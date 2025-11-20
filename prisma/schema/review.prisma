@@ -1,0 +1,38 @@
+model ProductReview {
+  id           String   @id @default(uuid())
+  productId    String   @map("product_id")
+  userId       String   @map("user_id")
+  rating       Int      @db.SmallInt
+  title        String?  @db.VarChar(255)
+  comment      String?  @db.Text
+  isVerified   Boolean  @default(false) @map("is_verified")
+  isApproved   Boolean  @default(false) @map("is_approved")
+  helpfulCount Int      @default(0) @map("helpful_count")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  product Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  images  ReviewImage[]
+
+  @@unique([productId, userId])
+  @@index([productId])
+  @@index([userId])
+  @@index([rating])
+  @@map("product_reviews")
+}
+
+model ReviewImage {
+  id        String   @id @default(uuid())
+  reviewId  String   @map("review_id")
+  mediaId   String   @map("media_id")
+  alt       String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  media  Media         @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+  @@index([mediaId])
+  @@map("review_images")
+}

@@ -1,0 +1,36 @@
+enum PaymentMethod {
+  COD
+  BANK_TRANSFER
+  CREDIT_CARD
+  E_WALLET
+  MOMO
+  ZALOPAY
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  orderId       String        @map("order_id")
+  method        PaymentMethod
+  amount        Decimal       @db.Decimal(10, 2)
+  status        PaymentStatus @default(PENDING)
+  transactionId String?       @unique @map("transaction_id") @db.VarChar(255)
+  paymentData   String?       @map("payment_data") @db.Text
+  paidAt        DateTime?     @map("paid_at")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([status])
+  @@index([transactionId])
+  @@map("payments")
+}
