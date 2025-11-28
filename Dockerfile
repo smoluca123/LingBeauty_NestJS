@@ -16,9 +16,6 @@ COPY prisma ./prisma/
 # Install dependencies
 RUN bun install --frozen-lockfile
 
-# Generate Prisma client
-RUN bunx prisma generate
-
 # ================================
 # Stage 2: Builder
 # ================================
