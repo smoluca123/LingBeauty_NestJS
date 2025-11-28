@@ -1,12 +1,11 @@
-FROM oven/bun:1
+FROM oven/bun
 
 WORKDIR /app
 
 COPY package.json bun.lockb ./
-RUN bun install --frozen-lockfile
+RUN bun install
+RUN bun run build
 
 COPY . .
-
-RUN bun prisma generate
 
 CMD ["bun", "run", "start"]
