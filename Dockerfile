@@ -4,9 +4,8 @@ WORKDIR /app
 
 COPY package.json bun.lockb ./
 RUN bun install --frozen-lockfile
+RUN npx prisma generate
 
 COPY . .
-
-RUN bun prisma generate
 
 CMD ["bun", "run", "start"]
