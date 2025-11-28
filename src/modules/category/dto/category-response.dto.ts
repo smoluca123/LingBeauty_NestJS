@@ -32,7 +32,7 @@ export class CategoryResponseDto extends BaseResponseDto {
   @ApiPropertyOptional({
     description: 'Brand of the category',
   })
-  @Type(() => CategoryResponseDto)
+  @Type(() => BrandResponseDto)
   brand?: BrandResponseDto;
 
   @ApiPropertyOptional({
