@@ -1,11 +1,52 @@
-FROM oven/bun
+# ================================
+# Stage 1: Dependencies
+# ================================
+FROM oven/bun:1-alpine AS deps
 
 WORKDIR /app
 
-COPY package.json bun.lockb ./
-RUN bun install
-RUN bun run build
+# Copy package files
+COPY package*.json bun.lock* ./
+COPY prisma ./prisma/
 
+# Install dependencies
+RUN bun install --frozen-lockfile
+
+# Generate Prisma client
+RUN bunx prisma generate
+
+# ================================
+# Stage 2: Builder
+# ================================
+FROM oven/bun:1-alpine AS builder
+
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-CMD ["bun", "run", "start"]
+# Build the application
+RUN bun run build
+
+# ================================
+# Stage 3: Production
+# ================================
+FROM oven/bun:1-alpine AS production
+
+WORKDIR /app
+
+# Set environment
+ENV NODE_ENV=production
+
+# Copy necessary files
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/prisma ./prisma
+
+# Expose port
+EXPOSE 3000
+
+# Start the application
+CMD ["bun", "run", "dist/main.js"]
