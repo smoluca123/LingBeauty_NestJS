@@ -5,6 +5,9 @@ FROM oven/bun:1-alpine AS deps
 
 WORKDIR /app
 
+# Install dependencies required for Prisma on Alpine
+RUN apk add --no-cache openssl libc6-compat
+
 # Copy package files
 COPY package*.json bun.lock* ./
 COPY prisma ./prisma/
@@ -35,6 +38,9 @@ RUN bun run build
 FROM oven/bun:1-alpine AS production
 
 WORKDIR /app
+
+# Install dependencies required for Prisma on Alpine
+RUN apk add --no-cache openssl libc6-compat
 
 # Set environment
 ENV NODE_ENV=production
