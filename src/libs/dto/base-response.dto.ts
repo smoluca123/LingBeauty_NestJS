@@ -13,14 +13,13 @@ export class BaseResponseDto {
     description: 'Creation timestamp',
     example: '2024-01-01T00:00:00.000Z',
   })
-  @Transform(({ value }) => value?.toISOString())
+  // @Transform(({ value }: { value: Date }) => value.toDateString())
   createdAt: Date;
 
   @ApiProperty({
     description: 'Last update timestamp',
     example: '2024-01-01T00:00:00.000Z',
   })
-  @Transform(({ value }) => value?.toISOString())
+  // @Transform(({ value }: { value: Date }) => value.toDateString())
   updatedAt: Date;
 }
-

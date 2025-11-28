@@ -18,6 +18,7 @@ import { UserModule } from 'src/modules/user/user.module';
 import { ProductModule } from 'src/modules/product/product.module';
 import { CategoryModule } from 'src/modules/category/category.module';
 import { BrandModule } from 'src/modules/brand/brand.module';
+import { ReviewModule } from 'src/modules/review/review.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { BrandModule } from 'src/modules/brand/brand.module';
     CategoryModule,
     ProductModule,
     BrandModule,
+    ReviewModule,
     StorageModule,
     SystemModule,
   ],

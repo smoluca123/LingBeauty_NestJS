@@ -39,7 +39,7 @@ export class UserService {
       );
       const updatedUser = await this.prismaService.user.update({
         where: { id: userId },
-        data: { avatarMediaId: uploadedMedia.mediaId },
+        data: { avatarMediaId: uploadedMedia.id },
         select: userSelect,
       });
 

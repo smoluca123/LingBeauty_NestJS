@@ -6,7 +6,6 @@ import { categorySelect } from 'src/libs/prisma/category-select';
 import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { processDataObject } from 'src/libs/utils/utils';
-import { UploadResponseDto } from 'src/modules/storage/dto/upload-response.dto';
 import { StorageService } from 'src/modules/storage/storage.service';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { CategoryResponseDto } from './dto/category-response.dto';
@@ -14,6 +13,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import slugify from 'slugify';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
+import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
 
 @Injectable()
 export class CategoryService {
@@ -59,7 +59,7 @@ export class CategoryService {
           },
         );
 
-        imageMediaId = uploadedMedia.mediaId;
+        imageMediaId = uploadedMedia.id;
       }
 
       const slug = await this.ensureUniqueSlug(createCategoryDto.name);
@@ -194,7 +194,7 @@ export class CategoryService {
           },
         );
 
-        data.imageMediaId = uploadedMedia.mediaId;
+        data.imageMediaId = uploadedMedia.id;
       }
 
       const updated = await this.prismaService.category.update({
@@ -249,7 +249,7 @@ export class CategoryService {
         );
       }
 
-      const productsCount = await this.prismaService.product.count({
+      const productsCount = await this.prismaService.productCategory.count({
         where: { categoryId },
       });
 
@@ -331,18 +331,8 @@ export class CategoryService {
   //   return toResponseDto(CategoryResponseDto, category);
   // }
 
-  private mapMediaToUploadDto(media: any): UploadResponseDto {
-    const plain: any = {
-      mediaId: media.id,
-      url: media.url,
-      key: media.key,
-      size: media.size,
-      mimetype: media.mimetype,
-      filename: media.filename,
-      type: media.type,
-    };
-
-    return toResponseDto(UploadResponseDto, plain);
+  private mapMediaToUploadDto(media: any): MediaResponseDto {
+    return toResponseDto(MediaResponseDto, media);
   }
 
   private async ensureUniqueSlug(

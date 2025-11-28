@@ -1,8 +1,8 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Exclude, Type } from 'class-transformer';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
+import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
 import { BrandResponseDto } from 'src/modules/brand/dto/brand-response.dto';
-import { UploadResponseDto } from 'src/modules/storage/dto/upload-response.dto';
 
 export class CategoryResponseDto extends BaseResponseDto {
   @ApiProperty({
@@ -54,11 +54,11 @@ export class CategoryResponseDto extends BaseResponseDto {
   isActive: boolean;
 
   @ApiPropertyOptional({
-    type: UploadResponseDto,
+    type: MediaResponseDto,
     description: 'Category cover image',
   })
-  @Type(() => UploadResponseDto)
-  imageMedia?: UploadResponseDto;
+  @Type(() => MediaResponseDto)
+  imageMedia?: MediaResponseDto;
 
   @ApiPropertyOptional({
     type: [CategoryResponseDto],

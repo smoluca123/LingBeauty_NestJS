@@ -10,13 +10,13 @@ import {
 } from 'src/libs/types/interfaces/response.interface';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { processDataObject } from 'src/libs/utils/utils';
-import { UploadResponseDto } from 'src/modules/storage/dto/upload-response.dto';
 import { StorageService } from 'src/modules/storage/storage.service';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import slugify from 'slugify';
 import { BrandResponseDto } from './dto/brand-response.dto';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
+import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
 
 @Injectable()
 export class BrandService {
@@ -105,7 +105,7 @@ export class BrandService {
           },
         );
 
-        logoMediaId = uploadedMedia.mediaId;
+        logoMediaId = uploadedMedia.id;
       }
 
       const slug = await this.ensureUniqueSlug(createBrandDto.name);
@@ -223,7 +223,7 @@ export class BrandService {
           },
         );
 
-        data.logoMediaId = uploadedMedia.mediaId;
+        data.logoMediaId = uploadedMedia.id;
       }
 
       const updated = await this.prismaService.brand.update({
@@ -325,7 +325,7 @@ export class BrandService {
     return toResponseDto(BrandResponseDto, plain);
   }
 
-  private mapMediaToUploadDto(media: any): UploadResponseDto {
+  private mapMediaToUploadDto(media: any): MediaResponseDto {
     // const plain: any = {
     //   mediaId: media.id,
     //   url: media.url,
@@ -337,7 +337,7 @@ export class BrandService {
     // };
     console.log('media', media);
 
-    return toResponseDto(UploadResponseDto, media);
+    return toResponseDto(MediaResponseDto, media);
   }
 
   private async ensureUniqueSlug(

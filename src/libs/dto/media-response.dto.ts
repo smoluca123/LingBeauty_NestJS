@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { MediaType } from 'prisma/generated/prisma/client';
+import { MediaType } from 'prisma/generated/prisma';
 
-export class UploadResponseDto {
+export class MediaResponseDto {
   @ApiProperty({
     description: 'Media ID in database',
     example: '123e4567-e89b-12d3-a456-426614174000',
