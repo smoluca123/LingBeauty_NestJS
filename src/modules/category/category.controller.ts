@@ -6,28 +6,15 @@ import {
   Patch,
   Param,
   Delete,
-  UseInterceptors,
   UploadedFile,
   UseGuards,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import {
-  ApiBearerAuth,
-  ApiConsumes,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { DecodedAccessToken } from 'src/decorators/decodedAccessToken.decorator';
-import type { IDecodedAccecssTokenType } from 'src/libs/types/interfaces/utils.interfaces';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CategoryResponseDto } from './dto/category-response.dto';
 import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
-import {
-  ApiProtectedAuthOperation,
-  ApiPublicOperation,
-} from 'src/decorators/api.decorators';
 import { AuthGuard } from '@nestjs/passport';
 import {
   ApiCreateCategory,

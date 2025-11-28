@@ -178,7 +178,7 @@ const response = await fetch(
 );
 
 const result = await response.json();
-console.log('Media ID:', result.data.mediaId);
+console.log('Media ID:', result.data.id);
 console.log('File URL:', result.data.url);
 ```
 
@@ -189,7 +189,7 @@ console.log('File URL:', result.data.url);
 await prisma.productImage.create({
   data: {
     productId: 'product-uuid',
-    mediaId: result.data.mediaId, // From upload response
+    mediaId: result.data.id, // From upload response
     alt: 'Product image description',
     isPrimary: true,
   },

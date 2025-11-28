@@ -38,6 +38,30 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.BRAND_ALREADY_EXISTS]: 'Brand already exists',
   [ERROR_CODES.DELETE_BRAND_HAS_PRODUCTS]: 'Cannot delete brand with products',
 
+  // Product
+  [ERROR_CODES.PRODUCT_NOT_FOUND]: 'Product not found',
+  [ERROR_CODES.PRODUCT_SKU_EXISTS]: 'Product SKU already exists',
+  [ERROR_CODES.PRODUCT_VARIANT_SKU_EXISTS]:
+    'Product variant SKU already exists',
+  [ERROR_CODES.PRODUCT_HAS_ORDERS]:
+    'Cannot delete product with existing orders',
+  [ERROR_CODES.PRODUCT_IMAGE_NOT_FOUND]: 'Product image not found',
+  [ERROR_CODES.PRODUCT_IMAGE_LIMIT_EXCEEDED]:
+    'Maximum number of product images exceeded',
+  [ERROR_CODES.PRODUCT_VIDEO_NOT_FOUND]: 'Product video not found',
+  [ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND]: 'Product variant not found',
+  [ERROR_CODES.PRODUCT_VARIANT_HAS_ORDERS]:
+    'Cannot delete product variant with existing orders',
+
+  // Review
+  [ERROR_CODES.REVIEW_NOT_FOUND]: 'Review not found',
+  [ERROR_CODES.REVIEW_ALREADY_EXISTS]: 'You have already reviewed this product',
+  [ERROR_CODES.REVIEW_IMAGE_NOT_FOUND]: 'Review image not found',
+  [ERROR_CODES.REVIEW_IMAGE_LIMIT_EXCEEDED]:
+    'Maximum number of review images exceeded',
+  [ERROR_CODES.REVIEW_NOT_OWNED]:
+    'You do not have permission to modify this review',
+
   // Referral
   [ERROR_CODES.REFERRAL_NOT_FOUND]: 'Referral not found',
   [ERROR_CODES.REFERRAL_USER_ALREADY_EXISTS]: 'Referral user already exists',

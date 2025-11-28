@@ -331,7 +331,6 @@ exports.Prisma.ProductScalarFieldEnum = {
   description: 'description',
   shortDesc: 'shortDesc',
   sku: 'sku',
-  categoryId: 'categoryId',
   brandId: 'brandId',
   basePrice: 'basePrice',
   comparePrice: 'comparePrice',
@@ -340,6 +339,18 @@ exports.Prisma.ProductScalarFieldEnum = {
   weight: 'weight',
   metaTitle: 'metaTitle',
   metaDesc: 'metaDesc',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductBadgeScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  name: 'name',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  variant: 'variant',
+  type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -361,6 +372,7 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
 exports.Prisma.ProductImageScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
+  variantId: 'variantId',
   mediaId: 'mediaId',
   alt: 'alt',
   sortOrder: 'sortOrder',
@@ -376,6 +388,13 @@ exports.Prisma.ProductInventoryScalarFieldEnum = {
   lowStockThreshold: 'lowStockThreshold',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductCategoryScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.PromotionScalarFieldEnum = {
@@ -554,6 +573,19 @@ exports.CateGoryType = exports.$Enums.CateGoryType = {
   CATEGORY: 'CATEGORY'
 };
 
+exports.ProductBadgeVariant = exports.$Enums.ProductBadgeVariant = {
+  PRIMARY: 'PRIMARY',
+  INFO: 'INFO',
+  NEUTRAL: 'NEUTRAL'
+};
+
+exports.ProductBadgeType = exports.$Enums.ProductBadgeType = {
+  NEW: 'NEW',
+  SALE: 'SALE',
+  BEST_SELLER: 'BEST_SELLER',
+  FREESHIPPING: 'FREESHIPPING'
+};
+
 exports.Prisma.ModelName = {
   Address: 'Address',
   Affiliate: 'Affiliate',
@@ -572,9 +604,11 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Brand: 'Brand',
   Product: 'Product',
+  ProductBadge: 'ProductBadge',
   ProductVariant: 'ProductVariant',
   ProductImage: 'ProductImage',
   ProductInventory: 'ProductInventory',
+  ProductCategory: 'ProductCategory',
   Promotion: 'Promotion',
   PromotionProduct: 'PromotionProduct',
   Coupon: 'Coupon',

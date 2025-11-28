@@ -85,7 +85,15 @@ export function generateSecureVerificationCode() {
 }
 
 /**
- * Generate a 6-digit OTP code for verification
+ * Generate a 8-digit number code for sku
+ * @returns 8-digit string code (e.g., "12345678")
+ */
+export function generateSkuCode(): string {
+  return Math.floor(10000000 + Math.random() * 90000000).toString();
+}
+
+/**
+ * Generate a 6-digit number code for otp
  * @returns 6-digit string code (e.g., "123456")
  */
 export function generateOTPCode(): string {

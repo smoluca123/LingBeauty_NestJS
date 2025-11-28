@@ -138,7 +138,9 @@ export function serializeForResponse<T>(
  * const userDtos = toResponseDto(UserResponseDto, users);
  */
 export function toResponseDto<T>(dtoClass: ClassConstructor<T>, data: any): T {
-  return plainToInstance(dtoClass, data, {
+  // First serialize to convert Decimal, BigInt, Date, etc. to JSON-safe types
+  const serialized = serializeForResponse(data);
+  return plainToInstance(dtoClass, serialized, {
     excludeExtraneousValues: false,
   });
 }

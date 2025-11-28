@@ -357,11 +357,11 @@ model Category {
   brandId      String?      @map("brand_id")
   type         CateGoryType @default(CATEGORY)
 
-  parent     Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
-  children   Category[] @relation("CategoryTree")
-  products   Product[]
-  imageMedia Media?     @relation("CategoryImage", fields: [imageMediaId], references: [id], onDelete: SetNull)
-  brand      Brand?     @relation("BrandCategory", fields: [brandId], references: [id], onDelete: SetNull)
+  parent            Category?         @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children          Category[]        @relation("CategoryTree")
+  imageMedia        Media?            @relation("CategoryImage", fields: [imageMediaId], references: [id], onDelete: SetNull)
+  brand             Brand?            @relation("BrandCategory", fields: [brandId], references: [id], onDelete: SetNull)
+  productCategories ProductCategory[]
 
   @@index([slug])
   @@index([parentId])
@@ -396,7 +396,6 @@ model Product {
   description  String?  @db.Text
   shortDesc    String?  @map("short_desc") @db.VarChar(500)
   sku          String   @unique @db.VarChar(100)
-  categoryId   String   @map("category_id")
   brandId      String?  @map("brand_id")
   basePrice    Decimal  @map("base_price") @db.Decimal(10, 2)
   comparePrice Decimal? @map("compare_price") @db.Decimal(10, 2)
@@ -408,8 +407,8 @@ model Product {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
-  category          Category           @relation(fields: [categoryId], references: [id])
   brand             Brand?             @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  badges            ProductBadge[]
   variants          ProductVariant[]
   images            ProductImage[]
   reviews           ProductReview[]
@@ -418,12 +417,42 @@ model Product {
   promotions        PromotionProduct[]
   commRates         CommissionRate[]
   flashSaleProducts FlashSaleProduct[]
+  productCategories ProductCategory[]
 
   @@index([slug])
-  @@index([categoryId])
   @@index([brandId])
   @@index([sku])
   @@map("products")
+}
+
+enum ProductBadgeType {
+  NEW
+  SALE
+  BEST_SELLER
+  FREESHIPPING
+}
+
+enum ProductBadgeVariant {
+  PRIMARY
+  INFO
+  NEUTRAL
+}
+
+model ProductBadge {
+  id        String              @id @default(uuid())
+  productId String              @map("product_id")
+  name      String              @db.VarChar(255)
+  sortOrder Int                 @default(0) @map("sort_order")
+  isActive  Boolean             @default(true) @map("is_active")
+  variant   ProductBadgeVariant @default(INFO)
+  type      ProductBadgeType    @default(NEW)
+  createdAt DateTime            @default(now()) @map("created_at")
+  updatedAt DateTime            @updatedAt @map("updated_at")
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_badges")
 }
 
 model ProductVariant {
@@ -441,6 +470,7 @@ model ProductVariant {
 
   product           Product            @relation(fields: [productId], references: [id], onDelete: Cascade)
   inventory         ProductInventory?
+  images            ProductImage[]
   orderItems        OrderItem[]
   cartItems         CartItem[]
   flashSaleProducts FlashSaleProduct[]
@@ -453,17 +483,20 @@ model ProductVariant {
 model ProductImage {
   id        String   @id @default(uuid())
   productId String   @map("product_id")
+  variantId String?  @map("variant_id")
   mediaId   String   @map("media_id")
   alt       String?  @db.VarChar(255)
   sortOrder Int      @default(0) @map("sort_order")
   isPrimary Boolean  @default(false) @map("is_primary")
   createdAt DateTime @default(now()) @map("created_at")
 
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  media   Media   @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  media   Media           @relation(fields: [mediaId], references: [id], onDelete: Cascade)
 
   @@index([productId])
   @@index([mediaId])
+  @@index([variantId])
   @@map("product_images")
 }
 
@@ -480,6 +513,21 @@ model ProductInventory {
 
   @@index([variantId])
   @@map("product_inventory")
+}
+
+model ProductCategory {
+  id         String   @id @default(uuid())
+  productId  String   @map("product_id")
+  categoryId String   @map("category_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, categoryId])
+  @@index([productId])
+  @@index([categoryId])
+  @@map("product_categories")
 }
 
 model Promotion {

@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Exclude, Transform } from 'class-transformer';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
-import { UploadResponseDto } from 'src/modules/storage/dto/upload-response.dto';
+import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
 
 /**
  * User Response DTO
@@ -41,10 +41,10 @@ export class UserResponseDto extends BaseResponseDto {
 
   @ApiProperty({
     description: 'User avatar',
-    type: UploadResponseDto,
+    type: MediaResponseDto,
     nullable: true,
   })
-  avatarMedia?: UploadResponseDto;
+  avatarMedia?: MediaResponseDto;
 
   @ApiProperty({
     description: 'User active status',

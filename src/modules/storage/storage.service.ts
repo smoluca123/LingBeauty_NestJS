@@ -15,8 +15,10 @@ import {
   UploadToS3Params,
   DeleteFromS3Params,
 } from './interfaces/storage.interface';
-import { UploadResponseDto } from './dto/upload-response.dto';
 import { FileValidationUtil } from './utils/file-validation.util';
+import { mediaSelect } from 'src/libs/prisma/media-select';
+import { toResponseDto } from 'src/libs/utils/transform.utils';
+import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
 
 @Injectable()
 export class StorageService {
@@ -54,7 +56,7 @@ export class StorageService {
     } = {
       getDirectUrl: false,
     },
-  ): Promise<UploadResponseDto> {
+  ): Promise<MediaResponseDto> {
     const { file, type, userId } = params;
 
     // Validate file based on type (comprehensive validation)
@@ -87,17 +89,12 @@ export class StorageService {
           type,
           uploadedById: userId,
         },
+        select: mediaSelect,
       });
 
-      return {
-        mediaId: media.id,
-        url: url,
-        key: media.key,
-        size: media.size,
-        mimetype: media.mimetype,
-        filename: media.filename,
-        type: media.type,
-      };
+      const responseData = toResponseDto(MediaResponseDto, media);
+
+      return responseData;
     } catch (error) {
       throw new BusinessException(
         `Failed to upload file: ${error.message}`,
