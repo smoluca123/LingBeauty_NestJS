@@ -8,8 +8,9 @@ WORKDIR /app
 # Install dependencies required for Prisma on Alpine
 RUN apk add --no-cache openssl libc6-compat
 
-# Copy package files
+# Copy package files and prisma config
 COPY package*.json bun.lock* ./
+COPY prisma.config.ts ./
 COPY prisma ./prisma/
 
 # Install dependencies
