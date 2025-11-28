@@ -31,6 +31,7 @@ export class CategoryResponseDto extends BaseResponseDto {
 
   @ApiPropertyOptional({
     description: 'Brand of the category',
+    type: () => BrandResponseDto,
   })
   @Type(() => BrandResponseDto)
   brand?: BrandResponseDto;
@@ -61,7 +62,7 @@ export class CategoryResponseDto extends BaseResponseDto {
   imageMedia?: MediaResponseDto;
 
   @ApiPropertyOptional({
-    type: [CategoryResponseDto],
+    type: () => [CategoryResponseDto],
     description: 'Child categories',
   })
   @Type(() => CategoryResponseDto)
