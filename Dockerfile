@@ -1,49 +1,41 @@
-# Build stage
-FROM oven/bun:1 AS builder
-
-# Build arguments from Northflank
+# Initiate a container to build the application in.
+FROM node:20-alpine AS builder
 ARG DATABASE_URL
+ENV NODE_ENV=build
 ENV DATABASE_URL=$DATABASE_URL
+WORKDIR /usr/src/app
 
-WORKDIR /app
+# Copy the package.json into the container.
+COPY package*.json ./
 
-# Copy package files
-COPY package.json bun.lockb ./
+# Install the dependencies required to build the application.
+RUN npm install --legacy-peer-deps
 
-# Install all dependencies
-RUN bun install --frozen-lockfile
-
-# Copy source code
+# Copy the application source into the container.
 COPY . .
 
 # Generate Prisma client
-RUN bunx prisma generate --schema=./prisma/schema
+RUN npx prisma generate --schema=./prisma/schema
 
-# # Build application
-# RUN bun run build
+# Build the application.
+RUN npm run build
 
-# # Production stage
-# FROM oven/bun:1 AS production
+# Uninstall the dependencies not required to run the built application.
+RUN npm prune --production
 
-# # Build arguments from Northflank
-# ARG DATABASE_URL
-# ENV DATABASE_URL=$DATABASE_URL
+# Initiate a new container to run the application in.
+FROM node:20-alpine
+ENV NODE_ENV=production
+WORKDIR /usr/src/app
 
-# WORKDIR /app
+# Copy everything required to run the built application into the new container.
+COPY --from=builder /usr/src/app/package*.json ./
+COPY --from=builder /usr/src/app/node_modules/ ./node_modules/
+COPY --from=builder /usr/src/app/dist/ ./dist/
+COPY --from=builder /usr/src/app/prisma/ ./prisma/
 
-# # Copy package files and install production dependencies only
-# COPY package.json bun.lockb ./
-# RUN bun install --frozen-lockfile --production
-
-# # Copy Prisma schema and generate client
-# COPY prisma ./prisma
-# RUN bunx prisma generate --schema=./prisma/schema
-
-# # Copy built application from builder stage
-# COPY --from=builder /app/dist ./dist
-
-# Expose port
+# Expose the web server's port.
 EXPOSE 3000
 
-# Start application
-CMD ["bun", "run", "dev"]
+# Run the application.
+CMD ["node", "dist/main"]
