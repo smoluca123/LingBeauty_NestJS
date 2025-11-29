@@ -1,6 +1,10 @@
 # Build stage
 FROM oven/bun:1 AS builder
 
+# Build arguments from Northflank
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 WORKDIR /app
 
 # Copy package files
@@ -21,7 +25,9 @@ RUN bun run build
 # Production stage
 FROM oven/bun:1 AS production
 
+# Build arguments from Northflank
 ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
 
 WORKDIR /app
 
