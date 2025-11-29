@@ -219,6 +219,10 @@ export class ProductResponseDto extends BaseResponseDto {
   @Type(() => ProductVariantDto)
   variants: ProductVariantDto[];
 
+  @ApiProperty({ type: [ProductBadgeResponseDto] })
+  @Type(() => ProductBadgeResponseDto)
+  badges: ProductBadgeResponseDto[];
+
   @Exclude()
   brandId?: string;
 }
