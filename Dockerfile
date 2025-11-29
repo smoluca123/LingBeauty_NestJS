@@ -21,6 +21,8 @@ RUN bun run build
 # Production stage
 FROM oven/bun:1 AS production
 
+ARG DATABASE_URL
+
 WORKDIR /app
 
 # Copy package files and install production dependencies only
