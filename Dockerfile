@@ -21,7 +21,7 @@ RUN npx prisma generate --schema=./prisma/schema
 RUN npm run build
 
 # Uninstall the dependencies not required to run the built application.
-RUN npm prune --production
+RUN npm prune --production --force
 
 # Initiate a new container to run the application in.
 FROM node:20-alpine
