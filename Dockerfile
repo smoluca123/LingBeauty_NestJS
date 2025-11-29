@@ -13,7 +13,7 @@ RUN bun install --frozen-lockfile --production
 COPY . .
 
 # Generate Prisma client
-RUN bun prisma generate --schema=./prisma/schema
+# RUN bun prisma generate --schema=./prisma/schema
 
 # Build application
 RUN bun run build
