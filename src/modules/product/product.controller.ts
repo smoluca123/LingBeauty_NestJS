@@ -17,7 +17,6 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import {
   ProductBadgeResponseDto,
-  ProductListResponseDto,
   ProductResponseDto,
 } from './dto/product-response.dto';
 import {
@@ -89,7 +88,7 @@ export class ProductController {
     @Query('maxPrice') maxPrice?: number,
     @Query('sortBy') sortBy?: 'name' | 'basePrice' | 'createdAt' | 'updatedAt',
     @Query('order') order?: 'asc' | 'desc',
-  ): Promise<IBeforeTransformPaginationResponseType<ProductListResponseDto>> {
+  ): Promise<IBeforeTransformPaginationResponseType<ProductResponseDto>> {
     const { page: normalizedPage, limit: normalizedLimit } =
       normalizePaginationParams({ page, limit });
     return this.productService.getAllProducts({

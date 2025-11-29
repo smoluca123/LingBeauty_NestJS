@@ -121,45 +121,29 @@ export type ProductSelect = Prisma.ProductGetPayload<{
 
 // Simplified select for list view (without variants details)
 export const productListSelect = {
-  id: true,
-  name: true,
-  slug: true,
-  shortDesc: true,
-  sku: true,
-  brandId: true,
-  basePrice: true,
-  comparePrice: true,
-  isActive: true,
-  isFeatured: true,
-  createdAt: true,
-  updatedAt: true,
-  productCategories: {
-    select: {
-      category: {
-        select: categorySelect,
-      },
-    },
-  },
-  brand: {
-    select: brandSelect,
-  },
-  images: {
-    select: productImageSelect,
-    orderBy: {
-      sortOrder: 'asc' as const,
-    },
-    // where: {
-    //   isPrimary: true,
-    // },
-    // take: 1,
-  },
-  variants: {
-    select: productVariantSelect,
-  },
-  // _count: {
+  ...productSelect,
+  // productCategories: {
   //   select: {
-  //     variants: true,
+  //     category: {
+  //       select: categorySelect,
+  //     },
   //   },
+  // },
+  // brand: {
+  //   select: brandSelect,
+  // },
+  // images: {
+  //   select: productImageSelect,
+  //   orderBy: {
+  //     sortOrder: 'asc' as const,
+  //   },
+  //   // where: {
+  //   //   isPrimary: true,
+  //   // },
+  //   // take: 1,
+  // },
+  // variants: {
+  //   select: productVariantSelect,
   // },
 } satisfies Prisma.ProductSelect;
 
