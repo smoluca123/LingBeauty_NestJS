@@ -27,7 +27,7 @@ WORKDIR /app
 
 # Copy package files and install production dependencies only
 COPY package*.json ./
-bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production
 
 # Copy Prisma schema and generate client
 COPY prisma ./prisma
