@@ -27,7 +27,6 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import {
   ProductBadgeResponseDto,
-  ProductListResponseDto,
   ProductResponseDto,
 } from './dto/product-response.dto';
 import {
@@ -81,7 +80,7 @@ export class ProductService {
     sortBy = 'createdAt',
     order = 'desc',
   }: GetProductsParams): Promise<
-    IBeforeTransformPaginationResponseType<ProductListResponseDto>
+    IBeforeTransformPaginationResponseType<ProductResponseDto>
   > {
     try {
       const whereQuery: Prisma.ProductWhereInput = {
@@ -1595,6 +1594,7 @@ export class ProductService {
   // ============== Private Methods ==============
 
   private mapProductEntity(product: ProductSelect): ProductResponseDto {
+    console.log(product);
     return toResponseDto(ProductResponseDto, {
       ...product,
       // categories: product.productCategories.map((pc) => pc.category),
@@ -1602,10 +1602,9 @@ export class ProductService {
     });
   }
 
-  private mapProductListEntity(
-    product: ProductListSelect,
-  ): ProductListResponseDto {
-    return toResponseDto(ProductListResponseDto, {
+  private mapProductListEntity(product: ProductListSelect): ProductResponseDto {
+    console.log(product);
+    return toResponseDto(ProductResponseDto, {
       ...product,
       // categories: product.productCategories.map((pc) => pc.category),
       primaryImage: product.images.find((image) => image.isPrimary),

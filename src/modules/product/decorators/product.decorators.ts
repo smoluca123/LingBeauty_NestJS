@@ -15,7 +15,6 @@ import {
 import { RolesLevel } from 'src/libs/types/interfaces/utils.interfaces';
 import {
   ProductBadgeResponseDto,
-  ProductListResponseDto,
   ProductResponseDto,
 } from '../dto/product-response.dto';
 import {
@@ -60,7 +59,7 @@ export const ApiGetProducts = () =>
     }),
     ApiResponse({
       status: 200,
-      type: ProductListResponseDto,
+      type: ProductResponseDto,
       isArray: true,
     }),
     ApiQuery({

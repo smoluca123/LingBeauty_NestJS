@@ -227,73 +227,8 @@ export class ProductResponseDto extends BaseResponseDto {
   brandId?: string;
 }
 
-export class ProductListResponseDto extends BaseResponseDto {
-  @ApiProperty({
-    example: 'Lipstick Matte Red',
-    description: 'Product name',
-  })
-  name: string;
-
-  @ApiProperty({
-    example: 'lipstick-matte-red',
-    description: 'Product slug',
-  })
-  slug: string;
-
-  @ApiPropertyOptional({
-    example: 'Long-lasting matte lipstick',
-    description: 'Short description',
-  })
-  shortDesc?: string;
-
-  @ApiProperty({
-    example: 'LP-MAT-001',
-    description: 'SKU code',
-  })
-  sku: string;
-
-  @ApiProperty({
-    example: '250000',
-    description: 'Base price',
-  })
-  basePrice: string;
-
-  @ApiPropertyOptional({
-    example: '300000',
-    description: 'Compare price',
-  })
-  comparePrice?: string;
-
-  @ApiProperty({
-    example: true,
-    description: 'Whether the product is active',
-  })
-  isActive: boolean;
-
-  @ApiProperty({
-    example: false,
-    description: 'Whether the product is featured',
-  })
-  isFeatured: boolean;
-
-  @ApiProperty({ type: [ProductCategoryDto] })
-  @Type(() => ProductCategoryDto)
-  categories: ProductCategoryDto[];
-
-  @ApiPropertyOptional({ type: ProductBrandDto })
-  @Type(() => ProductBrandDto)
-  brand?: ProductBrandDto;
-
-  @ApiPropertyOptional({ type: ProductImageDto })
-  @Type(() => ProductImageDto)
-  primaryImage?: ProductImageDto;
-
-  @ApiProperty({
-    example: 3,
-    description: 'Number of variants',
-  })
-  variantsCount: number;
-
-  @Exclude()
-  brandId?: string;
-}
+// export class ProductListResponseDto extends ProductResponseDto {
+//   @ApiPropertyOptional({ type: ProductImageDto })
+//   @Type(() => ProductImageDto)
+//   primaryImage?: ProductImageDto;
+// }
