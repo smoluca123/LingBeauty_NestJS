@@ -33,8 +33,10 @@ RUN bun install --frozen-lockfile --production
 COPY prisma ./prisma
 RUN bun prisma generate --schema=./prisma/schema
 
+RUN bun run build
+
 # Copy built application from builder stage
-COPY --from=base /app/dist ./dist
+COPY --from=builder /app/dist ./dist
 
 # Expose port
 EXPOSE 3000
