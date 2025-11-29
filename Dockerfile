@@ -34,7 +34,7 @@ COPY prisma ./prisma
 RUN bun prisma generate --schema=./prisma/schema
 
 # Copy built application from builder stage
-COPY --from=builder /app/dist ./dist
+COPY --from=base /app/dist ./dist
 
 # Expose port
 EXPOSE 3000
