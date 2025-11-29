@@ -1,32 +1,37 @@
 # Build stage
-FROM node:20-alpine AS builder
+FROM oven/bun:1 AS base
 
 WORKDIR /app
 
+FROM base AS install
 # Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN bun install --frozen-lockfile --production
 
+FROM base AS prerelease
 # Copy source code
 COPY . .
 
+# Generate Prisma client
+RUN bun prisma generate --schema=./prisma/schema
+
 # Build application
-RUN npm run build
+RUN bun run build
 
 # Production stage
-FROM node:20-alpine AS production
+FROM base AS release
 
 WORKDIR /app
 
 # Copy package files and install production dependencies only
 COPY package*.json ./
-RUN npm install --omit=dev
+bun install --frozen-lockfile --production
 
 # Copy Prisma schema and generate client
 COPY prisma ./prisma
-RUN npx prisma generate --schema=./prisma/schema
+RUN bun prisma generate --schema=./prisma/schema
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
