@@ -1,6 +1,27 @@
 import { Prisma } from 'prisma/generated/prisma/client';
 import { mediaSelect } from 'src/libs/prisma/media-select';
 
+export const userRoleSelect = {
+  id: true,
+  name: true,
+  createdAt: true,
+  updatedAt: true,
+} satisfies Prisma.UserRoleSelect;
+export type UserRoleSelectt = Prisma.UserRoleGetPayload<{
+  select: typeof userRoleSelect;
+}>;
+
+export const userRoleAssignmentsSelect = {
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  userId: true,
+  roleId: true,
+  role: {
+    select: userRoleSelect,
+  },
+} satisfies Prisma.UserRoleAssignmentSelect;
+
 export const userSelect = {
   id: true,
   email: true,
@@ -21,6 +42,9 @@ export const userSelect = {
   phoneVerifiedAt: true,
   avatarMedia: {
     select: mediaSelect,
+  },
+  roleAssignments: {
+    select: userRoleAssignmentsSelect,
   },
 } satisfies Prisma.UserSelect;
 

@@ -43,14 +43,8 @@ const configuration = () => ({
   S3_PUBLIC_DIR: process.env.S3_PUBLIC_DIR,
   S3_PUBLIC_PATH_PREFIX: process.env.S3_PUBLIC_PATH_PREFIX,
   S3_DOMAIN: process.env.S3_DOMAIN,
-  S3_MAX_IMAGE_SIZE: parseInt(
-    process.env.S3_MAX_IMAGE_SIZE || '5242880',
-    10,
-  ), // 5MB default
-  S3_MAX_VIDEO_SIZE: parseInt(
-    process.env.S3_MAX_VIDEO_SIZE || '104857600',
-    10,
-  ), // 100MB default
+  S3_MAX_IMAGE_SIZE: parseInt(process.env.S3_MAX_IMAGE_SIZE || '5242880', 10), // 5MB default
+  S3_MAX_VIDEO_SIZE: parseInt(process.env.S3_MAX_VIDEO_SIZE || '104857600', 10), // 100MB default
 
   // AI Services
   // OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
@@ -62,6 +56,7 @@ const configuration = () => ({
   // Logger
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   NODE_ENV: process.env.NODE_ENV || 'development',
+  USER_ROLE_ID: process.env.USER_ROLE_ID,
 });
 
 const validConfig = envSchema.safeParse(configuration());
