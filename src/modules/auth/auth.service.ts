@@ -194,25 +194,13 @@ export class AuthService {
         lastName: registerDto.lastName,
         phone: registerDto.phone,
         username: registerDto.username,
+        roleAssignments: {
+          create: {
+            roleId: configData.USER_ROLE_ID,
+          },
+        },
       },
-      select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        phone: true,
-        username: true,
-        isActive: true,
-        isVerified: true,
-        isBanned: true,
-        isDeleted: true,
-        isEmailVerified: true,
-        isPhoneVerified: true,
-        emailVerifiedAt: true,
-        phoneVerifiedAt: true,
-        createdAt: true,
-        updatedAt: true,
-      },
+      select: userSelect,
     });
 
     // Generate tokens
@@ -253,15 +241,7 @@ export class AuthService {
     // Find user by email
     const user = await this.prismaService.user.findUnique({
       where: { email: loginDto.email },
-      // select: userSelect,
-      omit: {
-        avatarMediaId: true,
-      },
-      include: {
-        avatarMedia: {
-          select: mediaSelect,
-        },
-      },
+      select: { ...userSelect, password: true },
     });
 
     if (!user) {

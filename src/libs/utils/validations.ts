@@ -69,6 +69,7 @@ export const envSchema = z.object({
     .enum(['development', 'production', 'test'])
     .optional()
     .default('development'),
+  USER_ROLE_ID: z.string().min(1, 'User role ID is required'),
 });
 
 // Export type để sử dụng cho TypeScript

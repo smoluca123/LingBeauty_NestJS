@@ -2,6 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Exclude, Transform } from 'class-transformer';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
 import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
+import { UserRoleAssignmentsResponseDto } from 'src/modules/user/dto/response/user-role.dto';
 
 /**
  * User Response DTO
@@ -47,6 +48,13 @@ export class UserResponseDto extends BaseResponseDto {
   avatarMedia?: MediaResponseDto;
 
   @ApiProperty({
+    description: 'User role assignments',
+    type: [UserRoleAssignmentsResponseDto],
+    nullable: true,
+  })
+  roleAssignments?: UserRoleAssignmentsResponseDto[];
+
+  @ApiProperty({
     description: 'User active status',
     example: true,
   })
@@ -87,7 +95,7 @@ export class UserResponseDto extends BaseResponseDto {
     example: '2024-01-01T00:00:00.000Z',
     nullable: true,
   })
-  @Transform(({ value }) => value?.toISOString())
+  // @Transform(({ value }) => value?.toISOString())
   emailVerifiedAt?: Date | null;
 
   @ApiPropertyOptional({
@@ -95,12 +103,15 @@ export class UserResponseDto extends BaseResponseDto {
     example: '2024-01-01T00:00:00.000Z',
     nullable: true,
   })
-  @Transform(({ value }) => value?.toISOString())
+  // @Transform(({ value }) => value?.toISOString())
   phoneVerifiedAt?: Date | null;
 
   // Exclude sensitive fields from response
   @Exclude()
   password: string;
+
+  @Exclude()
+  avatarMediaId: string;
 
   @Exclude()
   refreshToken?: string | null;
