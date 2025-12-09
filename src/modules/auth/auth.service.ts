@@ -10,6 +10,7 @@ import { VerifyEmailDto } from 'src/modules/auth/dto/verify-email.dto';
 import { VerifyPhoneDto } from 'src/modules/auth/dto/verify-phone.dto';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 import { AuthResponseDto } from 'src/modules/auth/dto/response/auth-response.dto';
+import { ValidateTokenResponseDto } from 'src/modules/auth/dto/response/validate-token-response.dto';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { JwtAuthService } from 'src/modules/jwt/jwt.service';
@@ -25,7 +26,6 @@ import { configData } from 'src/configs/configuration';
 import { generateOTPCode } from 'src/libs/utils/utils';
 import { userSelect } from 'src/libs/prisma/user-select';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
-import { mediaSelect } from 'src/libs/prisma/media-select';
 
 @Injectable()
 export class AuthService {
@@ -682,6 +682,43 @@ export class AuthService {
         message: 'Your phone number has been verified successfully',
       },
       statusCode: 200,
+    };
+  }
+
+  /**
+   * Validate access token
+   * Uses decoded token from JWT guard and returns user info with expiration
+   */
+  async validateToken(
+    userId: string,
+    exp?: string | number,
+  ): Promise<IBeforeTransformResponseType<ValidateTokenResponseDto>> {
+    // Get user data
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+      select: userSelect,
+    });
+
+    if (!user) {
+      throw new CustomUnauthorizedException(
+        'User not found',
+        ERROR_CODES.USER_NOT_FOUND,
+      );
+    }
+
+    const userResponse = toResponseDto(UserResponseDto, user);
+
+    // Calculate expiration time
+    const expiresAt = exp ? new Date(Number(exp) * 1000) : undefined;
+
+    return {
+      type: 'response',
+      message: 'Token is valid',
+      data: {
+        valid: true,
+        user: userResponse,
+        expiresAt,
+      },
     };
   }
 }

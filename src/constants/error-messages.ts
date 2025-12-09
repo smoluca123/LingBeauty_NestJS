@@ -67,6 +67,13 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.REFERRAL_USER_ALREADY_EXISTS]: 'Referral user already exists',
   [ERROR_CODES.REFERRAL_STATS_NOT_FOUND]: 'Referral stats not found',
 
+  // Mail
+  [ERROR_CODES.MAIL_CONFIGURATION_ERROR]: 'Mail configuration error',
+  [ERROR_CODES.MAIL_SEND_FAILED]: 'Failed to send email',
+  [ERROR_CODES.MAIL_TEMPLATE_NOT_FOUND]: 'Email template not found',
+  [ERROR_CODES.MAIL_INVALID_EMAIL]: 'Invalid email address',
+  [ERROR_CODES.MAIL_SMTP_CONNECTION_FAILED]: 'SMTP connection failed',
+
   // User Management
   [ERROR_CODES.USER_NOT_FOUND]: 'User not found',
   [ERROR_CODES.USER_ALREADY_EXISTS]: 'User already exists',

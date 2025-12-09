@@ -19,6 +19,7 @@ import { ProductModule } from 'src/modules/product/product.module';
 import { CategoryModule } from 'src/modules/category/category.module';
 import { BrandModule } from 'src/modules/brand/brand.module';
 import { ReviewModule } from 'src/modules/review/review.module';
+import { MailModule } from 'src/modules/mail';
 
 @Module({
   imports: [
@@ -62,6 +63,29 @@ import { ReviewModule } from 'src/modules/review/review.module';
     ReviewModule,
     StorageModule,
     SystemModule,
+    MailModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        transport: {
+          host: configService.get('MAIL_HOST') || 'smtp.mailtrap.io',
+          port: configService.get('MAIL_PORT') || 587,
+          secure: configService.get('MAIL_SECURE') || false,
+          auth: {
+            user: configService.get('MAIL_USER') || '',
+            pass: configService.get('MAIL_PASS') || '',
+          },
+        },
+        defaults: {
+          from: {
+            name: configService.get('MAIL_FROM_NAME') || 'Your Company',
+            address:
+              configService.get('MAIL_FROM_ADDRESS') || 'noreply@example.com',
+          },
+        },
+        templateDir: __dirname + '/modules/mail/templates',
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [

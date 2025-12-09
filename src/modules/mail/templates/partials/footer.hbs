@@ -1,0 +1,10 @@
+<div class='email-footer'>
+  <p>©
+    {{year}}
+    {{#if companyName}}{{companyName}}{{else}}Your Company{{/if}}. All rights
+    reserved.</p>
+  <p>This is an automated email. Please do not reply directly to this message.</p>
+  {{#if unsubscribeLink}}
+    <p><a href='{{unsubscribeLink}}'>Unsubscribe</a></p>
+  {{/if}}
+</div>

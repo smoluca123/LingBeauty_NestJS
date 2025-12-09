@@ -23,6 +23,7 @@ import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressResponseDto } from './dto/address-response.dto';
 import {
+  ApiGetMe,
   ApiUpdateMe,
   ApiUpdateUserById,
   ApiUploadAvatar,
@@ -39,6 +40,17 @@ import {
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('me')
+  @ApiGetMe()
+  async getMe(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    const userId = decodedAccessToken.userId;
+    const result = await this.userService.getMe(userId);
+
+    return result;
+  }
 
   @Post('upload/avatar')
   @ApiUploadAvatar()

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from 'src/modules/auth/dto/login.dto';
@@ -8,6 +8,7 @@ import { VerifyEmailDto } from 'src/modules/auth/dto/verify-email.dto';
 import { VerifyPhoneDto } from 'src/modules/auth/dto/verify-phone.dto';
 import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
 import { AuthResponseDto } from 'src/modules/auth/dto/response/auth-response.dto';
+import { ValidateTokenResponseDto } from 'src/modules/auth/dto/response/validate-token-response.dto';
 import { DecodedAccessToken } from 'src/decorators/decodedAccessToken.decorator';
 import type { IDecodedAccecssTokenType } from 'src/libs/types/interfaces/utils.interfaces';
 import {
@@ -18,6 +19,7 @@ import {
   ApiVerifyEmail,
   ApiSendPhoneVerification,
   ApiVerifyPhone,
+  ApiValidateToken,
 } from './decorators/auth-api.decorators';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -84,5 +86,16 @@ export class AuthController {
     @Body() verifyPhoneDto: VerifyPhoneDto,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     return this.authService.verifyPhone(decodedToken.userId, verifyPhoneDto);
+  }
+
+  @Get('validate-token')
+  @ApiValidateToken()
+  validateToken(
+    @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
+  ): Promise<IBeforeTransformResponseType<ValidateTokenResponseDto>> {
+    return this.authService.validateToken(
+      decodedToken.userId,
+      decodedToken.exp,
+    );
   }
 }

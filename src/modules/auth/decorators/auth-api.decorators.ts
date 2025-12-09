@@ -1,5 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import { AuthResponseDto } from '../dto/response/auth-response.dto';
+import { ValidateTokenResponseDto } from '../dto/response/validate-token-response.dto';
 import {
   ApiProtectedAuthOperation,
   ApiPublicOperation,
@@ -71,5 +72,19 @@ export const ApiVerifyPhone = () =>
           },
         },
       },
+    }),
+  );
+
+export const ApiValidateToken = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Validate access token',
+      description:
+        'Validate access token from header and return user data with expiration info',
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Token is valid',
+      type: ValidateTokenResponseDto,
     }),
   );

@@ -33,11 +33,19 @@ export const envSchema = z.object({
   //     .string()
   //     .url('Supabase image path must be a valid URL'),
 
-  // Mail
-  //   MAILER_HOST: z.string().min(1, 'Mailer host is required'),
-  //   MAILER_PORT: z.number().min(1, 'Mailer port must be a positive integer'),
-  //   MAILER_USER: z.string().min(1, 'Mailer username is required'),
-  //   MAILER_PASS: z.string().min(1, 'Mailer password is required'),
+  // Mail SMTP
+  MAIL_HOST: z.string().min(1, 'Mail host is required').optional(),
+  MAIL_PORT: z
+    .number()
+    .min(1, 'Mail port must be a positive integer')
+    .optional(),
+  MAIL_SECURE: z.boolean().optional(),
+  MAIL_USER: z.string().min(1, 'Mail username is required').optional(),
+  MAIL_PASS: z.string().min(1, 'Mail password is required').optional(),
+  MAIL_FROM_NAME: z.string().min(1, 'Mail from name is required').optional(),
+  MAIL_FROM_ADDRESS: z
+    .email('Mail from address must be a valid email')
+    .optional(),
 
   // AI Services
   //   OPENROUTER_API_KEY: z.string().min(1, 'OpenRouter API key is required'),
