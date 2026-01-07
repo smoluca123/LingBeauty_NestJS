@@ -45,6 +45,11 @@ import {
   UpdateBadgeDto,
 } from './dto/product-badge.dto';
 import { generateSkuCode, processDataObject } from 'src/libs/utils/utils';
+import {
+  HotProductsQueryDto,
+  HotProductCriteria,
+  HotProductPeriod,
+} from './dto/hot-products-query.dto';
 
 export interface GetProductsParams {
   page?: number;
@@ -148,6 +153,490 @@ export class ProductService {
     }
   }
 
+  /**
+   * Get hot/best-selling products based on various criteria
+   *
+   * @param query - Query parameters for filtering and sorting
+   * @returns List of hot products with optional statistics
+   */
+  async getHotProducts(
+    query: HotProductsQueryDto,
+  ): Promise<IBeforeTransformResponseType<ProductResponseDto[]>> {
+    try {
+      const {
+        limit = 10,
+        criteria = HotProductCriteria.COMPOSITE,
+        period = HotProductPeriod.LAST_30_DAYS,
+        categoryId,
+        brandId,
+        minRating,
+      } = query;
+
+      // Calculate date range based on period
+      const dateFilter = this.getDateFilter(period);
+
+      // Build base where clause
+      const baseWhere: Prisma.ProductWhereInput = {
+        isActive: true,
+        ...(categoryId && {
+          productCategories: {
+            some: { categoryId },
+          },
+        }),
+        ...(brandId && { brandId }),
+      };
+
+      let products: ProductListSelect[] = [];
+
+      switch (criteria) {
+        case HotProductCriteria.BADGE:
+          // Products with BEST_SELLER badge
+          products = await this.prismaService.product.findMany({
+            where: {
+              ...baseWhere,
+              badges: {
+                some: {
+                  type: 'BEST_SELLER',
+                  isActive: true,
+                },
+              },
+            },
+            select: productListSelect,
+            take: limit,
+            orderBy: { createdAt: 'desc' },
+          });
+          break;
+
+        case HotProductCriteria.FEATURED:
+          // Admin-marked featured products
+          products = await this.prismaService.product.findMany({
+            where: {
+              ...baseWhere,
+              isFeatured: true,
+            },
+            select: productListSelect,
+            take: limit,
+            orderBy: { createdAt: 'desc' },
+          });
+          break;
+
+        case HotProductCriteria.SALES:
+          // Products with highest quantity sold
+          products = await this.getProductsBySales(
+            baseWhere,
+            dateFilter,
+            limit,
+          );
+          break;
+
+        case HotProductCriteria.REVENUE:
+          // Products with highest revenue
+          products = await this.getProductsByRevenue(
+            baseWhere,
+            dateFilter,
+            limit,
+          );
+          break;
+
+        case HotProductCriteria.REVIEWS:
+          // Products with most reviews
+          products = await this.getProductsByReviewCount(
+            baseWhere,
+            limit,
+            minRating,
+          );
+          break;
+
+        case HotProductCriteria.RATING:
+          // Products with highest average rating
+          products = await this.getProductsByRating(
+            baseWhere,
+            limit,
+            minRating,
+          );
+          break;
+
+        case HotProductCriteria.COMPOSITE:
+        default:
+          // Composite score combining multiple factors
+          products = await this.getProductsByCompositeScore(
+            baseWhere,
+            dateFilter,
+            limit,
+            minRating,
+          );
+          break;
+      }
+
+      const productResponses = products.map((product) =>
+        this.mapProductListEntity(product),
+      );
+
+      return {
+        type: 'response',
+        message: 'Hot products retrieved successfully',
+        data: productResponses,
+      };
+    } catch (error) {
+      console.error('Error getting hot products:', error);
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        'Failed to get hot products',
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  /**
+   * Get date filter based on period
+   */
+  private getDateFilter(period: HotProductPeriod): Date | null {
+    const now = new Date();
+    switch (period) {
+      case HotProductPeriod.LAST_7_DAYS:
+        return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      case HotProductPeriod.LAST_30_DAYS:
+        return new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      case HotProductPeriod.LAST_90_DAYS:
+        return new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+      case HotProductPeriod.ALL_TIME:
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * Get products sorted by total quantity sold
+   */
+  private async getProductsBySales(
+    baseWhere: Prisma.ProductWhereInput,
+    dateFilter: Date | null,
+    limit: number,
+  ): Promise<ProductListSelect[]> {
+    // Get product IDs with sales stats using raw query for aggregation
+    const salesData = await this.prismaService.orderItem.groupBy({
+      by: ['productId'],
+      where: {
+        order: {
+          status: { in: ['DELIVERED', 'CONFIRMED', 'SHIPPED', 'PROCESSING'] },
+          ...(dateFilter && { createdAt: { gte: dateFilter } }),
+        },
+      },
+      _sum: {
+        quantity: true,
+      },
+      orderBy: {
+        _sum: {
+          quantity: 'desc',
+        },
+      },
+      take: limit * 2, // Get more to filter by baseWhere
+    });
+
+    if (salesData.length === 0) {
+      // Fallback to featured products if no sales data
+      return this.prismaService.product.findMany({
+        where: { ...baseWhere, isFeatured: true },
+        select: productListSelect,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      });
+    }
+
+    const productIds = salesData.map((s) => s.productId);
+
+    // Fetch products in order of sales
+    const products = await this.prismaService.product.findMany({
+      where: {
+        ...baseWhere,
+        id: { in: productIds },
+      },
+      select: productListSelect,
+    });
+
+    // Sort by sales order
+    const productMap = new Map(products.map((p) => [p.id, p]));
+    return productIds
+      .filter((id) => productMap.has(id))
+      .map((id) => productMap.get(id)!)
+      .slice(0, limit);
+  }
+
+  /**
+   * Get products sorted by total revenue
+   */
+  private async getProductsByRevenue(
+    baseWhere: Prisma.ProductWhereInput,
+    dateFilter: Date | null,
+    limit: number,
+  ): Promise<ProductListSelect[]> {
+    const revenueData = await this.prismaService.orderItem.groupBy({
+      by: ['productId'],
+      where: {
+        order: {
+          status: { in: ['DELIVERED', 'CONFIRMED', 'SHIPPED', 'PROCESSING'] },
+          ...(dateFilter && { createdAt: { gte: dateFilter } }),
+        },
+      },
+      _sum: {
+        total: true,
+      },
+      orderBy: {
+        _sum: {
+          total: 'desc',
+        },
+      },
+      take: limit * 2,
+    });
+
+    if (revenueData.length === 0) {
+      return this.prismaService.product.findMany({
+        where: { ...baseWhere, isFeatured: true },
+        select: productListSelect,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      });
+    }
+
+    const productIds = revenueData.map((r) => r.productId);
+
+    const products = await this.prismaService.product.findMany({
+      where: {
+        ...baseWhere,
+        id: { in: productIds },
+      },
+      select: productListSelect,
+    });
+
+    const productMap = new Map(products.map((p) => [p.id, p]));
+    return productIds
+      .filter((id) => productMap.has(id))
+      .map((id) => productMap.get(id)!)
+      .slice(0, limit);
+  }
+
+  /**
+   * Get products sorted by review count
+   */
+  private async getProductsByReviewCount(
+    baseWhere: Prisma.ProductWhereInput,
+    limit: number,
+    minRating?: number,
+  ): Promise<ProductListSelect[]> {
+    const reviewData = await this.prismaService.productReview.groupBy({
+      by: ['productId'],
+      where: {
+        isApproved: true,
+        ...(minRating && { rating: { gte: minRating } }),
+      },
+      _count: {
+        id: true,
+      },
+      orderBy: {
+        _count: {
+          id: 'desc',
+        },
+      },
+      take: limit * 2,
+    });
+
+    if (reviewData.length === 0) {
+      return this.prismaService.product.findMany({
+        where: { ...baseWhere, isFeatured: true },
+        select: productListSelect,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      });
+    }
+
+    const productIds = reviewData.map((r) => r.productId);
+
+    const products = await this.prismaService.product.findMany({
+      where: {
+        ...baseWhere,
+        id: { in: productIds },
+      },
+      select: productListSelect,
+    });
+
+    const productMap = new Map(products.map((p) => [p.id, p]));
+    return productIds
+      .filter((id) => productMap.has(id))
+      .map((id) => productMap.get(id)!)
+      .slice(0, limit);
+  }
+
+  /**
+   * Get products sorted by average rating
+   */
+  private async getProductsByRating(
+    baseWhere: Prisma.ProductWhereInput,
+    limit: number,
+    minRating?: number,
+  ): Promise<ProductListSelect[]> {
+    const ratingData = await this.prismaService.productReview.groupBy({
+      by: ['productId'],
+      where: {
+        isApproved: true,
+      },
+      _avg: {
+        rating: true,
+      },
+      _count: {
+        id: true,
+      },
+      having: {
+        rating: {
+          _avg: { gte: minRating || 3.5 },
+        },
+        id: {
+          _count: { gte: 1 }, // At least 1 review
+        },
+      },
+      orderBy: {
+        _avg: {
+          rating: 'desc',
+        },
+      },
+      take: limit * 2,
+    });
+
+    if (ratingData.length === 0) {
+      return this.prismaService.product.findMany({
+        where: { ...baseWhere, isFeatured: true },
+        select: productListSelect,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      });
+    }
+
+    const productIds = ratingData.map((r) => r.productId);
+
+    const products = await this.prismaService.product.findMany({
+      where: {
+        ...baseWhere,
+        id: { in: productIds },
+      },
+      select: productListSelect,
+    });
+
+    const productMap = new Map(products.map((p) => [p.id, p]));
+    return productIds
+      .filter((id) => productMap.has(id))
+      .map((id) => productMap.get(id)!)
+      .slice(0, limit);
+  }
+
+  /**
+   * Get products by composite score (combining multiple factors)
+   * Score = (salesScore * 0.4) + (ratingScore * 0.3) + (reviewCountScore * 0.2) + (featuredBonus * 0.1)
+   */
+  private async getProductsByCompositeScore(
+    baseWhere: Prisma.ProductWhereInput,
+    dateFilter: Date | null,
+    limit: number,
+    minRating?: number,
+  ): Promise<ProductListSelect[]> {
+    // Get all active products that match base criteria
+    const allProducts = await this.prismaService.product.findMany({
+      where: baseWhere,
+      select: {
+        ...productListSelect,
+        orderItems: {
+          where: {
+            order: {
+              status: {
+                in: ['DELIVERED', 'CONFIRMED', 'SHIPPED', 'PROCESSING'],
+              },
+              ...(dateFilter && { createdAt: { gte: dateFilter } }),
+            },
+          },
+          select: {
+            quantity: true,
+            total: true,
+          },
+        },
+        reviews: {
+          where: {
+            isApproved: true,
+          },
+          select: {
+            rating: true,
+          },
+        },
+      },
+    });
+
+    if (allProducts.length === 0) {
+      return [];
+    }
+
+    // Calculate scores for each product
+    const productScores = allProducts.map((product) => {
+      const totalSales = product.orderItems.reduce(
+        (sum, item) => sum + item.quantity,
+        0,
+      );
+      const reviewCount = product.reviews.length;
+      const avgRating =
+        reviewCount > 0
+          ? product.reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+          : 0;
+      const isFeatured = product.isFeatured ? 1 : 0;
+      const hasBestSellerBadge = product.badges.some(
+        (b) => b.type === 'BEST_SELLER' && b.isActive,
+      )
+        ? 1
+        : 0;
+
+      return {
+        product,
+        totalSales,
+        reviewCount,
+        avgRating,
+        isFeatured,
+        hasBestSellerBadge,
+      };
+    });
+
+    // Normalize scores (0-1 range)
+    const maxSales = Math.max(...productScores.map((p) => p.totalSales), 1);
+    const maxReviews = Math.max(...productScores.map((p) => p.reviewCount), 1);
+
+    const scoredProducts = productScores
+      .map((p) => {
+        const salesScore = p.totalSales / maxSales;
+        const ratingScore = p.avgRating / 5;
+        const reviewScore = p.reviewCount / maxReviews;
+        const featuredScore = p.isFeatured + p.hasBestSellerBadge;
+
+        // Composite score with weights
+        const compositeScore =
+          salesScore * 0.4 +
+          ratingScore * 0.3 +
+          reviewScore * 0.2 +
+          featuredScore * 0.1;
+
+        return {
+          ...p,
+          compositeScore,
+        };
+      })
+      .filter((p) => !minRating || p.avgRating >= minRating)
+      .sort((a, b) => b.compositeScore - a.compositeScore)
+      .slice(0, limit);
+
+    // Return products in order, mapping back to ProductListSelect
+    return scoredProducts.map((sp) => {
+      // Remove the orderItems and reviews from the product to match ProductListSelect
+      const { orderItems, reviews, ...productData } = sp.product;
+      return productData as ProductListSelect;
+    });
+  }
+
   async getProductById(
     productId: string,
   ): Promise<IBeforeTransformResponseType<ProductResponseDto>> {
@@ -222,9 +711,10 @@ export class ProductService {
     createProductDto: CreateProductDto,
   ): Promise<IBeforeTransformResponseType<ProductResponseDto>> {
     try {
+      const productSku = createProductDto.sku || generateSkuCode();
       // Check if SKU already exists
       const existingSku = await this.prismaService.product.findUnique({
-        where: { sku: createProductDto.sku },
+        where: { sku: productSku },
         select: { id: true },
       });
 
@@ -288,7 +778,7 @@ export class ProductService {
           slug,
           description: createProductDto.description,
           shortDesc: createProductDto.shortDesc,
-          sku: createProductDto.sku,
+          sku: productSku,
           productCategories: {
             create: createProductDto.categoryIds.map((categoryId) => ({
               categoryId,

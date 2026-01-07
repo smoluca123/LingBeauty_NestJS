@@ -1,0 +1,28 @@
+// Email Verification Log - Audit trail for email verification activities
+
+model EmailVerificationLog {
+  id        String                  @id @default(uuid())
+  userId    String                  @map("user_id")
+  email     String                  @db.VarChar(255)
+  action    EmailVerificationAction
+  ipAddress String?                 @map("ip_address") @db.VarChar(45)
+  userAgent String?                 @map("user_agent") @db.Text
+  metadata  Json?
+  createdAt DateTime                @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([email])
+  @@index([action])
+  @@index([createdAt])
+  @@map("email_verification_logs")
+}
+
+enum EmailVerificationAction {
+  SEND_OTP
+  RESEND_OTP
+  VERIFY_SUCCESS
+  VERIFY_FAILED
+  RATE_LIMITED
+}

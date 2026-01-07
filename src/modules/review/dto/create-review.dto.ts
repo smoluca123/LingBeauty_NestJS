@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsArray,
   IsInt,
@@ -58,4 +59,48 @@ export class CreateReviewDto {
   @IsUUID('4', { each: true })
   @IsOptional()
   mediaIds?: string[];
+}
+
+/**
+ * DTO for creating review with multipart file upload
+ * Used with POST /review/with-images endpoint
+ */
+export class CreateReviewWithImagesDto {
+  @ApiProperty({
+    description: 'Product ID to review',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  @IsUUID()
+  @IsNotEmpty()
+  productId: string;
+
+  @ApiProperty({
+    description: 'Rating from 1 to 5',
+    example: 5,
+    minimum: 1,
+    maximum: 5,
+  })
+  @Transform(({ value }) => parseInt(value, 10))
+  @IsInt()
+  @Min(1)
+  @Max(5)
+  rating: number;
+
+  @ApiPropertyOptional({
+    description: 'Review title',
+    example: 'Great product!',
+    maxLength: 255,
+  })
+  @IsString()
+  @IsOptional()
+  @MaxLength(255)
+  title?: string;
+
+  @ApiPropertyOptional({
+    description: 'Review comment',
+    example: 'I really love this product. It works perfectly for my skin.',
+  })
+  @IsString()
+  @IsOptional()
+  comment?: string;
 }

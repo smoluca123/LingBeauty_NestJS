@@ -78,6 +78,7 @@ model Product {
   commRates         CommissionRate[]
   flashSaleProducts FlashSaleProduct[]
   productCategories ProductCategory[]
+  stats             ProductStats?
 
   @@index([slug])
   @@index([brandId])

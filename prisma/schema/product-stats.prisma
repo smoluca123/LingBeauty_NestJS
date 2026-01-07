@@ -1,0 +1,22 @@
+// Product statistics for performance optimization
+// This table stores pre-calculated metrics to avoid expensive aggregate queries
+
+model ProductStats {
+    id           String    @id @default(uuid())
+    productId    String    @unique @map("product_id")
+    totalSold    Int       @default(0) @map("total_sold")
+    totalRevenue Decimal   @default(0) @map("total_revenue") @db.Decimal(15, 2)
+    avgRating    Decimal?  @map("avg_rating") @db.Decimal(3, 2)
+    reviewCount  Int       @default(0) @map("review_count")
+    viewCount    Int       @default(0) @map("view_count")
+    lastSoldAt   DateTime? @map("last_sold_at")
+    createdAt    DateTime  @default(now()) @map("created_at")
+    updatedAt    DateTime  @updatedAt @map("updated_at")
+
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    @@index([productId])
+    @@index([totalSold])
+    @@index([avgRating])
+    @@map("product_stats")
+}

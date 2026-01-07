@@ -5,6 +5,7 @@ import {
   ExecutionContext,
   CallHandler,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -18,7 +19,9 @@ import { serializeForResponse } from 'src/libs/utils/transform.utils';
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const response = context.switchToHttp().getResponse();
+    const request = context.switchToHttp().getRequest<Request>();
+    const response = context.switchToHttp().getResponse<Response>();
+    const defaultStatusCode = request.method === 'POST' ? 201 : 200;
 
     return next.handle().pipe(
       map((data: any) => {
@@ -27,7 +30,7 @@ export class ResponseInterceptor implements NestInterceptor {
 
         // Check if data is IBeforeTransformResponseType (from service)
         if (this.isBeforeTransformResponse(safeData)) {
-          const statusCode = safeData.statusCode || 200;
+          const statusCode = safeData.statusCode || defaultStatusCode;
           // Set HTTP status code
           response.status(statusCode);
 
@@ -42,7 +45,7 @@ export class ResponseInterceptor implements NestInterceptor {
 
         // Check if data is IBeforeTransformPaginationResponseType (from service)
         if (this.isBeforeTransformPaginationResponse(safeData)) {
-          const statusCode = safeData.statusCode || 200;
+          const statusCode = safeData.statusCode || defaultStatusCode;
           // Set HTTP status code
           response.status(statusCode);
 

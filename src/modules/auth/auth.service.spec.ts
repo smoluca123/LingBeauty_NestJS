@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { PrismaService } from '../../services/prisma/prisma.service';
 import { JwtAuthService } from '../jwt/jwt.service';
 import { RedisService } from '@liaoliaots/nestjs-redis';
+import { MailService } from '../mail/mail.service';
 import {
   ConflictException,
   CustomUnauthorizedException,
@@ -41,6 +42,8 @@ describe('AuthService', () => {
     get: jest.Mock;
     setex: jest.Mock;
     del: jest.Mock;
+    incr: jest.Mock;
+    ttl: jest.Mock;
   };
 
   const mockUser = {
@@ -74,6 +77,8 @@ describe('AuthService', () => {
       get: jest.fn(),
       setex: jest.fn(),
       del: jest.fn(),
+      incr: jest.fn(),
+      ttl: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -100,6 +105,12 @@ describe('AuthService', () => {
           provide: RedisService,
           useValue: {
             getOrThrow: jest.fn(() => mockRedis),
+          },
+        },
+        {
+          provide: MailService,
+          useValue: {
+            sendOtpEmail: jest.fn().mockResolvedValue({ success: true }),
           },
         },
       ],

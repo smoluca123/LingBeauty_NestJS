@@ -126,6 +126,29 @@ export class ProductVariantDto {
   inventory?: ProductInventoryDto;
 }
 
+export class ProductStatsDto {
+  @ApiProperty({ example: 150, description: 'Total quantity sold' })
+  totalSold: number;
+
+  @ApiProperty({ example: '15000000', description: 'Total revenue generated' })
+  totalRevenue: string;
+
+  @ApiPropertyOptional({ example: '4.5', description: 'Average rating (1-5)' })
+  avgRating?: string;
+
+  @ApiProperty({ example: 25, description: 'Number of approved reviews' })
+  reviewCount: number;
+
+  @ApiProperty({ example: 1250, description: 'Number of product views' })
+  viewCount: number;
+
+  @ApiPropertyOptional({
+    example: '2024-01-15T10:30:00Z',
+    description: 'Last sale date',
+  })
+  lastSoldAt?: Date;
+}
+
 export class ProductResponseDto extends BaseResponseDto {
   @ApiProperty({
     example: 'Lipstick Matte Red',
@@ -223,12 +246,13 @@ export class ProductResponseDto extends BaseResponseDto {
   @Type(() => ProductBadgeResponseDto)
   badges: ProductBadgeResponseDto[];
 
+  @ApiPropertyOptional({
+    type: ProductStatsDto,
+    description: 'Product statistics (sales, reviews, ratings)',
+  })
+  @Type(() => ProductStatsDto)
+  stats?: ProductStatsDto;
+
   @Exclude()
   brandId?: string;
 }
-
-// export class ProductListResponseDto extends ProductResponseDto {
-//   @ApiPropertyOptional({ type: ProductImageDto })
-//   @Type(() => ProductImageDto)
-//   primaryImage?: ProductImageDto;
-// }

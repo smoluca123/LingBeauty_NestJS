@@ -184,6 +184,17 @@ exports.Prisma.CommissionRateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.EmailVerificationLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  action: 'action',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.FlashSaleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -293,6 +304,19 @@ exports.Prisma.PaymentScalarFieldEnum = {
   transactionId: 'transactionId',
   paymentData: 'paymentData',
   paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductStatsScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  totalSold: 'totalSold',
+  totalRevenue: 'totalRevenue',
+  avgRating: 'avgRating',
+  reviewCount: 'reviewCount',
+  viewCount: 'viewCount',
+  lastSoldAt: 'lastSoldAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -515,6 +539,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -524,6 +553,20 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.EmailVerificationAction = exports.$Enums.EmailVerificationAction = {
+  SEND_OTP: 'SEND_OTP',
+  RESEND_OTP: 'RESEND_OTP',
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS',
+  VERIFY_FAILED: 'VERIFY_FAILED',
+  RATE_LIMITED: 'RATE_LIMITED'
+};
+
 exports.FlashSaleStatus = exports.$Enums.FlashSaleStatus = {
   UPCOMING: 'UPCOMING',
   ACTIVE: 'ACTIVE',
@@ -592,6 +635,7 @@ exports.Prisma.ModelName = {
   AffiliateLink: 'AffiliateLink',
   AffiliateCommission: 'AffiliateCommission',
   CommissionRate: 'CommissionRate',
+  EmailVerificationLog: 'EmailVerificationLog',
   FlashSale: 'FlashSale',
   FlashSaleProduct: 'FlashSaleProduct',
   FlashSaleOrder: 'FlashSaleOrder',
@@ -601,6 +645,7 @@ exports.Prisma.ModelName = {
   Order: 'Order',
   OrderItem: 'OrderItem',
   Payment: 'Payment',
+  ProductStats: 'ProductStats',
   Category: 'Category',
   Brand: 'Brand',
   Product: 'Product',

@@ -226,14 +226,18 @@ export class FileValidationUtil {
       allowedTypes: 'image' | 'video' | 'both';
       maxSize: number;
       validateSignature?: boolean;
+      isRequired?: boolean;
     },
   ): Promise<void> {
     // 1. Validate file exists
     if (!file || !file.buffer) {
-      throw new BusinessException(
-        'No file provided',
-        ERROR_CODES.INVALID_FILE_TYPE,
-      );
+      if (options.isRequired) {
+        throw new BusinessException(
+          'No file provided',
+          ERROR_CODES.INVALID_FILE_TYPE,
+        );
+      }
+      return;
     }
 
     // 2. Validate file type

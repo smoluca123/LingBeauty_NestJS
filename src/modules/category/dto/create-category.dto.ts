@@ -24,6 +24,7 @@ export class CreateCategoryDto {
   @ApiPropertyOptional({
     example: CateGoryType.BRAND,
     description: 'Type of the category',
+    enum: CateGoryType,
   })
   @IsEnum(CateGoryType)
   @IsOptional()

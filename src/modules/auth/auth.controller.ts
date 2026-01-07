@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Header,
+  Headers,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import type { Request } from 'express';
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from 'src/modules/auth/dto/login.dto';
@@ -17,6 +27,7 @@ import {
   ApiRefreshToken,
   ApiSendEmailVerification,
   ApiVerifyEmail,
+  ApiResendEmailVerification,
   ApiSendPhoneVerification,
   ApiVerifyPhone,
   ApiValidateToken,
@@ -49,17 +60,27 @@ export class AuthController {
   @Post('refresh-token')
   @ApiRefreshToken()
   refreshToken(
-    @Body() refreshTokenDto: RefreshTokenDto,
+    @Headers('accessToken') accessToken: string,
   ): Promise<IBeforeTransformResponseType<AuthResponseDto>> {
-    return this.authService.refreshToken(refreshTokenDto);
+    return this.authService.refreshToken({
+      accessToken,
+    });
   }
 
   @Post('send-email-verification')
   @ApiSendEmailVerification()
   sendEmailVerification(
     @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
+    @Req() req: Request,
   ): Promise<IBeforeTransformResponseType<{ message: string; code?: string }>> {
-    return this.authService.sendEmailVerification(decodedToken.userId);
+    const metadata = {
+      ipAddress: req.ip || req.headers['x-forwarded-for']?.toString(),
+      userAgent: req.headers['user-agent'],
+    };
+    return this.authService.sendEmailVerification(
+      decodedToken.userId,
+      metadata,
+    );
   }
 
   @Post('verify-email')
@@ -67,8 +88,33 @@ export class AuthController {
   verifyEmail(
     @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
     @Body() verifyEmailDto: VerifyEmailDto,
+    @Req() req: Request,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
-    return this.authService.verifyEmail(decodedToken.userId, verifyEmailDto);
+    const metadata = {
+      ipAddress: req.ip || req.headers['x-forwarded-for']?.toString(),
+      userAgent: req.headers['user-agent'],
+    };
+    return this.authService.verifyEmail(
+      decodedToken.userId,
+      verifyEmailDto,
+      metadata,
+    );
+  }
+
+  @Post('resend-email-verification')
+  @ApiResendEmailVerification()
+  resendEmailVerification(
+    @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
+    @Req() req: Request,
+  ): Promise<IBeforeTransformResponseType<{ message: string; code?: string }>> {
+    const metadata = {
+      ipAddress: req.ip || req.headers['x-forwarded-for']?.toString(),
+      userAgent: req.headers['user-agent'],
+    };
+    return this.authService.resendEmailVerification(
+      decodedToken.userId,
+      metadata,
+    );
   }
 
   @Post('send-phone-verification')

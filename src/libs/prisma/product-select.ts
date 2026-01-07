@@ -68,6 +68,19 @@ export type ProductBadge = Prisma.ProductBadgeGetPayload<{
   select: typeof productBadgeSelect;
 }>;
 
+export const productStatsSelect = {
+  totalSold: true,
+  totalRevenue: true,
+  avgRating: true,
+  reviewCount: true,
+  viewCount: true,
+  lastSoldAt: true,
+} satisfies Prisma.ProductStatsSelect;
+
+export type ProductStatsSelect = Prisma.ProductStatsGetPayload<{
+  select: typeof productStatsSelect;
+}>;
+
 export const productSelect = {
   id: true,
   name: true,
@@ -112,6 +125,9 @@ export const productSelect = {
     orderBy: {
       sortOrder: 'asc' as const,
     },
+  },
+  stats: {
+    select: productStatsSelect,
   },
 } satisfies Prisma.ProductSelect;
 

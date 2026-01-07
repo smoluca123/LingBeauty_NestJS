@@ -9,7 +9,12 @@ import {
 } from 'src/libs/types/interfaces/response.interface';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { StorageService } from 'src/modules/storage/storage.service';
-import { CreateReviewDto } from './dto/create-review.dto';
+import { ProductStatsService } from 'src/modules/product/product-stats.service';
+import {
+  CreateReviewDto,
+  CreateReviewWithImagesDto,
+} from './dto/create-review.dto';
+
 import { UpdateReviewDto } from './dto/update-review.dto';
 import {
   AddReviewImageDto,
@@ -19,55 +24,14 @@ import {
   ReviewResponseDto,
   ReviewWithProductResponseDto,
 } from './dto/review-response.dto';
-
-const reviewSelect = {
-  id: true,
-  productId: true,
-  userId: true,
-  rating: true,
-  title: true,
-  comment: true,
-  isVerified: true,
-  isApproved: true,
-  helpfulCount: true,
-  createdAt: true,
-  updatedAt: true,
-  user: {
-    select: {
-      id: true,
-      fullName: true,
-      avatarMedia: {
-        select: {
-          url: true,
-        },
-      },
-    },
-  },
-  images: {
-    select: {
-      id: true,
-      alt: true,
-      media: {
-        select: {
-          id: true,
-          url: true,
-          mimetype: true,
-        },
-      },
-    },
-  },
-};
-
-const reviewWithProductSelect = {
-  ...reviewSelect,
-  product: {
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-    },
-  },
-};
+import {
+  reviewSelect,
+  reviewWithProductSelect,
+} from 'src/libs/prisma/review-select';
+import {
+  toResponseDto,
+  toResponseDtoArray,
+} from 'src/libs/utils/transform.utils';
 
 export interface GetReviewsParams {
   page?: number;
@@ -85,6 +49,7 @@ export class ReviewService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly storageService: StorageService,
+    private readonly productStatsService: ProductStatsService,
   ) {}
 
   async getProductReviews(
@@ -122,9 +87,7 @@ export class ReviewService {
         }),
       ]);
 
-      const reviewResponses = reviews.map((review) =>
-        this.mapReviewEntity(review),
-      );
+      const reviewResponses = toResponseDtoArray(ReviewResponseDto, reviews);
 
       return {
         type: 'pagination',
@@ -163,10 +126,12 @@ export class ReviewService {
         );
       }
 
+      const result = toResponseDto(ReviewWithProductResponseDto, review);
+
       return {
         type: 'response',
         message: 'Review retrieved successfully',
-        data: this.mapReviewWithProductEntity(review),
+        data: result,
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -240,7 +205,7 @@ export class ReviewService {
           rating: dto.rating,
           title: dto.title,
           comment: dto.comment,
-          images:
+          reviewImages:
             dto.mediaIds && dto.mediaIds.length > 0
               ? {
                   create: dto.mediaIds.map((mediaId) => ({
@@ -252,10 +217,107 @@ export class ReviewService {
         select: reviewSelect,
       });
 
+      const result = toResponseDto(ReviewResponseDto, review);
+
       return {
         type: 'response',
         message: 'Review created successfully',
-        data: this.mapReviewEntity(review),
+        data: result,
+        statusCode: 201,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        'Failed to create review',
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  /**
+   * Create review with uploaded images (multipart/form-data)
+   * Atomic operation: creates review + uploads images in one request
+   */
+  async createReviewWithImages(
+    userId: string,
+    dto: CreateReviewWithImagesDto,
+    files: Express.Multer.File[],
+  ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
+    try {
+      // Check if product exists
+      const product = await this.prismaService.product.findUnique({
+        where: { id: dto.productId },
+        select: { id: true },
+      });
+      if (!product) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.PRODUCT_NOT_FOUND],
+          ERROR_CODES.PRODUCT_NOT_FOUND,
+        );
+      }
+      // Check if user already reviewed this product
+      const existingReview = await this.prismaService.productReview.findUnique({
+        where: {
+          productId_userId: {
+            productId: dto.productId,
+            userId,
+          },
+        },
+        select: { id: true },
+      });
+      if (existingReview) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_ALREADY_EXISTS],
+          ERROR_CODES.REVIEW_ALREADY_EXISTS,
+        );
+      }
+      // Validate file count
+      if (files && files.length > 5) {
+        throw new BusinessException(
+          'Maximum 5 images allowed per review',
+          ERROR_CODES.REVIEW_IMAGE_LIMIT_EXCEEDED,
+        );
+      }
+      // Upload images and get media IDs
+      const uploadedMediaIds: string[] = [];
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const uploadResult = await this.storageService.uploadFile({
+            file,
+            type: MediaType.REVIEW_IMAGE,
+            userId,
+          });
+          uploadedMediaIds.push(uploadResult.id);
+        }
+      }
+      // Create review with images
+      const review = await this.prismaService.productReview.create({
+        data: {
+          productId: dto.productId,
+          userId,
+          rating: dto.rating,
+          title: dto.title,
+          comment: dto.comment,
+          reviewImages:
+            uploadedMediaIds.length > 0
+              ? {
+                  create: uploadedMediaIds.map((mediaId) => ({
+                    mediaId,
+                  })),
+                }
+              : undefined,
+        },
+        select: reviewSelect,
+      });
+
+      const result = toResponseDto(ReviewResponseDto, review);
+
+      return {
+        type: 'response',
+        message: 'Review created successfully',
+        data: result,
         statusCode: 201,
       };
     } catch (error) {
@@ -274,10 +336,11 @@ export class ReviewService {
     reviewId: string,
     dto: UpdateReviewDto,
   ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
+    let productIdToSync: string | null = null;
     try {
       const existingReview = await this.prismaService.productReview.findUnique({
         where: { id: reviewId },
-        select: { id: true, userId: true },
+        select: { id: true, userId: true, productId: true },
       });
 
       if (!existingReview) {
@@ -293,6 +356,8 @@ export class ReviewService {
           ERROR_CODES.REVIEW_NOT_OWNED,
         );
       }
+
+      productIdToSync = existingReview.productId;
 
       const updated = await this.prismaService.productReview.update({
         where: { id: reviewId },
@@ -304,10 +369,12 @@ export class ReviewService {
         select: reviewSelect,
       });
 
+      const result = toResponseDto(ReviewResponseDto, updated);
+
       return {
         type: 'response',
         message: 'Review updated successfully',
-        data: this.mapReviewEntity(updated),
+        data: result,
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -317,6 +384,18 @@ export class ReviewService {
         'Failed to update review',
         ERROR_CODES.DATABASE_ERROR,
       );
+    } finally {
+      // Auto sync product stats after review updated (rating might have changed)
+      if (dto.rating !== undefined && productIdToSync) {
+        this.productStatsService
+          .onReviewChange(productIdToSync)
+          .catch((err) => {
+            console.error(
+              'Failed to sync product stats after review updated:',
+              err,
+            );
+          });
+      }
     }
   }
 
@@ -324,10 +403,11 @@ export class ReviewService {
     userId: string,
     reviewId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    let productIdToSync: string | null = null;
     try {
       const existingReview = await this.prismaService.productReview.findUnique({
         where: { id: reviewId },
-        select: { id: true, userId: true },
+        select: { id: true, userId: true, productId: true },
       });
 
       if (!existingReview) {
@@ -343,6 +423,8 @@ export class ReviewService {
           ERROR_CODES.REVIEW_NOT_OWNED,
         );
       }
+
+      productIdToSync = existingReview.productId;
 
       await this.prismaService.productReview.delete({
         where: { id: reviewId },
@@ -361,6 +443,18 @@ export class ReviewService {
         'Failed to delete review',
         ERROR_CODES.DATABASE_ERROR,
       );
+    } finally {
+      // Auto sync product stats after review deleted
+      if (productIdToSync) {
+        this.productStatsService
+          .onReviewChange(productIdToSync)
+          .catch((err) => {
+            console.error(
+              'Failed to sync product stats after review deleted:',
+              err,
+            );
+          });
+      }
     }
   }
 
@@ -569,10 +663,11 @@ export class ReviewService {
     reviewId: string,
     isApproved: boolean,
   ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
+    let productId: string | null = null;
     try {
       const existingReview = await this.prismaService.productReview.findUnique({
         where: { id: reviewId },
-        select: { id: true },
+        select: { id: true, productId: true },
       });
 
       if (!existingReview) {
@@ -582,16 +677,20 @@ export class ReviewService {
         );
       }
 
+      productId = existingReview.productId;
+
       const updated = await this.prismaService.productReview.update({
         where: { id: reviewId },
         data: { isApproved },
         select: reviewSelect,
       });
 
+      const result = toResponseDto(ReviewResponseDto, updated);
+
       return {
         type: 'response',
         message: `Review ${isApproved ? 'approved' : 'rejected'} successfully`,
-        data: this.mapReviewEntity(updated),
+        data: result,
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -601,6 +700,17 @@ export class ReviewService {
         'Failed to update review status',
         ERROR_CODES.DATABASE_ERROR,
       );
+    } finally {
+      // Auto sync product stats after review approved/rejected
+      // This affects avgRating since only approved reviews count
+      if (productId) {
+        this.productStatsService.onReviewChange(productId).catch((err) => {
+          console.error(
+            'Failed to sync product stats after review approval change:',
+            err,
+          );
+        });
+      }
     }
   }
 
@@ -774,29 +884,5 @@ export class ReviewService {
         ERROR_CODES.DATABASE_ERROR,
       );
     }
-  }
-
-  private mapReviewEntity(review: any): ReviewResponseDto {
-    return {
-      ...review,
-      user: {
-        id: review.user.id,
-        fullName: review.user.fullName,
-        avatarUrl: review.user.avatarMedia?.url || null,
-      },
-    };
-  }
-
-  private mapReviewWithProductEntity(
-    review: any,
-  ): ReviewWithProductResponseDto {
-    return {
-      ...review,
-      user: {
-        id: review.user.id,
-        fullName: review.user.fullName,
-        avatarUrl: review.user.avatarMedia?.url || null,
-      },
-    };
   }
 }

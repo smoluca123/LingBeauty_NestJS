@@ -123,8 +123,8 @@ export class CreateProductDto {
     description: 'Unique SKU code',
   })
   @IsString()
-  @IsNotEmpty()
-  sku: string;
+  @IsOptional()
+  sku?: string;
 
   @ApiProperty({
     example: ['uuid-category-id-1', 'uuid-category-id-2'],

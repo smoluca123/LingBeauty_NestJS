@@ -96,6 +96,35 @@ model CommissionRate {
   @@map("commission_rates")
 }
 
+// Email Verification Log - Audit trail for email verification activities
+
+model EmailVerificationLog {
+  id        String                  @id @default(uuid())
+  userId    String                  @map("user_id")
+  email     String                  @db.VarChar(255)
+  action    EmailVerificationAction
+  ipAddress String?                 @map("ip_address") @db.VarChar(45)
+  userAgent String?                 @map("user_agent") @db.Text
+  metadata  Json?
+  createdAt DateTime                @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([email])
+  @@index([action])
+  @@index([createdAt])
+  @@map("email_verification_logs")
+}
+
+enum EmailVerificationAction {
+  SEND_OTP
+  RESEND_OTP
+  VERIFY_SUCCESS
+  VERIFY_FAILED
+  RATE_LIMITED
+}
+
 enum FlashSaleStatus {
   UPCOMING
   ACTIVE
@@ -338,6 +367,29 @@ model Payment {
   @@map("payments")
 }
 
+// Product statistics for performance optimization
+// This table stores pre-calculated metrics to avoid expensive aggregate queries
+
+model ProductStats {
+  id           String    @id @default(uuid())
+  productId    String    @unique @map("product_id")
+  totalSold    Int       @default(0) @map("total_sold")
+  totalRevenue Decimal   @default(0) @map("total_revenue") @db.Decimal(15, 2)
+  avgRating    Decimal?  @map("avg_rating") @db.Decimal(3, 2)
+  reviewCount  Int       @default(0) @map("review_count")
+  viewCount    Int       @default(0) @map("view_count")
+  lastSoldAt   DateTime? @map("last_sold_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([totalSold])
+  @@index([avgRating])
+  @@map("product_stats")
+}
+
 enum CateGoryType {
   BRAND
   CATEGORY
@@ -418,6 +470,7 @@ model Product {
   commRates         CommissionRate[]
   flashSaleProducts FlashSaleProduct[]
   productCategories ProductCategory[]
+  stats             ProductStats?
 
   @@index([slug])
   @@index([brandId])
@@ -619,9 +672,9 @@ model ProductReview {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
-  product Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  images  ReviewImage[]
+  product      Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviewImages ReviewImage[]
 
   @@unique([productId, userId])
   @@index([productId])
@@ -684,23 +737,24 @@ model User {
   updatedAt     DateTime @updatedAt @map("updated_at")
   refreshToken  String?  @map("refresh_token")
 
-  isActive        Boolean              @default(true) @map("is_active")
-  isVerified      Boolean              @default(false) @map("is_verified")
-  isBanned        Boolean              @default(false) @map("is_banned")
-  isDeleted       Boolean              @default(false) @map("is_deleted")
-  isEmailVerified Boolean              @default(false) @map("is_email_verified")
-  isPhoneVerified Boolean              @default(false) @map("is_phone_verified")
-  emailVerifiedAt DateTime?            @map("email_verified_at")
-  phoneVerifiedAt DateTime?            @map("phone_verified_at")
+  isActive              Boolean                @default(true) @map("is_active")
+  isVerified            Boolean                @default(false) @map("is_verified")
+  isBanned              Boolean                @default(false) @map("is_banned")
+  isDeleted             Boolean                @default(false) @map("is_deleted")
+  isEmailVerified       Boolean                @default(false) @map("is_email_verified")
+  isPhoneVerified       Boolean                @default(false) @map("is_phone_verified")
+  emailVerifiedAt       DateTime?              @map("email_verified_at")
+  phoneVerifiedAt       DateTime?              @map("phone_verified_at")
   // Relations
-  cart            Cart?
-  orders          Order[]
-  reviews         ProductReview[]
-  addresses       Address[]
-  affiliate       Affiliate?
-  roleAssignments UserRoleAssignment[]
-  avatarMedia     Media?               @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
-  uploadedMedia   Media[]              @relation("UserUploadedMedia")
+  cart                  Cart?
+  orders                Order[]
+  reviews               ProductReview[]
+  addresses             Address[]
+  affiliate             Affiliate?
+  roleAssignments       UserRoleAssignment[]
+  avatarMedia           Media?                 @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
+  uploadedMedia         Media[]                @relation("UserUploadedMedia")
+  emailVerificationLogs EmailVerificationLog[]
 
   @@index([email])
   @@index([phone])
