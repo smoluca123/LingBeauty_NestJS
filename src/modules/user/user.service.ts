@@ -22,6 +22,30 @@ export class UserService {
     private readonly storageService: StorageService,
     private readonly prismaService: PrismaService,
   ) {}
+
+  async getMe(
+    userId: string,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+      select: userSelect,
+    });
+
+    if (!user) {
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+        ERROR_CODES.USER_NOT_FOUND,
+      );
+    }
+
+    const userResponse = toResponseDto(UserResponseDto, user);
+
+    return {
+      type: 'response',
+      message: 'User retrieved successfully',
+      data: userResponse,
+    };
+  }
   async updateAvatar(
     userId: string,
     file: Express.Multer.File,

@@ -28,11 +28,14 @@ const configuration = () => ({
   // SUPABASE_BUCKET_NAME: process.env.SUPABASE_BUCKET_NAME,
   // SUPABASE_IMAGE_PATH: process.env.SUPABASE_IMAGE_PATH,
 
-  // Mail
-  // MAILER_HOST: process.env.MAILER_HOST,
-  // MAILER_PORT: parseInt(process.env.MAILER_PORT || '465', 10),
-  // MAILER_USER: process.env.MAILER_USER,
-  // MAILER_PASS: process.env.MAILER_PASS,
+  // Mail SMTP
+  MAIL_HOST: process.env.MAIL_HOST || 'smtp.mailtrap.io',
+  MAIL_PORT: parseInt(process.env.MAIL_PORT || '587', 10),
+  MAIL_SECURE: process.env.MAIL_SECURE === 'true',
+  MAIL_USER: process.env.MAIL_USER,
+  MAIL_PASS: process.env.MAIL_PASS,
+  MAIL_FROM_NAME: process.env.MAIL_FROM_NAME || 'Your Company',
+  MAIL_FROM_ADDRESS: process.env.MAIL_FROM_ADDRESS || 'noreply@example.com',
 
   // S3
   S3_REGION: process.env.S3_REGION,

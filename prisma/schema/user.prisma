@@ -20,14 +20,15 @@ model User {
   emailVerifiedAt DateTime?            @map("email_verified_at")
   phoneVerifiedAt DateTime?            @map("phone_verified_at")
   // Relations
-  cart            Cart?
-  orders          Order[]
-  reviews         ProductReview[]
-  addresses       Address[]
-  affiliate       Affiliate?
-  roleAssignments UserRoleAssignment[]
-  avatarMedia     Media?               @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
-  uploadedMedia   Media[]              @relation("UserUploadedMedia")
+  cart                      Cart?
+  orders                    Order[]
+  reviews                   ProductReview[]
+  addresses                 Address[]
+  affiliate                 Affiliate?
+  roleAssignments           UserRoleAssignment[]
+  avatarMedia               Media?                    @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
+  uploadedMedia             Media[]                   @relation("UserUploadedMedia")
+  emailVerificationLogs     EmailVerificationLog[]
 
   @@index([email])
   @@index([phone])

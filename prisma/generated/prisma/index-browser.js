@@ -184,6 +184,57 @@ exports.Prisma.CommissionRateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BannerGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  isActive: 'isActive',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BannerScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  position: 'position',
+  badge: 'badge',
+  title: 'title',
+  description: 'description',
+  highlight: 'highlight',
+  ctaText: 'ctaText',
+  ctaLink: 'ctaLink',
+  subLabel: 'subLabel',
+  gradientFrom: 'gradientFrom',
+  gradientTo: 'gradientTo',
+  imageMediaId: 'imageMediaId',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BannerGroupMappingScalarFieldEnum = {
+  id: 'id',
+  bannerId: 'bannerId',
+  bannerGroupId: 'bannerGroupId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EmailVerificationLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  action: 'action',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.FlashSaleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -293,6 +344,19 @@ exports.Prisma.PaymentScalarFieldEnum = {
   transactionId: 'transactionId',
   paymentData: 'paymentData',
   paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductStatsScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  totalSold: 'totalSold',
+  totalRevenue: 'totalRevenue',
+  avgRating: 'avgRating',
+  reviewCount: 'reviewCount',
+  viewCount: 'viewCount',
+  lastSoldAt: 'lastSoldAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -515,6 +579,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -524,6 +593,31 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.BannerType = exports.$Enums.BannerType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE'
+};
+
+exports.BannerPosition = exports.$Enums.BannerPosition = {
+  MAIN_CAROUSEL: 'MAIN_CAROUSEL',
+  SIDE_TOP: 'SIDE_TOP',
+  SIDE_BOTTOM: 'SIDE_BOTTOM'
+};
+
+exports.EmailVerificationAction = exports.$Enums.EmailVerificationAction = {
+  SEND_OTP: 'SEND_OTP',
+  RESEND_OTP: 'RESEND_OTP',
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS',
+  VERIFY_FAILED: 'VERIFY_FAILED',
+  RATE_LIMITED: 'RATE_LIMITED'
+};
+
 exports.FlashSaleStatus = exports.$Enums.FlashSaleStatus = {
   UPCOMING: 'UPCOMING',
   ACTIVE: 'ACTIVE',
@@ -538,7 +632,8 @@ exports.MediaType = exports.$Enums.MediaType = {
   REVIEW_VIDEO: 'REVIEW_VIDEO',
   AVATAR: 'AVATAR',
   CATEGORY_IMAGE: 'CATEGORY_IMAGE',
-  BRAND_LOGO: 'BRAND_LOGO'
+  BRAND_LOGO: 'BRAND_LOGO',
+  BANNER_IMAGE: 'BANNER_IMAGE'
 };
 
 exports.OrderStatus = exports.$Enums.OrderStatus = {
@@ -586,12 +681,21 @@ exports.ProductBadgeType = exports.$Enums.ProductBadgeType = {
   FREESHIPPING: 'FREESHIPPING'
 };
 
+exports.ProductInventoryDisplayStatus = exports.$Enums.ProductInventoryDisplayStatus = {
+  IN_STOCK: 'IN_STOCK',
+  OUT_OF_STOCK: 'OUT_OF_STOCK'
+};
+
 exports.Prisma.ModelName = {
   Address: 'Address',
   Affiliate: 'Affiliate',
   AffiliateLink: 'AffiliateLink',
   AffiliateCommission: 'AffiliateCommission',
   CommissionRate: 'CommissionRate',
+  BannerGroup: 'BannerGroup',
+  Banner: 'Banner',
+  BannerGroupMapping: 'BannerGroupMapping',
+  EmailVerificationLog: 'EmailVerificationLog',
   FlashSale: 'FlashSale',
   FlashSaleProduct: 'FlashSaleProduct',
   FlashSaleOrder: 'FlashSaleOrder',
@@ -601,6 +705,7 @@ exports.Prisma.ModelName = {
   Order: 'Order',
   OrderItem: 'OrderItem',
   Payment: 'Payment',
+  ProductStats: 'ProductStats',
   Category: 'Category',
   Brand: 'Brand',
   Product: 'Product',

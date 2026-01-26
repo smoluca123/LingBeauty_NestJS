@@ -10,6 +10,7 @@ import { VerifyEmailDto } from 'src/modules/auth/dto/verify-email.dto';
 import { VerifyPhoneDto } from 'src/modules/auth/dto/verify-phone.dto';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 import { AuthResponseDto } from 'src/modules/auth/dto/response/auth-response.dto';
+import { ValidateTokenResponseDto } from 'src/modules/auth/dto/response/validate-token-response.dto';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { JwtAuthService } from 'src/modules/jwt/jwt.service';
@@ -25,19 +26,91 @@ import { configData } from 'src/configs/configuration';
 import { generateOTPCode } from 'src/libs/utils/utils';
 import { userSelect } from 'src/libs/prisma/user-select';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
-import { mediaSelect } from 'src/libs/prisma/media-select';
+import { MailService } from 'src/modules/mail/mail.service';
+import { EmailVerificationAction } from 'prisma/generated/prisma';
+
+// Interface for request metadata (IP, User Agent)
+interface RequestMetadata {
+  ipAddress?: string;
+  userAgent?: string;
+}
 
 @Injectable()
 export class AuthService {
   private readonly redis: Redis;
   private readonly OTP_TTL = 600; // 10 minutes in seconds
+  private readonly RATE_LIMIT_MAX_REQUESTS = 3;
+  private readonly RATE_LIMIT_WINDOW_SECONDS = 300; // 5 minutes
 
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtAuthService: JwtAuthService,
     private readonly redisService: RedisService,
+    private readonly mailService: MailService,
   ) {
     this.redis = this.redisService.getOrThrow();
+  }
+
+  /**
+   * Check if user is rate limited for email verification
+   * @returns true if rate limited, false otherwise
+   */
+  private async checkRateLimit(userId: string): Promise<boolean> {
+    const rateLimitKey = `email_verification_rate:${userId}`;
+    const currentCount = await this.redis.get(rateLimitKey);
+    return (
+      currentCount !== null &&
+      parseInt(currentCount, 10) >= this.RATE_LIMIT_MAX_REQUESTS
+    );
+  }
+
+  /**
+   * Get remaining cooldown time in seconds
+   */
+  private async getRemainingCooldown(userId: string): Promise<number> {
+    const rateLimitKey = `email_verification_rate:${userId}`;
+    const ttl = await this.redis.ttl(rateLimitKey);
+    return ttl > 0 ? ttl : 0;
+  }
+
+  /**
+   * Increment rate limit counter for email verification
+   */
+  private async incrementRateLimitCounter(userId: string): Promise<void> {
+    const rateLimitKey = `email_verification_rate:${userId}`;
+    const currentCount = await this.redis.get(rateLimitKey);
+
+    if (currentCount === null) {
+      await this.redis.setex(rateLimitKey, this.RATE_LIMIT_WINDOW_SECONDS, '1');
+    } else {
+      await this.redis.incr(rateLimitKey);
+    }
+  }
+
+  /**
+   * Log email verification action for audit trail
+   */
+  private async logEmailVerificationAction(
+    userId: string,
+    email: string,
+    action: EmailVerificationAction,
+    metadata?: RequestMetadata & { error?: string },
+  ): Promise<void> {
+    try {
+      await this.prismaService.emailVerificationLog.create({
+        data: {
+          userId,
+          email,
+          action,
+          ipAddress: metadata?.ipAddress,
+          userAgent: metadata?.userAgent,
+          metadata: metadata?.error ? { error: metadata.error } : undefined,
+        },
+      });
+    } catch (error) {
+      // Don't throw error if logging fails - it shouldn't break the main flow
+      console.error('Failed to log email verification action:', error);
+    }
   }
 
   /**
@@ -325,160 +398,211 @@ export class AuthService {
   async refreshToken(
     refreshTokenDto: RefreshTokenDto,
   ): Promise<IBeforeTransformResponseType<AuthResponseDto>> {
-    let decodedPayload: JwtPayload;
-
     try {
       // Verify refresh token
-      decodedPayload = await this.jwtAuthService.verifyToken<JwtPayload>(
-        refreshTokenDto.accessToken,
-        {
-          ignoreExpiration: true,
-        },
-      );
+      let decodedPayload: JwtPayload;
+      try {
+        decodedPayload = await this.jwtAuthService.verifyToken<JwtPayload>(
+          refreshTokenDto.accessToken,
+          {
+            ignoreExpiration: true,
+          },
+        );
+      } catch {
+        throw new CustomUnauthorizedException(
+          'Invalid refresh token',
+          ERROR_CODES.INVALID_REFRESH_TOKEN,
+        );
+      }
+
+      // Find user by userId from token payload
+      const user = await this.prismaService.user.findUnique({
+        where: { id: decodedPayload.userId },
+        select: userSelect,
+      });
+
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          'User not found',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Check if user is deleted
+      if (user.isDeleted) {
+        throw new CustomUnauthorizedException(
+          'User not found or has been deleted',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Check if user is banned
+      if (user.isBanned || !user.isActive) {
+        throw new ForbiddenException(
+          'User has been banned',
+          ERROR_CODES.USER_BANNED,
+        );
+      }
+
+      // Generate new tokens
+      const payload: JwtPayload = {
+        userId: user.id,
+        username: user.username,
+      };
+      const { accessToken, refreshToken } =
+        await this.jwtAuthService.generateTokenPair(payload);
+
+      // Update refreshToken in database
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: { refreshToken },
+      });
+
+      // Transform to DTOs
+      const userResponse = toResponseDto(UserResponseDto, user);
+      const authResponse: AuthResponseDto = {
+        user: userResponse,
+        accessToken,
+      };
+
+      return {
+        type: 'response',
+        message: 'Token refreshed successfully',
+        data: authResponse,
+      };
     } catch (error) {
-      throw new CustomUnauthorizedException(
-        'Invalid refresh token',
-        ERROR_CODES.INVALID_REFRESH_TOKEN,
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof ForbiddenException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        'Failed to refresh token',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
-
-    // Find user by userId from token payload
-    const user = await this.prismaService.user.findUnique({
-      where: { id: decodedPayload.userId },
-      select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        phone: true,
-        username: true,
-        refreshToken: true,
-        isActive: true,
-        isBanned: true,
-        isDeleted: true,
-        isEmailVerified: true,
-        isPhoneVerified: true,
-        emailVerifiedAt: true,
-        phoneVerifiedAt: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
-    if (!user) {
-      throw new CustomUnauthorizedException(
-        'User not found',
-        ERROR_CODES.USER_NOT_FOUND,
-      );
-    }
-
-    // Check if user is deleted
-    if (user.isDeleted) {
-      throw new CustomUnauthorizedException(
-        'User not found or has been deleted',
-        ERROR_CODES.USER_NOT_FOUND,
-      );
-    }
-
-    // Check if user is banned
-    if (user.isBanned || !user.isActive) {
-      throw new ForbiddenException(
-        'User has been banned',
-        ERROR_CODES.USER_BANNED,
-      );
-    }
-
-    // Verify refreshToken matches the one in database
-    // if (user.refreshToken !== refreshTokenDto.accessToken) {
-    //   throw new CustomUnauthorizedException(
-    //     'Invalid refresh token',
-    //     ERROR_CODES.INVALID_REFRESH_TOKEN,
-    //   );
-    // }
-
-    // Generate new tokens
-    const payload: JwtPayload = {
-      userId: user.id,
-      username: user.username,
-    };
-    const { accessToken, refreshToken } =
-      await this.jwtAuthService.generateTokenPair(payload);
-
-    // Update refreshToken in database
-    await this.prismaService.user.update({
-      where: { id: user.id },
-      data: { refreshToken },
-    });
-
-    // Transform to DTOs
-    const userResponse = toResponseDto(UserResponseDto, user);
-    const authResponse: AuthResponseDto = {
-      user: userResponse,
-      accessToken,
-    };
-
-    return {
-      type: 'response',
-      message: 'Token refreshed successfully',
-      data: authResponse,
-    };
   }
 
   /**
    * Send email verification code
-   * Generates OTP code, stores it in Redis, and sends it via email (placeholder)
+   * Generates OTP code, stores it in Redis, and sends it via email
    */
   async sendEmailVerification(
     userId: string,
-  ): Promise<IBeforeTransformResponseType<{ message: string; code?: string }>> {
-    // Get user to check email and verification status
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        isEmailVerified: true,
-      },
-    });
+    metadata?: RequestMetadata,
+  ): Promise<
+    IBeforeTransformResponseType<{
+      message: string;
+      code?: string;
+      remainingCooldown?: number;
+    }>
+  > {
+    try {
+      // Get user to check email and verification status
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          isEmailVerified: true,
+        },
+      });
 
-    if (!user) {
-      throw new CustomUnauthorizedException(
-        'User not found',
-        ERROR_CODES.USER_NOT_FOUND,
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          'User not found',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Check if email is already verified
+      if (user.isEmailVerified) {
+        throw new BusinessException(
+          'Email is already verified',
+          ERROR_CODES.INVALID_OPERATION,
+        );
+      }
+
+      // Check rate limit
+      const isRateLimited = await this.checkRateLimit(userId);
+      if (isRateLimited) {
+        const remainingCooldown = await this.getRemainingCooldown(userId);
+        // Log rate limited action
+        await this.logEmailVerificationAction(
+          userId,
+          user.email,
+          EmailVerificationAction.RATE_LIMITED,
+          metadata,
+        );
+        throw new BusinessException(
+          `Too many requests. Please try again in ${remainingCooldown} seconds`,
+          ERROR_CODES.RATE_LIMIT_EXCEEDED,
+          429,
+          { remainingCooldown },
+        );
+      }
+
+      // Generate OTP code
+      const code = generateOTPCode();
+
+      // Store code in Redis with TTL (this also invalidates any previous OTP)
+      const redisKey = `email_verification:${userId}`;
+      await this.redis.setex(redisKey, this.OTP_TTL, code);
+
+      // Send email with OTP code
+      try {
+        await this.mailService.sendOtpEmail(user.email, {
+          userName: user.firstName || 'User',
+          otpCode: code,
+          companyName: configData.MAIL_FROM_NAME || 'LingBeauty',
+          expiresIn: '10 phút',
+        });
+      } catch (error) {
+        // Remove OTP from Redis if email sending fails
+        await this.redis.del(redisKey);
+        throw new BusinessException(
+          'Failed to send verification email',
+          ERROR_CODES.MAIL_SEND_FAILED,
+          500,
+        );
+      }
+
+      // Increment rate limit counter after successful email send
+      await this.incrementRateLimitCounter(userId);
+
+      // Log successful OTP send
+      await this.logEmailVerificationAction(
+        userId,
+        user.email,
+        EmailVerificationAction.SEND_OTP,
+        metadata,
       );
-    }
 
-    // Check if email is already verified
-    if (user.isEmailVerified) {
+      return {
+        type: 'response',
+        message: 'Verification code sent to email',
+        data: {
+          message: 'Verification code has been sent to your email',
+          ...(configData.NODE_ENV === 'development' && { code }), // Only return code in dev mode
+        },
+      };
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
       throw new BusinessException(
-        'Email is already verified',
-        ERROR_CODES.INVALID_OPERATION,
+        'Failed to send email verification',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
-
-    // Generate OTP code
-    const code = generateOTPCode();
-
-    // Store code in Redis with TTL
-    const redisKey = `email_verification:${userId}`;
-    await this.redis.setex(redisKey, this.OTP_TTL, code);
-
-    // TODO: Send email with code
-    // In development mode, we can return the code for testing
-    // In production, this should send an actual email
-    if (configData.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log(`Email verification code for ${user.email}: ${code}`);
-    }
-
-    return {
-      type: 'response',
-      message: 'Verification code sent to email',
-      data: {
-        message: 'Verification code has been sent to your email',
-        ...(configData.NODE_ENV === 'development' && { code }), // Only return code in dev mode
-      },
-    };
   }
 
   /**
@@ -488,70 +612,157 @@ export class AuthService {
   async verifyEmail(
     userId: string,
     verifyEmailDto: VerifyEmailDto,
+    metadata?: RequestMetadata,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
-    // Get user
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        isEmailVerified: true,
-      },
-    });
+    try {
+      // Get user
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          email: true,
+          isEmailVerified: true,
+        },
+      });
 
-    if (!user) {
-      throw new CustomUnauthorizedException(
-        'User not found',
-        ERROR_CODES.USER_NOT_FOUND,
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          'User not found',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Check if already verified
+      if (user.isEmailVerified) {
+        throw new BusinessException(
+          'Email is already verified',
+          ERROR_CODES.INVALID_OPERATION,
+        );
+      }
+
+      // Get code from Redis
+      const redisKey = `email_verification:${userId}`;
+      const storedCode = await this.redis.get(redisKey);
+
+      if (!storedCode) {
+        // Log failed verification - code expired
+        await this.logEmailVerificationAction(
+          userId,
+          user.email,
+          EmailVerificationAction.VERIFY_FAILED,
+          { ...metadata, error: 'Code expired or not found' },
+        );
+        throw new CustomUnauthorizedException(
+          'Verification code expired or not found',
+          ERROR_CODES.INVALID_CREDENTIALS,
+        );
+      }
+
+      // Verify code
+      if (storedCode !== verifyEmailDto.code) {
+        // Log failed verification - invalid code
+        await this.logEmailVerificationAction(
+          userId,
+          user.email,
+          EmailVerificationAction.VERIFY_FAILED,
+          { ...metadata, error: 'Invalid verification code' },
+        );
+        throw new CustomUnauthorizedException(
+          'Invalid verification code',
+          ERROR_CODES.INVALID_CREDENTIALS,
+        );
+      }
+
+      // Update user - mark email as verified
+      await this.prismaService.user.update({
+        where: { id: userId },
+        data: {
+          isEmailVerified: true,
+          emailVerifiedAt: new Date(),
+        },
+      });
+
+      // Delete code from Redis (one-time use)
+      await this.redis.del(redisKey);
+
+      // Log successful verification
+      await this.logEmailVerificationAction(
+        userId,
+        user.email,
+        EmailVerificationAction.VERIFY_SUCCESS,
+        metadata,
       );
-    }
 
-    // Check if already verified
-    if (user.isEmailVerified) {
+      return {
+        type: 'response',
+        message: 'Email verified successfully',
+        data: {
+          message: 'Your email has been verified successfully',
+        },
+      };
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
       throw new BusinessException(
-        'Email is already verified',
-        ERROR_CODES.INVALID_OPERATION,
+        'Failed to verify email',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
+  }
 
-    // Get code from Redis
-    const redisKey = `email_verification:${userId}`;
-    const storedCode = await this.redis.get(redisKey);
+  /**
+   * Resend email verification code
+   * Invalidates previous OTP and generates a new one
+   */
+  async resendEmailVerification(
+    userId: string,
+    metadata?: RequestMetadata,
+  ): Promise<
+    IBeforeTransformResponseType<{
+      message: string;
+      code?: string;
+      remainingCooldown?: number;
+    }>
+  > {
+    try {
+      // Get user email for logging
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: { email: true },
+      });
 
-    if (!storedCode) {
-      throw new CustomUnauthorizedException(
-        'Verification code expired or not found',
-        ERROR_CODES.INVALID_CREDENTIALS,
+      // Call sendEmailVerification which handles all the logic
+      const result = await this.sendEmailVerification(userId, metadata);
+
+      // Log resend action (sendEmailVerification already logs SEND_OTP, but we want to track resends separately)
+      if (user) {
+        await this.logEmailVerificationAction(
+          userId,
+          user.email,
+          EmailVerificationAction.RESEND_OTP,
+          metadata,
+        );
+      }
+
+      return result;
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        'Failed to resend email verification',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
-
-    // Verify code
-    if (storedCode !== verifyEmailDto.code) {
-      throw new CustomUnauthorizedException(
-        'Invalid verification code',
-        ERROR_CODES.INVALID_CREDENTIALS,
-      );
-    }
-
-    // Update user - mark email as verified
-    await this.prismaService.user.update({
-      where: { id: userId },
-      data: {
-        isEmailVerified: true,
-        emailVerifiedAt: new Date(),
-      },
-    });
-
-    // Delete code from Redis (one-time use)
-    await this.redis.del(redisKey);
-
-    return {
-      type: 'response',
-      message: 'Email verified successfully',
-      data: {
-        message: 'Your email has been verified successfully',
-      },
-    };
   }
 
   /**
@@ -561,54 +772,68 @@ export class AuthService {
   async sendPhoneVerification(
     userId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string; code?: string }>> {
-    // Get user to check phone and verification status
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        phone: true,
-        isPhoneVerified: true,
-      },
-    });
+    try {
+      // Get user to check phone and verification status
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          phone: true,
+          isPhoneVerified: true,
+        },
+      });
 
-    if (!user) {
-      throw new CustomUnauthorizedException(
-        'User not found',
-        ERROR_CODES.USER_NOT_FOUND,
-      );
-    }
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          'User not found',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
 
-    // Check if phone is already verified
-    if (user.isPhoneVerified) {
+      // Check if phone is already verified
+      if (user.isPhoneVerified) {
+        throw new BusinessException(
+          'Phone number is already verified',
+          ERROR_CODES.INVALID_OPERATION,
+        );
+      }
+
+      // Generate OTP code
+      const code = generateOTPCode();
+
+      // Store code in Redis with TTL
+      const redisKey = `phone_verification:${userId}`;
+      await this.redis.setex(redisKey, this.OTP_TTL, code);
+
+      // TODO: Send SMS with code
+      // In development mode, we can return the code for testing
+      // In production, this should send an actual SMS
+      if (configData.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log(`Phone verification code for ${user.phone}: ${code}`);
+      }
+
+      return {
+        type: 'response',
+        message: 'Verification code sent to phone',
+        data: {
+          message: 'Verification code has been sent to your phone',
+          ...(configData.NODE_ENV === 'development' && { code }), // Only return code in dev mode
+        },
+      };
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
       throw new BusinessException(
-        'Phone number is already verified',
-        ERROR_CODES.INVALID_OPERATION,
+        'Failed to send phone verification',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
-
-    // Generate OTP code
-    const code = generateOTPCode();
-
-    // Store code in Redis with TTL
-    const redisKey = `phone_verification:${userId}`;
-    await this.redis.setex(redisKey, this.OTP_TTL, code);
-
-    // TODO: Send SMS with code
-    // In development mode, we can return the code for testing
-    // In production, this should send an actual SMS
-    if (configData.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log(`Phone verification code for ${user.phone}: ${code}`);
-    }
-
-    return {
-      type: 'response',
-      message: 'Verification code sent to phone',
-      data: {
-        message: 'Verification code has been sent to your phone',
-        ...(configData.NODE_ENV === 'development' && { code }), // Only return code in dev mode
-      },
-    };
   }
 
   /**
@@ -619,69 +844,134 @@ export class AuthService {
     userId: string,
     verifyPhoneDto: VerifyPhoneDto,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
-    // Get user
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        phone: true,
-        isPhoneVerified: true,
-      },
-    });
+    try {
+      // Get user
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          phone: true,
+          isPhoneVerified: true,
+        },
+      });
 
-    if (!user) {
-      throw new CustomUnauthorizedException(
-        'User not found',
-        ERROR_CODES.USER_NOT_FOUND,
-      );
-    }
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          'User not found',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
 
-    // Check if already verified
-    if (user.isPhoneVerified) {
+      // Check if already verified
+      if (user.isPhoneVerified) {
+        throw new BusinessException(
+          'Phone number is already verified',
+          ERROR_CODES.INVALID_OPERATION,
+        );
+      }
+
+      // Get code from Redis
+      const redisKey = `phone_verification:${userId}`;
+      const storedCode = await this.redis.get(redisKey);
+
+      if (!storedCode) {
+        throw new CustomUnauthorizedException(
+          'Verification code expired or not found',
+          ERROR_CODES.INVALID_CREDENTIALS,
+        );
+      }
+
+      // Verify code
+      if (storedCode !== verifyPhoneDto.code) {
+        throw new CustomUnauthorizedException(
+          'Invalid verification code',
+          ERROR_CODES.INVALID_CREDENTIALS,
+        );
+      }
+
+      // Update user - mark phone as verified
+      await this.prismaService.user.update({
+        where: { id: userId },
+        data: {
+          isPhoneVerified: true,
+          phoneVerifiedAt: new Date(),
+        },
+      });
+
+      // Delete code from Redis (one-time use)
+      await this.redis.del(redisKey);
+
+      return {
+        type: 'response',
+        message: 'Phone verified successfully',
+        data: {
+          message: 'Your phone number has been verified successfully',
+        },
+        statusCode: 200,
+      };
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
       throw new BusinessException(
-        'Phone number is already verified',
-        ERROR_CODES.INVALID_OPERATION,
+        'Failed to verify phone',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
+  }
 
-    // Get code from Redis
-    const redisKey = `phone_verification:${userId}`;
-    const storedCode = await this.redis.get(redisKey);
+  /**
+   * Validate access token
+   * Uses decoded token from JWT guard and returns user info with expiration
+   */
+  async validateToken(
+    userId: string,
+    exp?: string | number,
+  ): Promise<IBeforeTransformResponseType<ValidateTokenResponseDto>> {
+    try {
+      // Get user data
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: userSelect,
+      });
 
-    if (!storedCode) {
-      throw new CustomUnauthorizedException(
-        'Verification code expired or not found',
-        ERROR_CODES.INVALID_CREDENTIALS,
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          'User not found',
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      const userResponse = toResponseDto(UserResponseDto, user);
+
+      // Calculate expiration time
+      const expiresAt = exp ? new Date(Number(exp) * 1000) : undefined;
+
+      return {
+        type: 'response',
+        message: 'Token is valid',
+        data: {
+          valid: true,
+          user: userResponse,
+          expiresAt,
+        },
+      };
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        'Failed to validate token',
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
-
-    // Verify code
-    if (storedCode !== verifyPhoneDto.code) {
-      throw new CustomUnauthorizedException(
-        'Invalid verification code',
-        ERROR_CODES.INVALID_CREDENTIALS,
-      );
-    }
-
-    // Update user - mark phone as verified
-    await this.prismaService.user.update({
-      where: { id: userId },
-      data: {
-        isPhoneVerified: true,
-        phoneVerifiedAt: new Date(),
-      },
-    });
-
-    // Delete code from Redis (one-time use)
-    await this.redis.del(redisKey);
-
-    return {
-      type: 'response',
-      message: 'Phone verified successfully',
-      data: {
-        message: 'Your phone number has been verified successfully',
-      },
-      statusCode: 200,
-    };
   }
 }

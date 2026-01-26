@@ -39,6 +39,26 @@ export type AffiliateCommission = $Result.DefaultSelection<Prisma.$AffiliateComm
  */
 export type CommissionRate = $Result.DefaultSelection<Prisma.$CommissionRatePayload>
 /**
+ * Model BannerGroup
+ * 
+ */
+export type BannerGroup = $Result.DefaultSelection<Prisma.$BannerGroupPayload>
+/**
+ * Model Banner
+ * 
+ */
+export type Banner = $Result.DefaultSelection<Prisma.$BannerPayload>
+/**
+ * Model BannerGroupMapping
+ * 
+ */
+export type BannerGroupMapping = $Result.DefaultSelection<Prisma.$BannerGroupMappingPayload>
+/**
+ * Model EmailVerificationLog
+ * 
+ */
+export type EmailVerificationLog = $Result.DefaultSelection<Prisma.$EmailVerificationLogPayload>
+/**
  * Model FlashSale
  * 
  */
@@ -83,6 +103,11 @@ export type OrderItem = $Result.DefaultSelection<Prisma.$OrderItemPayload>
  * 
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
+/**
+ * Model ProductStats
+ * 
+ */
+export type ProductStats = $Result.DefaultSelection<Prisma.$ProductStatsPayload>
 /**
  * Model Category
  * 
@@ -178,7 +203,35 @@ export type UserRoleAssignment = $Result.DefaultSelection<Prisma.$UserRoleAssign
  * Enums
  */
 export namespace $Enums {
-  export const FlashSaleStatus: {
+  export const BannerType: {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE'
+};
+
+export type BannerType = (typeof BannerType)[keyof typeof BannerType]
+
+
+export const BannerPosition: {
+  MAIN_CAROUSEL: 'MAIN_CAROUSEL',
+  SIDE_TOP: 'SIDE_TOP',
+  SIDE_BOTTOM: 'SIDE_BOTTOM'
+};
+
+export type BannerPosition = (typeof BannerPosition)[keyof typeof BannerPosition]
+
+
+export const EmailVerificationAction: {
+  SEND_OTP: 'SEND_OTP',
+  RESEND_OTP: 'RESEND_OTP',
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS',
+  VERIFY_FAILED: 'VERIFY_FAILED',
+  RATE_LIMITED: 'RATE_LIMITED'
+};
+
+export type EmailVerificationAction = (typeof EmailVerificationAction)[keyof typeof EmailVerificationAction]
+
+
+export const FlashSaleStatus: {
   UPCOMING: 'UPCOMING',
   ACTIVE: 'ACTIVE',
   ENDED: 'ENDED',
@@ -195,7 +248,8 @@ export const MediaType: {
   REVIEW_VIDEO: 'REVIEW_VIDEO',
   AVATAR: 'AVATAR',
   CATEGORY_IMAGE: 'CATEGORY_IMAGE',
-  BRAND_LOGO: 'BRAND_LOGO'
+  BRAND_LOGO: 'BRAND_LOGO',
+  BANNER_IMAGE: 'BANNER_IMAGE'
 };
 
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
@@ -263,7 +317,27 @@ export const ProductBadgeVariant: {
 
 export type ProductBadgeVariant = (typeof ProductBadgeVariant)[keyof typeof ProductBadgeVariant]
 
+
+export const ProductInventoryDisplayStatus: {
+  IN_STOCK: 'IN_STOCK',
+  OUT_OF_STOCK: 'OUT_OF_STOCK'
+};
+
+export type ProductInventoryDisplayStatus = (typeof ProductInventoryDisplayStatus)[keyof typeof ProductInventoryDisplayStatus]
+
 }
+
+export type BannerType = $Enums.BannerType
+
+export const BannerType: typeof $Enums.BannerType
+
+export type BannerPosition = $Enums.BannerPosition
+
+export const BannerPosition: typeof $Enums.BannerPosition
+
+export type EmailVerificationAction = $Enums.EmailVerificationAction
+
+export const EmailVerificationAction: typeof $Enums.EmailVerificationAction
 
 export type FlashSaleStatus = $Enums.FlashSaleStatus
 
@@ -296,6 +370,10 @@ export const ProductBadgeType: typeof $Enums.ProductBadgeType
 export type ProductBadgeVariant = $Enums.ProductBadgeVariant
 
 export const ProductBadgeVariant: typeof $Enums.ProductBadgeVariant
+
+export type ProductInventoryDisplayStatus = $Enums.ProductInventoryDisplayStatus
+
+export const ProductInventoryDisplayStatus: typeof $Enums.ProductInventoryDisplayStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -465,6 +543,46 @@ export class PrismaClient<
   get commissionRate(): Prisma.CommissionRateDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.bannerGroup`: Exposes CRUD operations for the **BannerGroup** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BannerGroups
+    * const bannerGroups = await prisma.bannerGroup.findMany()
+    * ```
+    */
+  get bannerGroup(): Prisma.BannerGroupDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.banner`: Exposes CRUD operations for the **Banner** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Banners
+    * const banners = await prisma.banner.findMany()
+    * ```
+    */
+  get banner(): Prisma.BannerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bannerGroupMapping`: Exposes CRUD operations for the **BannerGroupMapping** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BannerGroupMappings
+    * const bannerGroupMappings = await prisma.bannerGroupMapping.findMany()
+    * ```
+    */
+  get bannerGroupMapping(): Prisma.BannerGroupMappingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emailVerificationLog`: Exposes CRUD operations for the **EmailVerificationLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmailVerificationLogs
+    * const emailVerificationLogs = await prisma.emailVerificationLog.findMany()
+    * ```
+    */
+  get emailVerificationLog(): Prisma.EmailVerificationLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.flashSale`: Exposes CRUD operations for the **FlashSale** model.
     * Example usage:
     * ```ts
@@ -553,6 +671,16 @@ export class PrismaClient<
     * ```
     */
   get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productStats`: Exposes CRUD operations for the **ProductStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductStats
+    * const productStats = await prisma.productStats.findMany()
+    * ```
+    */
+  get productStats(): Prisma.ProductStatsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -1172,6 +1300,10 @@ export namespace Prisma {
     AffiliateLink: 'AffiliateLink',
     AffiliateCommission: 'AffiliateCommission',
     CommissionRate: 'CommissionRate',
+    BannerGroup: 'BannerGroup',
+    Banner: 'Banner',
+    BannerGroupMapping: 'BannerGroupMapping',
+    EmailVerificationLog: 'EmailVerificationLog',
     FlashSale: 'FlashSale',
     FlashSaleProduct: 'FlashSaleProduct',
     FlashSaleOrder: 'FlashSaleOrder',
@@ -1181,6 +1313,7 @@ export namespace Prisma {
     Order: 'Order',
     OrderItem: 'OrderItem',
     Payment: 'Payment',
+    ProductStats: 'ProductStats',
     Category: 'Category',
     Brand: 'Brand',
     Product: 'Product',
@@ -1214,7 +1347,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
+      modelProps: "address" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1585,6 +1718,302 @@ export namespace Prisma {
           count: {
             args: Prisma.CommissionRateCountArgs<ExtArgs>
             result: $Utils.Optional<CommissionRateCountAggregateOutputType> | number
+          }
+        }
+      }
+      BannerGroup: {
+        payload: Prisma.$BannerGroupPayload<ExtArgs>
+        fields: Prisma.BannerGroupFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerGroupFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerGroupFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerGroupFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerGroupFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          findMany: {
+            args: Prisma.BannerGroupFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>[]
+          }
+          create: {
+            args: Prisma.BannerGroupCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          createMany: {
+            args: Prisma.BannerGroupCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerGroupCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerGroupDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          update: {
+            args: Prisma.BannerGroupUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerGroupDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerGroupUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerGroupUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerGroupUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerGroupAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBannerGroup>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerGroupCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupCountAggregateOutputType> | number
+          }
+        }
+      }
+      Banner: {
+        payload: Prisma.$BannerPayload<ExtArgs>
+        fields: Prisma.BannerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          findMany: {
+            args: Prisma.BannerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          create: {
+            args: Prisma.BannerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          createMany: {
+            args: Prisma.BannerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          update: {
+            args: Prisma.BannerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBanner>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerCountAggregateOutputType> | number
+          }
+        }
+      }
+      BannerGroupMapping: {
+        payload: Prisma.$BannerGroupMappingPayload<ExtArgs>
+        fields: Prisma.BannerGroupMappingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerGroupMappingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerGroupMappingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerGroupMappingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerGroupMappingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          findMany: {
+            args: Prisma.BannerGroupMappingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>[]
+          }
+          create: {
+            args: Prisma.BannerGroupMappingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          createMany: {
+            args: Prisma.BannerGroupMappingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerGroupMappingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerGroupMappingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          update: {
+            args: Prisma.BannerGroupMappingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerGroupMappingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerGroupMappingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerGroupMappingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerGroupMappingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerGroupMappingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBannerGroupMapping>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupMappingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupMappingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerGroupMappingCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupMappingCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmailVerificationLog: {
+        payload: Prisma.$EmailVerificationLogPayload<ExtArgs>
+        fields: Prisma.EmailVerificationLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmailVerificationLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmailVerificationLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>
+          }
+          findFirst: {
+            args: Prisma.EmailVerificationLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmailVerificationLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>
+          }
+          findMany: {
+            args: Prisma.EmailVerificationLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>[]
+          }
+          create: {
+            args: Prisma.EmailVerificationLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>
+          }
+          createMany: {
+            args: Prisma.EmailVerificationLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmailVerificationLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>[]
+          }
+          delete: {
+            args: Prisma.EmailVerificationLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>
+          }
+          update: {
+            args: Prisma.EmailVerificationLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmailVerificationLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmailVerificationLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmailVerificationLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmailVerificationLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationLogPayload>
+          }
+          aggregate: {
+            args: Prisma.EmailVerificationLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailVerificationLog>
+          }
+          groupBy: {
+            args: Prisma.EmailVerificationLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailVerificationLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmailVerificationLogCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailVerificationLogCountAggregateOutputType> | number
           }
         }
       }
@@ -2251,6 +2680,80 @@ export namespace Prisma {
           count: {
             args: Prisma.PaymentCountArgs<ExtArgs>
             result: $Utils.Optional<PaymentCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProductStats: {
+        payload: Prisma.$ProductStatsPayload<ExtArgs>
+        fields: Prisma.ProductStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.ProductStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>
+          }
+          findMany: {
+            args: Prisma.ProductStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>[]
+          }
+          create: {
+            args: Prisma.ProductStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>
+          }
+          createMany: {
+            args: Prisma.ProductStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.ProductStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>
+          }
+          update: {
+            args: Prisma.ProductStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductStats>
+          }
+          groupBy: {
+            args: Prisma.ProductStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductStatsCountAggregateOutputType> | number
           }
         }
       }
@@ -3683,6 +4186,10 @@ export namespace Prisma {
     affiliateLink?: AffiliateLinkOmit
     affiliateCommission?: AffiliateCommissionOmit
     commissionRate?: CommissionRateOmit
+    bannerGroup?: BannerGroupOmit
+    banner?: BannerOmit
+    bannerGroupMapping?: BannerGroupMappingOmit
+    emailVerificationLog?: EmailVerificationLogOmit
     flashSale?: FlashSaleOmit
     flashSaleProduct?: FlashSaleProductOmit
     flashSaleOrder?: FlashSaleOrderOmit
@@ -3692,6 +4199,7 @@ export namespace Prisma {
     order?: OrderOmit
     orderItem?: OrderItemOmit
     payment?: PaymentOmit
+    productStats?: ProductStatsOmit
     category?: CategoryOmit
     brand?: BrandOmit
     product?: ProductOmit
@@ -3857,6 +4365,68 @@ export namespace Prisma {
 
 
   /**
+   * Count Type BannerGroupCountOutputType
+   */
+
+  export type BannerGroupCountOutputType = {
+    banners: number
+  }
+
+  export type BannerGroupCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banners?: boolean | BannerGroupCountOutputTypeCountBannersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BannerGroupCountOutputType without action
+   */
+  export type BannerGroupCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupCountOutputType
+     */
+    select?: BannerGroupCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BannerGroupCountOutputType without action
+   */
+  export type BannerGroupCountOutputTypeCountBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupMappingWhereInput
+  }
+
+
+  /**
+   * Count Type BannerCountOutputType
+   */
+
+  export type BannerCountOutputType = {
+    groups: number
+  }
+
+  export type BannerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | BannerCountOutputTypeCountGroupsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BannerCountOutputType without action
+   */
+  export type BannerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerCountOutputType
+     */
+    select?: BannerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BannerCountOutputType without action
+   */
+  export type BannerCountOutputTypeCountGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupMappingWhereInput
+  }
+
+
+  /**
    * Count Type FlashSaleCountOutputType
    */
 
@@ -3906,6 +4476,7 @@ export namespace Prisma {
     userAvatars: number
     categories: number
     brands: number
+    banners: number
   }
 
   export type MediaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3914,6 +4485,7 @@ export namespace Prisma {
     userAvatars?: boolean | MediaCountOutputTypeCountUserAvatarsArgs
     categories?: boolean | MediaCountOutputTypeCountCategoriesArgs
     brands?: boolean | MediaCountOutputTypeCountBrandsArgs
+    banners?: boolean | MediaCountOutputTypeCountBannersArgs
   }
 
   // Custom InputTypes
@@ -3960,6 +4532,13 @@ export namespace Prisma {
    */
   export type MediaCountOutputTypeCountBrandsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BrandWhereInput
+  }
+
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeCountBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerWhereInput
   }
 
 
@@ -4360,11 +4939,11 @@ export namespace Prisma {
    */
 
   export type ProductReviewCountOutputType = {
-    images: number
+    reviewImages: number
   }
 
   export type ProductReviewCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    images?: boolean | ProductReviewCountOutputTypeCountImagesArgs
+    reviewImages?: boolean | ProductReviewCountOutputTypeCountReviewImagesArgs
   }
 
   // Custom InputTypes
@@ -4381,7 +4960,7 @@ export namespace Prisma {
   /**
    * ProductReviewCountOutputType without action
    */
-  export type ProductReviewCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductReviewCountOutputTypeCountReviewImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewImageWhereInput
   }
 
@@ -4396,6 +4975,7 @@ export namespace Prisma {
     addresses: number
     roleAssignments: number
     uploadedMedia: number
+    emailVerificationLogs: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4404,6 +4984,7 @@ export namespace Prisma {
     addresses?: boolean | UserCountOutputTypeCountAddressesArgs
     roleAssignments?: boolean | UserCountOutputTypeCountRoleAssignmentsArgs
     uploadedMedia?: boolean | UserCountOutputTypeCountUploadedMediaArgs
+    emailVerificationLogs?: boolean | UserCountOutputTypeCountEmailVerificationLogsArgs
   }
 
   // Custom InputTypes
@@ -4450,6 +5031,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountUploadedMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MediaWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEmailVerificationLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailVerificationLogWhereInput
   }
 
 
@@ -10358,6 +10946,4618 @@ export namespace Prisma {
 
 
   /**
+   * Model BannerGroup
+   */
+
+  export type AggregateBannerGroup = {
+    _count: BannerGroupCountAggregateOutputType | null
+    _min: BannerGroupMinAggregateOutputType | null
+    _max: BannerGroupMaxAggregateOutputType | null
+  }
+
+  export type BannerGroupMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    isActive: boolean | null
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerGroupMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    isActive: boolean | null
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerGroupCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    description: number
+    isActive: number
+    startDate: number
+    endDate: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BannerGroupMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerGroupMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerGroupCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BannerGroupAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroup to aggregate.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BannerGroups
+    **/
+    _count?: true | BannerGroupCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerGroupMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerGroupMaxAggregateInputType
+  }
+
+  export type GetBannerGroupAggregateType<T extends BannerGroupAggregateArgs> = {
+        [P in keyof T & keyof AggregateBannerGroup]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBannerGroup[P]>
+      : GetScalarType<T[P], AggregateBannerGroup[P]>
+  }
+
+
+
+
+  export type BannerGroupGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupWhereInput
+    orderBy?: BannerGroupOrderByWithAggregationInput | BannerGroupOrderByWithAggregationInput[]
+    by: BannerGroupScalarFieldEnum[] | BannerGroupScalarFieldEnum
+    having?: BannerGroupScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerGroupCountAggregateInputType | true
+    _min?: BannerGroupMinAggregateInputType
+    _max?: BannerGroupMaxAggregateInputType
+  }
+
+  export type BannerGroupGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    description: string | null
+    isActive: boolean
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BannerGroupCountAggregateOutputType | null
+    _min: BannerGroupMinAggregateOutputType | null
+    _max: BannerGroupMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupGroupByPayload<T extends BannerGroupGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerGroupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    banners?: boolean | BannerGroup$bannersArgs<ExtArgs>
+    _count?: boolean | BannerGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroup"]>
+
+  export type BannerGroupSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bannerGroup"]>
+
+  export type BannerGroupSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bannerGroup"]>
+
+  export type BannerGroupSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BannerGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "isActive" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["bannerGroup"]>
+  export type BannerGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banners?: boolean | BannerGroup$bannersArgs<ExtArgs>
+    _count?: boolean | BannerGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BannerGroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type BannerGroupIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $BannerGroupPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BannerGroup"
+    objects: {
+      banners: Prisma.$BannerGroupMappingPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      description: string | null
+      isActive: boolean
+      startDate: Date | null
+      endDate: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["bannerGroup"]>
+    composites: {}
+  }
+
+  type BannerGroupGetPayload<S extends boolean | null | undefined | BannerGroupDefaultArgs> = $Result.GetResult<Prisma.$BannerGroupPayload, S>
+
+  type BannerGroupCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerGroupFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerGroupCountAggregateInputType | true
+    }
+
+  export interface BannerGroupDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BannerGroup'], meta: { name: 'BannerGroup' } }
+    /**
+     * Find zero or one BannerGroup that matches the filter.
+     * @param {BannerGroupFindUniqueArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerGroupFindUniqueArgs>(args: SelectSubset<T, BannerGroupFindUniqueArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BannerGroup that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerGroupFindUniqueOrThrowArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerGroupFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerGroupFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroup that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupFindFirstArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerGroupFindFirstArgs>(args?: SelectSubset<T, BannerGroupFindFirstArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroup that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupFindFirstOrThrowArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerGroupFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerGroupFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BannerGroups that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BannerGroups
+     * const bannerGroups = await prisma.bannerGroup.findMany()
+     * 
+     * // Get first 10 BannerGroups
+     * const bannerGroups = await prisma.bannerGroup.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerGroupWithIdOnly = await prisma.bannerGroup.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerGroupFindManyArgs>(args?: SelectSubset<T, BannerGroupFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BannerGroup.
+     * @param {BannerGroupCreateArgs} args - Arguments to create a BannerGroup.
+     * @example
+     * // Create one BannerGroup
+     * const BannerGroup = await prisma.bannerGroup.create({
+     *   data: {
+     *     // ... data to create a BannerGroup
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerGroupCreateArgs>(args: SelectSubset<T, BannerGroupCreateArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BannerGroups.
+     * @param {BannerGroupCreateManyArgs} args - Arguments to create many BannerGroups.
+     * @example
+     * // Create many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerGroupCreateManyArgs>(args?: SelectSubset<T, BannerGroupCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BannerGroups and returns the data saved in the database.
+     * @param {BannerGroupCreateManyAndReturnArgs} args - Arguments to create many BannerGroups.
+     * @example
+     * // Create many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BannerGroups and only return the `id`
+     * const bannerGroupWithIdOnly = await prisma.bannerGroup.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerGroupCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerGroupCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BannerGroup.
+     * @param {BannerGroupDeleteArgs} args - Arguments to delete one BannerGroup.
+     * @example
+     * // Delete one BannerGroup
+     * const BannerGroup = await prisma.bannerGroup.delete({
+     *   where: {
+     *     // ... filter to delete one BannerGroup
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerGroupDeleteArgs>(args: SelectSubset<T, BannerGroupDeleteArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BannerGroup.
+     * @param {BannerGroupUpdateArgs} args - Arguments to update one BannerGroup.
+     * @example
+     * // Update one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerGroupUpdateArgs>(args: SelectSubset<T, BannerGroupUpdateArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BannerGroups.
+     * @param {BannerGroupDeleteManyArgs} args - Arguments to filter BannerGroups to delete.
+     * @example
+     * // Delete a few BannerGroups
+     * const { count } = await prisma.bannerGroup.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerGroupDeleteManyArgs>(args?: SelectSubset<T, BannerGroupDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerGroupUpdateManyArgs>(args: SelectSubset<T, BannerGroupUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroups and returns the data updated in the database.
+     * @param {BannerGroupUpdateManyAndReturnArgs} args - Arguments to update many BannerGroups.
+     * @example
+     * // Update many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BannerGroups and only return the `id`
+     * const bannerGroupWithIdOnly = await prisma.bannerGroup.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerGroupUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerGroupUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BannerGroup.
+     * @param {BannerGroupUpsertArgs} args - Arguments to update or create a BannerGroup.
+     * @example
+     * // Update or create a BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.upsert({
+     *   create: {
+     *     // ... data to create a BannerGroup
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BannerGroup we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerGroupUpsertArgs>(args: SelectSubset<T, BannerGroupUpsertArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BannerGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupCountArgs} args - Arguments to filter BannerGroups to count.
+     * @example
+     * // Count the number of BannerGroups
+     * const count = await prisma.bannerGroup.count({
+     *   where: {
+     *     // ... the filter for the BannerGroups we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerGroupCountArgs>(
+      args?: Subset<T, BannerGroupCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerGroupCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BannerGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerGroupAggregateArgs>(args: Subset<T, BannerGroupAggregateArgs>): Prisma.PrismaPromise<GetBannerGroupAggregateType<T>>
+
+    /**
+     * Group by BannerGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BannerGroup model
+   */
+  readonly fields: BannerGroupFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BannerGroup.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerGroupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    banners<T extends BannerGroup$bannersArgs<ExtArgs> = {}>(args?: Subset<T, BannerGroup$bannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BannerGroup model
+   */
+  interface BannerGroupFieldRefs {
+    readonly id: FieldRef<"BannerGroup", 'String'>
+    readonly name: FieldRef<"BannerGroup", 'String'>
+    readonly slug: FieldRef<"BannerGroup", 'String'>
+    readonly description: FieldRef<"BannerGroup", 'String'>
+    readonly isActive: FieldRef<"BannerGroup", 'Boolean'>
+    readonly startDate: FieldRef<"BannerGroup", 'DateTime'>
+    readonly endDate: FieldRef<"BannerGroup", 'DateTime'>
+    readonly createdAt: FieldRef<"BannerGroup", 'DateTime'>
+    readonly updatedAt: FieldRef<"BannerGroup", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BannerGroup findUnique
+   */
+  export type BannerGroupFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup findUniqueOrThrow
+   */
+  export type BannerGroupFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup findFirst
+   */
+  export type BannerGroupFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroups.
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroups.
+     */
+    distinct?: BannerGroupScalarFieldEnum | BannerGroupScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup findFirstOrThrow
+   */
+  export type BannerGroupFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroups.
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroups.
+     */
+    distinct?: BannerGroupScalarFieldEnum | BannerGroupScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup findMany
+   */
+  export type BannerGroupFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroups to fetch.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BannerGroups.
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    distinct?: BannerGroupScalarFieldEnum | BannerGroupScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup create
+   */
+  export type BannerGroupCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BannerGroup.
+     */
+    data: XOR<BannerGroupCreateInput, BannerGroupUncheckedCreateInput>
+  }
+
+  /**
+   * BannerGroup createMany
+   */
+  export type BannerGroupCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BannerGroups.
+     */
+    data: BannerGroupCreateManyInput | BannerGroupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BannerGroup createManyAndReturn
+   */
+  export type BannerGroupCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * The data used to create many BannerGroups.
+     */
+    data: BannerGroupCreateManyInput | BannerGroupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BannerGroup update
+   */
+  export type BannerGroupUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BannerGroup.
+     */
+    data: XOR<BannerGroupUpdateInput, BannerGroupUncheckedUpdateInput>
+    /**
+     * Choose, which BannerGroup to update.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup updateMany
+   */
+  export type BannerGroupUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BannerGroups.
+     */
+    data: XOR<BannerGroupUpdateManyMutationInput, BannerGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroups to update
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * Limit how many BannerGroups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroup updateManyAndReturn
+   */
+  export type BannerGroupUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * The data used to update BannerGroups.
+     */
+    data: XOR<BannerGroupUpdateManyMutationInput, BannerGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroups to update
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * Limit how many BannerGroups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroup upsert
+   */
+  export type BannerGroupUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BannerGroup to update in case it exists.
+     */
+    where: BannerGroupWhereUniqueInput
+    /**
+     * In case the BannerGroup found by the `where` argument doesn't exist, create a new BannerGroup with this data.
+     */
+    create: XOR<BannerGroupCreateInput, BannerGroupUncheckedCreateInput>
+    /**
+     * In case the BannerGroup was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerGroupUpdateInput, BannerGroupUncheckedUpdateInput>
+  }
+
+  /**
+   * BannerGroup delete
+   */
+  export type BannerGroupDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter which BannerGroup to delete.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup deleteMany
+   */
+  export type BannerGroupDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroups to delete
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * Limit how many BannerGroups to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroup.banners
+   */
+  export type BannerGroup$bannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    where?: BannerGroupMappingWhereInput
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    cursor?: BannerGroupMappingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup without action
+   */
+  export type BannerGroupDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Banner
+   */
+
+  export type AggregateBanner = {
+    _count: BannerCountAggregateOutputType | null
+    _avg: BannerAvgAggregateOutputType | null
+    _sum: BannerSumAggregateOutputType | null
+    _min: BannerMinAggregateOutputType | null
+    _max: BannerMaxAggregateOutputType | null
+  }
+
+  export type BannerAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.BannerType | null
+    position: $Enums.BannerPosition | null
+    badge: string | null
+    title: string | null
+    description: string | null
+    highlight: string | null
+    ctaText: string | null
+    ctaLink: string | null
+    subLabel: string | null
+    gradientFrom: string | null
+    gradientTo: string | null
+    imageMediaId: string | null
+    sortOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.BannerType | null
+    position: $Enums.BannerPosition | null
+    badge: string | null
+    title: string | null
+    description: string | null
+    highlight: string | null
+    ctaText: string | null
+    ctaLink: string | null
+    subLabel: string | null
+    gradientFrom: string | null
+    gradientTo: string | null
+    imageMediaId: string | null
+    sortOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerCountAggregateOutputType = {
+    id: number
+    type: number
+    position: number
+    badge: number
+    title: number
+    description: number
+    highlight: number
+    ctaText: number
+    ctaLink: number
+    subLabel: number
+    gradientFrom: number
+    gradientTo: number
+    imageMediaId: number
+    sortOrder: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BannerAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerMinAggregateInputType = {
+    id?: true
+    type?: true
+    position?: true
+    badge?: true
+    title?: true
+    description?: true
+    highlight?: true
+    ctaText?: true
+    ctaLink?: true
+    subLabel?: true
+    gradientFrom?: true
+    gradientTo?: true
+    imageMediaId?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerMaxAggregateInputType = {
+    id?: true
+    type?: true
+    position?: true
+    badge?: true
+    title?: true
+    description?: true
+    highlight?: true
+    ctaText?: true
+    ctaLink?: true
+    subLabel?: true
+    gradientFrom?: true
+    gradientTo?: true
+    imageMediaId?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerCountAggregateInputType = {
+    id?: true
+    type?: true
+    position?: true
+    badge?: true
+    title?: true
+    description?: true
+    highlight?: true
+    ctaText?: true
+    ctaLink?: true
+    subLabel?: true
+    gradientFrom?: true
+    gradientTo?: true
+    imageMediaId?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BannerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Banner to aggregate.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Banners
+    **/
+    _count?: true | BannerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BannerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BannerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerMaxAggregateInputType
+  }
+
+  export type GetBannerAggregateType<T extends BannerAggregateArgs> = {
+        [P in keyof T & keyof AggregateBanner]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBanner[P]>
+      : GetScalarType<T[P], AggregateBanner[P]>
+  }
+
+
+
+
+  export type BannerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerWhereInput
+    orderBy?: BannerOrderByWithAggregationInput | BannerOrderByWithAggregationInput[]
+    by: BannerScalarFieldEnum[] | BannerScalarFieldEnum
+    having?: BannerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerCountAggregateInputType | true
+    _avg?: BannerAvgAggregateInputType
+    _sum?: BannerSumAggregateInputType
+    _min?: BannerMinAggregateInputType
+    _max?: BannerMaxAggregateInputType
+  }
+
+  export type BannerGroupByOutputType = {
+    id: string
+    type: $Enums.BannerType
+    position: $Enums.BannerPosition
+    badge: string | null
+    title: string | null
+    description: string | null
+    highlight: string | null
+    ctaText: string | null
+    ctaLink: string | null
+    subLabel: string | null
+    gradientFrom: string | null
+    gradientTo: string | null
+    imageMediaId: string | null
+    sortOrder: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: BannerCountAggregateOutputType | null
+    _avg: BannerAvgAggregateOutputType | null
+    _sum: BannerSumAggregateOutputType | null
+    _min: BannerMinAggregateOutputType | null
+    _max: BannerMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupByPayload<T extends BannerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    groups?: boolean | Banner$groupsArgs<ExtArgs>
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+    _count?: boolean | BannerCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectScalar = {
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "position" | "badge" | "title" | "description" | "highlight" | "ctaText" | "ctaLink" | "subLabel" | "gradientFrom" | "gradientTo" | "imageMediaId" | "sortOrder" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
+  export type BannerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | Banner$groupsArgs<ExtArgs>
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+    _count?: boolean | BannerCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BannerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }
+  export type BannerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }
+
+  export type $BannerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Banner"
+    objects: {
+      groups: Prisma.$BannerGroupMappingPayload<ExtArgs>[]
+      imageMedia: Prisma.$MediaPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.BannerType
+      position: $Enums.BannerPosition
+      badge: string | null
+      title: string | null
+      description: string | null
+      highlight: string | null
+      ctaText: string | null
+      ctaLink: string | null
+      subLabel: string | null
+      gradientFrom: string | null
+      gradientTo: string | null
+      imageMediaId: string | null
+      sortOrder: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["banner"]>
+    composites: {}
+  }
+
+  type BannerGetPayload<S extends boolean | null | undefined | BannerDefaultArgs> = $Result.GetResult<Prisma.$BannerPayload, S>
+
+  type BannerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerCountAggregateInputType | true
+    }
+
+  export interface BannerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Banner'], meta: { name: 'Banner' } }
+    /**
+     * Find zero or one Banner that matches the filter.
+     * @param {BannerFindUniqueArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerFindUniqueArgs>(args: SelectSubset<T, BannerFindUniqueArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Banner that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerFindUniqueOrThrowArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Banner that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindFirstArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerFindFirstArgs>(args?: SelectSubset<T, BannerFindFirstArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Banner that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindFirstOrThrowArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Banners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Banners
+     * const banners = await prisma.banner.findMany()
+     * 
+     * // Get first 10 Banners
+     * const banners = await prisma.banner.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerWithIdOnly = await prisma.banner.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerFindManyArgs>(args?: SelectSubset<T, BannerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Banner.
+     * @param {BannerCreateArgs} args - Arguments to create a Banner.
+     * @example
+     * // Create one Banner
+     * const Banner = await prisma.banner.create({
+     *   data: {
+     *     // ... data to create a Banner
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerCreateArgs>(args: SelectSubset<T, BannerCreateArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Banners.
+     * @param {BannerCreateManyArgs} args - Arguments to create many Banners.
+     * @example
+     * // Create many Banners
+     * const banner = await prisma.banner.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerCreateManyArgs>(args?: SelectSubset<T, BannerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Banners and returns the data saved in the database.
+     * @param {BannerCreateManyAndReturnArgs} args - Arguments to create many Banners.
+     * @example
+     * // Create many Banners
+     * const banner = await prisma.banner.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Banners and only return the `id`
+     * const bannerWithIdOnly = await prisma.banner.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Banner.
+     * @param {BannerDeleteArgs} args - Arguments to delete one Banner.
+     * @example
+     * // Delete one Banner
+     * const Banner = await prisma.banner.delete({
+     *   where: {
+     *     // ... filter to delete one Banner
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerDeleteArgs>(args: SelectSubset<T, BannerDeleteArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Banner.
+     * @param {BannerUpdateArgs} args - Arguments to update one Banner.
+     * @example
+     * // Update one Banner
+     * const banner = await prisma.banner.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerUpdateArgs>(args: SelectSubset<T, BannerUpdateArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Banners.
+     * @param {BannerDeleteManyArgs} args - Arguments to filter Banners to delete.
+     * @example
+     * // Delete a few Banners
+     * const { count } = await prisma.banner.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerDeleteManyArgs>(args?: SelectSubset<T, BannerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Banners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Banners
+     * const banner = await prisma.banner.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerUpdateManyArgs>(args: SelectSubset<T, BannerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Banners and returns the data updated in the database.
+     * @param {BannerUpdateManyAndReturnArgs} args - Arguments to update many Banners.
+     * @example
+     * // Update many Banners
+     * const banner = await prisma.banner.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Banners and only return the `id`
+     * const bannerWithIdOnly = await prisma.banner.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Banner.
+     * @param {BannerUpsertArgs} args - Arguments to update or create a Banner.
+     * @example
+     * // Update or create a Banner
+     * const banner = await prisma.banner.upsert({
+     *   create: {
+     *     // ... data to create a Banner
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Banner we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerUpsertArgs>(args: SelectSubset<T, BannerUpsertArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Banners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerCountArgs} args - Arguments to filter Banners to count.
+     * @example
+     * // Count the number of Banners
+     * const count = await prisma.banner.count({
+     *   where: {
+     *     // ... the filter for the Banners we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerCountArgs>(
+      args?: Subset<T, BannerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Banner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerAggregateArgs>(args: Subset<T, BannerAggregateArgs>): Prisma.PrismaPromise<GetBannerAggregateType<T>>
+
+    /**
+     * Group by Banner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Banner model
+   */
+  readonly fields: BannerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Banner.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    groups<T extends Banner$groupsArgs<ExtArgs> = {}>(args?: Subset<T, Banner$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    imageMedia<T extends Banner$imageMediaArgs<ExtArgs> = {}>(args?: Subset<T, Banner$imageMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Banner model
+   */
+  interface BannerFieldRefs {
+    readonly id: FieldRef<"Banner", 'String'>
+    readonly type: FieldRef<"Banner", 'BannerType'>
+    readonly position: FieldRef<"Banner", 'BannerPosition'>
+    readonly badge: FieldRef<"Banner", 'String'>
+    readonly title: FieldRef<"Banner", 'String'>
+    readonly description: FieldRef<"Banner", 'String'>
+    readonly highlight: FieldRef<"Banner", 'String'>
+    readonly ctaText: FieldRef<"Banner", 'String'>
+    readonly ctaLink: FieldRef<"Banner", 'String'>
+    readonly subLabel: FieldRef<"Banner", 'String'>
+    readonly gradientFrom: FieldRef<"Banner", 'String'>
+    readonly gradientTo: FieldRef<"Banner", 'String'>
+    readonly imageMediaId: FieldRef<"Banner", 'String'>
+    readonly sortOrder: FieldRef<"Banner", 'Int'>
+    readonly isActive: FieldRef<"Banner", 'Boolean'>
+    readonly createdAt: FieldRef<"Banner", 'DateTime'>
+    readonly updatedAt: FieldRef<"Banner", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Banner findUnique
+   */
+  export type BannerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner findUniqueOrThrow
+   */
+  export type BannerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner findFirst
+   */
+  export type BannerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Banners.
+     */
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner findFirstOrThrow
+   */
+  export type BannerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Banners.
+     */
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner findMany
+   */
+  export type BannerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banners to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner create
+   */
+  export type BannerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Banner.
+     */
+    data: XOR<BannerCreateInput, BannerUncheckedCreateInput>
+  }
+
+  /**
+   * Banner createMany
+   */
+  export type BannerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Banners.
+     */
+    data: BannerCreateManyInput | BannerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Banner createManyAndReturn
+   */
+  export type BannerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data used to create many Banners.
+     */
+    data: BannerCreateManyInput | BannerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Banner update
+   */
+  export type BannerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Banner.
+     */
+    data: XOR<BannerUpdateInput, BannerUncheckedUpdateInput>
+    /**
+     * Choose, which Banner to update.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner updateMany
+   */
+  export type BannerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Banners.
+     */
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyInput>
+    /**
+     * Filter which Banners to update
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner updateManyAndReturn
+   */
+  export type BannerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data used to update Banners.
+     */
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyInput>
+    /**
+     * Filter which Banners to update
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Banner upsert
+   */
+  export type BannerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Banner to update in case it exists.
+     */
+    where: BannerWhereUniqueInput
+    /**
+     * In case the Banner found by the `where` argument doesn't exist, create a new Banner with this data.
+     */
+    create: XOR<BannerCreateInput, BannerUncheckedCreateInput>
+    /**
+     * In case the Banner was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerUpdateInput, BannerUncheckedUpdateInput>
+  }
+
+  /**
+   * Banner delete
+   */
+  export type BannerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter which Banner to delete.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner deleteMany
+   */
+  export type BannerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Banners to delete
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner.groups
+   */
+  export type Banner$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    where?: BannerGroupMappingWhereInput
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    cursor?: BannerGroupMappingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * Banner.imageMedia
+   */
+  export type Banner$imageMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+  }
+
+  /**
+   * Banner without action
+   */
+  export type BannerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BannerGroupMapping
+   */
+
+  export type AggregateBannerGroupMapping = {
+    _count: BannerGroupMappingCountAggregateOutputType | null
+    _avg: BannerGroupMappingAvgAggregateOutputType | null
+    _sum: BannerGroupMappingSumAggregateOutputType | null
+    _min: BannerGroupMappingMinAggregateOutputType | null
+    _max: BannerGroupMappingMaxAggregateOutputType | null
+  }
+
+  export type BannerGroupMappingAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerGroupMappingSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerGroupMappingMinAggregateOutputType = {
+    id: string | null
+    bannerId: string | null
+    bannerGroupId: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+  }
+
+  export type BannerGroupMappingMaxAggregateOutputType = {
+    id: string | null
+    bannerId: string | null
+    bannerGroupId: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+  }
+
+  export type BannerGroupMappingCountAggregateOutputType = {
+    id: number
+    bannerId: number
+    bannerGroupId: number
+    sortOrder: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BannerGroupMappingAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerGroupMappingSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerGroupMappingMinAggregateInputType = {
+    id?: true
+    bannerId?: true
+    bannerGroupId?: true
+    sortOrder?: true
+    createdAt?: true
+  }
+
+  export type BannerGroupMappingMaxAggregateInputType = {
+    id?: true
+    bannerId?: true
+    bannerGroupId?: true
+    sortOrder?: true
+    createdAt?: true
+  }
+
+  export type BannerGroupMappingCountAggregateInputType = {
+    id?: true
+    bannerId?: true
+    bannerGroupId?: true
+    sortOrder?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BannerGroupMappingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroupMapping to aggregate.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BannerGroupMappings
+    **/
+    _count?: true | BannerGroupMappingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BannerGroupMappingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BannerGroupMappingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerGroupMappingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerGroupMappingMaxAggregateInputType
+  }
+
+  export type GetBannerGroupMappingAggregateType<T extends BannerGroupMappingAggregateArgs> = {
+        [P in keyof T & keyof AggregateBannerGroupMapping]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBannerGroupMapping[P]>
+      : GetScalarType<T[P], AggregateBannerGroupMapping[P]>
+  }
+
+
+
+
+  export type BannerGroupMappingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupMappingWhereInput
+    orderBy?: BannerGroupMappingOrderByWithAggregationInput | BannerGroupMappingOrderByWithAggregationInput[]
+    by: BannerGroupMappingScalarFieldEnum[] | BannerGroupMappingScalarFieldEnum
+    having?: BannerGroupMappingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerGroupMappingCountAggregateInputType | true
+    _avg?: BannerGroupMappingAvgAggregateInputType
+    _sum?: BannerGroupMappingSumAggregateInputType
+    _min?: BannerGroupMappingMinAggregateInputType
+    _max?: BannerGroupMappingMaxAggregateInputType
+  }
+
+  export type BannerGroupMappingGroupByOutputType = {
+    id: string
+    bannerId: string
+    bannerGroupId: string
+    sortOrder: number
+    createdAt: Date
+    _count: BannerGroupMappingCountAggregateOutputType | null
+    _avg: BannerGroupMappingAvgAggregateOutputType | null
+    _sum: BannerGroupMappingSumAggregateOutputType | null
+    _min: BannerGroupMappingMinAggregateOutputType | null
+    _max: BannerGroupMappingMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupMappingGroupByPayload<T extends BannerGroupMappingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupMappingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupMappingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupMappingGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupMappingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerGroupMappingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroupMapping"]>
+
+  export type BannerGroupMappingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroupMapping"]>
+
+  export type BannerGroupMappingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroupMapping"]>
+
+  export type BannerGroupMappingSelectScalar = {
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+  }
+
+  export type BannerGroupMappingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bannerId" | "bannerGroupId" | "sortOrder" | "createdAt", ExtArgs["result"]["bannerGroupMapping"]>
+  export type BannerGroupMappingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }
+  export type BannerGroupMappingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }
+  export type BannerGroupMappingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }
+
+  export type $BannerGroupMappingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BannerGroupMapping"
+    objects: {
+      banner: Prisma.$BannerPayload<ExtArgs>
+      bannerGroup: Prisma.$BannerGroupPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      bannerId: string
+      bannerGroupId: string
+      sortOrder: number
+      createdAt: Date
+    }, ExtArgs["result"]["bannerGroupMapping"]>
+    composites: {}
+  }
+
+  type BannerGroupMappingGetPayload<S extends boolean | null | undefined | BannerGroupMappingDefaultArgs> = $Result.GetResult<Prisma.$BannerGroupMappingPayload, S>
+
+  type BannerGroupMappingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerGroupMappingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerGroupMappingCountAggregateInputType | true
+    }
+
+  export interface BannerGroupMappingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BannerGroupMapping'], meta: { name: 'BannerGroupMapping' } }
+    /**
+     * Find zero or one BannerGroupMapping that matches the filter.
+     * @param {BannerGroupMappingFindUniqueArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerGroupMappingFindUniqueArgs>(args: SelectSubset<T, BannerGroupMappingFindUniqueArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BannerGroupMapping that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerGroupMappingFindUniqueOrThrowArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerGroupMappingFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerGroupMappingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroupMapping that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingFindFirstArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerGroupMappingFindFirstArgs>(args?: SelectSubset<T, BannerGroupMappingFindFirstArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroupMapping that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingFindFirstOrThrowArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerGroupMappingFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerGroupMappingFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BannerGroupMappings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BannerGroupMappings
+     * const bannerGroupMappings = await prisma.bannerGroupMapping.findMany()
+     * 
+     * // Get first 10 BannerGroupMappings
+     * const bannerGroupMappings = await prisma.bannerGroupMapping.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerGroupMappingWithIdOnly = await prisma.bannerGroupMapping.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerGroupMappingFindManyArgs>(args?: SelectSubset<T, BannerGroupMappingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BannerGroupMapping.
+     * @param {BannerGroupMappingCreateArgs} args - Arguments to create a BannerGroupMapping.
+     * @example
+     * // Create one BannerGroupMapping
+     * const BannerGroupMapping = await prisma.bannerGroupMapping.create({
+     *   data: {
+     *     // ... data to create a BannerGroupMapping
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerGroupMappingCreateArgs>(args: SelectSubset<T, BannerGroupMappingCreateArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BannerGroupMappings.
+     * @param {BannerGroupMappingCreateManyArgs} args - Arguments to create many BannerGroupMappings.
+     * @example
+     * // Create many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerGroupMappingCreateManyArgs>(args?: SelectSubset<T, BannerGroupMappingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BannerGroupMappings and returns the data saved in the database.
+     * @param {BannerGroupMappingCreateManyAndReturnArgs} args - Arguments to create many BannerGroupMappings.
+     * @example
+     * // Create many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BannerGroupMappings and only return the `id`
+     * const bannerGroupMappingWithIdOnly = await prisma.bannerGroupMapping.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerGroupMappingCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerGroupMappingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BannerGroupMapping.
+     * @param {BannerGroupMappingDeleteArgs} args - Arguments to delete one BannerGroupMapping.
+     * @example
+     * // Delete one BannerGroupMapping
+     * const BannerGroupMapping = await prisma.bannerGroupMapping.delete({
+     *   where: {
+     *     // ... filter to delete one BannerGroupMapping
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerGroupMappingDeleteArgs>(args: SelectSubset<T, BannerGroupMappingDeleteArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BannerGroupMapping.
+     * @param {BannerGroupMappingUpdateArgs} args - Arguments to update one BannerGroupMapping.
+     * @example
+     * // Update one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerGroupMappingUpdateArgs>(args: SelectSubset<T, BannerGroupMappingUpdateArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BannerGroupMappings.
+     * @param {BannerGroupMappingDeleteManyArgs} args - Arguments to filter BannerGroupMappings to delete.
+     * @example
+     * // Delete a few BannerGroupMappings
+     * const { count } = await prisma.bannerGroupMapping.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerGroupMappingDeleteManyArgs>(args?: SelectSubset<T, BannerGroupMappingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroupMappings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerGroupMappingUpdateManyArgs>(args: SelectSubset<T, BannerGroupMappingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroupMappings and returns the data updated in the database.
+     * @param {BannerGroupMappingUpdateManyAndReturnArgs} args - Arguments to update many BannerGroupMappings.
+     * @example
+     * // Update many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BannerGroupMappings and only return the `id`
+     * const bannerGroupMappingWithIdOnly = await prisma.bannerGroupMapping.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerGroupMappingUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerGroupMappingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BannerGroupMapping.
+     * @param {BannerGroupMappingUpsertArgs} args - Arguments to update or create a BannerGroupMapping.
+     * @example
+     * // Update or create a BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.upsert({
+     *   create: {
+     *     // ... data to create a BannerGroupMapping
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BannerGroupMapping we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerGroupMappingUpsertArgs>(args: SelectSubset<T, BannerGroupMappingUpsertArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BannerGroupMappings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingCountArgs} args - Arguments to filter BannerGroupMappings to count.
+     * @example
+     * // Count the number of BannerGroupMappings
+     * const count = await prisma.bannerGroupMapping.count({
+     *   where: {
+     *     // ... the filter for the BannerGroupMappings we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerGroupMappingCountArgs>(
+      args?: Subset<T, BannerGroupMappingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerGroupMappingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BannerGroupMapping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerGroupMappingAggregateArgs>(args: Subset<T, BannerGroupMappingAggregateArgs>): Prisma.PrismaPromise<GetBannerGroupMappingAggregateType<T>>
+
+    /**
+     * Group by BannerGroupMapping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupMappingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupMappingGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupMappingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupMappingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupMappingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BannerGroupMapping model
+   */
+  readonly fields: BannerGroupMappingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BannerGroupMapping.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerGroupMappingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    banner<T extends BannerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BannerDefaultArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bannerGroup<T extends BannerGroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BannerGroupDefaultArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BannerGroupMapping model
+   */
+  interface BannerGroupMappingFieldRefs {
+    readonly id: FieldRef<"BannerGroupMapping", 'String'>
+    readonly bannerId: FieldRef<"BannerGroupMapping", 'String'>
+    readonly bannerGroupId: FieldRef<"BannerGroupMapping", 'String'>
+    readonly sortOrder: FieldRef<"BannerGroupMapping", 'Int'>
+    readonly createdAt: FieldRef<"BannerGroupMapping", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BannerGroupMapping findUnique
+   */
+  export type BannerGroupMappingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping findUniqueOrThrow
+   */
+  export type BannerGroupMappingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping findFirst
+   */
+  export type BannerGroupMappingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroupMappings.
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroupMappings.
+     */
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroupMapping findFirstOrThrow
+   */
+  export type BannerGroupMappingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroupMappings.
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroupMappings.
+     */
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroupMapping findMany
+   */
+  export type BannerGroupMappingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMappings to fetch.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BannerGroupMappings.
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroupMapping create
+   */
+  export type BannerGroupMappingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BannerGroupMapping.
+     */
+    data: XOR<BannerGroupMappingCreateInput, BannerGroupMappingUncheckedCreateInput>
+  }
+
+  /**
+   * BannerGroupMapping createMany
+   */
+  export type BannerGroupMappingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BannerGroupMappings.
+     */
+    data: BannerGroupMappingCreateManyInput | BannerGroupMappingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BannerGroupMapping createManyAndReturn
+   */
+  export type BannerGroupMappingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * The data used to create many BannerGroupMappings.
+     */
+    data: BannerGroupMappingCreateManyInput | BannerGroupMappingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BannerGroupMapping update
+   */
+  export type BannerGroupMappingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BannerGroupMapping.
+     */
+    data: XOR<BannerGroupMappingUpdateInput, BannerGroupMappingUncheckedUpdateInput>
+    /**
+     * Choose, which BannerGroupMapping to update.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping updateMany
+   */
+  export type BannerGroupMappingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BannerGroupMappings.
+     */
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroupMappings to update
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * Limit how many BannerGroupMappings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroupMapping updateManyAndReturn
+   */
+  export type BannerGroupMappingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * The data used to update BannerGroupMappings.
+     */
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroupMappings to update
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * Limit how many BannerGroupMappings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BannerGroupMapping upsert
+   */
+  export type BannerGroupMappingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BannerGroupMapping to update in case it exists.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+    /**
+     * In case the BannerGroupMapping found by the `where` argument doesn't exist, create a new BannerGroupMapping with this data.
+     */
+    create: XOR<BannerGroupMappingCreateInput, BannerGroupMappingUncheckedCreateInput>
+    /**
+     * In case the BannerGroupMapping was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerGroupMappingUpdateInput, BannerGroupMappingUncheckedUpdateInput>
+  }
+
+  /**
+   * BannerGroupMapping delete
+   */
+  export type BannerGroupMappingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter which BannerGroupMapping to delete.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping deleteMany
+   */
+  export type BannerGroupMappingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroupMappings to delete
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * Limit how many BannerGroupMappings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroupMapping without action
+   */
+  export type BannerGroupMappingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmailVerificationLog
+   */
+
+  export type AggregateEmailVerificationLog = {
+    _count: EmailVerificationLogCountAggregateOutputType | null
+    _min: EmailVerificationLogMinAggregateOutputType | null
+    _max: EmailVerificationLogMaxAggregateOutputType | null
+  }
+
+  export type EmailVerificationLogMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    email: string | null
+    action: $Enums.EmailVerificationAction | null
+    ipAddress: string | null
+    userAgent: string | null
+    createdAt: Date | null
+  }
+
+  export type EmailVerificationLogMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    email: string | null
+    action: $Enums.EmailVerificationAction | null
+    ipAddress: string | null
+    userAgent: string | null
+    createdAt: Date | null
+  }
+
+  export type EmailVerificationLogCountAggregateOutputType = {
+    id: number
+    userId: number
+    email: number
+    action: number
+    ipAddress: number
+    userAgent: number
+    metadata: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EmailVerificationLogMinAggregateInputType = {
+    id?: true
+    userId?: true
+    email?: true
+    action?: true
+    ipAddress?: true
+    userAgent?: true
+    createdAt?: true
+  }
+
+  export type EmailVerificationLogMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    email?: true
+    action?: true
+    ipAddress?: true
+    userAgent?: true
+    createdAt?: true
+  }
+
+  export type EmailVerificationLogCountAggregateInputType = {
+    id?: true
+    userId?: true
+    email?: true
+    action?: true
+    ipAddress?: true
+    userAgent?: true
+    metadata?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EmailVerificationLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailVerificationLog to aggregate.
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailVerificationLogs to fetch.
+     */
+    orderBy?: EmailVerificationLogOrderByWithRelationInput | EmailVerificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmailVerificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailVerificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailVerificationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmailVerificationLogs
+    **/
+    _count?: true | EmailVerificationLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmailVerificationLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmailVerificationLogMaxAggregateInputType
+  }
+
+  export type GetEmailVerificationLogAggregateType<T extends EmailVerificationLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailVerificationLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmailVerificationLog[P]>
+      : GetScalarType<T[P], AggregateEmailVerificationLog[P]>
+  }
+
+
+
+
+  export type EmailVerificationLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailVerificationLogWhereInput
+    orderBy?: EmailVerificationLogOrderByWithAggregationInput | EmailVerificationLogOrderByWithAggregationInput[]
+    by: EmailVerificationLogScalarFieldEnum[] | EmailVerificationLogScalarFieldEnum
+    having?: EmailVerificationLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmailVerificationLogCountAggregateInputType | true
+    _min?: EmailVerificationLogMinAggregateInputType
+    _max?: EmailVerificationLogMaxAggregateInputType
+  }
+
+  export type EmailVerificationLogGroupByOutputType = {
+    id: string
+    userId: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress: string | null
+    userAgent: string | null
+    metadata: JsonValue | null
+    createdAt: Date
+    _count: EmailVerificationLogCountAggregateOutputType | null
+    _min: EmailVerificationLogMinAggregateOutputType | null
+    _max: EmailVerificationLogMaxAggregateOutputType | null
+  }
+
+  type GetEmailVerificationLogGroupByPayload<T extends EmailVerificationLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmailVerificationLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmailVerificationLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmailVerificationLogGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailVerificationLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmailVerificationLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    action?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailVerificationLog"]>
+
+  export type EmailVerificationLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    action?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailVerificationLog"]>
+
+  export type EmailVerificationLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    action?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["emailVerificationLog"]>
+
+  export type EmailVerificationLogSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    email?: boolean
+    action?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }
+
+  export type EmailVerificationLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "email" | "action" | "ipAddress" | "userAgent" | "metadata" | "createdAt", ExtArgs["result"]["emailVerificationLog"]>
+  export type EmailVerificationLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EmailVerificationLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EmailVerificationLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $EmailVerificationLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailVerificationLog"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      email: string
+      action: $Enums.EmailVerificationAction
+      ipAddress: string | null
+      userAgent: string | null
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+    }, ExtArgs["result"]["emailVerificationLog"]>
+    composites: {}
+  }
+
+  type EmailVerificationLogGetPayload<S extends boolean | null | undefined | EmailVerificationLogDefaultArgs> = $Result.GetResult<Prisma.$EmailVerificationLogPayload, S>
+
+  type EmailVerificationLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailVerificationLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailVerificationLogCountAggregateInputType | true
+    }
+
+  export interface EmailVerificationLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailVerificationLog'], meta: { name: 'EmailVerificationLog' } }
+    /**
+     * Find zero or one EmailVerificationLog that matches the filter.
+     * @param {EmailVerificationLogFindUniqueArgs} args - Arguments to find a EmailVerificationLog
+     * @example
+     * // Get one EmailVerificationLog
+     * const emailVerificationLog = await prisma.emailVerificationLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmailVerificationLogFindUniqueArgs>(args: SelectSubset<T, EmailVerificationLogFindUniqueArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmailVerificationLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmailVerificationLogFindUniqueOrThrowArgs} args - Arguments to find a EmailVerificationLog
+     * @example
+     * // Get one EmailVerificationLog
+     * const emailVerificationLog = await prisma.emailVerificationLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmailVerificationLogFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailVerificationLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailVerificationLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogFindFirstArgs} args - Arguments to find a EmailVerificationLog
+     * @example
+     * // Get one EmailVerificationLog
+     * const emailVerificationLog = await prisma.emailVerificationLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmailVerificationLogFindFirstArgs>(args?: SelectSubset<T, EmailVerificationLogFindFirstArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmailVerificationLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogFindFirstOrThrowArgs} args - Arguments to find a EmailVerificationLog
+     * @example
+     * // Get one EmailVerificationLog
+     * const emailVerificationLog = await prisma.emailVerificationLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmailVerificationLogFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailVerificationLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmailVerificationLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmailVerificationLogs
+     * const emailVerificationLogs = await prisma.emailVerificationLog.findMany()
+     * 
+     * // Get first 10 EmailVerificationLogs
+     * const emailVerificationLogs = await prisma.emailVerificationLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emailVerificationLogWithIdOnly = await prisma.emailVerificationLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmailVerificationLogFindManyArgs>(args?: SelectSubset<T, EmailVerificationLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmailVerificationLog.
+     * @param {EmailVerificationLogCreateArgs} args - Arguments to create a EmailVerificationLog.
+     * @example
+     * // Create one EmailVerificationLog
+     * const EmailVerificationLog = await prisma.emailVerificationLog.create({
+     *   data: {
+     *     // ... data to create a EmailVerificationLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmailVerificationLogCreateArgs>(args: SelectSubset<T, EmailVerificationLogCreateArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmailVerificationLogs.
+     * @param {EmailVerificationLogCreateManyArgs} args - Arguments to create many EmailVerificationLogs.
+     * @example
+     * // Create many EmailVerificationLogs
+     * const emailVerificationLog = await prisma.emailVerificationLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmailVerificationLogCreateManyArgs>(args?: SelectSubset<T, EmailVerificationLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmailVerificationLogs and returns the data saved in the database.
+     * @param {EmailVerificationLogCreateManyAndReturnArgs} args - Arguments to create many EmailVerificationLogs.
+     * @example
+     * // Create many EmailVerificationLogs
+     * const emailVerificationLog = await prisma.emailVerificationLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmailVerificationLogs and only return the `id`
+     * const emailVerificationLogWithIdOnly = await prisma.emailVerificationLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmailVerificationLogCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailVerificationLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmailVerificationLog.
+     * @param {EmailVerificationLogDeleteArgs} args - Arguments to delete one EmailVerificationLog.
+     * @example
+     * // Delete one EmailVerificationLog
+     * const EmailVerificationLog = await prisma.emailVerificationLog.delete({
+     *   where: {
+     *     // ... filter to delete one EmailVerificationLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmailVerificationLogDeleteArgs>(args: SelectSubset<T, EmailVerificationLogDeleteArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmailVerificationLog.
+     * @param {EmailVerificationLogUpdateArgs} args - Arguments to update one EmailVerificationLog.
+     * @example
+     * // Update one EmailVerificationLog
+     * const emailVerificationLog = await prisma.emailVerificationLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmailVerificationLogUpdateArgs>(args: SelectSubset<T, EmailVerificationLogUpdateArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmailVerificationLogs.
+     * @param {EmailVerificationLogDeleteManyArgs} args - Arguments to filter EmailVerificationLogs to delete.
+     * @example
+     * // Delete a few EmailVerificationLogs
+     * const { count } = await prisma.emailVerificationLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmailVerificationLogDeleteManyArgs>(args?: SelectSubset<T, EmailVerificationLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailVerificationLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmailVerificationLogs
+     * const emailVerificationLog = await prisma.emailVerificationLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmailVerificationLogUpdateManyArgs>(args: SelectSubset<T, EmailVerificationLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmailVerificationLogs and returns the data updated in the database.
+     * @param {EmailVerificationLogUpdateManyAndReturnArgs} args - Arguments to update many EmailVerificationLogs.
+     * @example
+     * // Update many EmailVerificationLogs
+     * const emailVerificationLog = await prisma.emailVerificationLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmailVerificationLogs and only return the `id`
+     * const emailVerificationLogWithIdOnly = await prisma.emailVerificationLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmailVerificationLogUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailVerificationLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmailVerificationLog.
+     * @param {EmailVerificationLogUpsertArgs} args - Arguments to update or create a EmailVerificationLog.
+     * @example
+     * // Update or create a EmailVerificationLog
+     * const emailVerificationLog = await prisma.emailVerificationLog.upsert({
+     *   create: {
+     *     // ... data to create a EmailVerificationLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmailVerificationLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmailVerificationLogUpsertArgs>(args: SelectSubset<T, EmailVerificationLogUpsertArgs<ExtArgs>>): Prisma__EmailVerificationLogClient<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmailVerificationLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogCountArgs} args - Arguments to filter EmailVerificationLogs to count.
+     * @example
+     * // Count the number of EmailVerificationLogs
+     * const count = await prisma.emailVerificationLog.count({
+     *   where: {
+     *     // ... the filter for the EmailVerificationLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmailVerificationLogCountArgs>(
+      args?: Subset<T, EmailVerificationLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmailVerificationLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmailVerificationLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmailVerificationLogAggregateArgs>(args: Subset<T, EmailVerificationLogAggregateArgs>): Prisma.PrismaPromise<GetEmailVerificationLogAggregateType<T>>
+
+    /**
+     * Group by EmailVerificationLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmailVerificationLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmailVerificationLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmailVerificationLogGroupByArgs['orderBy'] }
+        : { orderBy?: EmailVerificationLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmailVerificationLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailVerificationLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmailVerificationLog model
+   */
+  readonly fields: EmailVerificationLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmailVerificationLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmailVerificationLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmailVerificationLog model
+   */
+  interface EmailVerificationLogFieldRefs {
+    readonly id: FieldRef<"EmailVerificationLog", 'String'>
+    readonly userId: FieldRef<"EmailVerificationLog", 'String'>
+    readonly email: FieldRef<"EmailVerificationLog", 'String'>
+    readonly action: FieldRef<"EmailVerificationLog", 'EmailVerificationAction'>
+    readonly ipAddress: FieldRef<"EmailVerificationLog", 'String'>
+    readonly userAgent: FieldRef<"EmailVerificationLog", 'String'>
+    readonly metadata: FieldRef<"EmailVerificationLog", 'Json'>
+    readonly createdAt: FieldRef<"EmailVerificationLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmailVerificationLog findUnique
+   */
+  export type EmailVerificationLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailVerificationLog to fetch.
+     */
+    where: EmailVerificationLogWhereUniqueInput
+  }
+
+  /**
+   * EmailVerificationLog findUniqueOrThrow
+   */
+  export type EmailVerificationLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailVerificationLog to fetch.
+     */
+    where: EmailVerificationLogWhereUniqueInput
+  }
+
+  /**
+   * EmailVerificationLog findFirst
+   */
+  export type EmailVerificationLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailVerificationLog to fetch.
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailVerificationLogs to fetch.
+     */
+    orderBy?: EmailVerificationLogOrderByWithRelationInput | EmailVerificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailVerificationLogs.
+     */
+    cursor?: EmailVerificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailVerificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailVerificationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailVerificationLogs.
+     */
+    distinct?: EmailVerificationLogScalarFieldEnum | EmailVerificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * EmailVerificationLog findFirstOrThrow
+   */
+  export type EmailVerificationLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailVerificationLog to fetch.
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailVerificationLogs to fetch.
+     */
+    orderBy?: EmailVerificationLogOrderByWithRelationInput | EmailVerificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmailVerificationLogs.
+     */
+    cursor?: EmailVerificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailVerificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailVerificationLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmailVerificationLogs.
+     */
+    distinct?: EmailVerificationLogScalarFieldEnum | EmailVerificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * EmailVerificationLog findMany
+   */
+  export type EmailVerificationLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * Filter, which EmailVerificationLogs to fetch.
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmailVerificationLogs to fetch.
+     */
+    orderBy?: EmailVerificationLogOrderByWithRelationInput | EmailVerificationLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmailVerificationLogs.
+     */
+    cursor?: EmailVerificationLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmailVerificationLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmailVerificationLogs.
+     */
+    skip?: number
+    distinct?: EmailVerificationLogScalarFieldEnum | EmailVerificationLogScalarFieldEnum[]
+  }
+
+  /**
+   * EmailVerificationLog create
+   */
+  export type EmailVerificationLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EmailVerificationLog.
+     */
+    data: XOR<EmailVerificationLogCreateInput, EmailVerificationLogUncheckedCreateInput>
+  }
+
+  /**
+   * EmailVerificationLog createMany
+   */
+  export type EmailVerificationLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmailVerificationLogs.
+     */
+    data: EmailVerificationLogCreateManyInput | EmailVerificationLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmailVerificationLog createManyAndReturn
+   */
+  export type EmailVerificationLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmailVerificationLogs.
+     */
+    data: EmailVerificationLogCreateManyInput | EmailVerificationLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailVerificationLog update
+   */
+  export type EmailVerificationLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EmailVerificationLog.
+     */
+    data: XOR<EmailVerificationLogUpdateInput, EmailVerificationLogUncheckedUpdateInput>
+    /**
+     * Choose, which EmailVerificationLog to update.
+     */
+    where: EmailVerificationLogWhereUniqueInput
+  }
+
+  /**
+   * EmailVerificationLog updateMany
+   */
+  export type EmailVerificationLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmailVerificationLogs.
+     */
+    data: XOR<EmailVerificationLogUpdateManyMutationInput, EmailVerificationLogUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailVerificationLogs to update
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * Limit how many EmailVerificationLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailVerificationLog updateManyAndReturn
+   */
+  export type EmailVerificationLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * The data used to update EmailVerificationLogs.
+     */
+    data: XOR<EmailVerificationLogUpdateManyMutationInput, EmailVerificationLogUncheckedUpdateManyInput>
+    /**
+     * Filter which EmailVerificationLogs to update
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * Limit how many EmailVerificationLogs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EmailVerificationLog upsert
+   */
+  export type EmailVerificationLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EmailVerificationLog to update in case it exists.
+     */
+    where: EmailVerificationLogWhereUniqueInput
+    /**
+     * In case the EmailVerificationLog found by the `where` argument doesn't exist, create a new EmailVerificationLog with this data.
+     */
+    create: XOR<EmailVerificationLogCreateInput, EmailVerificationLogUncheckedCreateInput>
+    /**
+     * In case the EmailVerificationLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailVerificationLogUpdateInput, EmailVerificationLogUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailVerificationLog delete
+   */
+  export type EmailVerificationLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    /**
+     * Filter which EmailVerificationLog to delete.
+     */
+    where: EmailVerificationLogWhereUniqueInput
+  }
+
+  /**
+   * EmailVerificationLog deleteMany
+   */
+  export type EmailVerificationLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailVerificationLogs to delete
+     */
+    where?: EmailVerificationLogWhereInput
+    /**
+     * Limit how many EmailVerificationLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailVerificationLog without action
+   */
+  export type EmailVerificationLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model FlashSale
    */
 
@@ -14136,6 +19336,7 @@ export namespace Prisma {
     userAvatars?: boolean | Media$userAvatarsArgs<ExtArgs>
     categories?: boolean | Media$categoriesArgs<ExtArgs>
     brands?: boolean | Media$brandsArgs<ExtArgs>
+    banners?: boolean | Media$bannersArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
@@ -14191,6 +19392,7 @@ export namespace Prisma {
     userAvatars?: boolean | Media$userAvatarsArgs<ExtArgs>
     categories?: boolean | Media$categoriesArgs<ExtArgs>
     brands?: boolean | Media$brandsArgs<ExtArgs>
+    banners?: boolean | Media$bannersArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14209,6 +19411,7 @@ export namespace Prisma {
       userAvatars: Prisma.$UserPayload<ExtArgs>[]
       categories: Prisma.$CategoryPayload<ExtArgs>[]
       brands: Prisma.$BrandPayload<ExtArgs>[]
+      banners: Prisma.$BannerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14622,6 +19825,7 @@ export namespace Prisma {
     userAvatars<T extends Media$userAvatarsArgs<ExtArgs> = {}>(args?: Subset<T, Media$userAvatarsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends Media$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Media$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     brands<T extends Media$brandsArgs<ExtArgs> = {}>(args?: Subset<T, Media$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    banners<T extends Media$bannersArgs<ExtArgs> = {}>(args?: Subset<T, Media$bannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15194,6 +20398,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
+  }
+
+  /**
+   * Media.banners
+   */
+  export type Media$bannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    where?: BannerWhereInput
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    cursor?: BannerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
   }
 
   /**
@@ -21160,6 +26388,1179 @@ export namespace Prisma {
 
 
   /**
+   * Model ProductStats
+   */
+
+  export type AggregateProductStats = {
+    _count: ProductStatsCountAggregateOutputType | null
+    _avg: ProductStatsAvgAggregateOutputType | null
+    _sum: ProductStatsSumAggregateOutputType | null
+    _min: ProductStatsMinAggregateOutputType | null
+    _max: ProductStatsMaxAggregateOutputType | null
+  }
+
+  export type ProductStatsAvgAggregateOutputType = {
+    totalSold: number | null
+    totalRevenue: Decimal | null
+    avgRating: Decimal | null
+    reviewCount: number | null
+    viewCount: number | null
+  }
+
+  export type ProductStatsSumAggregateOutputType = {
+    totalSold: number | null
+    totalRevenue: Decimal | null
+    avgRating: Decimal | null
+    reviewCount: number | null
+    viewCount: number | null
+  }
+
+  export type ProductStatsMinAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    totalSold: number | null
+    totalRevenue: Decimal | null
+    avgRating: Decimal | null
+    reviewCount: number | null
+    viewCount: number | null
+    lastSoldAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductStatsMaxAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    totalSold: number | null
+    totalRevenue: Decimal | null
+    avgRating: Decimal | null
+    reviewCount: number | null
+    viewCount: number | null
+    lastSoldAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductStatsCountAggregateOutputType = {
+    id: number
+    productId: number
+    totalSold: number
+    totalRevenue: number
+    avgRating: number
+    reviewCount: number
+    viewCount: number
+    lastSoldAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductStatsAvgAggregateInputType = {
+    totalSold?: true
+    totalRevenue?: true
+    avgRating?: true
+    reviewCount?: true
+    viewCount?: true
+  }
+
+  export type ProductStatsSumAggregateInputType = {
+    totalSold?: true
+    totalRevenue?: true
+    avgRating?: true
+    reviewCount?: true
+    viewCount?: true
+  }
+
+  export type ProductStatsMinAggregateInputType = {
+    id?: true
+    productId?: true
+    totalSold?: true
+    totalRevenue?: true
+    avgRating?: true
+    reviewCount?: true
+    viewCount?: true
+    lastSoldAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductStatsMaxAggregateInputType = {
+    id?: true
+    productId?: true
+    totalSold?: true
+    totalRevenue?: true
+    avgRating?: true
+    reviewCount?: true
+    viewCount?: true
+    lastSoldAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductStatsCountAggregateInputType = {
+    id?: true
+    productId?: true
+    totalSold?: true
+    totalRevenue?: true
+    avgRating?: true
+    reviewCount?: true
+    viewCount?: true
+    lastSoldAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductStats to aggregate.
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductStats to fetch.
+     */
+    orderBy?: ProductStatsOrderByWithRelationInput | ProductStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductStats
+    **/
+    _count?: true | ProductStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductStatsMaxAggregateInputType
+  }
+
+  export type GetProductStatsAggregateType<T extends ProductStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductStats[P]>
+      : GetScalarType<T[P], AggregateProductStats[P]>
+  }
+
+
+
+
+  export type ProductStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductStatsWhereInput
+    orderBy?: ProductStatsOrderByWithAggregationInput | ProductStatsOrderByWithAggregationInput[]
+    by: ProductStatsScalarFieldEnum[] | ProductStatsScalarFieldEnum
+    having?: ProductStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductStatsCountAggregateInputType | true
+    _avg?: ProductStatsAvgAggregateInputType
+    _sum?: ProductStatsSumAggregateInputType
+    _min?: ProductStatsMinAggregateInputType
+    _max?: ProductStatsMaxAggregateInputType
+  }
+
+  export type ProductStatsGroupByOutputType = {
+    id: string
+    productId: string
+    totalSold: number
+    totalRevenue: Decimal
+    avgRating: Decimal | null
+    reviewCount: number
+    viewCount: number
+    lastSoldAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductStatsCountAggregateOutputType | null
+    _avg: ProductStatsAvgAggregateOutputType | null
+    _sum: ProductStatsSumAggregateOutputType | null
+    _min: ProductStatsMinAggregateOutputType | null
+    _max: ProductStatsMaxAggregateOutputType | null
+  }
+
+  type GetProductStatsGroupByPayload<T extends ProductStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    totalSold?: boolean
+    totalRevenue?: boolean
+    avgRating?: boolean
+    reviewCount?: boolean
+    viewCount?: boolean
+    lastSoldAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productStats"]>
+
+  export type ProductStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    totalSold?: boolean
+    totalRevenue?: boolean
+    avgRating?: boolean
+    reviewCount?: boolean
+    viewCount?: boolean
+    lastSoldAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productStats"]>
+
+  export type ProductStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    totalSold?: boolean
+    totalRevenue?: boolean
+    avgRating?: boolean
+    reviewCount?: boolean
+    viewCount?: boolean
+    lastSoldAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productStats"]>
+
+  export type ProductStatsSelectScalar = {
+    id?: boolean
+    productId?: boolean
+    totalSold?: boolean
+    totalRevenue?: boolean
+    avgRating?: boolean
+    reviewCount?: boolean
+    viewCount?: boolean
+    lastSoldAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProductStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "totalSold" | "totalRevenue" | "avgRating" | "reviewCount" | "viewCount" | "lastSoldAt" | "createdAt" | "updatedAt", ExtArgs["result"]["productStats"]>
+  export type ProductStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type ProductStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type ProductStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+
+  export type $ProductStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductStats"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      productId: string
+      totalSold: number
+      totalRevenue: Prisma.Decimal
+      avgRating: Prisma.Decimal | null
+      reviewCount: number
+      viewCount: number
+      lastSoldAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productStats"]>
+    composites: {}
+  }
+
+  type ProductStatsGetPayload<S extends boolean | null | undefined | ProductStatsDefaultArgs> = $Result.GetResult<Prisma.$ProductStatsPayload, S>
+
+  type ProductStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductStatsCountAggregateInputType | true
+    }
+
+  export interface ProductStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductStats'], meta: { name: 'ProductStats' } }
+    /**
+     * Find zero or one ProductStats that matches the filter.
+     * @param {ProductStatsFindUniqueArgs} args - Arguments to find a ProductStats
+     * @example
+     * // Get one ProductStats
+     * const productStats = await prisma.productStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductStatsFindUniqueArgs>(args: SelectSubset<T, ProductStatsFindUniqueArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductStatsFindUniqueOrThrowArgs} args - Arguments to find a ProductStats
+     * @example
+     * // Get one ProductStats
+     * const productStats = await prisma.productStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsFindFirstArgs} args - Arguments to find a ProductStats
+     * @example
+     * // Get one ProductStats
+     * const productStats = await prisma.productStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductStatsFindFirstArgs>(args?: SelectSubset<T, ProductStatsFindFirstArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsFindFirstOrThrowArgs} args - Arguments to find a ProductStats
+     * @example
+     * // Get one ProductStats
+     * const productStats = await prisma.productStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductStats
+     * const productStats = await prisma.productStats.findMany()
+     * 
+     * // Get first 10 ProductStats
+     * const productStats = await prisma.productStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productStatsWithIdOnly = await prisma.productStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductStatsFindManyArgs>(args?: SelectSubset<T, ProductStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductStats.
+     * @param {ProductStatsCreateArgs} args - Arguments to create a ProductStats.
+     * @example
+     * // Create one ProductStats
+     * const ProductStats = await prisma.productStats.create({
+     *   data: {
+     *     // ... data to create a ProductStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductStatsCreateArgs>(args: SelectSubset<T, ProductStatsCreateArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductStats.
+     * @param {ProductStatsCreateManyArgs} args - Arguments to create many ProductStats.
+     * @example
+     * // Create many ProductStats
+     * const productStats = await prisma.productStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductStatsCreateManyArgs>(args?: SelectSubset<T, ProductStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductStats and returns the data saved in the database.
+     * @param {ProductStatsCreateManyAndReturnArgs} args - Arguments to create many ProductStats.
+     * @example
+     * // Create many ProductStats
+     * const productStats = await prisma.productStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductStats and only return the `id`
+     * const productStatsWithIdOnly = await prisma.productStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductStats.
+     * @param {ProductStatsDeleteArgs} args - Arguments to delete one ProductStats.
+     * @example
+     * // Delete one ProductStats
+     * const ProductStats = await prisma.productStats.delete({
+     *   where: {
+     *     // ... filter to delete one ProductStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductStatsDeleteArgs>(args: SelectSubset<T, ProductStatsDeleteArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductStats.
+     * @param {ProductStatsUpdateArgs} args - Arguments to update one ProductStats.
+     * @example
+     * // Update one ProductStats
+     * const productStats = await prisma.productStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductStatsUpdateArgs>(args: SelectSubset<T, ProductStatsUpdateArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductStats.
+     * @param {ProductStatsDeleteManyArgs} args - Arguments to filter ProductStats to delete.
+     * @example
+     * // Delete a few ProductStats
+     * const { count } = await prisma.productStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductStatsDeleteManyArgs>(args?: SelectSubset<T, ProductStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductStats
+     * const productStats = await prisma.productStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductStatsUpdateManyArgs>(args: SelectSubset<T, ProductStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductStats and returns the data updated in the database.
+     * @param {ProductStatsUpdateManyAndReturnArgs} args - Arguments to update many ProductStats.
+     * @example
+     * // Update many ProductStats
+     * const productStats = await prisma.productStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductStats and only return the `id`
+     * const productStatsWithIdOnly = await prisma.productStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductStats.
+     * @param {ProductStatsUpsertArgs} args - Arguments to update or create a ProductStats.
+     * @example
+     * // Update or create a ProductStats
+     * const productStats = await prisma.productStats.upsert({
+     *   create: {
+     *     // ... data to create a ProductStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductStatsUpsertArgs>(args: SelectSubset<T, ProductStatsUpsertArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsCountArgs} args - Arguments to filter ProductStats to count.
+     * @example
+     * // Count the number of ProductStats
+     * const count = await prisma.productStats.count({
+     *   where: {
+     *     // ... the filter for the ProductStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductStatsCountArgs>(
+      args?: Subset<T, ProductStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductStatsAggregateArgs>(args: Subset<T, ProductStatsAggregateArgs>): Prisma.PrismaPromise<GetProductStatsAggregateType<T>>
+
+    /**
+     * Group by ProductStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductStatsGroupByArgs['orderBy'] }
+        : { orderBy?: ProductStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductStats model
+   */
+  readonly fields: ProductStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductStats model
+   */
+  interface ProductStatsFieldRefs {
+    readonly id: FieldRef<"ProductStats", 'String'>
+    readonly productId: FieldRef<"ProductStats", 'String'>
+    readonly totalSold: FieldRef<"ProductStats", 'Int'>
+    readonly totalRevenue: FieldRef<"ProductStats", 'Decimal'>
+    readonly avgRating: FieldRef<"ProductStats", 'Decimal'>
+    readonly reviewCount: FieldRef<"ProductStats", 'Int'>
+    readonly viewCount: FieldRef<"ProductStats", 'Int'>
+    readonly lastSoldAt: FieldRef<"ProductStats", 'DateTime'>
+    readonly createdAt: FieldRef<"ProductStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProductStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductStats findUnique
+   */
+  export type ProductStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductStats to fetch.
+     */
+    where: ProductStatsWhereUniqueInput
+  }
+
+  /**
+   * ProductStats findUniqueOrThrow
+   */
+  export type ProductStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductStats to fetch.
+     */
+    where: ProductStatsWhereUniqueInput
+  }
+
+  /**
+   * ProductStats findFirst
+   */
+  export type ProductStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductStats to fetch.
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductStats to fetch.
+     */
+    orderBy?: ProductStatsOrderByWithRelationInput | ProductStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductStats.
+     */
+    cursor?: ProductStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductStats.
+     */
+    distinct?: ProductStatsScalarFieldEnum | ProductStatsScalarFieldEnum[]
+  }
+
+  /**
+   * ProductStats findFirstOrThrow
+   */
+  export type ProductStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductStats to fetch.
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductStats to fetch.
+     */
+    orderBy?: ProductStatsOrderByWithRelationInput | ProductStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductStats.
+     */
+    cursor?: ProductStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductStats.
+     */
+    distinct?: ProductStatsScalarFieldEnum | ProductStatsScalarFieldEnum[]
+  }
+
+  /**
+   * ProductStats findMany
+   */
+  export type ProductStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductStats to fetch.
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductStats to fetch.
+     */
+    orderBy?: ProductStatsOrderByWithRelationInput | ProductStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductStats.
+     */
+    cursor?: ProductStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductStats.
+     */
+    skip?: number
+    distinct?: ProductStatsScalarFieldEnum | ProductStatsScalarFieldEnum[]
+  }
+
+  /**
+   * ProductStats create
+   */
+  export type ProductStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductStats.
+     */
+    data: XOR<ProductStatsCreateInput, ProductStatsUncheckedCreateInput>
+  }
+
+  /**
+   * ProductStats createMany
+   */
+  export type ProductStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductStats.
+     */
+    data: ProductStatsCreateManyInput | ProductStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductStats createManyAndReturn
+   */
+  export type ProductStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductStats.
+     */
+    data: ProductStatsCreateManyInput | ProductStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductStats update
+   */
+  export type ProductStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductStats.
+     */
+    data: XOR<ProductStatsUpdateInput, ProductStatsUncheckedUpdateInput>
+    /**
+     * Choose, which ProductStats to update.
+     */
+    where: ProductStatsWhereUniqueInput
+  }
+
+  /**
+   * ProductStats updateMany
+   */
+  export type ProductStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductStats.
+     */
+    data: XOR<ProductStatsUpdateManyMutationInput, ProductStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductStats to update
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * Limit how many ProductStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductStats updateManyAndReturn
+   */
+  export type ProductStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductStats.
+     */
+    data: XOR<ProductStatsUpdateManyMutationInput, ProductStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductStats to update
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * Limit how many ProductStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductStats upsert
+   */
+  export type ProductStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductStats to update in case it exists.
+     */
+    where: ProductStatsWhereUniqueInput
+    /**
+     * In case the ProductStats found by the `where` argument doesn't exist, create a new ProductStats with this data.
+     */
+    create: XOR<ProductStatsCreateInput, ProductStatsUncheckedCreateInput>
+    /**
+     * In case the ProductStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductStatsUpdateInput, ProductStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductStats delete
+   */
+  export type ProductStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    /**
+     * Filter which ProductStats to delete.
+     */
+    where: ProductStatsWhereUniqueInput
+  }
+
+  /**
+   * ProductStats deleteMany
+   */
+  export type ProductStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductStats to delete
+     */
+    where?: ProductStatsWhereInput
+    /**
+     * Limit how many ProductStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductStats without action
+   */
+  export type ProductStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Category
    */
 
@@ -23965,6 +30366,7 @@ export namespace Prisma {
     commRates?: boolean | Product$commRatesArgs<ExtArgs>
     flashSaleProducts?: boolean | Product$flashSaleProductsArgs<ExtArgs>
     productCategories?: boolean | Product$productCategoriesArgs<ExtArgs>
+    stats?: boolean | Product$statsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -24040,6 +30442,7 @@ export namespace Prisma {
     commRates?: boolean | Product$commRatesArgs<ExtArgs>
     flashSaleProducts?: boolean | Product$flashSaleProductsArgs<ExtArgs>
     productCategories?: boolean | Product$productCategoriesArgs<ExtArgs>
+    stats?: boolean | Product$statsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24063,6 +30466,7 @@ export namespace Prisma {
       commRates: Prisma.$CommissionRatePayload<ExtArgs>[]
       flashSaleProducts: Prisma.$FlashSaleProductPayload<ExtArgs>[]
       productCategories: Prisma.$ProductCategoryPayload<ExtArgs>[]
+      stats: Prisma.$ProductStatsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24486,6 +30890,7 @@ export namespace Prisma {
     commRates<T extends Product$commRatesArgs<ExtArgs> = {}>(args?: Subset<T, Product$commRatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommissionRatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     flashSaleProducts<T extends Product$flashSaleProductsArgs<ExtArgs> = {}>(args?: Subset<T, Product$flashSaleProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashSaleProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     productCategories<T extends Product$productCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, Product$productCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stats<T extends Product$statsArgs<ExtArgs> = {}>(args?: Subset<T, Product$statsArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25183,6 +31588,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProductCategoryScalarFieldEnum | ProductCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Product.stats
+   */
+  export type Product$statsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductStats
+     */
+    select?: ProductStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductStats
+     */
+    omit?: ProductStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductStatsInclude<ExtArgs> | null
+    where?: ProductStatsWhereInput
   }
 
   /**
@@ -28851,7 +35275,7 @@ export namespace Prisma {
     id: string | null
     variantId: string | null
     quantity: number | null
-    displayStatus: string | null
+    displayStatus: $Enums.ProductInventoryDisplayStatus | null
     lowStockThreshold: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -28861,7 +35285,7 @@ export namespace Prisma {
     id: string | null
     variantId: string | null
     quantity: number | null
-    displayStatus: string | null
+    displayStatus: $Enums.ProductInventoryDisplayStatus | null
     lowStockThreshold: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -29010,7 +35434,7 @@ export namespace Prisma {
     id: string
     variantId: string
     quantity: number
-    displayStatus: string
+    displayStatus: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold: number
     createdAt: Date
     updatedAt: Date
@@ -29098,7 +35522,7 @@ export namespace Prisma {
       id: string
       variantId: string
       quantity: number
-      displayStatus: string
+      displayStatus: $Enums.ProductInventoryDisplayStatus
       lowStockThreshold: number
       createdAt: Date
       updatedAt: Date
@@ -29529,7 +35953,7 @@ export namespace Prisma {
     readonly id: FieldRef<"ProductInventory", 'String'>
     readonly variantId: FieldRef<"ProductInventory", 'String'>
     readonly quantity: FieldRef<"ProductInventory", 'Int'>
-    readonly displayStatus: FieldRef<"ProductInventory", 'String'>
+    readonly displayStatus: FieldRef<"ProductInventory", 'ProductInventoryDisplayStatus'>
     readonly lowStockThreshold: FieldRef<"ProductInventory", 'Int'>
     readonly createdAt: FieldRef<"ProductInventory", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductInventory", 'DateTime'>
@@ -35832,7 +42256,7 @@ export namespace Prisma {
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-    images?: boolean | ProductReview$imagesArgs<ExtArgs>
+    reviewImages?: boolean | ProductReview$reviewImagesArgs<ExtArgs>
     _count?: boolean | ProductReviewCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productReview"]>
 
@@ -35886,7 +42310,7 @@ export namespace Prisma {
   export type ProductReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-    images?: boolean | ProductReview$imagesArgs<ExtArgs>
+    reviewImages?: boolean | ProductReview$reviewImagesArgs<ExtArgs>
     _count?: boolean | ProductReviewCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -35903,7 +42327,7 @@ export namespace Prisma {
     objects: {
       product: Prisma.$ProductPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
-      images: Prisma.$ReviewImagePayload<ExtArgs>[]
+      reviewImages: Prisma.$ReviewImagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -36313,7 +42737,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    images<T extends ProductReview$imagesArgs<ExtArgs> = {}>(args?: Subset<T, ProductReview$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewImages<T extends ProductReview$reviewImagesArgs<ExtArgs> = {}>(args?: Subset<T, ProductReview$reviewImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36750,9 +43174,9 @@ export namespace Prisma {
   }
 
   /**
-   * ProductReview.images
+   * ProductReview.reviewImages
    */
-  export type ProductReview$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProductReview$reviewImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ReviewImage
      */
@@ -39171,6 +45595,7 @@ export namespace Prisma {
     roleAssignments?: boolean | User$roleAssignmentsArgs<ExtArgs>
     avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
     uploadedMedia?: boolean | User$uploadedMediaArgs<ExtArgs>
+    emailVerificationLogs?: boolean | User$emailVerificationLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -39252,6 +45677,7 @@ export namespace Prisma {
     roleAssignments?: boolean | User$roleAssignmentsArgs<ExtArgs>
     avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
     uploadedMedia?: boolean | User$uploadedMediaArgs<ExtArgs>
+    emailVerificationLogs?: boolean | User$emailVerificationLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -39272,6 +45698,7 @@ export namespace Prisma {
       roleAssignments: Prisma.$UserRoleAssignmentPayload<ExtArgs>[]
       avatarMedia: Prisma.$MediaPayload<ExtArgs> | null
       uploadedMedia: Prisma.$MediaPayload<ExtArgs>[]
+      emailVerificationLogs: Prisma.$EmailVerificationLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -39695,6 +46122,7 @@ export namespace Prisma {
     roleAssignments<T extends User$roleAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$roleAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     avatarMedia<T extends User$avatarMediaArgs<ExtArgs> = {}>(args?: Subset<T, User$avatarMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     uploadedMedia<T extends User$uploadedMediaArgs<ExtArgs> = {}>(args?: Subset<T, User$uploadedMediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    emailVerificationLogs<T extends User$emailVerificationLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$emailVerificationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -40313,6 +46741,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * User.emailVerificationLogs
+   */
+  export type User$emailVerificationLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationLog
+     */
+    select?: EmailVerificationLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationLog
+     */
+    omit?: EmailVerificationLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmailVerificationLogInclude<ExtArgs> | null
+    where?: EmailVerificationLogWhereInput
+    orderBy?: EmailVerificationLogOrderByWithRelationInput | EmailVerificationLogOrderByWithRelationInput[]
+    cursor?: EmailVerificationLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmailVerificationLogScalarFieldEnum | EmailVerificationLogScalarFieldEnum[]
   }
 
   /**
@@ -42550,6 +49002,69 @@ export namespace Prisma {
   export type CommissionRateScalarFieldEnum = (typeof CommissionRateScalarFieldEnum)[keyof typeof CommissionRateScalarFieldEnum]
 
 
+  export const BannerGroupScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    isActive: 'isActive',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BannerGroupScalarFieldEnum = (typeof BannerGroupScalarFieldEnum)[keyof typeof BannerGroupScalarFieldEnum]
+
+
+  export const BannerScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    position: 'position',
+    badge: 'badge',
+    title: 'title',
+    description: 'description',
+    highlight: 'highlight',
+    ctaText: 'ctaText',
+    ctaLink: 'ctaLink',
+    subLabel: 'subLabel',
+    gradientFrom: 'gradientFrom',
+    gradientTo: 'gradientTo',
+    imageMediaId: 'imageMediaId',
+    sortOrder: 'sortOrder',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BannerScalarFieldEnum = (typeof BannerScalarFieldEnum)[keyof typeof BannerScalarFieldEnum]
+
+
+  export const BannerGroupMappingScalarFieldEnum: {
+    id: 'id',
+    bannerId: 'bannerId',
+    bannerGroupId: 'bannerGroupId',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt'
+  };
+
+  export type BannerGroupMappingScalarFieldEnum = (typeof BannerGroupMappingScalarFieldEnum)[keyof typeof BannerGroupMappingScalarFieldEnum]
+
+
+  export const EmailVerificationLogScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    email: 'email',
+    action: 'action',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    metadata: 'metadata',
+    createdAt: 'createdAt'
+  };
+
+  export type EmailVerificationLogScalarFieldEnum = (typeof EmailVerificationLogScalarFieldEnum)[keyof typeof EmailVerificationLogScalarFieldEnum]
+
+
   export const FlashSaleScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -42688,6 +49203,22 @@ export namespace Prisma {
   };
 
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+  export const ProductStatsScalarFieldEnum: {
+    id: 'id',
+    productId: 'productId',
+    totalSold: 'totalSold',
+    totalRevenue: 'totalRevenue',
+    avgRating: 'avgRating',
+    reviewCount: 'reviewCount',
+    viewCount: 'viewCount',
+    lastSoldAt: 'lastSoldAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductStatsScalarFieldEnum = (typeof ProductStatsScalarFieldEnum)[keyof typeof ProductStatsScalarFieldEnum]
 
 
   export const CategoryScalarFieldEnum: {
@@ -42965,6 +49496,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -42979,6 +49518,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -43046,6 +49594,62 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerType'
+   */
+  export type EnumBannerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerType'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerType[]'
+   */
+  export type ListEnumBannerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerPosition'
+   */
+  export type EnumBannerPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerPosition'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerPosition[]'
+   */
+  export type ListEnumBannerPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerPosition[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'EmailVerificationAction'
+   */
+  export type EnumEmailVerificationActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmailVerificationAction'>
+    
+
+
+  /**
+   * Reference to a field of type 'EmailVerificationAction[]'
+   */
+  export type ListEnumEmailVerificationActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmailVerificationAction[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -43158,6 +49762,20 @@ export namespace Prisma {
    * Reference to a field of type 'ProductBadgeType[]'
    */
   export type ListEnumProductBadgeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductBadgeType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductInventoryDisplayStatus'
+   */
+  export type EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInventoryDisplayStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductInventoryDisplayStatus[]'
+   */
+  export type ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInventoryDisplayStatus[]'>
     
 
 
@@ -43593,6 +50211,332 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"CommissionRate"> | Date | string
   }
 
+  export type BannerGroupWhereInput = {
+    AND?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    OR?: BannerGroupWhereInput[]
+    NOT?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    id?: StringFilter<"BannerGroup"> | string
+    name?: StringFilter<"BannerGroup"> | string
+    slug?: StringFilter<"BannerGroup"> | string
+    description?: StringNullableFilter<"BannerGroup"> | string | null
+    isActive?: BoolFilter<"BannerGroup"> | boolean
+    startDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    createdAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    updatedAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    banners?: BannerGroupMappingListRelationFilter
+  }
+
+  export type BannerGroupOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    banners?: BannerGroupMappingOrderByRelationAggregateInput
+  }
+
+  export type BannerGroupWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    OR?: BannerGroupWhereInput[]
+    NOT?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    name?: StringFilter<"BannerGroup"> | string
+    description?: StringNullableFilter<"BannerGroup"> | string | null
+    isActive?: BoolFilter<"BannerGroup"> | boolean
+    startDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    createdAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    updatedAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    banners?: BannerGroupMappingListRelationFilter
+  }, "id" | "slug">
+
+  export type BannerGroupOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BannerGroupCountOrderByAggregateInput
+    _max?: BannerGroupMaxOrderByAggregateInput
+    _min?: BannerGroupMinOrderByAggregateInput
+  }
+
+  export type BannerGroupScalarWhereWithAggregatesInput = {
+    AND?: BannerGroupScalarWhereWithAggregatesInput | BannerGroupScalarWhereWithAggregatesInput[]
+    OR?: BannerGroupScalarWhereWithAggregatesInput[]
+    NOT?: BannerGroupScalarWhereWithAggregatesInput | BannerGroupScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BannerGroup"> | string
+    name?: StringWithAggregatesFilter<"BannerGroup"> | string
+    slug?: StringWithAggregatesFilter<"BannerGroup"> | string
+    description?: StringNullableWithAggregatesFilter<"BannerGroup"> | string | null
+    isActive?: BoolWithAggregatesFilter<"BannerGroup"> | boolean
+    startDate?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BannerGroup"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BannerGroup"> | Date | string
+  }
+
+  export type BannerWhereInput = {
+    AND?: BannerWhereInput | BannerWhereInput[]
+    OR?: BannerWhereInput[]
+    NOT?: BannerWhereInput | BannerWhereInput[]
+    id?: StringFilter<"Banner"> | string
+    type?: EnumBannerTypeFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableFilter<"Banner"> | string | null
+    title?: StringNullableFilter<"Banner"> | string | null
+    description?: StringNullableFilter<"Banner"> | string | null
+    highlight?: StringNullableFilter<"Banner"> | string | null
+    ctaText?: StringNullableFilter<"Banner"> | string | null
+    ctaLink?: StringNullableFilter<"Banner"> | string | null
+    subLabel?: StringNullableFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableFilter<"Banner"> | string | null
+    gradientTo?: StringNullableFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableFilter<"Banner"> | string | null
+    sortOrder?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+    groups?: BannerGroupMappingListRelationFilter
+    imageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+  }
+
+  export type BannerOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    highlight?: SortOrderInput | SortOrder
+    ctaText?: SortOrderInput | SortOrder
+    ctaLink?: SortOrderInput | SortOrder
+    subLabel?: SortOrderInput | SortOrder
+    gradientFrom?: SortOrderInput | SortOrder
+    gradientTo?: SortOrderInput | SortOrder
+    imageMediaId?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    groups?: BannerGroupMappingOrderByRelationAggregateInput
+    imageMedia?: MediaOrderByWithRelationInput
+  }
+
+  export type BannerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BannerWhereInput | BannerWhereInput[]
+    OR?: BannerWhereInput[]
+    NOT?: BannerWhereInput | BannerWhereInput[]
+    type?: EnumBannerTypeFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableFilter<"Banner"> | string | null
+    title?: StringNullableFilter<"Banner"> | string | null
+    description?: StringNullableFilter<"Banner"> | string | null
+    highlight?: StringNullableFilter<"Banner"> | string | null
+    ctaText?: StringNullableFilter<"Banner"> | string | null
+    ctaLink?: StringNullableFilter<"Banner"> | string | null
+    subLabel?: StringNullableFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableFilter<"Banner"> | string | null
+    gradientTo?: StringNullableFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableFilter<"Banner"> | string | null
+    sortOrder?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+    groups?: BannerGroupMappingListRelationFilter
+    imageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+  }, "id">
+
+  export type BannerOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    highlight?: SortOrderInput | SortOrder
+    ctaText?: SortOrderInput | SortOrder
+    ctaLink?: SortOrderInput | SortOrder
+    subLabel?: SortOrderInput | SortOrder
+    gradientFrom?: SortOrderInput | SortOrder
+    gradientTo?: SortOrderInput | SortOrder
+    imageMediaId?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BannerCountOrderByAggregateInput
+    _avg?: BannerAvgOrderByAggregateInput
+    _max?: BannerMaxOrderByAggregateInput
+    _min?: BannerMinOrderByAggregateInput
+    _sum?: BannerSumOrderByAggregateInput
+  }
+
+  export type BannerScalarWhereWithAggregatesInput = {
+    AND?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
+    OR?: BannerScalarWhereWithAggregatesInput[]
+    NOT?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Banner"> | string
+    type?: EnumBannerTypeWithAggregatesFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionWithAggregatesFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    title?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    highlight?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    ctaText?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    ctaLink?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    subLabel?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    gradientTo?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"Banner"> | number
+    isActive?: BoolWithAggregatesFilter<"Banner"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
+  }
+
+  export type BannerGroupMappingWhereInput = {
+    AND?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    OR?: BannerGroupMappingWhereInput[]
+    NOT?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    id?: StringFilter<"BannerGroupMapping"> | string
+    bannerId?: StringFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeFilter<"BannerGroupMapping"> | Date | string
+    banner?: XOR<BannerScalarRelationFilter, BannerWhereInput>
+    bannerGroup?: XOR<BannerGroupScalarRelationFilter, BannerGroupWhereInput>
+  }
+
+  export type BannerGroupMappingOrderByWithRelationInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    banner?: BannerOrderByWithRelationInput
+    bannerGroup?: BannerGroupOrderByWithRelationInput
+  }
+
+  export type BannerGroupMappingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    bannerId_bannerGroupId?: BannerGroupMappingBannerIdBannerGroupIdCompoundUniqueInput
+    AND?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    OR?: BannerGroupMappingWhereInput[]
+    NOT?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    bannerId?: StringFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeFilter<"BannerGroupMapping"> | Date | string
+    banner?: XOR<BannerScalarRelationFilter, BannerWhereInput>
+    bannerGroup?: XOR<BannerGroupScalarRelationFilter, BannerGroupWhereInput>
+  }, "id" | "bannerId_bannerGroupId">
+
+  export type BannerGroupMappingOrderByWithAggregationInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    _count?: BannerGroupMappingCountOrderByAggregateInput
+    _avg?: BannerGroupMappingAvgOrderByAggregateInput
+    _max?: BannerGroupMappingMaxOrderByAggregateInput
+    _min?: BannerGroupMappingMinOrderByAggregateInput
+    _sum?: BannerGroupMappingSumOrderByAggregateInput
+  }
+
+  export type BannerGroupMappingScalarWhereWithAggregatesInput = {
+    AND?: BannerGroupMappingScalarWhereWithAggregatesInput | BannerGroupMappingScalarWhereWithAggregatesInput[]
+    OR?: BannerGroupMappingScalarWhereWithAggregatesInput[]
+    NOT?: BannerGroupMappingScalarWhereWithAggregatesInput | BannerGroupMappingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BannerGroupMapping"> | string
+    bannerId?: StringWithAggregatesFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringWithAggregatesFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntWithAggregatesFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"BannerGroupMapping"> | Date | string
+  }
+
+  export type EmailVerificationLogWhereInput = {
+    AND?: EmailVerificationLogWhereInput | EmailVerificationLogWhereInput[]
+    OR?: EmailVerificationLogWhereInput[]
+    NOT?: EmailVerificationLogWhereInput | EmailVerificationLogWhereInput[]
+    id?: StringFilter<"EmailVerificationLog"> | string
+    userId?: StringFilter<"EmailVerificationLog"> | string
+    email?: StringFilter<"EmailVerificationLog"> | string
+    action?: EnumEmailVerificationActionFilter<"EmailVerificationLog"> | $Enums.EmailVerificationAction
+    ipAddress?: StringNullableFilter<"EmailVerificationLog"> | string | null
+    userAgent?: StringNullableFilter<"EmailVerificationLog"> | string | null
+    metadata?: JsonNullableFilter<"EmailVerificationLog">
+    createdAt?: DateTimeFilter<"EmailVerificationLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type EmailVerificationLogOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    action?: SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type EmailVerificationLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmailVerificationLogWhereInput | EmailVerificationLogWhereInput[]
+    OR?: EmailVerificationLogWhereInput[]
+    NOT?: EmailVerificationLogWhereInput | EmailVerificationLogWhereInput[]
+    userId?: StringFilter<"EmailVerificationLog"> | string
+    email?: StringFilter<"EmailVerificationLog"> | string
+    action?: EnumEmailVerificationActionFilter<"EmailVerificationLog"> | $Enums.EmailVerificationAction
+    ipAddress?: StringNullableFilter<"EmailVerificationLog"> | string | null
+    userAgent?: StringNullableFilter<"EmailVerificationLog"> | string | null
+    metadata?: JsonNullableFilter<"EmailVerificationLog">
+    createdAt?: DateTimeFilter<"EmailVerificationLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type EmailVerificationLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    action?: SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: EmailVerificationLogCountOrderByAggregateInput
+    _max?: EmailVerificationLogMaxOrderByAggregateInput
+    _min?: EmailVerificationLogMinOrderByAggregateInput
+  }
+
+  export type EmailVerificationLogScalarWhereWithAggregatesInput = {
+    AND?: EmailVerificationLogScalarWhereWithAggregatesInput | EmailVerificationLogScalarWhereWithAggregatesInput[]
+    OR?: EmailVerificationLogScalarWhereWithAggregatesInput[]
+    NOT?: EmailVerificationLogScalarWhereWithAggregatesInput | EmailVerificationLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailVerificationLog"> | string
+    userId?: StringWithAggregatesFilter<"EmailVerificationLog"> | string
+    email?: StringWithAggregatesFilter<"EmailVerificationLog"> | string
+    action?: EnumEmailVerificationActionWithAggregatesFilter<"EmailVerificationLog"> | $Enums.EmailVerificationAction
+    ipAddress?: StringNullableWithAggregatesFilter<"EmailVerificationLog"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"EmailVerificationLog"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"EmailVerificationLog">
+    createdAt?: DateTimeWithAggregatesFilter<"EmailVerificationLog"> | Date | string
+  }
+
   export type FlashSaleWhereInput = {
     AND?: FlashSaleWhereInput | FlashSaleWhereInput[]
     OR?: FlashSaleWhereInput[]
@@ -43866,6 +50810,7 @@ export namespace Prisma {
     userAvatars?: UserListRelationFilter
     categories?: CategoryListRelationFilter
     brands?: BrandListRelationFilter
+    banners?: BannerListRelationFilter
   }
 
   export type MediaOrderByWithRelationInput = {
@@ -43886,6 +50831,7 @@ export namespace Prisma {
     userAvatars?: UserOrderByRelationAggregateInput
     categories?: CategoryOrderByRelationAggregateInput
     brands?: BrandOrderByRelationAggregateInput
+    banners?: BannerOrderByRelationAggregateInput
   }
 
   export type MediaWhereUniqueInput = Prisma.AtLeast<{
@@ -43909,6 +50855,7 @@ export namespace Prisma {
     userAvatars?: UserListRelationFilter
     categories?: CategoryListRelationFilter
     brands?: BrandListRelationFilter
+    banners?: BannerListRelationFilter
   }, "id">
 
   export type MediaOrderByWithAggregationInput = {
@@ -44369,6 +51316,88 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
+  export type ProductStatsWhereInput = {
+    AND?: ProductStatsWhereInput | ProductStatsWhereInput[]
+    OR?: ProductStatsWhereInput[]
+    NOT?: ProductStatsWhereInput | ProductStatsWhereInput[]
+    id?: StringFilter<"ProductStats"> | string
+    productId?: StringFilter<"ProductStats"> | string
+    totalSold?: IntFilter<"ProductStats"> | number
+    totalRevenue?: DecimalFilter<"ProductStats"> | Decimal | DecimalJsLike | number | string
+    avgRating?: DecimalNullableFilter<"ProductStats"> | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFilter<"ProductStats"> | number
+    viewCount?: IntFilter<"ProductStats"> | number
+    lastSoldAt?: DateTimeNullableFilter<"ProductStats"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProductStats"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductStats"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }
+
+  export type ProductStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrderInput | SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+    lastSoldAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    product?: ProductOrderByWithRelationInput
+  }
+
+  export type ProductStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    productId?: string
+    AND?: ProductStatsWhereInput | ProductStatsWhereInput[]
+    OR?: ProductStatsWhereInput[]
+    NOT?: ProductStatsWhereInput | ProductStatsWhereInput[]
+    totalSold?: IntFilter<"ProductStats"> | number
+    totalRevenue?: DecimalFilter<"ProductStats"> | Decimal | DecimalJsLike | number | string
+    avgRating?: DecimalNullableFilter<"ProductStats"> | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFilter<"ProductStats"> | number
+    viewCount?: IntFilter<"ProductStats"> | number
+    lastSoldAt?: DateTimeNullableFilter<"ProductStats"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProductStats"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductStats"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }, "id" | "productId">
+
+  export type ProductStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrderInput | SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+    lastSoldAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProductStatsCountOrderByAggregateInput
+    _avg?: ProductStatsAvgOrderByAggregateInput
+    _max?: ProductStatsMaxOrderByAggregateInput
+    _min?: ProductStatsMinOrderByAggregateInput
+    _sum?: ProductStatsSumOrderByAggregateInput
+  }
+
+  export type ProductStatsScalarWhereWithAggregatesInput = {
+    AND?: ProductStatsScalarWhereWithAggregatesInput | ProductStatsScalarWhereWithAggregatesInput[]
+    OR?: ProductStatsScalarWhereWithAggregatesInput[]
+    NOT?: ProductStatsScalarWhereWithAggregatesInput | ProductStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProductStats"> | string
+    productId?: StringWithAggregatesFilter<"ProductStats"> | string
+    totalSold?: IntWithAggregatesFilter<"ProductStats"> | number
+    totalRevenue?: DecimalWithAggregatesFilter<"ProductStats"> | Decimal | DecimalJsLike | number | string
+    avgRating?: DecimalNullableWithAggregatesFilter<"ProductStats"> | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntWithAggregatesFilter<"ProductStats"> | number
+    viewCount?: IntWithAggregatesFilter<"ProductStats"> | number
+    lastSoldAt?: DateTimeNullableWithAggregatesFilter<"ProductStats"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProductStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProductStats"> | Date | string
+  }
+
   export type CategoryWhereInput = {
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
@@ -44585,6 +51614,7 @@ export namespace Prisma {
     commRates?: CommissionRateListRelationFilter
     flashSaleProducts?: FlashSaleProductListRelationFilter
     productCategories?: ProductCategoryListRelationFilter
+    stats?: XOR<ProductStatsNullableScalarRelationFilter, ProductStatsWhereInput> | null
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -44615,6 +51645,7 @@ export namespace Prisma {
     commRates?: CommissionRateOrderByRelationAggregateInput
     flashSaleProducts?: FlashSaleProductOrderByRelationAggregateInput
     productCategories?: ProductCategoryOrderByRelationAggregateInput
+    stats?: ProductStatsOrderByWithRelationInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -44648,6 +51679,7 @@ export namespace Prisma {
     commRates?: CommissionRateListRelationFilter
     flashSaleProducts?: FlashSaleProductListRelationFilter
     productCategories?: ProductCategoryListRelationFilter
+    stats?: XOR<ProductStatsNullableScalarRelationFilter, ProductStatsWhereInput> | null
   }, "id" | "slug" | "sku">
 
   export type ProductOrderByWithAggregationInput = {
@@ -44960,7 +51992,7 @@ export namespace Prisma {
     id?: StringFilter<"ProductInventory"> | string
     variantId?: StringFilter<"ProductInventory"> | string
     quantity?: IntFilter<"ProductInventory"> | number
-    displayStatus?: StringFilter<"ProductInventory"> | string
+    displayStatus?: EnumProductInventoryDisplayStatusFilter<"ProductInventory"> | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFilter<"ProductInventory"> | number
     createdAt?: DateTimeFilter<"ProductInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductInventory"> | Date | string
@@ -44985,7 +52017,7 @@ export namespace Prisma {
     OR?: ProductInventoryWhereInput[]
     NOT?: ProductInventoryWhereInput | ProductInventoryWhereInput[]
     quantity?: IntFilter<"ProductInventory"> | number
-    displayStatus?: StringFilter<"ProductInventory"> | string
+    displayStatus?: EnumProductInventoryDisplayStatusFilter<"ProductInventory"> | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFilter<"ProductInventory"> | number
     createdAt?: DateTimeFilter<"ProductInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductInventory"> | Date | string
@@ -45014,7 +52046,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ProductInventory"> | string
     variantId?: StringWithAggregatesFilter<"ProductInventory"> | string
     quantity?: IntWithAggregatesFilter<"ProductInventory"> | number
-    displayStatus?: StringWithAggregatesFilter<"ProductInventory"> | string
+    displayStatus?: EnumProductInventoryDisplayStatusWithAggregatesFilter<"ProductInventory"> | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntWithAggregatesFilter<"ProductInventory"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ProductInventory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductInventory"> | Date | string
@@ -45394,7 +52426,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProductReview"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    images?: ReviewImageListRelationFilter
+    reviewImages?: ReviewImageListRelationFilter
   }
 
   export type ProductReviewOrderByWithRelationInput = {
@@ -45411,7 +52443,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     product?: ProductOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
-    images?: ReviewImageOrderByRelationAggregateInput
+    reviewImages?: ReviewImageOrderByRelationAggregateInput
   }
 
   export type ProductReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -45432,7 +52464,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProductReview"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    images?: ReviewImageListRelationFilter
+    reviewImages?: ReviewImageListRelationFilter
   }, "id" | "productId_userId">
 
   export type ProductReviewOrderByWithAggregationInput = {
@@ -45614,6 +52646,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentListRelationFilter
     avatarMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     uploadedMedia?: MediaListRelationFilter
+    emailVerificationLogs?: EmailVerificationLogListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -45644,6 +52677,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentOrderByRelationAggregateInput
     avatarMedia?: MediaOrderByWithRelationInput
     uploadedMedia?: MediaOrderByRelationAggregateInput
+    emailVerificationLogs?: EmailVerificationLogOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -45677,6 +52711,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentListRelationFilter
     avatarMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     uploadedMedia?: MediaListRelationFilter
+    emailVerificationLogs?: EmailVerificationLogListRelationFilter
   }, "id" | "email" | "phone" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -46292,6 +53327,367 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BannerGroupCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    banners?: BannerGroupMappingCreateNestedManyWithoutBannerGroupInput
+  }
+
+  export type BannerGroupUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    banners?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerGroupInput
+  }
+
+  export type BannerGroupUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banners?: BannerGroupMappingUpdateManyWithoutBannerGroupNestedInput
+  }
+
+  export type BannerGroupUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banners?: BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupNestedInput
+  }
+
+  export type BannerGroupCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerGroupUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerCreateInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingCreateNestedManyWithoutBannerInput
+    imageMedia?: MediaCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerUncheckedCreateInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    imageMediaId?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput
+  }
+
+  export type BannerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUpdateManyWithoutBannerNestedInput
+    imageMedia?: MediaUpdateOneWithoutBannersNestedInput
+  }
+
+  export type BannerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput
+  }
+
+  export type BannerCreateManyInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    imageMediaId?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingCreateInput = {
+    id?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    banner: BannerCreateNestedOneWithoutGroupsInput
+    bannerGroup: BannerGroupCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateInput = {
+    id?: string
+    bannerId: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banner?: BannerUpdateOneRequiredWithoutGroupsNestedInput
+    bannerGroup?: BannerGroupUpdateOneRequiredWithoutBannersNestedInput
+  }
+
+  export type BannerGroupMappingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingCreateManyInput = {
+    id?: string
+    bannerId: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailVerificationLogCreateInput = {
+    id?: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress?: string | null
+    userAgent?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutEmailVerificationLogsInput
+  }
+
+  export type EmailVerificationLogUncheckedCreateInput = {
+    id?: string
+    userId: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress?: string | null
+    userAgent?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmailVerificationLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutEmailVerificationLogsNestedInput
+  }
+
+  export type EmailVerificationLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailVerificationLogCreateManyInput = {
+    id?: string
+    userId: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress?: string | null
+    userAgent?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmailVerificationLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailVerificationLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type FlashSaleCreateInput = {
     id?: string
     name: string
@@ -46578,6 +53974,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateInput = {
@@ -46597,6 +53994,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUpdateInput = {
@@ -46616,6 +54014,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateInput = {
@@ -46635,6 +54034,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaCreateManyInput = {
@@ -47119,6 +54519,96 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProductStatsCreateInput = {
+    id?: string
+    totalSold?: number
+    totalRevenue?: Decimal | DecimalJsLike | number | string
+    avgRating?: Decimal | DecimalJsLike | number | string | null
+    reviewCount?: number
+    viewCount?: number
+    lastSoldAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutStatsInput
+  }
+
+  export type ProductStatsUncheckedCreateInput = {
+    id?: string
+    productId: string
+    totalSold?: number
+    totalRevenue?: Decimal | DecimalJsLike | number | string
+    avgRating?: Decimal | DecimalJsLike | number | string | null
+    reviewCount?: number
+    viewCount?: number
+    lastSoldAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalSold?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    avgRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    lastSoldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutStatsNestedInput
+  }
+
+  export type ProductStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    totalSold?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    avgRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    lastSoldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductStatsCreateManyInput = {
+    id?: string
+    productId: string
+    totalSold?: number
+    totalRevenue?: Decimal | DecimalJsLike | number | string
+    avgRating?: Decimal | DecimalJsLike | number | string | null
+    reviewCount?: number
+    viewCount?: number
+    lastSoldAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalSold?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    avgRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    lastSoldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    totalSold?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    avgRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    lastSoldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CategoryCreateInput = {
     id?: string
     name: string
@@ -47347,6 +54837,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -47376,6 +54867,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -47405,6 +54897,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -47434,6 +54927,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -47769,7 +55263,7 @@ export namespace Prisma {
   export type ProductInventoryCreateInput = {
     id?: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47780,7 +55274,7 @@ export namespace Prisma {
     id?: string
     variantId: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47789,7 +55283,7 @@ export namespace Prisma {
   export type ProductInventoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47800,7 +55294,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     variantId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47810,7 +55304,7 @@ export namespace Prisma {
     id?: string
     variantId: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47819,7 +55313,7 @@ export namespace Prisma {
   export type ProductInventoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47829,7 +55323,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     variantId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48220,7 +55714,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutReviewsInput
     user: UserCreateNestedOneWithoutReviewsInput
-    images?: ReviewImageCreateNestedManyWithoutReviewInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateInput = {
@@ -48235,7 +55729,7 @@ export namespace Prisma {
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    images?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUpdateInput = {
@@ -48250,7 +55744,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
-    images?: ReviewImageUpdateManyWithoutReviewNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateInput = {
@@ -48265,7 +55759,7 @@ export namespace Prisma {
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    images?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewCreateManyInput = {
@@ -48312,7 +55806,7 @@ export namespace Prisma {
     id?: string
     alt?: string | null
     createdAt?: Date | string
-    review: ProductReviewCreateNestedOneWithoutImagesInput
+    review: ProductReviewCreateNestedOneWithoutReviewImagesInput
     media: MediaCreateNestedOneWithoutReviewImagesInput
   }
 
@@ -48328,7 +55822,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     alt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    review?: ProductReviewUpdateOneRequiredWithoutImagesNestedInput
+    review?: ProductReviewUpdateOneRequiredWithoutReviewImagesNestedInput
     media?: MediaUpdateOneRequiredWithoutReviewImagesNestedInput
   }
 
@@ -48445,6 +55939,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -48474,6 +55969,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -48503,6 +55999,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -48532,6 +56029,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -49176,6 +56674,303 @@ export namespace Prisma {
     rate?: SortOrder
   }
 
+  export type BannerGroupMappingListRelationFilter = {
+    every?: BannerGroupMappingWhereInput
+    some?: BannerGroupMappingWhereInput
+    none?: BannerGroupMappingWhereInput
+  }
+
+  export type BannerGroupMappingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BannerGroupCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerGroupMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerGroupMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumBannerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeFilter<$PrismaModel> | $Enums.BannerType
+  }
+
+  export type EnumBannerPositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionFilter<$PrismaModel> | $Enums.BannerPosition
+  }
+
+  export type MediaNullableScalarRelationFilter = {
+    is?: MediaWhereInput | null
+    isNot?: MediaWhereInput | null
+  }
+
+  export type BannerCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    highlight?: SortOrder
+    ctaText?: SortOrder
+    ctaLink?: SortOrder
+    subLabel?: SortOrder
+    gradientFrom?: SortOrder
+    gradientTo?: SortOrder
+    imageMediaId?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type BannerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    highlight?: SortOrder
+    ctaText?: SortOrder
+    ctaLink?: SortOrder
+    subLabel?: SortOrder
+    gradientFrom?: SortOrder
+    gradientTo?: SortOrder
+    imageMediaId?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    highlight?: SortOrder
+    ctaText?: SortOrder
+    ctaLink?: SortOrder
+    subLabel?: SortOrder
+    gradientFrom?: SortOrder
+    gradientTo?: SortOrder
+    imageMediaId?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type EnumBannerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeWithAggregatesFilter<$PrismaModel> | $Enums.BannerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerTypeFilter<$PrismaModel>
+    _max?: NestedEnumBannerTypeFilter<$PrismaModel>
+  }
+
+  export type EnumBannerPositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionWithAggregatesFilter<$PrismaModel> | $Enums.BannerPosition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerPositionFilter<$PrismaModel>
+    _max?: NestedEnumBannerPositionFilter<$PrismaModel>
+  }
+
+  export type BannerScalarRelationFilter = {
+    is?: BannerWhereInput
+    isNot?: BannerWhereInput
+  }
+
+  export type BannerGroupScalarRelationFilter = {
+    is?: BannerGroupWhereInput
+    isNot?: BannerGroupWhereInput
+  }
+
+  export type BannerGroupMappingBannerIdBannerGroupIdCompoundUniqueInput = {
+    bannerId: string
+    bannerGroupId: string
+  }
+
+  export type BannerGroupMappingCountOrderByAggregateInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BannerGroupMappingAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type BannerGroupMappingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BannerGroupMappingMinOrderByAggregateInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BannerGroupMappingSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type EnumEmailVerificationActionFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmailVerificationAction | EnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    in?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmailVerificationActionFilter<$PrismaModel> | $Enums.EmailVerificationAction
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EmailVerificationLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    action?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EmailVerificationLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    action?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EmailVerificationLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    email?: SortOrder
+    action?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumEmailVerificationActionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmailVerificationAction | EnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    in?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmailVerificationActionWithAggregatesFilter<$PrismaModel> | $Enums.EmailVerificationAction
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEmailVerificationActionFilter<$PrismaModel>
+    _max?: NestedEnumEmailVerificationActionFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type EnumFlashSaleStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.FlashSaleStatus | EnumFlashSaleStatusFieldRefInput<$PrismaModel>
     in?: $Enums.FlashSaleStatus[] | ListEnumFlashSaleStatusFieldRefInput<$PrismaModel>
@@ -49416,6 +57211,12 @@ export namespace Prisma {
     none?: BrandWhereInput
   }
 
+  export type BannerListRelationFilter = {
+    every?: BannerWhereInput
+    some?: BannerWhereInput
+    none?: BannerWhereInput
+  }
+
   export type ProductImageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -49433,6 +57234,10 @@ export namespace Prisma {
   }
 
   export type BrandOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BannerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -49834,6 +57639,88 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type ProductStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+    lastSoldAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductStatsAvgOrderByAggregateInput = {
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+  }
+
+  export type ProductStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+    lastSoldAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+    lastSoldAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductStatsSumOrderByAggregateInput = {
+    totalSold?: SortOrder
+    totalRevenue?: SortOrder
+    avgRating?: SortOrder
+    reviewCount?: SortOrder
+    viewCount?: SortOrder
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
   export type EnumCateGoryTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.CateGoryType | EnumCateGoryTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
@@ -49844,11 +57731,6 @@ export namespace Prisma {
   export type CategoryNullableScalarRelationFilter = {
     is?: CategoryWhereInput | null
     isNot?: CategoryWhereInput | null
-  }
-
-  export type MediaNullableScalarRelationFilter = {
-    is?: MediaWhereInput | null
-    isNot?: MediaWhereInput | null
   }
 
   export type BrandNullableScalarRelationFilter = {
@@ -49975,17 +57857,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
   export type ProductBadgeListRelationFilter = {
     every?: ProductBadgeWhereInput
     some?: ProductBadgeWhereInput
@@ -50014,6 +57885,11 @@ export namespace Prisma {
     every?: CommissionRateWhereInput
     some?: CommissionRateWhereInput
     none?: CommissionRateWhereInput
+  }
+
+  export type ProductStatsNullableScalarRelationFilter = {
+    is?: ProductStatsWhereInput | null
+    isNot?: ProductStatsWhereInput | null
   }
 
   export type ProductBadgeOrderByRelationAggregateInput = {
@@ -50103,22 +57979,6 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrder
     weight?: SortOrder
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type EnumProductBadgeVariantFilter<$PrismaModel = never> = {
@@ -50302,6 +58162,13 @@ export namespace Prisma {
     sortOrder?: SortOrder
   }
 
+  export type EnumProductInventoryDisplayStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+  }
+
   export type ProductInventoryCountOrderByAggregateInput = {
     id?: SortOrder
     variantId?: SortOrder
@@ -50340,6 +58207,16 @@ export namespace Prisma {
   export type ProductInventorySumOrderByAggregateInput = {
     quantity?: SortOrder
     lowStockThreshold?: SortOrder
+  }
+
+  export type EnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
   }
 
   export type CategoryScalarRelationFilter = {
@@ -50745,6 +58622,12 @@ export namespace Prisma {
     none?: MediaWhereInput
   }
 
+  export type EmailVerificationLogListRelationFilter = {
+    every?: EmailVerificationLogWhereInput
+    some?: EmailVerificationLogWhereInput
+    none?: EmailVerificationLogWhereInput
+  }
+
   export type AddressOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -50754,6 +58637,10 @@ export namespace Prisma {
   }
 
   export type MediaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmailVerificationLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -51126,6 +59013,160 @@ export namespace Prisma {
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutCommRatesInput, ProductUpdateWithoutCommRatesInput>, ProductUncheckedUpdateWithoutCommRatesInput>
   }
 
+  export type BannerGroupMappingCreateNestedManyWithoutBannerGroupInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type BannerGroupMappingUncheckedCreateNestedManyWithoutBannerGroupInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type BannerGroupMappingUpdateManyWithoutBannerGroupNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type BannerGroupMappingCreateNestedManyWithoutBannerInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type MediaCreateNestedOneWithoutBannersInput = {
+    create?: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutBannersInput
+    connect?: MediaWhereUniqueInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type EnumBannerTypeFieldUpdateOperationsInput = {
+    set?: $Enums.BannerType
+  }
+
+  export type EnumBannerPositionFieldUpdateOperationsInput = {
+    set?: $Enums.BannerPosition
+  }
+
+  export type BannerGroupMappingUpdateManyWithoutBannerNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type MediaUpdateOneWithoutBannersNestedInput = {
+    create?: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutBannersInput
+    upsert?: MediaUpsertWithoutBannersInput
+    disconnect?: MediaWhereInput | boolean
+    delete?: MediaWhereInput | boolean
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutBannersInput, MediaUpdateWithoutBannersInput>, MediaUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type BannerCreateNestedOneWithoutGroupsInput = {
+    create?: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+    connectOrCreate?: BannerCreateOrConnectWithoutGroupsInput
+    connect?: BannerWhereUniqueInput
+  }
+
+  export type BannerGroupCreateNestedOneWithoutBannersInput = {
+    create?: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: BannerGroupCreateOrConnectWithoutBannersInput
+    connect?: BannerGroupWhereUniqueInput
+  }
+
+  export type BannerUpdateOneRequiredWithoutGroupsNestedInput = {
+    create?: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+    connectOrCreate?: BannerCreateOrConnectWithoutGroupsInput
+    upsert?: BannerUpsertWithoutGroupsInput
+    connect?: BannerWhereUniqueInput
+    update?: XOR<XOR<BannerUpdateToOneWithWhereWithoutGroupsInput, BannerUpdateWithoutGroupsInput>, BannerUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type BannerGroupUpdateOneRequiredWithoutBannersNestedInput = {
+    create?: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: BannerGroupCreateOrConnectWithoutBannersInput
+    upsert?: BannerGroupUpsertWithoutBannersInput
+    connect?: BannerGroupWhereUniqueInput
+    update?: XOR<XOR<BannerGroupUpdateToOneWithWhereWithoutBannersInput, BannerGroupUpdateWithoutBannersInput>, BannerGroupUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type UserCreateNestedOneWithoutEmailVerificationLogsInput = {
+    create?: XOR<UserCreateWithoutEmailVerificationLogsInput, UserUncheckedCreateWithoutEmailVerificationLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmailVerificationLogsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumEmailVerificationActionFieldUpdateOperationsInput = {
+    set?: $Enums.EmailVerificationAction
+  }
+
+  export type UserUpdateOneRequiredWithoutEmailVerificationLogsNestedInput = {
+    create?: XOR<UserCreateWithoutEmailVerificationLogsInput, UserUncheckedCreateWithoutEmailVerificationLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmailVerificationLogsInput
+    upsert?: UserUpsertWithoutEmailVerificationLogsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmailVerificationLogsInput, UserUpdateWithoutEmailVerificationLogsInput>, UserUncheckedUpdateWithoutEmailVerificationLogsInput>
+  }
+
   export type FlashSaleProductCreateNestedManyWithoutFlashSaleInput = {
     create?: XOR<FlashSaleProductCreateWithoutFlashSaleInput, FlashSaleProductUncheckedCreateWithoutFlashSaleInput> | FlashSaleProductCreateWithoutFlashSaleInput[] | FlashSaleProductUncheckedCreateWithoutFlashSaleInput[]
     connectOrCreate?: FlashSaleProductCreateOrConnectWithoutFlashSaleInput | FlashSaleProductCreateOrConnectWithoutFlashSaleInput[]
@@ -51327,6 +59368,13 @@ export namespace Prisma {
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
   }
 
+  export type BannerCreateNestedManyWithoutImageMediaInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+  }
+
   export type ProductImageUncheckedCreateNestedManyWithoutMediaInput = {
     create?: XOR<ProductImageCreateWithoutMediaInput, ProductImageUncheckedCreateWithoutMediaInput> | ProductImageCreateWithoutMediaInput[] | ProductImageUncheckedCreateWithoutMediaInput[]
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaInput | ProductImageCreateOrConnectWithoutMediaInput[]
@@ -51360,6 +59408,13 @@ export namespace Prisma {
     connectOrCreate?: BrandCreateOrConnectWithoutLogoMediaInput | BrandCreateOrConnectWithoutLogoMediaInput[]
     createMany?: BrandCreateManyLogoMediaInputEnvelope
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+  }
+
+  export type BannerUncheckedCreateNestedManyWithoutImageMediaInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
   }
 
   export type EnumMediaTypeFieldUpdateOperationsInput = {
@@ -51446,6 +59501,20 @@ export namespace Prisma {
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
   }
 
+  export type BannerUpdateManyWithoutImageMediaNestedInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    upsert?: BannerUpsertWithWhereUniqueWithoutImageMediaInput | BannerUpsertWithWhereUniqueWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    set?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    disconnect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    delete?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    update?: BannerUpdateWithWhereUniqueWithoutImageMediaInput | BannerUpdateWithWhereUniqueWithoutImageMediaInput[]
+    updateMany?: BannerUpdateManyWithWhereWithoutImageMediaInput | BannerUpdateManyWithWhereWithoutImageMediaInput[]
+    deleteMany?: BannerScalarWhereInput | BannerScalarWhereInput[]
+  }
+
   export type ProductImageUncheckedUpdateManyWithoutMediaNestedInput = {
     create?: XOR<ProductImageCreateWithoutMediaInput, ProductImageUncheckedCreateWithoutMediaInput> | ProductImageCreateWithoutMediaInput[] | ProductImageUncheckedCreateWithoutMediaInput[]
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaInput | ProductImageCreateOrConnectWithoutMediaInput[]
@@ -51514,6 +59583,20 @@ export namespace Prisma {
     update?: BrandUpdateWithWhereUniqueWithoutLogoMediaInput | BrandUpdateWithWhereUniqueWithoutLogoMediaInput[]
     updateMany?: BrandUpdateManyWithWhereWithoutLogoMediaInput | BrandUpdateManyWithWhereWithoutLogoMediaInput[]
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
+  }
+
+  export type BannerUncheckedUpdateManyWithoutImageMediaNestedInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    upsert?: BannerUpsertWithWhereUniqueWithoutImageMediaInput | BannerUpsertWithWhereUniqueWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    set?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    disconnect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    delete?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    update?: BannerUpdateWithWhereUniqueWithoutImageMediaInput | BannerUpdateWithWhereUniqueWithoutImageMediaInput[]
+    updateMany?: BannerUpdateManyWithWhereWithoutImageMediaInput | BannerUpdateManyWithWhereWithoutImageMediaInput[]
+    deleteMany?: BannerScalarWhereInput | BannerScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCartInput = {
@@ -51902,6 +59985,28 @@ export namespace Prisma {
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutPaymentsInput, OrderUpdateWithoutPaymentsInput>, OrderUncheckedUpdateWithoutPaymentsInput>
   }
 
+  export type ProductCreateNestedOneWithoutStatsInput = {
+    create?: XOR<ProductCreateWithoutStatsInput, ProductUncheckedCreateWithoutStatsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutStatsInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type ProductUpdateOneRequiredWithoutStatsNestedInput = {
+    create?: XOR<ProductCreateWithoutStatsInput, ProductUncheckedCreateWithoutStatsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutStatsInput
+    upsert?: ProductUpsertWithoutStatsInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutStatsInput, ProductUpdateWithoutStatsInput>, ProductUncheckedUpdateWithoutStatsInput>
+  }
+
   export type CategoryCreateNestedOneWithoutChildrenInput = {
     create?: XOR<CategoryCreateWithoutChildrenInput, CategoryUncheckedCreateWithoutChildrenInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutChildrenInput
@@ -52214,6 +60319,12 @@ export namespace Prisma {
     connect?: ProductCategoryWhereUniqueInput | ProductCategoryWhereUniqueInput[]
   }
 
+  export type ProductStatsCreateNestedOneWithoutProductInput = {
+    create?: XOR<ProductStatsCreateWithoutProductInput, ProductStatsUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductStatsCreateOrConnectWithoutProductInput
+    connect?: ProductStatsWhereUniqueInput
+  }
+
   export type ProductBadgeUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<ProductBadgeCreateWithoutProductInput, ProductBadgeUncheckedCreateWithoutProductInput> | ProductBadgeCreateWithoutProductInput[] | ProductBadgeUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductBadgeCreateOrConnectWithoutProductInput | ProductBadgeCreateOrConnectWithoutProductInput[]
@@ -52284,12 +60395,10 @@ export namespace Prisma {
     connect?: ProductCategoryWhereUniqueInput | ProductCategoryWhereUniqueInput[]
   }
 
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
+  export type ProductStatsUncheckedCreateNestedOneWithoutProductInput = {
+    create?: XOR<ProductStatsCreateWithoutProductInput, ProductStatsUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductStatsCreateOrConnectWithoutProductInput
+    connect?: ProductStatsWhereUniqueInput
   }
 
   export type BrandUpdateOneWithoutProductsNestedInput = {
@@ -52442,6 +60551,16 @@ export namespace Prisma {
     deleteMany?: ProductCategoryScalarWhereInput | ProductCategoryScalarWhereInput[]
   }
 
+  export type ProductStatsUpdateOneWithoutProductNestedInput = {
+    create?: XOR<ProductStatsCreateWithoutProductInput, ProductStatsUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductStatsCreateOrConnectWithoutProductInput
+    upsert?: ProductStatsUpsertWithoutProductInput
+    disconnect?: ProductStatsWhereInput | boolean
+    delete?: ProductStatsWhereInput | boolean
+    connect?: ProductStatsWhereUniqueInput
+    update?: XOR<XOR<ProductStatsUpdateToOneWithWhereWithoutProductInput, ProductStatsUpdateWithoutProductInput>, ProductStatsUncheckedUpdateWithoutProductInput>
+  }
+
   export type ProductBadgeUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ProductBadgeCreateWithoutProductInput, ProductBadgeUncheckedCreateWithoutProductInput> | ProductBadgeCreateWithoutProductInput[] | ProductBadgeUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductBadgeCreateOrConnectWithoutProductInput | ProductBadgeCreateOrConnectWithoutProductInput[]
@@ -52580,6 +60699,16 @@ export namespace Prisma {
     update?: ProductCategoryUpdateWithWhereUniqueWithoutProductInput | ProductCategoryUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: ProductCategoryUpdateManyWithWhereWithoutProductInput | ProductCategoryUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: ProductCategoryScalarWhereInput | ProductCategoryScalarWhereInput[]
+  }
+
+  export type ProductStatsUncheckedUpdateOneWithoutProductNestedInput = {
+    create?: XOR<ProductStatsCreateWithoutProductInput, ProductStatsUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductStatsCreateOrConnectWithoutProductInput
+    upsert?: ProductStatsUpsertWithoutProductInput
+    disconnect?: ProductStatsWhereInput | boolean
+    delete?: ProductStatsWhereInput | boolean
+    connect?: ProductStatsWhereUniqueInput
+    update?: XOR<XOR<ProductStatsUpdateToOneWithWhereWithoutProductInput, ProductStatsUpdateWithoutProductInput>, ProductStatsUncheckedUpdateWithoutProductInput>
   }
 
   export type ProductCreateNestedOneWithoutBadgesInput = {
@@ -52868,6 +60997,10 @@ export namespace Prisma {
     connect?: ProductVariantWhereUniqueInput
   }
 
+  export type EnumProductInventoryDisplayStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ProductInventoryDisplayStatus
+  }
+
   export type ProductVariantUpdateOneRequiredWithoutInventoryNestedInput = {
     create?: XOR<ProductVariantCreateWithoutInventoryInput, ProductVariantUncheckedCreateWithoutInventoryInput>
     connectOrCreate?: ProductVariantCreateOrConnectWithoutInventoryInput
@@ -53122,9 +61255,9 @@ export namespace Prisma {
     deleteMany?: ReviewImageScalarWhereInput | ReviewImageScalarWhereInput[]
   }
 
-  export type ProductReviewCreateNestedOneWithoutImagesInput = {
-    create?: XOR<ProductReviewCreateWithoutImagesInput, ProductReviewUncheckedCreateWithoutImagesInput>
-    connectOrCreate?: ProductReviewCreateOrConnectWithoutImagesInput
+  export type ProductReviewCreateNestedOneWithoutReviewImagesInput = {
+    create?: XOR<ProductReviewCreateWithoutReviewImagesInput, ProductReviewUncheckedCreateWithoutReviewImagesInput>
+    connectOrCreate?: ProductReviewCreateOrConnectWithoutReviewImagesInput
     connect?: ProductReviewWhereUniqueInput
   }
 
@@ -53134,12 +61267,12 @@ export namespace Prisma {
     connect?: MediaWhereUniqueInput
   }
 
-  export type ProductReviewUpdateOneRequiredWithoutImagesNestedInput = {
-    create?: XOR<ProductReviewCreateWithoutImagesInput, ProductReviewUncheckedCreateWithoutImagesInput>
-    connectOrCreate?: ProductReviewCreateOrConnectWithoutImagesInput
-    upsert?: ProductReviewUpsertWithoutImagesInput
+  export type ProductReviewUpdateOneRequiredWithoutReviewImagesNestedInput = {
+    create?: XOR<ProductReviewCreateWithoutReviewImagesInput, ProductReviewUncheckedCreateWithoutReviewImagesInput>
+    connectOrCreate?: ProductReviewCreateOrConnectWithoutReviewImagesInput
+    upsert?: ProductReviewUpsertWithoutReviewImagesInput
     connect?: ProductReviewWhereUniqueInput
-    update?: XOR<XOR<ProductReviewUpdateToOneWithWhereWithoutImagesInput, ProductReviewUpdateWithoutImagesInput>, ProductReviewUncheckedUpdateWithoutImagesInput>
+    update?: XOR<XOR<ProductReviewUpdateToOneWithWhereWithoutReviewImagesInput, ProductReviewUpdateWithoutReviewImagesInput>, ProductReviewUncheckedUpdateWithoutReviewImagesInput>
   }
 
   export type MediaUpdateOneRequiredWithoutReviewImagesNestedInput = {
@@ -53203,6 +61336,13 @@ export namespace Prisma {
     connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
   }
 
+  export type EmailVerificationLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmailVerificationLogCreateWithoutUserInput, EmailVerificationLogUncheckedCreateWithoutUserInput> | EmailVerificationLogCreateWithoutUserInput[] | EmailVerificationLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailVerificationLogCreateOrConnectWithoutUserInput | EmailVerificationLogCreateOrConnectWithoutUserInput[]
+    createMany?: EmailVerificationLogCreateManyUserInputEnvelope
+    connect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+  }
+
   export type CartUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -53248,6 +61388,13 @@ export namespace Prisma {
     connectOrCreate?: MediaCreateOrConnectWithoutUploadedByInput | MediaCreateOrConnectWithoutUploadedByInput[]
     createMany?: MediaCreateManyUploadedByInputEnvelope
     connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmailVerificationLogCreateWithoutUserInput, EmailVerificationLogUncheckedCreateWithoutUserInput> | EmailVerificationLogCreateWithoutUserInput[] | EmailVerificationLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailVerificationLogCreateOrConnectWithoutUserInput | EmailVerificationLogCreateOrConnectWithoutUserInput[]
+    createMany?: EmailVerificationLogCreateManyUserInputEnvelope
+    connect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
   }
 
   export type CartUpdateOneWithoutUserNestedInput = {
@@ -53350,6 +61497,20 @@ export namespace Prisma {
     deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
   }
 
+  export type EmailVerificationLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmailVerificationLogCreateWithoutUserInput, EmailVerificationLogUncheckedCreateWithoutUserInput> | EmailVerificationLogCreateWithoutUserInput[] | EmailVerificationLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailVerificationLogCreateOrConnectWithoutUserInput | EmailVerificationLogCreateOrConnectWithoutUserInput[]
+    upsert?: EmailVerificationLogUpsertWithWhereUniqueWithoutUserInput | EmailVerificationLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmailVerificationLogCreateManyUserInputEnvelope
+    set?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    disconnect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    delete?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    connect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    update?: EmailVerificationLogUpdateWithWhereUniqueWithoutUserInput | EmailVerificationLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmailVerificationLogUpdateManyWithWhereWithoutUserInput | EmailVerificationLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmailVerificationLogScalarWhereInput | EmailVerificationLogScalarWhereInput[]
+  }
+
   export type CartUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -53438,6 +61599,20 @@ export namespace Prisma {
     update?: MediaUpdateWithWhereUniqueWithoutUploadedByInput | MediaUpdateWithWhereUniqueWithoutUploadedByInput[]
     updateMany?: MediaUpdateManyWithWhereWithoutUploadedByInput | MediaUpdateManyWithWhereWithoutUploadedByInput[]
     deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmailVerificationLogCreateWithoutUserInput, EmailVerificationLogUncheckedCreateWithoutUserInput> | EmailVerificationLogCreateWithoutUserInput[] | EmailVerificationLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmailVerificationLogCreateOrConnectWithoutUserInput | EmailVerificationLogCreateOrConnectWithoutUserInput[]
+    upsert?: EmailVerificationLogUpsertWithWhereUniqueWithoutUserInput | EmailVerificationLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmailVerificationLogCreateManyUserInputEnvelope
+    set?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    disconnect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    delete?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    connect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+    update?: EmailVerificationLogUpdateWithWhereUniqueWithoutUserInput | EmailVerificationLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmailVerificationLogUpdateManyWithWhereWithoutUserInput | EmailVerificationLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmailVerificationLogScalarWhereInput | EmailVerificationLogScalarWhereInput[]
   }
 
   export type UserRoleAssignmentCreateNestedManyWithoutRoleInput = {
@@ -53711,6 +61886,80 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumBannerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeFilter<$PrismaModel> | $Enums.BannerType
+  }
+
+  export type NestedEnumBannerPositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionFilter<$PrismaModel> | $Enums.BannerPosition
+  }
+
+  export type NestedEnumBannerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeWithAggregatesFilter<$PrismaModel> | $Enums.BannerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerTypeFilter<$PrismaModel>
+    _max?: NestedEnumBannerTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumBannerPositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionWithAggregatesFilter<$PrismaModel> | $Enums.BannerPosition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerPositionFilter<$PrismaModel>
+    _max?: NestedEnumBannerPositionFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEmailVerificationActionFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmailVerificationAction | EnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    in?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmailVerificationActionFilter<$PrismaModel> | $Enums.EmailVerificationAction
+  }
+
+  export type NestedEnumEmailVerificationActionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmailVerificationAction | EnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    in?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmailVerificationActionWithAggregatesFilter<$PrismaModel> | $Enums.EmailVerificationAction
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEmailVerificationActionFilter<$PrismaModel>
+    _max?: NestedEnumEmailVerificationActionFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type NestedEnumFlashSaleStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.FlashSaleStatus | EnumFlashSaleStatusFieldRefInput<$PrismaModel>
     in?: $Enums.FlashSaleStatus[] | ListEnumFlashSaleStatusFieldRefInput<$PrismaModel>
@@ -53796,23 +62045,6 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
-  export type NestedEnumCateGoryTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.CateGoryType | EnumCateGoryTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCateGoryTypeFilter<$PrismaModel> | $Enums.CateGoryType
-  }
-
-  export type NestedEnumCateGoryTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CateGoryType | EnumCateGoryTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCateGoryTypeWithAggregatesFilter<$PrismaModel> | $Enums.CateGoryType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCateGoryTypeFilter<$PrismaModel>
-    _max?: NestedEnumCateGoryTypeFilter<$PrismaModel>
-  }
-
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -53838,6 +62070,23 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCateGoryTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CateGoryType | EnumCateGoryTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCateGoryTypeFilter<$PrismaModel> | $Enums.CateGoryType
+  }
+
+  export type NestedEnumCateGoryTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CateGoryType | EnumCateGoryTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CateGoryType[] | ListEnumCateGoryTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCateGoryTypeWithAggregatesFilter<$PrismaModel> | $Enums.CateGoryType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCateGoryTypeFilter<$PrismaModel>
+    _max?: NestedEnumCateGoryTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumProductBadgeVariantFilter<$PrismaModel = never> = {
@@ -53872,6 +62121,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
     _max?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+  }
+
+  export type NestedEnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -53927,6 +62193,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAddressesInput = {
@@ -53955,6 +62222,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAddressesInput = {
@@ -54053,6 +62321,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAddressesInput = {
@@ -54081,6 +62350,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OrderUpsertWithWhereUniqueWithoutShippingAddressInput = {
@@ -54146,6 +62416,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAffiliateInput = {
@@ -54174,6 +62445,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAffiliateInput = {
@@ -54280,6 +62552,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAffiliateInput = {
@@ -54308,6 +62581,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AffiliateLinkUpsertWithWhereUniqueWithoutAffiliateInput = {
@@ -54661,6 +62935,7 @@ export namespace Prisma {
     promotions?: PromotionProductCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCommRatesInput = {
@@ -54689,6 +62964,7 @@ export namespace Prisma {
     promotions?: PromotionProductUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCommRatesInput = {
@@ -54733,6 +63009,7 @@ export namespace Prisma {
     promotions?: PromotionProductUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCommRatesInput = {
@@ -54761,6 +63038,482 @@ export namespace Prisma {
     promotions?: PromotionProductUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
+  }
+
+  export type BannerGroupMappingCreateWithoutBannerGroupInput = {
+    id?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    banner: BannerCreateNestedOneWithoutGroupsInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateWithoutBannerGroupInput = {
+    id?: string
+    bannerId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingCreateOrConnectWithoutBannerGroupInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    create: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingCreateManyBannerGroupInputEnvelope = {
+    data: BannerGroupMappingCreateManyBannerGroupInput | BannerGroupMappingCreateManyBannerGroupInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    update: XOR<BannerGroupMappingUpdateWithoutBannerGroupInput, BannerGroupMappingUncheckedUpdateWithoutBannerGroupInput>
+    create: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    data: XOR<BannerGroupMappingUpdateWithoutBannerGroupInput, BannerGroupMappingUncheckedUpdateWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput = {
+    where: BannerGroupMappingScalarWhereInput
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingScalarWhereInput = {
+    AND?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+    OR?: BannerGroupMappingScalarWhereInput[]
+    NOT?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+    id?: StringFilter<"BannerGroupMapping"> | string
+    bannerId?: StringFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeFilter<"BannerGroupMapping"> | Date | string
+  }
+
+  export type BannerGroupMappingCreateWithoutBannerInput = {
+    id?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    bannerGroup: BannerGroupCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateWithoutBannerInput = {
+    id?: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingCreateOrConnectWithoutBannerInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    create: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput>
+  }
+
+  export type BannerGroupMappingCreateManyBannerInputEnvelope = {
+    data: BannerGroupMappingCreateManyBannerInput | BannerGroupMappingCreateManyBannerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MediaCreateWithoutBannersInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
+    productImages?: ProductImageCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
+    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    categories?: CategoryCreateNestedManyWithoutImageMediaInput
+    brands?: BrandCreateNestedManyWithoutLogoMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutBannersInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    uploadedById?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
+    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
+    brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+  }
+
+  export type MediaCreateOrConnectWithoutBannersInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+  }
+
+  export type BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    update: XOR<BannerGroupMappingUpdateWithoutBannerInput, BannerGroupMappingUncheckedUpdateWithoutBannerInput>
+    create: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput>
+  }
+
+  export type BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    data: XOR<BannerGroupMappingUpdateWithoutBannerInput, BannerGroupMappingUncheckedUpdateWithoutBannerInput>
+  }
+
+  export type BannerGroupMappingUpdateManyWithWhereWithoutBannerInput = {
+    where: BannerGroupMappingScalarWhereInput
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyWithoutBannerInput>
+  }
+
+  export type MediaUpsertWithoutBannersInput = {
+    update: XOR<MediaUpdateWithoutBannersInput, MediaUncheckedUpdateWithoutBannersInput>
+    create: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutBannersInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutBannersInput, MediaUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type MediaUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
+    productImages?: ProductImageUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
+    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    categories?: CategoryUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
+    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+  }
+
+  export type BannerCreateWithoutGroupsInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    imageMedia?: MediaCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerUncheckedCreateWithoutGroupsInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    imageMediaId?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerCreateOrConnectWithoutGroupsInput = {
+    where: BannerWhereUniqueInput
+    create: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+  }
+
+  export type BannerGroupCreateWithoutBannersInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerGroupUncheckedCreateWithoutBannersInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerGroupCreateOrConnectWithoutBannersInput = {
+    where: BannerGroupWhereUniqueInput
+    create: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+  }
+
+  export type BannerUpsertWithoutGroupsInput = {
+    update: XOR<BannerUpdateWithoutGroupsInput, BannerUncheckedUpdateWithoutGroupsInput>
+    create: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+    where?: BannerWhereInput
+  }
+
+  export type BannerUpdateToOneWithWhereWithoutGroupsInput = {
+    where?: BannerWhereInput
+    data: XOR<BannerUpdateWithoutGroupsInput, BannerUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type BannerUpdateWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    imageMedia?: MediaUpdateOneWithoutBannersNestedInput
+  }
+
+  export type BannerUncheckedUpdateWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupUpsertWithoutBannersInput = {
+    update: XOR<BannerGroupUpdateWithoutBannersInput, BannerGroupUncheckedUpdateWithoutBannersInput>
+    create: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+    where?: BannerGroupWhereInput
+  }
+
+  export type BannerGroupUpdateToOneWithWhereWithoutBannersInput = {
+    where?: BannerGroupWhereInput
+    data: XOR<BannerGroupUpdateWithoutBannersInput, BannerGroupUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type BannerGroupUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupUncheckedUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutEmailVerificationLogsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+  }
+
+  export type UserUncheckedCreateWithoutEmailVerificationLogsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    avatarMediaId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  }
+
+  export type UserCreateOrConnectWithoutEmailVerificationLogsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEmailVerificationLogsInput, UserUncheckedCreateWithoutEmailVerificationLogsInput>
+  }
+
+  export type UserUpsertWithoutEmailVerificationLogsInput = {
+    update: XOR<UserUpdateWithoutEmailVerificationLogsInput, UserUncheckedUpdateWithoutEmailVerificationLogsInput>
+    create: XOR<UserCreateWithoutEmailVerificationLogsInput, UserUncheckedCreateWithoutEmailVerificationLogsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEmailVerificationLogsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEmailVerificationLogsInput, UserUncheckedUpdateWithoutEmailVerificationLogsInput>
+  }
+
+  export type UserUpdateWithoutEmailVerificationLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEmailVerificationLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   }
 
   export type FlashSaleProductCreateWithoutFlashSaleInput = {
@@ -54949,6 +63702,7 @@ export namespace Prisma {
     promotions?: PromotionProductCreateNestedManyWithoutProductInput
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutFlashSaleProductsInput = {
@@ -54977,6 +63731,7 @@ export namespace Prisma {
     promotions?: PromotionProductUncheckedCreateNestedManyWithoutProductInput
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutFlashSaleProductsInput = {
@@ -55105,6 +63860,7 @@ export namespace Prisma {
     promotions?: PromotionProductUpdateManyWithoutProductNestedInput
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutFlashSaleProductsInput = {
@@ -55133,6 +63889,7 @@ export namespace Prisma {
     promotions?: PromotionProductUncheckedUpdateManyWithoutProductNestedInput
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutFlashSaleProductsInput = {
@@ -55392,6 +64149,7 @@ export namespace Prisma {
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUploadedMediaInput = {
@@ -55420,6 +64178,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUploadedMediaInput = {
@@ -55461,7 +64220,7 @@ export namespace Prisma {
     id?: string
     alt?: string | null
     createdAt?: Date | string
-    review: ProductReviewCreateNestedOneWithoutImagesInput
+    review: ProductReviewCreateNestedOneWithoutReviewImagesInput
   }
 
   export type ReviewImageUncheckedCreateWithoutMediaInput = {
@@ -55507,6 +64266,7 @@ export namespace Prisma {
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAvatarMediaInput = {
@@ -55535,6 +64295,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAvatarMediaInput = {
@@ -55625,6 +64386,56 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BannerCreateWithoutImageMediaInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingCreateNestedManyWithoutBannerInput
+  }
+
+  export type BannerUncheckedCreateWithoutImageMediaInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput
+  }
+
+  export type BannerCreateOrConnectWithoutImageMediaInput = {
+    where: BannerWhereUniqueInput
+    create: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput>
+  }
+
+  export type BannerCreateManyImageMediaInputEnvelope = {
+    data: BannerCreateManyImageMediaInput | BannerCreateManyImageMediaInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutUploadedMediaInput = {
     update: XOR<UserUpdateWithoutUploadedMediaInput, UserUncheckedUpdateWithoutUploadedMediaInput>
     create: XOR<UserCreateWithoutUploadedMediaInput, UserUncheckedCreateWithoutUploadedMediaInput>
@@ -55662,6 +64473,7 @@ export namespace Prisma {
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUploadedMediaInput = {
@@ -55690,6 +64502,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProductImageUpsertWithWhereUniqueWithoutMediaInput = {
@@ -55855,6 +64668,45 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
   }
 
+  export type BannerUpsertWithWhereUniqueWithoutImageMediaInput = {
+    where: BannerWhereUniqueInput
+    update: XOR<BannerUpdateWithoutImageMediaInput, BannerUncheckedUpdateWithoutImageMediaInput>
+    create: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput>
+  }
+
+  export type BannerUpdateWithWhereUniqueWithoutImageMediaInput = {
+    where: BannerWhereUniqueInput
+    data: XOR<BannerUpdateWithoutImageMediaInput, BannerUncheckedUpdateWithoutImageMediaInput>
+  }
+
+  export type BannerUpdateManyWithWhereWithoutImageMediaInput = {
+    where: BannerScalarWhereInput
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyWithoutImageMediaInput>
+  }
+
+  export type BannerScalarWhereInput = {
+    AND?: BannerScalarWhereInput | BannerScalarWhereInput[]
+    OR?: BannerScalarWhereInput[]
+    NOT?: BannerScalarWhereInput | BannerScalarWhereInput[]
+    id?: StringFilter<"Banner"> | string
+    type?: EnumBannerTypeFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableFilter<"Banner"> | string | null
+    title?: StringNullableFilter<"Banner"> | string | null
+    description?: StringNullableFilter<"Banner"> | string | null
+    highlight?: StringNullableFilter<"Banner"> | string | null
+    ctaText?: StringNullableFilter<"Banner"> | string | null
+    ctaLink?: StringNullableFilter<"Banner"> | string | null
+    subLabel?: StringNullableFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableFilter<"Banner"> | string | null
+    gradientTo?: StringNullableFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableFilter<"Banner"> | string | null
+    sortOrder?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+  }
+
   export type UserCreateWithoutCartInput = {
     id?: string
     email: string
@@ -55881,6 +64733,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCartInput = {
@@ -55909,6 +64762,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCartInput = {
@@ -55981,6 +64835,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCartInput = {
@@ -56009,6 +64864,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CartItemUpsertWithWhereUniqueWithoutCartInput = {
@@ -56085,6 +64941,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCartItemsInput = {
@@ -56113,6 +64970,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCartItemsInput = {
@@ -56223,6 +65081,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCartItemsInput = {
@@ -56251,6 +65110,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutCartItemsInput = {
@@ -56326,6 +65186,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -56354,6 +65215,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -56571,6 +65433,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -56599,6 +65462,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AddressUpsertWithoutOrdersInput = {
@@ -56847,6 +65711,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutOrderItemsInput = {
@@ -56875,6 +65740,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutOrderItemsInput = {
@@ -57015,6 +65881,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutOrderItemsInput = {
@@ -57043,6 +65910,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutOrderItemsInput = {
@@ -57196,6 +66064,138 @@ export namespace Prisma {
     flashSaleOrder?: FlashSaleOrderUncheckedUpdateOneWithoutOrderNestedInput
   }
 
+  export type ProductCreateWithoutStatsInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    shortDesc?: string | null
+    sku: string
+    basePrice: Decimal | DecimalJsLike | number | string
+    comparePrice?: Decimal | DecimalJsLike | number | string | null
+    isActive?: boolean
+    isFeatured?: boolean
+    weight?: Decimal | DecimalJsLike | number | string | null
+    metaTitle?: string | null
+    metaDesc?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand?: BrandCreateNestedOneWithoutProductsInput
+    badges?: ProductBadgeCreateNestedManyWithoutProductInput
+    variants?: ProductVariantCreateNestedManyWithoutProductInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
+    reviews?: ProductReviewCreateNestedManyWithoutProductInput
+    orderItems?: OrderItemCreateNestedManyWithoutProductInput
+    cartItems?: CartItemCreateNestedManyWithoutProductInput
+    promotions?: PromotionProductCreateNestedManyWithoutProductInput
+    commRates?: CommissionRateCreateNestedManyWithoutProductInput
+    flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
+    productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutStatsInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    shortDesc?: string | null
+    sku: string
+    brandId?: string | null
+    basePrice: Decimal | DecimalJsLike | number | string
+    comparePrice?: Decimal | DecimalJsLike | number | string | null
+    isActive?: boolean
+    isFeatured?: boolean
+    weight?: Decimal | DecimalJsLike | number | string | null
+    metaTitle?: string | null
+    metaDesc?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
+    variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutProductInput
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
+    promotions?: PromotionProductUncheckedCreateNestedManyWithoutProductInput
+    commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
+    flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
+    productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutStatsInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutStatsInput, ProductUncheckedCreateWithoutStatsInput>
+  }
+
+  export type ProductUpsertWithoutStatsInput = {
+    update: XOR<ProductUpdateWithoutStatsInput, ProductUncheckedUpdateWithoutStatsInput>
+    create: XOR<ProductCreateWithoutStatsInput, ProductUncheckedCreateWithoutStatsInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutStatsInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutStatsInput, ProductUncheckedUpdateWithoutStatsInput>
+  }
+
+  export type ProductUpdateWithoutStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    sku?: StringFieldUpdateOperationsInput | string
+    basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: BrandUpdateOneWithoutProductsNestedInput
+    badges?: ProductBadgeUpdateManyWithoutProductNestedInput
+    variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
+    reviews?: ProductReviewUpdateManyWithoutProductNestedInput
+    orderItems?: OrderItemUpdateManyWithoutProductNestedInput
+    cartItems?: CartItemUpdateManyWithoutProductNestedInput
+    promotions?: PromotionProductUpdateManyWithoutProductNestedInput
+    commRates?: CommissionRateUpdateManyWithoutProductNestedInput
+    flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
+    productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    sku?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
+    variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutProductNestedInput
+    orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
+    promotions?: PromotionProductUncheckedUpdateManyWithoutProductNestedInput
+    commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
+    flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
+    productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+  }
+
   export type CategoryCreateWithoutChildrenInput = {
     id?: string
     name: string
@@ -57291,6 +66291,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutCategoriesInput = {
@@ -57309,6 +66310,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutCategoriesInput = {
@@ -57455,6 +66457,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutCategoriesInput = {
@@ -57473,6 +66476,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type BrandUpsertWithoutCategoriesInput = {
@@ -57564,6 +66568,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutBrandInput = {
@@ -57592,6 +66597,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutBrandInput = {
@@ -57620,6 +66626,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutBrandsInput = {
@@ -57638,6 +66645,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutBrandsInput = {
@@ -57752,6 +66760,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutBrandsInput = {
@@ -57770,6 +66779,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutBrandInput = {
@@ -57938,7 +66948,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
-    images?: ReviewImageCreateNestedManyWithoutReviewInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateWithoutProductInput = {
@@ -57952,7 +66962,7 @@ export namespace Prisma {
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    images?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewCreateOrConnectWithoutProductInput = {
@@ -58137,6 +67147,35 @@ export namespace Prisma {
   export type ProductCategoryCreateManyProductInputEnvelope = {
     data: ProductCategoryCreateManyProductInput | ProductCategoryCreateManyProductInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ProductStatsCreateWithoutProductInput = {
+    id?: string
+    totalSold?: number
+    totalRevenue?: Decimal | DecimalJsLike | number | string
+    avgRating?: Decimal | DecimalJsLike | number | string | null
+    reviewCount?: number
+    viewCount?: number
+    lastSoldAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductStatsUncheckedCreateWithoutProductInput = {
+    id?: string
+    totalSold?: number
+    totalRevenue?: Decimal | DecimalJsLike | number | string
+    avgRating?: Decimal | DecimalJsLike | number | string | null
+    reviewCount?: number
+    viewCount?: number
+    lastSoldAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductStatsCreateOrConnectWithoutProductInput = {
+    where: ProductStatsWhereUniqueInput
+    create: XOR<ProductStatsCreateWithoutProductInput, ProductStatsUncheckedCreateWithoutProductInput>
   }
 
   export type BrandUpsertWithoutProductsInput = {
@@ -58408,6 +67447,41 @@ export namespace Prisma {
     data: XOR<ProductCategoryUpdateManyMutationInput, ProductCategoryUncheckedUpdateManyWithoutProductInput>
   }
 
+  export type ProductStatsUpsertWithoutProductInput = {
+    update: XOR<ProductStatsUpdateWithoutProductInput, ProductStatsUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductStatsCreateWithoutProductInput, ProductStatsUncheckedCreateWithoutProductInput>
+    where?: ProductStatsWhereInput
+  }
+
+  export type ProductStatsUpdateToOneWithWhereWithoutProductInput = {
+    where?: ProductStatsWhereInput
+    data: XOR<ProductStatsUpdateWithoutProductInput, ProductStatsUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductStatsUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalSold?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    avgRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    lastSoldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductStatsUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalSold?: IntFieldUpdateOperationsInput | number
+    totalRevenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    avgRating?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    reviewCount?: IntFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    lastSoldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProductCreateWithoutBadgesInput = {
     id?: string
     name: string
@@ -58434,6 +67508,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutBadgesInput = {
@@ -58462,6 +67537,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutBadgesInput = {
@@ -58506,6 +67582,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutBadgesInput = {
@@ -58534,6 +67611,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductCreateWithoutVariantsInput = {
@@ -58562,6 +67640,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutVariantsInput = {
@@ -58590,6 +67669,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutVariantsInput = {
@@ -58600,7 +67680,7 @@ export namespace Prisma {
   export type ProductInventoryCreateWithoutVariantInput = {
     id?: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -58609,7 +67689,7 @@ export namespace Prisma {
   export type ProductInventoryUncheckedCreateWithoutVariantInput = {
     id?: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -58789,6 +67869,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutVariantsInput = {
@@ -58817,6 +67898,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductInventoryUpsertWithoutVariantInput = {
@@ -58833,7 +67915,7 @@ export namespace Prisma {
   export type ProductInventoryUpdateWithoutVariantInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58842,7 +67924,7 @@ export namespace Prisma {
   export type ProductInventoryUncheckedUpdateWithoutVariantInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58938,6 +68020,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutImagesInput = {
@@ -58966,6 +68049,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutImagesInput = {
@@ -59030,6 +68114,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutProductImagesInput = {
@@ -59048,6 +68133,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutProductImagesInput = {
@@ -59092,6 +68178,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutImagesInput = {
@@ -59120,6 +68207,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutImagesInput = {
@@ -59196,6 +68284,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutProductImagesInput = {
@@ -59214,6 +68303,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type ProductVariantCreateWithoutInventoryInput = {
@@ -59330,6 +68420,7 @@ export namespace Prisma {
     promotions?: PromotionProductCreateNestedManyWithoutProductInput
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutProductCategoriesInput = {
@@ -59358,6 +68449,7 @@ export namespace Prisma {
     promotions?: PromotionProductUncheckedCreateNestedManyWithoutProductInput
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutProductCategoriesInput = {
@@ -59439,6 +68531,7 @@ export namespace Prisma {
     promotions?: PromotionProductUpdateManyWithoutProductNestedInput
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutProductCategoriesInput = {
@@ -59467,6 +68560,7 @@ export namespace Prisma {
     promotions?: PromotionProductUncheckedUpdateManyWithoutProductNestedInput
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type CategoryUpsertWithoutProductCategoriesInput = {
@@ -59611,6 +68705,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutPromotionsInput = {
@@ -59639,6 +68734,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutPromotionsInput = {
@@ -59724,6 +68820,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutPromotionsInput = {
@@ -59752,6 +68849,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type CouponUsageCreateWithoutCouponInput = {
@@ -60015,6 +69113,7 @@ export namespace Prisma {
     commRates?: CommissionRateCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutReviewsInput = {
@@ -60043,6 +69142,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutReviewsInput = {
@@ -60076,6 +69176,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -60104,6 +69205,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -60172,6 +69274,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutReviewsInput = {
@@ -60200,6 +69303,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type UserUpsertWithoutReviewsInput = {
@@ -60239,6 +69343,7 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -60267,6 +69372,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReviewImageUpsertWithWhereUniqueWithoutReviewInput = {
@@ -60285,7 +69391,7 @@ export namespace Prisma {
     data: XOR<ReviewImageUpdateManyMutationInput, ReviewImageUncheckedUpdateManyWithoutReviewInput>
   }
 
-  export type ProductReviewCreateWithoutImagesInput = {
+  export type ProductReviewCreateWithoutReviewImagesInput = {
     id?: string
     rating: number
     title?: string | null
@@ -60299,7 +69405,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutReviewsInput
   }
 
-  export type ProductReviewUncheckedCreateWithoutImagesInput = {
+  export type ProductReviewUncheckedCreateWithoutReviewImagesInput = {
     id?: string
     productId: string
     userId: string
@@ -60313,9 +69419,9 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ProductReviewCreateOrConnectWithoutImagesInput = {
+  export type ProductReviewCreateOrConnectWithoutReviewImagesInput = {
     where: ProductReviewWhereUniqueInput
-    create: XOR<ProductReviewCreateWithoutImagesInput, ProductReviewUncheckedCreateWithoutImagesInput>
+    create: XOR<ProductReviewCreateWithoutReviewImagesInput, ProductReviewUncheckedCreateWithoutReviewImagesInput>
   }
 
   export type MediaCreateWithoutReviewImagesInput = {
@@ -60334,6 +69440,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutReviewImagesInput = {
@@ -60352,6 +69459,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutReviewImagesInput = {
@@ -60359,18 +69467,18 @@ export namespace Prisma {
     create: XOR<MediaCreateWithoutReviewImagesInput, MediaUncheckedCreateWithoutReviewImagesInput>
   }
 
-  export type ProductReviewUpsertWithoutImagesInput = {
-    update: XOR<ProductReviewUpdateWithoutImagesInput, ProductReviewUncheckedUpdateWithoutImagesInput>
-    create: XOR<ProductReviewCreateWithoutImagesInput, ProductReviewUncheckedCreateWithoutImagesInput>
+  export type ProductReviewUpsertWithoutReviewImagesInput = {
+    update: XOR<ProductReviewUpdateWithoutReviewImagesInput, ProductReviewUncheckedUpdateWithoutReviewImagesInput>
+    create: XOR<ProductReviewCreateWithoutReviewImagesInput, ProductReviewUncheckedCreateWithoutReviewImagesInput>
     where?: ProductReviewWhereInput
   }
 
-  export type ProductReviewUpdateToOneWithWhereWithoutImagesInput = {
+  export type ProductReviewUpdateToOneWithWhereWithoutReviewImagesInput = {
     where?: ProductReviewWhereInput
-    data: XOR<ProductReviewUpdateWithoutImagesInput, ProductReviewUncheckedUpdateWithoutImagesInput>
+    data: XOR<ProductReviewUpdateWithoutReviewImagesInput, ProductReviewUncheckedUpdateWithoutReviewImagesInput>
   }
 
-  export type ProductReviewUpdateWithoutImagesInput = {
+  export type ProductReviewUpdateWithoutReviewImagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     title?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60384,7 +69492,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
   }
 
-  export type ProductReviewUncheckedUpdateWithoutImagesInput = {
+  export type ProductReviewUncheckedUpdateWithoutReviewImagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -60425,6 +69533,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutReviewImagesInput = {
@@ -60443,6 +69552,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type CartCreateWithoutUserInput = {
@@ -60529,7 +69639,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutReviewsInput
-    images?: ReviewImageCreateNestedManyWithoutReviewInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateWithoutUserInput = {
@@ -60543,7 +69653,7 @@ export namespace Prisma {
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    images?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewCreateOrConnectWithoutUserInput = {
@@ -60675,6 +69785,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutUserAvatarsInput = {
@@ -60693,6 +69804,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutUserAvatarsInput = {
@@ -60716,6 +69828,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutUploadedByInput = {
@@ -60734,6 +69847,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutUploadedByInput = {
@@ -60743,6 +69857,36 @@ export namespace Prisma {
 
   export type MediaCreateManyUploadedByInputEnvelope = {
     data: MediaCreateManyUploadedByInput | MediaCreateManyUploadedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmailVerificationLogCreateWithoutUserInput = {
+    id?: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress?: string | null
+    userAgent?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmailVerificationLogUncheckedCreateWithoutUserInput = {
+    id?: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress?: string | null
+    userAgent?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type EmailVerificationLogCreateOrConnectWithoutUserInput = {
+    where: EmailVerificationLogWhereUniqueInput
+    create: XOR<EmailVerificationLogCreateWithoutUserInput, EmailVerificationLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type EmailVerificationLogCreateManyUserInputEnvelope = {
+    data: EmailVerificationLogCreateManyUserInput | EmailVerificationLogCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -60935,6 +70079,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutUserAvatarsInput = {
@@ -60953,6 +70098,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUpsertWithWhereUniqueWithoutUploadedByInput = {
@@ -60986,6 +70132,36 @@ export namespace Prisma {
     isDeleted?: BoolFilter<"Media"> | boolean
     createdAt?: DateTimeFilter<"Media"> | Date | string
     updatedAt?: DateTimeFilter<"Media"> | Date | string
+  }
+
+  export type EmailVerificationLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: EmailVerificationLogWhereUniqueInput
+    update: XOR<EmailVerificationLogUpdateWithoutUserInput, EmailVerificationLogUncheckedUpdateWithoutUserInput>
+    create: XOR<EmailVerificationLogCreateWithoutUserInput, EmailVerificationLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type EmailVerificationLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: EmailVerificationLogWhereUniqueInput
+    data: XOR<EmailVerificationLogUpdateWithoutUserInput, EmailVerificationLogUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EmailVerificationLogUpdateManyWithWhereWithoutUserInput = {
+    where: EmailVerificationLogScalarWhereInput
+    data: XOR<EmailVerificationLogUpdateManyMutationInput, EmailVerificationLogUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type EmailVerificationLogScalarWhereInput = {
+    AND?: EmailVerificationLogScalarWhereInput | EmailVerificationLogScalarWhereInput[]
+    OR?: EmailVerificationLogScalarWhereInput[]
+    NOT?: EmailVerificationLogScalarWhereInput | EmailVerificationLogScalarWhereInput[]
+    id?: StringFilter<"EmailVerificationLog"> | string
+    userId?: StringFilter<"EmailVerificationLog"> | string
+    email?: StringFilter<"EmailVerificationLog"> | string
+    action?: EnumEmailVerificationActionFilter<"EmailVerificationLog"> | $Enums.EmailVerificationAction
+    ipAddress?: StringNullableFilter<"EmailVerificationLog"> | string | null
+    userAgent?: StringNullableFilter<"EmailVerificationLog"> | string | null
+    metadata?: JsonNullableFilter<"EmailVerificationLog">
+    createdAt?: DateTimeFilter<"EmailVerificationLog"> | Date | string
   }
 
   export type UserRoleAssignmentCreateWithoutRoleInput = {
@@ -61054,6 +70230,7 @@ export namespace Prisma {
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleAssignmentsInput = {
@@ -61082,6 +70259,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleAssignmentsInput = {
@@ -61145,6 +70323,7 @@ export namespace Prisma {
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleAssignmentsInput = {
@@ -61173,6 +70352,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserRoleUpsertWithoutRoleAssignmentsInput = {
@@ -61362,6 +70542,62 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BannerGroupMappingCreateManyBannerGroupInput = {
+    id?: string
+    bannerId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateWithoutBannerGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banner?: BannerUpdateOneRequiredWithoutGroupsNestedInput
+  }
+
+  export type BannerGroupMappingUncheckedUpdateWithoutBannerGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingCreateManyBannerInput = {
+    id?: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateWithoutBannerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerGroup?: BannerGroupUpdateOneRequiredWithoutBannersNestedInput
+  }
+
+  export type BannerGroupMappingUncheckedUpdateWithoutBannerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type FlashSaleProductCreateManyFlashSaleInput = {
     id?: string
     productId: string
@@ -61509,6 +70745,25 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type BannerCreateManyImageMediaInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ProductImageUpdateWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
     alt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61543,7 +70798,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     alt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    review?: ProductReviewUpdateOneRequiredWithoutImagesNestedInput
+    review?: ProductReviewUpdateOneRequiredWithoutReviewImagesNestedInput
   }
 
   export type ReviewImageUncheckedUpdateWithoutMediaInput = {
@@ -61586,6 +70841,7 @@ export namespace Prisma {
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAvatarMediaInput = {
@@ -61614,6 +70870,7 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAvatarMediaInput = {
@@ -61715,6 +70972,65 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerUpdateWithoutImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUpdateManyWithoutBannerNestedInput
+  }
+
+  export type BannerUncheckedUpdateWithoutImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput
+  }
+
+  export type BannerUncheckedUpdateManyWithoutImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62038,6 +71354,7 @@ export namespace Prisma {
     commRates?: CommissionRateUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutBrandInput = {
@@ -62066,6 +71383,7 @@ export namespace Prisma {
     commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutBrandInput = {
@@ -62359,7 +71677,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
-    images?: ReviewImageUpdateManyWithoutReviewNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateWithoutProductInput = {
@@ -62373,7 +71691,7 @@ export namespace Prisma {
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    images?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateManyWithoutProductInput = {
@@ -62889,6 +72207,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EmailVerificationLogCreateManyUserInput = {
+    id?: string
+    email: string
+    action: $Enums.EmailVerificationAction
+    ipAddress?: string | null
+    userAgent?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
   export type OrderUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderNumber?: StringFieldUpdateOperationsInput | string
@@ -62961,7 +72289,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
-    images?: ReviewImageUpdateManyWithoutReviewNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateWithoutUserInput = {
@@ -62975,7 +72303,7 @@ export namespace Prisma {
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    images?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateManyWithoutUserInput = {
@@ -63075,6 +72403,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutUploadedByInput = {
@@ -63093,6 +72422,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateManyWithoutUploadedByInput = {
@@ -63106,6 +72436,36 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailVerificationLogUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailVerificationLogUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmailVerificationLogUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    action?: EnumEmailVerificationActionFieldUpdateOperationsInput | $Enums.EmailVerificationAction
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleAssignmentCreateManyRoleInput = {

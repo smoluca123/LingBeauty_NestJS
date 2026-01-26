@@ -78,6 +78,7 @@ model Product {
   commRates         CommissionRate[]
   flashSaleProducts FlashSaleProduct[]
   productCategories ProductCategory[]
+  stats             ProductStats?
 
   @@index([slug])
   @@index([brandId])
@@ -160,14 +161,19 @@ model ProductImage {
   @@map("product_images")
 }
 
+enum ProductInventoryDisplayStatus {
+  IN_STOCK
+  OUT_OF_STOCK
+}
+
 model ProductInventory {
-  id                String   @id @default(uuid())
-  variantId         String   @unique @map("variant_id")
-  quantity          Int      @default(0)
-  displayStatus     String   @default("in_stock") @map("display_status") @db.VarChar(50)
-  lowStockThreshold Int      @default(10) @map("low_stock_threshold")
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
+  id                String                        @id @default(uuid())
+  variantId         String                        @unique @map("variant_id")
+  quantity          Int                           @default(0)
+  displayStatus     ProductInventoryDisplayStatus @default(IN_STOCK) @map("display_status")
+  lowStockThreshold Int                           @default(10) @map("low_stock_threshold")
+  createdAt         DateTime                      @default(now()) @map("created_at")
+  updatedAt         DateTime                      @updatedAt @map("updated_at")
 
   variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
 

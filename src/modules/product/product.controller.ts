@@ -12,7 +12,9 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ProductService } from './product.service';
+import { ProductStatsService } from './product-stats.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import {
@@ -46,7 +48,11 @@ import {
   ApiUpdateProductVariant,
   ApiUploadProductImage,
   ApiUploadProductVideo,
+  ApiGetHotProducts,
+  ApiTrackProductView,
 } from './decorators/product.decorators';
+import { HotProductsQueryDto } from './dto/hot-products-query.dto';
+import { TrackProductViewResponseDto } from './dto/public-product.dto';
 import {
   AddProductImageDto,
   ProductImageResponseDto,
@@ -72,7 +78,10 @@ import type { IDecodedAccecssTokenType } from 'src/libs/types/interfaces/utils.i
 @UseGuards(AuthGuard('jwt'))
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly productStatsService: ProductStatsService,
+  ) {}
 
   @Get()
   @ApiGetProducts()
@@ -339,5 +348,108 @@ export class ProductController {
     @Param('badgeId') badgeId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     return this.productService.deleteProductBadge({ productId, badgeId });
+  }
+
+  // ============== Product Stats Admin Routes ==============
+
+  @Post('stats/sync-all')
+  @ApiOperation({
+    summary: 'Sync all product stats',
+    description:
+      'Recalculate and update stats for all active products. Use for initial migration or periodic sync.',
+  })
+  @ApiResponse({ status: 200, description: 'Stats synced successfully' })
+  async syncAllProductStats(): Promise<
+    IBeforeTransformResponseType<{ synced: number }>
+  > {
+    const result = await this.productStatsService.syncAllProductStats();
+    return {
+      type: 'response',
+      message: `Successfully synced stats for ${result.synced} products`,
+      data: result,
+    };
+  }
+
+  @Post(':id/stats/sync')
+  @ApiOperation({
+    summary: 'Sync stats for a single product',
+    description: 'Recalculate and update stats for a specific product.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Product stats synced successfully',
+  })
+  async syncProductStats(
+    @Param('id') productId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    await this.productStatsService.updateProductStats(productId);
+    return {
+      type: 'response',
+      message: 'Product stats synced successfully',
+      data: { message: 'Product stats synced successfully' },
+    };
+  }
+
+  @Get(':id/stats')
+  @ApiOperation({
+    summary: 'Get stats for a product',
+    description: 'Retrieve pre-calculated stats for a specific product.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Product stats retrieved successfully',
+  })
+  async getProductStats(
+    @Param('id') productId: string,
+  ): Promise<IBeforeTransformResponseType<any>> {
+    const stats = await this.productStatsService.getProductStats(productId);
+    return {
+      type: 'response',
+      message: 'Product stats retrieved successfully',
+      data: stats,
+    };
+  }
+}
+
+/**
+ * Public Product Controller
+ * Handles public product endpoints that don't require authentication
+ * Used by the frontend to display products on public pages
+ */
+@ApiTags('Public Products')
+@Controller('product')
+export class PublicProductController {
+  constructor(
+    private readonly productService: ProductService,
+    private readonly productStatsService: ProductStatsService,
+  ) {}
+
+  /**
+   * Get hot/best-selling products
+   * This endpoint is public and doesn't require authentication
+   */
+  @Get('public/hot')
+  @ApiGetHotProducts()
+  getHotProducts(
+    @Query() query: HotProductsQueryDto,
+  ): Promise<IBeforeTransformResponseType<ProductResponseDto[]>> {
+    return this.productService.getHotProducts(query);
+  }
+
+  /**
+   * Track product view
+   * Call this when user visits product detail page
+   */
+  @Post('public/:id/view')
+  @ApiTrackProductView()
+  async trackProductView(
+    @Param('id') productId: string,
+  ): Promise<IBeforeTransformResponseType<TrackProductViewResponseDto>> {
+    await this.productStatsService.incrementViewCount(productId);
+    return {
+      type: 'response',
+      message: 'Product view tracked successfully',
+      data: { message: 'Product view tracked successfully' },
+    };
   }
 }

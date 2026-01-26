@@ -23,6 +23,7 @@ export class FileValidationInterceptor implements NestInterceptor {
       type: MediaType;
       maxSize?: number;
       validateSignature?: boolean;
+      isRequired?: boolean;
     },
   ) {}
 
@@ -33,7 +34,7 @@ export class FileValidationInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest();
     const file: Express.Multer.File = request.file;
 
-    if (!file) {
+    if (!file && this.options.isRequired) {
       throw new BusinessException(
         'No file uploaded',
         ERROR_CODES.INVALID_FILE_TYPE,
@@ -53,6 +54,7 @@ export class FileValidationInterceptor implements NestInterceptor {
       allowedTypes: isImage ? 'image' : isVideo ? 'video' : 'both',
       maxSize,
       validateSignature: this.options.validateSignature ?? true,
+      isRequired: this.options.isRequired ?? false,
     });
 
     return next.handle();

@@ -62,10 +62,24 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.REVIEW_NOT_OWNED]:
     'You do not have permission to modify this review',
 
+  // Banner
+  [ERROR_CODES.BANNER_GROUP_NOT_FOUND]: 'Banner group not found',
+  [ERROR_CODES.BANNER_GROUP_SLUG_EXISTS]:
+    'Banner group with this slug already exists',
+  [ERROR_CODES.BANNER_NOT_FOUND]: 'Banner not found',
+  [ERROR_CODES.NO_ACTIVE_BANNER_GROUP]: 'No active banner group found',
+
   // Referral
   [ERROR_CODES.REFERRAL_NOT_FOUND]: 'Referral not found',
   [ERROR_CODES.REFERRAL_USER_ALREADY_EXISTS]: 'Referral user already exists',
   [ERROR_CODES.REFERRAL_STATS_NOT_FOUND]: 'Referral stats not found',
+
+  // Mail
+  [ERROR_CODES.MAIL_CONFIGURATION_ERROR]: 'Mail configuration error',
+  [ERROR_CODES.MAIL_SEND_FAILED]: 'Failed to send email',
+  [ERROR_CODES.MAIL_TEMPLATE_NOT_FOUND]: 'Email template not found',
+  [ERROR_CODES.MAIL_INVALID_EMAIL]: 'Invalid email address',
+  [ERROR_CODES.MAIL_SMTP_CONNECTION_FAILED]: 'SMTP connection failed',
 
   // User Management
   [ERROR_CODES.USER_NOT_FOUND]: 'User not found',

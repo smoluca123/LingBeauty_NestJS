@@ -1,42 +1,29 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
+import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
+import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 
-export class ReviewImageMediaDto {
-  @ApiProperty({ example: 'uuid-media-id' })
-  id: string;
-
-  @ApiProperty({ example: 'https://example.com/image.jpg' })
-  url: string;
-
-  @ApiProperty({ example: 'image/jpeg' })
-  mimetype: string;
-}
-
+// Match reviewImageSelect from review-select.ts
 export class ReviewImageDto {
   @ApiProperty({ example: 'uuid-review-image-id' })
   id: string;
 
+  @ApiProperty({ example: 'uuid-review-id' })
+  reviewId: string;
+
+  @ApiProperty({ example: 'uuid-media-id' })
+  mediaId: string;
+
   @ApiPropertyOptional({ example: 'Review image', nullable: true })
   alt: string | null;
 
-  @ApiProperty({ type: ReviewImageMediaDto })
-  @Type(() => ReviewImageMediaDto)
-  media: ReviewImageMediaDto;
-}
+  @ApiProperty()
+  createdAt: Date;
 
-export class ReviewUserDto {
-  @ApiProperty({ example: 'uuid-user-id' })
-  id: string;
-
-  @ApiProperty({ example: 'John Doe' })
-  fullName: string;
-
-  @ApiPropertyOptional({
-    example: 'https://example.com/avatar.jpg',
-    nullable: true,
-  })
-  avatarUrl: string | null;
+  @ApiProperty({ type: MediaResponseDto })
+  @Type(() => MediaResponseDto)
+  media: MediaResponseDto;
 }
 
 export class ReviewProductDto {
@@ -50,6 +37,7 @@ export class ReviewProductDto {
   slug: string;
 }
 
+// Match reviewSelect from review-select.ts
 export class ReviewResponseDto extends BaseResponseDto {
   @ApiProperty({ example: 'uuid-product-id' })
   productId: string;
@@ -78,15 +66,16 @@ export class ReviewResponseDto extends BaseResponseDto {
   @ApiProperty({ example: 10 })
   helpfulCount: number;
 
-  @ApiProperty({ type: ReviewUserDto })
-  @Type(() => ReviewUserDto)
-  user: ReviewUserDto;
+  @ApiProperty({ type: UserResponseDto })
+  @Type(() => UserResponseDto)
+  user: UserResponseDto;
 
   @ApiProperty({ type: [ReviewImageDto] })
   @Type(() => ReviewImageDto)
-  images: ReviewImageDto[];
+  reviewImages: ReviewImageDto[];
 }
 
+// Match reviewWithProductSelect from review-select.ts
 export class ReviewWithProductResponseDto extends ReviewResponseDto {
   @ApiProperty({ type: ReviewProductDto })
   @Type(() => ReviewProductDto)

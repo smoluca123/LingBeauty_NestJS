@@ -8,12 +8,24 @@ import {
   Delete,
   Query,
   UseGuards,
+  UseInterceptors,
   UploadedFile,
+  UploadedFiles,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiConsumes,
+  ApiTags,
+  ApiOperation,
+  ApiBody,
+} from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { ReviewService, GetReviewsParams } from './review.service';
-import { CreateReviewDto } from './dto/create-review.dto';
+import {
+  CreateReviewDto,
+  CreateReviewWithImagesDto,
+} from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import {
   AddReviewImageDto,
@@ -31,6 +43,7 @@ import {
   ApiAddReviewImage,
   ApiApproveReview,
   ApiCreateReview,
+  ApiCreateReviewWithImages,
   ApiDeleteReview,
   ApiDeleteReviewImage,
   ApiGetReview,
@@ -97,6 +110,25 @@ export class ReviewController {
     return this.reviewService.createReview(
       decodedAccessToken.userId,
       createReviewDto,
+    );
+  }
+
+  /**
+   * Create review with images upload (multipart/form-data)
+   * Uses ApiProtectedAuthOperation for authentication
+   */
+  @Post('with-images')
+  @UseInterceptors(FilesInterceptor('images', 5))
+  @ApiCreateReviewWithImages()
+  createReviewWithImages(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Body() createReviewDto: CreateReviewWithImagesDto,
+    @UploadedFiles() files: Express.Multer.File[],
+  ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
+    return this.reviewService.createReviewWithImages(
+      decodedAccessToken.userId,
+      createReviewDto,
+      files || [],
     );
   }
 

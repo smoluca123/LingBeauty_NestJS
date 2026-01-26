@@ -14,6 +14,18 @@ import { UpdateAddressDto } from 'src/modules/user/dto/update-address.dto';
 import { AddressResponseDto } from 'src/modules/user/dto/address-response.dto';
 import { FileValidationInterceptor } from 'src/modules/storage/interceptors/file-validation.interceptor';
 import { MediaType } from 'prisma/generated/prisma';
+import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
+
+export function ApiGetMe() {
+  return applyDecorators(
+    ApiProtectedAuthOperation({ summary: 'Get current user profile' }),
+    ApiResponse({
+      status: 200,
+      description: 'Current user profile',
+      type: UserResponseDto,
+    }),
+  );
+}
 
 export function ApiUploadAvatar() {
   return applyDecorators(

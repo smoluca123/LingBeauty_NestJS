@@ -57,7 +57,9 @@ export class BrandService {
         where: whereQuery,
       });
 
-      const brandResponse = brands.map((brand) => this.mapBrandEntity(brand));
+      const brandResponse = brands.map((brand) =>
+        toResponseDto(BrandResponseDto, brand),
+      );
 
       return {
         type: 'pagination',
@@ -110,22 +112,18 @@ export class BrandService {
 
       const slug = await this.ensureUniqueSlug(createBrandDto.name);
 
+      const processedDto = await processDataObject(createBrandDto);
+
       const brand = await this.prismaService.brand.create({
         data: {
-          name: createBrandDto.name,
+          ...processedDto,
           slug,
-          description: createBrandDto.description,
-          website: createBrandDto.website,
-          isActive:
-            createBrandDto.isActive === undefined
-              ? true
-              : createBrandDto.isActive,
           logoMediaId,
         },
         select: brandSelect,
       });
 
-      const brandResponse = this.mapBrandEntity(brand);
+      const brandResponse = toResponseDto(BrandResponseDto, brand);
 
       return {
         type: 'response',
@@ -161,7 +159,7 @@ export class BrandService {
         );
       }
 
-      const brandResponse = this.mapBrandEntity(brand);
+      const brandResponse = toResponseDto(BrandResponseDto, brand);
 
       return {
         type: 'response',
@@ -232,7 +230,7 @@ export class BrandService {
         select: brandSelect,
       });
 
-      const responseDto = this.mapBrandEntity(updated);
+      const responseDto = toResponseDto(BrandResponseDto, updated);
 
       return {
         type: 'response',
@@ -288,7 +286,7 @@ export class BrandService {
       }
 
       const message = 'Brand deleted successfully';
-      const responseDto = this.mapBrandEntity(existing);
+      const responseDto = toResponseDto(BrandResponseDto, existing);
       return {
         type: 'response',
         message,
@@ -304,40 +302,6 @@ export class BrandService {
         ERROR_CODES.DATABASE_ERROR,
       );
     }
-  }
-
-  private mapBrandEntity(brand: BrandSelect): BrandResponseDto {
-    const plain: any = {
-      id: brand.id,
-      createdAt: brand.createdAt,
-      updatedAt: brand.updatedAt,
-      name: brand.name,
-      slug: brand.slug,
-      description: brand.description,
-      website: brand.website,
-      isActive: brand.isActive,
-      logoMediaId: brand.logoMediaId,
-      logoMedia: brand.logoMedia
-        ? this.mapMediaToUploadDto(brand.logoMedia)
-        : undefined,
-    };
-
-    return toResponseDto(BrandResponseDto, plain);
-  }
-
-  private mapMediaToUploadDto(media: any): MediaResponseDto {
-    // const plain: any = {
-    //   mediaId: media.id,
-    //   url: media.url,
-    //   key: media.key,
-    //   size: media.size,
-    //   mimetype: media.mimetype,
-    //   filename: media.filename,
-    //   type: media.type,
-    // };
-    console.log('media', media);
-
-    return toResponseDto(MediaResponseDto, media);
   }
 
   private async ensureUniqueSlug(

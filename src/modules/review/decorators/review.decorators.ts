@@ -9,6 +9,7 @@ import {
 } from '@nestjs/swagger';
 import {
   ApiProtectedAuthOperation,
+  ApiPublicOperation,
   ApiRoleProtectedOperation,
 } from 'src/decorators/api.decorators';
 import { RolesLevel } from 'src/libs/types/interfaces/utils.interfaces';
@@ -29,7 +30,7 @@ import { MediaType } from 'prisma/generated/prisma/client';
 
 export const ApiGetReviews = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiPublicOperation({
       summary: 'Get product reviews',
       description: 'Retrieve reviews with filtering and pagination',
     }),
@@ -114,6 +115,63 @@ export const ApiCreateReview = () =>
     }),
     ApiBody({
       type: CreateReviewDto,
+    }),
+    ApiResponse({
+      status: 201,
+      type: ReviewResponseDto,
+    }),
+  );
+
+export const ApiCreateReviewWithImages = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Create review with images',
+      description:
+        'Create a new product review with up to 5 images uploaded directly. Images are validated for type and size.',
+    }),
+    UseInterceptors(
+      new FileValidationInterceptor({
+        type: MediaType.REVIEW_IMAGE,
+        isRequired: false,
+      }),
+    ),
+    ApiConsumes('multipart/form-data'),
+    ApiBody({
+      schema: {
+        type: 'object',
+        required: ['productId', 'rating'],
+        properties: {
+          productId: {
+            type: 'string',
+            format: 'uuid',
+            description: 'Product ID to review',
+          },
+          rating: {
+            type: 'integer',
+            minimum: 1,
+            maximum: 5,
+            description: 'Rating from 1 to 5',
+          },
+          title: {
+            type: 'string',
+            maxLength: 255,
+            description: 'Review title (optional)',
+          },
+          comment: {
+            type: 'string',
+            description: 'Review comment (optional)',
+          },
+          images: {
+            type: 'array',
+            items: {
+              type: 'string',
+              format: 'binary',
+            },
+            maxItems: 5,
+            description: 'Review images (max 5, jpeg/png/webp/gif)',
+          },
+        },
+      },
     }),
     ApiResponse({
       status: 201,

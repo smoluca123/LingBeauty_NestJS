@@ -6,6 +6,7 @@ enum MediaType {
   AVATAR
   CATEGORY_IMAGE
   BRAND_LOGO
+  BANNER_IMAGE
 }
 
 model Media {
@@ -27,6 +28,7 @@ model Media {
   userAvatars   User[]         @relation("UserAvatar")
   categories    Category[]     @relation("CategoryImage")
   brands        Brand[]        @relation("BrandLogo")
+  banners       Banner[]       @relation("BannerImage")
 
   @@index([type])
   @@index([uploadedById])

@@ -1,0 +1,145 @@
+<html lang='vi'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Xác nhận đơn hàng #{{orderNumber}}</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+      }
+      .header {
+        background: #27ae60;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .body {
+        padding: 30px;
+      }
+      .footer {
+        background: #ecf0f1;
+        padding: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #7f8c8d;
+      }
+      .order-info {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+      .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      .order-table th,
+      .order-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .order-table th {
+        background: #f8f9fa;
+      }
+      .total-row {
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: #27ae60;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <h1>✓ Đặt hàng thành công!</h1>
+      </div>
+      <div class='body'>
+        <h2>Xin chào {{userName}},</h2>
+        <p>Cảm ơn bạn đã đặt hàng tại
+          <strong>{{companyName}}</strong>. Đơn hàng của bạn đã được xác nhận.</p>
+
+        <div class='order-info'>
+          <p><strong>Mã đơn hàng:</strong> #{{orderNumber}}</p>
+          <p><strong>Ngày đặt:</strong> {{orderDate}}</p>
+          {{#if shippingAddress}}
+            <p><strong>Địa chỉ giao hàng:</strong> {{shippingAddress}}</p>
+          {{/if}}
+        </div>
+
+        <h3>Chi tiết đơn hàng:</h3>
+        <table class='order-table'>
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Số lượng</th>
+              <th>Đơn giá</th>
+              <th>Thành tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each items}}
+              <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.quantity}}</td>
+                <td>{{formatCurrency this.price}}</td>
+                <td>{{formatCurrency this.subtotal}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+          <tfoot>
+            {{#if shippingFee}}
+              <tr>
+                <td colspan='3' style='text-align: right;'>Phí vận chuyển:</td>
+                <td>{{formatCurrency shippingFee}}</td>
+              </tr>
+            {{/if}}
+            {{#if discount}}
+              <tr>
+                <td colspan='3' style='text-align: right;'>Giảm giá:</td>
+                <td>-{{formatCurrency discount}}</td>
+              </tr>
+            {{/if}}
+            <tr class='total-row'>
+              <td colspan='3' style='text-align: right;'>Tổng cộng:</td>
+              <td>{{formatCurrency total}}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        {{#if trackingLink}}
+          <p style='text-align: center;'>
+            <a href='{{trackingLink}}' class='btn'>Theo dõi đơn hàng</a>
+          </p>
+        {{/if}}
+
+        <p>Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi.</p>
+        <p>Trân trọng,<br />Đội ngũ {{companyName}}</p>
+      </div>
+      <div class='footer'>
+        <p>© {{year}} {{companyName}}. All rights reserved.</p>
+        <p>Email này được gửi tự động, vui lòng không trả lời trực tiếp.</p>
+      </div>
+    </div>
+  </body>
+</html>
