@@ -268,6 +268,7 @@ export class StorageService {
       [MediaType.AVATAR]: 'avatars',
       [MediaType.CATEGORY_IMAGE]: 'categories',
       [MediaType.BRAND_LOGO]: 'brands',
+      [MediaType.BANNER_IMAGE]: 'banners/images',
     };
 
     const folder = typeMap[type] || 'misc';

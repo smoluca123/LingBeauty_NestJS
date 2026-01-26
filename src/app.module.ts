@@ -19,6 +19,7 @@ import { ProductModule } from 'src/modules/product/product.module';
 import { CategoryModule } from 'src/modules/category/category.module';
 import { BrandModule } from 'src/modules/brand/brand.module';
 import { ReviewModule } from 'src/modules/review/review.module';
+import { BannerModule } from 'src/modules/banner/banner.module';
 import { MailModule } from 'src/modules/mail';
 
 @Module({
@@ -61,6 +62,7 @@ import { MailModule } from 'src/modules/mail';
     ProductModule,
     BrandModule,
     ReviewModule,
+    BannerModule,
     StorageModule,
     SystemModule,
     MailModule.forRootAsync({

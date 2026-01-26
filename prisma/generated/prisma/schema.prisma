@@ -96,6 +96,87 @@ model CommissionRate {
   @@map("commission_rates")
 }
 
+enum BannerType {
+  TEXT // Banner with text content (badge, title, description, etc)
+  IMAGE // Banner with only image
+}
+
+enum BannerPosition {
+  MAIN_CAROUSEL // Main carousel banner (left side)
+  SIDE_TOP // Top side banner (right side)
+  SIDE_BOTTOM // Bottom side banner (right side)
+}
+
+model BannerGroup {
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(255)
+  slug        String    @unique @db.VarChar(255)
+  description String?   @db.Text
+  isActive    Boolean   @default(true) @map("is_active")
+  startDate   DateTime? @map("start_date")
+  endDate     DateTime? @map("end_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  banners BannerGroupMapping[]
+
+  @@index([slug])
+  @@index([isActive])
+  @@map("banner_groups")
+}
+
+model Banner {
+  id       String         @id @default(uuid())
+  type     BannerType     @default(TEXT)
+  position BannerPosition @default(MAIN_CAROUSEL)
+
+  // Text content (for TEXT type)
+  badge       String? @db.VarChar(100)
+  title       String? @db.VarChar(255)
+  description String? @db.Text
+  highlight   String? @db.VarChar(255)
+  ctaText     String? @map("cta_text") @db.VarChar(100)
+  ctaLink     String? @map("cta_link") @db.VarChar(500)
+  subLabel    String? @map("sub_label") @db.VarChar(255)
+
+  // Styling - Gradient colors
+  gradientFrom String? @map("gradient_from") @db.VarChar(50)
+  gradientTo   String? @map("gradient_to") @db.VarChar(50)
+
+  // Image (for IMAGE type or as background)
+  imageMediaId String? @map("image_media_id")
+
+  // Settings
+  sortOrder Int      @default(0) @map("sort_order")
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  groups     BannerGroupMapping[]
+  imageMedia Media?               @relation("BannerImage", fields: [imageMediaId], references: [id], onDelete: SetNull)
+
+  @@index([position])
+  @@index([isActive])
+  @@map("banners")
+}
+
+// Junction table for many-to-many relationship
+model BannerGroupMapping {
+  id            String   @id @default(uuid())
+  bannerId      String   @map("banner_id")
+  bannerGroupId String   @map("banner_group_id")
+  sortOrder     Int      @default(0) @map("sort_order")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  banner      Banner      @relation(fields: [bannerId], references: [id], onDelete: Cascade)
+  bannerGroup BannerGroup @relation(fields: [bannerGroupId], references: [id], onDelete: Cascade)
+
+  @@unique([bannerId, bannerGroupId])
+  @@index([bannerId])
+  @@index([bannerGroupId])
+  @@map("banner_group_mappings")
+}
+
 // Email Verification Log - Audit trail for email verification activities
 
 model EmailVerificationLog {
@@ -206,6 +287,7 @@ enum MediaType {
   AVATAR
   CATEGORY_IMAGE
   BRAND_LOGO
+  BANNER_IMAGE
 }
 
 model Media {
@@ -227,6 +309,7 @@ model Media {
   userAvatars   User[]         @relation("UserAvatar")
   categories    Category[]     @relation("CategoryImage")
   brands        Brand[]        @relation("BrandLogo")
+  banners       Banner[]       @relation("BannerImage")
 
   @@index([type])
   @@index([uploadedById])
@@ -553,14 +636,19 @@ model ProductImage {
   @@map("product_images")
 }
 
+enum ProductInventoryDisplayStatus {
+  IN_STOCK
+  OUT_OF_STOCK
+}
+
 model ProductInventory {
-  id                String   @id @default(uuid())
-  variantId         String   @unique @map("variant_id")
-  quantity          Int      @default(0)
-  displayStatus     String   @default("in_stock") @map("display_status") @db.VarChar(50)
-  lowStockThreshold Int      @default(10) @map("low_stock_threshold")
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
+  id                String                        @id @default(uuid())
+  variantId         String                        @unique @map("variant_id")
+  quantity          Int                           @default(0)
+  displayStatus     ProductInventoryDisplayStatus @default(IN_STOCK) @map("display_status")
+  lowStockThreshold Int                           @default(10) @map("low_stock_threshold")
+  createdAt         DateTime                      @default(now()) @map("created_at")
+  updatedAt         DateTime                      @updatedAt @map("updated_at")
 
   variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
 

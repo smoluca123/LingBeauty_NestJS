@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { MediaType, Prisma } from 'prisma/generated/prisma/client';
+import {
+  MediaType,
+  Prisma,
+  ProductInventoryDisplayStatus,
+} from 'prisma/generated/prisma/client';
 import { StorageService } from 'src/modules/storage/storage.service';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
@@ -808,8 +812,8 @@ export class ProductService {
                       lowStockThreshold: variant.lowStockThreshold ?? 10,
                       displayStatus:
                         (variant.quantity ?? 0) > 0
-                          ? 'in_stock'
-                          : 'out_of_stock',
+                          ? ProductInventoryDisplayStatus.IN_STOCK
+                          : ProductInventoryDisplayStatus.OUT_OF_STOCK,
                     },
                   },
                 })),
@@ -992,7 +996,9 @@ export class ProductService {
                   quantity: variant.quantity ?? 0,
                   lowStockThreshold: variant.lowStockThreshold ?? 10,
                   displayStatus:
-                    (variant.quantity ?? 0) > 0 ? 'in_stock' : 'out_of_stock',
+                    (variant.quantity ?? 0) > 0
+                      ? ProductInventoryDisplayStatus.IN_STOCK
+                      : ProductInventoryDisplayStatus.OUT_OF_STOCK,
                 },
               },
             })),
@@ -1651,7 +1657,10 @@ export class ProductService {
             create: {
               quantity,
               lowStockThreshold,
-              displayStatus: (quantity ?? 0) > 0 ? 'in_stock' : 'out_of_stock',
+              displayStatus:
+                (quantity ?? 0) > 0
+                  ? ProductInventoryDisplayStatus.IN_STOCK
+                  : ProductInventoryDisplayStatus.OUT_OF_STOCK,
             },
           },
         },
@@ -1745,12 +1754,17 @@ export class ProductService {
             quantity: dto.quantity ?? 0,
             lowStockThreshold: dto.lowStockThreshold ?? 10,
             displayStatus:
-              (dto.quantity ?? 0) > 0 ? 'in_stock' : 'out_of_stock',
+              (dto.quantity ?? 0) > 0
+                ? ProductInventoryDisplayStatus.IN_STOCK
+                : ProductInventoryDisplayStatus.OUT_OF_STOCK,
           },
           update: {
             ...(dto.quantity !== undefined && {
               quantity: dto.quantity,
-              displayStatus: dto.quantity > 0 ? 'in_stock' : 'out_of_stock',
+              displayStatus:
+                dto.quantity > 0
+                  ? ProductInventoryDisplayStatus.IN_STOCK
+                  : ProductInventoryDisplayStatus.OUT_OF_STOCK,
             }),
             ...(dto.lowStockThreshold !== undefined && {
               lowStockThreshold: dto.lowStockThreshold,

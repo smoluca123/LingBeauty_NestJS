@@ -48,7 +48,11 @@ import {
   ApiUpdateProductVariant,
   ApiUploadProductImage,
   ApiUploadProductVideo,
+  ApiGetHotProducts,
+  ApiTrackProductView,
 } from './decorators/product.decorators';
+import { HotProductsQueryDto } from './dto/hot-products-query.dto';
+import { TrackProductViewResponseDto } from './dto/public-product.dto';
 import {
   AddProductImageDto,
   ProductImageResponseDto,
@@ -403,6 +407,49 @@ export class ProductController {
       type: 'response',
       message: 'Product stats retrieved successfully',
       data: stats,
+    };
+  }
+}
+
+/**
+ * Public Product Controller
+ * Handles public product endpoints that don't require authentication
+ * Used by the frontend to display products on public pages
+ */
+@ApiTags('Public Products')
+@Controller('product')
+export class PublicProductController {
+  constructor(
+    private readonly productService: ProductService,
+    private readonly productStatsService: ProductStatsService,
+  ) {}
+
+  /**
+   * Get hot/best-selling products
+   * This endpoint is public and doesn't require authentication
+   */
+  @Get('public/hot')
+  @ApiGetHotProducts()
+  getHotProducts(
+    @Query() query: HotProductsQueryDto,
+  ): Promise<IBeforeTransformResponseType<ProductResponseDto[]>> {
+    return this.productService.getHotProducts(query);
+  }
+
+  /**
+   * Track product view
+   * Call this when user visits product detail page
+   */
+  @Post('public/:id/view')
+  @ApiTrackProductView()
+  async trackProductView(
+    @Param('id') productId: string,
+  ): Promise<IBeforeTransformResponseType<TrackProductViewResponseDto>> {
+    await this.productStatsService.incrementViewCount(productId);
+    return {
+      type: 'response',
+      message: 'Product view tracked successfully',
+      data: { message: 'Product view tracked successfully' },
     };
   }
 }

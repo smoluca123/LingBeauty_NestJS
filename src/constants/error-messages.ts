@@ -62,6 +62,13 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.REVIEW_NOT_OWNED]:
     'You do not have permission to modify this review',
 
+  // Banner
+  [ERROR_CODES.BANNER_GROUP_NOT_FOUND]: 'Banner group not found',
+  [ERROR_CODES.BANNER_GROUP_SLUG_EXISTS]:
+    'Banner group with this slug already exists',
+  [ERROR_CODES.BANNER_NOT_FOUND]: 'Banner not found',
+  [ERROR_CODES.NO_ACTIVE_BANNER_GROUP]: 'No active banner group found',
+
   // Referral
   [ERROR_CODES.REFERRAL_NOT_FOUND]: 'Referral not found',
   [ERROR_CODES.REFERRAL_USER_ALREADY_EXISTS]: 'Referral user already exists',

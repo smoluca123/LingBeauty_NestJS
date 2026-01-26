@@ -3,120 +3,18 @@
 
  Source Server         : lingbeauty
  Source Server Type    : PostgreSQL
- Source Server Version : 170005 (170005)
+ Source Server Version : 170006 (170006)
  Source Host           : primary.lingbeauty--qjr8p8k7zs4l.addon.code.run:29615
  Source Catalog        : _ad28d54ceb16
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
- Target Server Version : 170005 (170005)
+ Target Server Version : 170006 (170006)
  File Encoding         : 65001
 
- Date: 29/11/2025 02:56:41
+ Date: 07/01/2026 16:57:16
 */
 
-
--- ----------------------------
--- Type structure for CateGoryType
--- ----------------------------
-DROP TYPE IF EXISTS "public"."CateGoryType";
-CREATE TYPE "public"."CateGoryType" AS ENUM (
-  'BRAND',
-  'CATEGORY'
-);
-ALTER TYPE "public"."CateGoryType" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for FlashSaleStatus
--- ----------------------------
-DROP TYPE IF EXISTS "public"."FlashSaleStatus";
-CREATE TYPE "public"."FlashSaleStatus" AS ENUM (
-  'UPCOMING',
-  'ACTIVE',
-  'ENDED',
-  'CANCELLED'
-);
-ALTER TYPE "public"."FlashSaleStatus" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for MediaType
--- ----------------------------
-DROP TYPE IF EXISTS "public"."MediaType";
-CREATE TYPE "public"."MediaType" AS ENUM (
-  'PRODUCT_IMAGE',
-  'PRODUCT_VIDEO',
-  'REVIEW_IMAGE',
-  'REVIEW_VIDEO',
-  'AVATAR',
-  'CATEGORY_IMAGE',
-  'BRAND_LOGO'
-);
-ALTER TYPE "public"."MediaType" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for OrderStatus
--- ----------------------------
-DROP TYPE IF EXISTS "public"."OrderStatus";
-CREATE TYPE "public"."OrderStatus" AS ENUM (
-  'PENDING',
-  'CONFIRMED',
-  'PROCESSING',
-  'SHIPPED',
-  'DELIVERED',
-  'CANCELLED',
-  'REFUNDED'
-);
-ALTER TYPE "public"."OrderStatus" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for PaymentMethod
--- ----------------------------
-DROP TYPE IF EXISTS "public"."PaymentMethod";
-CREATE TYPE "public"."PaymentMethod" AS ENUM (
-  'COD',
-  'BANK_TRANSFER',
-  'CREDIT_CARD',
-  'E_WALLET',
-  'MOMO',
-  'ZALOPAY'
-);
-ALTER TYPE "public"."PaymentMethod" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for PaymentStatus
--- ----------------------------
-DROP TYPE IF EXISTS "public"."PaymentStatus";
-CREATE TYPE "public"."PaymentStatus" AS ENUM (
-  'PENDING',
-  'PROCESSING',
-  'COMPLETED',
-  'FAILED',
-  'REFUNDED'
-);
-ALTER TYPE "public"."PaymentStatus" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for ProductBadgeType
--- ----------------------------
-DROP TYPE IF EXISTS "public"."ProductBadgeType";
-CREATE TYPE "public"."ProductBadgeType" AS ENUM (
-  'NEW',
-  'SALE',
-  'BEST_SELLER',
-  'FREESHIPPING'
-);
-ALTER TYPE "public"."ProductBadgeType" OWNER TO "_f0b6369f8abe5380";
-
--- ----------------------------
--- Type structure for ProductBadgeVariant
--- ----------------------------
-DROP TYPE IF EXISTS "public"."ProductBadgeVariant";
-CREATE TYPE "public"."ProductBadgeVariant" AS ENUM (
-  'PRIMARY',
-  'INFO',
-  'NEUTRAL'
-);
-ALTER TYPE "public"."ProductBadgeVariant" OWNER TO "_f0b6369f8abe5380";
 
 -- ----------------------------
 -- Table structure for addresses
@@ -230,6 +128,63 @@ CREATE TABLE "public"."auth_codes" (
 INSERT INTO "public"."auth_codes" VALUES ('b7893e2b-5b76-48f8-82c8-cc6b10f7a2eb', 'SMOTeam', 3, '2025-11-04 04:16:30', '2025-11-04 04:16:32');
 
 -- ----------------------------
+-- Table structure for banner_groups
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."banner_groups";
+CREATE TABLE "public"."banner_groups" (
+  "id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "name" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "slug" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "description" text COLLATE "pg_catalog"."default",
+  "is_active" bool NOT NULL DEFAULT true,
+  "start_date" timestamp(3),
+  "end_date" timestamp(3),
+  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(3) NOT NULL
+)
+;
+
+-- ----------------------------
+-- Records of banner_groups
+-- ----------------------------
+INSERT INTO "public"."banner_groups" VALUES ('0a219a4a-68d1-4bbe-b503-437ea8a1dc46', 'Homepage Main Banners', 'homepage-main', 'Main banner group for homepage display', 't', NULL, NULL, '2026-01-07 09:43:16.522', '2026-01-07 09:43:16.522');
+
+-- ----------------------------
+-- Table structure for banners
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."banners";
+CREATE TABLE "public"."banners" (
+  "id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "group_id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "type" "public"."BannerType" NOT NULL DEFAULT 'TEXT'::"BannerType",
+  "position" "public"."BannerPosition" NOT NULL DEFAULT 'MAIN_CAROUSEL'::"BannerPosition",
+  "badge" varchar(100) COLLATE "pg_catalog"."default",
+  "title" varchar(255) COLLATE "pg_catalog"."default",
+  "description" text COLLATE "pg_catalog"."default",
+  "highlight" varchar(255) COLLATE "pg_catalog"."default",
+  "cta_text" varchar(100) COLLATE "pg_catalog"."default",
+  "cta_link" varchar(500) COLLATE "pg_catalog"."default",
+  "sub_label" varchar(255) COLLATE "pg_catalog"."default",
+  "image_media_id" text COLLATE "pg_catalog"."default",
+  "sort_order" int4 NOT NULL DEFAULT 0,
+  "is_active" bool NOT NULL DEFAULT true,
+  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(3) NOT NULL,
+  "gradient_from" varchar(50) COLLATE "pg_catalog"."default",
+  "gradient_to" varchar(50) COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Records of banners
+-- ----------------------------
+INSERT INTO "public"."banners" VALUES ('8ea486b6-6d7c-489d-a723-84884277d97e', '0a219a4a-68d1-4bbe-b503-437ea8a1dc46', 'TEXT', 'MAIN_CAROUSEL', 'Beauty Box', 'FLASH SALE RINH QUÀ LINH ĐÌNH', 'Áp dụng trên website và mua online nhận hàng nhanh tại cửa hàng.', 'Mua 1 tặng 3', 'Mua ngay', '/products', 'Số lượng quà tặng có hạn.', NULL, 1, 't', '2026-01-07 09:43:16.572', '2026-01-07 09:43:16.572', '#ffe4f0', '#fff5fb');
+INSERT INTO "public"."banners" VALUES ('e77c5661-58cb-4a83-8634-a7aeca84cfed', '0a219a4a-68d1-4bbe-b503-437ea8a1dc46', 'TEXT', 'MAIN_CAROUSEL', 'Ưu đãi hôm nay', 'Giảm đến 50% sản phẩm chăm sóc da', 'Chọn ngay routine phù hợp cho làn da của bạn với deal siêu hời.', 'Giảm đến -50%', 'Khám phá ngay', '/products', 'Áp dụng cho sản phẩm được gắn nhãn Flash Sale.', NULL, 2, 't', '2026-01-07 09:43:16.621', '2026-01-07 09:43:16.621', '#e0f2ff', '#ffffff');
+INSERT INTO "public"."banners" VALUES ('3475cb56-4b4f-4c02-a516-6c98002fbaa3', '0a219a4a-68d1-4bbe-b503-437ea8a1dc46', 'TEXT', 'MAIN_CAROUSEL', 'Hội viên mới', 'Tặng voucher 50K cho đơn đầu tiên', 'Đăng ký tài khoản để nhận thêm nhiều ưu đãi cực dễ thương.', 'Voucher 50K', 'Đăng ký ngay', '/auth/register', 'Áp dụng cho đơn từ 299K.', NULL, 3, 't', '2026-01-07 09:43:16.667', '2026-01-07 09:43:16.667', '#fff4e0', '#ffffff');
+INSERT INTO "public"."banners" VALUES ('bfabf64f-dc08-49e6-ab29-9cb764e03934', '0a219a4a-68d1-4bbe-b503-437ea8a1dc46', 'TEXT', 'SIDE_TOP', 'Sạch sâu nhưng vẫn dịu nhẹ', 'Combo làm sạch da 100%', 'Làm sạch nhiều lớp makeup, không khô căng.', 'Chỉ từ 58K', 'Xem ngay', '/products', NULL, NULL, 1, 't', '2026-01-07 09:43:16.715', '2026-01-07 09:43:16.715', '#e5f6ff', '#ffffff');
+INSERT INTO "public"."banners" VALUES ('998849fe-26d9-44c8-8d13-848071e82213', '0a219a4a-68d1-4bbe-b503-437ea8a1dc46', 'TEXT', 'SIDE_BOTTOM', 'Độc quyền tại Beauty Box', 'Kem nền Mesh Blur mịn lì', 'Hiệu ứng blur mờ mịn, che phủ cho lớp nền tự nhiên.', 'Mua kèm nhận quà tặng', 'Xem ngay', '/products', NULL, NULL, 2, 't', '2026-01-07 09:43:16.766', '2026-01-07 09:43:16.766', '#f4e6ff', '#ffffff');
+
+-- ----------------------------
 -- Table structure for brands
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."brands";
@@ -252,6 +207,7 @@ CREATE TABLE "public"."brands" (
 INSERT INTO "public"."brands" VALUES ('cc214951-a62b-4650-b06a-11d3848bcb03', 'AHC', 'ahc', 'Thương hiệu AHC', NULL, 't', '2025-11-20 15:28:56.617', '2025-11-20 15:28:56.617', '775e73e3-c1d3-4d69-971e-143980ffec74');
 INSERT INTO "public"."brands" VALUES ('e6f24ef7-0eff-467e-93b6-14b51af43723', 'CLIO', 'clio', 'Thương hiệu CLIO', NULL, 't', '2025-11-20 15:29:58.904', '2025-11-20 15:29:58.904', '8bb07459-85f1-4fc2-8cd4-3d38451d7d20');
 INSERT INTO "public"."brands" VALUES ('3897d67d-23e5-49e7-8533-f64d910e3780', 'GOODAL', 'goodal', 'Thương hiệu GOODAL', NULL, 't', '2025-11-20 15:35:30.136', '2025-11-20 15:35:30.136', '641426b7-bd5e-4e81-8227-70466d492621');
+INSERT INTO "public"."brands" VALUES ('7931cc87-0c28-46a3-b2d0-4f073e0d8cd4', 'BANILA CO', 'banila-co', 'Thương hiệu BANILA CO', NULL, 't', '2025-12-15 11:24:19.768', '2025-12-15 11:24:19.768', '8e0865a8-f770-419d-b6f4-87127c5452ff');
 
 -- ----------------------------
 -- Table structure for cart_items
@@ -322,6 +278,7 @@ INSERT INTO "public"."categories" VALUES ('f09c0ea5-6508-4f53-befd-5ce727ffcbed'
 INSERT INTO "public"."categories" VALUES ('74fbe677-684d-4872-9f3b-3ba19e513821', 'Chăm sóc cơ thể', 'cham-soc-co-the', 'Sản phẩm chăm sóc cơ thể', NULL, 't', 0, '2025-11-20 16:27:49.486', '2025-11-20 16:27:49.486', NULL, 'CATEGORY', NULL);
 INSERT INTO "public"."categories" VALUES ('1c7e487b-4c22-4e87-9f8a-53a626a1da8b', 'Sản phẩm mới', 'san-pham-moi', 'Sản phẩm mới', NULL, 't', 0, '2025-11-20 16:27:59.256', '2025-11-20 16:27:59.256', NULL, 'CATEGORY', NULL);
 INSERT INTO "public"."categories" VALUES ('0b5bf4d6-7af2-4e0f-94fb-8383ce06f33c', 'Thương hiệu', 'thuong-hieu', 'Các thương hiệu mỹ phẩm', NULL, 't', -1, '2025-11-20 11:42:49.357', '2025-11-20 11:42:49.357', NULL, 'CATEGORY', NULL);
+INSERT INTO "public"."categories" VALUES ('b8f869d0-ff9e-4b2b-9166-a4f0ec743c38', 'Brand BANILA CO', 'brand-banila-co', NULL, '0b5bf4d6-7af2-4e0f-94fb-8383ce06f33c', 't', 0, '2025-12-15 11:25:51.838', '2025-12-15 11:25:51.838', NULL, 'BRAND', '7931cc87-0c28-46a3-b2d0-4f073e0d8cd4');
 
 -- ----------------------------
 -- Table structure for commission_rates
@@ -383,6 +340,44 @@ CREATE TABLE "public"."coupons" (
 -- ----------------------------
 -- Records of coupons
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for email_verification_logs
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."email_verification_logs";
+CREATE TABLE "public"."email_verification_logs" (
+  "id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "user_id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "email" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "action" "public"."EmailVerificationAction" NOT NULL,
+  "ip_address" varchar(45) COLLATE "pg_catalog"."default",
+  "user_agent" text COLLATE "pg_catalog"."default",
+  "metadata" jsonb,
+  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+;
+
+-- ----------------------------
+-- Records of email_verification_logs
+-- ----------------------------
+INSERT INTO "public"."email_verification_logs" VALUES ('0018c0da-cc23-43a7-a430-11a3c45fa7d0', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'SEND_OTP', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 13:59:44.441');
+INSERT INTO "public"."email_verification_logs" VALUES ('42870143-a5d0-44d6-9fb6-9c97f64171ea', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'VERIFY_SUCCESS', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:00:26.52');
+INSERT INTO "public"."email_verification_logs" VALUES ('75b00b9f-6bdd-4ba8-9ebd-18a028785f4b', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'SEND_OTP', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:04:56.981');
+INSERT INTO "public"."email_verification_logs" VALUES ('ba21a23d-1606-492d-82e6-6c836e52459e', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'SEND_OTP', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:02.036');
+INSERT INTO "public"."email_verification_logs" VALUES ('ba163799-c5cb-442b-b2e6-a8ebc1e761ba', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'SEND_OTP', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:15.351');
+INSERT INTO "public"."email_verification_logs" VALUES ('d53c7f55-8947-4057-8c35-cb455ce825b7', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'RESEND_OTP', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:15.395');
+INSERT INTO "public"."email_verification_logs" VALUES ('e9ed0c26-534a-42c6-a999-d958ff31bbd6', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'RATE_LIMITED', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:18.412');
+INSERT INTO "public"."email_verification_logs" VALUES ('b0c99b30-7ee5-4055-bbf6-3da82f702fd9', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'RATE_LIMITED', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:20.702');
+INSERT INTO "public"."email_verification_logs" VALUES ('47fbead4-92dd-4001-bd0d-6acbc87bd8a9', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'RATE_LIMITED', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:21.825');
+INSERT INTO "public"."email_verification_logs" VALUES ('0f90a110-3044-497a-b026-1c3e09020781', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'RATE_LIMITED', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:05:22.82');
+INSERT INTO "public"."email_verification_logs" VALUES ('3f24acfe-cad5-4c77-8431-1fa7abe3145a', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'VERIFY_SUCCESS', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', NULL, '2025-12-09 14:06:15.971');
+INSERT INTO "public"."email_verification_logs" VALUES ('c0ace6bf-fc23-4af1-a00b-fca4e80860f5', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'SEND_OTP', '::1', 'node', NULL, '2025-12-11 10:24:25.65');
+INSERT INTO "public"."email_verification_logs" VALUES ('0092b784-c278-4236-90c5-b6737fab5a9f', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'SEND_OTP', '::1', 'node', NULL, '2025-12-11 10:25:56.015');
+INSERT INTO "public"."email_verification_logs" VALUES ('da780633-8201-4b1d-8b4a-9010699bf6ef', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'SEND_OTP', '::1', 'node', NULL, '2025-12-11 10:26:29.494');
+INSERT INTO "public"."email_verification_logs" VALUES ('bb8b850d-3486-4d84-9d87-b2e1ed5432cd', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'RATE_LIMITED', '::1', 'node', NULL, '2025-12-11 10:28:08.851');
+INSERT INTO "public"."email_verification_logs" VALUES ('f736761b-ae90-4694-af8e-570dde887d6b', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'RATE_LIMITED', '::1', 'node', NULL, '2025-12-11 10:28:24.041');
+INSERT INTO "public"."email_verification_logs" VALUES ('67482bf9-bdc0-4e67-9d01-e7e1759dabe3', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'SEND_OTP', '::1', 'node', NULL, '2025-12-11 10:29:30.12');
+INSERT INTO "public"."email_verification_logs" VALUES ('35ebdb43-89d6-4d08-83df-f49d6dfa8ce9', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'VERIFY_SUCCESS', '::1', 'node', NULL, '2025-12-11 10:29:44.009');
 
 -- ----------------------------
 -- Table structure for flash_sale_orders
@@ -489,6 +484,16 @@ INSERT INTO "public"."media" VALUES ('faaa90a2-20b3-421a-adc8-2b3f05c4020c', 'ht
 INSERT INTO "public"."media" VALUES ('2323711b-bf6c-4ba5-9c98-d5578de86c51', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/86523562-0f74-4211-b71b-0367509c6de3_1764190788447_5c261108.webp?wrap=0', 'uploads/public/products/images/86523562-0f74-4211-b71b-0367509c6de3_1764190788447_5c261108.webp', '86523562-0f74-4211-b71b-0367509c6de3.webp', 'image/webp', 24990, 'PRODUCT_IMAGE', NULL, 'f', '2025-11-26 20:59:49.091', '2025-11-26 20:59:49.091');
 INSERT INTO "public"."media" VALUES ('af6fc1ed-389d-466c-a399-96bd6a54081e', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/3636b9b0-b9ef-4ad9-9b35-0f41952ec397_1764190972088_6cd37b32.webp?wrap=0', 'uploads/public/products/images/3636b9b0-b9ef-4ad9-9b35-0f41952ec397_1764190972088_6cd37b32.webp', '3636b9b0-b9ef-4ad9-9b35-0f41952ec397.webp', 'image/webp', 26564, 'PRODUCT_IMAGE', NULL, 'f', '2025-11-26 21:02:52.676', '2025-11-26 21:02:52.676');
 INSERT INTO "public"."media" VALUES ('0361956d-2c9d-4b73-aa5a-b59d3d7ff55d', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/b2e040d7-f100-4a1a-8c4e-2aeff579b98b_1764191034130_acb9ef13.webp?wrap=0', 'uploads/public/products/images/b2e040d7-f100-4a1a-8c4e-2aeff579b98b_1764191034130_acb9ef13.webp', 'b2e040d7-f100-4a1a-8c4e-2aeff579b98b.webp', 'image/webp', 25338, 'PRODUCT_IMAGE', NULL, 'f', '2025-11-26 21:03:54.678', '2025-11-26 21:03:54.678');
+INSERT INTO "public"."media" VALUES ('8e0865a8-f770-419d-b6f4-87127c5452ff', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/brands/bannila_co_logo_1765797858931_22b99e88.jpg?wrap=0', 'uploads/public/brands/bannila_co_logo_1765797858931_22b99e88.jpg', 'bannila_co_logo.jpg', 'image/jpeg', 9703, 'BRAND_LOGO', NULL, 'f', '2025-12-15 11:24:19.683', '2025-12-15 11:24:19.683');
+INSERT INTO "public"."media" VALUES ('93b74795-9f5b-4bf5-9193-f1a2c9a11205', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/c336f484-4500-4598-aa8d-b2a3d6ce591a_1765808599261_ebedd2c7.webp?wrap=0', 'uploads/public/products/images/c336f484-4500-4598-aa8d-b2a3d6ce591a_1765808599261_ebedd2c7.webp', 'c336f484-4500-4598-aa8d-b2a3d6ce591a.webp', 'image/webp', 29450, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:23:20.142', '2025-12-15 14:23:20.142');
+INSERT INTO "public"."media" VALUES ('8afdff26-9b46-4445-b850-e105bb624399', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/5328896f-664a-4cc8-81c6-27c34b1d8743_1765808662686_19c0f03c.webp?wrap=0', 'uploads/public/products/images/5328896f-664a-4cc8-81c6-27c34b1d8743_1765808662686_19c0f03c.webp', '5328896f-664a-4cc8-81c6-27c34b1d8743.webp', 'image/webp', 73822, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:24:23.465', '2025-12-15 14:24:23.465');
+INSERT INTO "public"."media" VALUES ('1f9c440b-c6db-4aba-8d6b-7e3bb60f12da', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/4913a444-f4fb-44be-81b4-7c29e83b8c35_1765808694346_b1c39e6b.webp?wrap=0', 'uploads/public/products/images/4913a444-f4fb-44be-81b4-7c29e83b8c35_1765808694346_b1c39e6b.webp', '4913a444-f4fb-44be-81b4-7c29e83b8c35.webp', 'image/webp', 75360, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:24:54.749', '2025-12-15 14:24:54.749');
+INSERT INTO "public"."media" VALUES ('a54d63a1-a90d-4f5a-8749-edc4771bf2dd', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/0e34ab51-dc56-4602-9be4-b4153722c685_1765808702422_54f8f207.webp?wrap=0', 'uploads/public/products/images/0e34ab51-dc56-4602-9be4-b4153722c685_1765808702422_54f8f207.webp', '0e34ab51-dc56-4602-9be4-b4153722c685.webp', 'image/webp', 379558, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:25:02.904', '2025-12-15 14:25:02.904');
+INSERT INTO "public"."media" VALUES ('51cf6d29-40b9-499e-ab5c-6576ccf5cf8c', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/0e34ab51-dc56-4602-9be4-b4153722c685_1765808712974_0d0340e9.webp?wrap=0', 'uploads/public/products/images/0e34ab51-dc56-4602-9be4-b4153722c685_1765808712974_0d0340e9.webp', '0e34ab51-dc56-4602-9be4-b4153722c685.webp', 'image/webp', 379558, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:25:13.403', '2025-12-15 14:25:13.403');
+INSERT INTO "public"."media" VALUES ('480b2336-be28-4228-aa38-324dd4d012e8', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/6c1a45e3-e490-46cd-87f4-0f6e7aa6ee5b_1765809294668_ff38ddd7.webp?wrap=0', 'uploads/public/products/images/6c1a45e3-e490-46cd-87f4-0f6e7aa6ee5b_1765809294668_ff38ddd7.webp', '6c1a45e3-e490-46cd-87f4-0f6e7aa6ee5b.webp', 'image/webp', 171070, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:34:55.333', '2025-12-15 14:34:55.333');
+INSERT INTO "public"."media" VALUES ('013c9414-683e-4780-a976-e00a9bf9bee2', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/6efe75e8-8628-455e-849e-f7216409233f_1765809310448_a104b93d.webp?wrap=0', 'uploads/public/products/images/6efe75e8-8628-455e-849e-f7216409233f_1765809310448_a104b93d.webp', '6efe75e8-8628-455e-849e-f7216409233f.webp', 'image/webp', 83742, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:35:10.878', '2025-12-15 14:35:10.878');
+INSERT INTO "public"."media" VALUES ('58554a57-901f-47f5-9a4e-49352a361f24', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/4b4e0676-9d94-4cc6-b745-99f02e6a3a75_1765809320998_bfc354a2.webp?wrap=0', 'uploads/public/products/images/4b4e0676-9d94-4cc6-b745-99f02e6a3a75_1765809320998_bfc354a2.webp', '4b4e0676-9d94-4cc6-b745-99f02e6a3a75.webp', 'image/webp', 69812, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:35:21.407', '2025-12-15 14:35:21.407');
+INSERT INTO "public"."media" VALUES ('ca430cfc-9edb-47c8-9d0d-323bbc9f9931', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/104f5eba-2ca6-439b-8ab0-cdf22cd2099f_1765809353657_f55a0ae4.webp?wrap=0', 'uploads/public/products/images/104f5eba-2ca6-439b-8ab0-cdf22cd2099f_1765809353657_f55a0ae4.webp', '104f5eba-2ca6-439b-8ab0-cdf22cd2099f.webp', 'image/webp', 45048, 'PRODUCT_IMAGE', NULL, 'f', '2025-12-15 14:35:54.062', '2025-12-15 14:35:54.062');
 
 -- ----------------------------
 -- Table structure for order_items
@@ -599,6 +604,7 @@ CREATE TABLE "public"."product_categories" (
 -- Records of product_categories
 -- ----------------------------
 INSERT INTO "public"."product_categories" VALUES ('9007f361-5f47-4513-9cb3-dc2a6115c04f', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '22efe8cc-9307-491f-8a4e-52164998b55b', '2025-11-24 23:18:57.297');
+INSERT INTO "public"."product_categories" VALUES ('4907c35d-d456-4dda-bb72-2263311ecb04', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', '39f1cbdc-41c6-4d11-b785-94cbf1996177', '2025-12-15 14:07:55.1');
 
 -- ----------------------------
 -- Table structure for product_images
@@ -628,6 +634,14 @@ INSERT INTO "public"."product_images" VALUES ('28164e79-b958-42a0-aca0-1eae4861f
 INSERT INTO "public"."product_images" VALUES ('4c4c03d2-ca9f-4d5a-b2b9-eaff37c73aa0', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml màu 21N linen - da sáng tự nhiên (tone beige yellow)', 6, 'f', '2025-11-26 20:59:49.164', '2323711b-bf6c-4ba5-9c98-d5578de86c51', '16d13d2a-fce2-4d21-a72c-9e2cb7a75202');
 INSERT INTO "public"."product_images" VALUES ('b97ff9f6-6aef-4592-b03c-4470c97c2fdf', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml màu 23N Ginger - da trung bình (tone tự nhiên beige yellow)', 7, 'f', '2025-11-26 21:02:52.747', 'af6fc1ed-389d-466c-a399-96bd6a54081e', 'c7bba2e6-f70b-4688-a3e7-1a9d238112a5');
 INSERT INTO "public"."product_images" VALUES ('89b63fdc-4a97-474d-8df7-c6ee050ec4d8', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml màu 19N Porcelain - Da trắng sáng (tone da tự nhiên beige yellow)', 8, 'f', '2025-11-26 21:03:54.749', '0361956d-2c9d-4b73-aa5a-b59d3d7ff55d', 'f336f788-48a5-4f02-89e6-f5349001a1b3');
+INSERT INTO "public"."product_images" VALUES ('7d2fcc0c-a915-42ad-bf60-6412cf2cb991', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Primary product image', 0, 't', '2025-12-15 14:23:20.383', '93b74795-9f5b-4bf5-9193-f1a2c9a11205', NULL);
+INSERT INTO "public"."product_images" VALUES ('d3d79607-a44a-4b6b-a6ca-3ed6a3e7705e', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 2', 1, 'f', '2025-12-15 14:24:23.562', '8afdff26-9b46-4445-b850-e105bb624399', NULL);
+INSERT INTO "public"."product_images" VALUES ('39d82a35-aba3-42c9-a78f-aa16632b14d9', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 3', 2, 'f', '2025-12-15 14:24:54.846', '1f9c440b-c6db-4aba-8d6b-7e3bb60f12da', NULL);
+INSERT INTO "public"."product_images" VALUES ('b1cfbd3f-8337-4bb4-a119-6b2dbb2c7edf', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 4', 3, 'f', '2025-12-15 14:25:02.996', 'a54d63a1-a90d-4f5a-8749-edc4771bf2dd', NULL);
+INSERT INTO "public"."product_images" VALUES ('677d188a-71e5-4e50-b4a4-13a46764a59f', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 5', 4, 'f', '2025-12-15 14:34:55.543', '480b2336-be28-4228-aa38-324dd4d012e8', NULL);
+INSERT INTO "public"."product_images" VALUES ('a9f26590-06d2-4e28-a82d-ba7751ac75be', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 6', 5, 'f', '2025-12-15 14:35:10.971', '013c9414-683e-4780-a976-e00a9bf9bee2', NULL);
+INSERT INTO "public"."product_images" VALUES ('aa9083a5-111f-4fa3-9360-d0c027ce3681', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 7', 6, 'f', '2025-12-15 14:35:21.498', '58554a57-901f-47f5-9a4e-49352a361f24', NULL);
+INSERT INTO "public"."product_images" VALUES ('8c1e6765-5ac4-4551-9e4b-429b161e0710', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Product image 8', 7, 'f', '2025-12-15 14:35:54.158', 'ca430cfc-9edb-47c8-9d0d-323bbc9f9931', NULL);
 
 -- ----------------------------
 -- Table structure for product_inventory
@@ -675,6 +689,32 @@ CREATE TABLE "public"."product_reviews" (
 -- ----------------------------
 -- Records of product_reviews
 -- ----------------------------
+INSERT INTO "public"."product_reviews" VALUES ('f169ca31-ad22-4460-a802-cbbbcb71ab6f', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 5, 'Đỉnh nha mấy bà', '', 'f', 'f', 0, '2026-01-06 08:28:18.993', '2026-01-06 08:28:18.993');
+INSERT INTO "public"."product_reviews" VALUES ('332c312d-a9d7-4375-a90d-26ffd0c865ca', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 5, '', '', 'f', 't', 0, '2026-01-06 08:52:34.019', '2026-01-07 06:23:24.737');
+
+-- ----------------------------
+-- Table structure for product_stats
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."product_stats";
+CREATE TABLE "public"."product_stats" (
+  "id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "product_id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "total_sold" int4 NOT NULL DEFAULT 0,
+  "total_revenue" numeric(15,2) NOT NULL DEFAULT 0,
+  "avg_rating" numeric(3,2),
+  "review_count" int4 NOT NULL DEFAULT 0,
+  "view_count" int4 NOT NULL DEFAULT 0,
+  "last_sold_at" timestamp(3),
+  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(3) NOT NULL
+)
+;
+
+-- ----------------------------
+-- Records of product_stats
+-- ----------------------------
+INSERT INTO "public"."product_stats" VALUES ('6b6188fb-21c4-41ce-b659-75ab57f64ac3', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 0, 0.00, NULL, 0, 0, NULL, '2026-01-06 07:52:03.741', '2026-01-06 08:52:02.988');
+INSERT INTO "public"."product_stats" VALUES ('fac0fe7b-5fb1-46c7-b144-648aa91cc26d', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 0, 0.00, 5.00, 1, 0, NULL, '2026-01-06 07:52:03.789', '2026-01-07 06:23:25.235');
 
 -- ----------------------------
 -- Table structure for product_variants
@@ -732,6 +772,7 @@ CREATE TABLE "public"."products" (
 -- Records of products
 -- ----------------------------
 INSERT INTO "public"."products" VALUES ('139e4863-8f90-4cc4-8aad-3cb004a0759c', 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml', 'kem-nen-che-khuyet-djiem-clio-kill-cover-founwear-foundation-the-original-35ml', 'Kem nền Clio Kill Cover Founwear Foundation The Original nổi bật với khả năng che phủ mỏng nhẹ và hoàn hảo, bền màu và bảo vệ da khỏi tác hại của tia UV.​ The Original sở hữu công thức  mới kem mỏng nhẹ, tạo lớp nền trông rất tự nhiên, nhẹ & mỏng mịn trên da, mang đến hiệu ứng da rạng rỡ, mượt mà', 'Kem nền Clio Kill Cover Founwear Foundation The Original nổi bật với khả năng che phủ mỏng nhẹ và hoàn hảo, bền màu và bảo vệ da khỏi tác hại của tia UV.​ The Original sở hữu công thức  mới kem mỏng nhẹ, tạo lớp nền trông rất tự nhiên, nhẹ & mỏng mịn trên da, mang đến hiệu ứng da rạng rỡ, mượt mà', '14554829', 'e6f24ef7-0eff-467e-93b6-14b51af43723', 349000.00, 399000.00, 't', 't', 50.00, 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml', 'Kem nền Clio Kill Cover Founwear Foundation The Original nổi bật với khả năng che phủ mỏng nhẹ và hoàn hảo, bền màu và bảo vệ da khỏi tác hại của tia UV.​ The Original sở hữu công thức  mới kem mỏng nhẹ, tạo lớp nền trông rất tự nhiên, nhẹ & mỏng mịn trên da, mang đến hiệu ứng da rạng rỡ, mượt mà', '2025-11-24 23:18:57.297', '2025-11-24 23:18:57.297');
+INSERT INTO "public"."products" VALUES ('6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'Kem Mắt Và Mặt AHC Mờ Nám, Làm Đều Màu Da Pro Shot Gluta-Ctivation Bright 3 30ml', 'kem-mat-va-mat-ahc-mo-nam-lam-djeu-mau-da-pro-shot-gluta-ctivation-bright-3-30ml', 'Kem Mắt Và Mặt AHC Mờ Nám, Làm Đều Màu Da Pro Shot Gluta-Ctivation Bright 3 30ml', 'Kem Mắt Và Mặt AHC Mờ Nám, Làm Đều Màu Da Pro Shot Gluta-Ctivation Bright 3 30ml', '95440379', 'cc214951-a62b-4650-b06a-11d3848bcb03', 515755.00, 542900.00, 't', 'f', 30.00, 'Kem Mắt Và Mặt AHC Mờ Nám, Làm Đều Màu Da Pro Shot Gluta-Ctivation Bright 3 30ml', 'Kem Mắt Và Mặt AHC Mờ Nám, Làm Đều Màu Da Pro Shot Gluta-Ctivation Bright 3 30ml giá rẻ', '2025-12-15 14:07:55.1', '2025-12-15 14:07:55.1');
 
 -- ----------------------------
 -- Table structure for promotion_products
@@ -806,6 +847,9 @@ CREATE TABLE "public"."user_role_assignments" (
 -- ----------------------------
 -- Records of user_role_assignments
 -- ----------------------------
+INSERT INTO "public"."user_role_assignments" VALUES ('4988c9a6-2f45-4676-a52e-9339ac61bc72', 'edfd5d77-bd20-4aec-ae70-4a2976847fa3', '019ad71b-5d94-7788-8816-5c28161bd32b', '2025-11-30 23:43:53.845', '2025-11-30 23:43:53.845');
+INSERT INTO "public"."user_role_assignments" VALUES ('019ad73b-4b16-706d-94b3-f76930948e51', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', '019ad71c-0363-77dd-8909-2bb9f6360eff', '2025-11-30 23:43:53.845', '2025-11-30 23:43:53.845');
+INSERT INTO "public"."user_role_assignments" VALUES ('d1f7f430-5d1b-4b8d-8b88-b7cce8b411aa', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', '019ad71b-5d94-7788-8816-5c28161bd32b', '2025-12-11 10:03:26.466', '2025-12-11 10:03:26.466');
 
 -- ----------------------------
 -- Table structure for user_roles
@@ -822,6 +866,10 @@ CREATE TABLE "public"."user_roles" (
 -- ----------------------------
 -- Records of user_roles
 -- ----------------------------
+INSERT INTO "public"."user_roles" VALUES ('019ad71b-5d94-7788-8816-5c28161bd32b', 'Khách hàng', '2025-12-01 06:31:56', '2025-12-01 06:32:00');
+INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-789f-8218-cf4a01088597', 'Cộng tác viên', '2025-12-01 06:32:37', '2025-12-01 06:32:39');
+INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-7ddb-8b7c-fc270e6c33d6', 'Đại lý', '2025-12-01 06:32:37', '2025-12-01 06:32:39');
+INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-77dd-8909-2bb9f6360eff', 'Quản trị viên', '2025-12-01 06:38:51', '2025-12-01 06:38:54');
 
 -- ----------------------------
 -- Table structure for users
@@ -853,197 +901,9 @@ CREATE TABLE "public"."users" (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO "public"."users" VALUES ('bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'Hàn Tiểu', 'Ling', '+1234567890', 'htligz', '$2b$10$2LgIgalzreWaEjHSLVbkl.Q07yOdzhcXGRbqEVZRs9OmiTSBFQe9O', '2025-11-05 17:44:38.293', '2025-11-20 15:28:07.229', '2025-11-05 19:21:19.973', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZDlmZGNjMS01MjQ3LTQ5YTItOWVkNC0xZjAwNWRkNDdjZDIiLCJ1c2VybmFtZSI6Imh0bGlneiIsImlhdCI6MTc2MzY1MjQ4NywiZXhwIjoxNzY2MjQ0NDg3fQ.uprWyKw5vOHqnC5hfJMi7ZChlhUs4PrfPozHF6wkkB8', 'e8cd3ded-a0c2-4fc2-8520-6c5182e30f13');
-
--- ----------------------------
--- Function structure for pg_stat_kcache
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."pg_stat_kcache"(OUT "queryid" int8, OUT "top" bool, OUT "userid" oid, OUT "dbid" oid, OUT "plan_reads" int8, OUT "plan_writes" int8, OUT "plan_user_time" float8, OUT "plan_system_time" float8, OUT "plan_minflts" int8, OUT "plan_majflts" int8, OUT "plan_nswaps" int8, OUT "plan_msgsnds" int8, OUT "plan_msgrcvs" int8, OUT "plan_nsignals" int8, OUT "plan_nvcsws" int8, OUT "plan_nivcsws" int8, OUT "exec_reads" int8, OUT "exec_writes" int8, OUT "exec_user_time" float8, OUT "exec_system_time" float8, OUT "exec_minflts" int8, OUT "exec_majflts" int8, OUT "exec_nswaps" int8, OUT "exec_msgsnds" int8, OUT "exec_msgrcvs" int8, OUT "exec_nsignals" int8, OUT "exec_nvcsws" int8, OUT "exec_nivcsws" int8, OUT "stats_since" timestamptz);
-CREATE OR REPLACE FUNCTION "public"."pg_stat_kcache"(OUT "queryid" int8, OUT "top" bool, OUT "userid" oid, OUT "dbid" oid, OUT "plan_reads" int8, OUT "plan_writes" int8, OUT "plan_user_time" float8, OUT "plan_system_time" float8, OUT "plan_minflts" int8, OUT "plan_majflts" int8, OUT "plan_nswaps" int8, OUT "plan_msgsnds" int8, OUT "plan_msgrcvs" int8, OUT "plan_nsignals" int8, OUT "plan_nvcsws" int8, OUT "plan_nivcsws" int8, OUT "exec_reads" int8, OUT "exec_writes" int8, OUT "exec_user_time" float8, OUT "exec_system_time" float8, OUT "exec_minflts" int8, OUT "exec_majflts" int8, OUT "exec_nswaps" int8, OUT "exec_msgsnds" int8, OUT "exec_msgrcvs" int8, OUT "exec_nsignals" int8, OUT "exec_nvcsws" int8, OUT "exec_nivcsws" int8, OUT "stats_since" timestamptz)
-  RETURNS SETOF "pg_catalog"."record" AS '$libdir/pg_stat_kcache', 'pg_stat_kcache_2_3'
-  LANGUAGE c VOLATILE
-  COST 1000
-  ROWS 1000;
-
--- ----------------------------
--- Function structure for pg_stat_kcache_reset
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."pg_stat_kcache_reset"();
-CREATE OR REPLACE FUNCTION "public"."pg_stat_kcache_reset"()
-  RETURNS "pg_catalog"."void" AS '$libdir/pg_stat_kcache', 'pg_stat_kcache_reset'
-  LANGUAGE c VOLATILE
-  COST 1000;
-
--- ----------------------------
--- Function structure for pg_stat_statements
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."pg_stat_statements"("showtext" bool, OUT "userid" oid, OUT "dbid" oid, OUT "toplevel" bool, OUT "queryid" int8, OUT "query" text, OUT "plans" int8, OUT "total_plan_time" float8, OUT "min_plan_time" float8, OUT "max_plan_time" float8, OUT "mean_plan_time" float8, OUT "stddev_plan_time" float8, OUT "calls" int8, OUT "total_exec_time" float8, OUT "min_exec_time" float8, OUT "max_exec_time" float8, OUT "mean_exec_time" float8, OUT "stddev_exec_time" float8, OUT "rows" int8, OUT "shared_blks_hit" int8, OUT "shared_blks_read" int8, OUT "shared_blks_dirtied" int8, OUT "shared_blks_written" int8, OUT "local_blks_hit" int8, OUT "local_blks_read" int8, OUT "local_blks_dirtied" int8, OUT "local_blks_written" int8, OUT "temp_blks_read" int8, OUT "temp_blks_written" int8, OUT "shared_blk_read_time" float8, OUT "shared_blk_write_time" float8, OUT "local_blk_read_time" float8, OUT "local_blk_write_time" float8, OUT "temp_blk_read_time" float8, OUT "temp_blk_write_time" float8, OUT "wal_records" int8, OUT "wal_fpi" int8, OUT "wal_bytes" numeric, OUT "jit_functions" int8, OUT "jit_generation_time" float8, OUT "jit_inlining_count" int8, OUT "jit_inlining_time" float8, OUT "jit_optimization_count" int8, OUT "jit_optimization_time" float8, OUT "jit_emission_count" int8, OUT "jit_emission_time" float8, OUT "jit_deform_count" int8, OUT "jit_deform_time" float8, OUT "stats_since" timestamptz, OUT "minmax_stats_since" timestamptz);
-CREATE OR REPLACE FUNCTION "public"."pg_stat_statements"(IN "showtext" bool, OUT "userid" oid, OUT "dbid" oid, OUT "toplevel" bool, OUT "queryid" int8, OUT "query" text, OUT "plans" int8, OUT "total_plan_time" float8, OUT "min_plan_time" float8, OUT "max_plan_time" float8, OUT "mean_plan_time" float8, OUT "stddev_plan_time" float8, OUT "calls" int8, OUT "total_exec_time" float8, OUT "min_exec_time" float8, OUT "max_exec_time" float8, OUT "mean_exec_time" float8, OUT "stddev_exec_time" float8, OUT "rows" int8, OUT "shared_blks_hit" int8, OUT "shared_blks_read" int8, OUT "shared_blks_dirtied" int8, OUT "shared_blks_written" int8, OUT "local_blks_hit" int8, OUT "local_blks_read" int8, OUT "local_blks_dirtied" int8, OUT "local_blks_written" int8, OUT "temp_blks_read" int8, OUT "temp_blks_written" int8, OUT "shared_blk_read_time" float8, OUT "shared_blk_write_time" float8, OUT "local_blk_read_time" float8, OUT "local_blk_write_time" float8, OUT "temp_blk_read_time" float8, OUT "temp_blk_write_time" float8, OUT "wal_records" int8, OUT "wal_fpi" int8, OUT "wal_bytes" numeric, OUT "jit_functions" int8, OUT "jit_generation_time" float8, OUT "jit_inlining_count" int8, OUT "jit_inlining_time" float8, OUT "jit_optimization_count" int8, OUT "jit_optimization_time" float8, OUT "jit_emission_count" int8, OUT "jit_emission_time" float8, OUT "jit_deform_count" int8, OUT "jit_deform_time" float8, OUT "stats_since" timestamptz, OUT "minmax_stats_since" timestamptz)
-  RETURNS SETOF "pg_catalog"."record" AS '$libdir/pg_stat_statements', 'pg_stat_statements_1_11'
-  LANGUAGE c VOLATILE STRICT
-  COST 1
-  ROWS 1000;
-
--- ----------------------------
--- Function structure for pg_stat_statements_info
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."pg_stat_statements_info"(OUT "dealloc" int8, OUT "stats_reset" timestamptz);
-CREATE OR REPLACE FUNCTION "public"."pg_stat_statements_info"(OUT "dealloc" int8, OUT "stats_reset" timestamptz)
-  RETURNS "pg_catalog"."record" AS '$libdir/pg_stat_statements', 'pg_stat_statements_info'
-  LANGUAGE c VOLATILE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for pg_stat_statements_reset
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."pg_stat_statements_reset"("userid" oid, "dbid" oid, "queryid" int8, "minmax_only" bool);
-CREATE OR REPLACE FUNCTION "public"."pg_stat_statements_reset"("userid" oid=0, "dbid" oid=0, "queryid" int8=0, "minmax_only" bool=false)
-  RETURNS "pg_catalog"."timestamptz" AS '$libdir/pg_stat_statements', 'pg_stat_statements_reset_1_11'
-  LANGUAGE c VOLATILE STRICT
-  COST 1;
-
--- ----------------------------
--- View structure for pg_stat_statements_info
--- ----------------------------
-DROP VIEW IF EXISTS "public"."pg_stat_statements_info";
-CREATE VIEW "public"."pg_stat_statements_info" AS  SELECT dealloc,
-    stats_reset
-   FROM pg_stat_statements_info() pg_stat_statements_info(dealloc, stats_reset);
-
--- ----------------------------
--- View structure for pg_stat_statements
--- ----------------------------
-DROP VIEW IF EXISTS "public"."pg_stat_statements";
-CREATE VIEW "public"."pg_stat_statements" AS  SELECT userid,
-    dbid,
-    toplevel,
-    queryid,
-    query,
-    plans,
-    total_plan_time,
-    min_plan_time,
-    max_plan_time,
-    mean_plan_time,
-    stddev_plan_time,
-    calls,
-    total_exec_time,
-    min_exec_time,
-    max_exec_time,
-    mean_exec_time,
-    stddev_exec_time,
-    rows,
-    shared_blks_hit,
-    shared_blks_read,
-    shared_blks_dirtied,
-    shared_blks_written,
-    local_blks_hit,
-    local_blks_read,
-    local_blks_dirtied,
-    local_blks_written,
-    temp_blks_read,
-    temp_blks_written,
-    shared_blk_read_time,
-    shared_blk_write_time,
-    local_blk_read_time,
-    local_blk_write_time,
-    temp_blk_read_time,
-    temp_blk_write_time,
-    wal_records,
-    wal_fpi,
-    wal_bytes,
-    jit_functions,
-    jit_generation_time,
-    jit_inlining_count,
-    jit_inlining_time,
-    jit_optimization_count,
-    jit_optimization_time,
-    jit_emission_count,
-    jit_emission_time,
-    jit_deform_count,
-    jit_deform_time,
-    stats_since,
-    minmax_stats_since
-   FROM pg_stat_statements(true) pg_stat_statements(userid, dbid, toplevel, queryid, query, plans, total_plan_time, min_plan_time, max_plan_time, mean_plan_time, stddev_plan_time, calls, total_exec_time, min_exec_time, max_exec_time, mean_exec_time, stddev_exec_time, rows, shared_blks_hit, shared_blks_read, shared_blks_dirtied, shared_blks_written, local_blks_hit, local_blks_read, local_blks_dirtied, local_blks_written, temp_blks_read, temp_blks_written, shared_blk_read_time, shared_blk_write_time, local_blk_read_time, local_blk_write_time, temp_blk_read_time, temp_blk_write_time, wal_records, wal_fpi, wal_bytes, jit_functions, jit_generation_time, jit_inlining_count, jit_inlining_time, jit_optimization_count, jit_optimization_time, jit_emission_count, jit_emission_time, jit_deform_count, jit_deform_time, stats_since, minmax_stats_since);
-
--- ----------------------------
--- View structure for pg_stat_kcache_detail
--- ----------------------------
-DROP VIEW IF EXISTS "public"."pg_stat_kcache_detail";
-CREATE VIEW "public"."pg_stat_kcache_detail" AS  SELECT s.query,
-    k.top,
-    d.datname,
-    r.rolname,
-    k.plan_user_time,
-    k.plan_system_time,
-    k.plan_minflts,
-    k.plan_majflts,
-    k.plan_nswaps,
-    k.plan_reads,
-    k.plan_reads / current_setting('block_size'::text)::integer AS plan_reads_blks,
-    k.plan_writes,
-    k.plan_writes / current_setting('block_size'::text)::integer AS plan_writes_blks,
-    k.plan_msgsnds,
-    k.plan_msgrcvs,
-    k.plan_nsignals,
-    k.plan_nvcsws,
-    k.plan_nivcsws,
-    k.exec_user_time,
-    k.exec_system_time,
-    k.exec_minflts,
-    k.exec_majflts,
-    k.exec_nswaps,
-    k.exec_reads,
-    k.exec_reads / current_setting('block_size'::text)::integer AS exec_reads_blks,
-    k.exec_writes,
-    k.exec_writes / current_setting('block_size'::text)::integer AS exec_writes_blks,
-    k.exec_msgsnds,
-    k.exec_msgrcvs,
-    k.exec_nsignals,
-    k.exec_nvcsws,
-    k.exec_nivcsws,
-    k.stats_since
-   FROM pg_stat_kcache() k(queryid, top, userid, dbid, plan_reads, plan_writes, plan_user_time, plan_system_time, plan_minflts, plan_majflts, plan_nswaps, plan_msgsnds, plan_msgrcvs, plan_nsignals, plan_nvcsws, plan_nivcsws, exec_reads, exec_writes, exec_user_time, exec_system_time, exec_minflts, exec_majflts, exec_nswaps, exec_msgsnds, exec_msgrcvs, exec_nsignals, exec_nvcsws, exec_nivcsws, stats_since)
-     JOIN pg_stat_statements s ON k.queryid = s.queryid AND k.dbid = s.dbid AND k.userid = s.userid
-     JOIN pg_database d ON d.oid = s.dbid
-     JOIN pg_roles r ON r.oid = s.userid;
-
--- ----------------------------
--- View structure for pg_stat_kcache
--- ----------------------------
-DROP VIEW IF EXISTS "public"."pg_stat_kcache";
-CREATE VIEW "public"."pg_stat_kcache" AS  SELECT datname,
-    sum(plan_user_time) AS plan_user_time,
-    sum(plan_system_time) AS plan_system_time,
-    sum(plan_minflts) AS plan_minflts,
-    sum(plan_majflts) AS plan_majflts,
-    sum(plan_nswaps) AS plan_nswaps,
-    sum(plan_reads) AS plan_reads,
-    sum(plan_reads_blks) AS plan_reads_blks,
-    sum(plan_writes) AS plan_writes,
-    sum(plan_writes_blks) AS plan_writes_blks,
-    sum(plan_msgsnds) AS plan_msgsnds,
-    sum(plan_msgrcvs) AS plan_msgrcvs,
-    sum(plan_nsignals) AS plan_nsignals,
-    sum(plan_nvcsws) AS plan_nvcsws,
-    sum(plan_nivcsws) AS plan_nivcsws,
-    sum(exec_user_time) AS exec_user_time,
-    sum(exec_system_time) AS exec_system_time,
-    sum(exec_minflts) AS exec_minflts,
-    sum(exec_majflts) AS exec_majflts,
-    sum(exec_nswaps) AS exec_nswaps,
-    sum(exec_reads) AS exec_reads,
-    sum(exec_reads_blks) AS exec_reads_blks,
-    sum(exec_writes) AS exec_writes,
-    sum(exec_writes_blks) AS exec_writes_blks,
-    sum(exec_msgsnds) AS exec_msgsnds,
-    sum(exec_msgrcvs) AS exec_msgrcvs,
-    sum(exec_nsignals) AS exec_nsignals,
-    sum(exec_nvcsws) AS exec_nvcsws,
-    sum(exec_nivcsws) AS exec_nivcsws,
-    min(stats_since) AS stats_since
-   FROM pg_stat_kcache_detail
-  WHERE top IS TRUE
-  GROUP BY datname;
+INSERT INTO "public"."users" VALUES ('edfd5d77-bd20-4aec-ae70-4a2976847fa3', 'user1@example.com', 'John', 'Doe', '+1234567891', 'user1', '$2b$10$NhJ/s.Ms5lToR8JCwLzhC.5rqk4EM3mu9ImcX482sM0MYfXdkgogO', '2025-11-30 23:43:53.845', '2025-12-01 00:05:33.414', NULL, 't', 'f', 'f', 'f', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlZGZkNWQ3Ny1iZDIwLTRhZWMtYWU3MC00YTI5NzY4NDdmYTMiLCJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNzY0NTQ3NTMzLCJleHAiOjE3NjcxMzk1MzN9.BcHzJUFFqqVZmaAleh30ZGnnFXnVKDVuAEokqht-y24', NULL);
+INSERT INTO "public"."users" VALUES ('24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'Nguyễn', 'Lu', '0123456789', 'lucan1', '$2b$10$3RgYDM3n9/3tGFwszsqk5eYVIZid89huDbKVxfYOW.v0mqdqEcYvG', '2025-12-11 10:03:26.466', '2025-12-11 10:29:43.93', '2025-12-11 10:29:43.927', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGExMWRjNC0yOTZlLTRhY2ItYmFkZi02ZDc5MjlkM2Y3YzgiLCJ1c2VybmFtZSI6Imx1Y2FuMSIsImlhdCI6MTc2NTQ0ODYxNywiZXhwIjoxNzY4MDQwNjE3fQ.MtSC0YTOA4uwmuZjHT0TGr55g8nGOPgc3etxdnXHLJE', NULL);
+INSERT INTO "public"."users" VALUES ('bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'Hàn Tiểu', 'Ling', '+1234567890', 'htligz', '$2b$10$K4ifXXbH4EpLt7Y9yNvLa.L6nB.hXejOFpyPf0mIDNkEcknpCX8rC', '2025-11-05 17:44:38.293', '2026-01-06 08:14:42.237', '2025-12-09 14:06:15.871', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZDlmZGNjMS01MjQ3LTQ5YTItOWVkNC0xZjAwNWRkNDdjZDIiLCJ1c2VybmFtZSI6Imh0bGlneiIsImlhdCI6MTc2NzY4NzI4MiwiZXhwIjoxNzcwMjc5MjgyfQ.AAQJVCRY2b9kzFsw4XJ8aTETUX_M1bHGuLs2sGENwus', 'e8cd3ded-a0c2-4fc2-8520-6c5182e30f13');
 
 -- ----------------------------
 -- Indexes structure for table addresses
@@ -1122,6 +982,42 @@ CREATE INDEX "auth_codes_auth_code_idx" ON "public"."auth_codes" USING btree (
 -- Primary Key structure for table auth_codes
 -- ----------------------------
 ALTER TABLE "public"."auth_codes" ADD CONSTRAINT "auth_codes_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table banner_groups
+-- ----------------------------
+CREATE INDEX "banner_groups_is_active_idx" ON "public"."banner_groups" USING btree (
+  "is_active" "pg_catalog"."bool_ops" ASC NULLS LAST
+);
+CREATE INDEX "banner_groups_slug_idx" ON "public"."banner_groups" USING btree (
+  "slug" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE UNIQUE INDEX "banner_groups_slug_key" ON "public"."banner_groups" USING btree (
+  "slug" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table banner_groups
+-- ----------------------------
+ALTER TABLE "public"."banner_groups" ADD CONSTRAINT "banner_groups_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table banners
+-- ----------------------------
+CREATE INDEX "banners_group_id_idx" ON "public"."banners" USING btree (
+  "group_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE INDEX "banners_is_active_idx" ON "public"."banners" USING btree (
+  "is_active" "pg_catalog"."bool_ops" ASC NULLS LAST
+);
+CREATE INDEX "banners_position_idx" ON "public"."banners" USING btree (
+  "position" "pg_catalog"."enum_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table banners
+-- ----------------------------
+ALTER TABLE "public"."banners" ADD CONSTRAINT "banners_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Indexes structure for table brands
@@ -1252,6 +1148,27 @@ CREATE INDEX "coupons_start_date_idx" ON "public"."coupons" USING btree (
 -- Primary Key structure for table coupons
 -- ----------------------------
 ALTER TABLE "public"."coupons" ADD CONSTRAINT "coupons_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table email_verification_logs
+-- ----------------------------
+CREATE INDEX "email_verification_logs_action_idx" ON "public"."email_verification_logs" USING btree (
+  "action" "pg_catalog"."enum_ops" ASC NULLS LAST
+);
+CREATE INDEX "email_verification_logs_created_at_idx" ON "public"."email_verification_logs" USING btree (
+  "created_at" "pg_catalog"."timestamp_ops" ASC NULLS LAST
+);
+CREATE INDEX "email_verification_logs_email_idx" ON "public"."email_verification_logs" USING btree (
+  "email" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE INDEX "email_verification_logs_user_id_idx" ON "public"."email_verification_logs" USING btree (
+  "user_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table email_verification_logs
+-- ----------------------------
+ALTER TABLE "public"."email_verification_logs" ADD CONSTRAINT "email_verification_logs_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Indexes structure for table flash_sale_orders
@@ -1492,6 +1409,27 @@ CREATE INDEX "product_reviews_user_id_idx" ON "public"."product_reviews" USING b
 ALTER TABLE "public"."product_reviews" ADD CONSTRAINT "product_reviews_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
+-- Indexes structure for table product_stats
+-- ----------------------------
+CREATE INDEX "product_stats_avg_rating_idx" ON "public"."product_stats" USING btree (
+  "avg_rating" "pg_catalog"."numeric_ops" ASC NULLS LAST
+);
+CREATE INDEX "product_stats_product_id_idx" ON "public"."product_stats" USING btree (
+  "product_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE UNIQUE INDEX "product_stats_product_id_key" ON "public"."product_stats" USING btree (
+  "product_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE INDEX "product_stats_total_sold_idx" ON "public"."product_stats" USING btree (
+  "total_sold" "pg_catalog"."int4_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table product_stats
+-- ----------------------------
+ALTER TABLE "public"."product_stats" ADD CONSTRAINT "product_stats_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
 -- Indexes structure for table product_variants
 -- ----------------------------
 CREATE INDEX "product_variants_product_id_idx" ON "public"."product_variants" USING btree (
@@ -1668,6 +1606,12 @@ ALTER TABLE "public"."affiliate_links" ADD CONSTRAINT "affiliate_links_affiliate
 ALTER TABLE "public"."affiliates" ADD CONSTRAINT "affiliates_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
+-- Foreign Keys structure for table banners
+-- ----------------------------
+ALTER TABLE "public"."banners" ADD CONSTRAINT "banners_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "public"."banner_groups" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."banners" ADD CONSTRAINT "banners_image_media_id_fkey" FOREIGN KEY ("image_media_id") REFERENCES "public"."media" ("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- ----------------------------
 -- Foreign Keys structure for table brands
 -- ----------------------------
 ALTER TABLE "public"."brands" ADD CONSTRAINT "brands_logo_media_id_fkey" FOREIGN KEY ("logo_media_id") REFERENCES "public"."media" ("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1701,6 +1645,11 @@ ALTER TABLE "public"."commission_rates" ADD CONSTRAINT "commission_rates_product
 -- ----------------------------
 ALTER TABLE "public"."coupon_usages" ADD CONSTRAINT "coupon_usages_coupon_id_fkey" FOREIGN KEY ("coupon_id") REFERENCES "public"."coupons" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "public"."coupon_usages" ADD CONSTRAINT "coupon_usages_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "public"."orders" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table email_verification_logs
+-- ----------------------------
+ALTER TABLE "public"."email_verification_logs" ADD CONSTRAINT "email_verification_logs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
 -- Foreign Keys structure for table flash_sale_orders
@@ -1768,6 +1717,11 @@ ALTER TABLE "public"."product_reviews" ADD CONSTRAINT "product_reviews_product_i
 ALTER TABLE "public"."product_reviews" ADD CONSTRAINT "product_reviews_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
+-- Foreign Keys structure for table product_stats
+-- ----------------------------
+ALTER TABLE "public"."product_stats" ADD CONSTRAINT "product_stats_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- ----------------------------
 -- Foreign Keys structure for table product_variants
 -- ----------------------------
 ALTER TABLE "public"."product_variants" ADD CONSTRAINT "product_variants_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1792,6 +1746,7 @@ ALTER TABLE "public"."review_images" ADD CONSTRAINT "review_images_review_id_fke
 -- ----------------------------
 -- Foreign Keys structure for table user_role_assignments
 -- ----------------------------
+ALTER TABLE "public"."user_role_assignments" ADD CONSTRAINT "user_role_assignments_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "public"."user_roles" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "public"."user_role_assignments" ADD CONSTRAINT "user_role_assignments_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------

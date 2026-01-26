@@ -39,6 +39,21 @@ export type AffiliateCommission = $Result.DefaultSelection<Prisma.$AffiliateComm
  */
 export type CommissionRate = $Result.DefaultSelection<Prisma.$CommissionRatePayload>
 /**
+ * Model BannerGroup
+ * 
+ */
+export type BannerGroup = $Result.DefaultSelection<Prisma.$BannerGroupPayload>
+/**
+ * Model Banner
+ * 
+ */
+export type Banner = $Result.DefaultSelection<Prisma.$BannerPayload>
+/**
+ * Model BannerGroupMapping
+ * 
+ */
+export type BannerGroupMapping = $Result.DefaultSelection<Prisma.$BannerGroupMappingPayload>
+/**
  * Model EmailVerificationLog
  * 
  */
@@ -188,7 +203,24 @@ export type UserRoleAssignment = $Result.DefaultSelection<Prisma.$UserRoleAssign
  * Enums
  */
 export namespace $Enums {
-  export const EmailVerificationAction: {
+  export const BannerType: {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE'
+};
+
+export type BannerType = (typeof BannerType)[keyof typeof BannerType]
+
+
+export const BannerPosition: {
+  MAIN_CAROUSEL: 'MAIN_CAROUSEL',
+  SIDE_TOP: 'SIDE_TOP',
+  SIDE_BOTTOM: 'SIDE_BOTTOM'
+};
+
+export type BannerPosition = (typeof BannerPosition)[keyof typeof BannerPosition]
+
+
+export const EmailVerificationAction: {
   SEND_OTP: 'SEND_OTP',
   RESEND_OTP: 'RESEND_OTP',
   VERIFY_SUCCESS: 'VERIFY_SUCCESS',
@@ -216,7 +248,8 @@ export const MediaType: {
   REVIEW_VIDEO: 'REVIEW_VIDEO',
   AVATAR: 'AVATAR',
   CATEGORY_IMAGE: 'CATEGORY_IMAGE',
-  BRAND_LOGO: 'BRAND_LOGO'
+  BRAND_LOGO: 'BRAND_LOGO',
+  BANNER_IMAGE: 'BANNER_IMAGE'
 };
 
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
@@ -284,7 +317,23 @@ export const ProductBadgeVariant: {
 
 export type ProductBadgeVariant = (typeof ProductBadgeVariant)[keyof typeof ProductBadgeVariant]
 
+
+export const ProductInventoryDisplayStatus: {
+  IN_STOCK: 'IN_STOCK',
+  OUT_OF_STOCK: 'OUT_OF_STOCK'
+};
+
+export type ProductInventoryDisplayStatus = (typeof ProductInventoryDisplayStatus)[keyof typeof ProductInventoryDisplayStatus]
+
 }
+
+export type BannerType = $Enums.BannerType
+
+export const BannerType: typeof $Enums.BannerType
+
+export type BannerPosition = $Enums.BannerPosition
+
+export const BannerPosition: typeof $Enums.BannerPosition
 
 export type EmailVerificationAction = $Enums.EmailVerificationAction
 
@@ -321,6 +370,10 @@ export const ProductBadgeType: typeof $Enums.ProductBadgeType
 export type ProductBadgeVariant = $Enums.ProductBadgeVariant
 
 export const ProductBadgeVariant: typeof $Enums.ProductBadgeVariant
+
+export type ProductInventoryDisplayStatus = $Enums.ProductInventoryDisplayStatus
+
+export const ProductInventoryDisplayStatus: typeof $Enums.ProductInventoryDisplayStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -488,6 +541,36 @@ export class PrismaClient<
     * ```
     */
   get commissionRate(): Prisma.CommissionRateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bannerGroup`: Exposes CRUD operations for the **BannerGroup** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BannerGroups
+    * const bannerGroups = await prisma.bannerGroup.findMany()
+    * ```
+    */
+  get bannerGroup(): Prisma.BannerGroupDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.banner`: Exposes CRUD operations for the **Banner** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Banners
+    * const banners = await prisma.banner.findMany()
+    * ```
+    */
+  get banner(): Prisma.BannerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bannerGroupMapping`: Exposes CRUD operations for the **BannerGroupMapping** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BannerGroupMappings
+    * const bannerGroupMappings = await prisma.bannerGroupMapping.findMany()
+    * ```
+    */
+  get bannerGroupMapping(): Prisma.BannerGroupMappingDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.emailVerificationLog`: Exposes CRUD operations for the **EmailVerificationLog** model.
@@ -1217,6 +1300,9 @@ export namespace Prisma {
     AffiliateLink: 'AffiliateLink',
     AffiliateCommission: 'AffiliateCommission',
     CommissionRate: 'CommissionRate',
+    BannerGroup: 'BannerGroup',
+    Banner: 'Banner',
+    BannerGroupMapping: 'BannerGroupMapping',
     EmailVerificationLog: 'EmailVerificationLog',
     FlashSale: 'FlashSale',
     FlashSaleProduct: 'FlashSaleProduct',
@@ -1261,7 +1347,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
+      modelProps: "address" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1632,6 +1718,228 @@ export namespace Prisma {
           count: {
             args: Prisma.CommissionRateCountArgs<ExtArgs>
             result: $Utils.Optional<CommissionRateCountAggregateOutputType> | number
+          }
+        }
+      }
+      BannerGroup: {
+        payload: Prisma.$BannerGroupPayload<ExtArgs>
+        fields: Prisma.BannerGroupFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerGroupFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerGroupFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerGroupFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerGroupFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          findMany: {
+            args: Prisma.BannerGroupFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>[]
+          }
+          create: {
+            args: Prisma.BannerGroupCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          createMany: {
+            args: Prisma.BannerGroupCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerGroupCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerGroupDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          update: {
+            args: Prisma.BannerGroupUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerGroupDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerGroupUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerGroupUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerGroupUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerGroupAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBannerGroup>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerGroupCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupCountAggregateOutputType> | number
+          }
+        }
+      }
+      Banner: {
+        payload: Prisma.$BannerPayload<ExtArgs>
+        fields: Prisma.BannerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          findMany: {
+            args: Prisma.BannerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          create: {
+            args: Prisma.BannerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          createMany: {
+            args: Prisma.BannerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          update: {
+            args: Prisma.BannerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBanner>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerCountAggregateOutputType> | number
+          }
+        }
+      }
+      BannerGroupMapping: {
+        payload: Prisma.$BannerGroupMappingPayload<ExtArgs>
+        fields: Prisma.BannerGroupMappingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BannerGroupMappingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BannerGroupMappingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          findFirst: {
+            args: Prisma.BannerGroupMappingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BannerGroupMappingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          findMany: {
+            args: Prisma.BannerGroupMappingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>[]
+          }
+          create: {
+            args: Prisma.BannerGroupMappingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          createMany: {
+            args: Prisma.BannerGroupMappingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BannerGroupMappingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>[]
+          }
+          delete: {
+            args: Prisma.BannerGroupMappingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          update: {
+            args: Prisma.BannerGroupMappingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          deleteMany: {
+            args: Prisma.BannerGroupMappingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BannerGroupMappingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BannerGroupMappingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>[]
+          }
+          upsert: {
+            args: Prisma.BannerGroupMappingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BannerGroupMappingPayload>
+          }
+          aggregate: {
+            args: Prisma.BannerGroupMappingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBannerGroupMapping>
+          }
+          groupBy: {
+            args: Prisma.BannerGroupMappingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupMappingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BannerGroupMappingCountArgs<ExtArgs>
+            result: $Utils.Optional<BannerGroupMappingCountAggregateOutputType> | number
           }
         }
       }
@@ -3878,6 +4186,9 @@ export namespace Prisma {
     affiliateLink?: AffiliateLinkOmit
     affiliateCommission?: AffiliateCommissionOmit
     commissionRate?: CommissionRateOmit
+    bannerGroup?: BannerGroupOmit
+    banner?: BannerOmit
+    bannerGroupMapping?: BannerGroupMappingOmit
     emailVerificationLog?: EmailVerificationLogOmit
     flashSale?: FlashSaleOmit
     flashSaleProduct?: FlashSaleProductOmit
@@ -4054,6 +4365,68 @@ export namespace Prisma {
 
 
   /**
+   * Count Type BannerGroupCountOutputType
+   */
+
+  export type BannerGroupCountOutputType = {
+    banners: number
+  }
+
+  export type BannerGroupCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banners?: boolean | BannerGroupCountOutputTypeCountBannersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BannerGroupCountOutputType without action
+   */
+  export type BannerGroupCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupCountOutputType
+     */
+    select?: BannerGroupCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BannerGroupCountOutputType without action
+   */
+  export type BannerGroupCountOutputTypeCountBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupMappingWhereInput
+  }
+
+
+  /**
+   * Count Type BannerCountOutputType
+   */
+
+  export type BannerCountOutputType = {
+    groups: number
+  }
+
+  export type BannerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | BannerCountOutputTypeCountGroupsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BannerCountOutputType without action
+   */
+  export type BannerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerCountOutputType
+     */
+    select?: BannerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BannerCountOutputType without action
+   */
+  export type BannerCountOutputTypeCountGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupMappingWhereInput
+  }
+
+
+  /**
    * Count Type FlashSaleCountOutputType
    */
 
@@ -4103,6 +4476,7 @@ export namespace Prisma {
     userAvatars: number
     categories: number
     brands: number
+    banners: number
   }
 
   export type MediaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4111,6 +4485,7 @@ export namespace Prisma {
     userAvatars?: boolean | MediaCountOutputTypeCountUserAvatarsArgs
     categories?: boolean | MediaCountOutputTypeCountCategoriesArgs
     brands?: boolean | MediaCountOutputTypeCountBrandsArgs
+    banners?: boolean | MediaCountOutputTypeCountBannersArgs
   }
 
   // Custom InputTypes
@@ -4157,6 +4532,13 @@ export namespace Prisma {
    */
   export type MediaCountOutputTypeCountBrandsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BrandWhereInput
+  }
+
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeCountBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerWhereInput
   }
 
 
@@ -10564,6 +10946,3525 @@ export namespace Prisma {
 
 
   /**
+   * Model BannerGroup
+   */
+
+  export type AggregateBannerGroup = {
+    _count: BannerGroupCountAggregateOutputType | null
+    _min: BannerGroupMinAggregateOutputType | null
+    _max: BannerGroupMaxAggregateOutputType | null
+  }
+
+  export type BannerGroupMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    isActive: boolean | null
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerGroupMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    isActive: boolean | null
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerGroupCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    description: number
+    isActive: number
+    startDate: number
+    endDate: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BannerGroupMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerGroupMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerGroupCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    startDate?: true
+    endDate?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BannerGroupAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroup to aggregate.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BannerGroups
+    **/
+    _count?: true | BannerGroupCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerGroupMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerGroupMaxAggregateInputType
+  }
+
+  export type GetBannerGroupAggregateType<T extends BannerGroupAggregateArgs> = {
+        [P in keyof T & keyof AggregateBannerGroup]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBannerGroup[P]>
+      : GetScalarType<T[P], AggregateBannerGroup[P]>
+  }
+
+
+
+
+  export type BannerGroupGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupWhereInput
+    orderBy?: BannerGroupOrderByWithAggregationInput | BannerGroupOrderByWithAggregationInput[]
+    by: BannerGroupScalarFieldEnum[] | BannerGroupScalarFieldEnum
+    having?: BannerGroupScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerGroupCountAggregateInputType | true
+    _min?: BannerGroupMinAggregateInputType
+    _max?: BannerGroupMaxAggregateInputType
+  }
+
+  export type BannerGroupGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    description: string | null
+    isActive: boolean
+    startDate: Date | null
+    endDate: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BannerGroupCountAggregateOutputType | null
+    _min: BannerGroupMinAggregateOutputType | null
+    _max: BannerGroupMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupGroupByPayload<T extends BannerGroupGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerGroupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    banners?: boolean | BannerGroup$bannersArgs<ExtArgs>
+    _count?: boolean | BannerGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroup"]>
+
+  export type BannerGroupSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bannerGroup"]>
+
+  export type BannerGroupSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["bannerGroup"]>
+
+  export type BannerGroupSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BannerGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "isActive" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["bannerGroup"]>
+  export type BannerGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banners?: boolean | BannerGroup$bannersArgs<ExtArgs>
+    _count?: boolean | BannerGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BannerGroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type BannerGroupIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $BannerGroupPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BannerGroup"
+    objects: {
+      banners: Prisma.$BannerGroupMappingPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      description: string | null
+      isActive: boolean
+      startDate: Date | null
+      endDate: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["bannerGroup"]>
+    composites: {}
+  }
+
+  type BannerGroupGetPayload<S extends boolean | null | undefined | BannerGroupDefaultArgs> = $Result.GetResult<Prisma.$BannerGroupPayload, S>
+
+  type BannerGroupCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerGroupFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerGroupCountAggregateInputType | true
+    }
+
+  export interface BannerGroupDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BannerGroup'], meta: { name: 'BannerGroup' } }
+    /**
+     * Find zero or one BannerGroup that matches the filter.
+     * @param {BannerGroupFindUniqueArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerGroupFindUniqueArgs>(args: SelectSubset<T, BannerGroupFindUniqueArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BannerGroup that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerGroupFindUniqueOrThrowArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerGroupFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerGroupFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroup that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupFindFirstArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerGroupFindFirstArgs>(args?: SelectSubset<T, BannerGroupFindFirstArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroup that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupFindFirstOrThrowArgs} args - Arguments to find a BannerGroup
+     * @example
+     * // Get one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerGroupFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerGroupFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BannerGroups that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BannerGroups
+     * const bannerGroups = await prisma.bannerGroup.findMany()
+     * 
+     * // Get first 10 BannerGroups
+     * const bannerGroups = await prisma.bannerGroup.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerGroupWithIdOnly = await prisma.bannerGroup.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerGroupFindManyArgs>(args?: SelectSubset<T, BannerGroupFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BannerGroup.
+     * @param {BannerGroupCreateArgs} args - Arguments to create a BannerGroup.
+     * @example
+     * // Create one BannerGroup
+     * const BannerGroup = await prisma.bannerGroup.create({
+     *   data: {
+     *     // ... data to create a BannerGroup
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerGroupCreateArgs>(args: SelectSubset<T, BannerGroupCreateArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BannerGroups.
+     * @param {BannerGroupCreateManyArgs} args - Arguments to create many BannerGroups.
+     * @example
+     * // Create many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerGroupCreateManyArgs>(args?: SelectSubset<T, BannerGroupCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BannerGroups and returns the data saved in the database.
+     * @param {BannerGroupCreateManyAndReturnArgs} args - Arguments to create many BannerGroups.
+     * @example
+     * // Create many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BannerGroups and only return the `id`
+     * const bannerGroupWithIdOnly = await prisma.bannerGroup.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerGroupCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerGroupCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BannerGroup.
+     * @param {BannerGroupDeleteArgs} args - Arguments to delete one BannerGroup.
+     * @example
+     * // Delete one BannerGroup
+     * const BannerGroup = await prisma.bannerGroup.delete({
+     *   where: {
+     *     // ... filter to delete one BannerGroup
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerGroupDeleteArgs>(args: SelectSubset<T, BannerGroupDeleteArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BannerGroup.
+     * @param {BannerGroupUpdateArgs} args - Arguments to update one BannerGroup.
+     * @example
+     * // Update one BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerGroupUpdateArgs>(args: SelectSubset<T, BannerGroupUpdateArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BannerGroups.
+     * @param {BannerGroupDeleteManyArgs} args - Arguments to filter BannerGroups to delete.
+     * @example
+     * // Delete a few BannerGroups
+     * const { count } = await prisma.bannerGroup.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerGroupDeleteManyArgs>(args?: SelectSubset<T, BannerGroupDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerGroupUpdateManyArgs>(args: SelectSubset<T, BannerGroupUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroups and returns the data updated in the database.
+     * @param {BannerGroupUpdateManyAndReturnArgs} args - Arguments to update many BannerGroups.
+     * @example
+     * // Update many BannerGroups
+     * const bannerGroup = await prisma.bannerGroup.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BannerGroups and only return the `id`
+     * const bannerGroupWithIdOnly = await prisma.bannerGroup.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerGroupUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerGroupUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BannerGroup.
+     * @param {BannerGroupUpsertArgs} args - Arguments to update or create a BannerGroup.
+     * @example
+     * // Update or create a BannerGroup
+     * const bannerGroup = await prisma.bannerGroup.upsert({
+     *   create: {
+     *     // ... data to create a BannerGroup
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BannerGroup we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerGroupUpsertArgs>(args: SelectSubset<T, BannerGroupUpsertArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BannerGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupCountArgs} args - Arguments to filter BannerGroups to count.
+     * @example
+     * // Count the number of BannerGroups
+     * const count = await prisma.bannerGroup.count({
+     *   where: {
+     *     // ... the filter for the BannerGroups we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerGroupCountArgs>(
+      args?: Subset<T, BannerGroupCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerGroupCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BannerGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerGroupAggregateArgs>(args: Subset<T, BannerGroupAggregateArgs>): Prisma.PrismaPromise<GetBannerGroupAggregateType<T>>
+
+    /**
+     * Group by BannerGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BannerGroup model
+   */
+  readonly fields: BannerGroupFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BannerGroup.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerGroupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    banners<T extends BannerGroup$bannersArgs<ExtArgs> = {}>(args?: Subset<T, BannerGroup$bannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BannerGroup model
+   */
+  interface BannerGroupFieldRefs {
+    readonly id: FieldRef<"BannerGroup", 'String'>
+    readonly name: FieldRef<"BannerGroup", 'String'>
+    readonly slug: FieldRef<"BannerGroup", 'String'>
+    readonly description: FieldRef<"BannerGroup", 'String'>
+    readonly isActive: FieldRef<"BannerGroup", 'Boolean'>
+    readonly startDate: FieldRef<"BannerGroup", 'DateTime'>
+    readonly endDate: FieldRef<"BannerGroup", 'DateTime'>
+    readonly createdAt: FieldRef<"BannerGroup", 'DateTime'>
+    readonly updatedAt: FieldRef<"BannerGroup", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BannerGroup findUnique
+   */
+  export type BannerGroupFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup findUniqueOrThrow
+   */
+  export type BannerGroupFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup findFirst
+   */
+  export type BannerGroupFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroups.
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroups.
+     */
+    distinct?: BannerGroupScalarFieldEnum | BannerGroupScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup findFirstOrThrow
+   */
+  export type BannerGroupFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroup to fetch.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroups.
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroups.
+     */
+    distinct?: BannerGroupScalarFieldEnum | BannerGroupScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup findMany
+   */
+  export type BannerGroupFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroups to fetch.
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroups to fetch.
+     */
+    orderBy?: BannerGroupOrderByWithRelationInput | BannerGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BannerGroups.
+     */
+    cursor?: BannerGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroups.
+     */
+    skip?: number
+    distinct?: BannerGroupScalarFieldEnum | BannerGroupScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup create
+   */
+  export type BannerGroupCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BannerGroup.
+     */
+    data: XOR<BannerGroupCreateInput, BannerGroupUncheckedCreateInput>
+  }
+
+  /**
+   * BannerGroup createMany
+   */
+  export type BannerGroupCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BannerGroups.
+     */
+    data: BannerGroupCreateManyInput | BannerGroupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BannerGroup createManyAndReturn
+   */
+  export type BannerGroupCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * The data used to create many BannerGroups.
+     */
+    data: BannerGroupCreateManyInput | BannerGroupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BannerGroup update
+   */
+  export type BannerGroupUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BannerGroup.
+     */
+    data: XOR<BannerGroupUpdateInput, BannerGroupUncheckedUpdateInput>
+    /**
+     * Choose, which BannerGroup to update.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup updateMany
+   */
+  export type BannerGroupUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BannerGroups.
+     */
+    data: XOR<BannerGroupUpdateManyMutationInput, BannerGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroups to update
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * Limit how many BannerGroups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroup updateManyAndReturn
+   */
+  export type BannerGroupUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * The data used to update BannerGroups.
+     */
+    data: XOR<BannerGroupUpdateManyMutationInput, BannerGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroups to update
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * Limit how many BannerGroups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroup upsert
+   */
+  export type BannerGroupUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BannerGroup to update in case it exists.
+     */
+    where: BannerGroupWhereUniqueInput
+    /**
+     * In case the BannerGroup found by the `where` argument doesn't exist, create a new BannerGroup with this data.
+     */
+    create: XOR<BannerGroupCreateInput, BannerGroupUncheckedCreateInput>
+    /**
+     * In case the BannerGroup was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerGroupUpdateInput, BannerGroupUncheckedUpdateInput>
+  }
+
+  /**
+   * BannerGroup delete
+   */
+  export type BannerGroupDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+    /**
+     * Filter which BannerGroup to delete.
+     */
+    where: BannerGroupWhereUniqueInput
+  }
+
+  /**
+   * BannerGroup deleteMany
+   */
+  export type BannerGroupDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroups to delete
+     */
+    where?: BannerGroupWhereInput
+    /**
+     * Limit how many BannerGroups to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroup.banners
+   */
+  export type BannerGroup$bannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    where?: BannerGroupMappingWhereInput
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    cursor?: BannerGroupMappingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroup without action
+   */
+  export type BannerGroupDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroup
+     */
+    select?: BannerGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroup
+     */
+    omit?: BannerGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Banner
+   */
+
+  export type AggregateBanner = {
+    _count: BannerCountAggregateOutputType | null
+    _avg: BannerAvgAggregateOutputType | null
+    _sum: BannerSumAggregateOutputType | null
+    _min: BannerMinAggregateOutputType | null
+    _max: BannerMaxAggregateOutputType | null
+  }
+
+  export type BannerAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.BannerType | null
+    position: $Enums.BannerPosition | null
+    badge: string | null
+    title: string | null
+    description: string | null
+    highlight: string | null
+    ctaText: string | null
+    ctaLink: string | null
+    subLabel: string | null
+    gradientFrom: string | null
+    gradientTo: string | null
+    imageMediaId: string | null
+    sortOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.BannerType | null
+    position: $Enums.BannerPosition | null
+    badge: string | null
+    title: string | null
+    description: string | null
+    highlight: string | null
+    ctaText: string | null
+    ctaLink: string | null
+    subLabel: string | null
+    gradientFrom: string | null
+    gradientTo: string | null
+    imageMediaId: string | null
+    sortOrder: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BannerCountAggregateOutputType = {
+    id: number
+    type: number
+    position: number
+    badge: number
+    title: number
+    description: number
+    highlight: number
+    ctaText: number
+    ctaLink: number
+    subLabel: number
+    gradientFrom: number
+    gradientTo: number
+    imageMediaId: number
+    sortOrder: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BannerAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerMinAggregateInputType = {
+    id?: true
+    type?: true
+    position?: true
+    badge?: true
+    title?: true
+    description?: true
+    highlight?: true
+    ctaText?: true
+    ctaLink?: true
+    subLabel?: true
+    gradientFrom?: true
+    gradientTo?: true
+    imageMediaId?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerMaxAggregateInputType = {
+    id?: true
+    type?: true
+    position?: true
+    badge?: true
+    title?: true
+    description?: true
+    highlight?: true
+    ctaText?: true
+    ctaLink?: true
+    subLabel?: true
+    gradientFrom?: true
+    gradientTo?: true
+    imageMediaId?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BannerCountAggregateInputType = {
+    id?: true
+    type?: true
+    position?: true
+    badge?: true
+    title?: true
+    description?: true
+    highlight?: true
+    ctaText?: true
+    ctaLink?: true
+    subLabel?: true
+    gradientFrom?: true
+    gradientTo?: true
+    imageMediaId?: true
+    sortOrder?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BannerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Banner to aggregate.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Banners
+    **/
+    _count?: true | BannerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BannerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BannerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerMaxAggregateInputType
+  }
+
+  export type GetBannerAggregateType<T extends BannerAggregateArgs> = {
+        [P in keyof T & keyof AggregateBanner]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBanner[P]>
+      : GetScalarType<T[P], AggregateBanner[P]>
+  }
+
+
+
+
+  export type BannerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerWhereInput
+    orderBy?: BannerOrderByWithAggregationInput | BannerOrderByWithAggregationInput[]
+    by: BannerScalarFieldEnum[] | BannerScalarFieldEnum
+    having?: BannerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerCountAggregateInputType | true
+    _avg?: BannerAvgAggregateInputType
+    _sum?: BannerSumAggregateInputType
+    _min?: BannerMinAggregateInputType
+    _max?: BannerMaxAggregateInputType
+  }
+
+  export type BannerGroupByOutputType = {
+    id: string
+    type: $Enums.BannerType
+    position: $Enums.BannerPosition
+    badge: string | null
+    title: string | null
+    description: string | null
+    highlight: string | null
+    ctaText: string | null
+    ctaLink: string | null
+    subLabel: string | null
+    gradientFrom: string | null
+    gradientTo: string | null
+    imageMediaId: string | null
+    sortOrder: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: BannerCountAggregateOutputType | null
+    _avg: BannerAvgAggregateOutputType | null
+    _sum: BannerSumAggregateOutputType | null
+    _min: BannerMinAggregateOutputType | null
+    _max: BannerMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupByPayload<T extends BannerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    groups?: boolean | Banner$groupsArgs<ExtArgs>
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+    _count?: boolean | BannerCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }, ExtArgs["result"]["banner"]>
+
+  export type BannerSelectScalar = {
+    id?: boolean
+    type?: boolean
+    position?: boolean
+    badge?: boolean
+    title?: boolean
+    description?: boolean
+    highlight?: boolean
+    ctaText?: boolean
+    ctaLink?: boolean
+    subLabel?: boolean
+    gradientFrom?: boolean
+    gradientTo?: boolean
+    imageMediaId?: boolean
+    sortOrder?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "position" | "badge" | "title" | "description" | "highlight" | "ctaText" | "ctaLink" | "subLabel" | "gradientFrom" | "gradientTo" | "imageMediaId" | "sortOrder" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
+  export type BannerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groups?: boolean | Banner$groupsArgs<ExtArgs>
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+    _count?: boolean | BannerCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BannerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }
+  export type BannerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
+  }
+
+  export type $BannerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Banner"
+    objects: {
+      groups: Prisma.$BannerGroupMappingPayload<ExtArgs>[]
+      imageMedia: Prisma.$MediaPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.BannerType
+      position: $Enums.BannerPosition
+      badge: string | null
+      title: string | null
+      description: string | null
+      highlight: string | null
+      ctaText: string | null
+      ctaLink: string | null
+      subLabel: string | null
+      gradientFrom: string | null
+      gradientTo: string | null
+      imageMediaId: string | null
+      sortOrder: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["banner"]>
+    composites: {}
+  }
+
+  type BannerGetPayload<S extends boolean | null | undefined | BannerDefaultArgs> = $Result.GetResult<Prisma.$BannerPayload, S>
+
+  type BannerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerCountAggregateInputType | true
+    }
+
+  export interface BannerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Banner'], meta: { name: 'Banner' } }
+    /**
+     * Find zero or one Banner that matches the filter.
+     * @param {BannerFindUniqueArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerFindUniqueArgs>(args: SelectSubset<T, BannerFindUniqueArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Banner that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerFindUniqueOrThrowArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Banner that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindFirstArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerFindFirstArgs>(args?: SelectSubset<T, BannerFindFirstArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Banner that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindFirstOrThrowArgs} args - Arguments to find a Banner
+     * @example
+     * // Get one Banner
+     * const banner = await prisma.banner.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Banners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Banners
+     * const banners = await prisma.banner.findMany()
+     * 
+     * // Get first 10 Banners
+     * const banners = await prisma.banner.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerWithIdOnly = await prisma.banner.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerFindManyArgs>(args?: SelectSubset<T, BannerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Banner.
+     * @param {BannerCreateArgs} args - Arguments to create a Banner.
+     * @example
+     * // Create one Banner
+     * const Banner = await prisma.banner.create({
+     *   data: {
+     *     // ... data to create a Banner
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerCreateArgs>(args: SelectSubset<T, BannerCreateArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Banners.
+     * @param {BannerCreateManyArgs} args - Arguments to create many Banners.
+     * @example
+     * // Create many Banners
+     * const banner = await prisma.banner.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerCreateManyArgs>(args?: SelectSubset<T, BannerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Banners and returns the data saved in the database.
+     * @param {BannerCreateManyAndReturnArgs} args - Arguments to create many Banners.
+     * @example
+     * // Create many Banners
+     * const banner = await prisma.banner.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Banners and only return the `id`
+     * const bannerWithIdOnly = await prisma.banner.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Banner.
+     * @param {BannerDeleteArgs} args - Arguments to delete one Banner.
+     * @example
+     * // Delete one Banner
+     * const Banner = await prisma.banner.delete({
+     *   where: {
+     *     // ... filter to delete one Banner
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerDeleteArgs>(args: SelectSubset<T, BannerDeleteArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Banner.
+     * @param {BannerUpdateArgs} args - Arguments to update one Banner.
+     * @example
+     * // Update one Banner
+     * const banner = await prisma.banner.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerUpdateArgs>(args: SelectSubset<T, BannerUpdateArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Banners.
+     * @param {BannerDeleteManyArgs} args - Arguments to filter Banners to delete.
+     * @example
+     * // Delete a few Banners
+     * const { count } = await prisma.banner.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerDeleteManyArgs>(args?: SelectSubset<T, BannerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Banners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Banners
+     * const banner = await prisma.banner.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerUpdateManyArgs>(args: SelectSubset<T, BannerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Banners and returns the data updated in the database.
+     * @param {BannerUpdateManyAndReturnArgs} args - Arguments to update many Banners.
+     * @example
+     * // Update many Banners
+     * const banner = await prisma.banner.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Banners and only return the `id`
+     * const bannerWithIdOnly = await prisma.banner.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Banner.
+     * @param {BannerUpsertArgs} args - Arguments to update or create a Banner.
+     * @example
+     * // Update or create a Banner
+     * const banner = await prisma.banner.upsert({
+     *   create: {
+     *     // ... data to create a Banner
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Banner we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerUpsertArgs>(args: SelectSubset<T, BannerUpsertArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Banners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerCountArgs} args - Arguments to filter Banners to count.
+     * @example
+     * // Count the number of Banners
+     * const count = await prisma.banner.count({
+     *   where: {
+     *     // ... the filter for the Banners we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerCountArgs>(
+      args?: Subset<T, BannerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Banner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerAggregateArgs>(args: Subset<T, BannerAggregateArgs>): Prisma.PrismaPromise<GetBannerAggregateType<T>>
+
+    /**
+     * Group by Banner.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Banner model
+   */
+  readonly fields: BannerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Banner.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    groups<T extends Banner$groupsArgs<ExtArgs> = {}>(args?: Subset<T, Banner$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    imageMedia<T extends Banner$imageMediaArgs<ExtArgs> = {}>(args?: Subset<T, Banner$imageMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Banner model
+   */
+  interface BannerFieldRefs {
+    readonly id: FieldRef<"Banner", 'String'>
+    readonly type: FieldRef<"Banner", 'BannerType'>
+    readonly position: FieldRef<"Banner", 'BannerPosition'>
+    readonly badge: FieldRef<"Banner", 'String'>
+    readonly title: FieldRef<"Banner", 'String'>
+    readonly description: FieldRef<"Banner", 'String'>
+    readonly highlight: FieldRef<"Banner", 'String'>
+    readonly ctaText: FieldRef<"Banner", 'String'>
+    readonly ctaLink: FieldRef<"Banner", 'String'>
+    readonly subLabel: FieldRef<"Banner", 'String'>
+    readonly gradientFrom: FieldRef<"Banner", 'String'>
+    readonly gradientTo: FieldRef<"Banner", 'String'>
+    readonly imageMediaId: FieldRef<"Banner", 'String'>
+    readonly sortOrder: FieldRef<"Banner", 'Int'>
+    readonly isActive: FieldRef<"Banner", 'Boolean'>
+    readonly createdAt: FieldRef<"Banner", 'DateTime'>
+    readonly updatedAt: FieldRef<"Banner", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Banner findUnique
+   */
+  export type BannerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner findUniqueOrThrow
+   */
+  export type BannerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner findFirst
+   */
+  export type BannerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Banners.
+     */
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner findFirstOrThrow
+   */
+  export type BannerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banner to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Banners.
+     */
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner findMany
+   */
+  export type BannerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter, which Banners to fetch.
+     */
+    where?: BannerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Banners to fetch.
+     */
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Banners.
+     */
+    cursor?: BannerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Banners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Banners.
+     */
+    skip?: number
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
+  }
+
+  /**
+   * Banner create
+   */
+  export type BannerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Banner.
+     */
+    data: XOR<BannerCreateInput, BannerUncheckedCreateInput>
+  }
+
+  /**
+   * Banner createMany
+   */
+  export type BannerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Banners.
+     */
+    data: BannerCreateManyInput | BannerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Banner createManyAndReturn
+   */
+  export type BannerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data used to create many Banners.
+     */
+    data: BannerCreateManyInput | BannerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Banner update
+   */
+  export type BannerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Banner.
+     */
+    data: XOR<BannerUpdateInput, BannerUncheckedUpdateInput>
+    /**
+     * Choose, which Banner to update.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner updateMany
+   */
+  export type BannerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Banners.
+     */
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyInput>
+    /**
+     * Filter which Banners to update
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner updateManyAndReturn
+   */
+  export type BannerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * The data used to update Banners.
+     */
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyInput>
+    /**
+     * Filter which Banners to update
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Banner upsert
+   */
+  export type BannerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Banner to update in case it exists.
+     */
+    where: BannerWhereUniqueInput
+    /**
+     * In case the Banner found by the `where` argument doesn't exist, create a new Banner with this data.
+     */
+    create: XOR<BannerCreateInput, BannerUncheckedCreateInput>
+    /**
+     * In case the Banner was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerUpdateInput, BannerUncheckedUpdateInput>
+  }
+
+  /**
+   * Banner delete
+   */
+  export type BannerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    /**
+     * Filter which Banner to delete.
+     */
+    where: BannerWhereUniqueInput
+  }
+
+  /**
+   * Banner deleteMany
+   */
+  export type BannerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Banners to delete
+     */
+    where?: BannerWhereInput
+    /**
+     * Limit how many Banners to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Banner.groups
+   */
+  export type Banner$groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    where?: BannerGroupMappingWhereInput
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    cursor?: BannerGroupMappingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * Banner.imageMedia
+   */
+  export type Banner$imageMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+  }
+
+  /**
+   * Banner without action
+   */
+  export type BannerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BannerGroupMapping
+   */
+
+  export type AggregateBannerGroupMapping = {
+    _count: BannerGroupMappingCountAggregateOutputType | null
+    _avg: BannerGroupMappingAvgAggregateOutputType | null
+    _sum: BannerGroupMappingSumAggregateOutputType | null
+    _min: BannerGroupMappingMinAggregateOutputType | null
+    _max: BannerGroupMappingMaxAggregateOutputType | null
+  }
+
+  export type BannerGroupMappingAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerGroupMappingSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type BannerGroupMappingMinAggregateOutputType = {
+    id: string | null
+    bannerId: string | null
+    bannerGroupId: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+  }
+
+  export type BannerGroupMappingMaxAggregateOutputType = {
+    id: string | null
+    bannerId: string | null
+    bannerGroupId: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+  }
+
+  export type BannerGroupMappingCountAggregateOutputType = {
+    id: number
+    bannerId: number
+    bannerGroupId: number
+    sortOrder: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BannerGroupMappingAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerGroupMappingSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type BannerGroupMappingMinAggregateInputType = {
+    id?: true
+    bannerId?: true
+    bannerGroupId?: true
+    sortOrder?: true
+    createdAt?: true
+  }
+
+  export type BannerGroupMappingMaxAggregateInputType = {
+    id?: true
+    bannerId?: true
+    bannerGroupId?: true
+    sortOrder?: true
+    createdAt?: true
+  }
+
+  export type BannerGroupMappingCountAggregateInputType = {
+    id?: true
+    bannerId?: true
+    bannerGroupId?: true
+    sortOrder?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BannerGroupMappingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroupMapping to aggregate.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BannerGroupMappings
+    **/
+    _count?: true | BannerGroupMappingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BannerGroupMappingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BannerGroupMappingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BannerGroupMappingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BannerGroupMappingMaxAggregateInputType
+  }
+
+  export type GetBannerGroupMappingAggregateType<T extends BannerGroupMappingAggregateArgs> = {
+        [P in keyof T & keyof AggregateBannerGroupMapping]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBannerGroupMapping[P]>
+      : GetScalarType<T[P], AggregateBannerGroupMapping[P]>
+  }
+
+
+
+
+  export type BannerGroupMappingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BannerGroupMappingWhereInput
+    orderBy?: BannerGroupMappingOrderByWithAggregationInput | BannerGroupMappingOrderByWithAggregationInput[]
+    by: BannerGroupMappingScalarFieldEnum[] | BannerGroupMappingScalarFieldEnum
+    having?: BannerGroupMappingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BannerGroupMappingCountAggregateInputType | true
+    _avg?: BannerGroupMappingAvgAggregateInputType
+    _sum?: BannerGroupMappingSumAggregateInputType
+    _min?: BannerGroupMappingMinAggregateInputType
+    _max?: BannerGroupMappingMaxAggregateInputType
+  }
+
+  export type BannerGroupMappingGroupByOutputType = {
+    id: string
+    bannerId: string
+    bannerGroupId: string
+    sortOrder: number
+    createdAt: Date
+    _count: BannerGroupMappingCountAggregateOutputType | null
+    _avg: BannerGroupMappingAvgAggregateOutputType | null
+    _sum: BannerGroupMappingSumAggregateOutputType | null
+    _min: BannerGroupMappingMinAggregateOutputType | null
+    _max: BannerGroupMappingMaxAggregateOutputType | null
+  }
+
+  type GetBannerGroupMappingGroupByPayload<T extends BannerGroupMappingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BannerGroupMappingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BannerGroupMappingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BannerGroupMappingGroupByOutputType[P]>
+            : GetScalarType<T[P], BannerGroupMappingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BannerGroupMappingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroupMapping"]>
+
+  export type BannerGroupMappingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroupMapping"]>
+
+  export type BannerGroupMappingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bannerGroupMapping"]>
+
+  export type BannerGroupMappingSelectScalar = {
+    id?: boolean
+    bannerId?: boolean
+    bannerGroupId?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+  }
+
+  export type BannerGroupMappingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bannerId" | "bannerGroupId" | "sortOrder" | "createdAt", ExtArgs["result"]["bannerGroupMapping"]>
+  export type BannerGroupMappingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }
+  export type BannerGroupMappingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }
+  export type BannerGroupMappingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    banner?: boolean | BannerDefaultArgs<ExtArgs>
+    bannerGroup?: boolean | BannerGroupDefaultArgs<ExtArgs>
+  }
+
+  export type $BannerGroupMappingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BannerGroupMapping"
+    objects: {
+      banner: Prisma.$BannerPayload<ExtArgs>
+      bannerGroup: Prisma.$BannerGroupPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      bannerId: string
+      bannerGroupId: string
+      sortOrder: number
+      createdAt: Date
+    }, ExtArgs["result"]["bannerGroupMapping"]>
+    composites: {}
+  }
+
+  type BannerGroupMappingGetPayload<S extends boolean | null | undefined | BannerGroupMappingDefaultArgs> = $Result.GetResult<Prisma.$BannerGroupMappingPayload, S>
+
+  type BannerGroupMappingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BannerGroupMappingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BannerGroupMappingCountAggregateInputType | true
+    }
+
+  export interface BannerGroupMappingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BannerGroupMapping'], meta: { name: 'BannerGroupMapping' } }
+    /**
+     * Find zero or one BannerGroupMapping that matches the filter.
+     * @param {BannerGroupMappingFindUniqueArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BannerGroupMappingFindUniqueArgs>(args: SelectSubset<T, BannerGroupMappingFindUniqueArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BannerGroupMapping that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BannerGroupMappingFindUniqueOrThrowArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BannerGroupMappingFindUniqueOrThrowArgs>(args: SelectSubset<T, BannerGroupMappingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroupMapping that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingFindFirstArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BannerGroupMappingFindFirstArgs>(args?: SelectSubset<T, BannerGroupMappingFindFirstArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BannerGroupMapping that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingFindFirstOrThrowArgs} args - Arguments to find a BannerGroupMapping
+     * @example
+     * // Get one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BannerGroupMappingFindFirstOrThrowArgs>(args?: SelectSubset<T, BannerGroupMappingFindFirstOrThrowArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BannerGroupMappings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BannerGroupMappings
+     * const bannerGroupMappings = await prisma.bannerGroupMapping.findMany()
+     * 
+     * // Get first 10 BannerGroupMappings
+     * const bannerGroupMappings = await prisma.bannerGroupMapping.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bannerGroupMappingWithIdOnly = await prisma.bannerGroupMapping.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BannerGroupMappingFindManyArgs>(args?: SelectSubset<T, BannerGroupMappingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BannerGroupMapping.
+     * @param {BannerGroupMappingCreateArgs} args - Arguments to create a BannerGroupMapping.
+     * @example
+     * // Create one BannerGroupMapping
+     * const BannerGroupMapping = await prisma.bannerGroupMapping.create({
+     *   data: {
+     *     // ... data to create a BannerGroupMapping
+     *   }
+     * })
+     * 
+     */
+    create<T extends BannerGroupMappingCreateArgs>(args: SelectSubset<T, BannerGroupMappingCreateArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BannerGroupMappings.
+     * @param {BannerGroupMappingCreateManyArgs} args - Arguments to create many BannerGroupMappings.
+     * @example
+     * // Create many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BannerGroupMappingCreateManyArgs>(args?: SelectSubset<T, BannerGroupMappingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BannerGroupMappings and returns the data saved in the database.
+     * @param {BannerGroupMappingCreateManyAndReturnArgs} args - Arguments to create many BannerGroupMappings.
+     * @example
+     * // Create many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BannerGroupMappings and only return the `id`
+     * const bannerGroupMappingWithIdOnly = await prisma.bannerGroupMapping.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BannerGroupMappingCreateManyAndReturnArgs>(args?: SelectSubset<T, BannerGroupMappingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BannerGroupMapping.
+     * @param {BannerGroupMappingDeleteArgs} args - Arguments to delete one BannerGroupMapping.
+     * @example
+     * // Delete one BannerGroupMapping
+     * const BannerGroupMapping = await prisma.bannerGroupMapping.delete({
+     *   where: {
+     *     // ... filter to delete one BannerGroupMapping
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BannerGroupMappingDeleteArgs>(args: SelectSubset<T, BannerGroupMappingDeleteArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BannerGroupMapping.
+     * @param {BannerGroupMappingUpdateArgs} args - Arguments to update one BannerGroupMapping.
+     * @example
+     * // Update one BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BannerGroupMappingUpdateArgs>(args: SelectSubset<T, BannerGroupMappingUpdateArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BannerGroupMappings.
+     * @param {BannerGroupMappingDeleteManyArgs} args - Arguments to filter BannerGroupMappings to delete.
+     * @example
+     * // Delete a few BannerGroupMappings
+     * const { count } = await prisma.bannerGroupMapping.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BannerGroupMappingDeleteManyArgs>(args?: SelectSubset<T, BannerGroupMappingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroupMappings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BannerGroupMappingUpdateManyArgs>(args: SelectSubset<T, BannerGroupMappingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BannerGroupMappings and returns the data updated in the database.
+     * @param {BannerGroupMappingUpdateManyAndReturnArgs} args - Arguments to update many BannerGroupMappings.
+     * @example
+     * // Update many BannerGroupMappings
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BannerGroupMappings and only return the `id`
+     * const bannerGroupMappingWithIdOnly = await prisma.bannerGroupMapping.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BannerGroupMappingUpdateManyAndReturnArgs>(args: SelectSubset<T, BannerGroupMappingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BannerGroupMapping.
+     * @param {BannerGroupMappingUpsertArgs} args - Arguments to update or create a BannerGroupMapping.
+     * @example
+     * // Update or create a BannerGroupMapping
+     * const bannerGroupMapping = await prisma.bannerGroupMapping.upsert({
+     *   create: {
+     *     // ... data to create a BannerGroupMapping
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BannerGroupMapping we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BannerGroupMappingUpsertArgs>(args: SelectSubset<T, BannerGroupMappingUpsertArgs<ExtArgs>>): Prisma__BannerGroupMappingClient<$Result.GetResult<Prisma.$BannerGroupMappingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BannerGroupMappings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingCountArgs} args - Arguments to filter BannerGroupMappings to count.
+     * @example
+     * // Count the number of BannerGroupMappings
+     * const count = await prisma.bannerGroupMapping.count({
+     *   where: {
+     *     // ... the filter for the BannerGroupMappings we want to count
+     *   }
+     * })
+    **/
+    count<T extends BannerGroupMappingCountArgs>(
+      args?: Subset<T, BannerGroupMappingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BannerGroupMappingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BannerGroupMapping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BannerGroupMappingAggregateArgs>(args: Subset<T, BannerGroupMappingAggregateArgs>): Prisma.PrismaPromise<GetBannerGroupMappingAggregateType<T>>
+
+    /**
+     * Group by BannerGroupMapping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BannerGroupMappingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BannerGroupMappingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BannerGroupMappingGroupByArgs['orderBy'] }
+        : { orderBy?: BannerGroupMappingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BannerGroupMappingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBannerGroupMappingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BannerGroupMapping model
+   */
+  readonly fields: BannerGroupMappingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BannerGroupMapping.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BannerGroupMappingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    banner<T extends BannerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BannerDefaultArgs<ExtArgs>>): Prisma__BannerClient<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bannerGroup<T extends BannerGroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BannerGroupDefaultArgs<ExtArgs>>): Prisma__BannerGroupClient<$Result.GetResult<Prisma.$BannerGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BannerGroupMapping model
+   */
+  interface BannerGroupMappingFieldRefs {
+    readonly id: FieldRef<"BannerGroupMapping", 'String'>
+    readonly bannerId: FieldRef<"BannerGroupMapping", 'String'>
+    readonly bannerGroupId: FieldRef<"BannerGroupMapping", 'String'>
+    readonly sortOrder: FieldRef<"BannerGroupMapping", 'Int'>
+    readonly createdAt: FieldRef<"BannerGroupMapping", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BannerGroupMapping findUnique
+   */
+  export type BannerGroupMappingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping findUniqueOrThrow
+   */
+  export type BannerGroupMappingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping findFirst
+   */
+  export type BannerGroupMappingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroupMappings.
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroupMappings.
+     */
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroupMapping findFirstOrThrow
+   */
+  export type BannerGroupMappingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMapping to fetch.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BannerGroupMappings.
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BannerGroupMappings.
+     */
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroupMapping findMany
+   */
+  export type BannerGroupMappingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter, which BannerGroupMappings to fetch.
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BannerGroupMappings to fetch.
+     */
+    orderBy?: BannerGroupMappingOrderByWithRelationInput | BannerGroupMappingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BannerGroupMappings.
+     */
+    cursor?: BannerGroupMappingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BannerGroupMappings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BannerGroupMappings.
+     */
+    skip?: number
+    distinct?: BannerGroupMappingScalarFieldEnum | BannerGroupMappingScalarFieldEnum[]
+  }
+
+  /**
+   * BannerGroupMapping create
+   */
+  export type BannerGroupMappingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BannerGroupMapping.
+     */
+    data: XOR<BannerGroupMappingCreateInput, BannerGroupMappingUncheckedCreateInput>
+  }
+
+  /**
+   * BannerGroupMapping createMany
+   */
+  export type BannerGroupMappingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BannerGroupMappings.
+     */
+    data: BannerGroupMappingCreateManyInput | BannerGroupMappingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BannerGroupMapping createManyAndReturn
+   */
+  export type BannerGroupMappingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * The data used to create many BannerGroupMappings.
+     */
+    data: BannerGroupMappingCreateManyInput | BannerGroupMappingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BannerGroupMapping update
+   */
+  export type BannerGroupMappingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BannerGroupMapping.
+     */
+    data: XOR<BannerGroupMappingUpdateInput, BannerGroupMappingUncheckedUpdateInput>
+    /**
+     * Choose, which BannerGroupMapping to update.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping updateMany
+   */
+  export type BannerGroupMappingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BannerGroupMappings.
+     */
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroupMappings to update
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * Limit how many BannerGroupMappings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroupMapping updateManyAndReturn
+   */
+  export type BannerGroupMappingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * The data used to update BannerGroupMappings.
+     */
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyInput>
+    /**
+     * Filter which BannerGroupMappings to update
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * Limit how many BannerGroupMappings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BannerGroupMapping upsert
+   */
+  export type BannerGroupMappingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BannerGroupMapping to update in case it exists.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+    /**
+     * In case the BannerGroupMapping found by the `where` argument doesn't exist, create a new BannerGroupMapping with this data.
+     */
+    create: XOR<BannerGroupMappingCreateInput, BannerGroupMappingUncheckedCreateInput>
+    /**
+     * In case the BannerGroupMapping was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BannerGroupMappingUpdateInput, BannerGroupMappingUncheckedUpdateInput>
+  }
+
+  /**
+   * BannerGroupMapping delete
+   */
+  export type BannerGroupMappingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+    /**
+     * Filter which BannerGroupMapping to delete.
+     */
+    where: BannerGroupMappingWhereUniqueInput
+  }
+
+  /**
+   * BannerGroupMapping deleteMany
+   */
+  export type BannerGroupMappingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BannerGroupMappings to delete
+     */
+    where?: BannerGroupMappingWhereInput
+    /**
+     * Limit how many BannerGroupMappings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BannerGroupMapping without action
+   */
+  export type BannerGroupMappingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BannerGroupMapping
+     */
+    select?: BannerGroupMappingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BannerGroupMapping
+     */
+    omit?: BannerGroupMappingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerGroupMappingInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model EmailVerificationLog
    */
 
@@ -15435,6 +19336,7 @@ export namespace Prisma {
     userAvatars?: boolean | Media$userAvatarsArgs<ExtArgs>
     categories?: boolean | Media$categoriesArgs<ExtArgs>
     brands?: boolean | Media$brandsArgs<ExtArgs>
+    banners?: boolean | Media$bannersArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
@@ -15490,6 +19392,7 @@ export namespace Prisma {
     userAvatars?: boolean | Media$userAvatarsArgs<ExtArgs>
     categories?: boolean | Media$categoriesArgs<ExtArgs>
     brands?: boolean | Media$brandsArgs<ExtArgs>
+    banners?: boolean | Media$bannersArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15508,6 +19411,7 @@ export namespace Prisma {
       userAvatars: Prisma.$UserPayload<ExtArgs>[]
       categories: Prisma.$CategoryPayload<ExtArgs>[]
       brands: Prisma.$BrandPayload<ExtArgs>[]
+      banners: Prisma.$BannerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15921,6 +19825,7 @@ export namespace Prisma {
     userAvatars<T extends Media$userAvatarsArgs<ExtArgs> = {}>(args?: Subset<T, Media$userAvatarsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends Media$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Media$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     brands<T extends Media$brandsArgs<ExtArgs> = {}>(args?: Subset<T, Media$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    banners<T extends Media$bannersArgs<ExtArgs> = {}>(args?: Subset<T, Media$bannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16493,6 +20398,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
+  }
+
+  /**
+   * Media.banners
+   */
+  export type Media$bannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Banner
+     */
+    select?: BannerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Banner
+     */
+    omit?: BannerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BannerInclude<ExtArgs> | null
+    where?: BannerWhereInput
+    orderBy?: BannerOrderByWithRelationInput | BannerOrderByWithRelationInput[]
+    cursor?: BannerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BannerScalarFieldEnum | BannerScalarFieldEnum[]
   }
 
   /**
@@ -31346,7 +35275,7 @@ export namespace Prisma {
     id: string | null
     variantId: string | null
     quantity: number | null
-    displayStatus: string | null
+    displayStatus: $Enums.ProductInventoryDisplayStatus | null
     lowStockThreshold: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -31356,7 +35285,7 @@ export namespace Prisma {
     id: string | null
     variantId: string | null
     quantity: number | null
-    displayStatus: string | null
+    displayStatus: $Enums.ProductInventoryDisplayStatus | null
     lowStockThreshold: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -31505,7 +35434,7 @@ export namespace Prisma {
     id: string
     variantId: string
     quantity: number
-    displayStatus: string
+    displayStatus: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold: number
     createdAt: Date
     updatedAt: Date
@@ -31593,7 +35522,7 @@ export namespace Prisma {
       id: string
       variantId: string
       quantity: number
-      displayStatus: string
+      displayStatus: $Enums.ProductInventoryDisplayStatus
       lowStockThreshold: number
       createdAt: Date
       updatedAt: Date
@@ -32024,7 +35953,7 @@ export namespace Prisma {
     readonly id: FieldRef<"ProductInventory", 'String'>
     readonly variantId: FieldRef<"ProductInventory", 'String'>
     readonly quantity: FieldRef<"ProductInventory", 'Int'>
-    readonly displayStatus: FieldRef<"ProductInventory", 'String'>
+    readonly displayStatus: FieldRef<"ProductInventory", 'ProductInventoryDisplayStatus'>
     readonly lowStockThreshold: FieldRef<"ProductInventory", 'Int'>
     readonly createdAt: FieldRef<"ProductInventory", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductInventory", 'DateTime'>
@@ -45073,6 +49002,55 @@ export namespace Prisma {
   export type CommissionRateScalarFieldEnum = (typeof CommissionRateScalarFieldEnum)[keyof typeof CommissionRateScalarFieldEnum]
 
 
+  export const BannerGroupScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    isActive: 'isActive',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BannerGroupScalarFieldEnum = (typeof BannerGroupScalarFieldEnum)[keyof typeof BannerGroupScalarFieldEnum]
+
+
+  export const BannerScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    position: 'position',
+    badge: 'badge',
+    title: 'title',
+    description: 'description',
+    highlight: 'highlight',
+    ctaText: 'ctaText',
+    ctaLink: 'ctaLink',
+    subLabel: 'subLabel',
+    gradientFrom: 'gradientFrom',
+    gradientTo: 'gradientTo',
+    imageMediaId: 'imageMediaId',
+    sortOrder: 'sortOrder',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BannerScalarFieldEnum = (typeof BannerScalarFieldEnum)[keyof typeof BannerScalarFieldEnum]
+
+
+  export const BannerGroupMappingScalarFieldEnum: {
+    id: 'id',
+    bannerId: 'bannerId',
+    bannerGroupId: 'bannerGroupId',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt'
+  };
+
+  export type BannerGroupMappingScalarFieldEnum = (typeof BannerGroupMappingScalarFieldEnum)[keyof typeof BannerGroupMappingScalarFieldEnum]
+
+
   export const EmailVerificationLogScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -45620,6 +49598,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'BannerType'
+   */
+  export type EnumBannerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerType'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerType[]'
+   */
+  export type ListEnumBannerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerPosition'
+   */
+  export type EnumBannerPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerPosition'>
+    
+
+
+  /**
+   * Reference to a field of type 'BannerPosition[]'
+   */
+  export type ListEnumBannerPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerPosition[]'>
+    
+
+
+  /**
    * Reference to a field of type 'EmailVerificationAction'
    */
   export type EnumEmailVerificationActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmailVerificationAction'>
@@ -45756,6 +49762,20 @@ export namespace Prisma {
    * Reference to a field of type 'ProductBadgeType[]'
    */
   export type ListEnumProductBadgeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductBadgeType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductInventoryDisplayStatus'
+   */
+  export type EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInventoryDisplayStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductInventoryDisplayStatus[]'
+   */
+  export type ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInventoryDisplayStatus[]'>
     
 
 
@@ -46191,6 +50211,262 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"CommissionRate"> | Date | string
   }
 
+  export type BannerGroupWhereInput = {
+    AND?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    OR?: BannerGroupWhereInput[]
+    NOT?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    id?: StringFilter<"BannerGroup"> | string
+    name?: StringFilter<"BannerGroup"> | string
+    slug?: StringFilter<"BannerGroup"> | string
+    description?: StringNullableFilter<"BannerGroup"> | string | null
+    isActive?: BoolFilter<"BannerGroup"> | boolean
+    startDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    createdAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    updatedAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    banners?: BannerGroupMappingListRelationFilter
+  }
+
+  export type BannerGroupOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    banners?: BannerGroupMappingOrderByRelationAggregateInput
+  }
+
+  export type BannerGroupWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    OR?: BannerGroupWhereInput[]
+    NOT?: BannerGroupWhereInput | BannerGroupWhereInput[]
+    name?: StringFilter<"BannerGroup"> | string
+    description?: StringNullableFilter<"BannerGroup"> | string | null
+    isActive?: BoolFilter<"BannerGroup"> | boolean
+    startDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
+    createdAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    updatedAt?: DateTimeFilter<"BannerGroup"> | Date | string
+    banners?: BannerGroupMappingListRelationFilter
+  }, "id" | "slug">
+
+  export type BannerGroupOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BannerGroupCountOrderByAggregateInput
+    _max?: BannerGroupMaxOrderByAggregateInput
+    _min?: BannerGroupMinOrderByAggregateInput
+  }
+
+  export type BannerGroupScalarWhereWithAggregatesInput = {
+    AND?: BannerGroupScalarWhereWithAggregatesInput | BannerGroupScalarWhereWithAggregatesInput[]
+    OR?: BannerGroupScalarWhereWithAggregatesInput[]
+    NOT?: BannerGroupScalarWhereWithAggregatesInput | BannerGroupScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BannerGroup"> | string
+    name?: StringWithAggregatesFilter<"BannerGroup"> | string
+    slug?: StringWithAggregatesFilter<"BannerGroup"> | string
+    description?: StringNullableWithAggregatesFilter<"BannerGroup"> | string | null
+    isActive?: BoolWithAggregatesFilter<"BannerGroup"> | boolean
+    startDate?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BannerGroup"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BannerGroup"> | Date | string
+  }
+
+  export type BannerWhereInput = {
+    AND?: BannerWhereInput | BannerWhereInput[]
+    OR?: BannerWhereInput[]
+    NOT?: BannerWhereInput | BannerWhereInput[]
+    id?: StringFilter<"Banner"> | string
+    type?: EnumBannerTypeFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableFilter<"Banner"> | string | null
+    title?: StringNullableFilter<"Banner"> | string | null
+    description?: StringNullableFilter<"Banner"> | string | null
+    highlight?: StringNullableFilter<"Banner"> | string | null
+    ctaText?: StringNullableFilter<"Banner"> | string | null
+    ctaLink?: StringNullableFilter<"Banner"> | string | null
+    subLabel?: StringNullableFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableFilter<"Banner"> | string | null
+    gradientTo?: StringNullableFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableFilter<"Banner"> | string | null
+    sortOrder?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+    groups?: BannerGroupMappingListRelationFilter
+    imageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+  }
+
+  export type BannerOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    highlight?: SortOrderInput | SortOrder
+    ctaText?: SortOrderInput | SortOrder
+    ctaLink?: SortOrderInput | SortOrder
+    subLabel?: SortOrderInput | SortOrder
+    gradientFrom?: SortOrderInput | SortOrder
+    gradientTo?: SortOrderInput | SortOrder
+    imageMediaId?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    groups?: BannerGroupMappingOrderByRelationAggregateInput
+    imageMedia?: MediaOrderByWithRelationInput
+  }
+
+  export type BannerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BannerWhereInput | BannerWhereInput[]
+    OR?: BannerWhereInput[]
+    NOT?: BannerWhereInput | BannerWhereInput[]
+    type?: EnumBannerTypeFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableFilter<"Banner"> | string | null
+    title?: StringNullableFilter<"Banner"> | string | null
+    description?: StringNullableFilter<"Banner"> | string | null
+    highlight?: StringNullableFilter<"Banner"> | string | null
+    ctaText?: StringNullableFilter<"Banner"> | string | null
+    ctaLink?: StringNullableFilter<"Banner"> | string | null
+    subLabel?: StringNullableFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableFilter<"Banner"> | string | null
+    gradientTo?: StringNullableFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableFilter<"Banner"> | string | null
+    sortOrder?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
+    groups?: BannerGroupMappingListRelationFilter
+    imageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+  }, "id">
+
+  export type BannerOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    highlight?: SortOrderInput | SortOrder
+    ctaText?: SortOrderInput | SortOrder
+    ctaLink?: SortOrderInput | SortOrder
+    subLabel?: SortOrderInput | SortOrder
+    gradientFrom?: SortOrderInput | SortOrder
+    gradientTo?: SortOrderInput | SortOrder
+    imageMediaId?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BannerCountOrderByAggregateInput
+    _avg?: BannerAvgOrderByAggregateInput
+    _max?: BannerMaxOrderByAggregateInput
+    _min?: BannerMinOrderByAggregateInput
+    _sum?: BannerSumOrderByAggregateInput
+  }
+
+  export type BannerScalarWhereWithAggregatesInput = {
+    AND?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
+    OR?: BannerScalarWhereWithAggregatesInput[]
+    NOT?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Banner"> | string
+    type?: EnumBannerTypeWithAggregatesFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionWithAggregatesFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    title?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    highlight?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    ctaText?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    ctaLink?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    subLabel?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    gradientTo?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableWithAggregatesFilter<"Banner"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"Banner"> | number
+    isActive?: BoolWithAggregatesFilter<"Banner"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
+  }
+
+  export type BannerGroupMappingWhereInput = {
+    AND?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    OR?: BannerGroupMappingWhereInput[]
+    NOT?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    id?: StringFilter<"BannerGroupMapping"> | string
+    bannerId?: StringFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeFilter<"BannerGroupMapping"> | Date | string
+    banner?: XOR<BannerScalarRelationFilter, BannerWhereInput>
+    bannerGroup?: XOR<BannerGroupScalarRelationFilter, BannerGroupWhereInput>
+  }
+
+  export type BannerGroupMappingOrderByWithRelationInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    banner?: BannerOrderByWithRelationInput
+    bannerGroup?: BannerGroupOrderByWithRelationInput
+  }
+
+  export type BannerGroupMappingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    bannerId_bannerGroupId?: BannerGroupMappingBannerIdBannerGroupIdCompoundUniqueInput
+    AND?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    OR?: BannerGroupMappingWhereInput[]
+    NOT?: BannerGroupMappingWhereInput | BannerGroupMappingWhereInput[]
+    bannerId?: StringFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeFilter<"BannerGroupMapping"> | Date | string
+    banner?: XOR<BannerScalarRelationFilter, BannerWhereInput>
+    bannerGroup?: XOR<BannerGroupScalarRelationFilter, BannerGroupWhereInput>
+  }, "id" | "bannerId_bannerGroupId">
+
+  export type BannerGroupMappingOrderByWithAggregationInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    _count?: BannerGroupMappingCountOrderByAggregateInput
+    _avg?: BannerGroupMappingAvgOrderByAggregateInput
+    _max?: BannerGroupMappingMaxOrderByAggregateInput
+    _min?: BannerGroupMappingMinOrderByAggregateInput
+    _sum?: BannerGroupMappingSumOrderByAggregateInput
+  }
+
+  export type BannerGroupMappingScalarWhereWithAggregatesInput = {
+    AND?: BannerGroupMappingScalarWhereWithAggregatesInput | BannerGroupMappingScalarWhereWithAggregatesInput[]
+    OR?: BannerGroupMappingScalarWhereWithAggregatesInput[]
+    NOT?: BannerGroupMappingScalarWhereWithAggregatesInput | BannerGroupMappingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BannerGroupMapping"> | string
+    bannerId?: StringWithAggregatesFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringWithAggregatesFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntWithAggregatesFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"BannerGroupMapping"> | Date | string
+  }
+
   export type EmailVerificationLogWhereInput = {
     AND?: EmailVerificationLogWhereInput | EmailVerificationLogWhereInput[]
     OR?: EmailVerificationLogWhereInput[]
@@ -46534,6 +50810,7 @@ export namespace Prisma {
     userAvatars?: UserListRelationFilter
     categories?: CategoryListRelationFilter
     brands?: BrandListRelationFilter
+    banners?: BannerListRelationFilter
   }
 
   export type MediaOrderByWithRelationInput = {
@@ -46554,6 +50831,7 @@ export namespace Prisma {
     userAvatars?: UserOrderByRelationAggregateInput
     categories?: CategoryOrderByRelationAggregateInput
     brands?: BrandOrderByRelationAggregateInput
+    banners?: BannerOrderByRelationAggregateInput
   }
 
   export type MediaWhereUniqueInput = Prisma.AtLeast<{
@@ -46577,6 +50855,7 @@ export namespace Prisma {
     userAvatars?: UserListRelationFilter
     categories?: CategoryListRelationFilter
     brands?: BrandListRelationFilter
+    banners?: BannerListRelationFilter
   }, "id">
 
   export type MediaOrderByWithAggregationInput = {
@@ -47713,7 +51992,7 @@ export namespace Prisma {
     id?: StringFilter<"ProductInventory"> | string
     variantId?: StringFilter<"ProductInventory"> | string
     quantity?: IntFilter<"ProductInventory"> | number
-    displayStatus?: StringFilter<"ProductInventory"> | string
+    displayStatus?: EnumProductInventoryDisplayStatusFilter<"ProductInventory"> | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFilter<"ProductInventory"> | number
     createdAt?: DateTimeFilter<"ProductInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductInventory"> | Date | string
@@ -47738,7 +52017,7 @@ export namespace Prisma {
     OR?: ProductInventoryWhereInput[]
     NOT?: ProductInventoryWhereInput | ProductInventoryWhereInput[]
     quantity?: IntFilter<"ProductInventory"> | number
-    displayStatus?: StringFilter<"ProductInventory"> | string
+    displayStatus?: EnumProductInventoryDisplayStatusFilter<"ProductInventory"> | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFilter<"ProductInventory"> | number
     createdAt?: DateTimeFilter<"ProductInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductInventory"> | Date | string
@@ -47767,7 +52046,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ProductInventory"> | string
     variantId?: StringWithAggregatesFilter<"ProductInventory"> | string
     quantity?: IntWithAggregatesFilter<"ProductInventory"> | number
-    displayStatus?: StringWithAggregatesFilter<"ProductInventory"> | string
+    displayStatus?: EnumProductInventoryDisplayStatusWithAggregatesFilter<"ProductInventory"> | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntWithAggregatesFilter<"ProductInventory"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ProductInventory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductInventory"> | Date | string
@@ -49048,6 +53327,291 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BannerGroupCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    banners?: BannerGroupMappingCreateNestedManyWithoutBannerGroupInput
+  }
+
+  export type BannerGroupUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    banners?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerGroupInput
+  }
+
+  export type BannerGroupUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banners?: BannerGroupMappingUpdateManyWithoutBannerGroupNestedInput
+  }
+
+  export type BannerGroupUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banners?: BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupNestedInput
+  }
+
+  export type BannerGroupCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerGroupUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerCreateInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingCreateNestedManyWithoutBannerInput
+    imageMedia?: MediaCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerUncheckedCreateInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    imageMediaId?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput
+  }
+
+  export type BannerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUpdateManyWithoutBannerNestedInput
+    imageMedia?: MediaUpdateOneWithoutBannersNestedInput
+  }
+
+  export type BannerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput
+  }
+
+  export type BannerCreateManyInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    imageMediaId?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingCreateInput = {
+    id?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    banner: BannerCreateNestedOneWithoutGroupsInput
+    bannerGroup: BannerGroupCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateInput = {
+    id?: string
+    bannerId: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banner?: BannerUpdateOneRequiredWithoutGroupsNestedInput
+    bannerGroup?: BannerGroupUpdateOneRequiredWithoutBannersNestedInput
+  }
+
+  export type BannerGroupMappingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingCreateManyInput = {
+    id?: string
+    bannerId: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EmailVerificationLogCreateInput = {
     id?: string
     email: string
@@ -49410,6 +53974,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateInput = {
@@ -49429,6 +53994,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUpdateInput = {
@@ -49448,6 +54014,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateInput = {
@@ -49467,6 +54034,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaCreateManyInput = {
@@ -50695,7 +55263,7 @@ export namespace Prisma {
   export type ProductInventoryCreateInput = {
     id?: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50706,7 +55274,7 @@ export namespace Prisma {
     id?: string
     variantId: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50715,7 +55283,7 @@ export namespace Prisma {
   export type ProductInventoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50726,7 +55294,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     variantId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50736,7 +55304,7 @@ export namespace Prisma {
     id?: string
     variantId: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50745,7 +55313,7 @@ export namespace Prisma {
   export type ProductInventoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50755,7 +55323,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     variantId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -52106,6 +56674,206 @@ export namespace Prisma {
     rate?: SortOrder
   }
 
+  export type BannerGroupMappingListRelationFilter = {
+    every?: BannerGroupMappingWhereInput
+    some?: BannerGroupMappingWhereInput
+    none?: BannerGroupMappingWhereInput
+  }
+
+  export type BannerGroupMappingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BannerGroupCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerGroupMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerGroupMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumBannerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeFilter<$PrismaModel> | $Enums.BannerType
+  }
+
+  export type EnumBannerPositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionFilter<$PrismaModel> | $Enums.BannerPosition
+  }
+
+  export type MediaNullableScalarRelationFilter = {
+    is?: MediaWhereInput | null
+    isNot?: MediaWhereInput | null
+  }
+
+  export type BannerCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    highlight?: SortOrder
+    ctaText?: SortOrder
+    ctaLink?: SortOrder
+    subLabel?: SortOrder
+    gradientFrom?: SortOrder
+    gradientTo?: SortOrder
+    imageMediaId?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type BannerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    highlight?: SortOrder
+    ctaText?: SortOrder
+    ctaLink?: SortOrder
+    subLabel?: SortOrder
+    gradientFrom?: SortOrder
+    gradientTo?: SortOrder
+    imageMediaId?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    position?: SortOrder
+    badge?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    highlight?: SortOrder
+    ctaText?: SortOrder
+    ctaLink?: SortOrder
+    subLabel?: SortOrder
+    gradientFrom?: SortOrder
+    gradientTo?: SortOrder
+    imageMediaId?: SortOrder
+    sortOrder?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BannerSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type EnumBannerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeWithAggregatesFilter<$PrismaModel> | $Enums.BannerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerTypeFilter<$PrismaModel>
+    _max?: NestedEnumBannerTypeFilter<$PrismaModel>
+  }
+
+  export type EnumBannerPositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionWithAggregatesFilter<$PrismaModel> | $Enums.BannerPosition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerPositionFilter<$PrismaModel>
+    _max?: NestedEnumBannerPositionFilter<$PrismaModel>
+  }
+
+  export type BannerScalarRelationFilter = {
+    is?: BannerWhereInput
+    isNot?: BannerWhereInput
+  }
+
+  export type BannerGroupScalarRelationFilter = {
+    is?: BannerGroupWhereInput
+    isNot?: BannerGroupWhereInput
+  }
+
+  export type BannerGroupMappingBannerIdBannerGroupIdCompoundUniqueInput = {
+    bannerId: string
+    bannerGroupId: string
+  }
+
+  export type BannerGroupMappingCountOrderByAggregateInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BannerGroupMappingAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type BannerGroupMappingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BannerGroupMappingMinOrderByAggregateInput = {
+    id?: SortOrder
+    bannerId?: SortOrder
+    bannerGroupId?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BannerGroupMappingSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
   export type EnumEmailVerificationActionFilter<$PrismaModel = never> = {
     equals?: $Enums.EmailVerificationAction | EnumEmailVerificationActionFieldRefInput<$PrismaModel>
     in?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
@@ -52443,6 +57211,12 @@ export namespace Prisma {
     none?: BrandWhereInput
   }
 
+  export type BannerListRelationFilter = {
+    every?: BannerWhereInput
+    some?: BannerWhereInput
+    none?: BannerWhereInput
+  }
+
   export type ProductImageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -52460,6 +57234,10 @@ export namespace Prisma {
   }
 
   export type BrandOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BannerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -52955,11 +57733,6 @@ export namespace Prisma {
     isNot?: CategoryWhereInput | null
   }
 
-  export type MediaNullableScalarRelationFilter = {
-    is?: MediaWhereInput | null
-    isNot?: MediaWhereInput | null
-  }
-
   export type BrandNullableScalarRelationFilter = {
     is?: BrandWhereInput | null
     isNot?: BrandWhereInput | null
@@ -53389,6 +58162,13 @@ export namespace Prisma {
     sortOrder?: SortOrder
   }
 
+  export type EnumProductInventoryDisplayStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+  }
+
   export type ProductInventoryCountOrderByAggregateInput = {
     id?: SortOrder
     variantId?: SortOrder
@@ -53427,6 +58207,16 @@ export namespace Prisma {
   export type ProductInventorySumOrderByAggregateInput = {
     quantity?: SortOrder
     lowStockThreshold?: SortOrder
+  }
+
+  export type EnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
   }
 
   export type CategoryScalarRelationFilter = {
@@ -54223,6 +59013,142 @@ export namespace Prisma {
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutCommRatesInput, ProductUpdateWithoutCommRatesInput>, ProductUncheckedUpdateWithoutCommRatesInput>
   }
 
+  export type BannerGroupMappingCreateNestedManyWithoutBannerGroupInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type BannerGroupMappingUncheckedCreateNestedManyWithoutBannerGroupInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type BannerGroupMappingUpdateManyWithoutBannerGroupNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput> | BannerGroupMappingCreateWithoutBannerGroupInput[] | BannerGroupMappingUncheckedCreateWithoutBannerGroupInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerGroupInput | BannerGroupMappingCreateOrConnectWithoutBannerGroupInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput[]
+    createMany?: BannerGroupMappingCreateManyBannerGroupInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type BannerGroupMappingCreateNestedManyWithoutBannerInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type MediaCreateNestedOneWithoutBannersInput = {
+    create?: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutBannersInput
+    connect?: MediaWhereUniqueInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+  }
+
+  export type EnumBannerTypeFieldUpdateOperationsInput = {
+    set?: $Enums.BannerType
+  }
+
+  export type EnumBannerPositionFieldUpdateOperationsInput = {
+    set?: $Enums.BannerPosition
+  }
+
+  export type BannerGroupMappingUpdateManyWithoutBannerNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type MediaUpdateOneWithoutBannersNestedInput = {
+    create?: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutBannersInput
+    upsert?: MediaUpsertWithoutBannersInput
+    disconnect?: MediaWhereInput | boolean
+    delete?: MediaWhereInput | boolean
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutBannersInput, MediaUpdateWithoutBannersInput>, MediaUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput = {
+    create?: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput> | BannerGroupMappingCreateWithoutBannerInput[] | BannerGroupMappingUncheckedCreateWithoutBannerInput[]
+    connectOrCreate?: BannerGroupMappingCreateOrConnectWithoutBannerInput | BannerGroupMappingCreateOrConnectWithoutBannerInput[]
+    upsert?: BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput[]
+    createMany?: BannerGroupMappingCreateManyBannerInputEnvelope
+    set?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    disconnect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    delete?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    connect?: BannerGroupMappingWhereUniqueInput | BannerGroupMappingWhereUniqueInput[]
+    update?: BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput | BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput[]
+    updateMany?: BannerGroupMappingUpdateManyWithWhereWithoutBannerInput | BannerGroupMappingUpdateManyWithWhereWithoutBannerInput[]
+    deleteMany?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+  }
+
+  export type BannerCreateNestedOneWithoutGroupsInput = {
+    create?: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+    connectOrCreate?: BannerCreateOrConnectWithoutGroupsInput
+    connect?: BannerWhereUniqueInput
+  }
+
+  export type BannerGroupCreateNestedOneWithoutBannersInput = {
+    create?: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: BannerGroupCreateOrConnectWithoutBannersInput
+    connect?: BannerGroupWhereUniqueInput
+  }
+
+  export type BannerUpdateOneRequiredWithoutGroupsNestedInput = {
+    create?: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+    connectOrCreate?: BannerCreateOrConnectWithoutGroupsInput
+    upsert?: BannerUpsertWithoutGroupsInput
+    connect?: BannerWhereUniqueInput
+    update?: XOR<XOR<BannerUpdateToOneWithWhereWithoutGroupsInput, BannerUpdateWithoutGroupsInput>, BannerUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type BannerGroupUpdateOneRequiredWithoutBannersNestedInput = {
+    create?: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+    connectOrCreate?: BannerGroupCreateOrConnectWithoutBannersInput
+    upsert?: BannerGroupUpsertWithoutBannersInput
+    connect?: BannerGroupWhereUniqueInput
+    update?: XOR<XOR<BannerGroupUpdateToOneWithWhereWithoutBannersInput, BannerGroupUpdateWithoutBannersInput>, BannerGroupUncheckedUpdateWithoutBannersInput>
+  }
+
   export type UserCreateNestedOneWithoutEmailVerificationLogsInput = {
     create?: XOR<UserCreateWithoutEmailVerificationLogsInput, UserUncheckedCreateWithoutEmailVerificationLogsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEmailVerificationLogsInput
@@ -54442,6 +59368,13 @@ export namespace Prisma {
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
   }
 
+  export type BannerCreateNestedManyWithoutImageMediaInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+  }
+
   export type ProductImageUncheckedCreateNestedManyWithoutMediaInput = {
     create?: XOR<ProductImageCreateWithoutMediaInput, ProductImageUncheckedCreateWithoutMediaInput> | ProductImageCreateWithoutMediaInput[] | ProductImageUncheckedCreateWithoutMediaInput[]
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaInput | ProductImageCreateOrConnectWithoutMediaInput[]
@@ -54475,6 +59408,13 @@ export namespace Prisma {
     connectOrCreate?: BrandCreateOrConnectWithoutLogoMediaInput | BrandCreateOrConnectWithoutLogoMediaInput[]
     createMany?: BrandCreateManyLogoMediaInputEnvelope
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+  }
+
+  export type BannerUncheckedCreateNestedManyWithoutImageMediaInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
   }
 
   export type EnumMediaTypeFieldUpdateOperationsInput = {
@@ -54561,6 +59501,20 @@ export namespace Prisma {
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
   }
 
+  export type BannerUpdateManyWithoutImageMediaNestedInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    upsert?: BannerUpsertWithWhereUniqueWithoutImageMediaInput | BannerUpsertWithWhereUniqueWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    set?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    disconnect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    delete?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    update?: BannerUpdateWithWhereUniqueWithoutImageMediaInput | BannerUpdateWithWhereUniqueWithoutImageMediaInput[]
+    updateMany?: BannerUpdateManyWithWhereWithoutImageMediaInput | BannerUpdateManyWithWhereWithoutImageMediaInput[]
+    deleteMany?: BannerScalarWhereInput | BannerScalarWhereInput[]
+  }
+
   export type ProductImageUncheckedUpdateManyWithoutMediaNestedInput = {
     create?: XOR<ProductImageCreateWithoutMediaInput, ProductImageUncheckedCreateWithoutMediaInput> | ProductImageCreateWithoutMediaInput[] | ProductImageUncheckedCreateWithoutMediaInput[]
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaInput | ProductImageCreateOrConnectWithoutMediaInput[]
@@ -54629,6 +59583,20 @@ export namespace Prisma {
     update?: BrandUpdateWithWhereUniqueWithoutLogoMediaInput | BrandUpdateWithWhereUniqueWithoutLogoMediaInput[]
     updateMany?: BrandUpdateManyWithWhereWithoutLogoMediaInput | BrandUpdateManyWithWhereWithoutLogoMediaInput[]
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
+  }
+
+  export type BannerUncheckedUpdateManyWithoutImageMediaNestedInput = {
+    create?: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput> | BannerCreateWithoutImageMediaInput[] | BannerUncheckedCreateWithoutImageMediaInput[]
+    connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
+    upsert?: BannerUpsertWithWhereUniqueWithoutImageMediaInput | BannerUpsertWithWhereUniqueWithoutImageMediaInput[]
+    createMany?: BannerCreateManyImageMediaInputEnvelope
+    set?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    disconnect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    delete?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+    update?: BannerUpdateWithWhereUniqueWithoutImageMediaInput | BannerUpdateWithWhereUniqueWithoutImageMediaInput[]
+    updateMany?: BannerUpdateManyWithWhereWithoutImageMediaInput | BannerUpdateManyWithWhereWithoutImageMediaInput[]
+    deleteMany?: BannerScalarWhereInput | BannerScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCartInput = {
@@ -56029,6 +60997,10 @@ export namespace Prisma {
     connect?: ProductVariantWhereUniqueInput
   }
 
+  export type EnumProductInventoryDisplayStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ProductInventoryDisplayStatus
+  }
+
   export type ProductVariantUpdateOneRequiredWithoutInventoryNestedInput = {
     create?: XOR<ProductVariantCreateWithoutInventoryInput, ProductVariantUncheckedCreateWithoutInventoryInput>
     connectOrCreate?: ProductVariantCreateOrConnectWithoutInventoryInput
@@ -56914,6 +61886,40 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumBannerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeFilter<$PrismaModel> | $Enums.BannerType
+  }
+
+  export type NestedEnumBannerPositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionFilter<$PrismaModel> | $Enums.BannerPosition
+  }
+
+  export type NestedEnumBannerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerType | EnumBannerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerType[] | ListEnumBannerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerTypeWithAggregatesFilter<$PrismaModel> | $Enums.BannerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerTypeFilter<$PrismaModel>
+    _max?: NestedEnumBannerTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumBannerPositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BannerPosition | EnumBannerPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BannerPosition[] | ListEnumBannerPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumBannerPositionWithAggregatesFilter<$PrismaModel> | $Enums.BannerPosition
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBannerPositionFilter<$PrismaModel>
+    _max?: NestedEnumBannerPositionFilter<$PrismaModel>
+  }
+
   export type NestedEnumEmailVerificationActionFilter<$PrismaModel = never> = {
     equals?: $Enums.EmailVerificationAction | EnumEmailVerificationActionFieldRefInput<$PrismaModel>
     in?: $Enums.EmailVerificationAction[] | ListEnumEmailVerificationActionFieldRefInput<$PrismaModel>
@@ -57115,6 +62121,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
     _max?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+  }
+
+  export type NestedEnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductInventoryDisplayStatus | EnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductInventoryDisplayStatus[] | ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductInventoryDisplayStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductInventoryDisplayStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -58016,6 +63039,349 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
+  }
+
+  export type BannerGroupMappingCreateWithoutBannerGroupInput = {
+    id?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    banner: BannerCreateNestedOneWithoutGroupsInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateWithoutBannerGroupInput = {
+    id?: string
+    bannerId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingCreateOrConnectWithoutBannerGroupInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    create: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingCreateManyBannerGroupInputEnvelope = {
+    data: BannerGroupMappingCreateManyBannerGroupInput | BannerGroupMappingCreateManyBannerGroupInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BannerGroupMappingUpsertWithWhereUniqueWithoutBannerGroupInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    update: XOR<BannerGroupMappingUpdateWithoutBannerGroupInput, BannerGroupMappingUncheckedUpdateWithoutBannerGroupInput>
+    create: XOR<BannerGroupMappingCreateWithoutBannerGroupInput, BannerGroupMappingUncheckedCreateWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingUpdateWithWhereUniqueWithoutBannerGroupInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    data: XOR<BannerGroupMappingUpdateWithoutBannerGroupInput, BannerGroupMappingUncheckedUpdateWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingUpdateManyWithWhereWithoutBannerGroupInput = {
+    where: BannerGroupMappingScalarWhereInput
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupInput>
+  }
+
+  export type BannerGroupMappingScalarWhereInput = {
+    AND?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+    OR?: BannerGroupMappingScalarWhereInput[]
+    NOT?: BannerGroupMappingScalarWhereInput | BannerGroupMappingScalarWhereInput[]
+    id?: StringFilter<"BannerGroupMapping"> | string
+    bannerId?: StringFilter<"BannerGroupMapping"> | string
+    bannerGroupId?: StringFilter<"BannerGroupMapping"> | string
+    sortOrder?: IntFilter<"BannerGroupMapping"> | number
+    createdAt?: DateTimeFilter<"BannerGroupMapping"> | Date | string
+  }
+
+  export type BannerGroupMappingCreateWithoutBannerInput = {
+    id?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    bannerGroup: BannerGroupCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerGroupMappingUncheckedCreateWithoutBannerInput = {
+    id?: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingCreateOrConnectWithoutBannerInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    create: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput>
+  }
+
+  export type BannerGroupMappingCreateManyBannerInputEnvelope = {
+    data: BannerGroupMappingCreateManyBannerInput | BannerGroupMappingCreateManyBannerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MediaCreateWithoutBannersInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
+    productImages?: ProductImageCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
+    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    categories?: CategoryCreateNestedManyWithoutImageMediaInput
+    brands?: BrandCreateNestedManyWithoutLogoMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutBannersInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    uploadedById?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
+    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
+    brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+  }
+
+  export type MediaCreateOrConnectWithoutBannersInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+  }
+
+  export type BannerGroupMappingUpsertWithWhereUniqueWithoutBannerInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    update: XOR<BannerGroupMappingUpdateWithoutBannerInput, BannerGroupMappingUncheckedUpdateWithoutBannerInput>
+    create: XOR<BannerGroupMappingCreateWithoutBannerInput, BannerGroupMappingUncheckedCreateWithoutBannerInput>
+  }
+
+  export type BannerGroupMappingUpdateWithWhereUniqueWithoutBannerInput = {
+    where: BannerGroupMappingWhereUniqueInput
+    data: XOR<BannerGroupMappingUpdateWithoutBannerInput, BannerGroupMappingUncheckedUpdateWithoutBannerInput>
+  }
+
+  export type BannerGroupMappingUpdateManyWithWhereWithoutBannerInput = {
+    where: BannerGroupMappingScalarWhereInput
+    data: XOR<BannerGroupMappingUpdateManyMutationInput, BannerGroupMappingUncheckedUpdateManyWithoutBannerInput>
+  }
+
+  export type MediaUpsertWithoutBannersInput = {
+    update: XOR<MediaUpdateWithoutBannersInput, MediaUncheckedUpdateWithoutBannersInput>
+    create: XOR<MediaCreateWithoutBannersInput, MediaUncheckedCreateWithoutBannersInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutBannersInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutBannersInput, MediaUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type MediaUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
+    productImages?: ProductImageUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
+    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    categories?: CategoryUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
+    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+  }
+
+  export type BannerCreateWithoutGroupsInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    imageMedia?: MediaCreateNestedOneWithoutBannersInput
+  }
+
+  export type BannerUncheckedCreateWithoutGroupsInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    imageMediaId?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerCreateOrConnectWithoutGroupsInput = {
+    where: BannerWhereUniqueInput
+    create: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+  }
+
+  export type BannerGroupCreateWithoutBannersInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerGroupUncheckedCreateWithoutBannersInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerGroupCreateOrConnectWithoutBannersInput = {
+    where: BannerGroupWhereUniqueInput
+    create: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+  }
+
+  export type BannerUpsertWithoutGroupsInput = {
+    update: XOR<BannerUpdateWithoutGroupsInput, BannerUncheckedUpdateWithoutGroupsInput>
+    create: XOR<BannerCreateWithoutGroupsInput, BannerUncheckedCreateWithoutGroupsInput>
+    where?: BannerWhereInput
+  }
+
+  export type BannerUpdateToOneWithWhereWithoutGroupsInput = {
+    where?: BannerWhereInput
+    data: XOR<BannerUpdateWithoutGroupsInput, BannerUncheckedUpdateWithoutGroupsInput>
+  }
+
+  export type BannerUpdateWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    imageMedia?: MediaUpdateOneWithoutBannersNestedInput
+  }
+
+  export type BannerUncheckedUpdateWithoutGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupUpsertWithoutBannersInput = {
+    update: XOR<BannerGroupUpdateWithoutBannersInput, BannerGroupUncheckedUpdateWithoutBannersInput>
+    create: XOR<BannerGroupCreateWithoutBannersInput, BannerGroupUncheckedCreateWithoutBannersInput>
+    where?: BannerGroupWhereInput
+  }
+
+  export type BannerGroupUpdateToOneWithWhereWithoutBannersInput = {
+    where?: BannerGroupWhereInput
+    data: XOR<BannerGroupUpdateWithoutBannersInput, BannerGroupUncheckedUpdateWithoutBannersInput>
+  }
+
+  export type BannerGroupUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupUncheckedUpdateWithoutBannersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutEmailVerificationLogsInput = {
@@ -59020,6 +64386,56 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BannerCreateWithoutImageMediaInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingCreateNestedManyWithoutBannerInput
+  }
+
+  export type BannerUncheckedCreateWithoutImageMediaInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    groups?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput
+  }
+
+  export type BannerCreateOrConnectWithoutImageMediaInput = {
+    where: BannerWhereUniqueInput
+    create: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput>
+  }
+
+  export type BannerCreateManyImageMediaInputEnvelope = {
+    data: BannerCreateManyImageMediaInput | BannerCreateManyImageMediaInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutUploadedMediaInput = {
     update: XOR<UserUpdateWithoutUploadedMediaInput, UserUncheckedUpdateWithoutUploadedMediaInput>
     create: XOR<UserCreateWithoutUploadedMediaInput, UserUncheckedCreateWithoutUploadedMediaInput>
@@ -59250,6 +64666,45 @@ export namespace Prisma {
     isActive?: BoolFilter<"Brand"> | boolean
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
+  }
+
+  export type BannerUpsertWithWhereUniqueWithoutImageMediaInput = {
+    where: BannerWhereUniqueInput
+    update: XOR<BannerUpdateWithoutImageMediaInput, BannerUncheckedUpdateWithoutImageMediaInput>
+    create: XOR<BannerCreateWithoutImageMediaInput, BannerUncheckedCreateWithoutImageMediaInput>
+  }
+
+  export type BannerUpdateWithWhereUniqueWithoutImageMediaInput = {
+    where: BannerWhereUniqueInput
+    data: XOR<BannerUpdateWithoutImageMediaInput, BannerUncheckedUpdateWithoutImageMediaInput>
+  }
+
+  export type BannerUpdateManyWithWhereWithoutImageMediaInput = {
+    where: BannerScalarWhereInput
+    data: XOR<BannerUpdateManyMutationInput, BannerUncheckedUpdateManyWithoutImageMediaInput>
+  }
+
+  export type BannerScalarWhereInput = {
+    AND?: BannerScalarWhereInput | BannerScalarWhereInput[]
+    OR?: BannerScalarWhereInput[]
+    NOT?: BannerScalarWhereInput | BannerScalarWhereInput[]
+    id?: StringFilter<"Banner"> | string
+    type?: EnumBannerTypeFilter<"Banner"> | $Enums.BannerType
+    position?: EnumBannerPositionFilter<"Banner"> | $Enums.BannerPosition
+    badge?: StringNullableFilter<"Banner"> | string | null
+    title?: StringNullableFilter<"Banner"> | string | null
+    description?: StringNullableFilter<"Banner"> | string | null
+    highlight?: StringNullableFilter<"Banner"> | string | null
+    ctaText?: StringNullableFilter<"Banner"> | string | null
+    ctaLink?: StringNullableFilter<"Banner"> | string | null
+    subLabel?: StringNullableFilter<"Banner"> | string | null
+    gradientFrom?: StringNullableFilter<"Banner"> | string | null
+    gradientTo?: StringNullableFilter<"Banner"> | string | null
+    imageMediaId?: StringNullableFilter<"Banner"> | string | null
+    sortOrder?: IntFilter<"Banner"> | number
+    isActive?: BoolFilter<"Banner"> | boolean
+    createdAt?: DateTimeFilter<"Banner"> | Date | string
+    updatedAt?: DateTimeFilter<"Banner"> | Date | string
   }
 
   export type UserCreateWithoutCartInput = {
@@ -60836,6 +66291,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutCategoriesInput = {
@@ -60854,6 +66310,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutCategoriesInput = {
@@ -61000,6 +66457,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutCategoriesInput = {
@@ -61018,6 +66476,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type BrandUpsertWithoutCategoriesInput = {
@@ -61167,6 +66626,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutBrandsInput = {
@@ -61185,6 +66645,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutBrandsInput = {
@@ -61299,6 +66760,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutBrandsInput = {
@@ -61317,6 +66779,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutBrandInput = {
@@ -62217,7 +67680,7 @@ export namespace Prisma {
   export type ProductInventoryCreateWithoutVariantInput = {
     id?: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62226,7 +67689,7 @@ export namespace Prisma {
   export type ProductInventoryUncheckedCreateWithoutVariantInput = {
     id?: string
     quantity?: number
-    displayStatus?: string
+    displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62452,7 +67915,7 @@ export namespace Prisma {
   export type ProductInventoryUpdateWithoutVariantInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62461,7 +67924,7 @@ export namespace Prisma {
   export type ProductInventoryUncheckedUpdateWithoutVariantInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
-    displayStatus?: StringFieldUpdateOperationsInput | string
+    displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62651,6 +68114,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutProductImagesInput = {
@@ -62669,6 +68133,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutProductImagesInput = {
@@ -62819,6 +68284,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutProductImagesInput = {
@@ -62837,6 +68303,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type ProductVariantCreateWithoutInventoryInput = {
@@ -63973,6 +69440,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutReviewImagesInput = {
@@ -63991,6 +69459,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutReviewImagesInput = {
@@ -64064,6 +69533,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutReviewImagesInput = {
@@ -64082,6 +69552,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type CartCreateWithoutUserInput = {
@@ -64314,6 +69785,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutUserAvatarsInput = {
@@ -64332,6 +69804,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutUserAvatarsInput = {
@@ -64355,6 +69828,7 @@ export namespace Prisma {
     userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaUncheckedCreateWithoutUploadedByInput = {
@@ -64373,6 +69847,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
   export type MediaCreateOrConnectWithoutUploadedByInput = {
@@ -64604,6 +70079,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutUserAvatarsInput = {
@@ -64622,6 +70098,7 @@ export namespace Prisma {
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUpsertWithWhereUniqueWithoutUploadedByInput = {
@@ -65065,6 +70542,62 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BannerGroupMappingCreateManyBannerGroupInput = {
+    id?: string
+    bannerId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateWithoutBannerGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banner?: BannerUpdateOneRequiredWithoutGroupsNestedInput
+  }
+
+  export type BannerGroupMappingUncheckedUpdateWithoutBannerGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingCreateManyBannerInput = {
+    id?: string
+    bannerGroupId: string
+    sortOrder?: number
+    createdAt?: Date | string
+  }
+
+  export type BannerGroupMappingUpdateWithoutBannerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerGroup?: BannerGroupUpdateOneRequiredWithoutBannersNestedInput
+  }
+
+  export type BannerGroupMappingUncheckedUpdateWithoutBannerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerGroupMappingUncheckedUpdateManyWithoutBannerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bannerGroupId?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type FlashSaleProductCreateManyFlashSaleInput = {
     id?: string
     productId: string
@@ -65207,6 +70740,25 @@ export namespace Prisma {
     slug: string
     description?: string | null
     website?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BannerCreateManyImageMediaInput = {
+    id?: string
+    type?: $Enums.BannerType
+    position?: $Enums.BannerPosition
+    badge?: string | null
+    title?: string | null
+    description?: string | null
+    highlight?: string | null
+    ctaText?: string | null
+    ctaLink?: string | null
+    subLabel?: string | null
+    gradientFrom?: string | null
+    gradientTo?: string | null
+    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -65420,6 +70972,65 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BannerUpdateWithoutImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUpdateManyWithoutBannerNestedInput
+  }
+
+  export type BannerUncheckedUpdateWithoutImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    groups?: BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput
+  }
+
+  export type BannerUncheckedUpdateManyWithoutImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumBannerTypeFieldUpdateOperationsInput | $Enums.BannerType
+    position?: EnumBannerPositionFieldUpdateOperationsInput | $Enums.BannerPosition
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    highlight?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaLink?: NullableStringFieldUpdateOperationsInput | string | null
+    subLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
+    gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -66792,6 +72403,7 @@ export namespace Prisma {
     userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutUploadedByInput = {
@@ -66810,6 +72422,7 @@ export namespace Prisma {
     userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUncheckedUpdateManyWithoutUploadedByInput = {

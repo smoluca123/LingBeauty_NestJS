@@ -547,3 +547,53 @@ export const ApiDeleteProductBadge = () =>
       description: 'Badge deleted successfully',
     }),
   );
+
+// ============== Public Product Decorators ==============
+
+export const ApiGetHotProducts = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get hot/best-selling products',
+      description: `
+        Retrieves hot or best-selling products based on various criteria.
+        
+        **Available Criteria:**
+        - \`sales\` - Products with highest quantity sold
+        - \`revenue\` - Products with highest revenue generated
+        - \`reviews\` - Products with most reviews
+        - \`rating\` - Products with highest average rating
+        - \`badge\` - Products marked with BEST_SELLER badge by admin
+        - \`featured\` - Products marked as featured by admin
+        - \`composite\` - Combined score using all factors (default)
+        
+        **Time Periods (for sales/revenue criteria):**
+        - \`7d\` - Last 7 days
+        - \`30d\` - Last 30 days (default)
+        - \`90d\` - Last 90 days
+        - \`all\` - All time
+      `,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Hot products retrieved successfully',
+      type: [ProductResponseDto],
+    }),
+  );
+
+export const ApiTrackProductView = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Track product view',
+      description:
+        'Increments the view count for a product. Call this when a user views the product detail page.',
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Product ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'View tracked successfully',
+    }),
+  );
