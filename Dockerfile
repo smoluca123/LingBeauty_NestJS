@@ -33,6 +33,8 @@ COPY --from=builder /usr/src/app/package*.json ./
 COPY --from=builder /usr/src/app/node_modules/ ./node_modules/
 COPY --from=builder /usr/src/app/dist/ ./dist/
 COPY --from=builder /usr/src/app/prisma/ ./prisma/
+# Copy email templates (fallback if nest-cli.json assets config doesn't work)
+COPY --from=builder /usr/src/app/src/modules/mail/templates/ ./src/modules/mail/templates/
 
 # Expose the web server's port.
 EXPOSE 3000
