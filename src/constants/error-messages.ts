@@ -17,6 +17,8 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.INVALID_OLD_PASSWORD]: 'Invalid old password',
   [ERROR_CODES.NOT_LOGGED_IN_FOR_FIRST_TIME]:
     'User is not logged in for the first time',
+  [ERROR_CODES.PASSWORD_SAME_AS_CURRENT]:
+    'New password must be different from current password',
   [ERROR_CODES.USER_OVER_STORAGE_LIMIT]: 'User has reached the storage limit',
   [ERROR_CODES.SUBSCRIPTION_NOT_FOUND]: 'Subscription not found',
   [ERROR_CODES.USER_STATS_NOT_FOUND]: 'User stats not found',
