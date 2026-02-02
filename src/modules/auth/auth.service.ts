@@ -974,4 +974,106 @@ export class AuthService {
       );
     }
   }
+
+  /**
+   * Change user password
+   * Verifies current password, hashes new password, and updates in database
+   */
+  async changePassword(
+    userId: string,
+    currentPassword: string,
+    newPassword: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      // Get user with password field
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          password: true,
+          isDeleted: true,
+          isBanned: true,
+          isActive: true,
+        },
+      });
+
+      if (!user) {
+        throw new CustomUnauthorizedException(
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Check if user is deleted
+      if (user.isDeleted) {
+        throw new CustomUnauthorizedException(
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Check if user is banned
+      if (user.isBanned || !user.isActive) {
+        throw new ForbiddenException(
+          ERROR_MESSAGES[ERROR_CODES.USER_BANNED],
+          ERROR_CODES.USER_BANNED,
+        );
+      }
+
+      // Verify current password
+      const isCurrentPasswordValid = await bcrypt.compare(
+        currentPassword,
+        user.password,
+      );
+
+      if (!isCurrentPasswordValid) {
+        throw new CustomUnauthorizedException(
+          ERROR_MESSAGES[ERROR_CODES.INVALID_OLD_PASSWORD],
+          ERROR_CODES.INVALID_OLD_PASSWORD,
+        );
+      }
+
+      // Check if new password is same as current password
+      const isSamePassword = await bcrypt.compare(newPassword, user.password);
+      if (isSamePassword) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.PASSWORD_SAME_AS_CURRENT],
+          ERROR_CODES.PASSWORD_SAME_AS_CURRENT,
+        );
+      }
+
+      // Hash new password
+      const hashedNewPassword = await bcrypt.hash(
+        newPassword,
+        configData.BCRYPT_SALT_ROUNDS,
+      );
+
+      // Update password in database
+      await this.prismaService.user.update({
+        where: { id: userId },
+        data: { password: hashedNewPassword },
+      });
+
+      return {
+        type: 'response',
+        message: 'Password changed successfully',
+        data: {
+          message: 'Your password has been changed successfully',
+        },
+      };
+    } catch (error) {
+      if (
+        error instanceof CustomUnauthorizedException ||
+        error instanceof ForbiddenException ||
+        error instanceof BusinessException
+      ) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
 }

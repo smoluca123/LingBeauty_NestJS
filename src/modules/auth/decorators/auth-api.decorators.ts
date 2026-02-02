@@ -8,6 +8,8 @@ import {
   ApiPublicOperation,
 } from 'src/decorators/api.decorators';
 import { ApiHeader, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ERROR_MESSAGES } from 'src/constants/error-messages';
+import { ERROR_CODES } from 'src/constants/error-codes';
 
 /**
  * Specific decorators for common auth endpoints
@@ -206,5 +208,61 @@ export const ApiValidateToken = () =>
       status: 200,
       description: 'Token is valid',
       type: ValidateTokenResponseDto,
+    }),
+  );
+
+export const ApiChangePassword = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Change user password',
+      description:
+        'Change password for the authenticated user. Requires current password and new password.',
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Password changed successfully',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            example: 'Password changed successfully',
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 401,
+      description: 'Current password is incorrect',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            example: ERROR_MESSAGES['INVALID_OLD_PASSWORD'],
+          },
+          errorCode: {
+            type: 'string',
+            example: ERROR_CODES['INVALID_OLD_PASSWORD'],
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 400,
+      description: 'New password is same as current password',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            example: ERROR_MESSAGES['PASSWORD_SAME_AS_CURRENT'],
+          },
+          errorCode: {
+            type: 'string',
+            example: ERROR_CODES['PASSWORD_SAME_AS_CURRENT'],
+          },
+        },
+      },
     }),
   );

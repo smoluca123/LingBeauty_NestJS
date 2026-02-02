@@ -13,9 +13,9 @@ import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from 'src/modules/auth/dto/login.dto';
 import { RegisterDto } from 'src/modules/auth/dto/register.dto';
-import { RefreshTokenDto } from 'src/modules/auth/dto/refresh-token.dto';
 import { VerifyEmailDto } from 'src/modules/auth/dto/verify-email.dto';
 import { VerifyPhoneDto } from 'src/modules/auth/dto/verify-phone.dto';
+import { ChangePasswordDto } from 'src/modules/auth/dto/change-password.dto';
 import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
 import { AuthResponseDto } from 'src/modules/auth/dto/response/auth-response.dto';
 import { ValidateTokenResponseDto } from 'src/modules/auth/dto/response/validate-token-response.dto';
@@ -31,6 +31,7 @@ import {
   ApiSendPhoneVerification,
   ApiVerifyPhone,
   ApiValidateToken,
+  ApiChangePassword,
 } from './decorators/auth-api.decorators';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -142,6 +143,19 @@ export class AuthController {
     return this.authService.validateToken(
       decodedToken.userId,
       decodedToken.exp,
+    );
+  }
+
+  @Post('change-password')
+  @ApiChangePassword()
+  changePassword(
+    @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    return this.authService.changePassword(
+      decodedToken.userId,
+      changePasswordDto.currentPassword,
+      changePasswordDto.newPassword,
     );
   }
 }
