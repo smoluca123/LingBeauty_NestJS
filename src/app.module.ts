@@ -21,6 +21,7 @@ import { BrandModule } from 'src/modules/brand/brand.module';
 import { ReviewModule } from 'src/modules/review/review.module';
 import { BannerModule } from 'src/modules/banner/banner.module';
 import { MailModule } from 'src/modules/mail';
+import { ProvincesModule } from 'src/modules/provinces/provinces.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { MailModule } from 'src/modules/mail';
     BannerModule,
     StorageModule,
     SystemModule,
+    ProvincesModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
