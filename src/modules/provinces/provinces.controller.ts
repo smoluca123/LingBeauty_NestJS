@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ProvincesService } from './provinces.service';
 import type { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
@@ -50,7 +50,11 @@ export class ProvincesController {
   ):
     | IBeforeTransformResponseType<ProvinceV1[]>
     | IBeforeTransformResponseType<ProvinceV2[]> {
-    const validVersion = version === 'v1' || version === 'v2' ? version : 'v2';
-    return this.provincesService.getProvincesByVersion(validVersion);
+    if (version !== 'v1' && version !== 'v2') {
+      throw new BadRequestException(
+        `Invalid version "${version}". Supported versions: v1, v2`,
+      );
+    }
+    return this.provincesService.getProvincesByVersion(version);
   }
 }
