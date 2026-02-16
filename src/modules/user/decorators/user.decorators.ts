@@ -15,6 +15,7 @@ import { AddressResponseDto } from 'src/modules/user/dto/address-response.dto';
 import { FileValidationInterceptor } from 'src/modules/storage/interceptors/file-validation.interceptor';
 import { MediaType } from 'prisma/generated/prisma';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
+import { ApiQueryLimitAndPage } from 'src/decorators/pagination.decorators';
 
 export function ApiGetMe() {
   return applyDecorators(
@@ -65,6 +66,7 @@ export function ApiUpdateUserById() {
 export function ApiGetMyAddresses() {
   return applyDecorators(
     ApiProtectedAuthOperation({ summary: 'Get my addresses' }),
+    ApiQueryLimitAndPage(),
     ApiResponse({
       status: 200,
       description: 'List of addresses',
@@ -94,9 +96,37 @@ export function ApiUpdateAddress() {
 export function ApiDeleteAddress() {
   return applyDecorators(
     ApiProtectedAuthOperation({ summary: 'Delete an address (Manager)' }),
+    ApiParam({
+      name: 'id',
+      description: 'Address ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Address deleted successfully',
+      example: {
+        message: 'Address deleted successfully',
+      },
+    }),
+  );
+}
+export function ApiAdminDeleteAddress() {
+  return applyDecorators(
     ApiRoleProtectedOperation({
       summary: 'Delete an address (Manager)',
       roles: [RolesLevel.MANAGER],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Address ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Address deleted successfully',
+      example: {
+        message: 'Address deleted successfully',
+      },
     }),
   );
 }
@@ -107,6 +137,7 @@ export function ApiGetAddressesByUserId() {
       summary: 'Get addresses by user ID (Manager only)',
       roles: [RolesLevel.MANAGER],
     }),
+    ApiQueryLimitAndPage(),
     ApiParam({
       name: 'userId',
       description: 'User ID',

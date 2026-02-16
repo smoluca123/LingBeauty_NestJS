@@ -1,17 +1,24 @@
+enum AddressType {
+  HOME
+  OFFICE
+  OTHER
+}
+
 model Address {
-  id           String   @id @default(uuid())
-  userId       String   @map("user_id")
-  fullName     String   @map("full_name") @db.VarChar(255)
-  phone        String   @db.VarChar(20)
-  addressLine1 String   @map("address_line1") @db.VarChar(255)
-  addressLine2 String?  @map("address_line2") @db.VarChar(255)
-  city         String   @db.VarChar(100)
-  province     String   @db.VarChar(100)
-  postalCode   String   @map("postal_code") @db.VarChar(20)
-  country      String   @default("Vietnam") @db.VarChar(100)
-  isDefault    Boolean  @default(false) @map("is_default")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id           String      @id @default(uuid())
+  userId       String      @map("user_id")
+  fullName     String      @map("full_name") @db.VarChar(255)
+  phone        String      @db.VarChar(20)
+  addressLine1 String      @map("address_line1") @db.VarChar(255)
+  addressLine2 String?     @map("address_line2") @db.VarChar(255)
+  city         String      @db.VarChar(100)
+  province     String      @db.VarChar(100)
+  postalCode   String      @map("postal_code") @db.VarChar(20)
+  country      String      @default("Vietnam") @db.VarChar(100)
+  type         AddressType @default(HOME)
+  isDefault    Boolean     @default(false) @map("is_default")
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
 
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   orders Order[]

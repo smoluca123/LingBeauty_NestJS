@@ -37,6 +37,7 @@ import {
   CreateSingleBadgeDto,
   UpdateBadgeDto,
 } from 'src/modules/product/dto/product-badge.dto';
+import { ApiQueryLimitAndPage } from 'src/decorators/pagination.decorators';
 
 export const ApiCreateProduct = () =>
   applyDecorators(
@@ -62,18 +63,19 @@ export const ApiGetProducts = () =>
       type: ProductResponseDto,
       isArray: true,
     }),
-    ApiQuery({
-      name: 'page',
-      type: Number,
-      required: false,
-      description: 'Page number (default: 1)',
-    }),
-    ApiQuery({
-      name: 'limit',
-      type: Number,
-      required: false,
-      description: 'Items per page (default: 10)',
-    }),
+    ApiQueryLimitAndPage(),
+    // ApiQuery({
+    //   name: 'page',
+    //   type: Number,
+    //   required: false,
+    //   description: 'Page number (default: 1)',
+    // }),
+    // ApiQuery({
+    //   name: 'limit',
+    //   type: Number,
+    //   required: false,
+    //   description: 'Items per page (default: 10)',
+    // }),
     ApiQuery({
       name: 'search',
       type: String,

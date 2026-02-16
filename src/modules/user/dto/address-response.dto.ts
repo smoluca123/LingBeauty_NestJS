@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { AddressType } from 'prisma/generated/prisma';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
 
 export class AddressResponseDto extends BaseResponseDto {
@@ -57,9 +58,15 @@ export class AddressResponseDto extends BaseResponseDto {
   country: string;
 
   @ApiProperty({
+    description: 'Type',
+    example: 'HOME',
+    enum: AddressType,
+  })
+  type: AddressType;
+
+  @ApiProperty({
     description: 'Is default address',
     example: false,
   })
   isDefault: boolean;
 }
-
