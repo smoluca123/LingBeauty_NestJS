@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsBoolean,
   Matches,
+  IsEnum,
 } from 'class-validator';
 
 export class CreateAddressDto {
@@ -18,9 +19,12 @@ export class CreateAddressDto {
 
   @IsString()
   @IsNotEmpty()
-  @Matches(/^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/, {
-    message: 'Invalid phone number format',
-  })
+  @Matches(
+    /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/,
+    {
+      message: 'Invalid phone number format',
+    },
+  )
   @ApiProperty({
     description: 'Phone number',
     example: '+84123456789',
@@ -67,6 +71,14 @@ export class CreateAddressDto {
   })
   postalCode: string;
 
+  @IsEnum(['HOME', 'OFFICE', 'OTHER'])
+  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Type of address',
+    example: 'HOME',
+  })
+  type: string;
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({
@@ -85,4 +97,3 @@ export class CreateAddressDto {
   })
   isDefault?: boolean;
 }
-

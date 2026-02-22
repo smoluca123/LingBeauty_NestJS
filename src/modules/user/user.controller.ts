@@ -8,6 +8,7 @@ import {
   UseGuards,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -15,7 +16,10 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { DecodedAccessToken } from 'src/decorators/decodedAccessToken.decorator';
 import { type IDecodedAccecssTokenType } from 'src/libs/types/interfaces/utils.interfaces';
-import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
+import {
+  IBeforeTransformPaginationResponseType,
+  IBeforeTransformResponseType,
+} from 'src/libs/types/interfaces/response.interface';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserByAdminDto } from './dto/update-user-admin.dto';
@@ -32,7 +36,9 @@ import {
   ApiDeleteAddress,
   ApiGetMyAddresses,
   ApiGetAddressesByUserId,
+  ApiAdminDeleteAddress,
 } from 'src/modules/user/decorators/user.decorators';
+import { normalizePaginationParams } from 'src/libs/utils/utils';
 
 @ApiTags('User Management')
 @ApiBearerAuth()
@@ -97,9 +103,21 @@ export class UserController {
   @ApiGetMyAddresses()
   async getMyAddresses(
     @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
-  ): Promise<IBeforeTransformResponseType<AddressResponseDto[]>> {
+    @Query('limit') limit: number,
+    @Query('page') page: number,
+    @Query('search') search: string,
+  ): Promise<IBeforeTransformPaginationResponseType<AddressResponseDto>> {
+    const { limit: limitNumber, page: pageNumber } = normalizePaginationParams({
+      limit,
+      page,
+    });
     const userId = decodedAccessToken.userId;
-    const result = await this.userService.getMyAddresses(userId);
+    const result = await this.userService.getMyAddresses({
+      userId,
+      limit: limitNumber,
+      page: pageNumber,
+      search,
+    });
 
     return result;
   }
@@ -108,8 +126,20 @@ export class UserController {
   @ApiGetAddressesByUserId()
   async getAddressesByUserId(
     @Param('userId') targetUserId: string,
-  ): Promise<IBeforeTransformResponseType<AddressResponseDto[]>> {
-    const result = await this.userService.getAddressesByUserId(targetUserId);
+    @Query() limit: number,
+    @Query() page: number,
+    @Query() search: string,
+  ): Promise<IBeforeTransformPaginationResponseType<AddressResponseDto>> {
+    const { limit: limitNumber, page: pageNumber } = normalizePaginationParams({
+      limit,
+      page,
+    });
+    const result = await this.userService.getAddressesByUserId({
+      targetUserId,
+      limit: limitNumber,
+      page: pageNumber,
+      search,
+    });
 
     return result;
   }
@@ -153,7 +183,22 @@ export class UserController {
     @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     const userId = decodedAccessToken.userId;
-    const result = await this.userService.deleteAddress(userId, addressId);
+    const result = await this.userService.deleteAddress({
+      userId,
+      addressId,
+    });
+
+    return result;
+  }
+
+  @Delete('admin/address/:id')
+  @ApiAdminDeleteAddress()
+  async adminDeleteAddress(
+    @Param('id') addressId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    const result = await this.userService.deleteAddressById({
+      addressId,
+    });
 
     return result;
   }

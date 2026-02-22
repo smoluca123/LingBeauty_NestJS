@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { MediaType } from 'prisma/generated/prisma/client';
+import { MediaType, Prisma } from 'prisma/generated/prisma/client';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import { BusinessException } from 'src/exceptions/business.exception';
 import { userSelect } from 'src/libs/prisma/user-select';
-import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
+import {
+  IBeforeTransformPaginationResponseType,
+  IBeforeTransformResponseType,
+} from 'src/libs/types/interfaces/response.interface';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 import { StorageService } from 'src/modules/storage/storage.service';
@@ -15,6 +18,7 @@ import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressResponseDto } from './dto/address-response.dto';
 import { processDataObject } from 'src/libs/utils/utils';
+import { addressSelect } from 'src/libs/prisma/address-select';
 
 @Injectable()
 export class UserService {
@@ -279,37 +283,17 @@ export class UserService {
     }
   }
 
-  async getMyAddresses(
-    userId: string,
-  ): Promise<IBeforeTransformResponseType<AddressResponseDto[]>> {
-    try {
-      const addresses = await this.prismaService.address.findMany({
-        where: {
-          userId,
-        },
-        orderBy: [{ isDefault: 'desc' }, { createdAt: 'desc' }],
-      });
-
-      const addressResponses = addresses.map((address) =>
-        toResponseDto(AddressResponseDto, address),
-      );
-
-      return {
-        type: 'response',
-        message: 'Addresses retrieved successfully',
-        data: addressResponses,
-      };
-    } catch (error) {
-      throw new BusinessException(
-        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
-        ERROR_CODES.DATABASE_ERROR,
-      );
-    }
-  }
-
-  async getAddressesByUserId(
-    targetUserId: string,
-  ): Promise<IBeforeTransformResponseType<AddressResponseDto[]>> {
+  async getAddressesByUserId({
+    targetUserId,
+    limit = 10,
+    page = 1,
+    search,
+  }: {
+    targetUserId: string;
+    limit: number;
+    page: number;
+    search: string;
+  }): Promise<IBeforeTransformPaginationResponseType<AddressResponseDto>> {
     try {
       // Check if user exists
       const user = await this.prismaService.user.findUnique({
@@ -323,21 +307,86 @@ export class UserService {
         );
       }
 
-      const addresses = await this.prismaService.address.findMany({
-        where: {
-          userId: targetUserId,
-        },
-        orderBy: [{ isDefault: 'desc' }, { createdAt: 'desc' }],
-      });
+      const whereQuery: Prisma.AddressWhereInput = {
+        userId: targetUserId,
+        ...(search && {
+          OR: [
+            {
+              phone: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              fullName: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              addressLine1: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              addressLine2: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              city: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              province: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              country: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              postalCode: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+          ],
+        }),
+      };
+
+      const [totalCount, addresses] = await Promise.all([
+        this.prismaService.address.count({ where: whereQuery }),
+        this.prismaService.address.findMany({
+          where: whereQuery,
+          select: addressSelect,
+          orderBy: [{ isDefault: 'desc' }, { createdAt: 'desc' }],
+          take: limit,
+          skip: (page - 1) * limit,
+        }),
+      ]);
 
       const addressResponses = addresses.map((address) =>
         toResponseDto(AddressResponseDto, address),
       );
 
       return {
-        type: 'response',
+        type: 'pagination',
         message: 'Addresses retrieved successfully',
-        data: addressResponses,
+        data: {
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+          items: addressResponses,
+        },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -349,6 +398,60 @@ export class UserService {
       );
     }
   }
+
+  async getMyAddresses({
+    userId,
+    limit,
+    page,
+    search,
+  }: {
+    userId: string;
+    limit: number;
+    page: number;
+    search: string;
+  }): Promise<IBeforeTransformPaginationResponseType<AddressResponseDto>> {
+    try {
+      return this.getAddressesByUserId({
+        targetUserId: userId,
+        limit,
+        page,
+        search,
+      });
+    } catch (error) {
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  // async getMyAddresses(
+  //   userId: string,
+  // ): Promise<IBeforeTransformResponseType<AddressResponseDto[]>> {
+  //   try {
+  //     const addresses = await this.prismaService.address.findMany({
+  //       where: {
+  //         userId,
+  //       },
+  //       orderBy: [{ isDefault: 'desc' }, { createdAt: 'desc' }],
+  //     });
+
+  //     const addressResponses = addresses.map((address) =>
+  //       toResponseDto(AddressResponseDto, address),
+  //     );
+
+  //     return {
+  //       type: 'response',
+  //       message: 'Addresses retrieved successfully',
+  //       data: addressResponses,
+  //     };
+  //   } catch (error) {
+  //     throw new BusinessException(
+  //       ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+  //       ERROR_CODES.DATABASE_ERROR,
+  //     );
+  //   }
+  // }
 
   async createAddress(
     userId: string,
@@ -467,10 +570,42 @@ export class UserService {
     }
   }
 
-  async deleteAddress(
-    userId: string,
-    addressId: string,
-  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+  async deleteAddress({
+    userId,
+    addressId,
+  }: {
+    userId: string;
+    addressId: string;
+  }): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      await this.deleteAddressById({
+        userId,
+        addressId,
+      });
+
+      return {
+        type: 'response',
+        message: 'Address deleted successfully',
+        data: { message: 'Address deleted successfully' },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DELETE_ADDRESS_FAILED],
+        ERROR_CODES.DELETE_ADDRESS_FAILED,
+      );
+    }
+  }
+
+  async deleteAddressById({
+    userId,
+    addressId,
+  }: {
+    userId?: string;
+    addressId: string;
+  }): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
       // Check if address exists
       const existingAddress = await this.prismaService.address.findUnique({
@@ -485,7 +620,7 @@ export class UserService {
       }
 
       // Verify ownership
-      if (existingAddress.userId !== userId) {
+      if (userId && existingAddress.userId !== userId) {
         throw new BusinessException(
           ERROR_MESSAGES[ERROR_CODES.ADDRESS_NOT_OWNED],
           ERROR_CODES.ADDRESS_NOT_OWNED,

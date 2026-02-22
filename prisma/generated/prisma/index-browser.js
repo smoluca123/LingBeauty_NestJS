@@ -131,6 +131,7 @@ exports.Prisma.AddressScalarFieldEnum = {
   province: 'province',
   postalCode: 'postalCode',
   country: 'country',
+  type: 'type',
   isDefault: 'isDefault',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -599,6 +600,12 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.AddressType = exports.$Enums.AddressType = {
+  HOME: 'HOME',
+  OFFICE: 'OFFICE',
+  OTHER: 'OTHER'
+};
+
 exports.BannerType = exports.$Enums.BannerType = {
   TEXT: 'TEXT',
   IMAGE: 'IMAGE'

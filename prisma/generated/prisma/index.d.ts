@@ -203,7 +203,16 @@ export type UserRoleAssignment = $Result.DefaultSelection<Prisma.$UserRoleAssign
  * Enums
  */
 export namespace $Enums {
-  export const BannerType: {
+  export const AddressType: {
+  HOME: 'HOME',
+  OFFICE: 'OFFICE',
+  OTHER: 'OTHER'
+};
+
+export type AddressType = (typeof AddressType)[keyof typeof AddressType]
+
+
+export const BannerType: {
   TEXT: 'TEXT',
   IMAGE: 'IMAGE'
 };
@@ -326,6 +335,10 @@ export const ProductInventoryDisplayStatus: {
 export type ProductInventoryDisplayStatus = (typeof ProductInventoryDisplayStatus)[keyof typeof ProductInventoryDisplayStatus]
 
 }
+
+export type AddressType = $Enums.AddressType
+
+export const AddressType: typeof $Enums.AddressType
 
 export type BannerType = $Enums.BannerType
 
@@ -5097,6 +5110,7 @@ export namespace Prisma {
     province: string | null
     postalCode: string | null
     country: string | null
+    type: $Enums.AddressType | null
     isDefault: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5113,6 +5127,7 @@ export namespace Prisma {
     province: string | null
     postalCode: string | null
     country: string | null
+    type: $Enums.AddressType | null
     isDefault: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5129,6 +5144,7 @@ export namespace Prisma {
     province: number
     postalCode: number
     country: number
+    type: number
     isDefault: number
     createdAt: number
     updatedAt: number
@@ -5147,6 +5163,7 @@ export namespace Prisma {
     province?: true
     postalCode?: true
     country?: true
+    type?: true
     isDefault?: true
     createdAt?: true
     updatedAt?: true
@@ -5163,6 +5180,7 @@ export namespace Prisma {
     province?: true
     postalCode?: true
     country?: true
+    type?: true
     isDefault?: true
     createdAt?: true
     updatedAt?: true
@@ -5179,6 +5197,7 @@ export namespace Prisma {
     province?: true
     postalCode?: true
     country?: true
+    type?: true
     isDefault?: true
     createdAt?: true
     updatedAt?: true
@@ -5268,6 +5287,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country: string
+    type: $Enums.AddressType
     isDefault: boolean
     createdAt: Date
     updatedAt: Date
@@ -5301,6 +5321,7 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    type?: boolean
     isDefault?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5320,6 +5341,7 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    type?: boolean
     isDefault?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5337,6 +5359,7 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    type?: boolean
     isDefault?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5354,12 +5377,13 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    type?: boolean
     isDefault?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fullName" | "phone" | "addressLine1" | "addressLine2" | "city" | "province" | "postalCode" | "country" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["address"]>
+  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fullName" | "phone" | "addressLine1" | "addressLine2" | "city" | "province" | "postalCode" | "country" | "type" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["address"]>
   export type AddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     orders?: boolean | Address$ordersArgs<ExtArgs>
@@ -5389,6 +5413,7 @@ export namespace Prisma {
       province: string
       postalCode: string
       country: string
+      type: $Enums.AddressType
       isDefault: boolean
       createdAt: Date
       updatedAt: Date
@@ -5827,6 +5852,7 @@ export namespace Prisma {
     readonly province: FieldRef<"Address", 'String'>
     readonly postalCode: FieldRef<"Address", 'String'>
     readonly country: FieldRef<"Address", 'String'>
+    readonly type: FieldRef<"Address", 'AddressType'>
     readonly isDefault: FieldRef<"Address", 'Boolean'>
     readonly createdAt: FieldRef<"Address", 'DateTime'>
     readonly updatedAt: FieldRef<"Address", 'DateTime'>
@@ -48934,6 +48960,7 @@ export namespace Prisma {
     province: 'province',
     postalCode: 'postalCode',
     country: 'country',
+    type: 'type',
     isDefault: 'isDefault',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -49549,6 +49576,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'AddressType'
+   */
+  export type EnumAddressTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AddressType'>
+    
+
+
+  /**
+   * Reference to a field of type 'AddressType[]'
+   */
+  export type ListEnumAddressTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AddressType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -49810,6 +49851,7 @@ export namespace Prisma {
     province?: StringFilter<"Address"> | string
     postalCode?: StringFilter<"Address"> | string
     country?: StringFilter<"Address"> | string
+    type?: EnumAddressTypeFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolFilter<"Address"> | boolean
     createdAt?: DateTimeFilter<"Address"> | Date | string
     updatedAt?: DateTimeFilter<"Address"> | Date | string
@@ -49828,6 +49870,7 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    type?: SortOrder
     isDefault?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -49849,6 +49892,7 @@ export namespace Prisma {
     province?: StringFilter<"Address"> | string
     postalCode?: StringFilter<"Address"> | string
     country?: StringFilter<"Address"> | string
+    type?: EnumAddressTypeFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolFilter<"Address"> | boolean
     createdAt?: DateTimeFilter<"Address"> | Date | string
     updatedAt?: DateTimeFilter<"Address"> | Date | string
@@ -49867,6 +49911,7 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    type?: SortOrder
     isDefault?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -49889,6 +49934,7 @@ export namespace Prisma {
     province?: StringWithAggregatesFilter<"Address"> | string
     postalCode?: StringWithAggregatesFilter<"Address"> | string
     country?: StringWithAggregatesFilter<"Address"> | string
+    type?: EnumAddressTypeWithAggregatesFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolWithAggregatesFilter<"Address"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
@@ -52883,6 +52929,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -52901,6 +52948,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -52917,6 +52965,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -52935,6 +52984,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -52952,6 +53002,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -52967,6 +53018,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -52983,6 +53035,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -56234,6 +56287,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumAddressTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AddressType | EnumAddressTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAddressTypeFilter<$PrismaModel> | $Enums.AddressType
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -56281,6 +56341,7 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    type?: SortOrder
     isDefault?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -56297,6 +56358,7 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    type?: SortOrder
     isDefault?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -56313,6 +56375,7 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    type?: SortOrder
     isDefault?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -56352,6 +56415,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumAddressTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AddressType | EnumAddressTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAddressTypeWithAggregatesFilter<$PrismaModel> | $Enums.AddressType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAddressTypeFilter<$PrismaModel>
+    _max?: NestedEnumAddressTypeFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -58791,6 +58864,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type EnumAddressTypeFieldUpdateOperationsInput = {
+    set?: $Enums.AddressType
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -61713,6 +61790,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumAddressTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AddressType | EnumAddressTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAddressTypeFilter<$PrismaModel> | $Enums.AddressType
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -61783,6 +61867,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumAddressTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AddressType | EnumAddressTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AddressType[] | ListEnumAddressTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAddressTypeWithAggregatesFilter<$PrismaModel> | $Enums.AddressType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAddressTypeFilter<$PrismaModel>
+    _max?: NestedEnumAddressTypeFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -65233,6 +65327,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -65250,6 +65345,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -65486,6 +65582,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65503,6 +65600,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -69676,6 +69774,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -69692,6 +69791,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -69977,6 +70077,7 @@ export namespace Prisma {
     province?: StringFilter<"Address"> | string
     postalCode?: StringFilter<"Address"> | string
     country?: StringFilter<"Address"> | string
+    type?: EnumAddressTypeFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolFilter<"Address"> | boolean
     createdAt?: DateTimeFilter<"Address"> | Date | string
     updatedAt?: DateTimeFilter<"Address"> | Date | string
@@ -72182,6 +72283,7 @@ export namespace Prisma {
     province: string
     postalCode: string
     country?: string
+    type?: $Enums.AddressType
     isDefault?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -72329,6 +72431,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72345,6 +72448,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72361,6 +72465,7 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
+    type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
