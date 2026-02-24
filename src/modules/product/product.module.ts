@@ -10,7 +10,7 @@ import { StorageModule } from 'src/modules/storage/storage.module';
 
 @Module({
   imports: [PrismaModule, StorageModule],
-  controllers: [ProductController, PublicProductController],
+  controllers: [PublicProductController, ProductController],
   providers: [ProductService, ProductStatsService],
   exports: [ProductService, ProductStatsService],
 })

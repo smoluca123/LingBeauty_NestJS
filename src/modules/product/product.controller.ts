@@ -21,6 +21,8 @@ import {
   ProductBadgeResponseDto,
   ProductResponseDto,
 } from './dto/product-response.dto';
+import { FilterCategoryResponseDto } from './dto/filter-category-response.dto';
+import { ProductStatsResponseDto } from './dto/product-stats-response.dto';
 import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
@@ -50,6 +52,8 @@ import {
   ApiUploadProductVideo,
   ApiGetHotProducts,
   ApiTrackProductView,
+  ApiGetFilterCategories,
+  ApiGetProductStats,
 } from './decorators/product.decorators';
 import { HotProductsQueryDto } from './dto/hot-products-query.dto';
 import { TrackProductViewResponseDto } from './dto/public-product.dto';
@@ -451,5 +455,49 @@ export class PublicProductController {
       message: 'Product view tracked successfully',
       data: { message: 'Product view tracked successfully' },
     };
+  }
+
+  /**
+   * Get filter categories for product listing sidebar.
+   * Returns distinct categories with product counts based on context filters.
+   */
+  @Get('public/filter-categories')
+  @ApiGetFilterCategories()
+  getFilterCategories(
+    @Query('brandId') brandId?: string,
+    @Query('categoryId') categoryId?: string,
+    @Query('search') search?: string,
+    @Query('isFeatured') isFeatured?: string,
+    @Query('minPrice') minPrice?: number,
+    @Query('maxPrice') maxPrice?: number,
+  ): Promise<IBeforeTransformResponseType<FilterCategoryResponseDto[]>> {
+    return this.productService.getFilterCategories({
+      brandId,
+      categoryId,
+      search,
+      isFeatured: isFeatured !== undefined ? isFeatured === 'true' : undefined,
+      minPrice: minPrice ? Number(minPrice) : undefined,
+      maxPrice: maxPrice ? Number(maxPrice) : undefined,
+    });
+  }
+
+  /**
+   * Get lightweight product stats (productCount, totalSold).
+   * Used by listing pages to show stats without fetching all products.
+   */
+  @Get('public/stats')
+  @ApiGetProductStats()
+  getProductStats(
+    @Query('brandId') brandId?: string,
+    @Query('categoryId') categoryId?: string,
+    @Query('search') search?: string,
+    @Query('isFeatured') isFeatured?: string,
+  ): Promise<IBeforeTransformResponseType<ProductStatsResponseDto>> {
+    return this.productService.getProductStats({
+      brandId,
+      categoryId,
+      search,
+      isFeatured: isFeatured !== undefined ? isFeatured === 'true' : undefined,
+    });
   }
 }
