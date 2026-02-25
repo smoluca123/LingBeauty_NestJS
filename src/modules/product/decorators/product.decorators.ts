@@ -599,3 +599,89 @@ export const ApiTrackProductView = () =>
       description: 'View tracked successfully',
     }),
   );
+
+export const ApiGetFilterCategories = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get filter categories for product listing',
+      description:
+        'Returns distinct categories with product counts based on the given filter context (brandId, search, isFeatured, etc.). Used to populate the category filter sidebar.',
+    }),
+    ApiQuery({
+      name: 'brandId',
+      type: String,
+      required: false,
+      description: 'Filter categories by brand ID',
+    }),
+    ApiQuery({
+      name: 'categoryId',
+      type: String,
+      required: false,
+      description: 'Filter categories by parent category ID',
+    }),
+    ApiQuery({
+      name: 'search',
+      type: String,
+      required: false,
+      description: 'Filter categories by product search term',
+    }),
+    ApiQuery({
+      name: 'isFeatured',
+      type: Boolean,
+      required: false,
+      description: 'Filter categories by featured products only',
+    }),
+    ApiQuery({
+      name: 'minPrice',
+      type: Number,
+      required: false,
+      description: 'Filter categories by minimum product price',
+    }),
+    ApiQuery({
+      name: 'maxPrice',
+      type: Number,
+      required: false,
+      description: 'Filter categories by maximum product price',
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Filter categories retrieved successfully',
+    }),
+  );
+
+export const ApiGetProductStats = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get lightweight product stats',
+      description:
+        'Returns productCount and totalSold for a given context (brandId, categoryId, etc.) without fetching product data.',
+    }),
+    ApiQuery({
+      name: 'brandId',
+      type: String,
+      required: false,
+      description: 'Filter stats by brand ID',
+    }),
+    ApiQuery({
+      name: 'categoryId',
+      type: String,
+      required: false,
+      description: 'Filter stats by category ID',
+    }),
+    ApiQuery({
+      name: 'search',
+      type: String,
+      required: false,
+      description: 'Filter stats by product search term',
+    }),
+    ApiQuery({
+      name: 'isFeatured',
+      type: Boolean,
+      required: false,
+      description: 'Filter stats by featured products only',
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Product stats retrieved successfully',
+    }),
+  );

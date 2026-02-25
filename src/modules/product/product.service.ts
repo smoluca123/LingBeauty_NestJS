@@ -54,6 +54,8 @@ import {
   HotProductCriteria,
   HotProductPeriod,
 } from './dto/hot-products-query.dto';
+import { FilterCategoryResponseDto } from './dto/filter-category-response.dto';
+import { ProductStatsResponseDto } from './dto/product-stats-response.dto';
 
 export interface GetProductsParams {
   page?: number;
@@ -69,6 +71,12 @@ export interface GetProductsParams {
   order?: 'asc' | 'desc';
 }
 
+/** Params for filter categories — same context as product listing but without pagination/sort */
+export type GetFilterCategoriesParams = Omit<
+  GetProductsParams,
+  'page' | 'limit' | 'sortBy' | 'order'
+>;
+
 @Injectable()
 export class ProductService {
   constructor(
@@ -76,44 +84,57 @@ export class ProductService {
     private readonly storageService: StorageService,
   ) {}
 
+  /**
+   * Build a shared Prisma where clause from product filter params.
+   * Reused by getAllProducts and getFilterCategories.
+   */
+  private buildProductWhereQuery(
+    params: Omit<GetProductsParams, 'page' | 'limit' | 'sortBy' | 'order'>,
+  ): Prisma.ProductWhereInput {
+    const {
+      search,
+      categoryId,
+      brandId,
+      isActive,
+      isFeatured,
+      minPrice,
+      maxPrice,
+    } = params;
+    return {
+      ...(search && {
+        name: {
+          contains: search,
+          mode: 'insensitive' as const,
+        },
+      }),
+      ...(categoryId && {
+        productCategories: {
+          some: { categoryId },
+        },
+      }),
+      ...(brandId && { brandId }),
+      ...(isActive !== undefined && { isActive }),
+      ...(isFeatured !== undefined && { isFeatured }),
+      ...((minPrice !== undefined || maxPrice !== undefined) && {
+        basePrice: {
+          ...(minPrice !== undefined && { gte: minPrice }),
+          ...(maxPrice !== undefined && { lte: maxPrice }),
+        },
+      }),
+    };
+  }
+
   async getAllProducts({
     page = 1,
     limit = 10,
-    search,
-    categoryId,
-    brandId,
-    isActive,
-    isFeatured,
-    minPrice,
-    maxPrice,
     sortBy = 'createdAt',
     order = 'desc',
+    ...filterParams
   }: GetProductsParams): Promise<
     IBeforeTransformPaginationResponseType<ProductResponseDto>
   > {
     try {
-      const whereQuery: Prisma.ProductWhereInput = {
-        ...(search && {
-          name: {
-            contains: search,
-            mode: 'insensitive' as const,
-          },
-        }),
-        ...(categoryId && {
-          productCategories: {
-            some: { categoryId },
-          },
-        }),
-        ...(brandId && { brandId }),
-        ...(isActive !== undefined && { isActive }),
-        ...(isFeatured !== undefined && { isFeatured }),
-        ...((minPrice !== undefined || maxPrice !== undefined) && {
-          basePrice: {
-            ...(minPrice !== undefined && { gte: minPrice }),
-            ...(maxPrice !== undefined && { lte: maxPrice }),
-          },
-        }),
-      };
+      const whereQuery = this.buildProductWhereQuery(filterParams);
 
       const [products, totalCount] = await Promise.all([
         this.prismaService.product.findMany({
@@ -152,6 +173,129 @@ export class ProductService {
 
       throw new BusinessException(
         'Failed to get products',
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  /**
+   * Get distinct categories with product counts for filter sidebar.
+   * Accepts the same context params as product listing (brandId, search, isFeatured, etc.).
+   */
+  async getFilterCategories(
+    params: GetFilterCategoriesParams,
+  ): Promise<IBeforeTransformResponseType<FilterCategoryResponseDto[]>> {
+    try {
+      const whereQuery = this.buildProductWhereQuery(params);
+
+      // Query ProductCategory join table, grouping by categoryId,
+      // but only for products that match the context filter
+      const categoryCounts = await this.prismaService.productCategory.groupBy({
+        by: ['categoryId'],
+        where: {
+          product: whereQuery,
+        },
+        _count: {
+          categoryId: true,
+        },
+        orderBy: {
+          _count: {
+            categoryId: 'desc',
+          },
+        },
+      });
+
+      if (categoryCounts.length === 0) {
+        return {
+          type: 'response',
+          message: 'Filter categories retrieved successfully',
+          data: [],
+        };
+      }
+
+      // Fetch category details for the grouped IDs
+      const categoryIds = categoryCounts.map((c) => c.categoryId);
+      const categories = await this.prismaService.category.findMany({
+        where: {
+          id: { in: categoryIds },
+          isActive: true,
+        },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          sortOrder: true,
+        },
+        orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
+      });
+
+      // Build count map for O(1) lookup
+      const countMap = new Map(
+        categoryCounts.map((c) => [c.categoryId, c._count.categoryId]),
+      );
+
+      const filterCategories: FilterCategoryResponseDto[] = categories.map(
+        (cat) => ({
+          id: cat.id,
+          name: cat.name,
+          slug: cat.slug,
+          count: countMap.get(cat.id) ?? 0,
+        }),
+      );
+
+      return {
+        type: 'response',
+        message: 'Filter categories retrieved successfully',
+        data: filterCategories,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        'Failed to get filter categories',
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  /**
+   * Get lightweight product stats (count + totalSold) for a given context.
+   * Uses pre-calculated ProductStats instead of scanning order items.
+   */
+  async getProductStats(
+    params: GetFilterCategoriesParams,
+  ): Promise<IBeforeTransformResponseType<ProductStatsResponseDto>> {
+    try {
+      const whereQuery = this.buildProductWhereQuery(params);
+
+      // Count products and sum totalSold from ProductStats in parallel
+      const [productCount, salesAgg] = await Promise.all([
+        this.prismaService.product.count({ where: whereQuery }),
+        this.prismaService.productStats.aggregate({
+          _sum: { totalSold: true },
+          where: {
+            product: whereQuery,
+          },
+        }),
+      ]);
+
+      return {
+        type: 'response',
+        message: 'Product stats retrieved successfully',
+        data: {
+          productCount,
+          totalSold: salesAgg._sum.totalSold ?? 0,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+
+      throw new BusinessException(
+        'Failed to get product stats',
         ERROR_CODES.DATABASE_ERROR,
       );
     }
