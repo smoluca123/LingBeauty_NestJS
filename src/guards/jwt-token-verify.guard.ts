@@ -152,7 +152,7 @@ export class JwtTokenVerifyGuard implements CanActivate {
       );
     }
 
-    if (!user.isActive) {
+    if (!user.isBanned) {
       throw new ForbiddenException(
         'User has been banned',
         ERROR_CODES.USER_BANNED,

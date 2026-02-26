@@ -97,7 +97,7 @@ export class CategoryService {
 
       return {
         type: 'response',
-        message: 'Category created successfully',
+        message: 'Tạo danh mục thành công',
         data: categoryResponse,
         statusCode: 201,
       };
@@ -107,7 +107,7 @@ export class CategoryService {
       }
 
       throw new BusinessException(
-        'Failed to create category',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -207,7 +207,7 @@ export class CategoryService {
 
       return {
         type: 'response',
-        message: 'Category updated successfully',
+        message: 'Cập nhật danh mục thành công',
         data: responseDto,
       };
     } catch (error) {
@@ -216,7 +216,7 @@ export class CategoryService {
       }
 
       throw new BusinessException(
-        'Failed to update category',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -264,7 +264,7 @@ export class CategoryService {
         where: { id: categoryId },
       });
 
-      const message = 'Category deleted successfully';
+      const message = 'Xóa danh mục thành công';
       const responseDto = toResponseDto(CategoryResponseDto, existing);
       return {
         type: 'response',
@@ -277,7 +277,7 @@ export class CategoryService {
       }
 
       throw new BusinessException(
-        'Failed to delete category',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -316,12 +316,12 @@ export class CategoryService {
 
       return {
         type: 'response',
-        message: 'Categories retrieved successfully',
+        message: 'Lấy danh sách danh mục thành công',
         data: roots,
       };
     } catch (error) {
       throw new BusinessException(
-        'Failed to get categories',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }

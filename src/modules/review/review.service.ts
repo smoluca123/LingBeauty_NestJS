@@ -91,7 +91,7 @@ export class ReviewService {
 
       return {
         type: 'pagination',
-        message: 'Reviews retrieved successfully',
+        message: 'Lấy danh sách đánh giá thành công',
         data: {
           items: reviewResponses,
           totalCount,
@@ -104,7 +104,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to get reviews',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -130,7 +130,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review retrieved successfully',
+        message: 'Lấy thông tin đánh giá thành công',
         data: result,
       };
     } catch (error) {
@@ -138,7 +138,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to get review',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -192,7 +192,7 @@ export class ReviewService {
 
         if (mediaRecords.length !== dto.mediaIds.length) {
           throw new BusinessException(
-            'One or more media IDs are invalid',
+            ERROR_MESSAGES[ERROR_CODES.MEDIA_NOT_FOUND],
             ERROR_CODES.MEDIA_NOT_FOUND,
           );
         }
@@ -221,7 +221,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review created successfully',
+        message: 'Tạo đánh giá thành công',
         data: result,
         statusCode: 201,
       };
@@ -230,7 +230,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to create review',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -316,7 +316,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review created successfully',
+        message: 'Tạo đánh giá thành công',
         data: result,
         statusCode: 201,
       };
@@ -325,7 +325,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to create review',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -373,7 +373,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review updated successfully',
+        message: 'Cập nhật đánh giá thành công',
         data: result,
       };
     } catch (error) {
@@ -381,7 +381,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to update review',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     } finally {
@@ -432,15 +432,15 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review deleted successfully',
-        data: { message: 'Review deleted successfully' },
+        message: 'Xóa đánh giá thành công',
+        data: { message: 'Xóa đánh giá thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
         throw error;
       }
       throw new BusinessException(
-        'Failed to delete review',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     } finally {
@@ -534,7 +534,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review image added successfully',
+        message: 'Thêm ảnh đánh giá thành công',
         data: reviewImage,
         statusCode: 201,
       };
@@ -543,7 +543,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to add review image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -594,15 +594,15 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review image deleted successfully',
-        data: { message: 'Review image deleted successfully' },
+        message: 'Xóa ảnh đánh giá thành công',
+        data: { message: 'Xóa ảnh đánh giá thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
         throw error;
       }
       throw new BusinessException(
-        'Failed to delete review image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -643,7 +643,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review images retrieved successfully',
+        message: 'Lấy danh sách ảnh đánh giá thành công',
         data: images,
       };
     } catch (error) {
@@ -651,7 +651,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to get review images',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -689,7 +689,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: `Review ${isApproved ? 'approved' : 'rejected'} successfully`,
+        message: `Đánh giá đã được ${isApproved ? 'phê duyệt' : 'từ chối'} thành công`,
         data: result,
       };
     } catch (error) {
@@ -697,7 +697,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to update review status',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     } finally {
@@ -786,7 +786,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review image uploaded successfully',
+        message: 'Tải ảnh đánh giá lên thành công',
         data: reviewImage,
         statusCode: 201,
       };
@@ -795,7 +795,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to upload review image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -871,7 +871,7 @@ export class ReviewService {
 
       return {
         type: 'response',
-        message: 'Review video uploaded successfully',
+        message: 'Tải video đánh giá lên thành công',
         data: reviewImage,
         statusCode: 201,
       };
@@ -880,7 +880,7 @@ export class ReviewService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to upload review video',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }

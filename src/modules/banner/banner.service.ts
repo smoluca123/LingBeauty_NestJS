@@ -68,7 +68,7 @@ export class BannerService {
 
       return {
         type: 'pagination',
-        message: 'Banner groups retrieved successfully',
+        message: 'Lấy danh sách nhóm banner thành công',
         data: {
           items: groupResponses,
           totalCount,
@@ -82,7 +82,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to get banner groups',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -108,7 +108,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner group retrieved successfully',
+        message: 'Lấy thông tin nhóm banner thành công',
         data: result,
       };
     } catch (error) {
@@ -116,7 +116,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to get banner group',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -155,7 +155,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Active banner group retrieved successfully',
+        message: 'Lấy nhóm banner đang hoạt động thành công',
         data: result,
       };
     } catch (error) {
@@ -164,7 +164,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to get active banner group',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -205,7 +205,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner group created successfully',
+        message: 'Tạo nhóm banner thành công',
         data: result,
       };
     } catch (error) {
@@ -213,7 +213,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to create banner group',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -255,7 +255,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner group updated successfully',
+        message: 'Cập nhật nhóm banner thành công',
         data: result,
       };
     } catch (error) {
@@ -263,7 +263,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to update banner group',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -290,15 +290,15 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner group deleted successfully',
-        data: { message: 'Banner group deleted successfully' },
+        message: 'Xóa nhóm banner thành công',
+        data: { message: 'Xóa nhóm banner thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
         throw error;
       }
       throw new BusinessException(
-        'Failed to delete banner group',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -352,7 +352,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner created successfully',
+        message: 'Tạo banner thành công',
         data: result,
       };
     } catch (error) {
@@ -360,7 +360,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to create banner',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -422,7 +422,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner created with image successfully',
+        message: 'Tạo banner kèm hình ảnh thành công',
         data: result,
       };
     } catch (error) {
@@ -430,7 +430,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to create banner with image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -474,7 +474,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner updated successfully',
+        message: 'Cập nhật banner thành công',
         data: result,
       };
     } catch (error) {
@@ -482,7 +482,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to update banner',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -542,7 +542,7 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner updated with image successfully',
+        message: 'Cập nhật banner kèm hình ảnh thành công',
         data: result,
       };
     } catch (error) {
@@ -550,7 +550,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to update banner with image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -577,15 +577,15 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner deleted successfully',
-        data: { message: 'Banner deleted successfully' },
+        message: 'Xóa banner thành công',
+        data: { message: 'Xóa banner thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
         throw error;
       }
       throw new BusinessException(
-        'Failed to delete banner',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -718,9 +718,9 @@ export class BannerService {
 
       return {
         type: 'response',
-        message: 'Banner data seeded successfully',
+        message: 'Khởi tạo dữ liệu banner thành công',
         data: {
-          message: `Created ${allBanners.length} banners (3 carousel + 2 side)`,
+          message: `Đã tạo ${allBanners.length} banner (3 băng chuyền + 2 bên)`,
           count: allBanners.length,
         },
       };
@@ -729,7 +729,7 @@ export class BannerService {
         throw error;
       }
       throw new BusinessException(
-        'Failed to seed banners',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }

@@ -63,7 +63,7 @@ export class BrandService {
 
       return {
         type: 'pagination',
-        message: 'Brands retrieved successfully',
+        message: 'Lấy danh sách thương hiệu thành công',
         data: {
           items: brandResponse,
           totalCount,
@@ -77,7 +77,7 @@ export class BrandService {
       }
 
       throw new BusinessException(
-        'Failed to get brands',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -127,7 +127,7 @@ export class BrandService {
 
       return {
         type: 'response',
-        message: 'Brand created successfully',
+        message: 'Tạo thương hiệu thành công',
         data: brandResponse,
         statusCode: 201,
       };
@@ -137,7 +137,7 @@ export class BrandService {
       }
 
       throw new BusinessException(
-        'Failed to create brand',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -163,7 +163,7 @@ export class BrandService {
 
       return {
         type: 'response',
-        message: 'Brand retrieved successfully',
+        message: 'Lấy thông tin thương hiệu thành công',
         data: brandResponse,
       };
     } catch (error) {
@@ -172,7 +172,7 @@ export class BrandService {
       }
 
       throw new BusinessException(
-        'Failed to get brand',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -234,7 +234,7 @@ export class BrandService {
 
       return {
         type: 'response',
-        message: 'Brand updated successfully',
+        message: 'Cập nhật thương hiệu thành công',
         data: responseDto,
       };
     } catch (error) {
@@ -243,7 +243,7 @@ export class BrandService {
       }
 
       throw new BusinessException(
-        'Failed to update brand',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -285,7 +285,7 @@ export class BrandService {
         await this.storageService.deleteFile(existing.logoMediaId);
       }
 
-      const message = 'Brand deleted successfully';
+      const message = 'Xóa thương hiệu thành công';
       const responseDto = toResponseDto(BrandResponseDto, existing);
       return {
         type: 'response',
@@ -298,7 +298,7 @@ export class BrandService {
       }
 
       throw new BusinessException(
-        'Failed to delete brand',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
