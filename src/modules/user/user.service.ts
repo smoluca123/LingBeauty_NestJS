@@ -19,6 +19,18 @@ import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressResponseDto } from './dto/address-response.dto';
 import { processDataObject } from 'src/libs/utils/utils';
 import { addressSelect } from 'src/libs/prisma/address-select';
+import { BanUserBulkItemDto, BanUserBulkResultDto } from './dto/ban-user.dto';
+
+export interface GetUsersParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  isActive?: boolean;
+  isBanned?: boolean;
+  isVerified?: boolean;
+  sortBy?: 'createdAt' | 'updatedAt' | 'email' | 'firstName' | 'lastName';
+  order?: 'asc' | 'desc';
+}
 
 @Injectable()
 export class UserService {
@@ -27,7 +39,71 @@ export class UserService {
     private readonly prismaService: PrismaService,
   ) {}
 
-  async getMe(
+  async getAllUsers({
+    page = 1,
+    limit = 10,
+    search,
+    isActive,
+    isBanned,
+    isVerified,
+    sortBy = 'createdAt',
+    order = 'desc',
+  }: GetUsersParams): Promise<
+    IBeforeTransformPaginationResponseType<UserResponseDto>
+  > {
+    try {
+      const whereQuery: Prisma.UserWhereInput = {
+        ...(search && {
+          OR: [
+            { email: { contains: search, mode: 'insensitive' } },
+            { firstName: { contains: search, mode: 'insensitive' } },
+            { lastName: { contains: search, mode: 'insensitive' } },
+            { username: { contains: search, mode: 'insensitive' } },
+            { phone: { contains: search, mode: 'insensitive' } },
+          ],
+        }),
+        ...(isActive !== undefined && { isActive }),
+        ...(isBanned !== undefined && { isBanned }),
+        ...(isVerified !== undefined && { isVerified }),
+      };
+
+      const [totalCount, users] = await Promise.all([
+        this.prismaService.user.count({ where: whereQuery }),
+        this.prismaService.user.findMany({
+          where: whereQuery,
+          select: userSelect,
+          orderBy: { [sortBy]: order },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+      ]);
+
+      const userResponses = users.map((user) =>
+        toResponseDto(UserResponseDto, user),
+      );
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách người dùng thành công',
+        data: {
+          items: userResponses,
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async getUserById(
     userId: string,
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     const user = await this.prismaService.user.findUnique({
@@ -46,9 +122,99 @@ export class UserService {
 
     return {
       type: 'response',
-      message: 'User retrieved successfully',
+      message: 'Lấy thông tin người dùng thành công',
       data: userResponse,
     };
+  }
+
+  async updateBanStatus(
+    userId: string,
+    isBanned: boolean,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    // Verify user exists before updating
+    const existingUser = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!existingUser) {
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+        ERROR_CODES.USER_NOT_FOUND,
+      );
+    }
+
+    const updatedUser = await this.prismaService.user.update({
+      where: { id: userId },
+      data: { isBanned },
+      select: userSelect,
+    });
+
+    const userResponse = toResponseDto(UserResponseDto, updatedUser);
+
+    return {
+      type: 'response',
+      message: isBanned
+        ? 'Khóa tài khoản người dùng thành công'
+        : 'Mở khóa tài khoản người dùng thành công',
+      data: userResponse,
+    };
+  }
+
+  async updateBanStatusBulk(
+    items: BanUserBulkItemDto[],
+  ): Promise<IBeforeTransformResponseType<BanUserBulkResultDto>> {
+    try {
+      // Group items by isBanned value to minimize DB round trips
+      const toBan = items
+        .filter((item) => item.isBanned)
+        .map((item) => item.userId);
+      const toUnban = items
+        .filter((item) => !item.isBanned)
+        .map((item) => item.userId);
+
+      const updates: Promise<{ count: number }>[] = [];
+
+      if (toBan.length > 0) {
+        updates.push(
+          this.prismaService.user.updateMany({
+            where: { id: { in: toBan } },
+            data: { isBanned: true },
+          }),
+        );
+      }
+
+      if (toUnban.length > 0) {
+        updates.push(
+          this.prismaService.user.updateMany({
+            where: { id: { in: toUnban } },
+            data: { isBanned: false },
+          }),
+        );
+      }
+
+      const results = await Promise.all(updates);
+      const updatedCount = results.reduce((sum, r) => sum + r.count, 0);
+
+      return {
+        type: 'response',
+        message: `Cập nhật trạng thái khóa thành công cho ${updatedCount} người dùng`,
+        data: { updatedCount },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async getMe(
+    userId: string,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    return this.getUserById(userId);
   }
   async updateAvatar(
     userId: string,
@@ -75,7 +241,7 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'Avatar updated successfully',
+        message: 'Cập nhật ảnh đại diện thành công',
         data: userResponse,
       };
     } catch (error) {
@@ -167,7 +333,7 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'User updated successfully',
+        message: 'Cập nhật thông tin cá nhân thành công',
         data: userResponse,
       };
     } catch (error) {
@@ -269,7 +435,7 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'User updated successfully by admin',
+        message: 'Cập nhật người dùng thành công',
         data: userResponse,
       };
     } catch (error) {
@@ -380,7 +546,7 @@ export class UserService {
 
       return {
         type: 'pagination',
-        message: 'Addresses retrieved successfully',
+        message: 'Lấy danh sách địa chỉ thành công',
         data: {
           totalCount,
           currentPage: page,
@@ -491,7 +657,7 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'Address created successfully',
+        message: 'Tạo địa chỉ thành công',
         data: addressResponse,
         statusCode: 201,
       };
@@ -556,7 +722,7 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'Address updated successfully',
+        message: 'Cập nhật địa chỉ thành công',
         data: addressResponse,
       };
     } catch (error) {
@@ -634,8 +800,8 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'Address deleted successfully',
-        data: { message: 'Address deleted successfully' },
+        message: 'Xóa địa chỉ thành công',
+        data: { message: 'Xóa địa chỉ thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {

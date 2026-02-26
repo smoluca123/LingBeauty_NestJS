@@ -27,6 +27,11 @@ import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressResponseDto } from './dto/address-response.dto';
 import {
+  BanUserBulkDto,
+  BanUserBulkResultDto,
+  BanUserDto,
+} from './dto/ban-user.dto';
+import {
   ApiGetMe,
   ApiUpdateMe,
   ApiUpdateUserById,
@@ -37,6 +42,10 @@ import {
   ApiGetMyAddresses,
   ApiGetAddressesByUserId,
   ApiAdminDeleteAddress,
+  ApiGetAllUsers,
+  ApiGetUserById,
+  ApiUpdateBanStatus,
+  ApiUpdateBanStatusBulk,
 } from 'src/modules/user/decorators/user.decorators';
 import { normalizePaginationParams } from 'src/libs/utils/utils';
 
@@ -46,6 +55,35 @@ import { normalizePaginationParams } from 'src/libs/utils/utils';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get()
+  @ApiGetAllUsers()
+  async getAllUsers(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('search') search?: string,
+    @Query('isActive') isActive?: string,
+    @Query('isBanned') isBanned?: string,
+    @Query('isVerified') isVerified?: string,
+    @Query('sortBy')
+    sortBy?: 'createdAt' | 'updatedAt' | 'email' | 'firstName' | 'lastName',
+    @Query('order') order?: 'asc' | 'desc',
+  ): Promise<IBeforeTransformPaginationResponseType<UserResponseDto>> {
+    const { limit: limitNumber, page: pageNumber } = normalizePaginationParams({
+      limit,
+      page,
+    });
+    return this.userService.getAllUsers({
+      page: pageNumber,
+      limit: limitNumber,
+      search,
+      isActive: isActive !== undefined ? isActive === 'true' : undefined,
+      isBanned: isBanned !== undefined ? isBanned === 'true' : undefined,
+      isVerified: isVerified !== undefined ? isVerified === 'true' : undefined,
+      sortBy,
+      order,
+    });
+  }
 
   @Get('me')
   @ApiGetMe()
@@ -201,5 +239,31 @@ export class UserController {
     });
 
     return result;
+  }
+
+  @Patch('ban/bulk')
+  @ApiUpdateBanStatusBulk()
+  async updateBanStatusBulk(
+    @Body() banUserBulkDto: BanUserBulkDto,
+  ): Promise<IBeforeTransformResponseType<BanUserBulkResultDto>> {
+    return this.userService.updateBanStatusBulk(banUserBulkDto.items);
+  }
+
+  @Patch(':id/ban')
+  @ApiUpdateBanStatus()
+  async updateBanStatus(
+    @Param('id') targetUserId: string,
+    @Body() banUserDto: BanUserDto,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    return this.userService.updateBanStatus(targetUserId, banUserDto.isBanned);
+  }
+
+  // NOTE: Parameterized route `:id` must be LAST to avoid shadowing static routes (e.g. address)
+  @Get(':id')
+  @ApiGetUserById()
+  async getUserById(
+    @Param('id') targetUserId: string,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    return this.userService.getUserById(targetUserId);
   }
 }
