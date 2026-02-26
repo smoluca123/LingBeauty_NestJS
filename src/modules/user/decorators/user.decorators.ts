@@ -1,6 +1,12 @@
 import { applyDecorators, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+} from '@nestjs/swagger';
 import {
   ApiProtectedAuthOperation,
   ApiRoleProtectedOperation,
@@ -16,6 +22,80 @@ import { FileValidationInterceptor } from 'src/modules/storage/interceptors/file
 import { MediaType } from 'prisma/generated/prisma';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 import { ApiQueryLimitAndPage } from 'src/decorators/pagination.decorators';
+import {
+  BanUserBulkDto,
+  BanUserBulkResultDto,
+  BanUserDto,
+} from 'src/modules/user/dto/ban-user.dto';
+
+export function ApiGetAllUsers() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Get all users with pagination (Admin/Manager only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiQueryLimitAndPage(),
+    ApiQuery({
+      name: 'search',
+      description: 'Search by email, firstName, lastName, username or phone',
+      required: false,
+    }),
+    ApiQuery({
+      name: 'isActive',
+      description: 'Filter by active status',
+      required: false,
+      type: Boolean,
+    }),
+    ApiQuery({
+      name: 'isBanned',
+      description: 'Filter by banned status',
+      required: false,
+      type: Boolean,
+    }),
+    ApiQuery({
+      name: 'isVerified',
+      description: 'Filter by verified status',
+      required: false,
+      type: Boolean,
+    }),
+    ApiQuery({
+      name: 'sortBy',
+      description: 'Sort field (default: createdAt)',
+      required: false,
+      enum: ['createdAt', 'updatedAt', 'email', 'firstName', 'lastName'],
+    }),
+    ApiQuery({
+      name: 'order',
+      description: 'Sort order (default: desc)',
+      required: false,
+      enum: ['asc', 'desc'],
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Paginated list of users',
+      type: [UserResponseDto],
+    }),
+  );
+}
+
+export function ApiGetUserById() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Get user detail by ID (Admin/Manager only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'User ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'User detail',
+      type: UserResponseDto,
+    }),
+  );
+}
 
 export function ApiGetMe() {
   return applyDecorators(
@@ -147,6 +227,41 @@ export function ApiGetAddressesByUserId() {
       status: 200,
       description: 'List of addresses for the user',
       type: [AddressResponseDto],
+    }),
+  );
+}
+
+export function ApiUpdateBanStatus() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Update ban status for a single user (Manager only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Target user ID',
+      type: String,
+    }),
+    ApiBody({ type: BanUserDto }),
+    ApiResponse({
+      status: 200,
+      description: 'User ban status updated successfully',
+      type: UserResponseDto,
+    }),
+  );
+}
+
+export function ApiUpdateBanStatusBulk() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Bulk update ban status for multiple users (Manager only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiBody({ type: BanUserBulkDto }),
+    ApiResponse({
+      status: 200,
+      description: 'Bulk ban status updated successfully',
+      type: BanUserBulkResultDto,
     }),
   );
 }
