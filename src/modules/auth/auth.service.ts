@@ -315,9 +315,9 @@ export class AuthService {
   async login(
     loginDto: LoginDto,
   ): Promise<IBeforeTransformResponseType<AuthResponseDto>> {
-    // Find user by email
-    const user = await this.prismaService.user.findUnique({
-      where: { email: loginDto.email },
+    // Find user by email or username
+    const user = await this.prismaService.user.findFirst({
+      where: { OR: [{ email: loginDto.email }, { username: loginDto.email }] },
       select: { ...userSelect, password: true },
     });
 
