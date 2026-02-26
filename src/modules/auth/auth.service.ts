@@ -149,7 +149,9 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException(
+        ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+      );
     }
 
     // Transform Prisma result to UserResponseDto
@@ -196,7 +198,9 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException(
+        ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+      );
     }
 
     // Transform to DTO - ClassSerializerInterceptor handles serialization
@@ -223,7 +227,7 @@ export class AuthService {
     });
     if (existingEmail) {
       throw new ConflictException(
-        'Email này đã được đăng ký',
+        ERROR_MESSAGES[ERROR_CODES.EMAIL_ALREADY_EXISTS],
         ERROR_CODES.EMAIL_ALREADY_EXISTS,
       );
     }
@@ -235,7 +239,7 @@ export class AuthService {
     });
     if (existingPhone) {
       throw new ConflictException(
-        'Số điện thoại này đã được đăng ký',
+        ERROR_MESSAGES[ERROR_CODES.PHONE_ALREADY_EXISTS],
         ERROR_CODES.USER_ALREADY_EXISTS,
       );
     }
@@ -247,7 +251,7 @@ export class AuthService {
     });
     if (existingUsername) {
       throw new ConflictException(
-        'Tên đăng nhập này đã được sử dụng',
+        ERROR_MESSAGES[ERROR_CODES.USERNAME_ALREADY_EXISTS],
         ERROR_CODES.USER_ALREADY_EXISTS,
       );
     }
@@ -335,15 +339,15 @@ export class AuthService {
     // Check if user is deleted
     if (user.isDeleted) {
       throw new CustomUnauthorizedException(
-        'Không tìm thấy người dùng hoặc tài khoản đã bị xóa',
-        ERROR_CODES.USER_NOT_FOUND,
+        ERROR_MESSAGES[ERROR_CODES.USER_DELETED],
+        ERROR_CODES.USER_DELETED,
       );
     }
 
     // Check if user is banned
     if (user.isBanned || !user.isActive) {
       throw new ForbiddenException(
-        'Tài khoản đã bị cấm',
+        ERROR_MESSAGES[ERROR_CODES.USER_BANNED],
         ERROR_CODES.USER_BANNED,
       );
     }
@@ -355,7 +359,7 @@ export class AuthService {
     );
     if (!isPasswordValid) {
       throw new CustomUnauthorizedException(
-        'Invalid email or password',
+        ERROR_MESSAGES[ERROR_CODES.INVALID_CREDENTIALS],
         ERROR_CODES.INVALID_CREDENTIALS,
       );
     }
@@ -410,7 +414,7 @@ export class AuthService {
         );
       } catch {
         throw new CustomUnauthorizedException(
-          'Invalid refresh token',
+          ERROR_MESSAGES[ERROR_CODES.INVALID_REFRESH_TOKEN],
           ERROR_CODES.INVALID_REFRESH_TOKEN,
         );
       }
@@ -423,7 +427,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'Không tìm thấy người dùng',
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -431,15 +435,15 @@ export class AuthService {
       // Check if user is deleted
       if (user.isDeleted) {
         throw new CustomUnauthorizedException(
-          'Không tìm thấy người dùng hoặc tài khoản đã bị xóa',
-          ERROR_CODES.USER_NOT_FOUND,
+          ERROR_MESSAGES[ERROR_CODES.USER_DELETED],
+          ERROR_CODES.USER_DELETED,
         );
       }
 
       // Check if user is banned
       if (user.isBanned || !user.isActive) {
         throw new ForbiddenException(
-          'Tài khoản đã bị cấm',
+          ERROR_MESSAGES[ERROR_CODES.USER_BANNED],
           ERROR_CODES.USER_BANNED,
         );
       }
@@ -480,7 +484,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to refresh token',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -514,7 +518,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'User not found',
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -522,8 +526,8 @@ export class AuthService {
       // Check if email is already verified
       if (user.isEmailVerified) {
         throw new BusinessException(
-          'Email này đã được xác thực',
-          ERROR_CODES.INVALID_OPERATION,
+          ERROR_MESSAGES[ERROR_CODES.EMAIL_ALREADY_VERIFIED],
+          ERROR_CODES.EMAIL_ALREADY_VERIFIED,
         );
       }
 
@@ -539,7 +543,7 @@ export class AuthService {
           metadata,
         );
         throw new BusinessException(
-          `Too many requests. Please try again in ${remainingCooldown} seconds`,
+          ERROR_MESSAGES[ERROR_CODES.RATE_LIMIT_EXCEEDED],
           ERROR_CODES.RATE_LIMIT_EXCEEDED,
           429,
           { remainingCooldown },
@@ -565,7 +569,7 @@ export class AuthService {
         // Remove OTP from Redis if email sending fails
         await this.redis.del(redisKey);
         throw new BusinessException(
-          'Failed to send verification email',
+          ERROR_MESSAGES[ERROR_CODES.MAIL_SEND_FAILED],
           ERROR_CODES.MAIL_SEND_FAILED,
           500,
         );
@@ -599,7 +603,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to send email verification',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -627,7 +631,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'User not found',
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -635,8 +639,8 @@ export class AuthService {
       // Check if already verified
       if (user.isEmailVerified) {
         throw new BusinessException(
-          'Email này đã được xác thực',
-          ERROR_CODES.INVALID_OPERATION,
+          ERROR_MESSAGES[ERROR_CODES.EMAIL_ALREADY_VERIFIED],
+          ERROR_CODES.EMAIL_ALREADY_VERIFIED,
         );
       }
 
@@ -653,8 +657,8 @@ export class AuthService {
           { ...metadata, error: 'Code expired or not found' },
         );
         throw new CustomUnauthorizedException(
-          'Verification code expired or not found',
-          ERROR_CODES.INVALID_CREDENTIALS,
+          ERROR_MESSAGES[ERROR_CODES.VERIFICATION_CODE_EXPIRED],
+          ERROR_CODES.VERIFICATION_CODE_EXPIRED,
         );
       }
 
@@ -668,8 +672,8 @@ export class AuthService {
           { ...metadata, error: 'Invalid verification code' },
         );
         throw new CustomUnauthorizedException(
-          'Invalid verification code',
-          ERROR_CODES.INVALID_CREDENTIALS,
+          ERROR_MESSAGES[ERROR_CODES.INVALID_VERIFICATION_CODE],
+          ERROR_CODES.INVALID_VERIFICATION_CODE,
         );
       }
 
@@ -709,7 +713,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to verify email',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -759,7 +763,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to resend email verification',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -785,7 +789,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'User not found',
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -793,8 +797,8 @@ export class AuthService {
       // Check if phone is already verified
       if (user.isPhoneVerified) {
         throw new BusinessException(
-          'Phone number is already verified',
-          ERROR_CODES.INVALID_OPERATION,
+          ERROR_MESSAGES[ERROR_CODES.PHONE_ALREADY_VERIFIED],
+          ERROR_CODES.PHONE_ALREADY_VERIFIED,
         );
       }
 
@@ -830,7 +834,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to send phone verification',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -876,16 +880,16 @@ export class AuthService {
 
       if (!storedCode) {
         throw new CustomUnauthorizedException(
-          'Verification code expired or not found',
-          ERROR_CODES.INVALID_CREDENTIALS,
+          ERROR_MESSAGES[ERROR_CODES.VERIFICATION_CODE_EXPIRED],
+          ERROR_CODES.VERIFICATION_CODE_EXPIRED,
         );
       }
 
       // Verify code
       if (storedCode !== verifyPhoneDto.code) {
         throw new CustomUnauthorizedException(
-          'Invalid verification code',
-          ERROR_CODES.INVALID_CREDENTIALS,
+          ERROR_MESSAGES[ERROR_CODES.INVALID_VERIFICATION_CODE],
+          ERROR_CODES.INVALID_VERIFICATION_CODE,
         );
       }
 
@@ -918,7 +922,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to verify phone',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -941,7 +945,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'User not found',
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -969,7 +973,7 @@ export class AuthService {
       }
 
       throw new BusinessException(
-        'Failed to validate token',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }

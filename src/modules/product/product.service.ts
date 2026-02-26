@@ -157,7 +157,7 @@ export class ProductService {
 
       return {
         type: 'pagination',
-        message: 'Products retrieved successfully',
+        message: 'Lấy danh sách sản phẩm thành công',
         data: {
           items: productResponses,
           totalCount,
@@ -172,7 +172,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get products',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -208,7 +208,7 @@ export class ProductService {
       if (categoryCounts.length === 0) {
         return {
           type: 'response',
-          message: 'Filter categories retrieved successfully',
+          message: 'Lấy danh mục lọc thành công',
           data: [],
         };
       }
@@ -254,7 +254,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get filter categories',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -283,7 +283,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product stats retrieved successfully',
+        message: 'Lấy thống kê sản phẩm thành công',
         data: {
           productCount,
           totalSold: salesAgg._sum.totalSold ?? 0,
@@ -295,7 +295,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get product stats',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -422,17 +422,17 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Hot products retrieved successfully',
+        message: 'Lấy sản phẩm nổi bật thành công',
         data: productResponses,
       };
     } catch (error) {
-      console.error('Error getting hot products:', error);
+      console.error('Lỗi khi lấy sản phẩm nổi bật:', error);
       if (error instanceof BusinessException) {
         throw error;
       }
 
       throw new BusinessException(
-        'Failed to get hot products',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -805,7 +805,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product retrieved successfully',
+        message: 'Lấy thông tin sản phẩm thành công',
         data: productResponse,
       };
     } catch (error) {
@@ -814,7 +814,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get product',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -840,7 +840,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product retrieved successfully',
+        message: 'Lấy thông tin sản phẩm thành công',
         data: productResponse,
       };
     } catch (error) {
@@ -849,7 +849,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get product',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -971,7 +971,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product created successfully',
+        message: 'Tạo sản phẩm thành công',
         data: productResponse,
         statusCode: 201,
       };
@@ -982,7 +982,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to create product',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1160,7 +1160,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product updated successfully',
+        message: 'Cập nhật sản phẩm thành công',
         data: productResponse,
       };
     } catch (error) {
@@ -1169,7 +1169,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to update product',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1211,7 +1211,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product deleted successfully',
+        message: 'Xóa sản phẩm thành công',
         data: productResponse,
       };
     } catch (error) {
@@ -1220,7 +1220,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to delete product',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1255,8 +1255,8 @@ export class ProductService {
 
         if (!variant) {
           throw new BusinessException(
-            'Product variant not found',
-            ERROR_CODES.PRODUCT_NOT_FOUND,
+            ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND],
+            ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND,
           );
         }
       }
@@ -1304,7 +1304,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product image added successfully',
+        message: 'Thêm ảnh sản phẩm thành công',
         data: responseData,
         statusCode: 201,
       };
@@ -1314,7 +1314,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to add product image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1360,7 +1360,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product image updated successfully',
+        message: 'Cập nhật ảnh sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -1369,7 +1369,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to update product image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1416,8 +1416,8 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product image deleted successfully',
-        data: { message: 'Product image deleted successfully' },
+        message: 'Xóa ảnh sản phẩm thành công',
+        data: { message: 'Xóa ảnh sản phẩm thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -1425,7 +1425,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to delete product image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1458,7 +1458,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product images retrieved successfully',
+        message: 'Lấy danh sách ảnh sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -1467,7 +1467,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get product images',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1511,7 +1511,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product images reordered successfully',
+        message: 'Sắp xếp lại ảnh sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -1520,7 +1520,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to reorder product images',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1562,8 +1562,8 @@ export class ProductService {
 
         if (!variant) {
           throw new BusinessException(
-            'Product variant not found',
-            ERROR_CODES.PRODUCT_NOT_FOUND,
+            ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND],
+            ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND,
           );
         }
       }
@@ -1613,7 +1613,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product image uploaded successfully',
+        message: 'Tải ảnh sản phẩm lên thành công',
         data: responseData,
         statusCode: 201,
       };
@@ -1623,7 +1623,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to upload product image',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1658,8 +1658,8 @@ export class ProductService {
 
         if (!variant) {
           throw new BusinessException(
-            'Product variant not found',
-            ERROR_CODES.PRODUCT_NOT_FOUND,
+            ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND],
+            ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND,
           );
         }
       }
@@ -1693,7 +1693,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product video uploaded successfully',
+        message: 'Tải video sản phẩm lên thành công',
         data: responseData,
         statusCode: 201,
       };
@@ -1703,7 +1703,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to upload product video',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1741,7 +1741,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product variants retrieved successfully',
+        message: 'Lấy danh sách biến thể sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -1750,7 +1750,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get product variants',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1818,7 +1818,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product variant added successfully',
+        message: 'Thêm biến thể sản phẩm thành công',
         data: responseData,
         statusCode: 201,
       };
@@ -1828,7 +1828,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to add product variant',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1932,7 +1932,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product variant updated successfully',
+        message: 'Cập nhật biến thể sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -1941,7 +1941,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to update product variant',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -1986,8 +1986,8 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product variant deleted successfully',
-        data: { message: 'Product variant deleted successfully' },
+        message: 'Xóa biến thể sản phẩm thành công',
+        data: { message: 'Xóa biến thể sản phẩm thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -1995,7 +1995,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to delete product variant',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -2018,7 +2018,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product badges retrieved successfully',
+        message: 'Lấy danh sách nhãn sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -2027,7 +2027,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to get product badges',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -2071,7 +2071,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product badge created successfully',
+        message: 'Tạo nhãn sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -2080,7 +2080,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to create product badge',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -2128,7 +2128,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: `${badges.length} product badges created successfully`,
+        message: `Tạo ${badges.length} nhãn sản phẩm thành công`,
         data: responseData,
       };
     } catch (error) {
@@ -2137,7 +2137,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to create product badges',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -2160,8 +2160,8 @@ export class ProductService {
 
       if (!existingBadge) {
         throw new BusinessException(
-          'Product badge not found',
-          ERROR_CODES.PRODUCT_NOT_FOUND,
+          ERROR_MESSAGES[ERROR_CODES.PRODUCT_BADGE_NOT_FOUND],
+          ERROR_CODES.PRODUCT_BADGE_NOT_FOUND,
         );
       }
 
@@ -2182,7 +2182,7 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product badge updated successfully',
+        message: 'Cập nhật nhãn sản phẩm thành công',
         data: responseData,
       };
     } catch (error) {
@@ -2191,7 +2191,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to update product badge',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }
@@ -2212,8 +2212,8 @@ export class ProductService {
 
       if (!existingBadge) {
         throw new BusinessException(
-          'Product badge not found',
-          ERROR_CODES.PRODUCT_NOT_FOUND,
+          ERROR_MESSAGES[ERROR_CODES.PRODUCT_BADGE_NOT_FOUND],
+          ERROR_CODES.PRODUCT_BADGE_NOT_FOUND,
         );
       }
 
@@ -2224,8 +2224,8 @@ export class ProductService {
 
       return {
         type: 'response',
-        message: 'Product badge deleted successfully',
-        data: { message: 'Product badge deleted successfully' },
+        message: 'Xóa nhãn sản phẩm thành công',
+        data: { message: 'Xóa nhãn sản phẩm thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -2233,7 +2233,7 @@ export class ProductService {
       }
 
       throw new BusinessException(
-        'Failed to delete product badge',
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
         ERROR_CODES.DATABASE_ERROR,
       );
     }

@@ -756,8 +756,8 @@ export class UserService {
 
       return {
         type: 'response',
-        message: 'Address deleted successfully',
-        data: { message: 'Address deleted successfully' },
+        message: 'Xóa địa chỉ thành công',
+        data: { message: 'Xóa địa chỉ thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {
@@ -870,8 +870,8 @@ export class UserService {
         });
         if (!roleExists) {
           throw new BusinessException(
-            'Không tìm thấy vai trò người dùng',
-            ERROR_CODES.RESOURCE_NOT_FOUND,
+            ERROR_MESSAGES[ERROR_CODES.USER_ROLE_NOT_FOUND],
+            ERROR_CODES.USER_ROLE_NOT_FOUND,
           );
         }
       }

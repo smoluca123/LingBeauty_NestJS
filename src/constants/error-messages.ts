@@ -18,6 +18,13 @@ export const ERROR_MESSAGES = {
     'Người dùng không phải đăng nhập lần đầu',
   [ERROR_CODES.PASSWORD_SAME_AS_CURRENT]:
     'Mật khẩu mới phải khác mật khẩu hiện tại',
+  [ERROR_CODES.EMAIL_ALREADY_VERIFIED]: 'Email này đã được xác thực',
+  [ERROR_CODES.PHONE_ALREADY_VERIFIED]: 'Số điện thoại này đã được xác thực',
+  [ERROR_CODES.USER_DELETED]:
+    'Không tìm thấy người dùng hoặc tài khoản đã bị xóa',
+  [ERROR_CODES.VERIFICATION_CODE_EXPIRED]:
+    'Mã xác thực đã hết hạn hoặc không tồn tại',
+  [ERROR_CODES.INVALID_VERIFICATION_CODE]: 'Mã xác thực không hợp lệ',
   [ERROR_CODES.USER_OVER_STORAGE_LIMIT]:
     'Người dùng đã đạt giới hạn dung lượng lưu trữ',
   [ERROR_CODES.SUBSCRIPTION_NOT_FOUND]: 'Không tìm thấy gói đăng ký',
@@ -55,6 +62,7 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND]: 'Không tìm thấy biến thể sản phẩm',
   [ERROR_CODES.PRODUCT_VARIANT_HAS_ORDERS]:
     'Không thể xóa biến thể sản phẩm đã có đơn hàng',
+  [ERROR_CODES.PRODUCT_BADGE_NOT_FOUND]: 'Không tìm thấy nhãn sản phẩm',
 
   // Review
   [ERROR_CODES.REVIEW_NOT_FOUND]: 'Không tìm thấy đánh giá',
@@ -99,6 +107,7 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.DELETE_ADDRESS_FAILED]: 'Xóa địa chỉ thất bại',
   [ERROR_CODES.ADDRESS_NOT_OWNED]: 'Bạn không có quyền truy cập địa chỉ này',
   [ERROR_CODES.UNAUTHORIZED]: 'Chưa xác thực',
+  [ERROR_CODES.USER_ROLE_NOT_FOUND]: 'Không tìm thấy vai trò người dùng',
 
   // Business Logic
   [ERROR_CODES.INVALID_OPERATION]: 'Thao tác không hợp lệ',
