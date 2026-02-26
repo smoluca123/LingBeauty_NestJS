@@ -27,6 +27,8 @@ import {
   BanUserBulkResultDto,
   BanUserDto,
 } from 'src/modules/user/dto/ban-user.dto';
+import { UserRoleResponseDto } from 'src/modules/user/dto/response/user-role-response.dto';
+import { CreateUserByAdminDto } from 'src/modules/user/dto/create-user-admin.dto';
 
 export function ApiGetAllUsers() {
   return applyDecorators(
@@ -262,6 +264,37 @@ export function ApiUpdateBanStatusBulk() {
       status: 200,
       description: 'Bulk ban status updated successfully',
       type: BanUserBulkResultDto,
+    }),
+  );
+}
+
+export function ApiGetAllUserRoles() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Get all user roles (Admin/Manager only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'List of all user roles',
+      type: [UserRoleResponseDto],
+    }),
+  );
+}
+
+export function ApiCreateUserByAdmin() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Create a new user (Admin only)',
+      roles: [RolesLevel.ADMIN],
+    }),
+    ApiBody({
+      type: CreateUserByAdminDto,
+    }),
+    ApiResponse({
+      status: 201,
+      description: 'User created successfully',
+      type: UserResponseDto,
     }),
   );
 }

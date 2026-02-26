@@ -21,11 +21,13 @@ import {
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
 import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
+import { UserRoleResponseDto } from './dto/response/user-role-response.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserByAdminDto } from './dto/update-user-admin.dto';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressResponseDto } from './dto/address-response.dto';
+import { CreateUserByAdminDto } from './dto/create-user-admin.dto';
 import {
   BanUserBulkDto,
   BanUserBulkResultDto,
@@ -46,6 +48,8 @@ import {
   ApiGetUserById,
   ApiUpdateBanStatus,
   ApiUpdateBanStatusBulk,
+  ApiGetAllUserRoles,
+  ApiCreateUserByAdmin,
 } from 'src/modules/user/decorators/user.decorators';
 import { normalizePaginationParams } from 'src/libs/utils/utils';
 
@@ -55,6 +59,14 @@ import { normalizePaginationParams } from 'src/libs/utils/utils';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Post()
+  @ApiCreateUserByAdmin()
+  async createUserByAdmin(
+    @Body() createUserByAdminDto: CreateUserByAdminDto,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    return this.userService.createUserByAdmin(createUserByAdminDto);
+  }
 
   @Get()
   @ApiGetAllUsers()
@@ -259,6 +271,14 @@ export class UserController {
   }
 
   // NOTE: Parameterized route `:id` must be LAST to avoid shadowing static routes (e.g. address)
+  @Get('roles')
+  @ApiGetAllUserRoles()
+  async getAllUserRoles(): Promise<
+    IBeforeTransformResponseType<UserRoleResponseDto[]>
+  > {
+    return this.userService.getAllUserRoles();
+  }
+
   @Get(':id')
   @ApiGetUserById()
   async getUserById(

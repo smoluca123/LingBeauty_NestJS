@@ -158,7 +158,7 @@ export class AuthService {
 
     return {
       type: 'response',
-      message: 'User retrieved successfully',
+      message: 'Lấy thông tin người dùng thành công',
       data: userResponse,
     };
   }
@@ -204,7 +204,7 @@ export class AuthService {
 
     return {
       type: 'response',
-      message: 'User retrieved successfully',
+      message: 'Lấy thông tin người dùng thành công',
       data: userResponse,
     };
   }
@@ -223,7 +223,7 @@ export class AuthService {
     });
     if (existingEmail) {
       throw new ConflictException(
-        'Email address is already registered',
+        'Email này đã được đăng ký',
         ERROR_CODES.EMAIL_ALREADY_EXISTS,
       );
     }
@@ -235,7 +235,7 @@ export class AuthService {
     });
     if (existingPhone) {
       throw new ConflictException(
-        'Phone number is already registered',
+        'Số điện thoại này đã được đăng ký',
         ERROR_CODES.USER_ALREADY_EXISTS,
       );
     }
@@ -247,7 +247,7 @@ export class AuthService {
     });
     if (existingUsername) {
       throw new ConflictException(
-        'Username is already taken',
+        'Tên đăng nhập này đã được sử dụng',
         ERROR_CODES.USER_ALREADY_EXISTS,
       );
     }
@@ -299,7 +299,7 @@ export class AuthService {
 
     return {
       type: 'response',
-      message: 'User registered successfully',
+      message: 'Đăng ký tài khoản thành công',
       data: authResponse,
     };
   }
@@ -335,7 +335,7 @@ export class AuthService {
     // Check if user is deleted
     if (user.isDeleted) {
       throw new CustomUnauthorizedException(
-        'User not found or has been deleted',
+        'Không tìm thấy người dùng hoặc tài khoản đã bị xóa',
         ERROR_CODES.USER_NOT_FOUND,
       );
     }
@@ -343,7 +343,7 @@ export class AuthService {
     // Check if user is banned
     if (user.isBanned || !user.isActive) {
       throw new ForbiddenException(
-        'User has been banned',
+        'Tài khoản đã bị cấm',
         ERROR_CODES.USER_BANNED,
       );
     }
@@ -386,7 +386,7 @@ export class AuthService {
 
     return {
       type: 'response',
-      message: 'Login successful',
+      message: 'Đăng nhập thành công',
       data: authResponse,
     };
   }
@@ -423,7 +423,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'User not found',
+          'Không tìm thấy người dùng',
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -431,7 +431,7 @@ export class AuthService {
       // Check if user is deleted
       if (user.isDeleted) {
         throw new CustomUnauthorizedException(
-          'User not found or has been deleted',
+          'Không tìm thấy người dùng hoặc tài khoản đã bị xóa',
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -439,7 +439,7 @@ export class AuthService {
       // Check if user is banned
       if (user.isBanned || !user.isActive) {
         throw new ForbiddenException(
-          'User has been banned',
+          'Tài khoản đã bị cấm',
           ERROR_CODES.USER_BANNED,
         );
       }
@@ -467,7 +467,7 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Token refreshed successfully',
+        message: 'Làm mới token thành công',
         data: authResponse,
       };
     } catch (error) {
@@ -522,7 +522,7 @@ export class AuthService {
       // Check if email is already verified
       if (user.isEmailVerified) {
         throw new BusinessException(
-          'Email is already verified',
+          'Email này đã được xác thực',
           ERROR_CODES.INVALID_OPERATION,
         );
       }
@@ -584,9 +584,9 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Verification code sent to email',
+        message: 'Đã gửi mã xác thực đến email',
         data: {
-          message: 'Verification code has been sent to your email',
+          message: 'Đã gửi mã xác thực đến email của bạn',
           ...(configData.NODE_ENV === 'development' && { code }), // Only return code in dev mode
         },
       };
@@ -635,7 +635,7 @@ export class AuthService {
       // Check if already verified
       if (user.isEmailVerified) {
         throw new BusinessException(
-          'Email is already verified',
+          'Email này đã được xác thực',
           ERROR_CODES.INVALID_OPERATION,
         );
       }
@@ -695,9 +695,9 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Email verified successfully',
+        message: 'Xác thực email thành công',
         data: {
-          message: 'Your email has been verified successfully',
+          message: 'Email của bạn đã được xác thực thành công',
         },
       };
     } catch (error) {
@@ -815,9 +815,9 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Verification code sent to phone',
+        message: 'Đã gửi mã xác thực đến số điện thoại',
         data: {
-          message: 'Verification code has been sent to your phone',
+          message: 'Đã gửi mã xác thực đến số điện thoại của bạn',
           ...(configData.NODE_ENV === 'development' && { code }), // Only return code in dev mode
         },
       };
@@ -857,7 +857,7 @@ export class AuthService {
 
       if (!user) {
         throw new CustomUnauthorizedException(
-          'User not found',
+          'Không tìm thấy người dùng',
           ERROR_CODES.USER_NOT_FOUND,
         );
       }
@@ -865,7 +865,7 @@ export class AuthService {
       // Check if already verified
       if (user.isPhoneVerified) {
         throw new BusinessException(
-          'Phone number is already verified',
+          'Số điện thoại này đã được xác thực',
           ERROR_CODES.INVALID_OPERATION,
         );
       }
@@ -903,9 +903,9 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Phone verified successfully',
+        message: 'Xác thực số điện thoại thành công',
         data: {
-          message: 'Your phone number has been verified successfully',
+          message: 'Số điện thoại của bạn đã được xác thực thành công',
         },
         statusCode: 200,
       };
@@ -953,7 +953,7 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Token is valid',
+        message: 'Token hợp lệ',
         data: {
           valid: true,
           user: userResponse,
@@ -1056,9 +1056,9 @@ export class AuthService {
 
       return {
         type: 'response',
-        message: 'Password changed successfully',
+        message: 'Đổi mật khẩu thành công',
         data: {
-          message: 'Your password has been changed successfully',
+          message: 'Mật khẩu của bạn đã được đổi thành công',
         },
       };
     } catch (error) {

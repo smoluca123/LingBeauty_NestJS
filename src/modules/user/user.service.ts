@@ -20,6 +20,11 @@ import { AddressResponseDto } from './dto/address-response.dto';
 import { processDataObject } from 'src/libs/utils/utils';
 import { addressSelect } from 'src/libs/prisma/address-select';
 import { BanUserBulkItemDto, BanUserBulkResultDto } from './dto/ban-user.dto';
+import { userRoleSelect } from 'src/libs/prisma/user-select';
+import { UserRoleResponseDto } from './dto/response/user-role-response.dto';
+import { CreateUserByAdminDto } from './dto/create-user-admin.dto';
+import * as bcrypt from 'bcryptjs';
+import { configData } from 'src/configs/configuration';
 
 export interface GetUsersParams {
   page?: number;
@@ -810,6 +815,144 @@ export class UserService {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.DELETE_ADDRESS_FAILED],
         ERROR_CODES.DELETE_ADDRESS_FAILED,
+      );
+    }
+  }
+
+  async createUserByAdmin(
+    createUserByAdminDto: CreateUserByAdminDto,
+  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+    try {
+      // Validate email uniqueness
+      const existingEmail = await this.prismaService.user.findUnique({
+        where: { email: createUserByAdminDto.email },
+        select: { id: true },
+      });
+      if (existingEmail) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.EMAIL_ALREADY_EXISTS],
+          ERROR_CODES.EMAIL_ALREADY_EXISTS,
+        );
+      }
+
+      // Validate phone uniqueness
+      const existingPhone = await this.prismaService.user.findUnique({
+        where: { phone: createUserByAdminDto.phone },
+        select: { id: true },
+      });
+      if (existingPhone) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.PHONE_ALREADY_EXISTS],
+          ERROR_CODES.PHONE_ALREADY_EXISTS,
+        );
+      }
+
+      // Validate username uniqueness
+      const existingUsername = await this.prismaService.user.findUnique({
+        where: { username: createUserByAdminDto.username },
+        select: { id: true },
+      });
+      if (existingUsername) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.USERNAME_ALREADY_EXISTS],
+          ERROR_CODES.USERNAME_ALREADY_EXISTS,
+        );
+      }
+
+      // Resolve roleId: use provided roleId or fall back to default USER role
+      const roleId = createUserByAdminDto.roleId ?? configData.USER_ROLE_ID;
+
+      // Validate that the provided roleId actually exists
+      if (createUserByAdminDto.roleId) {
+        const roleExists = await this.prismaService.userRole.findUnique({
+          where: { id: createUserByAdminDto.roleId },
+          select: { id: true },
+        });
+        if (!roleExists) {
+          throw new BusinessException(
+            'Không tìm thấy vai trò người dùng',
+            ERROR_CODES.RESOURCE_NOT_FOUND,
+          );
+        }
+      }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(
+        createUserByAdminDto.password,
+        configData.BCRYPT_SALT_ROUNDS,
+      );
+
+      // Create user with role assignment
+      const newUser = await this.prismaService.user.create({
+        data: {
+          email: createUserByAdminDto.email,
+          password: hashedPassword,
+          firstName: createUserByAdminDto.firstName,
+          lastName: createUserByAdminDto.lastName,
+          phone: createUserByAdminDto.phone,
+          username: createUserByAdminDto.username,
+          isActive: createUserByAdminDto.isActive ?? true,
+          isEmailVerified: createUserByAdminDto.isEmailVerified ?? false,
+          isPhoneVerified: createUserByAdminDto.isPhoneVerified ?? false,
+          emailVerifiedAt: createUserByAdminDto.isEmailVerified
+            ? new Date()
+            : null,
+          phoneVerifiedAt: createUserByAdminDto.isPhoneVerified
+            ? new Date()
+            : null,
+          roleAssignments: {
+            create: {
+              roleId,
+            },
+          },
+        },
+        select: userSelect,
+      });
+
+      const userResponse = toResponseDto(UserResponseDto, newUser);
+
+      return {
+        type: 'response',
+        message: 'Tạo người dùng thành công',
+        data: userResponse,
+        statusCode: 201,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async getAllUserRoles(): Promise<
+    IBeforeTransformResponseType<UserRoleResponseDto[]>
+  > {
+    try {
+      const roles = await this.prismaService.userRole.findMany({
+        select: userRoleSelect,
+        orderBy: { createdAt: 'asc' },
+      });
+
+      const roleResponses = roles.map((role) =>
+        toResponseDto(UserRoleResponseDto, role),
+      );
+
+      return {
+        type: 'response',
+        message: 'Lấy danh sách vai trò người dùng thành công',
+        data: roleResponses,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
       );
     }
   }
