@@ -28,6 +28,7 @@ import { userSelect } from 'src/libs/prisma/user-select';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import { MailService } from 'src/modules/mail/mail.service';
 import { EmailVerificationAction } from 'prisma/generated/prisma';
+import { StatsService } from 'src/modules/stats/stats.service';
 
 // Interface for request metadata (IP, User Agent)
 interface RequestMetadata {
@@ -47,6 +48,7 @@ export class AuthService {
     private readonly jwtAuthService: JwtAuthService,
     private readonly redisService: RedisService,
     private readonly mailService: MailService,
+    private readonly statsService: StatsService,
   ) {
     this.redis = this.redisService.getOrThrow();
   }
@@ -300,6 +302,11 @@ export class AuthService {
       user: userResponse,
       accessToken,
     };
+
+    // Fire-and-forget: update daily stats after user registered
+    this.statsService.onUserCreated().catch((err) => {
+      console.error('Failed to update stats after user created:', err);
+    });
 
     return {
       type: 'response',

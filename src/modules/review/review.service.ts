@@ -10,6 +10,7 @@ import {
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { StorageService } from 'src/modules/storage/storage.service';
 import { ProductStatsService } from 'src/modules/product/product-stats.service';
+import { StatsService } from 'src/modules/stats/stats.service';
 import {
   CreateReviewDto,
   CreateReviewWithImagesDto,
@@ -50,6 +51,7 @@ export class ReviewService {
     private readonly prismaService: PrismaService,
     private readonly storageService: StorageService,
     private readonly productStatsService: ProductStatsService,
+    private readonly statsService: StatsService,
   ) {}
 
   async getProductReviews(
@@ -218,6 +220,11 @@ export class ReviewService {
       });
 
       const result = toResponseDto(ReviewResponseDto, review);
+
+      // Fire-and-forget: update daily stats after review created
+      this.statsService.onReviewCreated().catch((err) => {
+        console.error('Failed to update stats after review created:', err);
+      });
 
       return {
         type: 'response',
@@ -709,6 +716,12 @@ export class ReviewService {
             'Failed to sync product stats after review approval change:',
             err,
           );
+        });
+      }
+      // Update admin daily stats when review is approved
+      if (isApproved && productId) {
+        this.statsService.onReviewApproved().catch((err) => {
+          console.error('Failed to update stats after review approved:', err);
         });
       }
     }
