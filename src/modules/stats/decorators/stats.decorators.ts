@@ -18,8 +18,7 @@ const ApiQueryPeriod = () =>
     name: 'period',
     enum: StatsPeriod,
     required: false,
-    description:
-      'Aggregation granularity: day (default), week, month, year',
+    description: 'Aggregation granularity: day (default), week, month, year',
   });
 
 const ApiQueryDateRange = () =>
@@ -121,7 +120,7 @@ export const ApiSyncDailyStats = () =>
     ApiRoleProtectedOperation({
       summary: 'Manually sync today daily stats snapshot',
       description:
-        'Triggers a full recalculation and upsert of today's DailyStats row. Use sparingly — prefer event-driven updates.',
+        "Triggers a full recalculation and upsert of today's DailyStats row. Use sparingly — prefer event-driven updates.",
       roles: [RolesLevel.ADMIN],
     }),
     ApiResponse({ status: 200, description: 'Sync completed' }),
