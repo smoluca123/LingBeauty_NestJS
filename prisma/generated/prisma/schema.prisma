@@ -27,6 +27,43 @@ model Address {
   @@map("addresses")
 }
 
+// Admin dashboard statistics
+// Stores pre-aggregated daily snapshots for fast dashboard queries
+// Updated incrementally via event-driven approach (no expensive cron)
+
+model DailyStats {
+  id   String   @id @default(uuid())
+  // Date of the snapshot (normalized to midnight UTC)
+  date DateTime @unique @map("date") @db.Date
+
+  // ── User metrics ──────────────────────────────────────────────
+  newUsers    Int @default(0) @map("new_users") // Users registered this day
+  activeUsers Int @default(0) @map("active_users") // Users who logged in this day
+  totalUsers  Int @default(0) @map("total_users") // Cumulative total users
+
+  // ── Order metrics ─────────────────────────────────────────────
+  totalOrders     Int     @default(0) @map("total_orders") // Orders placed this day
+  confirmedOrders Int     @default(0) @map("confirmed_orders") // Orders confirmed this day
+  cancelledOrders Int     @default(0) @map("cancelled_orders") // Orders cancelled this day
+  deliveredOrders Int     @default(0) @map("delivered_orders") // Orders delivered this day
+  revenue         Decimal @default(0) @map("revenue") @db.Decimal(15, 2) // Total revenue this day
+
+  // ── Product metrics ───────────────────────────────────────────
+  totalProducts  Int @default(0) @map("total_products") // Cumulative active products
+  newProducts    Int @default(0) @map("new_products") // Products created this day
+  totalItemsSold Int @default(0) @map("total_items_sold") // Units sold this day
+
+  // ── Review metrics ────────────────────────────────────────────
+  newReviews      Int @default(0) @map("new_reviews") // Reviews created this day
+  approvedReviews Int @default(0) @map("approved_reviews") // Reviews approved this day
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([date])
+  @@map("daily_stats")
+}
+
 model Affiliate {
   id              String   @id @default(uuid())
   userId          String   @unique @map("user_id")

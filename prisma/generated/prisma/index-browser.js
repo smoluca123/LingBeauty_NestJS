@@ -137,6 +137,26 @@ exports.Prisma.AddressScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DailyStatsScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  newUsers: 'newUsers',
+  activeUsers: 'activeUsers',
+  totalUsers: 'totalUsers',
+  totalOrders: 'totalOrders',
+  confirmedOrders: 'confirmedOrders',
+  cancelledOrders: 'cancelledOrders',
+  deliveredOrders: 'deliveredOrders',
+  revenue: 'revenue',
+  totalProducts: 'totalProducts',
+  newProducts: 'newProducts',
+  totalItemsSold: 'totalItemsSold',
+  newReviews: 'newReviews',
+  approvedReviews: 'approvedReviews',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.AffiliateScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -695,6 +715,7 @@ exports.ProductInventoryDisplayStatus = exports.$Enums.ProductInventoryDisplaySt
 
 exports.Prisma.ModelName = {
   Address: 'Address',
+  DailyStats: 'DailyStats',
   Affiliate: 'Affiliate',
   AffiliateLink: 'AffiliateLink',
   AffiliateCommission: 'AffiliateCommission',

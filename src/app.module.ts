@@ -22,6 +22,7 @@ import { ReviewModule } from 'src/modules/review/review.module';
 import { BannerModule } from 'src/modules/banner/banner.module';
 import { MailModule } from 'src/modules/mail';
 import { ProvincesModule } from 'src/modules/provinces/provinces.module';
+import { StatsModule } from 'src/modules/stats/stats.module';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { ProvincesModule } from 'src/modules/provinces/provinces.module';
     StorageModule,
     SystemModule,
     ProvincesModule,
+    StatsModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

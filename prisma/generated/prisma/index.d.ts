@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Address = $Result.DefaultSelection<Prisma.$AddressPayload>
 /**
+ * Model DailyStats
+ * 
+ */
+export type DailyStats = $Result.DefaultSelection<Prisma.$DailyStatsPayload>
+/**
  * Model Affiliate
  * 
  */
@@ -514,6 +519,16 @@ export class PrismaClient<
     * ```
     */
   get address(): Prisma.AddressDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dailyStats`: Exposes CRUD operations for the **DailyStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DailyStats
+    * const dailyStats = await prisma.dailyStats.findMany()
+    * ```
+    */
+  get dailyStats(): Prisma.DailyStatsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.affiliate`: Exposes CRUD operations for the **Affiliate** model.
@@ -1309,6 +1324,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Address: 'Address',
+    DailyStats: 'DailyStats',
     Affiliate: 'Affiliate',
     AffiliateLink: 'AffiliateLink',
     AffiliateCommission: 'AffiliateCommission',
@@ -1360,7 +1376,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
+      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1435,6 +1451,80 @@ export namespace Prisma {
           count: {
             args: Prisma.AddressCountArgs<ExtArgs>
             result: $Utils.Optional<AddressCountAggregateOutputType> | number
+          }
+        }
+      }
+      DailyStats: {
+        payload: Prisma.$DailyStatsPayload<ExtArgs>
+        fields: Prisma.DailyStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DailyStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DailyStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.DailyStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DailyStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>
+          }
+          findMany: {
+            args: Prisma.DailyStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>[]
+          }
+          create: {
+            args: Prisma.DailyStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>
+          }
+          createMany: {
+            args: Prisma.DailyStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DailyStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.DailyStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>
+          }
+          update: {
+            args: Prisma.DailyStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.DailyStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DailyStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DailyStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.DailyStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.DailyStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDailyStats>
+          }
+          groupBy: {
+            args: Prisma.DailyStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DailyStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DailyStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<DailyStatsCountAggregateOutputType> | number
           }
         }
       }
@@ -4195,6 +4285,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     address?: AddressOmit
+    dailyStats?: DailyStatsOmit
     affiliate?: AffiliateOmit
     affiliateLink?: AffiliateLinkOmit
     affiliateCommission?: AffiliateCommissionOmit
@@ -6291,6 +6382,1239 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AddressInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DailyStats
+   */
+
+  export type AggregateDailyStats = {
+    _count: DailyStatsCountAggregateOutputType | null
+    _avg: DailyStatsAvgAggregateOutputType | null
+    _sum: DailyStatsSumAggregateOutputType | null
+    _min: DailyStatsMinAggregateOutputType | null
+    _max: DailyStatsMaxAggregateOutputType | null
+  }
+
+  export type DailyStatsAvgAggregateOutputType = {
+    newUsers: number | null
+    activeUsers: number | null
+    totalUsers: number | null
+    totalOrders: number | null
+    confirmedOrders: number | null
+    cancelledOrders: number | null
+    deliveredOrders: number | null
+    revenue: Decimal | null
+    totalProducts: number | null
+    newProducts: number | null
+    totalItemsSold: number | null
+    newReviews: number | null
+    approvedReviews: number | null
+  }
+
+  export type DailyStatsSumAggregateOutputType = {
+    newUsers: number | null
+    activeUsers: number | null
+    totalUsers: number | null
+    totalOrders: number | null
+    confirmedOrders: number | null
+    cancelledOrders: number | null
+    deliveredOrders: number | null
+    revenue: Decimal | null
+    totalProducts: number | null
+    newProducts: number | null
+    totalItemsSold: number | null
+    newReviews: number | null
+    approvedReviews: number | null
+  }
+
+  export type DailyStatsMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    newUsers: number | null
+    activeUsers: number | null
+    totalUsers: number | null
+    totalOrders: number | null
+    confirmedOrders: number | null
+    cancelledOrders: number | null
+    deliveredOrders: number | null
+    revenue: Decimal | null
+    totalProducts: number | null
+    newProducts: number | null
+    totalItemsSold: number | null
+    newReviews: number | null
+    approvedReviews: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyStatsMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    newUsers: number | null
+    activeUsers: number | null
+    totalUsers: number | null
+    totalOrders: number | null
+    confirmedOrders: number | null
+    cancelledOrders: number | null
+    deliveredOrders: number | null
+    revenue: Decimal | null
+    totalProducts: number | null
+    newProducts: number | null
+    totalItemsSold: number | null
+    newReviews: number | null
+    approvedReviews: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyStatsCountAggregateOutputType = {
+    id: number
+    date: number
+    newUsers: number
+    activeUsers: number
+    totalUsers: number
+    totalOrders: number
+    confirmedOrders: number
+    cancelledOrders: number
+    deliveredOrders: number
+    revenue: number
+    totalProducts: number
+    newProducts: number
+    totalItemsSold: number
+    newReviews: number
+    approvedReviews: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DailyStatsAvgAggregateInputType = {
+    newUsers?: true
+    activeUsers?: true
+    totalUsers?: true
+    totalOrders?: true
+    confirmedOrders?: true
+    cancelledOrders?: true
+    deliveredOrders?: true
+    revenue?: true
+    totalProducts?: true
+    newProducts?: true
+    totalItemsSold?: true
+    newReviews?: true
+    approvedReviews?: true
+  }
+
+  export type DailyStatsSumAggregateInputType = {
+    newUsers?: true
+    activeUsers?: true
+    totalUsers?: true
+    totalOrders?: true
+    confirmedOrders?: true
+    cancelledOrders?: true
+    deliveredOrders?: true
+    revenue?: true
+    totalProducts?: true
+    newProducts?: true
+    totalItemsSold?: true
+    newReviews?: true
+    approvedReviews?: true
+  }
+
+  export type DailyStatsMinAggregateInputType = {
+    id?: true
+    date?: true
+    newUsers?: true
+    activeUsers?: true
+    totalUsers?: true
+    totalOrders?: true
+    confirmedOrders?: true
+    cancelledOrders?: true
+    deliveredOrders?: true
+    revenue?: true
+    totalProducts?: true
+    newProducts?: true
+    totalItemsSold?: true
+    newReviews?: true
+    approvedReviews?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyStatsMaxAggregateInputType = {
+    id?: true
+    date?: true
+    newUsers?: true
+    activeUsers?: true
+    totalUsers?: true
+    totalOrders?: true
+    confirmedOrders?: true
+    cancelledOrders?: true
+    deliveredOrders?: true
+    revenue?: true
+    totalProducts?: true
+    newProducts?: true
+    totalItemsSold?: true
+    newReviews?: true
+    approvedReviews?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyStatsCountAggregateInputType = {
+    id?: true
+    date?: true
+    newUsers?: true
+    activeUsers?: true
+    totalUsers?: true
+    totalOrders?: true
+    confirmedOrders?: true
+    cancelledOrders?: true
+    deliveredOrders?: true
+    revenue?: true
+    totalProducts?: true
+    newProducts?: true
+    totalItemsSold?: true
+    newReviews?: true
+    approvedReviews?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DailyStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyStats to aggregate.
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyStats to fetch.
+     */
+    orderBy?: DailyStatsOrderByWithRelationInput | DailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DailyStats
+    **/
+    _count?: true | DailyStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DailyStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DailyStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DailyStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DailyStatsMaxAggregateInputType
+  }
+
+  export type GetDailyStatsAggregateType<T extends DailyStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateDailyStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDailyStats[P]>
+      : GetScalarType<T[P], AggregateDailyStats[P]>
+  }
+
+
+
+
+  export type DailyStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyStatsWhereInput
+    orderBy?: DailyStatsOrderByWithAggregationInput | DailyStatsOrderByWithAggregationInput[]
+    by: DailyStatsScalarFieldEnum[] | DailyStatsScalarFieldEnum
+    having?: DailyStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DailyStatsCountAggregateInputType | true
+    _avg?: DailyStatsAvgAggregateInputType
+    _sum?: DailyStatsSumAggregateInputType
+    _min?: DailyStatsMinAggregateInputType
+    _max?: DailyStatsMaxAggregateInputType
+  }
+
+  export type DailyStatsGroupByOutputType = {
+    id: string
+    date: Date
+    newUsers: number
+    activeUsers: number
+    totalUsers: number
+    totalOrders: number
+    confirmedOrders: number
+    cancelledOrders: number
+    deliveredOrders: number
+    revenue: Decimal
+    totalProducts: number
+    newProducts: number
+    totalItemsSold: number
+    newReviews: number
+    approvedReviews: number
+    createdAt: Date
+    updatedAt: Date
+    _count: DailyStatsCountAggregateOutputType | null
+    _avg: DailyStatsAvgAggregateOutputType | null
+    _sum: DailyStatsSumAggregateOutputType | null
+    _min: DailyStatsMinAggregateOutputType | null
+    _max: DailyStatsMaxAggregateOutputType | null
+  }
+
+  type GetDailyStatsGroupByPayload<T extends DailyStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DailyStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DailyStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DailyStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], DailyStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DailyStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    newUsers?: boolean
+    activeUsers?: boolean
+    totalUsers?: boolean
+    totalOrders?: boolean
+    confirmedOrders?: boolean
+    cancelledOrders?: boolean
+    deliveredOrders?: boolean
+    revenue?: boolean
+    totalProducts?: boolean
+    newProducts?: boolean
+    totalItemsSold?: boolean
+    newReviews?: boolean
+    approvedReviews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dailyStats"]>
+
+  export type DailyStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    newUsers?: boolean
+    activeUsers?: boolean
+    totalUsers?: boolean
+    totalOrders?: boolean
+    confirmedOrders?: boolean
+    cancelledOrders?: boolean
+    deliveredOrders?: boolean
+    revenue?: boolean
+    totalProducts?: boolean
+    newProducts?: boolean
+    totalItemsSold?: boolean
+    newReviews?: boolean
+    approvedReviews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dailyStats"]>
+
+  export type DailyStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    newUsers?: boolean
+    activeUsers?: boolean
+    totalUsers?: boolean
+    totalOrders?: boolean
+    confirmedOrders?: boolean
+    cancelledOrders?: boolean
+    deliveredOrders?: boolean
+    revenue?: boolean
+    totalProducts?: boolean
+    newProducts?: boolean
+    totalItemsSold?: boolean
+    newReviews?: boolean
+    approvedReviews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dailyStats"]>
+
+  export type DailyStatsSelectScalar = {
+    id?: boolean
+    date?: boolean
+    newUsers?: boolean
+    activeUsers?: boolean
+    totalUsers?: boolean
+    totalOrders?: boolean
+    confirmedOrders?: boolean
+    cancelledOrders?: boolean
+    deliveredOrders?: boolean
+    revenue?: boolean
+    totalProducts?: boolean
+    newProducts?: boolean
+    totalItemsSold?: boolean
+    newReviews?: boolean
+    approvedReviews?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DailyStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "newUsers" | "activeUsers" | "totalUsers" | "totalOrders" | "confirmedOrders" | "cancelledOrders" | "deliveredOrders" | "revenue" | "totalProducts" | "newProducts" | "totalItemsSold" | "newReviews" | "approvedReviews" | "createdAt" | "updatedAt", ExtArgs["result"]["dailyStats"]>
+
+  export type $DailyStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DailyStats"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      date: Date
+      newUsers: number
+      activeUsers: number
+      totalUsers: number
+      totalOrders: number
+      confirmedOrders: number
+      cancelledOrders: number
+      deliveredOrders: number
+      revenue: Prisma.Decimal
+      totalProducts: number
+      newProducts: number
+      totalItemsSold: number
+      newReviews: number
+      approvedReviews: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dailyStats"]>
+    composites: {}
+  }
+
+  type DailyStatsGetPayload<S extends boolean | null | undefined | DailyStatsDefaultArgs> = $Result.GetResult<Prisma.$DailyStatsPayload, S>
+
+  type DailyStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DailyStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DailyStatsCountAggregateInputType | true
+    }
+
+  export interface DailyStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DailyStats'], meta: { name: 'DailyStats' } }
+    /**
+     * Find zero or one DailyStats that matches the filter.
+     * @param {DailyStatsFindUniqueArgs} args - Arguments to find a DailyStats
+     * @example
+     * // Get one DailyStats
+     * const dailyStats = await prisma.dailyStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DailyStatsFindUniqueArgs>(args: SelectSubset<T, DailyStatsFindUniqueArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DailyStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DailyStatsFindUniqueOrThrowArgs} args - Arguments to find a DailyStats
+     * @example
+     * // Get one DailyStats
+     * const dailyStats = await prisma.dailyStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DailyStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, DailyStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsFindFirstArgs} args - Arguments to find a DailyStats
+     * @example
+     * // Get one DailyStats
+     * const dailyStats = await prisma.dailyStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DailyStatsFindFirstArgs>(args?: SelectSubset<T, DailyStatsFindFirstArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsFindFirstOrThrowArgs} args - Arguments to find a DailyStats
+     * @example
+     * // Get one DailyStats
+     * const dailyStats = await prisma.dailyStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DailyStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, DailyStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DailyStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DailyStats
+     * const dailyStats = await prisma.dailyStats.findMany()
+     * 
+     * // Get first 10 DailyStats
+     * const dailyStats = await prisma.dailyStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dailyStatsWithIdOnly = await prisma.dailyStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DailyStatsFindManyArgs>(args?: SelectSubset<T, DailyStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DailyStats.
+     * @param {DailyStatsCreateArgs} args - Arguments to create a DailyStats.
+     * @example
+     * // Create one DailyStats
+     * const DailyStats = await prisma.dailyStats.create({
+     *   data: {
+     *     // ... data to create a DailyStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends DailyStatsCreateArgs>(args: SelectSubset<T, DailyStatsCreateArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DailyStats.
+     * @param {DailyStatsCreateManyArgs} args - Arguments to create many DailyStats.
+     * @example
+     * // Create many DailyStats
+     * const dailyStats = await prisma.dailyStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DailyStatsCreateManyArgs>(args?: SelectSubset<T, DailyStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DailyStats and returns the data saved in the database.
+     * @param {DailyStatsCreateManyAndReturnArgs} args - Arguments to create many DailyStats.
+     * @example
+     * // Create many DailyStats
+     * const dailyStats = await prisma.dailyStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DailyStats and only return the `id`
+     * const dailyStatsWithIdOnly = await prisma.dailyStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DailyStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, DailyStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DailyStats.
+     * @param {DailyStatsDeleteArgs} args - Arguments to delete one DailyStats.
+     * @example
+     * // Delete one DailyStats
+     * const DailyStats = await prisma.dailyStats.delete({
+     *   where: {
+     *     // ... filter to delete one DailyStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DailyStatsDeleteArgs>(args: SelectSubset<T, DailyStatsDeleteArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DailyStats.
+     * @param {DailyStatsUpdateArgs} args - Arguments to update one DailyStats.
+     * @example
+     * // Update one DailyStats
+     * const dailyStats = await prisma.dailyStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DailyStatsUpdateArgs>(args: SelectSubset<T, DailyStatsUpdateArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DailyStats.
+     * @param {DailyStatsDeleteManyArgs} args - Arguments to filter DailyStats to delete.
+     * @example
+     * // Delete a few DailyStats
+     * const { count } = await prisma.dailyStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DailyStatsDeleteManyArgs>(args?: SelectSubset<T, DailyStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DailyStats
+     * const dailyStats = await prisma.dailyStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DailyStatsUpdateManyArgs>(args: SelectSubset<T, DailyStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyStats and returns the data updated in the database.
+     * @param {DailyStatsUpdateManyAndReturnArgs} args - Arguments to update many DailyStats.
+     * @example
+     * // Update many DailyStats
+     * const dailyStats = await prisma.dailyStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DailyStats and only return the `id`
+     * const dailyStatsWithIdOnly = await prisma.dailyStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DailyStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, DailyStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DailyStats.
+     * @param {DailyStatsUpsertArgs} args - Arguments to update or create a DailyStats.
+     * @example
+     * // Update or create a DailyStats
+     * const dailyStats = await prisma.dailyStats.upsert({
+     *   create: {
+     *     // ... data to create a DailyStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DailyStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DailyStatsUpsertArgs>(args: SelectSubset<T, DailyStatsUpsertArgs<ExtArgs>>): Prisma__DailyStatsClient<$Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsCountArgs} args - Arguments to filter DailyStats to count.
+     * @example
+     * // Count the number of DailyStats
+     * const count = await prisma.dailyStats.count({
+     *   where: {
+     *     // ... the filter for the DailyStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends DailyStatsCountArgs>(
+      args?: Subset<T, DailyStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DailyStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DailyStatsAggregateArgs>(args: Subset<T, DailyStatsAggregateArgs>): Prisma.PrismaPromise<GetDailyStatsAggregateType<T>>
+
+    /**
+     * Group by DailyStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DailyStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DailyStatsGroupByArgs['orderBy'] }
+        : { orderBy?: DailyStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DailyStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDailyStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DailyStats model
+   */
+  readonly fields: DailyStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DailyStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DailyStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DailyStats model
+   */
+  interface DailyStatsFieldRefs {
+    readonly id: FieldRef<"DailyStats", 'String'>
+    readonly date: FieldRef<"DailyStats", 'DateTime'>
+    readonly newUsers: FieldRef<"DailyStats", 'Int'>
+    readonly activeUsers: FieldRef<"DailyStats", 'Int'>
+    readonly totalUsers: FieldRef<"DailyStats", 'Int'>
+    readonly totalOrders: FieldRef<"DailyStats", 'Int'>
+    readonly confirmedOrders: FieldRef<"DailyStats", 'Int'>
+    readonly cancelledOrders: FieldRef<"DailyStats", 'Int'>
+    readonly deliveredOrders: FieldRef<"DailyStats", 'Int'>
+    readonly revenue: FieldRef<"DailyStats", 'Decimal'>
+    readonly totalProducts: FieldRef<"DailyStats", 'Int'>
+    readonly newProducts: FieldRef<"DailyStats", 'Int'>
+    readonly totalItemsSold: FieldRef<"DailyStats", 'Int'>
+    readonly newReviews: FieldRef<"DailyStats", 'Int'>
+    readonly approvedReviews: FieldRef<"DailyStats", 'Int'>
+    readonly createdAt: FieldRef<"DailyStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"DailyStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DailyStats findUnique
+   */
+  export type DailyStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * Filter, which DailyStats to fetch.
+     */
+    where: DailyStatsWhereUniqueInput
+  }
+
+  /**
+   * DailyStats findUniqueOrThrow
+   */
+  export type DailyStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * Filter, which DailyStats to fetch.
+     */
+    where: DailyStatsWhereUniqueInput
+  }
+
+  /**
+   * DailyStats findFirst
+   */
+  export type DailyStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * Filter, which DailyStats to fetch.
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyStats to fetch.
+     */
+    orderBy?: DailyStatsOrderByWithRelationInput | DailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyStats.
+     */
+    cursor?: DailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyStats.
+     */
+    distinct?: DailyStatsScalarFieldEnum | DailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * DailyStats findFirstOrThrow
+   */
+  export type DailyStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * Filter, which DailyStats to fetch.
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyStats to fetch.
+     */
+    orderBy?: DailyStatsOrderByWithRelationInput | DailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyStats.
+     */
+    cursor?: DailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyStats.
+     */
+    distinct?: DailyStatsScalarFieldEnum | DailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * DailyStats findMany
+   */
+  export type DailyStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * Filter, which DailyStats to fetch.
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyStats to fetch.
+     */
+    orderBy?: DailyStatsOrderByWithRelationInput | DailyStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DailyStats.
+     */
+    cursor?: DailyStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyStats.
+     */
+    skip?: number
+    distinct?: DailyStatsScalarFieldEnum | DailyStatsScalarFieldEnum[]
+  }
+
+  /**
+   * DailyStats create
+   */
+  export type DailyStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DailyStats.
+     */
+    data: XOR<DailyStatsCreateInput, DailyStatsUncheckedCreateInput>
+  }
+
+  /**
+   * DailyStats createMany
+   */
+  export type DailyStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DailyStats.
+     */
+    data: DailyStatsCreateManyInput | DailyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DailyStats createManyAndReturn
+   */
+  export type DailyStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many DailyStats.
+     */
+    data: DailyStatsCreateManyInput | DailyStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DailyStats update
+   */
+  export type DailyStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DailyStats.
+     */
+    data: XOR<DailyStatsUpdateInput, DailyStatsUncheckedUpdateInput>
+    /**
+     * Choose, which DailyStats to update.
+     */
+    where: DailyStatsWhereUniqueInput
+  }
+
+  /**
+   * DailyStats updateMany
+   */
+  export type DailyStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DailyStats.
+     */
+    data: XOR<DailyStatsUpdateManyMutationInput, DailyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyStats to update
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * Limit how many DailyStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyStats updateManyAndReturn
+   */
+  export type DailyStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update DailyStats.
+     */
+    data: XOR<DailyStatsUpdateManyMutationInput, DailyStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyStats to update
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * Limit how many DailyStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyStats upsert
+   */
+  export type DailyStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DailyStats to update in case it exists.
+     */
+    where: DailyStatsWhereUniqueInput
+    /**
+     * In case the DailyStats found by the `where` argument doesn't exist, create a new DailyStats with this data.
+     */
+    create: XOR<DailyStatsCreateInput, DailyStatsUncheckedCreateInput>
+    /**
+     * In case the DailyStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DailyStatsUpdateInput, DailyStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * DailyStats delete
+   */
+  export type DailyStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
+    /**
+     * Filter which DailyStats to delete.
+     */
+    where: DailyStatsWhereUniqueInput
+  }
+
+  /**
+   * DailyStats deleteMany
+   */
+  export type DailyStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyStats to delete
+     */
+    where?: DailyStatsWhereInput
+    /**
+     * Limit how many DailyStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyStats without action
+   */
+  export type DailyStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyStats
+     */
+    select?: DailyStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyStats
+     */
+    omit?: DailyStatsOmit<ExtArgs> | null
   }
 
 
@@ -48969,6 +50293,29 @@ export namespace Prisma {
   export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
 
 
+  export const DailyStatsScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    newUsers: 'newUsers',
+    activeUsers: 'activeUsers',
+    totalUsers: 'totalUsers',
+    totalOrders: 'totalOrders',
+    confirmedOrders: 'confirmedOrders',
+    cancelledOrders: 'cancelledOrders',
+    deliveredOrders: 'deliveredOrders',
+    revenue: 'revenue',
+    totalProducts: 'totalProducts',
+    newProducts: 'newProducts',
+    totalItemsSold: 'totalItemsSold',
+    newReviews: 'newReviews',
+    approvedReviews: 'approvedReviews',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DailyStatsScalarFieldEnum = (typeof DailyStatsScalarFieldEnum)[keyof typeof DailyStatsScalarFieldEnum]
+
+
   export const AffiliateScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -49611,20 +50958,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Decimal'
-   */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-  /**
-   * Reference to a field of type 'Decimal[]'
-   */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -49635,6 +50968,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -49938,6 +51285,120 @@ export namespace Prisma {
     isDefault?: BoolWithAggregatesFilter<"Address"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
+  }
+
+  export type DailyStatsWhereInput = {
+    AND?: DailyStatsWhereInput | DailyStatsWhereInput[]
+    OR?: DailyStatsWhereInput[]
+    NOT?: DailyStatsWhereInput | DailyStatsWhereInput[]
+    id?: StringFilter<"DailyStats"> | string
+    date?: DateTimeFilter<"DailyStats"> | Date | string
+    newUsers?: IntFilter<"DailyStats"> | number
+    activeUsers?: IntFilter<"DailyStats"> | number
+    totalUsers?: IntFilter<"DailyStats"> | number
+    totalOrders?: IntFilter<"DailyStats"> | number
+    confirmedOrders?: IntFilter<"DailyStats"> | number
+    cancelledOrders?: IntFilter<"DailyStats"> | number
+    deliveredOrders?: IntFilter<"DailyStats"> | number
+    revenue?: DecimalFilter<"DailyStats"> | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFilter<"DailyStats"> | number
+    newProducts?: IntFilter<"DailyStats"> | number
+    totalItemsSold?: IntFilter<"DailyStats"> | number
+    newReviews?: IntFilter<"DailyStats"> | number
+    approvedReviews?: IntFilter<"DailyStats"> | number
+    createdAt?: DateTimeFilter<"DailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyStats"> | Date | string
+  }
+
+  export type DailyStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    date?: Date | string
+    AND?: DailyStatsWhereInput | DailyStatsWhereInput[]
+    OR?: DailyStatsWhereInput[]
+    NOT?: DailyStatsWhereInput | DailyStatsWhereInput[]
+    newUsers?: IntFilter<"DailyStats"> | number
+    activeUsers?: IntFilter<"DailyStats"> | number
+    totalUsers?: IntFilter<"DailyStats"> | number
+    totalOrders?: IntFilter<"DailyStats"> | number
+    confirmedOrders?: IntFilter<"DailyStats"> | number
+    cancelledOrders?: IntFilter<"DailyStats"> | number
+    deliveredOrders?: IntFilter<"DailyStats"> | number
+    revenue?: DecimalFilter<"DailyStats"> | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFilter<"DailyStats"> | number
+    newProducts?: IntFilter<"DailyStats"> | number
+    totalItemsSold?: IntFilter<"DailyStats"> | number
+    newReviews?: IntFilter<"DailyStats"> | number
+    approvedReviews?: IntFilter<"DailyStats"> | number
+    createdAt?: DateTimeFilter<"DailyStats"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyStats"> | Date | string
+  }, "id" | "date">
+
+  export type DailyStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DailyStatsCountOrderByAggregateInput
+    _avg?: DailyStatsAvgOrderByAggregateInput
+    _max?: DailyStatsMaxOrderByAggregateInput
+    _min?: DailyStatsMinOrderByAggregateInput
+    _sum?: DailyStatsSumOrderByAggregateInput
+  }
+
+  export type DailyStatsScalarWhereWithAggregatesInput = {
+    AND?: DailyStatsScalarWhereWithAggregatesInput | DailyStatsScalarWhereWithAggregatesInput[]
+    OR?: DailyStatsScalarWhereWithAggregatesInput[]
+    NOT?: DailyStatsScalarWhereWithAggregatesInput | DailyStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DailyStats"> | string
+    date?: DateTimeWithAggregatesFilter<"DailyStats"> | Date | string
+    newUsers?: IntWithAggregatesFilter<"DailyStats"> | number
+    activeUsers?: IntWithAggregatesFilter<"DailyStats"> | number
+    totalUsers?: IntWithAggregatesFilter<"DailyStats"> | number
+    totalOrders?: IntWithAggregatesFilter<"DailyStats"> | number
+    confirmedOrders?: IntWithAggregatesFilter<"DailyStats"> | number
+    cancelledOrders?: IntWithAggregatesFilter<"DailyStats"> | number
+    deliveredOrders?: IntWithAggregatesFilter<"DailyStats"> | number
+    revenue?: DecimalWithAggregatesFilter<"DailyStats"> | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntWithAggregatesFilter<"DailyStats"> | number
+    newProducts?: IntWithAggregatesFilter<"DailyStats"> | number
+    totalItemsSold?: IntWithAggregatesFilter<"DailyStats"> | number
+    newReviews?: IntWithAggregatesFilter<"DailyStats"> | number
+    approvedReviews?: IntWithAggregatesFilter<"DailyStats"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"DailyStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DailyStats"> | Date | string
   }
 
   export type AffiliateWhereInput = {
@@ -53037,6 +54498,146 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyStatsCreateInput = {
+    id?: string
+    date: Date | string
+    newUsers?: number
+    activeUsers?: number
+    totalUsers?: number
+    totalOrders?: number
+    confirmedOrders?: number
+    cancelledOrders?: number
+    deliveredOrders?: number
+    revenue?: Decimal | DecimalJsLike | number | string
+    totalProducts?: number
+    newProducts?: number
+    totalItemsSold?: number
+    newReviews?: number
+    approvedReviews?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyStatsUncheckedCreateInput = {
+    id?: string
+    date: Date | string
+    newUsers?: number
+    activeUsers?: number
+    totalUsers?: number
+    totalOrders?: number
+    confirmedOrders?: number
+    cancelledOrders?: number
+    deliveredOrders?: number
+    revenue?: Decimal | DecimalJsLike | number | string
+    totalProducts?: number
+    newProducts?: number
+    totalItemsSold?: number
+    newReviews?: number
+    approvedReviews?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    newUsers?: IntFieldUpdateOperationsInput | number
+    activeUsers?: IntFieldUpdateOperationsInput | number
+    totalUsers?: IntFieldUpdateOperationsInput | number
+    totalOrders?: IntFieldUpdateOperationsInput | number
+    confirmedOrders?: IntFieldUpdateOperationsInput | number
+    cancelledOrders?: IntFieldUpdateOperationsInput | number
+    deliveredOrders?: IntFieldUpdateOperationsInput | number
+    revenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFieldUpdateOperationsInput | number
+    newProducts?: IntFieldUpdateOperationsInput | number
+    totalItemsSold?: IntFieldUpdateOperationsInput | number
+    newReviews?: IntFieldUpdateOperationsInput | number
+    approvedReviews?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    newUsers?: IntFieldUpdateOperationsInput | number
+    activeUsers?: IntFieldUpdateOperationsInput | number
+    totalUsers?: IntFieldUpdateOperationsInput | number
+    totalOrders?: IntFieldUpdateOperationsInput | number
+    confirmedOrders?: IntFieldUpdateOperationsInput | number
+    cancelledOrders?: IntFieldUpdateOperationsInput | number
+    deliveredOrders?: IntFieldUpdateOperationsInput | number
+    revenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFieldUpdateOperationsInput | number
+    newProducts?: IntFieldUpdateOperationsInput | number
+    totalItemsSold?: IntFieldUpdateOperationsInput | number
+    newReviews?: IntFieldUpdateOperationsInput | number
+    approvedReviews?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyStatsCreateManyInput = {
+    id?: string
+    date: Date | string
+    newUsers?: number
+    activeUsers?: number
+    totalUsers?: number
+    totalOrders?: number
+    confirmedOrders?: number
+    cancelledOrders?: number
+    deliveredOrders?: number
+    revenue?: Decimal | DecimalJsLike | number | string
+    totalProducts?: number
+    newProducts?: number
+    totalItemsSold?: number
+    newReviews?: number
+    approvedReviews?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    newUsers?: IntFieldUpdateOperationsInput | number
+    activeUsers?: IntFieldUpdateOperationsInput | number
+    totalUsers?: IntFieldUpdateOperationsInput | number
+    totalOrders?: IntFieldUpdateOperationsInput | number
+    confirmedOrders?: IntFieldUpdateOperationsInput | number
+    cancelledOrders?: IntFieldUpdateOperationsInput | number
+    deliveredOrders?: IntFieldUpdateOperationsInput | number
+    revenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFieldUpdateOperationsInput | number
+    newProducts?: IntFieldUpdateOperationsInput | number
+    totalItemsSold?: IntFieldUpdateOperationsInput | number
+    newReviews?: IntFieldUpdateOperationsInput | number
+    approvedReviews?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    newUsers?: IntFieldUpdateOperationsInput | number
+    activeUsers?: IntFieldUpdateOperationsInput | number
+    totalUsers?: IntFieldUpdateOperationsInput | number
+    totalOrders?: IntFieldUpdateOperationsInput | number
+    confirmedOrders?: IntFieldUpdateOperationsInput | number
+    cancelledOrders?: IntFieldUpdateOperationsInput | number
+    deliveredOrders?: IntFieldUpdateOperationsInput | number
+    revenue?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalProducts?: IntFieldUpdateOperationsInput | number
+    newProducts?: IntFieldUpdateOperationsInput | number
+    totalItemsSold?: IntFieldUpdateOperationsInput | number
+    newReviews?: IntFieldUpdateOperationsInput | number
+    approvedReviews?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -56449,6 +58050,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type DecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -56458,6 +58070,130 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type DailyStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyStatsAvgOrderByAggregateInput = {
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+  }
+
+  export type DailyStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyStatsSumOrderByAggregateInput = {
+    newUsers?: SortOrder
+    activeUsers?: SortOrder
+    totalUsers?: SortOrder
+    totalOrders?: SortOrder
+    confirmedOrders?: SortOrder
+    cancelledOrders?: SortOrder
+    deliveredOrders?: SortOrder
+    revenue?: SortOrder
+    totalProducts?: SortOrder
+    newProducts?: SortOrder
+    totalItemsSold?: SortOrder
+    newReviews?: SortOrder
+    approvedReviews?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type AffiliateLinkListRelationFilter = {
@@ -56537,33 +58273,6 @@ export namespace Prisma {
     pendingEarnings?: SortOrder
   }
 
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type AffiliateScalarRelationFilter = {
     is?: AffiliateWhereInput
     isNot?: AffiliateWhereInput
@@ -56610,22 +58319,6 @@ export namespace Prisma {
   export type AffiliateLinkSumOrderByAggregateInput = {
     clicks?: SortOrder
     conversions?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -58914,6 +60607,22 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
   export type UserCreateNestedOneWithoutAffiliateInput = {
     create?: XOR<UserCreateWithoutAffiliateInput, UserUncheckedCreateWithoutAffiliateInput>
     connectOrCreate?: UserCreateOrConnectWithoutAffiliateInput
@@ -58946,14 +60655,6 @@ export namespace Prisma {
     connectOrCreate?: AffiliateCommissionCreateOrConnectWithoutAffiliateInput | AffiliateCommissionCreateOrConnectWithoutAffiliateInput[]
     createMany?: AffiliateCommissionCreateManyAffiliateInputEnvelope
     connect?: AffiliateCommissionWhereUniqueInput | AffiliateCommissionWhereUniqueInput[]
-  }
-
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type UserUpdateOneRequiredWithoutAffiliateNestedInput = {
@@ -59024,14 +60725,6 @@ export namespace Prisma {
     create?: XOR<AffiliateCreateWithoutLinksInput, AffiliateUncheckedCreateWithoutLinksInput>
     connectOrCreate?: AffiliateCreateOrConnectWithoutLinksInput
     connect?: AffiliateWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type AffiliateUpdateOneRequiredWithoutLinksNestedInput = {
@@ -61912,22 +63605,6 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -61953,6 +63630,22 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {

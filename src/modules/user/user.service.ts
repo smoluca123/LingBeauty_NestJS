@@ -25,6 +25,7 @@ import { UserRoleResponseDto } from './dto/response/user-role-response.dto';
 import { CreateUserByAdminDto } from './dto/create-user-admin.dto';
 import * as bcrypt from 'bcryptjs';
 import { configData } from 'src/configs/configuration';
+import { StatsService } from 'src/modules/stats/stats.service';
 
 export interface GetUsersParams {
   page?: number;
@@ -42,6 +43,7 @@ export class UserService {
   constructor(
     private readonly storageService: StorageService,
     private readonly prismaService: PrismaService,
+    private readonly statsService: StatsService,
   ) {}
 
   async getAllUsers({
@@ -910,6 +912,11 @@ export class UserService {
       });
 
       const userResponse = toResponseDto(UserResponseDto, newUser);
+
+      // Fire-and-forget: update daily stats after user created by admin
+      this.statsService.onUserCreated().catch((err) => {
+        console.error('Failed to update stats after admin created user:', err);
+      });
 
       return {
         type: 'response',
