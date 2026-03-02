@@ -38,17 +38,6 @@ export class AddProductImageDto {
   alt?: string;
 
   @ApiPropertyOptional({
-    description: 'Sort order for display',
-    example: 0,
-    default: 0,
-  })
-  @IsInt()
-  @Min(0)
-  @Max(100)
-  @IsOptional()
-  sortOrder?: number;
-
-  @ApiPropertyOptional({
     description: 'Whether this is the primary image',
     example: false,
     default: false,

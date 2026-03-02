@@ -64,6 +64,15 @@ export const ERROR_MESSAGES = {
     'Không thể xóa biến thể sản phẩm đã có đơn hàng',
   [ERROR_CODES.PRODUCT_BADGE_NOT_FOUND]: 'Không tìm thấy nhãn sản phẩm',
 
+  // Cart
+  [ERROR_CODES.CART_NOT_FOUND]: 'Không tìm thấy giỏ hàng',
+  [ERROR_CODES.CART_ITEM_NOT_FOUND]: 'Không tìm thấy sản phẩm trong giỏ hàng',
+  [ERROR_CODES.CART_ITEM_ALREADY_EXISTS]: 'Sản phẩm đã có trong giỏ hàng',
+  [ERROR_CODES.CART_ITEM_QUANTITY_INVALID]: 'Số lượng sản phẩm không hợp lệ',
+  [ERROR_CODES.CART_ITEM_OUT_OF_STOCK]: 'Sản phẩm đã hết hàng',
+  [ERROR_CODES.CART_ITEM_INSUFFICIENT_STOCK]:
+    'Số lượng sản phẩm trong kho không đủ',
+
   // Review
   [ERROR_CODES.REVIEW_NOT_FOUND]: 'Không tìm thấy đánh giá',
   [ERROR_CODES.REVIEW_ALREADY_EXISTS]: 'Bạn đã đánh giá sản phẩm này rồi',

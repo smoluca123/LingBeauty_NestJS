@@ -44,9 +44,7 @@ export const productVariantSelect = {
   },
   images: {
     select: productImageSelect,
-    orderBy: {
-      sortOrder: 'asc' as const,
-    },
+    orderBy: [{ isPrimary: 'desc' as const }, { sortOrder: 'asc' as const }],
   },
 } satisfies Prisma.ProductVariantSelect;
 
@@ -110,9 +108,7 @@ export const productSelect = {
   },
   images: {
     select: productImageSelect,
-    orderBy: {
-      sortOrder: 'asc' as const,
-    },
+    orderBy: [{ isPrimary: 'desc' as const }, { sortOrder: 'asc' as const }],
   },
   variants: {
     select: productVariantSelect,

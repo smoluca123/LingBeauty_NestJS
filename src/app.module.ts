@@ -23,6 +23,7 @@ import { BannerModule } from 'src/modules/banner/banner.module';
 import { MailModule } from 'src/modules/mail';
 import { ProvincesModule } from 'src/modules/provinces/provinces.module';
 import { StatsModule } from 'src/modules/stats/stats.module';
+import { CartModule } from 'src/modules/cart/cart.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { StatsModule } from 'src/modules/stats/stats.module';
     SystemModule,
     ProvincesModule,
     StatsModule,
+    CartModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
