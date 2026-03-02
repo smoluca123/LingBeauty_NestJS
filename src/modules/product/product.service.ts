@@ -1294,7 +1294,7 @@ export class ProductService {
           variantId: dto.variantId,
           mediaId: dto.mediaId,
           alt: dto.alt,
-          sortOrder: dto.sortOrder ?? (maxSortOrder._max.sortOrder ?? -1) + 1,
+          sortOrder: (maxSortOrder._max.sortOrder ?? -1) + 1,
           isPrimary: dto.isPrimary ?? false,
         },
         select: productImageSelect,
@@ -1450,7 +1450,8 @@ export class ProductService {
 
       const images = await this.prismaService.productImage.findMany({
         where: { productId },
-        orderBy: { sortOrder: 'asc' },
+        // Primary image always first, then sorted by sortOrder ascending
+        orderBy: [{ isPrimary: 'desc' }, { sortOrder: 'asc' }],
         select: productImageSelect,
       });
 
