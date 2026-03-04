@@ -20,8 +20,15 @@ import { AddressResponseDto } from './dto/address-response.dto';
 import { processDataObject } from 'src/libs/utils/utils';
 import { addressSelect } from 'src/libs/prisma/address-select';
 import { BanUserBulkItemDto, BanUserBulkResultDto } from './dto/ban-user.dto';
-import { userRoleSelect } from 'src/libs/prisma/user-select';
-import { UserRoleResponseDto } from './dto/response/user-role-response.dto';
+import {
+  userRoleAssignmentsSelect,
+  userRoleSelect,
+} from 'src/libs/prisma/user-select';
+import {
+  UserRoleAssignmentsResponseDto,
+  UserRoleResponseDto,
+} from './dto/response/user-role-response.dto';
+import { AssignRolesDto } from './dto/assign-role.dto';
 import { CreateUserByAdminDto } from './dto/create-user-admin.dto';
 import * as bcrypt from 'bcryptjs';
 import { configData } from 'src/configs/configuration';
@@ -923,6 +930,82 @@ export class UserService {
         message: 'Tạo người dùng thành công',
         data: userResponse,
         statusCode: 201,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async assignRolesToUser(
+    targetUserId: string,
+    assignRolesDto: AssignRolesDto,
+  ): Promise<IBeforeTransformResponseType<UserRoleAssignmentsResponseDto[]>> {
+    try {
+      // Verify target user exists
+      const targetUser = await this.prismaService.user.findUnique({
+        where: { id: targetUserId },
+        select: { id: true },
+      });
+
+      if (!targetUser) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
+          ERROR_CODES.USER_NOT_FOUND,
+        );
+      }
+
+      // Validate all provided roleIds exist
+      const existingRoles = await this.prismaService.userRole.findMany({
+        where: { id: { in: assignRolesDto.roleIds } },
+        select: { id: true },
+      });
+
+      if (existingRoles.length !== assignRolesDto.roleIds.length) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.USER_ROLE_NOT_FOUND],
+          ERROR_CODES.USER_ROLE_NOT_FOUND,
+        );
+      }
+
+      // Replace all role assignments inside a transaction
+      const newAssignments = await this.prismaService.$transaction(
+        async (tx) => {
+          // Delete existing role assignments
+          await tx.userRoleAssignment.deleteMany({
+            where: { userId: targetUserId },
+          });
+
+          // Create new role assignments
+          await tx.userRoleAssignment.createMany({
+            data: assignRolesDto.roleIds.map((roleId) => ({
+              userId: targetUserId,
+              roleId,
+            })),
+          });
+
+          // Return the newly created assignments with role details
+          return tx.userRoleAssignment.findMany({
+            where: { userId: targetUserId },
+            select: userRoleAssignmentsSelect,
+            orderBy: { createdAt: 'asc' },
+          });
+        },
+      );
+
+      const assignmentResponses = newAssignments.map((assignment) =>
+        toResponseDto(UserRoleAssignmentsResponseDto, assignment),
+      );
+
+      return {
+        type: 'response',
+        message: 'Phân quyền người dùng thành công',
+        data: assignmentResponses,
       };
     } catch (error) {
       if (error instanceof BusinessException) {

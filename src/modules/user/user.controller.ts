@@ -50,7 +50,10 @@ import {
   ApiUpdateBanStatusBulk,
   ApiGetAllUserRoles,
   ApiCreateUserByAdmin,
+  ApiAssignRolesToUser,
 } from 'src/modules/user/decorators/user.decorators';
+import { AssignRolesDto } from './dto/assign-role.dto';
+import { UserRoleAssignmentsResponseDto } from './dto/response/user-role-response.dto';
 import { normalizePaginationParams } from 'src/libs/utils/utils';
 
 @ApiTags('User Management')
@@ -277,6 +280,15 @@ export class UserController {
     IBeforeTransformResponseType<UserRoleResponseDto[]>
   > {
     return this.userService.getAllUserRoles();
+  }
+
+  @Patch(':id/roles')
+  @ApiAssignRolesToUser()
+  async assignRolesToUser(
+    @Param('id') targetUserId: string,
+    @Body() assignRolesDto: AssignRolesDto,
+  ): Promise<IBeforeTransformResponseType<UserRoleAssignmentsResponseDto[]>> {
+    return this.userService.assignRolesToUser(targetUserId, assignRolesDto);
   }
 
   @Get(':id')

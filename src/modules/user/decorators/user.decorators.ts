@@ -28,7 +28,9 @@ import {
   BanUserDto,
 } from 'src/modules/user/dto/ban-user.dto';
 import { UserRoleResponseDto } from 'src/modules/user/dto/response/user-role-response.dto';
+import { UserRoleAssignmentsResponseDto } from 'src/modules/user/dto/response/user-role-response.dto';
 import { CreateUserByAdminDto } from 'src/modules/user/dto/create-user-admin.dto';
+import { AssignRolesDto } from 'src/modules/user/dto/assign-role.dto';
 
 export function ApiGetAllUsers() {
   return applyDecorators(
@@ -295,6 +297,28 @@ export function ApiCreateUserByAdmin() {
       status: 201,
       description: 'User created successfully',
       type: UserResponseDto,
+    }),
+  );
+}
+
+export function ApiAssignRolesToUser() {
+  return applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Assign roles to a user (Admin only)',
+      roles: [RolesLevel.ADMIN],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Target user ID',
+      type: String,
+    }),
+    ApiBody({
+      type: AssignRolesDto,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Roles assigned successfully',
+      type: [UserRoleAssignmentsResponseDto],
     }),
   );
 }
