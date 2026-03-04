@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsBoolean, IsOptional } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 import { UpdateUserDto } from './update-user.dto';
 
 export class UpdateUserByAdminDto extends UpdateUserDto {
@@ -42,5 +42,15 @@ export class UpdateUserByAdminDto extends UpdateUserDto {
     example: false,
   })
   isPhoneVerified?: boolean;
-}
 
+  @IsArray()
+  @IsOptional()
+  @IsString({ each: true })
+  @ApiPropertyOptional({
+    description:
+      'List of role IDs to assign to the user (replaces existing roles)',
+    type: [String],
+    example: ['role-id-1', 'role-id-2'],
+  })
+  roleIds?: string[];
+}
