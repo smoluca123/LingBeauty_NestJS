@@ -416,33 +416,58 @@ export class UserService {
         }
       }
 
-      // Prepare update data
-      // const updateData: any = {};
-      // if (updateDto.email) updateData.email = updateDto.email;
-      // if (updateDto.firstName) updateData.firstName = updateDto.firstName;
-      // if (updateDto.lastName) updateData.lastName = updateDto.lastName;
-      // if (updateDto.phone) updateData.phone = updateDto.phone;
-      // if (updateDto.username) updateData.username = updateDto.username;
+      // Validate roleIds if provided
+      if (updateDto.roleIds && updateDto.roleIds.length > 0) {
+        const existingRoles = await this.prismaService.userRole.findMany({
+          where: { id: { in: updateDto.roleIds } },
+          select: { id: true },
+        });
 
-      const updateData = await processDataObject(updateDto);
+        if (existingRoles.length !== updateDto.roleIds.length) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.USER_ROLE_NOT_FOUND],
+            ERROR_CODES.USER_ROLE_NOT_FOUND,
+          );
+        }
+      }
 
-      // Add admin-specific fields
-      // if (updateDto.isActive !== undefined)
-      //   updateData.isActive = updateDto.isActive;
-      // if (updateDto.isBanned !== undefined)
-      //   updateData.isBanned = updateDto.isBanned;
-      // if (updateDto.isVerified !== undefined)
-      //   updateData.isVerified = updateDto.isVerified;
-      // if (updateDto.isEmailVerified !== undefined)
-      //   updateData.isEmailVerified = updateDto.isEmailVerified;
-      // if (updateDto.isPhoneVerified !== undefined)
-      //   updateData.isPhoneVerified = updateDto.isPhoneVerified;
+      // Exclude roleIds from user update data (handled separately)
+      const updateData = await processDataObject(updateDto, {
+        excludeKeys: ['roleIds'],
+      });
 
-      // Update user
-      const updatedUser = await this.prismaService.user.update({
-        where: { id: targetUserId },
-        data: updateData,
-        select: userSelect,
+      // Perform user update and role assignment atomically
+      const updatedUser = await this.prismaService.$transaction(async (tx) => {
+        // Update user info
+        const user = await tx.user.update({
+          where: { id: targetUserId },
+          data: updateData,
+          select: userSelect,
+        });
+
+        // Replace role assignments if roleIds is provided
+        if (updateDto.roleIds !== undefined) {
+          await tx.userRoleAssignment.deleteMany({
+            where: { userId: targetUserId },
+          });
+
+          if (updateDto.roleIds.length > 0) {
+            await tx.userRoleAssignment.createMany({
+              data: updateDto.roleIds.map((roleId) => ({
+                userId: targetUserId,
+                roleId,
+              })),
+            });
+          }
+
+          // Re-fetch user with updated role assignments
+          return tx.user.findUnique({
+            where: { id: targetUserId },
+            select: userSelect,
+          });
+        }
+
+        return user;
       });
 
       const userResponse = toResponseDto(UserResponseDto, updatedUser);
