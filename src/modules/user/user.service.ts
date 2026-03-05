@@ -361,11 +361,13 @@ export class UserService {
     }
   }
 
-  async updateUserById(
-    adminUserId: string,
-    targetUserId: string,
-    updateDto: UpdateUserByAdminDto,
-  ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
+  async updateUserById({
+    targetUserId,
+    updateDto,
+  }: {
+    targetUserId: string;
+    updateDto: UpdateUserByAdminDto;
+  }): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     try {
       // Verify target user exists
       const targetUser = await this.prismaService.user.findUnique({
@@ -431,10 +433,11 @@ export class UserService {
         }
       }
 
-      // Exclude roleIds from user update data (handled separately)
-      const updateData = await processDataObject(updateDto, {
-        excludeKeys: ['roleIds'],
-      });
+      // Destructure roleIds out — it is not a User model field
+      const { roleIds, ...userUpdateDto } = updateDto;
+
+      // Build user update data from the remaining fields
+      const updateData = await processDataObject(userUpdateDto);
 
       // Perform user update and role assignment atomically
       const updatedUser = await this.prismaService.$transaction(async (tx) => {
@@ -446,14 +449,14 @@ export class UserService {
         });
 
         // Replace role assignments if roleIds is provided
-        if (updateDto.roleIds !== undefined) {
+        if (roleIds !== undefined) {
           await tx.userRoleAssignment.deleteMany({
             where: { userId: targetUserId },
           });
 
-          if (updateDto.roleIds.length > 0) {
+          if (roleIds.length > 0) {
             await tx.userRoleAssignment.createMany({
-              data: updateDto.roleIds.map((roleId) => ({
+              data: roleIds.map((roleId) => ({
                 userId: targetUserId,
                 roleId,
               })),
@@ -470,7 +473,10 @@ export class UserService {
         return user;
       });
 
-      const userResponse = toResponseDto(UserResponseDto, updatedUser);
+      const userResponse = toResponseDto(
+        UserResponseDto,
+        updatedUser ?? ({} as any),
+      );
 
       return {
         type: 'response',

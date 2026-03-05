@@ -140,14 +140,11 @@ export class UserController {
   async updateUserById(
     @Param('id') targetUserId: string,
     @Body() updateUserDto: UpdateUserByAdminDto,
-    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
-    const adminUserId = decodedAccessToken.userId;
-    const result = await this.userService.updateUserById(
-      adminUserId,
+    const result = await this.userService.updateUserById({
       targetUserId,
-      updateUserDto,
-    );
+      updateDto: updateUserDto,
+    });
 
     return result;
   }
