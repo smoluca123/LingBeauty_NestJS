@@ -44,6 +44,7 @@ export const processDataObject = async <T>(
   const processedData = { ...data };
 
   for (const key of Object.keys(processedData)) {
+    // Remove excluded keys entirely from the result object
     if (excludeKeys.includes(key)) continue;
 
     const value = processedData[key];
