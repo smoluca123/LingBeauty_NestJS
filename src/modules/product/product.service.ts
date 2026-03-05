@@ -2013,9 +2013,10 @@ export class ProductService {
         select: productBadgeSelect,
       });
 
-      const responseData = toResponseDtoArray(ProductBadgeResponseDto, {
-        ...productBadges,
-      });
+      const responseData = toResponseDtoArray(
+        ProductBadgeResponseDto,
+        productBadges,
+      );
 
       return {
         type: 'response',
