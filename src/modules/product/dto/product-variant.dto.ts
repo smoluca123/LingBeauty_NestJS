@@ -55,6 +55,7 @@ export class CreateSingleVariantDto {
   @ApiProperty({
     example: 150000,
     description: 'Price of the variant',
+    required: false,
   })
   @IsNumber()
   @Min(0)
