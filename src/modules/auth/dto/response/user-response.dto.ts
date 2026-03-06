@@ -2,7 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Exclude, Transform } from 'class-transformer';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
 import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
-import { UserRoleAssignmentsResponseDto } from 'src/modules/user/dto/response/user-role.dto';
+import { UserRoleAssignmentsResponseDto } from 'src/modules/user/dto/response/user-role-response.dto';
 
 /**
  * User Response DTO
