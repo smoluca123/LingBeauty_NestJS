@@ -332,6 +332,14 @@ export const ProductBadgeVariant: {
 export type ProductBadgeVariant = (typeof ProductBadgeVariant)[keyof typeof ProductBadgeVariant]
 
 
+export const VariantDisplayType: {
+  COLOR: 'COLOR',
+  IMAGE: 'IMAGE'
+};
+
+export type VariantDisplayType = (typeof VariantDisplayType)[keyof typeof VariantDisplayType]
+
+
 export const ProductInventoryDisplayStatus: {
   IN_STOCK: 'IN_STOCK',
   OUT_OF_STOCK: 'OUT_OF_STOCK'
@@ -388,6 +396,10 @@ export const ProductBadgeType: typeof $Enums.ProductBadgeType
 export type ProductBadgeVariant = $Enums.ProductBadgeVariant
 
 export const ProductBadgeVariant: typeof $Enums.ProductBadgeVariant
+
+export type VariantDisplayType = $Enums.VariantDisplayType
+
+export const VariantDisplayType: typeof $Enums.VariantDisplayType
 
 export type ProductInventoryDisplayStatus = $Enums.ProductInventoryDisplayStatus
 
@@ -34153,6 +34165,7 @@ export namespace Prisma {
     size: string | null
     type: string | null
     price: Decimal | null
+    displayType: $Enums.VariantDisplayType | null
     sortOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -34167,6 +34180,7 @@ export namespace Prisma {
     size: string | null
     type: string | null
     price: Decimal | null
+    displayType: $Enums.VariantDisplayType | null
     sortOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -34181,6 +34195,7 @@ export namespace Prisma {
     size: number
     type: number
     price: number
+    displayType: number
     sortOrder: number
     createdAt: number
     updatedAt: number
@@ -34207,6 +34222,7 @@ export namespace Prisma {
     size?: true
     type?: true
     price?: true
+    displayType?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -34221,6 +34237,7 @@ export namespace Prisma {
     size?: true
     type?: true
     price?: true
+    displayType?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -34235,6 +34252,7 @@ export namespace Prisma {
     size?: true
     type?: true
     price?: true
+    displayType?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -34336,6 +34354,7 @@ export namespace Prisma {
     size: string | null
     type: string | null
     price: Decimal
+    displayType: $Enums.VariantDisplayType
     sortOrder: number
     createdAt: Date
     updatedAt: Date
@@ -34369,6 +34388,7 @@ export namespace Prisma {
     size?: boolean
     type?: boolean
     price?: boolean
+    displayType?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -34390,6 +34410,7 @@ export namespace Prisma {
     size?: boolean
     type?: boolean
     price?: boolean
+    displayType?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -34405,6 +34426,7 @@ export namespace Prisma {
     size?: boolean
     type?: boolean
     price?: boolean
+    displayType?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -34420,12 +34442,13 @@ export namespace Prisma {
     size?: boolean
     type?: boolean
     price?: boolean
+    displayType?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "sku" | "name" | "color" | "size" | "type" | "price" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
+  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "sku" | "name" | "color" | "size" | "type" | "price" | "displayType" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
   export type ProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     inventory?: boolean | ProductVariant$inventoryArgs<ExtArgs>
@@ -34461,6 +34484,7 @@ export namespace Prisma {
       size: string | null
       type: string | null
       price: Prisma.Decimal
+      displayType: $Enums.VariantDisplayType
       sortOrder: number
       createdAt: Date
       updatedAt: Date
@@ -34901,6 +34925,7 @@ export namespace Prisma {
     readonly size: FieldRef<"ProductVariant", 'String'>
     readonly type: FieldRef<"ProductVariant", 'String'>
     readonly price: FieldRef<"ProductVariant", 'Decimal'>
+    readonly displayType: FieldRef<"ProductVariant", 'VariantDisplayType'>
     readonly sortOrder: FieldRef<"ProductVariant", 'Int'>
     readonly createdAt: FieldRef<"ProductVariant", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductVariant", 'DateTime'>
@@ -50674,6 +50699,7 @@ export namespace Prisma {
     size: 'size',
     type: 'type',
     price: 'price',
+    displayType: 'displayType',
     sortOrder: 'sortOrder',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -51150,6 +51176,20 @@ export namespace Prisma {
    * Reference to a field of type 'ProductBadgeType[]'
    */
   export type ListEnumProductBadgeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductBadgeType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'VariantDisplayType'
+   */
+  export type EnumVariantDisplayTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VariantDisplayType'>
+    
+
+
+  /**
+   * Reference to a field of type 'VariantDisplayType[]'
+   */
+  export type ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VariantDisplayType[]'>
     
 
 
@@ -53324,6 +53364,7 @@ export namespace Prisma {
     size?: StringNullableFilter<"ProductVariant"> | string | null
     type?: StringNullableFilter<"ProductVariant"> | string | null
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntFilter<"ProductVariant"> | number
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
@@ -53344,6 +53385,7 @@ export namespace Prisma {
     size?: SortOrderInput | SortOrder
     type?: SortOrderInput | SortOrder
     price?: SortOrder
+    displayType?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -53367,6 +53409,7 @@ export namespace Prisma {
     size?: StringNullableFilter<"ProductVariant"> | string | null
     type?: StringNullableFilter<"ProductVariant"> | string | null
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntFilter<"ProductVariant"> | number
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
@@ -53387,6 +53430,7 @@ export namespace Prisma {
     size?: SortOrderInput | SortOrder
     type?: SortOrderInput | SortOrder
     price?: SortOrder
+    displayType?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -53409,6 +53453,7 @@ export namespace Prisma {
     size?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
     type?: StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
     price?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeWithAggregatesFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntWithAggregatesFilter<"ProductVariant"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string
@@ -56731,6 +56776,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -56751,6 +56797,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -56769,6 +56816,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -56789,6 +56837,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -56808,6 +56857,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -56821,6 +56871,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -56835,6 +56886,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -59825,6 +59877,13 @@ export namespace Prisma {
     _max?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
   }
 
+  export type EnumVariantDisplayTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VariantDisplayType | EnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVariantDisplayTypeFilter<$PrismaModel> | $Enums.VariantDisplayType
+  }
+
   export type ProductInventoryNullableScalarRelationFilter = {
     is?: ProductInventoryWhereInput | null
     isNot?: ProductInventoryWhereInput | null
@@ -59839,6 +59898,7 @@ export namespace Prisma {
     size?: SortOrder
     type?: SortOrder
     price?: SortOrder
+    displayType?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59858,6 +59918,7 @@ export namespace Prisma {
     size?: SortOrder
     type?: SortOrder
     price?: SortOrder
+    displayType?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59872,6 +59933,7 @@ export namespace Prisma {
     size?: SortOrder
     type?: SortOrder
     price?: SortOrder
+    displayType?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59880,6 +59942,16 @@ export namespace Prisma {
   export type ProductVariantSumOrderByAggregateInput = {
     price?: SortOrder
     sortOrder?: SortOrder
+  }
+
+  export type EnumVariantDisplayTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VariantDisplayType | EnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVariantDisplayTypeWithAggregatesFilter<$PrismaModel> | $Enums.VariantDisplayType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVariantDisplayTypeFilter<$PrismaModel>
+    _max?: NestedEnumVariantDisplayTypeFilter<$PrismaModel>
   }
 
   export type MediaScalarRelationFilter = {
@@ -62577,6 +62649,10 @@ export namespace Prisma {
     connect?: FlashSaleProductWhereUniqueInput | FlashSaleProductWhereUniqueInput[]
   }
 
+  export type EnumVariantDisplayTypeFieldUpdateOperationsInput = {
+    set?: $Enums.VariantDisplayType
+  }
+
   export type ProductUpdateOneRequiredWithoutVariantsNestedInput = {
     create?: XOR<ProductCreateWithoutVariantsInput, ProductUncheckedCreateWithoutVariantsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutVariantsInput
@@ -63908,6 +63984,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
     _max?: NestedEnumProductBadgeTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumVariantDisplayTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VariantDisplayType | EnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVariantDisplayTypeFilter<$PrismaModel> | $Enums.VariantDisplayType
+  }
+
+  export type NestedEnumVariantDisplayTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VariantDisplayType | EnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VariantDisplayType[] | ListEnumVariantDisplayTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVariantDisplayTypeWithAggregatesFilter<$PrismaModel> | $Enums.VariantDisplayType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVariantDisplayTypeFilter<$PrismaModel>
+    _max?: NestedEnumVariantDisplayTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel = never> = {
@@ -65534,6 +65627,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -65553,6 +65647,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -65698,6 +65793,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65717,6 +65813,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -66773,6 +66870,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -66792,6 +66890,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -66919,6 +67018,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -66938,6 +67038,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -67547,6 +67648,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -67566,6 +67668,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -67723,6 +67826,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -67742,6 +67846,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -68660,6 +68765,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -68678,6 +68784,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -69065,6 +69172,7 @@ export namespace Prisma {
     size?: StringNullableFilter<"ProductVariant"> | string | null
     type?: StringNullableFilter<"ProductVariant"> | string | null
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntFilter<"ProductVariant"> | number
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
@@ -69856,6 +69964,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -69875,6 +69984,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -70020,6 +70130,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -70039,6 +70150,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -70105,6 +70217,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -70124,6 +70237,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -70157,6 +70271,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -70176,6 +70291,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73263,6 +73379,7 @@ export namespace Prisma {
     size?: string | null
     type?: string | null
     price: Decimal | DecimalJsLike | number | string
+    displayType?: $Enums.VariantDisplayType
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -73389,6 +73506,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73407,6 +73525,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73425,6 +73544,7 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

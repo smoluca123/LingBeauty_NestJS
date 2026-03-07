@@ -116,6 +116,11 @@ model ProductBadge {
   @@map("product_badges")
 }
 
+enum VariantDisplayType {
+  COLOR // Display a color swatch using the `color` field
+  IMAGE // Display the variant image
+}
+
 model ProductVariant {
   id        String   @id @default(uuid())
   productId String   @map("product_id")
@@ -124,8 +129,9 @@ model ProductVariant {
   color     String?  @db.VarChar(100)
   size      String?  @db.VarChar(100)
   type      String?  @db.VarChar(100)
-  price     Decimal  @db.Decimal(10, 2)
-  sortOrder Int      @default(0) @map("sort_order")
+  price       Decimal            @db.Decimal(10, 2)
+  displayType VariantDisplayType @default(COLOR) @map("display_type")
+  sortOrder   Int                @default(0) @map("sort_order")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

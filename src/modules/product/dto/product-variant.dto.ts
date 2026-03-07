@@ -1,12 +1,14 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import {
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
   Min,
 } from 'class-validator';
+ import { VariantDisplayType } from 'prisma/generated/prisma';
 import { ProductInventoryDto, ProductVariantDto } from './product-response.dto';
 
 // ============== Create Product Variant DTO ==============
@@ -72,6 +74,16 @@ export class CreateSingleVariantDto {
   @IsOptional()
   @Transform(({ value }) => Number(value))
   sortOrder?: number;
+
+  @ApiPropertyOptional({
+    enum: VariantDisplayType,
+    example: VariantDisplayType.COLOR,
+    description: 'Controls how the variant button is rendered: COLOR (color swatch) or IMAGE',
+    default: VariantDisplayType.COLOR,
+  })
+  @IsEnum(VariantDisplayType)
+  @IsOptional()
+  displayType?: VariantDisplayType;
 
   @ApiPropertyOptional({
     example: 100,
@@ -157,6 +169,15 @@ export class UpdateSingleVariantDto {
   sortOrder?: number;
 
   @ApiPropertyOptional({
+    enum: VariantDisplayType,
+    example: VariantDisplayType.COLOR,
+    description: 'Controls how the variant button is rendered: COLOR (color swatch) or IMAGE',
+  })
+  @IsEnum(VariantDisplayType)
+  @IsOptional()
+  displayType?: VariantDisplayType;
+
+  @ApiPropertyOptional({
     example: 100,
     description: 'Inventory quantity',
   })
@@ -204,6 +225,13 @@ export class ProductVariantResponseDto {
 
   @ApiProperty({ example: 0 })
   sortOrder: number;
+
+  @ApiProperty({
+    enum: VariantDisplayType,
+    example: VariantDisplayType.COLOR,
+    description: 'Controls how the variant button is rendered',
+  })
+  displayType: VariantDisplayType;
 
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
   createdAt: Date;
