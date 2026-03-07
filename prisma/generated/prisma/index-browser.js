@@ -449,6 +449,7 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   size: 'size',
   type: 'type',
   price: 'price',
+  displayType: 'displayType',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -706,6 +707,11 @@ exports.ProductBadgeType = exports.$Enums.ProductBadgeType = {
   SALE: 'SALE',
   BEST_SELLER: 'BEST_SELLER',
   FREESHIPPING: 'FREESHIPPING'
+};
+
+exports.VariantDisplayType = exports.$Enums.VariantDisplayType = {
+  COLOR: 'COLOR',
+  IMAGE: 'IMAGE'
 };
 
 exports.ProductInventoryDisplayStatus = exports.$Enums.ProductInventoryDisplayStatus = {
