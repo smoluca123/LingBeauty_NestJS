@@ -39,6 +39,7 @@ export const productVariantSelect = {
   type: true,
   price: true,
   sortOrder: true,
+  displayType: true,
   inventory: {
     select: productInventorySelect,
   },
