@@ -1871,18 +1871,13 @@ export class ProductService {
         }
       }
 
-      // Build update data for variant
-      const updateData: Prisma.ProductVariantUpdateInput = {};
-      if (dto.sku !== undefined) updateData.sku = dto.sku;
-      if (dto.name !== undefined) updateData.name = dto.name;
-      if (dto.color !== undefined) updateData.color = dto.color;
-      if (dto.size !== undefined) updateData.size = dto.size;
-      if (dto.type !== undefined) updateData.type = dto.type;
-      if (dto.price !== undefined) updateData.price = dto.price;
-      if (dto.sortOrder !== undefined) updateData.sortOrder = dto.sortOrder;
+      // Build update data for variant (exclude inventory fields)
+      const { quantity, lowStockThreshold, ...variantDto } = dto;
+      const updateData: Prisma.ProductVariantUpdateInput =
+        await processDataObject(variantDto);
 
       // Update variant
-      const variant = await this.prismaService.productVariant.update({
+      await this.prismaService.productVariant.update({
         where: { id: variantId },
         data: updateData,
         include: {
