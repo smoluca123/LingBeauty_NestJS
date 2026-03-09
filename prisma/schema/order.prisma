@@ -24,15 +24,18 @@ model CartItem {
   id        String   @id @default(uuid())
   cartId    String   @map("cart_id")
   productId String   @map("product_id")
-  variantId String   @map("variant_id")
+  /// Null for products without variants (product-level inventory)
+  variantId String?  @map("variant_id")
   quantity  Int      @default(1)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  cart    Cart           @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  product Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  cart    Cart            @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
 
+  /// Unique per variant when variantId IS NOT NULL (Postgres: NULL != NULL so multiple NULLs allowed).
+  /// For no-variant products the service enforces uniqueness via a findFirst check before insert.
   @@unique([cartId, variantId])
   @@index([cartId])
   @@index([productId])

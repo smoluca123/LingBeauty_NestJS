@@ -4,9 +4,15 @@ import { categorySelect } from 'src/libs/prisma/category-select';
 import { mediaSelect } from 'src/libs/prisma/media-select';
 
 export const productInventorySelect = {
+  id: true,
+  productId: true,
+  variantId: true,
   quantity: true,
   displayStatus: true,
   lowStockThreshold: true,
+  minStockQuantity: true,
+  createdAt: true,
+  updatedAt: true,
 } satisfies Prisma.ProductInventorySelect;
 
 export type ProductInventory = Prisma.ProductInventoryGetPayload<{
@@ -28,6 +34,27 @@ export const productImageSelect = {
 
 export type ProductImage = Prisma.ProductImageGetPayload<{
   select: typeof productImageSelect;
+}>;
+
+// Minimal variant info for embedding in inventory/order responses
+export const variantSummarySelect = {
+  id: true,
+  sku: true,
+  name: true,
+  color: true,
+  size: true,
+  type: true,
+  price: true,
+  displayType: true,
+  images: {
+    select: productImageSelect,
+    orderBy: [{ isPrimary: 'desc' as const }, { sortOrder: 'asc' as const }],
+    take: 1,
+  },
+} satisfies Prisma.ProductVariantSelect;
+
+export type VariantSummary = Prisma.ProductVariantGetPayload<{
+  select: typeof variantSummarySelect;
 }>;
 
 export const productVariantSelect = {
@@ -80,6 +107,29 @@ export type ProductStatsSelect = Prisma.ProductStatsGetPayload<{
   select: typeof productStatsSelect;
 }>;
 
+// Minimal product info for embedding in inventory/variant responses
+export const productSummarySelect = {
+  id: true,
+  name: true,
+  slug: true,
+  sku: true,
+  basePrice: true,
+  comparePrice: true,
+  isActive: true,
+  brand: {
+    select: brandSelect,
+  },
+  images: {
+    select: productImageSelect,
+    orderBy: [{ isPrimary: 'desc' as const }, { sortOrder: 'asc' as const }],
+    take: 1,
+  },
+} satisfies Prisma.ProductSelect;
+
+export type ProductSummary = Prisma.ProductGetPayload<{
+  select: typeof productSummarySelect;
+}>;
+
 export const productSelect = {
   id: true,
   name: true,
@@ -126,6 +176,12 @@ export const productSelect = {
   stats: {
     select: productStatsSelect,
   },
+  // Product-level inventory (for products without variants)
+  inventory: {
+    select: productInventorySelect,
+    where: { variantId: null },
+    take: 1,
+  },
 } satisfies Prisma.ProductSelect;
 
 export type ProductSelect = Prisma.ProductGetPayload<{
@@ -163,9 +219,3 @@ export const productListSelect = {
 export type ProductListSelect = Prisma.ProductGetPayload<{
   select: typeof productListSelect;
 }>;
-
-// export const productInventorySelect = {
-//   quantity: true,
-//   displayStatus: true,
-//   lowStockThreshold: true,
-// } satisfies Prisma.ProductInventorySelect;

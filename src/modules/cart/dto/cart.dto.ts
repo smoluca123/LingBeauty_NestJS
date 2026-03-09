@@ -20,13 +20,14 @@ export class AddToCartDto {
   @IsNotEmpty()
   productId: string;
 
-  @ApiProperty({
-    description: 'Variant ID (required, each product must have a variant)',
+  @ApiPropertyOptional({
+    description:
+      'Variant ID. Omit for products that have no variants — the service will use product-level inventory instead.',
     example: '123e4567-e89b-12d3-a456-426614174000',
   })
   @IsUUID()
-  @IsNotEmpty()
-  variantId: string;
+  @IsOptional()
+  variantId?: string;
 
   @ApiPropertyOptional({
     description: 'Quantity to add (default: 1)',
@@ -70,6 +71,22 @@ export class CartItemProductImageWrapperDto {
   media: CartItemProductImageDto;
 }
 
+/** Stock snapshot — always present regardless of variant/no-variant product */
+export class CartItemStockInfoDto {
+  @ApiProperty({ example: 100 })
+  stockQuantity: number;
+
+  @ApiProperty({
+    example: -10,
+    description: 'Backorder floor: orders blocked when quantity drops to/below this value.',
+  })
+  minStockQuantity: number;
+
+  @ApiProperty({ example: 'IN_STOCK', enum: ['IN_STOCK', 'OUT_OF_STOCK'] })
+  stockStatus: string;
+}
+
+/** Variant display fields — null for products without variants */
 export class CartItemVariantDto {
   @ApiProperty({ example: 'uuid-variant-id' })
   id: string;
@@ -91,12 +108,6 @@ export class CartItemVariantDto {
 
   @ApiProperty({ example: '250000' })
   price: string;
-
-  @ApiProperty({ example: 100 })
-  stockQuantity: number;
-
-  @ApiProperty({ example: 'IN_STOCK' })
-  stockStatus: string;
 }
 
 export class CartItemProductDto {
@@ -140,7 +151,7 @@ export class CartItemResponseDto {
   productId: string;
 
   @ApiProperty({ example: 'uuid-variant-id' })
-  variantId: string;
+  variantId: string | null;
 
   @ApiProperty({ example: 2 })
   quantity: number;
@@ -155,9 +166,20 @@ export class CartItemResponseDto {
   @Type(() => CartItemProductDto)
   product: CartItemProductDto;
 
-  @ApiProperty({ type: CartItemVariantDto })
+  @ApiPropertyOptional({
+    type: CartItemVariantDto,
+    nullable: true,
+    description: 'Null for products without variants.',
+  })
   @Type(() => CartItemVariantDto)
-  variant: CartItemVariantDto;
+  variant: CartItemVariantDto | null;
+
+  @ApiProperty({
+    type: CartItemStockInfoDto,
+    description: 'Stock snapshot — always present. Use this for stock logic, not variant.',
+  })
+  @Type(() => CartItemStockInfoDto)
+  stockInfo: CartItemStockInfoDto;
 
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
   createdAt: Date;

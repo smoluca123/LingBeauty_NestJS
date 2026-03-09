@@ -9,7 +9,7 @@ import {
   Min,
 } from 'class-validator';
  import { VariantDisplayType } from 'prisma/generated/prisma';
-import { ProductInventoryDto, ProductVariantDto } from './product-response.dto';
+import { ProductImageDto, ProductInventoryDto, ProductVariantDto } from './product-response.dto';
 
 // ============== Create Product Variant DTO ==============
 
@@ -242,4 +242,37 @@ export class ProductVariantResponseDto {
   @ApiPropertyOptional({ type: ProductInventoryDto })
   @Type(() => ProductInventoryDto)
   inventory?: ProductInventoryDto;
+}
+
+/**
+ * Minimal variant info for embedding in inventory/order responses.
+ */
+export class VariantSummaryResponseDto {
+  @ApiProperty({ example: 'uuid-variant-id' })
+  id: string;
+
+  @ApiProperty({ example: 'SKU-001-RED' })
+  sku: string;
+
+  @ApiProperty({ example: 'Rờ - Size M' })
+  name: string;
+
+  @ApiPropertyOptional({ example: 'Red', nullable: true })
+  color?: string | null;
+
+  @ApiPropertyOptional({ example: 'M', nullable: true })
+  size?: string | null;
+
+  @ApiPropertyOptional({ example: 'Standard', nullable: true })
+  type?: string | null;
+
+  @ApiProperty({ example: '150000' })
+  price: string;
+
+  @ApiProperty({ enum: VariantDisplayType, example: VariantDisplayType.COLOR })
+  displayType: VariantDisplayType;
+
+  @ApiProperty({ type: [ProductImageDto] })
+  @Type(() => ProductImageDto)
+  images: ProductImageDto[];
 }

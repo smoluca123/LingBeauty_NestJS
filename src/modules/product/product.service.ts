@@ -950,16 +950,6 @@ export class ProductService {
                   type: variant.type,
                   price: variant.price,
                   sortOrder: variant.sortOrder ?? 0,
-                  inventory: {
-                    create: {
-                      quantity: variant.quantity ?? 0,
-                      lowStockThreshold: variant.lowStockThreshold ?? 10,
-                      displayStatus:
-                        (variant.quantity ?? 0) > 0
-                          ? ProductInventoryDisplayStatus.IN_STOCK
-                          : ProductInventoryDisplayStatus.OUT_OF_STOCK,
-                    },
-                  },
                 })),
               }
             : undefined,
@@ -967,7 +957,66 @@ export class ProductService {
         select: productSelect,
       });
 
-      const productResponse = this.mapProductEntity(product);
+      // Create inventory records for variants (outside nested create to satisfy productId constraint)
+      if (createProductDto.variants && createProductDto.variants.length > 0) {
+        const createdVariants = await this.prismaService.productVariant.findMany(
+          {
+            where: { productId: product.id },
+            select: { id: true, sku: true },
+          },
+        );
+
+        // Match created variants back to DTO by SKU to assign correct quantity
+        const variantSkuMap = new Map<
+          string,
+          { quantity?: number; lowStockThreshold?: number }
+        >(
+          createProductDto.variants.map((v) => [
+            v.sku || '',
+            { quantity: v.quantity, lowStockThreshold: v.lowStockThreshold },
+          ]),
+        );
+
+        await this.prismaService.productInventory.createMany({
+          data: createdVariants.map((v) => {
+            const inv = variantSkuMap.get(v.sku) ?? {};
+            const qty = inv.quantity ?? 0;
+            return {
+              productId: product.id,
+              variantId: v.id,
+              quantity: qty,
+              lowStockThreshold: inv.lowStockThreshold ?? 10,
+              displayStatus:
+                qty > 0
+                  ? ProductInventoryDisplayStatus.IN_STOCK
+                  : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+            };
+          }),
+        });
+      } else {
+        // Create product-level inventory for simple products (no variants)
+        const initQty = createProductDto.quantity ?? 0;
+        await this.prismaService.productInventory.create({
+          data: {
+            productId: product.id,
+            variantId: null,
+            quantity: initQty,
+            lowStockThreshold: createProductDto.lowStockThreshold ?? 10,
+            displayStatus:
+              initQty > 0
+                ? ProductInventoryDisplayStatus.IN_STOCK
+                : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+          },
+        });
+      }
+
+      // Re-fetch product to include inventory in response
+      const productWithInventory = await this.prismaService.product.findUnique({
+        where: { id: product.id },
+        select: productSelect,
+      });
+
+      const productResponse = this.mapProductEntity(productWithInventory!);
 
       return {
         type: 'response',
@@ -1105,6 +1154,11 @@ export class ProductService {
 
       // Handle variants update
       if (updateProductDto.variants !== undefined) {
+        // When switching TO variants mode: remove the product-level inventory
+        await this.prismaService.productInventory.deleteMany({
+          where: { productId, variantId: null },
+        });
+
         // Delete existing variants and recreate
         await this.prismaService.productVariant.deleteMany({
           where: { productId },
@@ -1135,18 +1189,110 @@ export class ProductService {
               type: variant.type,
               price: variant.price!,
               sortOrder: variant.sortOrder ?? 0,
-              inventory: {
-                create: {
-                  quantity: variant.quantity ?? 0,
-                  lowStockThreshold: variant.lowStockThreshold ?? 10,
-                  displayStatus:
-                    (variant.quantity ?? 0) > 0
-                      ? ProductInventoryDisplayStatus.IN_STOCK
-                      : ProductInventoryDisplayStatus.OUT_OF_STOCK,
-                },
-              },
             })),
           };
+
+          // Apply updateData first, then create inventories afterwards
+          const updatedProduct = await this.prismaService.product.update({
+            where: { id: productId },
+            data: updateData,
+            select: { id: true },
+          });
+
+          const createdVariants =
+            await this.prismaService.productVariant.findMany({
+              where: { productId: updatedProduct.id },
+              select: { id: true, sku: true },
+            });
+
+          const variantSkuMap = new Map<
+            string,
+            { quantity?: number; lowStockThreshold?: number }
+          >(
+            updateProductDto.variants.map((v) => [
+              v.sku ?? '',
+              { quantity: v.quantity, lowStockThreshold: v.lowStockThreshold },
+            ]),
+          );
+
+          await this.prismaService.productInventory.createMany({
+            data: createdVariants.map((v) => {
+              const inv = variantSkuMap.get(v.sku) ?? {};
+              const qty = inv.quantity ?? 0;
+              return {
+                productId,
+                variantId: v.id,
+                quantity: qty,
+                lowStockThreshold: inv.lowStockThreshold ?? 10,
+                displayStatus:
+                  qty > 0
+                    ? ProductInventoryDisplayStatus.IN_STOCK
+                    : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+              };
+            }),
+          });
+
+          // Fetch & return updated product with new inventory
+          const updated = await this.prismaService.product.findUnique({
+            where: { id: productId },
+            select: productSelect,
+          });
+
+          const productResponse = this.mapProductEntity(updated!);
+
+          return {
+            type: 'response',
+            message: 'Cập nhật sản phẩm thành công',
+            data: productResponse,
+          };
+        }
+      } else if (
+        updateProductDto.quantity !== undefined ||
+        updateProductDto.lowStockThreshold !== undefined
+      ) {
+        // Update product-level inventory (only for products without variants)
+        const hasVariants = await this.prismaService.productVariant.count({
+          where: { productId },
+        });
+
+        if (hasVariants === 0) {
+          const newQty = updateProductDto.quantity;
+          const existingInventory =
+            await this.prismaService.productInventory.findFirst({
+              where: { productId, variantId: null },
+              select: { id: true },
+            });
+
+          if (existingInventory) {
+            await this.prismaService.productInventory.update({
+              where: { id: existingInventory.id },
+              data: {
+                ...(newQty !== undefined && {
+                  quantity: newQty,
+                  displayStatus:
+                    newQty > 0
+                      ? ProductInventoryDisplayStatus.IN_STOCK
+                      : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+                }),
+                ...(updateProductDto.lowStockThreshold !== undefined && {
+                  lowStockThreshold: updateProductDto.lowStockThreshold,
+                }),
+              },
+            });
+          } else {
+            await this.prismaService.productInventory.create({
+              data: {
+                productId,
+                variantId: null,
+                quantity: newQty ?? 0,
+                lowStockThreshold: updateProductDto.lowStockThreshold ?? 10,
+                displayStatus:
+                  (newQty ?? 0) > 0
+                    ? ProductInventoryDisplayStatus.IN_STOCK
+                    : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+              },
+            });
+          }
         }
       }
 
@@ -1800,8 +1946,9 @@ export class ProductService {
           price: data.price || product.basePrice,
           inventory: {
             create: {
-              quantity,
-              lowStockThreshold,
+              productId,
+              quantity: quantity ?? 0,
+              lowStockThreshold: lowStockThreshold ?? 10,
               displayStatus:
                 (quantity ?? 0) > 0
                   ? ProductInventoryDisplayStatus.IN_STOCK
@@ -1890,6 +2037,7 @@ export class ProductService {
         await this.prismaService.productInventory.upsert({
           where: { variantId },
           create: {
+            productId,
             variantId,
             quantity: dto.quantity ?? 0,
             lowStockThreshold: dto.lowStockThreshold ?? 10,
@@ -2242,8 +2390,9 @@ export class ProductService {
     console.log(product);
     return toResponseDto(ProductResponseDto, {
       ...product,
-      // categories: product.productCategories.map((pc) => pc.category),
       primaryImage: product.images.find((image) => image.isPrimary),
+      // Expose the product-level inventory (first record where variantId is null)
+      inventory: product.inventory?.[0] ?? null,
     });
   }
 
@@ -2251,8 +2400,9 @@ export class ProductService {
     console.log(product);
     return toResponseDto(ProductResponseDto, {
       ...product,
-      // categories: product.productCategories.map((pc) => pc.category),
       primaryImage: product.images.find((image) => image.isPrimary),
+      // Expose the product-level inventory (first record where variantId is null)
+      inventory: (product as any).inventory?.[0] ?? null,
     });
   }
 

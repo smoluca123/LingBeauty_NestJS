@@ -211,11 +211,35 @@ export class CreateProductDto {
 
   @ApiPropertyOptional({
     type: [CreateProductVariantDto],
-    description: 'Product variants',
+    description: 'Product variants. If omitted, product-level inventory will be created instead.',
   })
   @IsArray()
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => CreateProductVariantDto)
   variants?: CreateProductVariantDto[];
+
+  @ApiPropertyOptional({
+    example: 100,
+    description:
+      'Initial inventory quantity for simple products (no variants). Ignored when variants are provided.',
+    default: 0,
+  })
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  @Transform(({ value }) => Number(value))
+  quantity?: number;
+
+  @ApiPropertyOptional({
+    example: 10,
+    description:
+      'Low stock alert threshold for simple products (no variants). Ignored when variants are provided.',
+    default: 10,
+  })
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  @Transform(({ value }) => Number(value))
+  lowStockThreshold?: number;
 }
