@@ -64,6 +64,14 @@ export const ERROR_MESSAGES = {
     'Không thể xóa biến thể sản phẩm đã có đơn hàng',
   [ERROR_CODES.PRODUCT_BADGE_NOT_FOUND]: 'Không tìm thấy nhãn sản phẩm',
 
+  // Inventory
+  [ERROR_CODES.INVENTORY_NOT_FOUND]: 'Không tìm thấy thông tin kho hàng',
+  [ERROR_CODES.INVENTORY_ALREADY_EXISTS]: 'Kho hàng đã tồn tại cho sản phẩm/biến thể này',
+  [ERROR_CODES.INVENTORY_VARIANT_MISMATCH]: 'Biến thể không thuộc sản phẩm này',
+  [ERROR_CODES.INVENTORY_PRODUCT_HAS_VARIANTS]: 'Sản phẩm này có biến thể, vui lòng quản lý kho theo từng biến thể',
+  [ERROR_CODES.INVENTORY_INSUFFICIENT_STOCK]: 'Số lượng tồn kho không đủ để thực hiện thao tác này',
+  [ERROR_CODES.INVENTORY_INVALID_ADJUSTMENT]: 'Điều chỉnh kho hàng không hợp lệ, số lượng không thể âm',
+
   // Cart
   [ERROR_CODES.CART_NOT_FOUND]: 'Không tìm thấy giỏ hàng',
   [ERROR_CODES.CART_ITEM_NOT_FOUND]: 'Không tìm thấy sản phẩm trong giỏ hàng',
@@ -72,6 +80,8 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.CART_ITEM_OUT_OF_STOCK]: 'Sản phẩm đã hết hàng',
   [ERROR_CODES.CART_ITEM_INSUFFICIENT_STOCK]:
     'Số lượng sản phẩm trong kho không đủ',
+  [ERROR_CODES.CART_ITEM_BACKORDER_LIMIT_REACHED]:
+    'Sản phẩm đã đạt giới hạn đặt trước, không thể thêm vào giỏ hàng',
 
   // Review
   [ERROR_CODES.REVIEW_NOT_FOUND]: 'Không tìm thấy đánh giá',

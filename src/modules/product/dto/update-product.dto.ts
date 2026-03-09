@@ -222,4 +222,26 @@ export class UpdateProductDto {
   @ValidateNested({ each: true })
   @Type(() => UpdateProductVariantDto)
   variants?: UpdateProductVariantDto[];
+
+  @ApiPropertyOptional({
+    example: 100,
+    description:
+      'Inventory quantity for simple products (no variants). Ignored when variants are provided.',
+  })
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  @Transform(({ value }) => (value !== undefined ? Number(value) : undefined))
+  quantity?: number;
+
+  @ApiPropertyOptional({
+    example: 10,
+    description:
+      'Low stock alert threshold for simple products (no variants). Ignored when variants are provided.',
+  })
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  @Transform(({ value }) => (value !== undefined ? Number(value) : undefined))
+  lowStockThreshold?: number;
 }

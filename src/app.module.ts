@@ -24,6 +24,7 @@ import { MailModule } from 'src/modules/mail';
 import { ProvincesModule } from 'src/modules/provinces/provinces.module';
 import { StatsModule } from 'src/modules/stats/stats.module';
 import { CartModule } from 'src/modules/cart/cart.module';
+import { InventoryModule } from 'src/modules/inventory/inventory.module';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { CartModule } from 'src/modules/cart/cart.module';
     ProvincesModule,
     StatsModule,
     CartModule,
+    InventoryModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

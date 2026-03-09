@@ -468,10 +468,12 @@ exports.Prisma.ProductImageScalarFieldEnum = {
 
 exports.Prisma.ProductInventoryScalarFieldEnum = {
   id: 'id',
+  productId: 'productId',
   variantId: 'variantId',
   quantity: 'quantity',
   displayStatus: 'displayStatus',
   lowStockThreshold: 'lowStockThreshold',
+  minStockQuantity: 'minStockQuantity',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

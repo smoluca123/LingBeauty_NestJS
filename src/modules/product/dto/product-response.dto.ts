@@ -55,10 +55,19 @@ export class ProductImageDto {
 }
 
 export class ProductInventoryDto {
+  @ApiProperty({ example: 'uuid-inventory-id' })
+  id: string;
+
+  @ApiProperty({ example: 'uuid-product-id' })
+  productId: string;
+
+  @ApiPropertyOptional({ example: 'uuid-variant-id', nullable: true })
+  variantId?: string | null;
+
   @ApiProperty({ example: 100 })
   quantity: number;
 
-  @ApiProperty({ example: 'in_stock' })
+  @ApiProperty({ example: 'IN_STOCK' })
   displayStatus: string;
 
   @ApiProperty({ example: 10 })
@@ -253,6 +262,53 @@ export class ProductResponseDto extends BaseResponseDto {
   @Type(() => ProductStatsDto)
   stats?: ProductStatsDto;
 
+  /**
+   * Product-level inventory — present only when the product has NO variants.
+   * When variants exist, inventory is managed per-variant inside `variants[].inventory`.
+   */
+  @ApiPropertyOptional({
+    type: ProductInventoryDto,
+    description:
+      'Product-level inventory. Only present for products without variants.',
+  })
+  @Type(() => ProductInventoryDto)
+  inventory?: ProductInventoryDto | null;
+
   @Exclude()
   brandId?: string;
+}
+
+/**
+ * Minimal product info for embedding in other module responses (e.g. inventory, order).
+ * Avoids over-fetching by excluding heavy relations (variants, badges, stats, categories).
+ */
+export class ProductSummaryResponseDto {
+  @ApiProperty({ example: 'uuid-product-id' })
+  id: string;
+
+  @ApiProperty({ example: 'Son môi đỏ Matte' })
+  name: string;
+
+  @ApiProperty({ example: 'son-moi-do-matte' })
+  slug: string;
+
+  @ApiPropertyOptional({ example: 'LP-MAT-001', nullable: true })
+  sku: string | null;
+
+  @ApiProperty({ example: '299000' })
+  basePrice: string;
+
+  @ApiPropertyOptional({ example: '350000', nullable: true })
+  comparePrice?: string | null;
+
+  @ApiProperty({ example: true })
+  isActive: boolean;
+
+  @ApiPropertyOptional({ type: ProductBrandDto, nullable: true })
+  @Type(() => ProductBrandDto)
+  brand?: ProductBrandDto | null;
+
+  @ApiProperty({ type: [ProductImageDto] })
+  @Type(() => ProductImageDto)
+  images: ProductImageDto[];
 }
