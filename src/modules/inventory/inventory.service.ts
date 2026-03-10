@@ -444,7 +444,9 @@ export class InventoryService {
   async getLowStockProducts(
     page = 1,
     limit = 20,
-  ): Promise<IBeforeTransformPaginationResponseType<InventoryResponseDto>> {
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryProductResponseDto>
+  > {
     try {
       const skip = (page - 1) * limit;
 
@@ -472,7 +474,10 @@ export class InventoryService {
         `,
       ]);
 
-      const mappedItems = toResponseDtoArray(InventoryResponseDto, items);
+      const mappedItems = toResponseDtoArray(
+        InventoryProductResponseDto,
+        items,
+      );
       const total = Number(totalCount[0]?.count ?? 0);
 
       return {
@@ -500,7 +505,9 @@ export class InventoryService {
   async getLowStockVariants(
     page = 1,
     limit = 20,
-  ): Promise<IBeforeTransformPaginationResponseType<InventoryResponseDto>> {
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryVariantResponseDto>
+  > {
     try {
       const skip = (page - 1) * limit;
 
@@ -527,7 +534,10 @@ export class InventoryService {
         `,
       ]);
 
-      const mappedItems = toResponseDtoArray(InventoryResponseDto, items);
+      const mappedItems = toResponseDtoArray(
+        InventoryVariantResponseDto,
+        items,
+      );
       const total = Number(totalCount[0]?.count ?? 0);
 
       return {
