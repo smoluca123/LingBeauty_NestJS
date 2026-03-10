@@ -440,6 +440,8 @@ export class InventoryService {
 
   /**
    * Get low-stock inventory for simple products (no variant, variantId IS NULL).
+   * Raw SQL is used only to filter by column-to-column comparison (quantity <= low_stock_threshold),
+   * then Prisma fetches full relations via inventoryFullSelect.
    */
   async getLowStockProducts(
     page = 1,
@@ -450,19 +452,15 @@ export class InventoryService {
     try {
       const skip = (page - 1) * limit;
 
-      // Prisma can't compare two columns — use raw SQL for the WHERE clause
-      const [items, totalCount] = await Promise.all([
-        this.prismaService.$queryRaw<any[]>`
-          SELECT
-            pi.id, pi.product_id as "productId", pi.variant_id as "variantId",
-            pi.quantity, pi.display_status as "displayStatus",
-            pi.low_stock_threshold as "lowStockThreshold",
-            pi.created_at as "createdAt", pi.updated_at as "updatedAt"
-          FROM product_inventory pi
-          WHERE pi.variant_id IS NULL
-            AND pi.quantity > 0
-            AND pi.quantity <= pi.low_stock_threshold
-          ORDER BY pi.quantity ASC
+      // Step 1: Get matching IDs and total count via raw SQL (column-to-column comparison)
+      const [idRows, totalCount] = await Promise.all([
+        this.prismaService.$queryRaw<{ id: string }[]>`
+          SELECT id
+          FROM product_inventory
+          WHERE variant_id IS NULL
+            AND quantity > 0
+            AND quantity <= low_stock_threshold
+          ORDER BY quantity ASC
           LIMIT ${limit} OFFSET ${skip}
         `,
         this.prismaService.$queryRaw<{ count: bigint }[]>`
@@ -474,10 +472,15 @@ export class InventoryService {
         `,
       ]);
 
-      const mappedItems = toResponseDtoArray(
-        InventoryProductResponseDto,
-        items,
-      );
+      // Step 2: Fetch full data with relations using Prisma
+      const ids = idRows.map((r) => r.id);
+      const items = await this.prismaService.productInventory.findMany({
+        where: { id: { in: ids } },
+        select: inventoryFullSelect,
+        orderBy: { quantity: 'asc' },
+      });
+
+      const mappedItems = toResponseDtoArray(InventoryProductResponseDto, items);
       const total = Number(totalCount[0]?.count ?? 0);
 
       return {
@@ -501,6 +504,8 @@ export class InventoryService {
 
   /**
    * Get low-stock inventory for variant-level records (variantId IS NOT NULL).
+   * Raw SQL is used only to filter by column-to-column comparison (quantity <= low_stock_threshold),
+   * then Prisma fetches full relations via inventoryVariantFullSelect.
    */
   async getLowStockVariants(
     page = 1,
@@ -511,18 +516,15 @@ export class InventoryService {
     try {
       const skip = (page - 1) * limit;
 
-      const [items, totalCount] = await Promise.all([
-        this.prismaService.$queryRaw<any[]>`
-          SELECT
-            pi.id, pi.product_id as "productId", pi.variant_id as "variantId",
-            pi.quantity, pi.display_status as "displayStatus",
-            pi.low_stock_threshold as "lowStockThreshold",
-            pi.created_at as "createdAt", pi.updated_at as "updatedAt"
-          FROM product_inventory pi
-          WHERE pi.variant_id IS NOT NULL
-            AND pi.quantity > 0
-            AND pi.quantity <= pi.low_stock_threshold
-          ORDER BY pi.quantity ASC
+      // Step 1: Get matching IDs and total count via raw SQL (column-to-column comparison)
+      const [idRows, totalCount] = await Promise.all([
+        this.prismaService.$queryRaw<{ id: string }[]>`
+          SELECT id
+          FROM product_inventory
+          WHERE variant_id IS NOT NULL
+            AND quantity > 0
+            AND quantity <= low_stock_threshold
+          ORDER BY quantity ASC
           LIMIT ${limit} OFFSET ${skip}
         `,
         this.prismaService.$queryRaw<{ count: bigint }[]>`
@@ -534,10 +536,15 @@ export class InventoryService {
         `,
       ]);
 
-      const mappedItems = toResponseDtoArray(
-        InventoryVariantResponseDto,
-        items,
-      );
+      // Step 2: Fetch full data with relations using Prisma
+      const ids = idRows.map((r) => r.id);
+      const items = await this.prismaService.productInventory.findMany({
+        where: { id: { in: ids } },
+        select: inventoryVariantFullSelect,
+        orderBy: { quantity: 'asc' },
+      });
+
+      const mappedItems = toResponseDtoArray(InventoryVariantResponseDto, items);
       const total = Number(totalCount[0]?.count ?? 0);
 
       return {
@@ -733,25 +740,5 @@ export class InventoryService {
     }
   }
 
-  // ─── Private Mappers ──────────────────────────────────────────────────────
-
-  /** Map raw SQL row to InventoryResponseDto shape */
-  // private mapRawToInventoryDto(row: any): InventoryResponseDto {
-  //   return {
-  //     id: row.id,
-  //     productId: row.productId,
-  //     variantId: row.variantId ?? null,
-  //     quantity: row.quantity,
-  //     displayStatus: row.displayStatus,
-  //     lowStockThreshold: row.lowStockThreshold,
-  //     createdAt: row.createdAt,
-  //     updatedAt: row.updatedAt,
-  //     product: row.p_id
-  //       ? { id: row.p_id, name: row.p_name, sku: row.p_sku }
-  //       : undefined,
-  //     variant: row.v_id
-  //       ? { id: row.v_id, name: row.v_name, sku: row.v_sku }
-  //       : null,
-  //   };
-  // }
 }
+
