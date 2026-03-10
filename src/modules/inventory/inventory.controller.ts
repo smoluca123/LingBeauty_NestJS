@@ -17,6 +17,7 @@ import {
 } from 'src/libs/types/interfaces/response.interface';
 import {
   InventoryOverviewResponseDto,
+  InventoryProductResponseDto,
   InventoryResponseDto,
   InventoryVariantResponseDto,
 } from './dto/inventory-response.dto';
@@ -60,7 +61,9 @@ export class InventoryController {
   getLowStockProducts(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
-  ): Promise<IBeforeTransformPaginationResponseType<InventoryResponseDto>> {
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryProductResponseDto>
+  > {
     return this.inventoryService.getLowStockProducts(
       page ? Number(page) : 1,
       limit ? Number(limit) : 20,
@@ -72,7 +75,9 @@ export class InventoryController {
   getLowStockVariants(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
-  ): Promise<IBeforeTransformPaginationResponseType<InventoryResponseDto>> {
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryVariantResponseDto>
+  > {
     return this.inventoryService.getLowStockVariants(
       page ? Number(page) : 1,
       limit ? Number(limit) : 20,
@@ -84,7 +89,9 @@ export class InventoryController {
   getOutOfStockProducts(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
-  ): Promise<IBeforeTransformPaginationResponseType<InventoryResponseDto>> {
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryProductResponseDto>
+  > {
     return this.inventoryService.getOutOfStockProducts(
       page ? Number(page) : 1,
       limit ? Number(limit) : 20,
@@ -96,7 +103,9 @@ export class InventoryController {
   getOutOfStockVariants(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
-  ): Promise<IBeforeTransformPaginationResponseType<InventoryResponseDto>> {
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryVariantResponseDto>
+  > {
     return this.inventoryService.getOutOfStockVariants(
       page ? Number(page) : 1,
       limit ? Number(limit) : 20,
@@ -157,7 +166,11 @@ export class InventoryController {
     @Param('variantId') variantId: string,
     @Body() dto: UpdateInventoryDto,
   ): Promise<IBeforeTransformResponseType<InventoryVariantResponseDto>> {
-    return this.inventoryService.updateVariantInventory(productId, variantId, dto);
+    return this.inventoryService.updateVariantInventory(
+      productId,
+      variantId,
+      dto,
+    );
   }
 
   @Post('product/:productId/variant/:variantId/adjust')
@@ -167,6 +180,10 @@ export class InventoryController {
     @Param('variantId') variantId: string,
     @Body() dto: AdjustInventoryDto,
   ): Promise<IBeforeTransformResponseType<InventoryVariantResponseDto>> {
-    return this.inventoryService.adjustVariantInventory(productId, variantId, dto);
+    return this.inventoryService.adjustVariantInventory(
+      productId,
+      variantId,
+      dto,
+    );
   }
 }
