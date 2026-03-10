@@ -17,6 +17,7 @@ import {
 import { UpdateInventoryDto } from './dto/update-inventory.dto';
 import { AdjustInventoryDto } from './dto/adjust-inventory.dto';
 import { BulkAdjustInventoryDto } from './dto/bulk-adjust-inventory.dto';
+import { InventoryListQueryDto } from './dto/inventory-list-query.dto';
 import {
   productInventorySelect,
   productSummarySelect,
@@ -428,6 +429,134 @@ export class InventoryService {
         type: 'response',
         message: 'Lấy tổng quan kho hàng thành công',
         data: overview,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) throw error;
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  /**
+   * Get all product-level inventory records (variantId IS NULL) with pagination, search and filter.
+   */
+  async getAllProducts(
+    query: InventoryListQueryDto,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryProductResponseDto>
+  > {
+    try {
+      const { page = 1, limit = 20, search, status } = query;
+      const skip = (page - 1) * limit;
+
+      // Build dynamic where clause
+      const where = {
+        variantId: null,
+        ...(status && { displayStatus: status }),
+        ...(search && {
+          product: {
+            OR: [
+              { name: { contains: search, mode: 'insensitive' as const } },
+              { sku: { contains: search, mode: 'insensitive' as const } },
+            ],
+          },
+        }),
+      };
+
+      const [total, items] = await Promise.all([
+        this.prismaService.productInventory.count({ where }),
+        this.prismaService.productInventory.findMany({
+          where,
+          select: inventoryFullSelect,
+          skip,
+          take: limit,
+          orderBy: { updatedAt: 'desc' },
+        }),
+      ]);
+
+      const mappedItems = toResponseDtoArray(InventoryProductResponseDto, items);
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách kho hàng sản phẩm thành công',
+        data: {
+          items: mappedItems,
+          totalCount: total,
+          currentPage: page,
+          pageSize: limit,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) throw error;
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  /**
+   * Get all variant-level inventory records (variantId IS NOT NULL) with pagination, search and filter.
+   */
+  async getAllVariants(
+    query: InventoryListQueryDto,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryVariantResponseDto>
+  > {
+    try {
+      const { page = 1, limit = 20, search, status } = query;
+      const skip = (page - 1) * limit;
+
+      // Build dynamic where clause
+      const where = {
+        variantId: { not: null as string | null },
+        ...(status && { displayStatus: status }),
+        ...(search && {
+          OR: [
+            {
+              product: {
+                OR: [
+                  { name: { contains: search, mode: 'insensitive' as const } },
+                  { sku: { contains: search, mode: 'insensitive' as const } },
+                ],
+              },
+            },
+            {
+              variant: {
+                OR: [
+                  { name: { contains: search, mode: 'insensitive' as const } },
+                  { sku: { contains: search, mode: 'insensitive' as const } },
+                ],
+              },
+            },
+          ],
+        }),
+      };
+
+      const [total, items] = await Promise.all([
+        this.prismaService.productInventory.count({ where }),
+        this.prismaService.productInventory.findMany({
+          where,
+          select: inventoryVariantFullSelect,
+          skip,
+          take: limit,
+          orderBy: { updatedAt: 'desc' },
+        }),
+      ]);
+
+      const mappedItems = toResponseDtoArray(InventoryVariantResponseDto, items);
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách kho hàng biến thể thành công',
+        data: {
+          items: mappedItems,
+          totalCount: total,
+          currentPage: page,
+          pageSize: limit,
+        },
       };
     } catch (error) {
       if (error instanceof BusinessException) throw error;

@@ -24,10 +24,13 @@ import {
 import { UpdateInventoryDto } from './dto/update-inventory.dto';
 import { AdjustInventoryDto } from './dto/adjust-inventory.dto';
 import { BulkAdjustInventoryDto } from './dto/bulk-adjust-inventory.dto';
+import { InventoryListQueryDto } from './dto/inventory-list-query.dto';
 import {
   ApiAdjustProductInventory,
   ApiAdjustVariantInventory,
   ApiBulkAdjustInventory,
+  ApiGetAllProducts,
+  ApiGetAllVariants,
   ApiGetInventoryOverview,
   ApiGetLowStockProducts,
   ApiGetLowStockVariants,
@@ -54,6 +57,26 @@ export class InventoryController {
     IBeforeTransformResponseType<InventoryOverviewResponseDto>
   > {
     return this.inventoryService.getInventoryOverview();
+  }
+
+  @Get('all/products')
+  @ApiGetAllProducts()
+  getAllProducts(
+    @Query() query: InventoryListQueryDto,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryProductResponseDto>
+  > {
+    return this.inventoryService.getAllProducts(query);
+  }
+
+  @Get('all/variants')
+  @ApiGetAllVariants()
+  getAllVariants(
+    @Query() query: InventoryListQueryDto,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<InventoryVariantResponseDto>
+  > {
+    return this.inventoryService.getAllVariants(query);
   }
 
   @Get('low-stock/products')

@@ -15,6 +15,7 @@ import {
 import { UpdateInventoryDto } from '../dto/update-inventory.dto';
 import { AdjustInventoryDto } from '../dto/adjust-inventory.dto';
 import { BulkAdjustInventoryDto } from '../dto/bulk-adjust-inventory.dto';
+import { ProductInventoryDisplayStatus } from 'prisma/generated/prisma/client';
 
 // ─── Overview & Reports ────────────────────────────────────────────────────
 
@@ -27,6 +28,54 @@ export const ApiGetInventoryOverview = () =>
       roles: [RolesLevel.MANAGER],
     }),
     ApiResponse({ status: 200, type: InventoryOverviewResponseDto }),
+  );
+
+export const ApiGetAllProducts = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Get all product-level inventory',
+      description:
+        'Returns paginated list of all product-level inventory records (variantId IS NULL). Supports search by name/SKU and filter by displayStatus.',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiQueryLimitAndPage(),
+    ApiQuery({
+      name: 'search',
+      description: 'Search by product name or SKU',
+      required: false,
+      type: String,
+    }),
+    ApiQuery({
+      name: 'status',
+      description: 'Filter by display status',
+      required: false,
+      enum: ProductInventoryDisplayStatus,
+    }),
+    ApiResponse({ status: 200, type: [InventoryProductResponseDto] }),
+  );
+
+export const ApiGetAllVariants = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Get all variant-level inventory',
+      description:
+        'Returns paginated list of all variant-level inventory records (variantId IS NOT NULL). Supports search by product name/SKU or variant name/SKU and filter by displayStatus.',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiQueryLimitAndPage(),
+    ApiQuery({
+      name: 'search',
+      description: 'Search by product name/SKU or variant name/SKU',
+      required: false,
+      type: String,
+    }),
+    ApiQuery({
+      name: 'status',
+      description: 'Filter by display status',
+      required: false,
+      enum: ProductInventoryDisplayStatus,
+    }),
+    ApiResponse({ status: 200, type: [InventoryVariantResponseDto] }),
   );
 
 export const ApiGetLowStockProducts = () =>
