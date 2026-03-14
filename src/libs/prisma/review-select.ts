@@ -29,6 +29,23 @@ export type ReviewImageWithProductSelectType = Prisma.ReviewImageGetPayload<{
   select: typeof reviewImageWithProductSelect;
 }>;
 
+export const reviewReplySelect = {
+  id: true,
+  reviewId: true,
+  userId: true,
+  content: true,
+  isAdmin: true,
+  createdAt: true,
+  updatedAt: true,
+  user: {
+    select: userSelect,
+  },
+} satisfies Prisma.ReviewReplySelect;
+
+export type ReviewReplySelectType = Prisma.ReviewReplyGetPayload<{
+  select: typeof reviewReplySelect;
+}>;
+
 export const reviewSelect = {
   id: true,
   productId: true,
@@ -47,6 +64,9 @@ export const reviewSelect = {
   reviewImages: {
     select: reviewImageSelect,
   },
+  replies: {
+    select: reviewReplySelect,
+  },
 };
 
 export type ReviewSelectType = Prisma.ProductReviewGetPayload<{
@@ -62,4 +82,31 @@ export const reviewWithProductSelect = {
 
 export type ReviewWithProductSelectType = Prisma.ProductReviewGetPayload<{
   select: typeof reviewWithProductSelect;
+}>;
+
+// Select for public reviews (without sensitive data)
+export const reviewPublicSelect = {
+  id: true,
+  productId: true,
+  userId: true,
+  rating: true,
+  title: true,
+  comment: true,
+  isVerified: true,
+  helpfulCount: true,
+  createdAt: true,
+  updatedAt: true,
+  user: {
+    select: userSelect,
+  },
+  reviewImages: {
+    select: reviewImageSelect,
+  },
+  replies: {
+    select: reviewReplySelect,
+  },
+};
+
+export type ReviewPublicSelectType = Prisma.ProductReviewGetPayload<{
+  select: typeof reviewPublicSelect;
 }>;

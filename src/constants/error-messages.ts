@@ -66,11 +66,15 @@ export const ERROR_MESSAGES = {
 
   // Inventory
   [ERROR_CODES.INVENTORY_NOT_FOUND]: 'Không tìm thấy thông tin kho hàng',
-  [ERROR_CODES.INVENTORY_ALREADY_EXISTS]: 'Kho hàng đã tồn tại cho sản phẩm/biến thể này',
+  [ERROR_CODES.INVENTORY_ALREADY_EXISTS]:
+    'Kho hàng đã tồn tại cho sản phẩm/biến thể này',
   [ERROR_CODES.INVENTORY_VARIANT_MISMATCH]: 'Biến thể không thuộc sản phẩm này',
-  [ERROR_CODES.INVENTORY_PRODUCT_HAS_VARIANTS]: 'Sản phẩm này có biến thể, vui lòng quản lý kho theo từng biến thể',
-  [ERROR_CODES.INVENTORY_INSUFFICIENT_STOCK]: 'Số lượng tồn kho không đủ để thực hiện thao tác này',
-  [ERROR_CODES.INVENTORY_INVALID_ADJUSTMENT]: 'Điều chỉnh kho hàng không hợp lệ, số lượng không thể âm',
+  [ERROR_CODES.INVENTORY_PRODUCT_HAS_VARIANTS]:
+    'Sản phẩm này có biến thể, vui lòng quản lý kho theo từng biến thể',
+  [ERROR_CODES.INVENTORY_INSUFFICIENT_STOCK]:
+    'Số lượng tồn kho không đủ để thực hiện thao tác này',
+  [ERROR_CODES.INVENTORY_INVALID_ADJUSTMENT]:
+    'Điều chỉnh kho hàng không hợp lệ, số lượng không thể âm',
 
   // Cart
   [ERROR_CODES.CART_NOT_FOUND]: 'Không tìm thấy giỏ hàng',
@@ -90,6 +94,11 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.REVIEW_IMAGE_LIMIT_EXCEEDED]:
     'Đã vượt quá số lượng hình ảnh đánh giá cho phép',
   [ERROR_CODES.REVIEW_NOT_OWNED]: 'Bạn không có quyền chỉnh sửa đánh giá này',
+  [ERROR_CODES.REVIEW_REPLY_NOT_FOUND]: 'Không tìm thấy phản hồi đánh giá',
+  [ERROR_CODES.REVIEW_REPLY_NOT_OWNED]:
+    'Bạn không có quyền chỉnh sửa phản hồi này',
+  [ERROR_CODES.REVIEW_ALREADY_MARKED]: 'Bạn đã đánh dấu đánh giá này rồi',
+  [ERROR_CODES.REVIEW_NOT_MARKED]: 'Bạn chưa đánh dấu đánh giá này',
 
   // Banner
   [ERROR_CODES.BANNER_GROUP_NOT_FOUND]: 'Không tìm thấy nhóm banner',

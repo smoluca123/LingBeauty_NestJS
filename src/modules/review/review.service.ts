@@ -26,8 +26,20 @@ import {
   ReviewWithProductResponseDto,
 } from './dto/review-response.dto';
 import {
+  CreateReviewReplyDto,
+  UpdateReviewReplyDto,
+  ReviewReplyResponseDto,
+} from './dto/review-reply.dto';
+import {
+  ReviewSummaryResponseDto,
+  MarkHelpfulResponseDto,
+  RatingDistributionDto,
+} from './dto/review-summary.dto';
+import {
   reviewSelect,
   reviewWithProductSelect,
+  reviewPublicSelect,
+  reviewReplySelect,
 } from 'src/libs/prisma/review-select';
 import {
   toResponseDto,
@@ -887,6 +899,733 @@ export class ReviewService {
         message: 'Tải video đánh giá lên thành công',
         data: reviewImage,
         statusCode: 201,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  // ============== Public Methods ==============
+
+  async getPublicProductReviews(
+    productId: string,
+    params: GetReviewsParams,
+  ): Promise<IBeforeTransformPaginationResponseType<ReviewResponseDto>> {
+    const {
+      page = 1,
+      limit = 10,
+      rating,
+      sortBy = 'createdAt',
+      order = 'desc',
+    } = params;
+
+    try {
+      // Check if product exists
+      const product = await this.prismaService.product.findUnique({
+        where: { id: productId },
+        select: { id: true },
+      });
+
+      if (!product) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.PRODUCT_NOT_FOUND],
+          ERROR_CODES.PRODUCT_NOT_FOUND,
+        );
+      }
+
+      const whereQuery = {
+        productId,
+        isApproved: true,
+        ...(rating && { rating }),
+      };
+
+      const [reviews, totalCount] = await Promise.all([
+        this.prismaService.productReview.findMany({
+          where: whereQuery,
+          select: reviewPublicSelect,
+          orderBy: { [sortBy]: order },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        this.prismaService.productReview.count({
+          where: whereQuery,
+        }),
+      ]);
+
+      const reviewResponses = toResponseDtoArray(ReviewResponseDto, reviews);
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách đánh giá thành công',
+        data: {
+          items: reviewResponses,
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async getPublicReviewById(
+    reviewId: string,
+  ): Promise<IBeforeTransformResponseType<ReviewWithProductResponseDto>> {
+    try {
+      const review = await this.prismaService.productReview.findFirst({
+        where: { id: reviewId, isApproved: true },
+        select: {
+          ...reviewPublicSelect,
+          product: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+            },
+          },
+        },
+      });
+
+      if (!review) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      const result = toResponseDto(ReviewWithProductResponseDto, review);
+
+      return {
+        type: 'response',
+        message: 'Lấy thông tin đánh giá thành công',
+        data: result,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async getProductReviewSummary(
+    productId: string,
+  ): Promise<IBeforeTransformResponseType<ReviewSummaryResponseDto>> {
+    try {
+      // Check if product exists
+      const product = await this.prismaService.product.findUnique({
+        where: { id: productId },
+        select: { id: true },
+      });
+
+      if (!product) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.PRODUCT_NOT_FOUND],
+          ERROR_CODES.PRODUCT_NOT_FOUND,
+        );
+      }
+
+      // Get all reviews for this product
+      const reviews = await this.prismaService.productReview.findMany({
+        where: { productId },
+        select: { rating: true, isApproved: true },
+      });
+
+      const totalReviews = reviews.length;
+      const approvedReviews = reviews.filter((r) => r.isApproved).length;
+
+      // Calculate rating distribution
+      const distribution: Record<number, number> = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+      };
+      let totalRating = 0;
+
+      for (const review of reviews) {
+        if (review.isApproved) {
+          distribution[review.rating] = (distribution[review.rating] || 0) + 1;
+          totalRating += review.rating;
+        }
+      }
+
+      const averageRating =
+        approvedReviews > 0 ? totalRating / approvedReviews : 0;
+
+      return {
+        type: 'response',
+        message: 'Lấy thông tin tổng quan đánh giá thành công',
+        data: {
+          productId,
+          averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal
+          totalReviews,
+          approvedReviews,
+          ratingDistribution: {
+            '1': distribution[1] || 0,
+            '2': distribution[2] || 0,
+            '3': distribution[3] || 0,
+            '4': distribution[4] || 0,
+            '5': distribution[5] || 0,
+          } as RatingDistributionDto,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  // ============== User Methods ==============
+
+  async getMyReviews(
+    userId: string,
+    params: GetReviewsParams,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<ReviewWithProductResponseDto>
+  > {
+    const {
+      page = 1,
+      limit = 10,
+      sortBy = 'createdAt',
+      order = 'desc',
+    } = params;
+
+    try {
+      const [reviews, totalCount] = await Promise.all([
+        this.prismaService.productReview.findMany({
+          where: { userId },
+          select: reviewWithProductSelect,
+          orderBy: { [sortBy]: order },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        this.prismaService.productReview.count({
+          where: { userId },
+        }),
+      ]);
+
+      const reviewResponses = toResponseDtoArray(
+        ReviewWithProductResponseDto,
+        reviews,
+      );
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách đánh giá của bạn thành công',
+        data: {
+          items: reviewResponses,
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async markHelpful(
+    userId: string,
+    reviewId: string,
+    isHelpful: boolean,
+  ): Promise<IBeforeTransformResponseType<MarkHelpfulResponseDto>> {
+    try {
+      // Check if review exists and is approved
+      const review = await this.prismaService.productReview.findFirst({
+        where: { id: reviewId, isApproved: true },
+        select: { id: true, helpfulCount: true },
+      });
+
+      if (!review) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      // Check if user already marked this review
+      const existingMark = await this.prismaService.reviewHelpful.findUnique({
+        where: {
+          reviewId_userId: {
+            reviewId,
+            userId,
+          },
+        },
+      });
+
+      if (existingMark) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_ALREADY_MARKED],
+          ERROR_CODES.REVIEW_ALREADY_MARKED,
+        );
+      }
+
+      // Create helpful mark and update count in transaction
+      const [_, updatedReview] = await this.prismaService.$transaction([
+        this.prismaService.reviewHelpful.create({
+          data: {
+            reviewId,
+            userId,
+            isHelpful,
+          },
+        }),
+        this.prismaService.productReview.update({
+          where: { id: reviewId },
+          data: {
+            helpfulCount: {
+              increment: isHelpful ? 1 : 0,
+            },
+          },
+          select: { id: true, helpfulCount: true },
+        }),
+      ]);
+
+      return {
+        type: 'response',
+        message: isHelpful
+          ? 'Đánh dấu hữu ích thành công'
+          : 'Đánh dấu không hữu ích thành công',
+        data: {
+          reviewId,
+          helpfulCount: updatedReview.helpfulCount,
+          hasMarked: true,
+          isHelpful,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async unmarkHelpful(
+    userId: string,
+    reviewId: string,
+  ): Promise<IBeforeTransformResponseType<MarkHelpfulResponseDto>> {
+    try {
+      // Check if review exists
+      const review = await this.prismaService.productReview.findUnique({
+        where: { id: reviewId },
+        select: { id: true, helpfulCount: true },
+      });
+
+      if (!review) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      // Check if user has marked this review
+      const existingMark = await this.prismaService.reviewHelpful.findUnique({
+        where: {
+          reviewId_userId: {
+            reviewId,
+            userId,
+          },
+        },
+      });
+
+      if (!existingMark) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_MARKED],
+          ERROR_CODES.REVIEW_NOT_MARKED,
+        );
+      }
+
+      // Delete helpful mark and update count in transaction
+      const [_, updatedReview] = await this.prismaService.$transaction([
+        this.prismaService.reviewHelpful.delete({
+          where: {
+            reviewId_userId: {
+              reviewId,
+              userId,
+            },
+          },
+        }),
+        this.prismaService.productReview.update({
+          where: { id: reviewId },
+          data: {
+            helpfulCount: {
+              decrement: existingMark.isHelpful ? 1 : 0,
+            },
+          },
+          select: { id: true, helpfulCount: true },
+        }),
+      ]);
+
+      return {
+        type: 'response',
+        message: 'Đã bỏ đánh dấu thành công',
+        data: {
+          reviewId,
+          helpfulCount: updatedReview.helpfulCount,
+          hasMarked: false,
+          isHelpful: null,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  // ============== Reply Methods ==============
+
+  async createReply(
+    userId: string,
+    reviewId: string,
+    dto: CreateReviewReplyDto,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
+    try {
+      // Check if review exists
+      const review = await this.prismaService.productReview.findUnique({
+        where: { id: reviewId },
+        select: { id: true, isApproved: true },
+      });
+
+      if (!review) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      const reply = await this.prismaService.reviewReply.create({
+        data: {
+          reviewId,
+          userId,
+          content: dto.content,
+          isAdmin: false,
+        },
+        select: reviewReplySelect,
+      });
+
+      return {
+        type: 'response',
+        message: 'Tạo phản hồi thành công',
+        data: reply,
+        statusCode: 201,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async updateReply(
+    userId: string,
+    replyId: string,
+    dto: UpdateReviewReplyDto,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
+    try {
+      // Check if reply exists and belongs to user
+      const existingReply = await this.prismaService.reviewReply.findUnique({
+        where: { id: replyId },
+        select: { id: true, userId: true },
+      });
+
+      if (!existingReply) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_REPLY_NOT_FOUND],
+          ERROR_CODES.REVIEW_REPLY_NOT_FOUND,
+        );
+      }
+
+      if (existingReply.userId !== userId) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_REPLY_NOT_OWNED],
+          ERROR_CODES.REVIEW_REPLY_NOT_OWNED,
+        );
+      }
+
+      const updated = await this.prismaService.reviewReply.update({
+        where: { id: replyId },
+        data: {
+          content: dto.content,
+        },
+        select: reviewReplySelect,
+      });
+
+      return {
+        type: 'response',
+        message: 'Cập nhật phản hồi thành công',
+        data: updated,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async deleteReply(
+    userId: string,
+    replyId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      // Check if reply exists and belongs to user
+      const existingReply = await this.prismaService.reviewReply.findUnique({
+        where: { id: replyId },
+        select: { id: true, userId: true },
+      });
+
+      if (!existingReply) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_REPLY_NOT_FOUND],
+          ERROR_CODES.REVIEW_REPLY_NOT_FOUND,
+        );
+      }
+
+      if (existingReply.userId !== userId) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_REPLY_NOT_OWNED],
+          ERROR_CODES.REVIEW_REPLY_NOT_OWNED,
+        );
+      }
+
+      await this.prismaService.reviewReply.delete({
+        where: { id: replyId },
+      });
+
+      return {
+        type: 'response',
+        message: 'Xóa phản hồi thành công',
+        data: { message: 'Xóa phản hồi thành công' },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async getReviewReplies(
+    reviewId: string,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto[]>> {
+    try {
+      // Check if review exists
+      const review = await this.prismaService.productReview.findUnique({
+        where: { id: reviewId },
+        select: { id: true },
+      });
+
+      if (!review) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      const replies = await this.prismaService.reviewReply.findMany({
+        where: { reviewId },
+        select: reviewReplySelect,
+        orderBy: { createdAt: 'asc' },
+      });
+
+      return {
+        type: 'response',
+        message: 'Lấy danh sách phản hồi thành công',
+        data: replies,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  // ============== Admin Methods ==============
+
+  async getPendingReviews(
+    params: GetReviewsParams,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<ReviewWithProductResponseDto>
+  > {
+    const {
+      page = 1,
+      limit = 10,
+      sortBy = 'createdAt',
+      order = 'desc',
+    } = params;
+
+    try {
+      const [reviews, totalCount] = await Promise.all([
+        this.prismaService.productReview.findMany({
+          where: { isApproved: false },
+          select: reviewWithProductSelect,
+          orderBy: { [sortBy]: order },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        this.prismaService.productReview.count({
+          where: { isApproved: false },
+        }),
+      ]);
+
+      const reviewResponses = toResponseDtoArray(
+        ReviewWithProductResponseDto,
+        reviews,
+      );
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách đánh giá chờ phê duyệt thành công',
+        data: {
+          items: reviewResponses,
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+        },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async adminReply(
+    adminId: string,
+    reviewId: string,
+    dto: CreateReviewReplyDto,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
+    try {
+      // Check if review exists
+      const review = await this.prismaService.productReview.findUnique({
+        where: { id: reviewId },
+        select: { id: true },
+      });
+
+      if (!review) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      const reply = await this.prismaService.reviewReply.create({
+        data: {
+          reviewId,
+          userId: adminId,
+          content: dto.content,
+          isAdmin: true,
+        },
+        select: reviewReplySelect,
+      });
+
+      return {
+        type: 'response',
+        message: 'Tạo phản hồi admin thành công',
+        data: reply,
+        statusCode: 201,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async adminDeleteReview(
+    reviewId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      // Check if review exists
+      const existingReview = await this.prismaService.productReview.findUnique({
+        where: { id: reviewId },
+        select: { id: true, productId: true },
+      });
+
+      if (!existingReview) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.REVIEW_NOT_FOUND],
+          ERROR_CODES.REVIEW_NOT_FOUND,
+        );
+      }
+
+      await this.prismaService.productReview.delete({
+        where: { id: reviewId },
+      });
+
+      // Sync product stats after deletion
+      this.productStatsService
+        .onReviewChange(existingReview.productId)
+        .catch((err) => {
+          console.error(
+            'Failed to sync product stats after admin deleted review:',
+            err,
+          );
+        });
+
+      return {
+        type: 'response',
+        message: 'Xóa đánh giá thành công',
+        data: { message: 'Xóa đánh giá thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {

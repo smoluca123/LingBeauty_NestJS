@@ -25,6 +25,15 @@ import {
   UploadReviewImageDto,
   UploadReviewVideoDto,
 } from '../dto/review-image.dto';
+import {
+  CreateReviewReplyDto,
+  UpdateReviewReplyDto,
+  ReviewReplyResponseDto,
+} from '../dto/review-reply.dto';
+import {
+  ReviewSummaryResponseDto,
+  MarkHelpfulResponseDto,
+} from '../dto/review-summary.dto';
 import { FileValidationInterceptor } from 'src/modules/storage/interceptors/file-validation.interceptor';
 import { MediaType } from 'prisma/generated/prisma/client';
 
@@ -354,5 +363,323 @@ export const ApiUploadReviewVideo = () =>
     ApiResponse({
       status: 201,
       type: ReviewImageResponseDto,
+    }),
+  );
+
+// ============== Public Decorators ==============
+
+export const ApiGetPublicReviews = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get public product reviews',
+      description:
+        'Retrieve approved reviews for a product (no authentication required)',
+    }),
+    ApiParam({
+      name: 'productId',
+      description: 'Product ID',
+      type: String,
+    }),
+    ApiQuery({
+      name: 'page',
+      type: Number,
+      required: false,
+      description: 'Page number (default: 1)',
+    }),
+    ApiQuery({
+      name: 'limit',
+      type: Number,
+      required: false,
+      description: 'Items per page (default: 10)',
+    }),
+    ApiQuery({
+      name: 'rating',
+      type: Number,
+      required: false,
+      description: 'Filter by exact rating (1-5)',
+    }),
+    ApiQuery({
+      name: 'sortBy',
+      type: String,
+      required: false,
+      enum: ['rating', 'helpfulCount', 'createdAt'],
+      description: 'Sort field (default: createdAt)',
+    }),
+    ApiQuery({
+      name: 'order',
+      type: String,
+      required: false,
+      enum: ['asc', 'desc'],
+      description: 'Sort order (default: desc)',
+    }),
+    ApiResponse({
+      status: 200,
+      type: [ReviewResponseDto],
+    }),
+  );
+
+export const ApiGetPublicReview = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get public review by ID',
+      description:
+        'Retrieve a single approved review by its ID (no authentication required)',
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      type: ReviewWithProductResponseDto,
+    }),
+  );
+
+export const ApiGetReviewSummary = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get product review summary',
+      description:
+        'Get review statistics for a product (average rating, distribution, etc.)',
+    }),
+    ApiParam({
+      name: 'productId',
+      description: 'Product ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      type: ReviewSummaryResponseDto,
+    }),
+  );
+
+// ============== User Decorators ==============
+
+export const ApiGetMyReviews = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Get my reviews',
+      description: 'Retrieve all reviews created by the current user',
+    }),
+    ApiQuery({
+      name: 'page',
+      type: Number,
+      required: false,
+      description: 'Page number (default: 1)',
+    }),
+    ApiQuery({
+      name: 'limit',
+      type: Number,
+      required: false,
+      description: 'Items per page (default: 10)',
+    }),
+    ApiQuery({
+      name: 'sortBy',
+      type: String,
+      required: false,
+      enum: ['rating', 'helpfulCount', 'createdAt'],
+      description: 'Sort field (default: createdAt)',
+    }),
+    ApiQuery({
+      name: 'order',
+      type: String,
+      required: false,
+      enum: ['asc', 'desc'],
+      description: 'Sort order (default: desc)',
+    }),
+    ApiResponse({
+      status: 200,
+      type: [ReviewWithProductResponseDto],
+    }),
+  );
+
+export const ApiMarkHelpful = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Mark review as helpful',
+      description: 'Mark a review as helpful',
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      type: MarkHelpfulResponseDto,
+    }),
+  );
+
+export const ApiUnmarkHelpful = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Unmark helpful',
+      description: 'Remove helpful mark from a review',
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      type: MarkHelpfulResponseDto,
+    }),
+  );
+
+// ============== Reply Decorators ==============
+
+export const ApiGetReplies = () =>
+  applyDecorators(
+    ApiPublicOperation({
+      summary: 'Get review replies',
+      description: 'Get all replies for a review (no authentication required)',
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      type: [ReviewReplyResponseDto],
+    }),
+  );
+
+export const ApiCreateReply = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Create reply',
+      description: 'Add a reply to a review',
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiBody({
+      type: CreateReviewReplyDto,
+    }),
+    ApiResponse({
+      status: 201,
+      type: ReviewReplyResponseDto,
+    }),
+  );
+
+export const ApiUpdateReply = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Update reply',
+      description: 'Update your reply',
+    }),
+    ApiParam({
+      name: 'replyId',
+      description: 'Reply ID',
+      type: String,
+    }),
+    ApiBody({
+      type: UpdateReviewReplyDto,
+    }),
+    ApiResponse({
+      status: 200,
+      type: ReviewReplyResponseDto,
+    }),
+  );
+
+export const ApiDeleteReply = () =>
+  applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Delete reply',
+      description: 'Delete your reply',
+    }),
+    ApiParam({
+      name: 'replyId',
+      description: 'Reply ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Reply deleted successfully',
+    }),
+  );
+
+// ============== Admin Decorators ==============
+
+export const ApiGetPendingReviews = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Get pending reviews',
+      description: 'Get all reviews waiting for approval (Admin only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiQuery({
+      name: 'page',
+      type: Number,
+      required: false,
+      description: 'Page number (default: 1)',
+    }),
+    ApiQuery({
+      name: 'limit',
+      type: Number,
+      required: false,
+      description: 'Items per page (default: 10)',
+    }),
+    ApiQuery({
+      name: 'sortBy',
+      type: String,
+      required: false,
+      enum: ['rating', 'helpfulCount', 'createdAt'],
+      description: 'Sort field (default: createdAt)',
+    }),
+    ApiQuery({
+      name: 'order',
+      type: String,
+      required: false,
+      enum: ['asc', 'desc'],
+      description: 'Sort order (default: desc)',
+    }),
+    ApiResponse({
+      status: 200,
+      type: [ReviewWithProductResponseDto],
+    }),
+  );
+
+export const ApiAdminReply = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Admin reply to review',
+      description: 'Reply to a review as admin (marked as official response)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiBody({
+      type: CreateReviewReplyDto,
+    }),
+    ApiResponse({
+      status: 201,
+      type: ReviewReplyResponseDto,
+    }),
+  );
+
+export const ApiAdminDeleteReview = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Admin delete review',
+      description: 'Delete any review (Admin only)',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Review ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Review deleted successfully',
     }),
   );
