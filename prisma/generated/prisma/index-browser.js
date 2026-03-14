@@ -553,6 +553,24 @@ exports.Prisma.ReviewImageScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ReviewReplyScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  userId: 'userId',
+  content: 'content',
+  isAdmin: 'isAdmin',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewHelpfulScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  userId: 'userId',
+  isHelpful: 'isHelpful',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.AuthCodeScalarFieldEnum = {
   id: 'id',
   authCode: 'authCode',
@@ -756,6 +774,8 @@ exports.Prisma.ModelName = {
   CouponUsage: 'CouponUsage',
   ProductReview: 'ProductReview',
   ReviewImage: 'ReviewImage',
+  ReviewReply: 'ReviewReply',
+  ReviewHelpful: 'ReviewHelpful',
   AuthCode: 'AuthCode',
   User: 'User',
   UserRole: 'UserRole',

@@ -398,9 +398,8 @@ model CartItem {
   variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
 
   /// Unique per variant when variantId IS NOT NULL (Postgres: NULL != NULL so multiple NULLs allowed).
-  /// For no-variant products the service enforces uniqueness via @@unique([cartId, productId]).
+  /// For no-variant products the service enforces uniqueness via a findFirst check before insert.
   @@unique([cartId, variantId])
-  @@unique([cartId, productId])
   @@index([cartId])
   @@index([productId])
   @@index([variantId])
@@ -822,9 +821,11 @@ model ProductReview {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
-  product      Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product      Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   reviewImages ReviewImage[]
+  replies      ReviewReply[]
+  helpfulMarks ReviewHelpful[]
 
   @@unique([productId, userId])
   @@index([productId])
@@ -846,6 +847,39 @@ model ReviewImage {
   @@index([reviewId])
   @@index([mediaId])
   @@map("review_images")
+}
+
+model ReviewReply {
+  id        String   @id @default(uuid())
+  reviewId  String   @map("review_id")
+  userId    String   @map("user_id")
+  content   String   @db.Text
+  isAdmin   Boolean  @default(false) @map("is_admin")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+  @@index([userId])
+  @@map("review_replies")
+}
+
+model ReviewHelpful {
+  id        String   @id @default(uuid())
+  reviewId  String   @map("review_id")
+  userId    String   @map("user_id")
+  isHelpful Boolean  @map("is_helpful")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([reviewId, userId])
+  @@index([reviewId])
+  @@index([userId])
+  @@map("review_helpful")
 }
 
 // This is your Prisma schema file,
@@ -899,6 +933,8 @@ model User {
   cart                  Cart?
   orders                Order[]
   reviews               ProductReview[]
+  reviewReplies         ReviewReply[]
+  reviewHelpfulMarks    ReviewHelpful[]
   addresses             Address[]
   affiliate             Affiliate?
   roleAssignments       UserRoleAssignment[]

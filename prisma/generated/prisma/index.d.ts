@@ -184,6 +184,16 @@ export type ProductReview = $Result.DefaultSelection<Prisma.$ProductReviewPayloa
  */
 export type ReviewImage = $Result.DefaultSelection<Prisma.$ReviewImagePayload>
 /**
+ * Model ReviewReply
+ * 
+ */
+export type ReviewReply = $Result.DefaultSelection<Prisma.$ReviewReplyPayload>
+/**
+ * Model ReviewHelpful
+ * 
+ */
+export type ReviewHelpful = $Result.DefaultSelection<Prisma.$ReviewHelpfulPayload>
+/**
  * Model AuthCode
  * 
  */
@@ -863,6 +873,26 @@ export class PrismaClient<
   get reviewImage(): Prisma.ReviewImageDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.reviewReply`: Exposes CRUD operations for the **ReviewReply** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReviewReplies
+    * const reviewReplies = await prisma.reviewReply.findMany()
+    * ```
+    */
+  get reviewReply(): Prisma.ReviewReplyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reviewHelpful`: Exposes CRUD operations for the **ReviewHelpful** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReviewHelpfuls
+    * const reviewHelpfuls = await prisma.reviewHelpful.findMany()
+    * ```
+    */
+  get reviewHelpful(): Prisma.ReviewHelpfulDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.authCode`: Exposes CRUD operations for the **AuthCode** model.
     * Example usage:
     * ```ts
@@ -1369,6 +1399,8 @@ export namespace Prisma {
     CouponUsage: 'CouponUsage',
     ProductReview: 'ProductReview',
     ReviewImage: 'ReviewImage',
+    ReviewReply: 'ReviewReply',
+    ReviewHelpful: 'ReviewHelpful',
     AuthCode: 'AuthCode',
     User: 'User',
     UserRole: 'UserRole',
@@ -1388,7 +1420,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "authCode" | "user" | "userRole" | "userRoleAssignment"
+      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userRole" | "userRoleAssignment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3908,6 +3940,154 @@ export namespace Prisma {
           }
         }
       }
+      ReviewReply: {
+        payload: Prisma.$ReviewReplyPayload<ExtArgs>
+        fields: Prisma.ReviewReplyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReviewReplyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReviewReplyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>
+          }
+          findFirst: {
+            args: Prisma.ReviewReplyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReviewReplyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>
+          }
+          findMany: {
+            args: Prisma.ReviewReplyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>[]
+          }
+          create: {
+            args: Prisma.ReviewReplyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>
+          }
+          createMany: {
+            args: Prisma.ReviewReplyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReviewReplyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>[]
+          }
+          delete: {
+            args: Prisma.ReviewReplyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>
+          }
+          update: {
+            args: Prisma.ReviewReplyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReviewReplyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReviewReplyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReviewReplyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReviewReplyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewReplyPayload>
+          }
+          aggregate: {
+            args: Prisma.ReviewReplyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReviewReply>
+          }
+          groupBy: {
+            args: Prisma.ReviewReplyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReviewReplyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReviewReplyCountArgs<ExtArgs>
+            result: $Utils.Optional<ReviewReplyCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReviewHelpful: {
+        payload: Prisma.$ReviewHelpfulPayload<ExtArgs>
+        fields: Prisma.ReviewHelpfulFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReviewHelpfulFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReviewHelpfulFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>
+          }
+          findFirst: {
+            args: Prisma.ReviewHelpfulFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReviewHelpfulFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>
+          }
+          findMany: {
+            args: Prisma.ReviewHelpfulFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>[]
+          }
+          create: {
+            args: Prisma.ReviewHelpfulCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>
+          }
+          createMany: {
+            args: Prisma.ReviewHelpfulCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReviewHelpfulCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>[]
+          }
+          delete: {
+            args: Prisma.ReviewHelpfulDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>
+          }
+          update: {
+            args: Prisma.ReviewHelpfulUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReviewHelpfulDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReviewHelpfulUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReviewHelpfulUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReviewHelpfulUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewHelpfulPayload>
+          }
+          aggregate: {
+            args: Prisma.ReviewHelpfulAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReviewHelpful>
+          }
+          groupBy: {
+            args: Prisma.ReviewHelpfulGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReviewHelpfulGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReviewHelpfulCountArgs<ExtArgs>
+            result: $Utils.Optional<ReviewHelpfulCountAggregateOutputType> | number
+          }
+        }
+      }
       AuthCode: {
         payload: Prisma.$AuthCodePayload<ExtArgs>
         fields: Prisma.AuthCodeFieldRefs
@@ -4330,6 +4510,8 @@ export namespace Prisma {
     couponUsage?: CouponUsageOmit
     productReview?: ProductReviewOmit
     reviewImage?: ReviewImageOmit
+    reviewReply?: ReviewReplyOmit
+    reviewHelpful?: ReviewHelpfulOmit
     authCode?: AuthCodeOmit
     user?: UserOmit
     userRole?: UserRoleOmit
@@ -5065,10 +5247,14 @@ export namespace Prisma {
 
   export type ProductReviewCountOutputType = {
     reviewImages: number
+    replies: number
+    helpfulMarks: number
   }
 
   export type ProductReviewCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviewImages?: boolean | ProductReviewCountOutputTypeCountReviewImagesArgs
+    replies?: boolean | ProductReviewCountOutputTypeCountRepliesArgs
+    helpfulMarks?: boolean | ProductReviewCountOutputTypeCountHelpfulMarksArgs
   }
 
   // Custom InputTypes
@@ -5089,6 +5275,20 @@ export namespace Prisma {
     where?: ReviewImageWhereInput
   }
 
+  /**
+   * ProductReviewCountOutputType without action
+   */
+  export type ProductReviewCountOutputTypeCountRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewReplyWhereInput
+  }
+
+  /**
+   * ProductReviewCountOutputType without action
+   */
+  export type ProductReviewCountOutputTypeCountHelpfulMarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewHelpfulWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -5097,6 +5297,8 @@ export namespace Prisma {
   export type UserCountOutputType = {
     orders: number
     reviews: number
+    reviewReplies: number
+    reviewHelpfulMarks: number
     addresses: number
     roleAssignments: number
     uploadedMedia: number
@@ -5106,6 +5308,8 @@ export namespace Prisma {
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+    reviewReplies?: boolean | UserCountOutputTypeCountReviewRepliesArgs
+    reviewHelpfulMarks?: boolean | UserCountOutputTypeCountReviewHelpfulMarksArgs
     addresses?: boolean | UserCountOutputTypeCountAddressesArgs
     roleAssignments?: boolean | UserCountOutputTypeCountRoleAssignmentsArgs
     uploadedMedia?: boolean | UserCountOutputTypeCountUploadedMediaArgs
@@ -5135,6 +5339,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductReviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewReplyWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewHelpfulMarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewHelpfulWhereInput
   }
 
   /**
@@ -43753,6 +43971,8 @@ export namespace Prisma {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     reviewImages?: boolean | ProductReview$reviewImagesArgs<ExtArgs>
+    replies?: boolean | ProductReview$repliesArgs<ExtArgs>
+    helpfulMarks?: boolean | ProductReview$helpfulMarksArgs<ExtArgs>
     _count?: boolean | ProductReviewCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productReview"]>
 
@@ -43807,6 +44027,8 @@ export namespace Prisma {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     reviewImages?: boolean | ProductReview$reviewImagesArgs<ExtArgs>
+    replies?: boolean | ProductReview$repliesArgs<ExtArgs>
+    helpfulMarks?: boolean | ProductReview$helpfulMarksArgs<ExtArgs>
     _count?: boolean | ProductReviewCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -43824,6 +44046,8 @@ export namespace Prisma {
       product: Prisma.$ProductPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
       reviewImages: Prisma.$ReviewImagePayload<ExtArgs>[]
+      replies: Prisma.$ReviewReplyPayload<ExtArgs>[]
+      helpfulMarks: Prisma.$ReviewHelpfulPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -44234,6 +44458,8 @@ export namespace Prisma {
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     reviewImages<T extends ProductReview$reviewImagesArgs<ExtArgs> = {}>(args?: Subset<T, ProductReview$reviewImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    replies<T extends ProductReview$repliesArgs<ExtArgs> = {}>(args?: Subset<T, ProductReview$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    helpfulMarks<T extends ProductReview$helpfulMarksArgs<ExtArgs> = {}>(args?: Subset<T, ProductReview$helpfulMarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -44691,6 +44917,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewImageScalarFieldEnum | ReviewImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductReview.replies
+   */
+  export type ProductReview$repliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    where?: ReviewReplyWhereInput
+    orderBy?: ReviewReplyOrderByWithRelationInput | ReviewReplyOrderByWithRelationInput[]
+    cursor?: ReviewReplyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewReplyScalarFieldEnum | ReviewReplyScalarFieldEnum[]
+  }
+
+  /**
+   * ProductReview.helpfulMarks
+   */
+  export type ProductReview$helpfulMarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    where?: ReviewHelpfulWhereInput
+    orderBy?: ReviewHelpfulOrderByWithRelationInput | ReviewHelpfulOrderByWithRelationInput[]
+    cursor?: ReviewHelpfulWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewHelpfulScalarFieldEnum | ReviewHelpfulScalarFieldEnum[]
   }
 
   /**
@@ -45775,6 +46049,2164 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ReviewImageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReviewReply
+   */
+
+  export type AggregateReviewReply = {
+    _count: ReviewReplyCountAggregateOutputType | null
+    _min: ReviewReplyMinAggregateOutputType | null
+    _max: ReviewReplyMaxAggregateOutputType | null
+  }
+
+  export type ReviewReplyMinAggregateOutputType = {
+    id: string | null
+    reviewId: string | null
+    userId: string | null
+    content: string | null
+    isAdmin: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReviewReplyMaxAggregateOutputType = {
+    id: string | null
+    reviewId: string | null
+    userId: string | null
+    content: string | null
+    isAdmin: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReviewReplyCountAggregateOutputType = {
+    id: number
+    reviewId: number
+    userId: number
+    content: number
+    isAdmin: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ReviewReplyMinAggregateInputType = {
+    id?: true
+    reviewId?: true
+    userId?: true
+    content?: true
+    isAdmin?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReviewReplyMaxAggregateInputType = {
+    id?: true
+    reviewId?: true
+    userId?: true
+    content?: true
+    isAdmin?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReviewReplyCountAggregateInputType = {
+    id?: true
+    reviewId?: true
+    userId?: true
+    content?: true
+    isAdmin?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ReviewReplyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReviewReply to aggregate.
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewReplies to fetch.
+     */
+    orderBy?: ReviewReplyOrderByWithRelationInput | ReviewReplyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReviewReplyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewReplies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewReplies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReviewReplies
+    **/
+    _count?: true | ReviewReplyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReviewReplyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReviewReplyMaxAggregateInputType
+  }
+
+  export type GetReviewReplyAggregateType<T extends ReviewReplyAggregateArgs> = {
+        [P in keyof T & keyof AggregateReviewReply]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReviewReply[P]>
+      : GetScalarType<T[P], AggregateReviewReply[P]>
+  }
+
+
+
+
+  export type ReviewReplyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewReplyWhereInput
+    orderBy?: ReviewReplyOrderByWithAggregationInput | ReviewReplyOrderByWithAggregationInput[]
+    by: ReviewReplyScalarFieldEnum[] | ReviewReplyScalarFieldEnum
+    having?: ReviewReplyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReviewReplyCountAggregateInputType | true
+    _min?: ReviewReplyMinAggregateInputType
+    _max?: ReviewReplyMaxAggregateInputType
+  }
+
+  export type ReviewReplyGroupByOutputType = {
+    id: string
+    reviewId: string
+    userId: string
+    content: string
+    isAdmin: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ReviewReplyCountAggregateOutputType | null
+    _min: ReviewReplyMinAggregateOutputType | null
+    _max: ReviewReplyMaxAggregateOutputType | null
+  }
+
+  type GetReviewReplyGroupByPayload<T extends ReviewReplyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReviewReplyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReviewReplyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReviewReplyGroupByOutputType[P]>
+            : GetScalarType<T[P], ReviewReplyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReviewReplySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    content?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviewReply"]>
+
+  export type ReviewReplySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    content?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviewReply"]>
+
+  export type ReviewReplySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    content?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviewReply"]>
+
+  export type ReviewReplySelectScalar = {
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    content?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ReviewReplyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reviewId" | "userId" | "content" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["reviewReply"]>
+  export type ReviewReplyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReviewReplyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReviewReplyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ReviewReplyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReviewReply"
+    objects: {
+      review: Prisma.$ProductReviewPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reviewId: string
+      userId: string
+      content: string
+      isAdmin: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["reviewReply"]>
+    composites: {}
+  }
+
+  type ReviewReplyGetPayload<S extends boolean | null | undefined | ReviewReplyDefaultArgs> = $Result.GetResult<Prisma.$ReviewReplyPayload, S>
+
+  type ReviewReplyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReviewReplyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReviewReplyCountAggregateInputType | true
+    }
+
+  export interface ReviewReplyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReviewReply'], meta: { name: 'ReviewReply' } }
+    /**
+     * Find zero or one ReviewReply that matches the filter.
+     * @param {ReviewReplyFindUniqueArgs} args - Arguments to find a ReviewReply
+     * @example
+     * // Get one ReviewReply
+     * const reviewReply = await prisma.reviewReply.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReviewReplyFindUniqueArgs>(args: SelectSubset<T, ReviewReplyFindUniqueArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReviewReply that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReviewReplyFindUniqueOrThrowArgs} args - Arguments to find a ReviewReply
+     * @example
+     * // Get one ReviewReply
+     * const reviewReply = await prisma.reviewReply.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReviewReplyFindUniqueOrThrowArgs>(args: SelectSubset<T, ReviewReplyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReviewReply that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyFindFirstArgs} args - Arguments to find a ReviewReply
+     * @example
+     * // Get one ReviewReply
+     * const reviewReply = await prisma.reviewReply.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReviewReplyFindFirstArgs>(args?: SelectSubset<T, ReviewReplyFindFirstArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReviewReply that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyFindFirstOrThrowArgs} args - Arguments to find a ReviewReply
+     * @example
+     * // Get one ReviewReply
+     * const reviewReply = await prisma.reviewReply.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReviewReplyFindFirstOrThrowArgs>(args?: SelectSubset<T, ReviewReplyFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReviewReplies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReviewReplies
+     * const reviewReplies = await prisma.reviewReply.findMany()
+     * 
+     * // Get first 10 ReviewReplies
+     * const reviewReplies = await prisma.reviewReply.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reviewReplyWithIdOnly = await prisma.reviewReply.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReviewReplyFindManyArgs>(args?: SelectSubset<T, ReviewReplyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReviewReply.
+     * @param {ReviewReplyCreateArgs} args - Arguments to create a ReviewReply.
+     * @example
+     * // Create one ReviewReply
+     * const ReviewReply = await prisma.reviewReply.create({
+     *   data: {
+     *     // ... data to create a ReviewReply
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReviewReplyCreateArgs>(args: SelectSubset<T, ReviewReplyCreateArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReviewReplies.
+     * @param {ReviewReplyCreateManyArgs} args - Arguments to create many ReviewReplies.
+     * @example
+     * // Create many ReviewReplies
+     * const reviewReply = await prisma.reviewReply.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReviewReplyCreateManyArgs>(args?: SelectSubset<T, ReviewReplyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReviewReplies and returns the data saved in the database.
+     * @param {ReviewReplyCreateManyAndReturnArgs} args - Arguments to create many ReviewReplies.
+     * @example
+     * // Create many ReviewReplies
+     * const reviewReply = await prisma.reviewReply.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReviewReplies and only return the `id`
+     * const reviewReplyWithIdOnly = await prisma.reviewReply.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReviewReplyCreateManyAndReturnArgs>(args?: SelectSubset<T, ReviewReplyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReviewReply.
+     * @param {ReviewReplyDeleteArgs} args - Arguments to delete one ReviewReply.
+     * @example
+     * // Delete one ReviewReply
+     * const ReviewReply = await prisma.reviewReply.delete({
+     *   where: {
+     *     // ... filter to delete one ReviewReply
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReviewReplyDeleteArgs>(args: SelectSubset<T, ReviewReplyDeleteArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReviewReply.
+     * @param {ReviewReplyUpdateArgs} args - Arguments to update one ReviewReply.
+     * @example
+     * // Update one ReviewReply
+     * const reviewReply = await prisma.reviewReply.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReviewReplyUpdateArgs>(args: SelectSubset<T, ReviewReplyUpdateArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReviewReplies.
+     * @param {ReviewReplyDeleteManyArgs} args - Arguments to filter ReviewReplies to delete.
+     * @example
+     * // Delete a few ReviewReplies
+     * const { count } = await prisma.reviewReply.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReviewReplyDeleteManyArgs>(args?: SelectSubset<T, ReviewReplyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReviewReplies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReviewReplies
+     * const reviewReply = await prisma.reviewReply.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReviewReplyUpdateManyArgs>(args: SelectSubset<T, ReviewReplyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReviewReplies and returns the data updated in the database.
+     * @param {ReviewReplyUpdateManyAndReturnArgs} args - Arguments to update many ReviewReplies.
+     * @example
+     * // Update many ReviewReplies
+     * const reviewReply = await prisma.reviewReply.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReviewReplies and only return the `id`
+     * const reviewReplyWithIdOnly = await prisma.reviewReply.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReviewReplyUpdateManyAndReturnArgs>(args: SelectSubset<T, ReviewReplyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReviewReply.
+     * @param {ReviewReplyUpsertArgs} args - Arguments to update or create a ReviewReply.
+     * @example
+     * // Update or create a ReviewReply
+     * const reviewReply = await prisma.reviewReply.upsert({
+     *   create: {
+     *     // ... data to create a ReviewReply
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReviewReply we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReviewReplyUpsertArgs>(args: SelectSubset<T, ReviewReplyUpsertArgs<ExtArgs>>): Prisma__ReviewReplyClient<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReviewReplies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyCountArgs} args - Arguments to filter ReviewReplies to count.
+     * @example
+     * // Count the number of ReviewReplies
+     * const count = await prisma.reviewReply.count({
+     *   where: {
+     *     // ... the filter for the ReviewReplies we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReviewReplyCountArgs>(
+      args?: Subset<T, ReviewReplyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReviewReplyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReviewReply.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReviewReplyAggregateArgs>(args: Subset<T, ReviewReplyAggregateArgs>): Prisma.PrismaPromise<GetReviewReplyAggregateType<T>>
+
+    /**
+     * Group by ReviewReply.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewReplyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReviewReplyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReviewReplyGroupByArgs['orderBy'] }
+        : { orderBy?: ReviewReplyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReviewReplyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReviewReplyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReviewReply model
+   */
+  readonly fields: ReviewReplyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReviewReply.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReviewReplyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    review<T extends ProductReviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductReviewDefaultArgs<ExtArgs>>): Prisma__ProductReviewClient<$Result.GetResult<Prisma.$ProductReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReviewReply model
+   */
+  interface ReviewReplyFieldRefs {
+    readonly id: FieldRef<"ReviewReply", 'String'>
+    readonly reviewId: FieldRef<"ReviewReply", 'String'>
+    readonly userId: FieldRef<"ReviewReply", 'String'>
+    readonly content: FieldRef<"ReviewReply", 'String'>
+    readonly isAdmin: FieldRef<"ReviewReply", 'Boolean'>
+    readonly createdAt: FieldRef<"ReviewReply", 'DateTime'>
+    readonly updatedAt: FieldRef<"ReviewReply", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReviewReply findUnique
+   */
+  export type ReviewReplyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewReply to fetch.
+     */
+    where: ReviewReplyWhereUniqueInput
+  }
+
+  /**
+   * ReviewReply findUniqueOrThrow
+   */
+  export type ReviewReplyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewReply to fetch.
+     */
+    where: ReviewReplyWhereUniqueInput
+  }
+
+  /**
+   * ReviewReply findFirst
+   */
+  export type ReviewReplyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewReply to fetch.
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewReplies to fetch.
+     */
+    orderBy?: ReviewReplyOrderByWithRelationInput | ReviewReplyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReviewReplies.
+     */
+    cursor?: ReviewReplyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewReplies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewReplies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReviewReplies.
+     */
+    distinct?: ReviewReplyScalarFieldEnum | ReviewReplyScalarFieldEnum[]
+  }
+
+  /**
+   * ReviewReply findFirstOrThrow
+   */
+  export type ReviewReplyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewReply to fetch.
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewReplies to fetch.
+     */
+    orderBy?: ReviewReplyOrderByWithRelationInput | ReviewReplyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReviewReplies.
+     */
+    cursor?: ReviewReplyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewReplies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewReplies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReviewReplies.
+     */
+    distinct?: ReviewReplyScalarFieldEnum | ReviewReplyScalarFieldEnum[]
+  }
+
+  /**
+   * ReviewReply findMany
+   */
+  export type ReviewReplyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewReplies to fetch.
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewReplies to fetch.
+     */
+    orderBy?: ReviewReplyOrderByWithRelationInput | ReviewReplyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReviewReplies.
+     */
+    cursor?: ReviewReplyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewReplies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewReplies.
+     */
+    skip?: number
+    distinct?: ReviewReplyScalarFieldEnum | ReviewReplyScalarFieldEnum[]
+  }
+
+  /**
+   * ReviewReply create
+   */
+  export type ReviewReplyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReviewReply.
+     */
+    data: XOR<ReviewReplyCreateInput, ReviewReplyUncheckedCreateInput>
+  }
+
+  /**
+   * ReviewReply createMany
+   */
+  export type ReviewReplyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReviewReplies.
+     */
+    data: ReviewReplyCreateManyInput | ReviewReplyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReviewReply createManyAndReturn
+   */
+  export type ReviewReplyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReviewReplies.
+     */
+    data: ReviewReplyCreateManyInput | ReviewReplyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReviewReply update
+   */
+  export type ReviewReplyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReviewReply.
+     */
+    data: XOR<ReviewReplyUpdateInput, ReviewReplyUncheckedUpdateInput>
+    /**
+     * Choose, which ReviewReply to update.
+     */
+    where: ReviewReplyWhereUniqueInput
+  }
+
+  /**
+   * ReviewReply updateMany
+   */
+  export type ReviewReplyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReviewReplies.
+     */
+    data: XOR<ReviewReplyUpdateManyMutationInput, ReviewReplyUncheckedUpdateManyInput>
+    /**
+     * Filter which ReviewReplies to update
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * Limit how many ReviewReplies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReviewReply updateManyAndReturn
+   */
+  export type ReviewReplyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * The data used to update ReviewReplies.
+     */
+    data: XOR<ReviewReplyUpdateManyMutationInput, ReviewReplyUncheckedUpdateManyInput>
+    /**
+     * Filter which ReviewReplies to update
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * Limit how many ReviewReplies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReviewReply upsert
+   */
+  export type ReviewReplyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReviewReply to update in case it exists.
+     */
+    where: ReviewReplyWhereUniqueInput
+    /**
+     * In case the ReviewReply found by the `where` argument doesn't exist, create a new ReviewReply with this data.
+     */
+    create: XOR<ReviewReplyCreateInput, ReviewReplyUncheckedCreateInput>
+    /**
+     * In case the ReviewReply was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReviewReplyUpdateInput, ReviewReplyUncheckedUpdateInput>
+  }
+
+  /**
+   * ReviewReply delete
+   */
+  export type ReviewReplyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    /**
+     * Filter which ReviewReply to delete.
+     */
+    where: ReviewReplyWhereUniqueInput
+  }
+
+  /**
+   * ReviewReply deleteMany
+   */
+  export type ReviewReplyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReviewReplies to delete
+     */
+    where?: ReviewReplyWhereInput
+    /**
+     * Limit how many ReviewReplies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReviewReply without action
+   */
+  export type ReviewReplyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReviewHelpful
+   */
+
+  export type AggregateReviewHelpful = {
+    _count: ReviewHelpfulCountAggregateOutputType | null
+    _min: ReviewHelpfulMinAggregateOutputType | null
+    _max: ReviewHelpfulMaxAggregateOutputType | null
+  }
+
+  export type ReviewHelpfulMinAggregateOutputType = {
+    id: string | null
+    reviewId: string | null
+    userId: string | null
+    isHelpful: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ReviewHelpfulMaxAggregateOutputType = {
+    id: string | null
+    reviewId: string | null
+    userId: string | null
+    isHelpful: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ReviewHelpfulCountAggregateOutputType = {
+    id: number
+    reviewId: number
+    userId: number
+    isHelpful: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ReviewHelpfulMinAggregateInputType = {
+    id?: true
+    reviewId?: true
+    userId?: true
+    isHelpful?: true
+    createdAt?: true
+  }
+
+  export type ReviewHelpfulMaxAggregateInputType = {
+    id?: true
+    reviewId?: true
+    userId?: true
+    isHelpful?: true
+    createdAt?: true
+  }
+
+  export type ReviewHelpfulCountAggregateInputType = {
+    id?: true
+    reviewId?: true
+    userId?: true
+    isHelpful?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ReviewHelpfulAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReviewHelpful to aggregate.
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewHelpfuls to fetch.
+     */
+    orderBy?: ReviewHelpfulOrderByWithRelationInput | ReviewHelpfulOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReviewHelpfulWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewHelpfuls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewHelpfuls.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReviewHelpfuls
+    **/
+    _count?: true | ReviewHelpfulCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReviewHelpfulMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReviewHelpfulMaxAggregateInputType
+  }
+
+  export type GetReviewHelpfulAggregateType<T extends ReviewHelpfulAggregateArgs> = {
+        [P in keyof T & keyof AggregateReviewHelpful]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReviewHelpful[P]>
+      : GetScalarType<T[P], AggregateReviewHelpful[P]>
+  }
+
+
+
+
+  export type ReviewHelpfulGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewHelpfulWhereInput
+    orderBy?: ReviewHelpfulOrderByWithAggregationInput | ReviewHelpfulOrderByWithAggregationInput[]
+    by: ReviewHelpfulScalarFieldEnum[] | ReviewHelpfulScalarFieldEnum
+    having?: ReviewHelpfulScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReviewHelpfulCountAggregateInputType | true
+    _min?: ReviewHelpfulMinAggregateInputType
+    _max?: ReviewHelpfulMaxAggregateInputType
+  }
+
+  export type ReviewHelpfulGroupByOutputType = {
+    id: string
+    reviewId: string
+    userId: string
+    isHelpful: boolean
+    createdAt: Date
+    _count: ReviewHelpfulCountAggregateOutputType | null
+    _min: ReviewHelpfulMinAggregateOutputType | null
+    _max: ReviewHelpfulMaxAggregateOutputType | null
+  }
+
+  type GetReviewHelpfulGroupByPayload<T extends ReviewHelpfulGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReviewHelpfulGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReviewHelpfulGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReviewHelpfulGroupByOutputType[P]>
+            : GetScalarType<T[P], ReviewHelpfulGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReviewHelpfulSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    isHelpful?: boolean
+    createdAt?: boolean
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviewHelpful"]>
+
+  export type ReviewHelpfulSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    isHelpful?: boolean
+    createdAt?: boolean
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviewHelpful"]>
+
+  export type ReviewHelpfulSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    isHelpful?: boolean
+    createdAt?: boolean
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviewHelpful"]>
+
+  export type ReviewHelpfulSelectScalar = {
+    id?: boolean
+    reviewId?: boolean
+    userId?: boolean
+    isHelpful?: boolean
+    createdAt?: boolean
+  }
+
+  export type ReviewHelpfulOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reviewId" | "userId" | "isHelpful" | "createdAt", ExtArgs["result"]["reviewHelpful"]>
+  export type ReviewHelpfulInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReviewHelpfulIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReviewHelpfulIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    review?: boolean | ProductReviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ReviewHelpfulPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReviewHelpful"
+    objects: {
+      review: Prisma.$ProductReviewPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reviewId: string
+      userId: string
+      isHelpful: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["reviewHelpful"]>
+    composites: {}
+  }
+
+  type ReviewHelpfulGetPayload<S extends boolean | null | undefined | ReviewHelpfulDefaultArgs> = $Result.GetResult<Prisma.$ReviewHelpfulPayload, S>
+
+  type ReviewHelpfulCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReviewHelpfulFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReviewHelpfulCountAggregateInputType | true
+    }
+
+  export interface ReviewHelpfulDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReviewHelpful'], meta: { name: 'ReviewHelpful' } }
+    /**
+     * Find zero or one ReviewHelpful that matches the filter.
+     * @param {ReviewHelpfulFindUniqueArgs} args - Arguments to find a ReviewHelpful
+     * @example
+     * // Get one ReviewHelpful
+     * const reviewHelpful = await prisma.reviewHelpful.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReviewHelpfulFindUniqueArgs>(args: SelectSubset<T, ReviewHelpfulFindUniqueArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReviewHelpful that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReviewHelpfulFindUniqueOrThrowArgs} args - Arguments to find a ReviewHelpful
+     * @example
+     * // Get one ReviewHelpful
+     * const reviewHelpful = await prisma.reviewHelpful.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReviewHelpfulFindUniqueOrThrowArgs>(args: SelectSubset<T, ReviewHelpfulFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReviewHelpful that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulFindFirstArgs} args - Arguments to find a ReviewHelpful
+     * @example
+     * // Get one ReviewHelpful
+     * const reviewHelpful = await prisma.reviewHelpful.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReviewHelpfulFindFirstArgs>(args?: SelectSubset<T, ReviewHelpfulFindFirstArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReviewHelpful that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulFindFirstOrThrowArgs} args - Arguments to find a ReviewHelpful
+     * @example
+     * // Get one ReviewHelpful
+     * const reviewHelpful = await prisma.reviewHelpful.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReviewHelpfulFindFirstOrThrowArgs>(args?: SelectSubset<T, ReviewHelpfulFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReviewHelpfuls that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReviewHelpfuls
+     * const reviewHelpfuls = await prisma.reviewHelpful.findMany()
+     * 
+     * // Get first 10 ReviewHelpfuls
+     * const reviewHelpfuls = await prisma.reviewHelpful.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reviewHelpfulWithIdOnly = await prisma.reviewHelpful.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReviewHelpfulFindManyArgs>(args?: SelectSubset<T, ReviewHelpfulFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReviewHelpful.
+     * @param {ReviewHelpfulCreateArgs} args - Arguments to create a ReviewHelpful.
+     * @example
+     * // Create one ReviewHelpful
+     * const ReviewHelpful = await prisma.reviewHelpful.create({
+     *   data: {
+     *     // ... data to create a ReviewHelpful
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReviewHelpfulCreateArgs>(args: SelectSubset<T, ReviewHelpfulCreateArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReviewHelpfuls.
+     * @param {ReviewHelpfulCreateManyArgs} args - Arguments to create many ReviewHelpfuls.
+     * @example
+     * // Create many ReviewHelpfuls
+     * const reviewHelpful = await prisma.reviewHelpful.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReviewHelpfulCreateManyArgs>(args?: SelectSubset<T, ReviewHelpfulCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReviewHelpfuls and returns the data saved in the database.
+     * @param {ReviewHelpfulCreateManyAndReturnArgs} args - Arguments to create many ReviewHelpfuls.
+     * @example
+     * // Create many ReviewHelpfuls
+     * const reviewHelpful = await prisma.reviewHelpful.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReviewHelpfuls and only return the `id`
+     * const reviewHelpfulWithIdOnly = await prisma.reviewHelpful.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReviewHelpfulCreateManyAndReturnArgs>(args?: SelectSubset<T, ReviewHelpfulCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReviewHelpful.
+     * @param {ReviewHelpfulDeleteArgs} args - Arguments to delete one ReviewHelpful.
+     * @example
+     * // Delete one ReviewHelpful
+     * const ReviewHelpful = await prisma.reviewHelpful.delete({
+     *   where: {
+     *     // ... filter to delete one ReviewHelpful
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReviewHelpfulDeleteArgs>(args: SelectSubset<T, ReviewHelpfulDeleteArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReviewHelpful.
+     * @param {ReviewHelpfulUpdateArgs} args - Arguments to update one ReviewHelpful.
+     * @example
+     * // Update one ReviewHelpful
+     * const reviewHelpful = await prisma.reviewHelpful.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReviewHelpfulUpdateArgs>(args: SelectSubset<T, ReviewHelpfulUpdateArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReviewHelpfuls.
+     * @param {ReviewHelpfulDeleteManyArgs} args - Arguments to filter ReviewHelpfuls to delete.
+     * @example
+     * // Delete a few ReviewHelpfuls
+     * const { count } = await prisma.reviewHelpful.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReviewHelpfulDeleteManyArgs>(args?: SelectSubset<T, ReviewHelpfulDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReviewHelpfuls.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReviewHelpfuls
+     * const reviewHelpful = await prisma.reviewHelpful.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReviewHelpfulUpdateManyArgs>(args: SelectSubset<T, ReviewHelpfulUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReviewHelpfuls and returns the data updated in the database.
+     * @param {ReviewHelpfulUpdateManyAndReturnArgs} args - Arguments to update many ReviewHelpfuls.
+     * @example
+     * // Update many ReviewHelpfuls
+     * const reviewHelpful = await prisma.reviewHelpful.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReviewHelpfuls and only return the `id`
+     * const reviewHelpfulWithIdOnly = await prisma.reviewHelpful.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReviewHelpfulUpdateManyAndReturnArgs>(args: SelectSubset<T, ReviewHelpfulUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReviewHelpful.
+     * @param {ReviewHelpfulUpsertArgs} args - Arguments to update or create a ReviewHelpful.
+     * @example
+     * // Update or create a ReviewHelpful
+     * const reviewHelpful = await prisma.reviewHelpful.upsert({
+     *   create: {
+     *     // ... data to create a ReviewHelpful
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReviewHelpful we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReviewHelpfulUpsertArgs>(args: SelectSubset<T, ReviewHelpfulUpsertArgs<ExtArgs>>): Prisma__ReviewHelpfulClient<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReviewHelpfuls.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulCountArgs} args - Arguments to filter ReviewHelpfuls to count.
+     * @example
+     * // Count the number of ReviewHelpfuls
+     * const count = await prisma.reviewHelpful.count({
+     *   where: {
+     *     // ... the filter for the ReviewHelpfuls we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReviewHelpfulCountArgs>(
+      args?: Subset<T, ReviewHelpfulCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReviewHelpfulCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReviewHelpful.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReviewHelpfulAggregateArgs>(args: Subset<T, ReviewHelpfulAggregateArgs>): Prisma.PrismaPromise<GetReviewHelpfulAggregateType<T>>
+
+    /**
+     * Group by ReviewHelpful.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewHelpfulGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReviewHelpfulGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReviewHelpfulGroupByArgs['orderBy'] }
+        : { orderBy?: ReviewHelpfulGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReviewHelpfulGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReviewHelpfulGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReviewHelpful model
+   */
+  readonly fields: ReviewHelpfulFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReviewHelpful.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReviewHelpfulClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    review<T extends ProductReviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductReviewDefaultArgs<ExtArgs>>): Prisma__ProductReviewClient<$Result.GetResult<Prisma.$ProductReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReviewHelpful model
+   */
+  interface ReviewHelpfulFieldRefs {
+    readonly id: FieldRef<"ReviewHelpful", 'String'>
+    readonly reviewId: FieldRef<"ReviewHelpful", 'String'>
+    readonly userId: FieldRef<"ReviewHelpful", 'String'>
+    readonly isHelpful: FieldRef<"ReviewHelpful", 'Boolean'>
+    readonly createdAt: FieldRef<"ReviewHelpful", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReviewHelpful findUnique
+   */
+  export type ReviewHelpfulFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewHelpful to fetch.
+     */
+    where: ReviewHelpfulWhereUniqueInput
+  }
+
+  /**
+   * ReviewHelpful findUniqueOrThrow
+   */
+  export type ReviewHelpfulFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewHelpful to fetch.
+     */
+    where: ReviewHelpfulWhereUniqueInput
+  }
+
+  /**
+   * ReviewHelpful findFirst
+   */
+  export type ReviewHelpfulFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewHelpful to fetch.
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewHelpfuls to fetch.
+     */
+    orderBy?: ReviewHelpfulOrderByWithRelationInput | ReviewHelpfulOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReviewHelpfuls.
+     */
+    cursor?: ReviewHelpfulWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewHelpfuls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewHelpfuls.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReviewHelpfuls.
+     */
+    distinct?: ReviewHelpfulScalarFieldEnum | ReviewHelpfulScalarFieldEnum[]
+  }
+
+  /**
+   * ReviewHelpful findFirstOrThrow
+   */
+  export type ReviewHelpfulFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewHelpful to fetch.
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewHelpfuls to fetch.
+     */
+    orderBy?: ReviewHelpfulOrderByWithRelationInput | ReviewHelpfulOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReviewHelpfuls.
+     */
+    cursor?: ReviewHelpfulWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewHelpfuls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewHelpfuls.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReviewHelpfuls.
+     */
+    distinct?: ReviewHelpfulScalarFieldEnum | ReviewHelpfulScalarFieldEnum[]
+  }
+
+  /**
+   * ReviewHelpful findMany
+   */
+  export type ReviewHelpfulFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * Filter, which ReviewHelpfuls to fetch.
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReviewHelpfuls to fetch.
+     */
+    orderBy?: ReviewHelpfulOrderByWithRelationInput | ReviewHelpfulOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReviewHelpfuls.
+     */
+    cursor?: ReviewHelpfulWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReviewHelpfuls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReviewHelpfuls.
+     */
+    skip?: number
+    distinct?: ReviewHelpfulScalarFieldEnum | ReviewHelpfulScalarFieldEnum[]
+  }
+
+  /**
+   * ReviewHelpful create
+   */
+  export type ReviewHelpfulCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReviewHelpful.
+     */
+    data: XOR<ReviewHelpfulCreateInput, ReviewHelpfulUncheckedCreateInput>
+  }
+
+  /**
+   * ReviewHelpful createMany
+   */
+  export type ReviewHelpfulCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReviewHelpfuls.
+     */
+    data: ReviewHelpfulCreateManyInput | ReviewHelpfulCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReviewHelpful createManyAndReturn
+   */
+  export type ReviewHelpfulCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReviewHelpfuls.
+     */
+    data: ReviewHelpfulCreateManyInput | ReviewHelpfulCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReviewHelpful update
+   */
+  export type ReviewHelpfulUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReviewHelpful.
+     */
+    data: XOR<ReviewHelpfulUpdateInput, ReviewHelpfulUncheckedUpdateInput>
+    /**
+     * Choose, which ReviewHelpful to update.
+     */
+    where: ReviewHelpfulWhereUniqueInput
+  }
+
+  /**
+   * ReviewHelpful updateMany
+   */
+  export type ReviewHelpfulUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReviewHelpfuls.
+     */
+    data: XOR<ReviewHelpfulUpdateManyMutationInput, ReviewHelpfulUncheckedUpdateManyInput>
+    /**
+     * Filter which ReviewHelpfuls to update
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * Limit how many ReviewHelpfuls to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReviewHelpful updateManyAndReturn
+   */
+  export type ReviewHelpfulUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * The data used to update ReviewHelpfuls.
+     */
+    data: XOR<ReviewHelpfulUpdateManyMutationInput, ReviewHelpfulUncheckedUpdateManyInput>
+    /**
+     * Filter which ReviewHelpfuls to update
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * Limit how many ReviewHelpfuls to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReviewHelpful upsert
+   */
+  export type ReviewHelpfulUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReviewHelpful to update in case it exists.
+     */
+    where: ReviewHelpfulWhereUniqueInput
+    /**
+     * In case the ReviewHelpful found by the `where` argument doesn't exist, create a new ReviewHelpful with this data.
+     */
+    create: XOR<ReviewHelpfulCreateInput, ReviewHelpfulUncheckedCreateInput>
+    /**
+     * In case the ReviewHelpful was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReviewHelpfulUpdateInput, ReviewHelpfulUncheckedUpdateInput>
+  }
+
+  /**
+   * ReviewHelpful delete
+   */
+  export type ReviewHelpfulDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    /**
+     * Filter which ReviewHelpful to delete.
+     */
+    where: ReviewHelpfulWhereUniqueInput
+  }
+
+  /**
+   * ReviewHelpful deleteMany
+   */
+  export type ReviewHelpfulDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReviewHelpfuls to delete
+     */
+    where?: ReviewHelpfulWhereInput
+    /**
+     * Limit how many ReviewHelpfuls to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReviewHelpful without action
+   */
+  export type ReviewHelpfulDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
   }
 
 
@@ -47086,6 +49518,8 @@ export namespace Prisma {
     cart?: boolean | User$cartArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
+    reviewReplies?: boolean | User$reviewRepliesArgs<ExtArgs>
+    reviewHelpfulMarks?: boolean | User$reviewHelpfulMarksArgs<ExtArgs>
     addresses?: boolean | User$addressesArgs<ExtArgs>
     affiliate?: boolean | User$affiliateArgs<ExtArgs>
     roleAssignments?: boolean | User$roleAssignmentsArgs<ExtArgs>
@@ -47168,6 +49602,8 @@ export namespace Prisma {
     cart?: boolean | User$cartArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
+    reviewReplies?: boolean | User$reviewRepliesArgs<ExtArgs>
+    reviewHelpfulMarks?: boolean | User$reviewHelpfulMarksArgs<ExtArgs>
     addresses?: boolean | User$addressesArgs<ExtArgs>
     affiliate?: boolean | User$affiliateArgs<ExtArgs>
     roleAssignments?: boolean | User$roleAssignmentsArgs<ExtArgs>
@@ -47189,6 +49625,8 @@ export namespace Prisma {
       cart: Prisma.$CartPayload<ExtArgs> | null
       orders: Prisma.$OrderPayload<ExtArgs>[]
       reviews: Prisma.$ProductReviewPayload<ExtArgs>[]
+      reviewReplies: Prisma.$ReviewReplyPayload<ExtArgs>[]
+      reviewHelpfulMarks: Prisma.$ReviewHelpfulPayload<ExtArgs>[]
       addresses: Prisma.$AddressPayload<ExtArgs>[]
       affiliate: Prisma.$AffiliatePayload<ExtArgs> | null
       roleAssignments: Prisma.$UserRoleAssignmentPayload<ExtArgs>[]
@@ -47613,6 +50051,8 @@ export namespace Prisma {
     cart<T extends User$cartArgs<ExtArgs> = {}>(args?: Subset<T, User$cartArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewReplies<T extends User$reviewRepliesArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewRepliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewHelpfulMarks<T extends User$reviewHelpfulMarksArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewHelpfulMarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewHelpfulPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     addresses<T extends User$addressesArgs<ExtArgs> = {}>(args?: Subset<T, User$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     affiliate<T extends User$affiliateArgs<ExtArgs> = {}>(args?: Subset<T, User$affiliateArgs<ExtArgs>>): Prisma__AffiliateClient<$Result.GetResult<Prisma.$AffiliatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     roleAssignments<T extends User$roleAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$roleAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -48127,6 +50567,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProductReviewScalarFieldEnum | ProductReviewScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewReplies
+   */
+  export type User$reviewRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewReply
+     */
+    select?: ReviewReplySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewReply
+     */
+    omit?: ReviewReplyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewReplyInclude<ExtArgs> | null
+    where?: ReviewReplyWhereInput
+    orderBy?: ReviewReplyOrderByWithRelationInput | ReviewReplyOrderByWithRelationInput[]
+    cursor?: ReviewReplyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewReplyScalarFieldEnum | ReviewReplyScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewHelpfulMarks
+   */
+  export type User$reviewHelpfulMarksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewHelpful
+     */
+    select?: ReviewHelpfulSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewHelpful
+     */
+    omit?: ReviewHelpfulOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewHelpfulInclude<ExtArgs> | null
+    where?: ReviewHelpfulWhereInput
+    orderBy?: ReviewHelpfulOrderByWithRelationInput | ReviewHelpfulOrderByWithRelationInput[]
+    cursor?: ReviewHelpfulWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewHelpfulScalarFieldEnum | ReviewHelpfulScalarFieldEnum[]
   }
 
   /**
@@ -50954,6 +53442,30 @@ export namespace Prisma {
   export type ReviewImageScalarFieldEnum = (typeof ReviewImageScalarFieldEnum)[keyof typeof ReviewImageScalarFieldEnum]
 
 
+  export const ReviewReplyScalarFieldEnum: {
+    id: 'id',
+    reviewId: 'reviewId',
+    userId: 'userId',
+    content: 'content',
+    isAdmin: 'isAdmin',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ReviewReplyScalarFieldEnum = (typeof ReviewReplyScalarFieldEnum)[keyof typeof ReviewReplyScalarFieldEnum]
+
+
+  export const ReviewHelpfulScalarFieldEnum: {
+    id: 'id',
+    reviewId: 'reviewId',
+    userId: 'userId',
+    isHelpful: 'isHelpful',
+    createdAt: 'createdAt'
+  };
+
+  export type ReviewHelpfulScalarFieldEnum = (typeof ReviewHelpfulScalarFieldEnum)[keyof typeof ReviewHelpfulScalarFieldEnum]
+
+
   export const AuthCodeScalarFieldEnum: {
     id: 'id',
     authCode: 'authCode',
@@ -52649,7 +55161,6 @@ export namespace Prisma {
   export type CartItemWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     cartId_variantId?: CartItemCartIdVariantIdCompoundUniqueInput
-    cartId_productId?: CartItemCartIdProductIdCompoundUniqueInput
     AND?: CartItemWhereInput | CartItemWhereInput[]
     OR?: CartItemWhereInput[]
     NOT?: CartItemWhereInput | CartItemWhereInput[]
@@ -52662,7 +55173,7 @@ export namespace Prisma {
     cart?: XOR<CartScalarRelationFilter, CartWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     variant?: XOR<ProductVariantNullableScalarRelationFilter, ProductVariantWhereInput> | null
-  }, "id" | "cartId_variantId" | "cartId_productId">
+  }, "id" | "cartId_variantId">
 
   export type CartItemOrderByWithAggregationInput = {
     id?: SortOrder
@@ -54119,6 +56630,8 @@ export namespace Prisma {
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     reviewImages?: ReviewImageListRelationFilter
+    replies?: ReviewReplyListRelationFilter
+    helpfulMarks?: ReviewHelpfulListRelationFilter
   }
 
   export type ProductReviewOrderByWithRelationInput = {
@@ -54136,6 +56649,8 @@ export namespace Prisma {
     product?: ProductOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     reviewImages?: ReviewImageOrderByRelationAggregateInput
+    replies?: ReviewReplyOrderByRelationAggregateInput
+    helpfulMarks?: ReviewHelpfulOrderByRelationAggregateInput
   }
 
   export type ProductReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -54157,6 +56672,8 @@ export namespace Prisma {
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     reviewImages?: ReviewImageListRelationFilter
+    replies?: ReviewReplyListRelationFilter
+    helpfulMarks?: ReviewHelpfulListRelationFilter
   }, "id" | "productId_userId">
 
   export type ProductReviewOrderByWithAggregationInput = {
@@ -54253,6 +56770,133 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ReviewImage"> | Date | string
   }
 
+  export type ReviewReplyWhereInput = {
+    AND?: ReviewReplyWhereInput | ReviewReplyWhereInput[]
+    OR?: ReviewReplyWhereInput[]
+    NOT?: ReviewReplyWhereInput | ReviewReplyWhereInput[]
+    id?: StringFilter<"ReviewReply"> | string
+    reviewId?: StringFilter<"ReviewReply"> | string
+    userId?: StringFilter<"ReviewReply"> | string
+    content?: StringFilter<"ReviewReply"> | string
+    isAdmin?: BoolFilter<"ReviewReply"> | boolean
+    createdAt?: DateTimeFilter<"ReviewReply"> | Date | string
+    updatedAt?: DateTimeFilter<"ReviewReply"> | Date | string
+    review?: XOR<ProductReviewScalarRelationFilter, ProductReviewWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ReviewReplyOrderByWithRelationInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    review?: ProductReviewOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ReviewReplyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReviewReplyWhereInput | ReviewReplyWhereInput[]
+    OR?: ReviewReplyWhereInput[]
+    NOT?: ReviewReplyWhereInput | ReviewReplyWhereInput[]
+    reviewId?: StringFilter<"ReviewReply"> | string
+    userId?: StringFilter<"ReviewReply"> | string
+    content?: StringFilter<"ReviewReply"> | string
+    isAdmin?: BoolFilter<"ReviewReply"> | boolean
+    createdAt?: DateTimeFilter<"ReviewReply"> | Date | string
+    updatedAt?: DateTimeFilter<"ReviewReply"> | Date | string
+    review?: XOR<ProductReviewScalarRelationFilter, ProductReviewWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ReviewReplyOrderByWithAggregationInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ReviewReplyCountOrderByAggregateInput
+    _max?: ReviewReplyMaxOrderByAggregateInput
+    _min?: ReviewReplyMinOrderByAggregateInput
+  }
+
+  export type ReviewReplyScalarWhereWithAggregatesInput = {
+    AND?: ReviewReplyScalarWhereWithAggregatesInput | ReviewReplyScalarWhereWithAggregatesInput[]
+    OR?: ReviewReplyScalarWhereWithAggregatesInput[]
+    NOT?: ReviewReplyScalarWhereWithAggregatesInput | ReviewReplyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReviewReply"> | string
+    reviewId?: StringWithAggregatesFilter<"ReviewReply"> | string
+    userId?: StringWithAggregatesFilter<"ReviewReply"> | string
+    content?: StringWithAggregatesFilter<"ReviewReply"> | string
+    isAdmin?: BoolWithAggregatesFilter<"ReviewReply"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ReviewReply"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ReviewReply"> | Date | string
+  }
+
+  export type ReviewHelpfulWhereInput = {
+    AND?: ReviewHelpfulWhereInput | ReviewHelpfulWhereInput[]
+    OR?: ReviewHelpfulWhereInput[]
+    NOT?: ReviewHelpfulWhereInput | ReviewHelpfulWhereInput[]
+    id?: StringFilter<"ReviewHelpful"> | string
+    reviewId?: StringFilter<"ReviewHelpful"> | string
+    userId?: StringFilter<"ReviewHelpful"> | string
+    isHelpful?: BoolFilter<"ReviewHelpful"> | boolean
+    createdAt?: DateTimeFilter<"ReviewHelpful"> | Date | string
+    review?: XOR<ProductReviewScalarRelationFilter, ProductReviewWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ReviewHelpfulOrderByWithRelationInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    isHelpful?: SortOrder
+    createdAt?: SortOrder
+    review?: ProductReviewOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ReviewHelpfulWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reviewId_userId?: ReviewHelpfulReviewIdUserIdCompoundUniqueInput
+    AND?: ReviewHelpfulWhereInput | ReviewHelpfulWhereInput[]
+    OR?: ReviewHelpfulWhereInput[]
+    NOT?: ReviewHelpfulWhereInput | ReviewHelpfulWhereInput[]
+    reviewId?: StringFilter<"ReviewHelpful"> | string
+    userId?: StringFilter<"ReviewHelpful"> | string
+    isHelpful?: BoolFilter<"ReviewHelpful"> | boolean
+    createdAt?: DateTimeFilter<"ReviewHelpful"> | Date | string
+    review?: XOR<ProductReviewScalarRelationFilter, ProductReviewWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "reviewId_userId">
+
+  export type ReviewHelpfulOrderByWithAggregationInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    isHelpful?: SortOrder
+    createdAt?: SortOrder
+    _count?: ReviewHelpfulCountOrderByAggregateInput
+    _max?: ReviewHelpfulMaxOrderByAggregateInput
+    _min?: ReviewHelpfulMinOrderByAggregateInput
+  }
+
+  export type ReviewHelpfulScalarWhereWithAggregatesInput = {
+    AND?: ReviewHelpfulScalarWhereWithAggregatesInput | ReviewHelpfulScalarWhereWithAggregatesInput[]
+    OR?: ReviewHelpfulScalarWhereWithAggregatesInput[]
+    NOT?: ReviewHelpfulScalarWhereWithAggregatesInput | ReviewHelpfulScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReviewHelpful"> | string
+    reviewId?: StringWithAggregatesFilter<"ReviewHelpful"> | string
+    userId?: StringWithAggregatesFilter<"ReviewHelpful"> | string
+    isHelpful?: BoolWithAggregatesFilter<"ReviewHelpful"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ReviewHelpful"> | Date | string
+  }
+
   export type AuthCodeWhereInput = {
     AND?: AuthCodeWhereInput | AuthCodeWhereInput[]
     OR?: AuthCodeWhereInput[]
@@ -54333,6 +56977,8 @@ export namespace Prisma {
     cart?: XOR<CartNullableScalarRelationFilter, CartWhereInput> | null
     orders?: OrderListRelationFilter
     reviews?: ProductReviewListRelationFilter
+    reviewReplies?: ReviewReplyListRelationFilter
+    reviewHelpfulMarks?: ReviewHelpfulListRelationFilter
     addresses?: AddressListRelationFilter
     affiliate?: XOR<AffiliateNullableScalarRelationFilter, AffiliateWhereInput> | null
     roleAssignments?: UserRoleAssignmentListRelationFilter
@@ -54364,6 +57010,8 @@ export namespace Prisma {
     cart?: CartOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
     reviews?: ProductReviewOrderByRelationAggregateInput
+    reviewReplies?: ReviewReplyOrderByRelationAggregateInput
+    reviewHelpfulMarks?: ReviewHelpfulOrderByRelationAggregateInput
     addresses?: AddressOrderByRelationAggregateInput
     affiliate?: AffiliateOrderByWithRelationInput
     roleAssignments?: UserRoleAssignmentOrderByRelationAggregateInput
@@ -54398,6 +57046,8 @@ export namespace Prisma {
     cart?: XOR<CartNullableScalarRelationFilter, CartWhereInput> | null
     orders?: OrderListRelationFilter
     reviews?: ProductReviewListRelationFilter
+    reviewReplies?: ReviewReplyListRelationFilter
+    reviewHelpfulMarks?: ReviewHelpfulListRelationFilter
     addresses?: AddressListRelationFilter
     affiliate?: XOR<AffiliateNullableScalarRelationFilter, AffiliateWhereInput> | null
     roleAssignments?: UserRoleAssignmentListRelationFilter
@@ -57578,6 +60228,8 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutReviewsInput
     user: UserCreateNestedOneWithoutReviewsInput
     reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateInput = {
@@ -57593,6 +60245,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyUncheckedCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUpdateInput = {
@@ -57608,6 +60262,8 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateInput = {
@@ -57623,6 +60279,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUncheckedUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewCreateManyInput = {
@@ -57719,6 +60377,128 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ReviewReplyCreateInput = {
+    id?: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    review: ProductReviewCreateNestedOneWithoutRepliesInput
+    user: UserCreateNestedOneWithoutReviewRepliesInput
+  }
+
+  export type ReviewReplyUncheckedCreateInput = {
+    id?: string
+    reviewId: string
+    userId: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewReplyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    review?: ProductReviewUpdateOneRequiredWithoutRepliesNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewRepliesNestedInput
+  }
+
+  export type ReviewReplyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewReplyCreateManyInput = {
+    id?: string
+    reviewId: string
+    userId: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewReplyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewReplyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulCreateInput = {
+    id?: string
+    isHelpful: boolean
+    createdAt?: Date | string
+    review: ProductReviewCreateNestedOneWithoutHelpfulMarksInput
+    user: UserCreateNestedOneWithoutReviewHelpfulMarksInput
+  }
+
+  export type ReviewHelpfulUncheckedCreateInput = {
+    id?: string
+    reviewId: string
+    userId: string
+    isHelpful: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReviewHelpfulUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    review?: ProductReviewUpdateOneRequiredWithoutHelpfulMarksNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewHelpfulMarksNestedInput
+  }
+
+  export type ReviewHelpfulUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulCreateManyInput = {
+    id?: string
+    reviewId: string
+    userId: string
+    isHelpful: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReviewHelpfulUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AuthCodeCreateInput = {
     id?: string
     authCode?: string | null
@@ -57797,6 +60577,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -57828,6 +60610,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -57857,6 +60641,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -57888,6 +60674,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -59317,11 +62105,6 @@ export namespace Prisma {
     variantId: string
   }
 
-  export type CartItemCartIdProductIdCompoundUniqueInput = {
-    cartId: string
-    productId: string
-  }
-
   export type CartItemCountOrderByAggregateInput = {
     id?: SortOrder
     cartId?: SortOrder
@@ -60494,6 +63277,26 @@ export namespace Prisma {
     discount?: SortOrder
   }
 
+  export type ReviewReplyListRelationFilter = {
+    every?: ReviewReplyWhereInput
+    some?: ReviewReplyWhereInput
+    none?: ReviewReplyWhereInput
+  }
+
+  export type ReviewHelpfulListRelationFilter = {
+    every?: ReviewHelpfulWhereInput
+    some?: ReviewHelpfulWhereInput
+    none?: ReviewHelpfulWhereInput
+  }
+
+  export type ReviewReplyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReviewHelpfulOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ProductReviewProductIdUserIdCompoundUniqueInput = {
     productId: string
     userId: string
@@ -60577,6 +63380,65 @@ export namespace Prisma {
     reviewId?: SortOrder
     mediaId?: SortOrder
     alt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReviewReplyCountOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReviewReplyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReviewReplyMinOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReviewHelpfulReviewIdUserIdCompoundUniqueInput = {
+    reviewId: string
+    userId: string
+  }
+
+  export type ReviewHelpfulCountOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    isHelpful?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReviewHelpfulMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    isHelpful?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReviewHelpfulMinOrderByAggregateInput = {
+    id?: SortOrder
+    reviewId?: SortOrder
+    userId?: SortOrder
+    isHelpful?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -63290,11 +66152,39 @@ export namespace Prisma {
     connect?: ReviewImageWhereUniqueInput | ReviewImageWhereUniqueInput[]
   }
 
+  export type ReviewReplyCreateNestedManyWithoutReviewInput = {
+    create?: XOR<ReviewReplyCreateWithoutReviewInput, ReviewReplyUncheckedCreateWithoutReviewInput> | ReviewReplyCreateWithoutReviewInput[] | ReviewReplyUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutReviewInput | ReviewReplyCreateOrConnectWithoutReviewInput[]
+    createMany?: ReviewReplyCreateManyReviewInputEnvelope
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+  }
+
+  export type ReviewHelpfulCreateNestedManyWithoutReviewInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutReviewInput, ReviewHelpfulUncheckedCreateWithoutReviewInput> | ReviewHelpfulCreateWithoutReviewInput[] | ReviewHelpfulUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutReviewInput | ReviewHelpfulCreateOrConnectWithoutReviewInput[]
+    createMany?: ReviewHelpfulCreateManyReviewInputEnvelope
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+  }
+
   export type ReviewImageUncheckedCreateNestedManyWithoutReviewInput = {
     create?: XOR<ReviewImageCreateWithoutReviewInput, ReviewImageUncheckedCreateWithoutReviewInput> | ReviewImageCreateWithoutReviewInput[] | ReviewImageUncheckedCreateWithoutReviewInput[]
     connectOrCreate?: ReviewImageCreateOrConnectWithoutReviewInput | ReviewImageCreateOrConnectWithoutReviewInput[]
     createMany?: ReviewImageCreateManyReviewInputEnvelope
     connect?: ReviewImageWhereUniqueInput | ReviewImageWhereUniqueInput[]
+  }
+
+  export type ReviewReplyUncheckedCreateNestedManyWithoutReviewInput = {
+    create?: XOR<ReviewReplyCreateWithoutReviewInput, ReviewReplyUncheckedCreateWithoutReviewInput> | ReviewReplyCreateWithoutReviewInput[] | ReviewReplyUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutReviewInput | ReviewReplyCreateOrConnectWithoutReviewInput[]
+    createMany?: ReviewReplyCreateManyReviewInputEnvelope
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+  }
+
+  export type ReviewHelpfulUncheckedCreateNestedManyWithoutReviewInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutReviewInput, ReviewHelpfulUncheckedCreateWithoutReviewInput> | ReviewHelpfulCreateWithoutReviewInput[] | ReviewHelpfulUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutReviewInput | ReviewHelpfulCreateOrConnectWithoutReviewInput[]
+    createMany?: ReviewHelpfulCreateManyReviewInputEnvelope
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
   }
 
   export type ProductUpdateOneRequiredWithoutReviewsNestedInput = {
@@ -63327,6 +66217,34 @@ export namespace Prisma {
     deleteMany?: ReviewImageScalarWhereInput | ReviewImageScalarWhereInput[]
   }
 
+  export type ReviewReplyUpdateManyWithoutReviewNestedInput = {
+    create?: XOR<ReviewReplyCreateWithoutReviewInput, ReviewReplyUncheckedCreateWithoutReviewInput> | ReviewReplyCreateWithoutReviewInput[] | ReviewReplyUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutReviewInput | ReviewReplyCreateOrConnectWithoutReviewInput[]
+    upsert?: ReviewReplyUpsertWithWhereUniqueWithoutReviewInput | ReviewReplyUpsertWithWhereUniqueWithoutReviewInput[]
+    createMany?: ReviewReplyCreateManyReviewInputEnvelope
+    set?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    disconnect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    delete?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    update?: ReviewReplyUpdateWithWhereUniqueWithoutReviewInput | ReviewReplyUpdateWithWhereUniqueWithoutReviewInput[]
+    updateMany?: ReviewReplyUpdateManyWithWhereWithoutReviewInput | ReviewReplyUpdateManyWithWhereWithoutReviewInput[]
+    deleteMany?: ReviewReplyScalarWhereInput | ReviewReplyScalarWhereInput[]
+  }
+
+  export type ReviewHelpfulUpdateManyWithoutReviewNestedInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutReviewInput, ReviewHelpfulUncheckedCreateWithoutReviewInput> | ReviewHelpfulCreateWithoutReviewInput[] | ReviewHelpfulUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutReviewInput | ReviewHelpfulCreateOrConnectWithoutReviewInput[]
+    upsert?: ReviewHelpfulUpsertWithWhereUniqueWithoutReviewInput | ReviewHelpfulUpsertWithWhereUniqueWithoutReviewInput[]
+    createMany?: ReviewHelpfulCreateManyReviewInputEnvelope
+    set?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    disconnect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    delete?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    update?: ReviewHelpfulUpdateWithWhereUniqueWithoutReviewInput | ReviewHelpfulUpdateWithWhereUniqueWithoutReviewInput[]
+    updateMany?: ReviewHelpfulUpdateManyWithWhereWithoutReviewInput | ReviewHelpfulUpdateManyWithWhereWithoutReviewInput[]
+    deleteMany?: ReviewHelpfulScalarWhereInput | ReviewHelpfulScalarWhereInput[]
+  }
+
   export type ReviewImageUncheckedUpdateManyWithoutReviewNestedInput = {
     create?: XOR<ReviewImageCreateWithoutReviewInput, ReviewImageUncheckedCreateWithoutReviewInput> | ReviewImageCreateWithoutReviewInput[] | ReviewImageUncheckedCreateWithoutReviewInput[]
     connectOrCreate?: ReviewImageCreateOrConnectWithoutReviewInput | ReviewImageCreateOrConnectWithoutReviewInput[]
@@ -63339,6 +66257,34 @@ export namespace Prisma {
     update?: ReviewImageUpdateWithWhereUniqueWithoutReviewInput | ReviewImageUpdateWithWhereUniqueWithoutReviewInput[]
     updateMany?: ReviewImageUpdateManyWithWhereWithoutReviewInput | ReviewImageUpdateManyWithWhereWithoutReviewInput[]
     deleteMany?: ReviewImageScalarWhereInput | ReviewImageScalarWhereInput[]
+  }
+
+  export type ReviewReplyUncheckedUpdateManyWithoutReviewNestedInput = {
+    create?: XOR<ReviewReplyCreateWithoutReviewInput, ReviewReplyUncheckedCreateWithoutReviewInput> | ReviewReplyCreateWithoutReviewInput[] | ReviewReplyUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutReviewInput | ReviewReplyCreateOrConnectWithoutReviewInput[]
+    upsert?: ReviewReplyUpsertWithWhereUniqueWithoutReviewInput | ReviewReplyUpsertWithWhereUniqueWithoutReviewInput[]
+    createMany?: ReviewReplyCreateManyReviewInputEnvelope
+    set?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    disconnect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    delete?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    update?: ReviewReplyUpdateWithWhereUniqueWithoutReviewInput | ReviewReplyUpdateWithWhereUniqueWithoutReviewInput[]
+    updateMany?: ReviewReplyUpdateManyWithWhereWithoutReviewInput | ReviewReplyUpdateManyWithWhereWithoutReviewInput[]
+    deleteMany?: ReviewReplyScalarWhereInput | ReviewReplyScalarWhereInput[]
+  }
+
+  export type ReviewHelpfulUncheckedUpdateManyWithoutReviewNestedInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutReviewInput, ReviewHelpfulUncheckedCreateWithoutReviewInput> | ReviewHelpfulCreateWithoutReviewInput[] | ReviewHelpfulUncheckedCreateWithoutReviewInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutReviewInput | ReviewHelpfulCreateOrConnectWithoutReviewInput[]
+    upsert?: ReviewHelpfulUpsertWithWhereUniqueWithoutReviewInput | ReviewHelpfulUpsertWithWhereUniqueWithoutReviewInput[]
+    createMany?: ReviewHelpfulCreateManyReviewInputEnvelope
+    set?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    disconnect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    delete?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    update?: ReviewHelpfulUpdateWithWhereUniqueWithoutReviewInput | ReviewHelpfulUpdateWithWhereUniqueWithoutReviewInput[]
+    updateMany?: ReviewHelpfulUpdateManyWithWhereWithoutReviewInput | ReviewHelpfulUpdateManyWithWhereWithoutReviewInput[]
+    deleteMany?: ReviewHelpfulScalarWhereInput | ReviewHelpfulScalarWhereInput[]
   }
 
   export type ProductReviewCreateNestedOneWithoutReviewImagesInput = {
@@ -63369,6 +66315,62 @@ export namespace Prisma {
     update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutReviewImagesInput, MediaUpdateWithoutReviewImagesInput>, MediaUncheckedUpdateWithoutReviewImagesInput>
   }
 
+  export type ProductReviewCreateNestedOneWithoutRepliesInput = {
+    create?: XOR<ProductReviewCreateWithoutRepliesInput, ProductReviewUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: ProductReviewCreateOrConnectWithoutRepliesInput
+    connect?: ProductReviewWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewRepliesInput = {
+    create?: XOR<UserCreateWithoutReviewRepliesInput, UserUncheckedCreateWithoutReviewRepliesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewRepliesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProductReviewUpdateOneRequiredWithoutRepliesNestedInput = {
+    create?: XOR<ProductReviewCreateWithoutRepliesInput, ProductReviewUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: ProductReviewCreateOrConnectWithoutRepliesInput
+    upsert?: ProductReviewUpsertWithoutRepliesInput
+    connect?: ProductReviewWhereUniqueInput
+    update?: XOR<XOR<ProductReviewUpdateToOneWithWhereWithoutRepliesInput, ProductReviewUpdateWithoutRepliesInput>, ProductReviewUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReviewRepliesNestedInput = {
+    create?: XOR<UserCreateWithoutReviewRepliesInput, UserUncheckedCreateWithoutReviewRepliesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewRepliesInput
+    upsert?: UserUpsertWithoutReviewRepliesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewRepliesInput, UserUpdateWithoutReviewRepliesInput>, UserUncheckedUpdateWithoutReviewRepliesInput>
+  }
+
+  export type ProductReviewCreateNestedOneWithoutHelpfulMarksInput = {
+    create?: XOR<ProductReviewCreateWithoutHelpfulMarksInput, ProductReviewUncheckedCreateWithoutHelpfulMarksInput>
+    connectOrCreate?: ProductReviewCreateOrConnectWithoutHelpfulMarksInput
+    connect?: ProductReviewWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewHelpfulMarksInput = {
+    create?: XOR<UserCreateWithoutReviewHelpfulMarksInput, UserUncheckedCreateWithoutReviewHelpfulMarksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewHelpfulMarksInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProductReviewUpdateOneRequiredWithoutHelpfulMarksNestedInput = {
+    create?: XOR<ProductReviewCreateWithoutHelpfulMarksInput, ProductReviewUncheckedCreateWithoutHelpfulMarksInput>
+    connectOrCreate?: ProductReviewCreateOrConnectWithoutHelpfulMarksInput
+    upsert?: ProductReviewUpsertWithoutHelpfulMarksInput
+    connect?: ProductReviewWhereUniqueInput
+    update?: XOR<XOR<ProductReviewUpdateToOneWithWhereWithoutHelpfulMarksInput, ProductReviewUpdateWithoutHelpfulMarksInput>, ProductReviewUncheckedUpdateWithoutHelpfulMarksInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReviewHelpfulMarksNestedInput = {
+    create?: XOR<UserCreateWithoutReviewHelpfulMarksInput, UserUncheckedCreateWithoutReviewHelpfulMarksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewHelpfulMarksInput
+    upsert?: UserUpsertWithoutReviewHelpfulMarksInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewHelpfulMarksInput, UserUpdateWithoutReviewHelpfulMarksInput>, UserUncheckedUpdateWithoutReviewHelpfulMarksInput>
+  }
+
   export type CartCreateNestedOneWithoutUserInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -63387,6 +66389,20 @@ export namespace Prisma {
     connectOrCreate?: ProductReviewCreateOrConnectWithoutUserInput | ProductReviewCreateOrConnectWithoutUserInput[]
     createMany?: ProductReviewCreateManyUserInputEnvelope
     connect?: ProductReviewWhereUniqueInput | ProductReviewWhereUniqueInput[]
+  }
+
+  export type ReviewReplyCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewReplyCreateWithoutUserInput, ReviewReplyUncheckedCreateWithoutUserInput> | ReviewReplyCreateWithoutUserInput[] | ReviewReplyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutUserInput | ReviewReplyCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewReplyCreateManyUserInputEnvelope
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+  }
+
+  export type ReviewHelpfulCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutUserInput, ReviewHelpfulUncheckedCreateWithoutUserInput> | ReviewHelpfulCreateWithoutUserInput[] | ReviewHelpfulUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutUserInput | ReviewHelpfulCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewHelpfulCreateManyUserInputEnvelope
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
   }
 
   export type AddressCreateNestedManyWithoutUserInput = {
@@ -63447,6 +66463,20 @@ export namespace Prisma {
     connectOrCreate?: ProductReviewCreateOrConnectWithoutUserInput | ProductReviewCreateOrConnectWithoutUserInput[]
     createMany?: ProductReviewCreateManyUserInputEnvelope
     connect?: ProductReviewWhereUniqueInput | ProductReviewWhereUniqueInput[]
+  }
+
+  export type ReviewReplyUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewReplyCreateWithoutUserInput, ReviewReplyUncheckedCreateWithoutUserInput> | ReviewReplyCreateWithoutUserInput[] | ReviewReplyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutUserInput | ReviewReplyCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewReplyCreateManyUserInputEnvelope
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+  }
+
+  export type ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutUserInput, ReviewHelpfulUncheckedCreateWithoutUserInput> | ReviewHelpfulCreateWithoutUserInput[] | ReviewHelpfulUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutUserInput | ReviewHelpfulCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewHelpfulCreateManyUserInputEnvelope
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
   }
 
   export type AddressUncheckedCreateNestedManyWithoutUserInput = {
@@ -63519,6 +66549,34 @@ export namespace Prisma {
     update?: ProductReviewUpdateWithWhereUniqueWithoutUserInput | ProductReviewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ProductReviewUpdateManyWithWhereWithoutUserInput | ProductReviewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ProductReviewScalarWhereInput | ProductReviewScalarWhereInput[]
+  }
+
+  export type ReviewReplyUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewReplyCreateWithoutUserInput, ReviewReplyUncheckedCreateWithoutUserInput> | ReviewReplyCreateWithoutUserInput[] | ReviewReplyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutUserInput | ReviewReplyCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewReplyUpsertWithWhereUniqueWithoutUserInput | ReviewReplyUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewReplyCreateManyUserInputEnvelope
+    set?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    disconnect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    delete?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    update?: ReviewReplyUpdateWithWhereUniqueWithoutUserInput | ReviewReplyUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewReplyUpdateManyWithWhereWithoutUserInput | ReviewReplyUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewReplyScalarWhereInput | ReviewReplyScalarWhereInput[]
+  }
+
+  export type ReviewHelpfulUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutUserInput, ReviewHelpfulUncheckedCreateWithoutUserInput> | ReviewHelpfulCreateWithoutUserInput[] | ReviewHelpfulUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutUserInput | ReviewHelpfulCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewHelpfulUpsertWithWhereUniqueWithoutUserInput | ReviewHelpfulUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewHelpfulCreateManyUserInputEnvelope
+    set?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    disconnect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    delete?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    update?: ReviewHelpfulUpdateWithWhereUniqueWithoutUserInput | ReviewHelpfulUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewHelpfulUpdateManyWithWhereWithoutUserInput | ReviewHelpfulUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewHelpfulScalarWhereInput | ReviewHelpfulScalarWhereInput[]
   }
 
   export type AddressUpdateManyWithoutUserNestedInput = {
@@ -63633,6 +66691,34 @@ export namespace Prisma {
     update?: ProductReviewUpdateWithWhereUniqueWithoutUserInput | ProductReviewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ProductReviewUpdateManyWithWhereWithoutUserInput | ProductReviewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ProductReviewScalarWhereInput | ProductReviewScalarWhereInput[]
+  }
+
+  export type ReviewReplyUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewReplyCreateWithoutUserInput, ReviewReplyUncheckedCreateWithoutUserInput> | ReviewReplyCreateWithoutUserInput[] | ReviewReplyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewReplyCreateOrConnectWithoutUserInput | ReviewReplyCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewReplyUpsertWithWhereUniqueWithoutUserInput | ReviewReplyUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewReplyCreateManyUserInputEnvelope
+    set?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    disconnect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    delete?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    connect?: ReviewReplyWhereUniqueInput | ReviewReplyWhereUniqueInput[]
+    update?: ReviewReplyUpdateWithWhereUniqueWithoutUserInput | ReviewReplyUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewReplyUpdateManyWithWhereWithoutUserInput | ReviewReplyUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewReplyScalarWhereInput | ReviewReplyScalarWhereInput[]
+  }
+
+  export type ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewHelpfulCreateWithoutUserInput, ReviewHelpfulUncheckedCreateWithoutUserInput> | ReviewHelpfulCreateWithoutUserInput[] | ReviewHelpfulUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewHelpfulCreateOrConnectWithoutUserInput | ReviewHelpfulCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewHelpfulUpsertWithWhereUniqueWithoutUserInput | ReviewHelpfulUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewHelpfulCreateManyUserInputEnvelope
+    set?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    disconnect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    delete?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    connect?: ReviewHelpfulWhereUniqueInput | ReviewHelpfulWhereUniqueInput[]
+    update?: ReviewHelpfulUpdateWithWhereUniqueWithoutUserInput | ReviewHelpfulUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewHelpfulUpdateManyWithWhereWithoutUserInput | ReviewHelpfulUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewHelpfulScalarWhereInput | ReviewHelpfulScalarWhereInput[]
   }
 
   export type AddressUncheckedUpdateManyWithoutUserNestedInput = {
@@ -64309,6 +67395,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
@@ -64339,6 +67427,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
@@ -64437,6 +67527,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
@@ -64467,6 +67559,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
@@ -64532,6 +67626,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
@@ -64562,6 +67658,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
@@ -64668,6 +67766,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
@@ -64698,6 +67798,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
@@ -65530,6 +68632,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -65560,6 +68664,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -65604,6 +68710,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -65634,6 +68742,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -66277,6 +69387,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -66307,6 +69419,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -66394,6 +69508,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -66423,6 +69539,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -66601,6 +69719,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -66631,6 +69751,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -66860,6 +69982,8 @@ export namespace Prisma {
     phoneVerifiedAt?: Date | string | null
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -66890,6 +70014,8 @@ export namespace Prisma {
     phoneVerifiedAt?: Date | string | null
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -66962,6 +70088,8 @@ export namespace Prisma {
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -66992,6 +70120,8 @@ export namespace Prisma {
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -67321,6 +70451,8 @@ export namespace Prisma {
     phoneVerifiedAt?: Date | string | null
     cart?: CartCreateNestedOneWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -67351,6 +70483,8 @@ export namespace Prisma {
     phoneVerifiedAt?: Date | string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -67570,6 +70704,8 @@ export namespace Prisma {
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cart?: CartUpdateOneWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -67600,6 +70736,8 @@ export namespace Prisma {
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -69109,6 +72247,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
     reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateWithoutProductInput = {
@@ -69123,6 +72263,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyUncheckedCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewCreateOrConnectWithoutProductInput = {
@@ -71569,6 +74711,8 @@ export namespace Prisma {
     phoneVerifiedAt?: Date | string | null
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
@@ -71599,6 +74743,8 @@ export namespace Prisma {
     phoneVerifiedAt?: Date | string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
@@ -71632,6 +74778,58 @@ export namespace Prisma {
 
   export type ReviewImageCreateManyReviewInputEnvelope = {
     data: ReviewImageCreateManyReviewInput | ReviewImageCreateManyReviewInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewReplyCreateWithoutReviewInput = {
+    id?: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutReviewRepliesInput
+  }
+
+  export type ReviewReplyUncheckedCreateWithoutReviewInput = {
+    id?: string
+    userId: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewReplyCreateOrConnectWithoutReviewInput = {
+    where: ReviewReplyWhereUniqueInput
+    create: XOR<ReviewReplyCreateWithoutReviewInput, ReviewReplyUncheckedCreateWithoutReviewInput>
+  }
+
+  export type ReviewReplyCreateManyReviewInputEnvelope = {
+    data: ReviewReplyCreateManyReviewInput | ReviewReplyCreateManyReviewInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewHelpfulCreateWithoutReviewInput = {
+    id?: string
+    isHelpful: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutReviewHelpfulMarksInput
+  }
+
+  export type ReviewHelpfulUncheckedCreateWithoutReviewInput = {
+    id?: string
+    userId: string
+    isHelpful: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReviewHelpfulCreateOrConnectWithoutReviewInput = {
+    where: ReviewHelpfulWhereUniqueInput
+    create: XOR<ReviewHelpfulCreateWithoutReviewInput, ReviewHelpfulUncheckedCreateWithoutReviewInput>
+  }
+
+  export type ReviewHelpfulCreateManyReviewInputEnvelope = {
+    data: ReviewHelpfulCreateManyReviewInput | ReviewHelpfulCreateManyReviewInput[]
     skipDuplicates?: boolean
   }
 
@@ -71738,6 +74936,8 @@ export namespace Prisma {
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -71768,6 +74968,8 @@ export namespace Prisma {
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -71791,6 +74993,62 @@ export namespace Prisma {
     data: XOR<ReviewImageUpdateManyMutationInput, ReviewImageUncheckedUpdateManyWithoutReviewInput>
   }
 
+  export type ReviewReplyUpsertWithWhereUniqueWithoutReviewInput = {
+    where: ReviewReplyWhereUniqueInput
+    update: XOR<ReviewReplyUpdateWithoutReviewInput, ReviewReplyUncheckedUpdateWithoutReviewInput>
+    create: XOR<ReviewReplyCreateWithoutReviewInput, ReviewReplyUncheckedCreateWithoutReviewInput>
+  }
+
+  export type ReviewReplyUpdateWithWhereUniqueWithoutReviewInput = {
+    where: ReviewReplyWhereUniqueInput
+    data: XOR<ReviewReplyUpdateWithoutReviewInput, ReviewReplyUncheckedUpdateWithoutReviewInput>
+  }
+
+  export type ReviewReplyUpdateManyWithWhereWithoutReviewInput = {
+    where: ReviewReplyScalarWhereInput
+    data: XOR<ReviewReplyUpdateManyMutationInput, ReviewReplyUncheckedUpdateManyWithoutReviewInput>
+  }
+
+  export type ReviewReplyScalarWhereInput = {
+    AND?: ReviewReplyScalarWhereInput | ReviewReplyScalarWhereInput[]
+    OR?: ReviewReplyScalarWhereInput[]
+    NOT?: ReviewReplyScalarWhereInput | ReviewReplyScalarWhereInput[]
+    id?: StringFilter<"ReviewReply"> | string
+    reviewId?: StringFilter<"ReviewReply"> | string
+    userId?: StringFilter<"ReviewReply"> | string
+    content?: StringFilter<"ReviewReply"> | string
+    isAdmin?: BoolFilter<"ReviewReply"> | boolean
+    createdAt?: DateTimeFilter<"ReviewReply"> | Date | string
+    updatedAt?: DateTimeFilter<"ReviewReply"> | Date | string
+  }
+
+  export type ReviewHelpfulUpsertWithWhereUniqueWithoutReviewInput = {
+    where: ReviewHelpfulWhereUniqueInput
+    update: XOR<ReviewHelpfulUpdateWithoutReviewInput, ReviewHelpfulUncheckedUpdateWithoutReviewInput>
+    create: XOR<ReviewHelpfulCreateWithoutReviewInput, ReviewHelpfulUncheckedCreateWithoutReviewInput>
+  }
+
+  export type ReviewHelpfulUpdateWithWhereUniqueWithoutReviewInput = {
+    where: ReviewHelpfulWhereUniqueInput
+    data: XOR<ReviewHelpfulUpdateWithoutReviewInput, ReviewHelpfulUncheckedUpdateWithoutReviewInput>
+  }
+
+  export type ReviewHelpfulUpdateManyWithWhereWithoutReviewInput = {
+    where: ReviewHelpfulScalarWhereInput
+    data: XOR<ReviewHelpfulUpdateManyMutationInput, ReviewHelpfulUncheckedUpdateManyWithoutReviewInput>
+  }
+
+  export type ReviewHelpfulScalarWhereInput = {
+    AND?: ReviewHelpfulScalarWhereInput | ReviewHelpfulScalarWhereInput[]
+    OR?: ReviewHelpfulScalarWhereInput[]
+    NOT?: ReviewHelpfulScalarWhereInput | ReviewHelpfulScalarWhereInput[]
+    id?: StringFilter<"ReviewHelpful"> | string
+    reviewId?: StringFilter<"ReviewHelpful"> | string
+    userId?: StringFilter<"ReviewHelpful"> | string
+    isHelpful?: BoolFilter<"ReviewHelpful"> | boolean
+    createdAt?: DateTimeFilter<"ReviewHelpful"> | Date | string
+  }
+
   export type ProductReviewCreateWithoutReviewImagesInput = {
     id?: string
     rating: number
@@ -71803,6 +75061,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutReviewsInput
     user: UserCreateNestedOneWithoutReviewsInput
+    replies?: ReviewReplyCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateWithoutReviewImagesInput = {
@@ -71817,6 +75077,8 @@ export namespace Prisma {
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    replies?: ReviewReplyUncheckedCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewCreateOrConnectWithoutReviewImagesInput = {
@@ -71890,6 +75152,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
+    replies?: ReviewReplyUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateWithoutReviewImagesInput = {
@@ -71904,6 +75168,8 @@ export namespace Prisma {
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: ReviewReplyUncheckedUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type MediaUpsertWithoutReviewImagesInput = {
@@ -71953,6 +75219,446 @@ export namespace Prisma {
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+  }
+
+  export type ProductReviewCreateWithoutRepliesInput = {
+    id?: string
+    rating: number
+    title?: string | null
+    comment?: string | null
+    isVerified?: boolean
+    isApproved?: boolean
+    helpfulCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutReviewsInput
+    user: UserCreateNestedOneWithoutReviewsInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulCreateNestedManyWithoutReviewInput
+  }
+
+  export type ProductReviewUncheckedCreateWithoutRepliesInput = {
+    id?: string
+    productId: string
+    userId: string
+    rating: number
+    title?: string | null
+    comment?: string | null
+    isVerified?: boolean
+    isApproved?: boolean
+    helpfulCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type ProductReviewCreateOrConnectWithoutRepliesInput = {
+    where: ProductReviewWhereUniqueInput
+    create: XOR<ProductReviewCreateWithoutRepliesInput, ProductReviewUncheckedCreateWithoutRepliesInput>
+  }
+
+  export type UserCreateWithoutReviewRepliesInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewRepliesInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    avatarMediaId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewRepliesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewRepliesInput, UserUncheckedCreateWithoutReviewRepliesInput>
+  }
+
+  export type ProductReviewUpsertWithoutRepliesInput = {
+    update: XOR<ProductReviewUpdateWithoutRepliesInput, ProductReviewUncheckedUpdateWithoutRepliesInput>
+    create: XOR<ProductReviewCreateWithoutRepliesInput, ProductReviewUncheckedCreateWithoutRepliesInput>
+    where?: ProductReviewWhereInput
+  }
+
+  export type ProductReviewUpdateToOneWithWhereWithoutRepliesInput = {
+    where?: ProductReviewWhereInput
+    data: XOR<ProductReviewUpdateWithoutRepliesInput, ProductReviewUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type ProductReviewUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    helpfulCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUpdateManyWithoutReviewNestedInput
+  }
+
+  export type ProductReviewUncheckedUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    helpfulCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type UserUpsertWithoutReviewRepliesInput = {
+    update: XOR<UserUpdateWithoutReviewRepliesInput, UserUncheckedUpdateWithoutReviewRepliesInput>
+    create: XOR<UserCreateWithoutReviewRepliesInput, UserUncheckedCreateWithoutReviewRepliesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewRepliesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewRepliesInput, UserUncheckedUpdateWithoutReviewRepliesInput>
+  }
+
+  export type UserUpdateWithoutReviewRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ProductReviewCreateWithoutHelpfulMarksInput = {
+    id?: string
+    rating: number
+    title?: string | null
+    comment?: string | null
+    isVerified?: boolean
+    isApproved?: boolean
+    helpfulCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutReviewsInput
+    user: UserCreateNestedOneWithoutReviewsInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyCreateNestedManyWithoutReviewInput
+  }
+
+  export type ProductReviewUncheckedCreateWithoutHelpfulMarksInput = {
+    id?: string
+    productId: string
+    userId: string
+    rating: number
+    title?: string | null
+    comment?: string | null
+    isVerified?: boolean
+    isApproved?: boolean
+    helpfulCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyUncheckedCreateNestedManyWithoutReviewInput
+  }
+
+  export type ProductReviewCreateOrConnectWithoutHelpfulMarksInput = {
+    where: ProductReviewWhereUniqueInput
+    create: XOR<ProductReviewCreateWithoutHelpfulMarksInput, ProductReviewUncheckedCreateWithoutHelpfulMarksInput>
+  }
+
+  export type UserCreateWithoutReviewHelpfulMarksInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewHelpfulMarksInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    avatarMediaId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewHelpfulMarksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewHelpfulMarksInput, UserUncheckedCreateWithoutReviewHelpfulMarksInput>
+  }
+
+  export type ProductReviewUpsertWithoutHelpfulMarksInput = {
+    update: XOR<ProductReviewUpdateWithoutHelpfulMarksInput, ProductReviewUncheckedUpdateWithoutHelpfulMarksInput>
+    create: XOR<ProductReviewCreateWithoutHelpfulMarksInput, ProductReviewUncheckedCreateWithoutHelpfulMarksInput>
+    where?: ProductReviewWhereInput
+  }
+
+  export type ProductReviewUpdateToOneWithWhereWithoutHelpfulMarksInput = {
+    where?: ProductReviewWhereInput
+    data: XOR<ProductReviewUpdateWithoutHelpfulMarksInput, ProductReviewUncheckedUpdateWithoutHelpfulMarksInput>
+  }
+
+  export type ProductReviewUpdateWithoutHelpfulMarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    helpfulCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUpdateManyWithoutReviewNestedInput
+  }
+
+  export type ProductReviewUncheckedUpdateWithoutHelpfulMarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    helpfulCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type UserUpsertWithoutReviewHelpfulMarksInput = {
+    update: XOR<UserUpdateWithoutReviewHelpfulMarksInput, UserUncheckedUpdateWithoutReviewHelpfulMarksInput>
+    create: XOR<UserCreateWithoutReviewHelpfulMarksInput, UserUncheckedCreateWithoutReviewHelpfulMarksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewHelpfulMarksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewHelpfulMarksInput, UserUncheckedUpdateWithoutReviewHelpfulMarksInput>
+  }
+
+  export type UserUpdateWithoutReviewHelpfulMarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewHelpfulMarksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CartCreateWithoutUserInput = {
@@ -72040,6 +75746,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutReviewsInput
     reviewImages?: ReviewImageCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewUncheckedCreateWithoutUserInput = {
@@ -72054,6 +75762,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutReviewInput
+    replies?: ReviewReplyUncheckedCreateNestedManyWithoutReviewInput
+    helpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutReviewInput
   }
 
   export type ProductReviewCreateOrConnectWithoutUserInput = {
@@ -72063,6 +75773,58 @@ export namespace Prisma {
 
   export type ProductReviewCreateManyUserInputEnvelope = {
     data: ProductReviewCreateManyUserInput | ProductReviewCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewReplyCreateWithoutUserInput = {
+    id?: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    review: ProductReviewCreateNestedOneWithoutRepliesInput
+  }
+
+  export type ReviewReplyUncheckedCreateWithoutUserInput = {
+    id?: string
+    reviewId: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewReplyCreateOrConnectWithoutUserInput = {
+    where: ReviewReplyWhereUniqueInput
+    create: XOR<ReviewReplyCreateWithoutUserInput, ReviewReplyUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewReplyCreateManyUserInputEnvelope = {
+    data: ReviewReplyCreateManyUserInput | ReviewReplyCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewHelpfulCreateWithoutUserInput = {
+    id?: string
+    isHelpful: boolean
+    createdAt?: Date | string
+    review: ProductReviewCreateNestedOneWithoutHelpfulMarksInput
+  }
+
+  export type ReviewHelpfulUncheckedCreateWithoutUserInput = {
+    id?: string
+    reviewId: string
+    isHelpful: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReviewHelpfulCreateOrConnectWithoutUserInput = {
+    where: ReviewHelpfulWhereUniqueInput
+    create: XOR<ReviewHelpfulCreateWithoutUserInput, ReviewHelpfulUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewHelpfulCreateManyUserInputEnvelope = {
+    data: ReviewHelpfulCreateManyUserInput | ReviewHelpfulCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -72349,6 +76111,38 @@ export namespace Prisma {
     data: XOR<ProductReviewUpdateManyMutationInput, ProductReviewUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type ReviewReplyUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReviewReplyWhereUniqueInput
+    update: XOR<ReviewReplyUpdateWithoutUserInput, ReviewReplyUncheckedUpdateWithoutUserInput>
+    create: XOR<ReviewReplyCreateWithoutUserInput, ReviewReplyUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewReplyUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReviewReplyWhereUniqueInput
+    data: XOR<ReviewReplyUpdateWithoutUserInput, ReviewReplyUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReviewReplyUpdateManyWithWhereWithoutUserInput = {
+    where: ReviewReplyScalarWhereInput
+    data: XOR<ReviewReplyUpdateManyMutationInput, ReviewReplyUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ReviewHelpfulUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReviewHelpfulWhereUniqueInput
+    update: XOR<ReviewHelpfulUpdateWithoutUserInput, ReviewHelpfulUncheckedUpdateWithoutUserInput>
+    create: XOR<ReviewHelpfulCreateWithoutUserInput, ReviewHelpfulUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewHelpfulUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReviewHelpfulWhereUniqueInput
+    data: XOR<ReviewHelpfulUpdateWithoutUserInput, ReviewHelpfulUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReviewHelpfulUpdateManyWithWhereWithoutUserInput = {
+    where: ReviewHelpfulScalarWhereInput
+    data: XOR<ReviewHelpfulUpdateManyMutationInput, ReviewHelpfulUncheckedUpdateManyWithoutUserInput>
+  }
+
   export type AddressUpsertWithWhereUniqueWithoutUserInput = {
     where: AddressWhereUniqueInput
     update: XOR<AddressUpdateWithoutUserInput, AddressUncheckedUpdateWithoutUserInput>
@@ -72629,6 +76423,8 @@ export namespace Prisma {
     cart?: CartCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
@@ -72659,6 +76455,8 @@ export namespace Prisma {
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
@@ -72722,6 +76520,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
@@ -72752,6 +76552,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
@@ -73240,6 +77042,8 @@ export namespace Prisma {
     cart?: CartUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
@@ -73269,6 +77073,8 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
@@ -74098,6 +77904,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateWithoutProductInput = {
@@ -74112,6 +77920,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUncheckedUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateManyWithoutProductInput = {
@@ -74574,6 +78384,22 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ReviewReplyCreateManyReviewInput = {
+    id?: string
+    userId: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewHelpfulCreateManyReviewInput = {
+    id?: string
+    userId: string
+    isHelpful: boolean
+    createdAt?: Date | string
+  }
+
   export type ReviewImageUpdateWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
     alt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74592,6 +78418,54 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mediaId?: StringFieldUpdateOperationsInput | string
     alt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewReplyUpdateWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutReviewRepliesNestedInput
+  }
+
+  export type ReviewReplyUncheckedUpdateWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewReplyUncheckedUpdateManyWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulUpdateWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutReviewHelpfulMarksNestedInput
+  }
+
+  export type ReviewHelpfulUncheckedUpdateWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulUncheckedUpdateManyWithoutReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -74623,6 +78497,22 @@ export namespace Prisma {
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ReviewReplyCreateManyUserInput = {
+    id?: string
+    reviewId: string
+    content: string
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewHelpfulCreateManyUserInput = {
+    id?: string
+    reviewId: string
+    isHelpful: boolean
+    createdAt?: Date | string
   }
 
   export type AddressCreateManyUserInput = {
@@ -74744,6 +78634,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateWithoutUserInput = {
@@ -74758,6 +78650,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutReviewNestedInput
+    replies?: ReviewReplyUncheckedUpdateManyWithoutReviewNestedInput
+    helpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutReviewNestedInput
   }
 
   export type ProductReviewUncheckedUpdateManyWithoutUserInput = {
@@ -74771,6 +78665,54 @@ export namespace Prisma {
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewReplyUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    review?: ProductReviewUpdateOneRequiredWithoutRepliesNestedInput
+  }
+
+  export type ReviewReplyUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewReplyUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    review?: ProductReviewUpdateOneRequiredWithoutHelpfulMarksNestedInput
+  }
+
+  export type ReviewHelpfulUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewHelpfulUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    isHelpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AddressUpdateWithoutUserInput = {

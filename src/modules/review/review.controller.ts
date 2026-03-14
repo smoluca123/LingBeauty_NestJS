@@ -36,6 +36,15 @@ import {
   ReviewWithProductResponseDto,
 } from './dto/review-response.dto';
 import {
+  CreateReviewReplyDto,
+  UpdateReviewReplyDto,
+  ReviewReplyResponseDto,
+} from './dto/review-reply.dto';
+import {
+  ReviewSummaryResponseDto,
+  MarkHelpfulResponseDto,
+} from './dto/review-summary.dto';
+import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
@@ -52,6 +61,19 @@ import {
   ApiUpdateReview,
   ApiUploadReviewImage,
   ApiUploadReviewVideo,
+  ApiGetPublicReviews,
+  ApiGetPublicReview,
+  ApiGetReviewSummary,
+  ApiGetMyReviews,
+  ApiMarkHelpful,
+  ApiUnmarkHelpful,
+  ApiGetReplies,
+  ApiCreateReply,
+  ApiUpdateReply,
+  ApiDeleteReply,
+  ApiGetPendingReviews,
+  ApiAdminReply,
+  ApiAdminDeleteReview,
 } from './decorators/review.decorators';
 import { DecodedAccessToken } from 'src/decorators/decodedAccessToken.decorator';
 import type { IDecodedAccecssTokenType } from 'src/libs/types/interfaces/utils.interfaces';
@@ -236,5 +258,186 @@ export class ReviewController {
       file,
       alt,
     );
+  }
+
+  // ============== Public Routes ==============
+
+  @Get('public/product/:productId')
+  @ApiGetPublicReviews()
+  getPublicProductReviews(
+    @Param('productId') productId: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('rating') rating?: number,
+    @Query('sortBy') sortBy?: 'rating' | 'helpfulCount' | 'createdAt',
+    @Query('order') order?: 'asc' | 'desc',
+  ): Promise<IBeforeTransformPaginationResponseType<ReviewResponseDto>> {
+    const { page: normalizedPage, limit: normalizedLimit } =
+      normalizePaginationParams({ page, limit });
+
+    return this.reviewService.getPublicProductReviews(productId, {
+      page: normalizedPage,
+      limit: normalizedLimit,
+      rating: rating ? Number(rating) : undefined,
+      sortBy,
+      order,
+    });
+  }
+
+  @Get('public/product/:productId/summary')
+  @ApiGetReviewSummary()
+  getProductReviewSummary(
+    @Param('productId') productId: string,
+  ): Promise<IBeforeTransformResponseType<ReviewSummaryResponseDto>> {
+    return this.reviewService.getProductReviewSummary(productId);
+  }
+
+  @Get('public/:id')
+  @ApiGetPublicReview()
+  getPublicReviewById(
+    @Param('id') reviewId: string,
+  ): Promise<IBeforeTransformResponseType<ReviewWithProductResponseDto>> {
+    return this.reviewService.getPublicReviewById(reviewId);
+  }
+
+  // ============== User Routes ==============
+
+  @Get('my-reviews')
+  @ApiGetMyReviews()
+  getMyReviews(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('sortBy') sortBy?: 'rating' | 'helpfulCount' | 'createdAt',
+    @Query('order') order?: 'asc' | 'desc',
+  ): Promise<
+    IBeforeTransformPaginationResponseType<ReviewWithProductResponseDto>
+  > {
+    const { page: normalizedPage, limit: normalizedLimit } =
+      normalizePaginationParams({ page, limit });
+
+    return this.reviewService.getMyReviews(decodedAccessToken.userId, {
+      page: normalizedPage,
+      limit: normalizedLimit,
+      sortBy,
+      order,
+    });
+  }
+
+  @Post(':id/helpful')
+  @ApiMarkHelpful()
+  markHelpful(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Param('id') reviewId: string,
+  ): Promise<IBeforeTransformResponseType<MarkHelpfulResponseDto>> {
+    return this.reviewService.markHelpful(
+      decodedAccessToken.userId,
+      reviewId,
+      true,
+    );
+  }
+
+  @Delete(':id/helpful')
+  @ApiUnmarkHelpful()
+  unmarkHelpful(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Param('id') reviewId: string,
+  ): Promise<IBeforeTransformResponseType<MarkHelpfulResponseDto>> {
+    return this.reviewService.unmarkHelpful(
+      decodedAccessToken.userId,
+      reviewId,
+    );
+  }
+
+  // ============== Reply Routes ==============
+
+  @Get(':id/replies')
+  @ApiGetReplies()
+  getReviewReplies(
+    @Param('id') reviewId: string,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto[]>> {
+    return this.reviewService.getReviewReplies(reviewId);
+  }
+
+  @Post(':id/reply')
+  @ApiCreateReply()
+  createReply(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Param('id') reviewId: string,
+    @Body() dto: CreateReviewReplyDto,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
+    return this.reviewService.createReply(
+      decodedAccessToken.userId,
+      reviewId,
+      dto,
+    );
+  }
+
+  @Patch('reply/:replyId')
+  @ApiUpdateReply()
+  updateReply(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Param('replyId') replyId: string,
+    @Body() dto: UpdateReviewReplyDto,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
+    return this.reviewService.updateReply(
+      decodedAccessToken.userId,
+      replyId,
+      dto,
+    );
+  }
+
+  @Delete('reply/:replyId')
+  @ApiDeleteReply()
+  deleteReply(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Param('replyId') replyId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    return this.reviewService.deleteReply(decodedAccessToken.userId, replyId);
+  }
+
+  // ============== Admin Routes ==============
+
+  @Get('admin/pending')
+  @ApiGetPendingReviews()
+  getPendingReviews(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('sortBy') sortBy?: 'rating' | 'helpfulCount' | 'createdAt',
+    @Query('order') order?: 'asc' | 'desc',
+  ): Promise<
+    IBeforeTransformPaginationResponseType<ReviewWithProductResponseDto>
+  > {
+    const { page: normalizedPage, limit: normalizedLimit } =
+      normalizePaginationParams({ page, limit });
+
+    return this.reviewService.getPendingReviews({
+      page: normalizedPage,
+      limit: normalizedLimit,
+      sortBy,
+      order,
+    });
+  }
+
+  @Post(':id/admin-reply')
+  @ApiAdminReply()
+  adminReply(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Param('id') reviewId: string,
+    @Body() dto: CreateReviewReplyDto,
+  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
+    return this.reviewService.adminReply(
+      decodedAccessToken.userId,
+      reviewId,
+      dto,
+    );
+  }
+
+  @Delete(':id/admin')
+  @ApiAdminDeleteReview()
+  adminDeleteReview(
+    @Param('id') reviewId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    return this.reviewService.adminDeleteReview(reviewId);
   }
 }

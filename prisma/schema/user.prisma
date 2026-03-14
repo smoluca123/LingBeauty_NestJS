@@ -11,24 +11,26 @@ model User {
   updatedAt     DateTime @updatedAt @map("updated_at")
   refreshToken  String?  @map("refresh_token")
 
-  isActive        Boolean              @default(true) @map("is_active")
-  isVerified      Boolean              @default(false) @map("is_verified")
-  isBanned        Boolean              @default(false) @map("is_banned")
-  isDeleted       Boolean              @default(false) @map("is_deleted")
-  isEmailVerified Boolean              @default(false) @map("is_email_verified")
-  isPhoneVerified Boolean              @default(false) @map("is_phone_verified")
-  emailVerifiedAt DateTime?            @map("email_verified_at")
-  phoneVerifiedAt DateTime?            @map("phone_verified_at")
+  isActive              Boolean                @default(true) @map("is_active")
+  isVerified            Boolean                @default(false) @map("is_verified")
+  isBanned              Boolean                @default(false) @map("is_banned")
+  isDeleted             Boolean                @default(false) @map("is_deleted")
+  isEmailVerified       Boolean                @default(false) @map("is_email_verified")
+  isPhoneVerified       Boolean                @default(false) @map("is_phone_verified")
+  emailVerifiedAt       DateTime?              @map("email_verified_at")
+  phoneVerifiedAt       DateTime?              @map("phone_verified_at")
   // Relations
-  cart                      Cart?
-  orders                    Order[]
-  reviews                   ProductReview[]
-  addresses                 Address[]
-  affiliate                 Affiliate?
-  roleAssignments           UserRoleAssignment[]
-  avatarMedia               Media?                    @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
-  uploadedMedia             Media[]                   @relation("UserUploadedMedia")
-  emailVerificationLogs     EmailVerificationLog[]
+  cart                  Cart?
+  orders                Order[]
+  reviews               ProductReview[]
+  reviewReplies         ReviewReply[]
+  reviewHelpfulMarks    ReviewHelpful[]
+  addresses             Address[]
+  affiliate             Affiliate?
+  roleAssignments       UserRoleAssignment[]
+  avatarMedia           Media?                 @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
+  uploadedMedia         Media[]                @relation("UserUploadedMedia")
+  emailVerificationLogs EmailVerificationLog[]
 
   @@index([email])
   @@index([phone])
