@@ -38,6 +38,7 @@ export class BannerService {
   async getAllBannerGroups(params?: {
     page?: number;
     limit?: number;
+    // isActive?: boolean;
   }): Promise<IBeforeTransformPaginationResponseType<BannerGroupResponseDto>> {
     try {
       const page = params?.page || 1;
@@ -47,13 +48,13 @@ export class BannerService {
         this.prismaService.bannerGroup.findMany({
           select: bannerGroupSelect,
           where: {
-            banners: {
-              some: {
-                banner: {
-                  isActive: true,
-                },
-              },
-            },
+            // banners: {
+            //   some: {
+            //     banner: {
+            //       isActive: true,
+            //     },
+            //   },
+            // },
           },
           orderBy: { createdAt: 'desc' },
           skip: (page - 1) * limit,
