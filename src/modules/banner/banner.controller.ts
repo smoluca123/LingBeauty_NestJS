@@ -42,6 +42,7 @@ import {
   ApiCreateBannerGroup,
   ApiUpdateBannerGroup,
   ApiDeleteBannerGroup,
+  ApiGetAllBanners,
   ApiCreateBanner,
   ApiCreateBannerWithUpload,
   ApiUpdateBanner,
@@ -107,6 +108,24 @@ export class BannerController {
 
   // ============== Banner Item Endpoints ==============
 
+  @Get('items')
+  @ApiGetAllBanners()
+  getAllBanners(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('search') search?: string,
+    @Query('groupId') groupId?: string,
+  ): Promise<IBeforeTransformPaginationResponseType<BannerResponseDto>> {
+    const { page: normalizedPage, limit: normalizedLimit } =
+      normalizePaginationParams({ page, limit });
+    return this.bannerService.getAllBanners({
+      page: normalizedPage,
+      limit: normalizedLimit,
+      search,
+      groupId,
+    });
+  }
+
   @Post('group/:groupId/items')
   @ApiCreateBanner()
   createBanner(
@@ -123,14 +142,8 @@ export class BannerController {
     @Param('groupId') groupId: string,
     @Body() dto: CreateBannerDto,
     @UploadedFile() file: Express.Multer.File,
-    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
-    return this.bannerService.createBannerWithUpload(
-      groupId,
-      dto,
-      file,
-      decodedAccessToken.userId,
-    );
+    return this.bannerService.createBannerWithUpload(groupId, dto, file);
   }
 
   @Patch('item/:id')

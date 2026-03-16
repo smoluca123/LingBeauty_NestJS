@@ -24,7 +24,7 @@ import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { processDataObject } from 'src/libs/utils/utils';
-import { bannerGroupSelect } from 'src/libs/prisma/banner-select';
+import { bannerGroupSelect, bannerSelect } from 'src/libs/prisma/banner-select';
 
 @Injectable()
 export class BannerService {
@@ -307,6 +307,73 @@ export class BannerService {
 
   // ============== Banner Item Methods ==============
 
+  async getAllBanners(params?: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    groupId?: string;
+  }): Promise<IBeforeTransformPaginationResponseType<BannerResponseDto>> {
+    try {
+      const page = params?.page || 1;
+      const limit = params?.limit || 10;
+
+      const where: Prisma.BannerWhereInput = {};
+
+      if (params?.search) {
+        where.OR = [
+          { title: { contains: params.search, mode: 'insensitive' } },
+          { badge: { contains: params.search, mode: 'insensitive' } },
+          { description: { contains: params.search, mode: 'insensitive' } },
+          { ctaLink: { contains: params.search, mode: 'insensitive' } },
+          { subLabel: { contains: params.search, mode: 'insensitive' } },
+        ];
+      }
+
+      if (params?.groupId) {
+        where.groups = {
+          some: {
+            bannerGroupId: params.groupId,
+          },
+        };
+      }
+
+      const [banners, totalCount] = await Promise.all([
+        this.prismaService.banner.findMany({
+          where,
+          select: bannerSelect,
+          orderBy: { createdAt: 'desc' },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        this.prismaService.banner.count({ where }),
+      ]);
+
+      const bannerResponses = banners.map((banner) =>
+        toResponseDto(BannerResponseDto, banner),
+      );
+
+      return {
+        type: 'pagination',
+        message: 'Lấy danh sách banner thành công',
+        data: {
+          items: bannerResponses,
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+        },
+      };
+    } catch (error) {
+      console.log(error);
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
   async createBanner(
     groupId: string, // Keep for API compatibility
     dto: CreateBannerDto,
@@ -327,20 +394,23 @@ export class BannerService {
 
       let sortOrder = processedDto.sortOrder;
       if (sortOrder === undefined || sortOrder === null) {
-        const lastBannerInGroup = await this.prismaService.bannerGroupMapping.findFirst({
-          where: { bannerGroupId: groupId },
-          orderBy: { sortOrder: 'desc' },
-          select: { sortOrder: true },
-        });
+        const lastBannerInGroup =
+          await this.prismaService.bannerGroupMapping.findFirst({
+            where: { bannerGroupId: groupId },
+            orderBy: { sortOrder: 'desc' },
+            select: { sortOrder: true },
+          });
         sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
         processedDto.sortOrder = sortOrder;
       }
 
+      const { bgClass: _, ...restDto } = processedDto as any;
+
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
         data: {
-          ...processedDto,
-          type: processedDto.type as BannerType,
+          ...restDto,
+          type: restDto.type as BannerType,
         },
         include: {
           imageMedia: true,
@@ -384,7 +454,6 @@ export class BannerService {
     groupId: string,
     dto: CreateBannerDto,
     file: Express.Multer.File,
-    userId: string,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
       const group = await this.prismaService.bannerGroup.findUnique({
@@ -402,21 +471,23 @@ export class BannerService {
       const uploadResult = await this.storageService.uploadFile({
         file,
         type: MediaType.BANNER_IMAGE,
-        userId,
       });
 
       const processedDto = await processDataObject(dto);
 
       let sortOrder = processedDto.sortOrder;
       if (sortOrder === undefined || sortOrder === null) {
-        const lastBannerInGroup = await this.prismaService.bannerGroupMapping.findFirst({
-          where: { bannerGroupId: groupId },
-          orderBy: { sortOrder: 'desc' },
-          select: { sortOrder: true },
-        });
+        const lastBannerInGroup =
+          await this.prismaService.bannerGroupMapping.findFirst({
+            where: { bannerGroupId: groupId },
+            orderBy: { sortOrder: 'desc' },
+            select: { sortOrder: true },
+          });
         sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
         processedDto.sortOrder = sortOrder;
       }
+
+      // const { imageMediaId: _, bgClass: __, ...restDto } = processedDto as any;
 
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
@@ -425,13 +496,8 @@ export class BannerService {
           type: processedDto.type as BannerType,
           imageMediaId: uploadResult.id,
         },
-        include: {
-          imageMedia: true,
-          groups: {
-            include: {
-              bannerGroup: true,
-            },
-          },
+        select: {
+          id: true,
         },
       });
 
@@ -444,7 +510,12 @@ export class BannerService {
         },
       });
 
-      const result = toResponseDto(BannerResponseDto, banner);
+      const bannerResult = await this.prismaService.banner.findUnique({
+        where: { id: banner.id },
+        select: bannerSelect,
+      });
+
+      const result = toResponseDto(BannerResponseDto, bannerResult);
 
       return {
         type: 'response',

@@ -160,3 +160,13 @@ export class CreateBannerDto {
   })
   isActive?: boolean;
 }
+
+export class CreateBannerWithUploadDto extends CreateBannerDto {
+  @ApiProperty({
+    type: 'string',
+    format: 'binary',
+    required: true,
+    description: 'Banner image file',
+  })
+  file: Express.Multer.File;
+}
