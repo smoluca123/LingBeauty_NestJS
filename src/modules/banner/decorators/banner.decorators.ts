@@ -13,8 +13,12 @@ import {
 } from '../dto/banner-response.dto';
 import { CreateBannerGroupDto } from '../dto/create-banner-group.dto';
 import { UpdateBannerGroupDto } from '../dto/update-banner-group.dto';
-import { CreateBannerDto } from '../dto/create-banner.dto';
+import {
+  CreateBannerDto,
+  CreateBannerWithUploadDto,
+} from '../dto/create-banner.dto';
 import { UpdateBannerDto } from '../dto/update-banner.dto';
+import { ApiQueryLimitAndPage } from 'src/decorators/pagination.decorators';
 
 // ============== Public Endpoints ==============
 
@@ -160,6 +164,48 @@ export function ApiDeleteBannerGroup() {
 
 // ============== Banner Item Endpoints ==============
 
+export function ApiGetAllBanners() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Get all banners',
+      description: 'Get all banners with pagination',
+    }),
+    // ApiQuery({
+    //   name: 'page',
+    //   required: false,
+    //   type: Number,
+    //   description: 'Page number',
+    //   example: 1,
+    // }),
+    // ApiQuery({
+    //   name: 'limit',
+    //   required: false,
+    //   type: Number,
+    //   description: 'Items per page',
+    //   example: 10,
+    // }),
+    ApiQueryLimitAndPage(),
+    ApiQuery({
+      name: 'search',
+      required: false,
+
+      type: String,
+      description: 'Search query',
+    }),
+    ApiQuery({
+      name: 'groupId',
+      required: false,
+      type: String,
+      description: 'Banner group ID',
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'Banners retrieved successfully',
+      type: [BannerResponseDto],
+    }),
+  );
+}
+
 export function ApiCreateBanner() {
   return applyDecorators(
     ApiOperation({
@@ -199,37 +245,7 @@ export function ApiCreateBannerWithUpload() {
       description: 'Banner group ID',
     }),
     ApiBody({
-      schema: {
-        type: 'object',
-        properties: {
-          file: {
-            type: 'string',
-            format: 'binary',
-            description: 'Banner image file',
-          },
-          type: {
-            type: 'string',
-            enum: ['TEXT', 'IMAGE'],
-            description: 'Banner type',
-          },
-          position: {
-            type: 'string',
-            enum: ['MAIN_CAROUSEL', 'SIDE_TOP', 'SIDE_BOTTOM'],
-            description: 'Banner position',
-          },
-          badge: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string' },
-          highlight: { type: 'string' },
-          ctaText: { type: 'string' },
-          ctaLink: { type: 'string' },
-          subLabel: { type: 'string' },
-          bgClass: { type: 'string' },
-          sortOrder: { type: 'number' },
-          isActive: { type: 'boolean' },
-        },
-        required: ['file', 'type', 'position'],
-      },
+      type: CreateBannerWithUploadDto,
     }),
     ApiResponse({
       status: 201,
