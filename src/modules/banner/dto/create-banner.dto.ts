@@ -9,6 +9,7 @@ import {
   Min,
   Matches,
 } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
 
 export enum BannerType {
   TEXT = 'TEXT',
@@ -143,6 +144,7 @@ export class CreateBannerDto {
   @IsInt()
   @IsOptional()
   @Min(0)
+  @Type(() => Number)
   sortOrder?: number;
 
   @ApiPropertyOptional({
@@ -151,5 +153,10 @@ export class CreateBannerDto {
   })
   @IsBoolean()
   @IsOptional()
+  @Transform(({ value }) => {
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    return value;
+  })
   isActive?: boolean;
 }
