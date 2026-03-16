@@ -86,6 +86,10 @@ export const ERROR_MESSAGES = {
     'Số lượng sản phẩm trong kho không đủ',
   [ERROR_CODES.CART_ITEM_BACKORDER_LIMIT_REACHED]:
     'Sản phẩm đã đạt giới hạn đặt trước, không thể thêm vào giỏ hàng',
+  [ERROR_CODES.CART_FS_LIMIT_EXCEEDED]:
+    'Vượt quá số lượng mua tối đa cho sản phẩm Flash Sale này',
+  [ERROR_CODES.CART_FS_OUT_OF_STOCK]:
+    'Sản phẩm Flash Sale đã hết hàng hoặc không đủ số lượng',
 
   // Review
   [ERROR_CODES.REVIEW_NOT_FOUND]: 'Không tìm thấy đánh giá',
@@ -152,6 +156,12 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.REQUIRED_FIELD_MISSING]: 'Thiếu trường bắt buộc',
   [ERROR_CODES.INVALID_FILE_TYPE]: 'Loại tệp không hợp lệ',
   [ERROR_CODES.FILE_TOO_LARGE]: 'Kích thước tệp vượt quá giới hạn cho phép',
+
+  // Flash Sale
+  [ERROR_CODES.FLASH_SALE_NOT_FOUND]: 'Không tìm thấy chương trình Flash Sale',
+  [ERROR_CODES.FLASH_SALE_SLUG_EXISTS]: 'Đường dẫn (slug) Flash Sale đã tồn tại',
+  [ERROR_CODES.FLASH_SALE_INVALID_TIME]: 'Thời gian bắt đầu phải trước thời gian kết thúc',
+  [ERROR_CODES.FLASH_SALE_PRODUCT_NOT_FOUND]: 'Không tìm thấy sản phẩm trong Flash Sale',
 
   // System Errors
   [ERROR_CODES.DATABASE_ERROR]: 'Thao tác cơ sở dữ liệu thất bại',

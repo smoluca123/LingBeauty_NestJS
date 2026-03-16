@@ -104,14 +104,47 @@ export class CartService {
     }
   }
 
+  private async getActiveFlashSaleMap(): Promise<Record<string, any>> {
+    const now = new Date();
+    const flashSale = await this.prismaService.flashSale.findFirst({
+      where: {
+        isActive: true,
+        startTime: { lte: now },
+        endTime: { gte: now },
+        status: 'ACTIVE',
+      },
+      include: {
+        products: {
+          where: { isActive: true },
+        },
+      },
+      orderBy: { startTime: 'asc' },
+    });
+
+    const map: Record<string, any> = {};
+    if (!flashSale) return map;
+
+    for (const p of flashSale.products) {
+      const key = p.variantId ? `${p.productId}_${p.variantId}` : `${p.productId}_null`;
+      map[key] = p;
+    }
+    return map;
+  }
+
   /**
    * Map a CartItemSelect DB entity to CartItemResponseDto.
    */
-  private mapCartItem(item: CartItemSelect): CartItemResponseDto {
+  private mapCartItem(item: CartItemSelect, flashSaleMap: Record<string, any> = {}): CartItemResponseDto {
+    const fsKey = item.variantId ? `${item.productId}_${item.variantId}` : `${item.productId}_null`;
+    const fsProduct = flashSaleMap[fsKey];
+
     // For no-variant products, fall back to product basePrice
-    const price = item.variant
+    const baseItemPrice = item.variant
       ? Number(item.variant.price)
       : Number(item.product.basePrice);
+    
+    // Apply Flash Sale price if available
+    const price = fsProduct ? Number(fsProduct.flashPrice) : baseItemPrice;
     const lineTotal = (price * item.quantity).toFixed(2);
     const thumbnailImage = item.product.images[0] ?? null;
 
@@ -131,6 +164,12 @@ export class CartService {
         productInventory?.displayStatus ??
         'OUT_OF_STOCK',
     };
+
+    const flashSaleInfo = fsProduct ? {
+      flashPrice: fsProduct.flashPrice.toString(),
+      limitPerOrder: fsProduct.limitPerOrder,
+      availableQuantity: fsProduct.maxQuantity - fsProduct.soldQuantity,
+    } : null;
 
     return {
       id: item.id,
@@ -170,6 +209,7 @@ export class CartService {
           }
         : null,
       stockInfo,
+      flashSaleInfo,
       createdAt: item.createdAt,
       updatedAt: item.updatedAt,
     };
@@ -194,8 +234,8 @@ export class CartService {
   /**
    * Map a full CartSelect DB entity to CartResponseDto.
    */
-  private mapCart(cart: CartSelect): CartResponseDto {
-    const items = cart.items.map((item) => this.mapCartItem(item));
+  private mapCart(cart: CartSelect, flashSaleMap: Record<string, any> = {}): CartResponseDto {
+    const items = cart.items.map((item) => this.mapCartItem(item, flashSaleMap));
     const summary = this.buildCartSummary(items);
 
     return {
@@ -232,10 +272,12 @@ export class CartService {
         );
       }
 
+      const flashSaleMap = await this.getActiveFlashSaleMap();
+
       return {
         type: 'response',
         message: 'Lấy giỏ hàng thành công',
-        data: this.mapCart(cart),
+        data: this.mapCart(cart, flashSaleMap),
       };
     } catch (error) {
       if (error instanceof BusinessException) throw error;
@@ -318,6 +360,28 @@ export class CartService {
 
       // newQuantity is computed after existingItem is resolved in both branches above
       const newQuantity = (existingItem?.quantity ?? 0) + quantity;
+
+      // Flash Sale Check Before Update
+      const fsMap = await this.getActiveFlashSaleMap();
+      const variantKey = resolvedVariantId ? `${dto.productId}_${resolvedVariantId}` : `${dto.productId}_null`;
+      const fsProduct = fsMap[variantKey];
+
+      if (fsProduct) {
+        if (newQuantity > fsProduct.limitPerOrder) {
+          throw new BusinessException(
+            `${ERROR_MESSAGES[ERROR_CODES.CART_FS_LIMIT_EXCEEDED]} (Tối đa: ${fsProduct.limitPerOrder})`,
+            ERROR_CODES.CART_FS_LIMIT_EXCEEDED
+          );
+        }
+        const fsAvailable = fsProduct.maxQuantity - fsProduct.soldQuantity;
+        if (newQuantity > fsAvailable) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.CART_FS_OUT_OF_STOCK], 
+            ERROR_CODES.CART_FS_OUT_OF_STOCK
+          );
+        }
+      }
+
       let cartItemId: string;
 
       if (existingItem) {
@@ -360,7 +424,7 @@ export class CartService {
         message: existingItem
           ? 'Cập nhật số lượng sản phẩm trong giỏ hàng thành công'
           : 'Thêm sản phẩm vào giỏ hàng thành công',
-        data: this.mapCartItem(cartItem),
+        data: this.mapCartItem(cartItem, fsMap),
         statusCode: existingItem ? 200 : 201,
       };
     } catch (error) {
@@ -425,6 +489,27 @@ export class CartService {
       );
       this.assertBackorderLimit(inv.quantity, dto.quantity, inv.minStockQuantity);
 
+      // Flash Sale Check
+      const fsMap = await this.getActiveFlashSaleMap();
+      const variantKey = item.variantId ? `${item.productId}_${item.variantId}` : `${item.productId}_null`;
+      const fsProduct = fsMap[variantKey];
+
+      if (fsProduct) {
+        if (dto.quantity > fsProduct.limitPerOrder) {
+          throw new BusinessException(
+            `${ERROR_MESSAGES[ERROR_CODES.CART_FS_LIMIT_EXCEEDED]} (Tối đa: ${fsProduct.limitPerOrder})`,
+            ERROR_CODES.CART_FS_LIMIT_EXCEEDED
+          );
+        }
+        const fsAvailable = fsProduct.maxQuantity - fsProduct.soldQuantity;
+        if (dto.quantity > fsAvailable) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.CART_FS_OUT_OF_STOCK], 
+            ERROR_CODES.CART_FS_OUT_OF_STOCK
+          );
+        }
+      }
+
       const updated = await this.prismaService.cartItem.update({
         where: { id: itemId },
         data: { quantity: dto.quantity },
@@ -434,7 +519,7 @@ export class CartService {
       return {
         type: 'response',
         message: 'Cập nhật giỏ hàng thành công',
-        data: this.mapCartItem(updated),
+        data: this.mapCartItem(updated, fsMap),
       };
     } catch (error) {
       if (error instanceof BusinessException) throw error;

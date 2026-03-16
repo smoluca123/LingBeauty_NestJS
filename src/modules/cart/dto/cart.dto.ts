@@ -140,6 +140,17 @@ export class CartItemProductDto {
   thumbnailImage: CartItemProductImageWrapperDto | null;
 }
 
+export class CartItemFlashSaleDto {
+  @ApiProperty({ example: '150000' })
+  flashPrice: string;
+
+  @ApiProperty({ example: 2 })
+  limitPerOrder: number;
+
+  @ApiProperty({ example: 10 })
+  availableQuantity: number;
+}
+
 export class CartItemResponseDto {
   @ApiProperty({ example: 'uuid-cart-item-id' })
   id: string;
@@ -180,6 +191,13 @@ export class CartItemResponseDto {
   })
   @Type(() => CartItemStockInfoDto)
   stockInfo: CartItemStockInfoDto;
+
+  @ApiPropertyOptional({
+    type: CartItemFlashSaleDto,
+    nullable: true,
+  })
+  @Type(() => CartItemFlashSaleDto)
+  flashSaleInfo?: CartItemFlashSaleDto | null;
 
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
   createdAt: Date;
