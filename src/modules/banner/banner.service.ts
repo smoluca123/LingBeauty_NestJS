@@ -325,6 +325,17 @@ export class BannerService {
 
       const processedDto = await processDataObject(dto);
 
+      let sortOrder = processedDto.sortOrder;
+      if (sortOrder === undefined || sortOrder === null) {
+        const lastBannerInGroup = await this.prismaService.bannerGroupMapping.findFirst({
+          where: { bannerGroupId: groupId },
+          orderBy: { sortOrder: 'desc' },
+          select: { sortOrder: true },
+        });
+        sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
+        processedDto.sortOrder = sortOrder;
+      }
+
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
         data: {
@@ -346,6 +357,7 @@ export class BannerService {
         data: {
           bannerId: banner.id,
           bannerGroupId: groupId,
+          sortOrder: sortOrder,
         },
       });
 
@@ -357,6 +369,7 @@ export class BannerService {
         data: result,
       };
     } catch (error) {
+      console.log(error);
       if (error instanceof BusinessException) {
         throw error;
       }
@@ -394,6 +407,17 @@ export class BannerService {
 
       const processedDto = await processDataObject(dto);
 
+      let sortOrder = processedDto.sortOrder;
+      if (sortOrder === undefined || sortOrder === null) {
+        const lastBannerInGroup = await this.prismaService.bannerGroupMapping.findFirst({
+          where: { bannerGroupId: groupId },
+          orderBy: { sortOrder: 'desc' },
+          select: { sortOrder: true },
+        });
+        sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
+        processedDto.sortOrder = sortOrder;
+      }
+
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
         data: {
@@ -416,6 +440,7 @@ export class BannerService {
         data: {
           bannerId: banner.id,
           bannerGroupId: groupId,
+          sortOrder: sortOrder,
         },
       });
 
