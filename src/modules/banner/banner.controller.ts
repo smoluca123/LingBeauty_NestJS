@@ -127,13 +127,12 @@ export class BannerController {
     });
   }
 
-  @Post('group/:groupId/items')
+  @Post('items')
   @ApiCreateBanner()
   createBanner(
-    @Param('groupId') groupId: string,
     @Body() dto: CreateBannerDto,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
-    return this.bannerService.createBanner(groupId, dto);
+    return this.bannerService.createBanner(dto);
   }
 
   @Post('group/:groupId/items/:id')
@@ -145,15 +144,14 @@ export class BannerController {
     return this.bannerService.addBannerToGroup(groupId, bannerId);
   }
 
-  @Post('group/:groupId/items/upload')
+  @Post('items/upload')
   @ApiCreateBannerWithUpload()
   @UseInterceptors(FileInterceptor('file'))
   createBannerWithUpload(
-    @Param('groupId') groupId: string,
     @Body() dto: CreateBannerDto,
     @UploadedFile() file: Express.Multer.File,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
-    return this.bannerService.createBannerWithUpload(groupId, dto, file);
+    return this.bannerService.createBannerWithUpload(dto, file);
   }
 
   @Patch('item/:id')

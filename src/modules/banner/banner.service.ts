@@ -375,25 +375,26 @@ export class BannerService {
   }
 
   async createBanner(
-    groupId: string, // Keep for API compatibility
     dto: CreateBannerDto,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
-      const group = await this.prismaService.bannerGroup.findUnique({
-        where: { id: groupId },
-      });
+      const { groupId, bgClass: _, ...restDto } = await processDataObject(dto) as any;
 
-      if (!group) {
-        throw new BusinessException(
-          ERROR_MESSAGES[ERROR_CODES.BANNER_GROUP_NOT_FOUND],
-          ERROR_CODES.BANNER_GROUP_NOT_FOUND,
-        );
+      if (groupId) {
+        const group = await this.prismaService.bannerGroup.findUnique({
+          where: { id: groupId },
+        });
+
+        if (!group) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.BANNER_GROUP_NOT_FOUND],
+            ERROR_CODES.BANNER_GROUP_NOT_FOUND,
+          );
+        }
       }
 
-      const processedDto = await processDataObject(dto);
-
-      let sortOrder = processedDto.sortOrder;
-      if (sortOrder === undefined || sortOrder === null) {
+      let sortOrder = restDto.sortOrder;
+      if (groupId && (sortOrder === undefined || sortOrder === null)) {
         const lastBannerInGroup =
           await this.prismaService.bannerGroupMapping.findFirst({
             where: { bannerGroupId: groupId },
@@ -401,10 +402,8 @@ export class BannerService {
             select: { sortOrder: true },
           });
         sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
-        processedDto.sortOrder = sortOrder;
+        restDto.sortOrder = sortOrder;
       }
-
-      const { bgClass: _, ...restDto } = processedDto as any;
 
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
@@ -422,14 +421,16 @@ export class BannerService {
         },
       });
 
-      // Create junction table mapping
-      await this.prismaService.bannerGroupMapping.create({
-        data: {
-          bannerId: banner.id,
-          bannerGroupId: groupId,
-          sortOrder: sortOrder,
-        },
-      });
+      // Create junction table mapping if groupId exists
+      if (groupId) {
+        await this.prismaService.bannerGroupMapping.create({
+          data: {
+            bannerId: banner.id,
+            bannerGroupId: groupId,
+            sortOrder: sortOrder || 0,
+          },
+        });
+      }
 
       const result = toResponseDto(BannerResponseDto, banner);
 
@@ -451,21 +452,24 @@ export class BannerService {
   }
 
   async createBannerWithUpload(
-    groupId: string,
     dto: CreateBannerDto,
     file: Express.Multer.File,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
-      const group = await this.prismaService.bannerGroup.findUnique({
-        where: { id: groupId },
-        select: bannerGroupSelect,
-      });
+      const { groupId, ...processedDto } = await processDataObject(dto) as any;
 
-      if (!group) {
-        throw new BusinessException(
-          ERROR_MESSAGES[ERROR_CODES.BANNER_GROUP_NOT_FOUND],
-          ERROR_CODES.BANNER_GROUP_NOT_FOUND,
-        );
+      if (groupId) {
+        const group = await this.prismaService.bannerGroup.findUnique({
+          where: { id: groupId },
+          select: bannerGroupSelect,
+        });
+
+        if (!group) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.BANNER_GROUP_NOT_FOUND],
+            ERROR_CODES.BANNER_GROUP_NOT_FOUND,
+          );
+        }
       }
 
       // Upload image
@@ -474,10 +478,8 @@ export class BannerService {
         type: MediaType.BANNER_IMAGE,
       });
 
-      const processedDto = await processDataObject(dto);
-
       let sortOrder = processedDto.sortOrder;
-      if (sortOrder === undefined || sortOrder === null) {
+      if (groupId && (sortOrder === undefined || sortOrder === null)) {
         const lastBannerInGroup =
           await this.prismaService.bannerGroupMapping.findFirst({
             where: { bannerGroupId: groupId },
@@ -487,8 +489,6 @@ export class BannerService {
         sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
         processedDto.sortOrder = sortOrder;
       }
-
-      // const { imageMediaId: _, bgClass: __, ...restDto } = processedDto as any;
 
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
@@ -502,14 +502,16 @@ export class BannerService {
         },
       });
 
-      // Create junction table mapping
-      await this.prismaService.bannerGroupMapping.create({
-        data: {
-          bannerId: banner.id,
-          bannerGroupId: groupId,
-          sortOrder: sortOrder,
-        },
-      });
+      // Create junction table mapping if groupId exists
+      if (groupId) {
+        await this.prismaService.bannerGroupMapping.create({
+          data: {
+            bannerId: banner.id,
+            bannerGroupId: groupId,
+            sortOrder: sortOrder || 0,
+          },
+        });
+      }
 
       const bannerResult = await this.prismaService.banner.findUnique({
         where: { id: banner.id },

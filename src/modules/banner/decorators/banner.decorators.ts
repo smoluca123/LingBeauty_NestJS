@@ -210,12 +210,7 @@ export function ApiCreateBanner() {
   return applyDecorators(
     ApiOperation({
       summary: 'Create banner item',
-      description: 'Create a new banner item in a group',
-    }),
-    ApiParam({
-      name: 'groupId',
-      type: String,
-      description: 'Banner group ID',
+      description: 'Create a new banner item',
     }),
     ApiBody({
       type: CreateBannerDto,
@@ -270,11 +265,6 @@ export function ApiCreateBannerWithUpload() {
       description: 'Create a new banner item and upload image in one request',
     }),
     ApiConsumes('multipart/form-data'),
-    ApiParam({
-      name: 'groupId',
-      type: String,
-      description: 'Banner group ID',
-    }),
     ApiBody({
       type: CreateBannerWithUploadDto,
     }),
