@@ -54,7 +54,7 @@ export class StorageService {
     options: {
       getDirectUrl?: boolean;
     } = {
-      getDirectUrl: false,
+      getDirectUrl: true,
     },
   ): Promise<MediaResponseDto> {
     const { file, type, userId } = params;
