@@ -232,6 +232,37 @@ export function ApiCreateBanner() {
   );
 }
 
+export function ApiAddBannerToGroup() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Add an existing banner to a banner group',
+      description: 'Map an existing banner to a specific banner group',
+    }),
+    ApiParam({
+      name: 'groupId',
+      type: String,
+      description: 'Banner group ID',
+    }),
+    ApiParam({
+      name: 'id',
+      type: String,
+      description: 'Banner ID',
+    }),
+    ApiResponse({
+      status: 201,
+      description: 'Banner added to group successfully',
+    }),
+    ApiResponse({
+      status: 404,
+      description: 'Banner or banner group not found',
+    }),
+    ApiResponse({
+      status: 400,
+      description: 'Banner is already in this group',
+    }),
+  );
+}
+
 export function ApiCreateBannerWithUpload() {
   return applyDecorators(
     ApiOperation({

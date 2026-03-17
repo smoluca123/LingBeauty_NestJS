@@ -110,6 +110,7 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.BANNER_NOT_FOUND]: 'Không tìm thấy banner',
   [ERROR_CODES.NO_ACTIVE_BANNER_GROUP]:
     'Không tìm thấy nhóm banner đang hoạt động',
+  [ERROR_CODES.BANNER_ALREADY_IN_GROUP]: 'Banner đã tồn tại trong nhóm này',
 
   // Referral
   [ERROR_CODES.REFERRAL_NOT_FOUND]: 'Không tìm thấy mã giới thiệu',

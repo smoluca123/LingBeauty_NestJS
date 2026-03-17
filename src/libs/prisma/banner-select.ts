@@ -33,6 +33,22 @@ export type BannerSelect = Prisma.BannerGetPayload<{
   select: typeof bannerSelect;
 }>;
 
+export const bannerMappingSelect = {
+  id: true,
+  bannerId: true,
+  bannerGroupId: true,
+  sortOrder: true,
+  createdAt: true,
+
+  banner: {
+    select: bannerSelect,
+  },
+} satisfies Prisma.BannerGroupMappingSelect;
+
+export type BannerMappingSelect = Prisma.BannerGroupMappingGetPayload<{
+  select: typeof bannerMappingSelect;
+}>;
+
 export const bannerGroupSelect = {
   id: true,
   name: true,
@@ -44,16 +60,7 @@ export const bannerGroupSelect = {
   createdAt: true,
   updatedAt: true,
   banners: {
-    select: {
-      id: true,
-      bannerId: true,
-      bannerGroupId: true,
-      sortOrder: true,
-      createdAt: true,
-      banner: {
-        select: bannerSelect,
-      },
-    },
+    select: bannerMappingSelect,
     orderBy: {
       sortOrder: 'asc' as const,
     },

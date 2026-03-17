@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 
 export class BannerResponseDto {
   @ApiProperty()
@@ -55,10 +56,14 @@ export class BannerResponseDto {
   @ApiProperty()
   updatedAt: Date;
 
-  @ApiPropertyOptional({ type: 'array', items: { type: 'object' } })
-  groups?: Array<{
-    bannerGroupId: string;
-  }>;
+  @ApiPropertyOptional({ type: () => [BannerGroupReferenceDto] })
+  @Type(() => BannerGroupReferenceDto)
+  groups?: BannerGroupReferenceDto[];
+}
+
+export class BannerGroupReferenceDto {
+  @ApiProperty()
+  bannerGroupId: string;
 }
 
 export class BannerGroupResponseDto {
@@ -89,13 +94,28 @@ export class BannerGroupResponseDto {
   @ApiProperty()
   updatedAt: Date;
 
-  @ApiPropertyOptional({ type: 'array', items: { type: 'object' } })
-  banners?: Array<{
-    id: string;
-    bannerId: string;
-    bannerGroupId: string;
-    sortOrder: number;
-    createdAt: Date;
-    banner: BannerResponseDto;
-  }>;
+  @ApiPropertyOptional({ type: () => [BannerMappingResponseDto] })
+  @Type(() => BannerMappingResponseDto)
+  banners?: BannerMappingResponseDto[];
+}
+
+export class BannerMappingResponseDto {
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  bannerId: string;
+
+  @ApiProperty()
+  bannerGroupId: string;
+
+  @ApiProperty()
+  sortOrder: number;
+
+  @ApiProperty()
+  createdAt: Date;
+
+  @ApiProperty()
+  @Type(() => BannerResponseDto)
+  banner: BannerResponseDto;
 }
