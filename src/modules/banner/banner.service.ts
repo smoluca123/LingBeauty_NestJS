@@ -458,6 +458,7 @@ export class BannerService {
     try {
       const group = await this.prismaService.bannerGroup.findUnique({
         where: { id: groupId },
+        select: bannerGroupSelect,
       });
 
       if (!group) {
@@ -641,6 +642,82 @@ export class BannerService {
         type: 'response',
         message: 'Cập nhật banner kèm hình ảnh thành công',
         data: result,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async addBannerToGroup(
+    groupId: string,
+    bannerId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      const group = await this.prismaService.bannerGroup.findUnique({
+        where: { id: groupId },
+      });
+
+      if (!group) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.BANNER_GROUP_NOT_FOUND],
+          ERROR_CODES.BANNER_GROUP_NOT_FOUND,
+        );
+      }
+
+      const banner = await this.prismaService.banner.findUnique({
+        where: { id: bannerId },
+      });
+
+      if (!banner) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.BANNER_NOT_FOUND],
+          ERROR_CODES.BANNER_NOT_FOUND,
+        );
+      }
+
+      const existingMapping = await this.prismaService.bannerGroupMapping.findUnique({
+        where: {
+          bannerId_bannerGroupId: {
+            bannerId,
+            bannerGroupId: groupId,
+          },
+        },
+      });
+
+      if (existingMapping) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.BANNER_ALREADY_IN_GROUP],
+          ERROR_CODES.BANNER_ALREADY_IN_GROUP,
+        );
+      }
+
+      const lastBannerInGroup =
+        await this.prismaService.bannerGroupMapping.findFirst({
+          where: { bannerGroupId: groupId },
+          orderBy: { sortOrder: 'desc' },
+          select: { sortOrder: true },
+        });
+
+      const sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
+
+      await this.prismaService.bannerGroupMapping.create({
+        data: {
+          bannerId,
+          bannerGroupId: groupId,
+          sortOrder,
+        },
+      });
+
+      return {
+        type: 'response',
+        message: 'Thêm banner vào nhóm thành công',
+        data: { message: 'Thêm banner vào nhóm thành công' },
       };
     } catch (error) {
       if (error instanceof BusinessException) {

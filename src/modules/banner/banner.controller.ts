@@ -48,6 +48,7 @@ import {
   ApiUpdateBanner,
   ApiUpdateBannerWithUpload,
   ApiDeleteBanner,
+  ApiAddBannerToGroup,
 } from './decorators/banner.decorators';
 
 @ApiTags('Banner Management')
@@ -133,6 +134,15 @@ export class BannerController {
     @Body() dto: CreateBannerDto,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     return this.bannerService.createBanner(groupId, dto);
+  }
+
+  @Post('group/:groupId/items/:id')
+  @ApiAddBannerToGroup()
+  addBannerToGroup(
+    @Param('groupId') groupId: string,
+    @Param('id') bannerId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    return this.bannerService.addBannerToGroup(groupId, bannerId);
   }
 
   @Post('group/:groupId/items/upload')
