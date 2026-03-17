@@ -62,6 +62,12 @@ export function ApiGetAllBannerGroups() {
       description: 'Items per page',
       example: 10,
     }),
+    ApiQuery({
+      name: 'bannerId',
+      required: false,
+      type: String,
+      description: 'Filter by banner ID',
+    }),
     ApiResponse({
       status: 200,
       description: 'Banner groups retrieved successfully',

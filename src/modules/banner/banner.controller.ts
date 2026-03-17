@@ -65,12 +65,14 @@ export class BannerController {
   getAllBannerGroups(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
+    @Query('bannerId') bannerId?: string,
   ): Promise<IBeforeTransformPaginationResponseType<BannerGroupResponseDto>> {
     const { page: normalizedPage, limit: normalizedLimit } =
       normalizePaginationParams({ page, limit });
     return this.bannerService.getAllBannerGroups({
       page: normalizedPage,
       limit: normalizedLimit,
+      bannerId,
     });
   }
 
