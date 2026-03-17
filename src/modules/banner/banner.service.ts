@@ -38,29 +38,31 @@ export class BannerService {
   async getAllBannerGroups(params?: {
     page?: number;
     limit?: number;
-    // isActive?: boolean;
+    bannerId?: string;
   }): Promise<IBeforeTransformPaginationResponseType<BannerGroupResponseDto>> {
     try {
       const page = params?.page || 1;
       const limit = params?.limit || 10;
 
+      const where: Prisma.BannerGroupWhereInput = {};
+
+      if (params?.bannerId) {
+        where.banners = {
+          some: {
+            bannerId: params.bannerId,
+          },
+        };
+      }
+
       const [groups, totalCount] = await Promise.all([
         this.prismaService.bannerGroup.findMany({
           select: bannerGroupSelect,
-          where: {
-            // banners: {
-            //   some: {
-            //     banner: {
-            //       isActive: true,
-            //     },
-            //   },
-            // },
-          },
+          where,
           orderBy: { createdAt: 'desc' },
           skip: (page - 1) * limit,
           take: limit,
         }),
-        this.prismaService.bannerGroup.count(),
+        this.prismaService.bannerGroup.count({ where }),
       ]);
 
       const groupResponses = groups.map((group) =>
