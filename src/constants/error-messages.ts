@@ -163,6 +163,15 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.FLASH_SALE_INVALID_TIME]: 'Thời gian bắt đầu phải trước thời gian kết thúc',
   [ERROR_CODES.FLASH_SALE_PRODUCT_NOT_FOUND]: 'Không tìm thấy sản phẩm trong Flash Sale',
 
+  // Coupon
+  [ERROR_CODES.COUPON_NOT_FOUND]: 'Không tìm thấy mã giảm giá',
+  [ERROR_CODES.COUPON_ALREADY_EXISTS]: 'Mã giảm giá đã tồn tại',
+  [ERROR_CODES.COUPON_NOT_ACTIVE]: 'Mã giảm giá chưa được kích hoạt hoặc đã bị khóa',
+  [ERROR_CODES.COUPON_EXPIRED]: 'Mã giảm giá đã hết hạn',
+  [ERROR_CODES.COUPON_NOT_STARTED]: 'Mã giảm giá chưa đến thời gian áp dụng',
+  [ERROR_CODES.COUPON_USAGE_LIMIT_REACHED]: 'Mã giảm giá đã hết lượt sử dụng',
+  [ERROR_CODES.COUPON_MIN_PURCHASE_NOT_MET]: 'Chưa đạt giá trị đơn hàng tối thiểu để áp dụng mã giảm giá này',
+
   // System Errors
   [ERROR_CODES.DATABASE_ERROR]: 'Thao tác cơ sở dữ liệu thất bại',
   [ERROR_CODES.EXTERNAL_SERVICE_ERROR]: 'Dịch vụ bên ngoài không khả dụng',
