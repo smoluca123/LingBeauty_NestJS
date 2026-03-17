@@ -26,6 +26,7 @@ import { StatsModule } from 'src/modules/stats/stats.module';
 import { CartModule } from 'src/modules/cart/cart.module';
 import { InventoryModule } from 'src/modules/inventory/inventory.module';
 import { FlashSaleModule } from 'src/modules/flash-sale/flash-sale.module';
+import { CouponModule } from 'src/modules/coupon/coupon.module';
 
 @Module({
   imports: [
@@ -75,6 +76,7 @@ import { FlashSaleModule } from 'src/modules/flash-sale/flash-sale.module';
     CartModule,
     InventoryModule,
     FlashSaleModule,
+    CouponModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
