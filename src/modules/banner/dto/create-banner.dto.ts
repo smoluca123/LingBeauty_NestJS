@@ -159,6 +159,14 @@ export class CreateBannerDto {
     return value;
   })
   isActive?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Banner group ID',
+    example: 'uuid-here',
+  })
+  @IsString()
+  @IsOptional()
+  groupId?: string;
 }
 
 export class CreateBannerWithUploadDto extends CreateBannerDto {
