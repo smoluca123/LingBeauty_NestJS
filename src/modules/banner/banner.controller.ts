@@ -25,6 +25,7 @@ import { CreateBannerGroupDto } from './dto/create-banner-group.dto';
 import { UpdateBannerGroupDto } from './dto/update-banner-group.dto';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
+import { BulkRemoveBannersDto, ReorderBannersDto } from './dto/manage-group-banners.dto';
 import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
@@ -144,6 +145,33 @@ export class BannerController {
     @Param('id') bannerId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     return this.bannerService.addBannerToGroup(groupId, bannerId);
+  }
+
+  @Delete('group/:groupId/items/:id')
+  @ApiOperation({ summary: 'Remove a banner from a group' })
+  removeBannerFromGroup(
+    @Param('groupId') groupId: string,
+    @Param('id') bannerId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    return this.bannerService.removeBannerFromGroup(groupId, bannerId);
+  }
+
+  @Delete('group/:groupId/items')
+  @ApiOperation({ summary: 'Bulk remove banners from a group' })
+  removeBannersFromGroup(
+    @Param('groupId') groupId: string,
+    @Body() dto: BulkRemoveBannersDto,
+  ): Promise<IBeforeTransformResponseType<{ message: string; count: number }>> {
+    return this.bannerService.removeBannersFromGroup(groupId, dto.bannerIds);
+  }
+
+  @Patch('group/:groupId/reorder')
+  @ApiOperation({ summary: 'Reorder banners within a group' })
+  reorderBannersInGroup(
+    @Param('groupId') groupId: string,
+    @Body() dto: ReorderBannersDto,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    return this.bannerService.reorderBannersInGroup(groupId, dto.orderData);
   }
 
   @Post('items/upload')

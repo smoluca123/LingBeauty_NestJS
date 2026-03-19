@@ -15,7 +15,6 @@ export const bannerSelect = {
   gradientFrom: true,
   gradientTo: true,
   imageMediaId: true,
-  sortOrder: true,
   isActive: true,
   createdAt: true,
   updatedAt: true,

@@ -1111,19 +1111,25 @@ export class ReviewService {
       limit = 10,
       sortBy = 'createdAt',
       order = 'desc',
+      isApproved = true,
     } = params;
 
     try {
+      const whereQuery = {
+        userId,
+        ...(isApproved !== undefined && { isApproved }),
+      };
+
       const [reviews, totalCount] = await Promise.all([
         this.prismaService.productReview.findMany({
-          where: { userId },
+          where: whereQuery,
           select: reviewWithProductSelect,
           orderBy: { [sortBy]: order },
           skip: (page - 1) * limit,
           take: limit,
         }),
         this.prismaService.productReview.count({
-          where: { userId },
+          where: whereQuery,
         }),
       ]);
 

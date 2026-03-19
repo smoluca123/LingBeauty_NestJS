@@ -404,14 +404,15 @@ export class BannerService {
             select: { sortOrder: true },
           });
         sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
-        restDto.sortOrder = sortOrder;
       }
+
+      const { sortOrder: _ignored, ...bannerData } = restDto;
 
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
         data: {
-          ...restDto,
-          type: restDto.type as BannerType,
+          ...bannerData,
+          type: bannerData.type as BannerType,
         },
         include: {
           imageMedia: true,
@@ -489,14 +490,15 @@ export class BannerService {
             select: { sortOrder: true },
           });
         sortOrder = lastBannerInGroup ? lastBannerInGroup.sortOrder + 1 : 1;
-        processedDto.sortOrder = sortOrder;
       }
+
+      const { sortOrder: _ignored, ...bannerData } = processedDto;
 
       // Create banner without groupId
       const banner = await this.prismaService.banner.create({
         data: {
-          ...processedDto,
-          type: processedDto.type as BannerType,
+          ...bannerData,
+          type: bannerData.type as BannerType,
           imageMediaId: uploadResult.id,
         },
         select: {
@@ -555,12 +557,13 @@ export class BannerService {
       }
 
       const processedDto = await processDataObject(dto);
+      const { sortOrder: _ignored, ...updateData } = processedDto as any;
 
       const banner = await this.prismaService.banner.update({
         where: { id: bannerId },
         data: {
-          ...processedDto,
-          ...(processedDto.type && { type: processedDto.type as BannerType }),
+          ...updateData,
+          ...(updateData.type && { type: updateData.type as BannerType }),
         },
         include: {
           imageMedia: true,
@@ -622,12 +625,13 @@ export class BannerService {
       }
 
       const processedDto = await processDataObject(dto);
+      const { sortOrder: _ignored, ...updateData } = processedDto as any;
 
       const banner = await this.prismaService.banner.update({
         where: { id: bannerId },
         data: {
-          ...processedDto,
-          ...(processedDto.type && { type: processedDto.type as BannerType }),
+          ...updateData,
+          ...(updateData.type && { type: updateData.type as BannerType }),
           imageMediaId: uploadResult.id,
         },
         include: {
@@ -769,6 +773,99 @@ export class BannerService {
     }
   }
 
+  async removeBannerFromGroup(
+    groupId: string,
+    bannerId: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      await this.prismaService.bannerGroupMapping.delete({
+        where: {
+          bannerId_bannerGroupId: {
+            bannerId,
+            bannerGroupId: groupId,
+          },
+        },
+      });
+
+      return {
+        type: 'response',
+        message: 'Gỡ banner khỏi nhóm thành công',
+        data: { message: 'Gỡ banner khỏi nhóm thành công' },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async removeBannersFromGroup(
+    groupId: string,
+    bannerIds: string[],
+  ): Promise<IBeforeTransformResponseType<{ message: string; count: number }>> {
+    try {
+      const result = await this.prismaService.bannerGroupMapping.deleteMany({
+        where: {
+          bannerGroupId: groupId,
+          bannerId: { in: bannerIds },
+        },
+      });
+
+      return {
+        type: 'response',
+        message: 'Gỡ hàng loạt banner khỏi nhóm thành công',
+        data: { message: 'Gỡ hàng loạt banner khỏi nhóm thành công', count: result.count },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
+  async reorderBannersInGroup(
+    groupId: string,
+    orderData: { bannerId: string; sortOrder: number }[],
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
+    try {
+      await this.prismaService.$transaction(
+        orderData.map((item) =>
+          this.prismaService.bannerGroupMapping.update({
+            where: {
+              bannerId_bannerGroupId: {
+                bannerGroupId: groupId,
+                bannerId: item.bannerId,
+              },
+            },
+            data: { sortOrder: item.sortOrder },
+          }),
+        ),
+      );
+
+      return {
+        type: 'response',
+        message: 'Cập nhật thứ tự banner thành công',
+        data: { message: 'Cập nhật thứ tự banner thành công' },
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
   // ============== Seed Method ==============
 
   async seedBanners(): Promise<
@@ -879,9 +976,10 @@ export class BannerService {
       const allBanners = [...mainBanners, ...sideBanners];
 
       for (const bannerData of allBanners) {
+        const { sortOrder, ...createData } = bannerData;
         // Create banner without groupId
         const banner = await this.prismaService.banner.create({
-          data: bannerData,
+          data: createData,
         });
 
         // Create junction table mapping

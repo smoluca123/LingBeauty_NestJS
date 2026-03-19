@@ -45,9 +45,6 @@ export class BannerResponseDto {
   imageUrl?: string;
 
   @ApiProperty()
-  sortOrder: number;
-
-  @ApiProperty()
   isActive: boolean;
 
   @ApiProperty()

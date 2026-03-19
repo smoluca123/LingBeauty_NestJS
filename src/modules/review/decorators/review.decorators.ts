@@ -488,6 +488,12 @@ export const ApiGetMyReviews = () =>
       enum: ['asc', 'desc'],
       description: 'Sort order (default: desc)',
     }),
+    ApiQuery({
+      name: 'isApproved',
+      type: Boolean,
+      required: false,
+      description: 'Filter by approval status (default: true)',
+    }),
     ApiResponse({
       status: 200,
       type: [ReviewWithProductResponseDto],
