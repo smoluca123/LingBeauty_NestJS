@@ -115,6 +115,30 @@ export class ReviewController {
     return this.reviewService.getProductReviews(params);
   }
 
+  @Get('my-reviews')
+  @ApiGetMyReviews()
+  getMyReviews(
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('sortBy') sortBy?: 'rating' | 'helpfulCount' | 'createdAt',
+    @Query('order') order?: 'asc' | 'desc',
+    @Query('isApproved') isApproved?: boolean,
+  ): Promise<
+    IBeforeTransformPaginationResponseType<ReviewWithProductResponseDto>
+  > {
+    const { page: normalizedPage, limit: normalizedLimit } =
+      normalizePaginationParams({ page, limit });
+
+    return this.reviewService.getMyReviews(decodedAccessToken.userId, {
+      page: normalizedPage,
+      limit: normalizedLimit,
+      sortBy,
+      order,
+      isApproved,
+    });
+  }
+
   @Get(':id')
   @ApiGetReview()
   getReview(
@@ -301,28 +325,6 @@ export class ReviewController {
   }
 
   // ============== User Routes ==============
-
-  @Get('my-reviews')
-  @ApiGetMyReviews()
-  getMyReviews(
-    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
-    @Query('page') page?: number,
-    @Query('limit') limit?: number,
-    @Query('sortBy') sortBy?: 'rating' | 'helpfulCount' | 'createdAt',
-    @Query('order') order?: 'asc' | 'desc',
-  ): Promise<
-    IBeforeTransformPaginationResponseType<ReviewWithProductResponseDto>
-  > {
-    const { page: normalizedPage, limit: normalizedLimit } =
-      normalizePaginationParams({ page, limit });
-
-    return this.reviewService.getMyReviews(decodedAccessToken.userId, {
-      page: normalizedPage,
-      limit: normalizedLimit,
-      sortBy,
-      order,
-    });
-  }
 
   @Post(':id/helpful')
   @ApiMarkHelpful()
