@@ -547,6 +547,32 @@ export const ApiGetReplies = () =>
       description: 'Review ID',
       type: String,
     }),
+    ApiQuery({
+      name: 'page',
+      type: Number,
+      required: false,
+      description: 'Page number (default: 1)',
+    }),
+    ApiQuery({
+      name: 'limit',
+      type: Number,
+      required: false,
+      description: 'Items per page (default: 10)',
+    }),
+    ApiQuery({
+      name: 'sortBy',
+      type: String,
+      required: false,
+      enum: ['createdAt'],
+      description: 'Sort field (default: createdAt)',
+    }),
+    ApiQuery({
+      name: 'order',
+      type: String,
+      required: false,
+      enum: ['asc', 'desc'],
+      description: 'Sort order (default: asc)',
+    }),
     ApiResponse({
       status: 200,
       type: [ReviewReplyResponseDto],
