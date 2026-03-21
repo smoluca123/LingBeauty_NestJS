@@ -1460,7 +1460,20 @@ export class ReviewService {
 
   async getReviewReplies(
     reviewId: string,
-  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto[]>> {
+    params?: {
+      page?: number;
+      limit?: number;
+      sortBy?: 'createdAt';
+      order?: 'asc' | 'desc';
+    },
+  ): Promise<IBeforeTransformPaginationResponseType<ReviewReplyResponseDto>> {
+    const {
+      page = 1,
+      limit = 10,
+      sortBy = 'createdAt',
+      order = 'asc',
+    } = params || {};
+
     try {
       // Check if review exists
       const review = await this.prismaService.productReview.findUnique({
@@ -1475,16 +1488,33 @@ export class ReviewService {
         );
       }
 
-      const replies = await this.prismaService.reviewReply.findMany({
-        where: { reviewId },
-        select: reviewReplySelect,
-        orderBy: { createdAt: 'asc' },
-      });
+      const [replies, totalCount] = await Promise.all([
+        this.prismaService.reviewReply.findMany({
+          where: { reviewId },
+          select: reviewReplySelect,
+          orderBy: { [sortBy]: order },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        this.prismaService.reviewReply.count({
+          where: { reviewId },
+        }),
+      ]);
+
+      const reviewReplyResponses = toResponseDtoArray(
+        ReviewReplyResponseDto,
+        replies,
+      );
 
       return {
-        type: 'response',
+        type: 'pagination',
         message: 'Lấy danh sách phản hồi thành công',
-        data: replies,
+        data: {
+          items: reviewReplyResponses,
+          totalCount,
+          currentPage: page,
+          pageSize: limit,
+        },
       };
     } catch (error) {
       if (error instanceof BusinessException) {

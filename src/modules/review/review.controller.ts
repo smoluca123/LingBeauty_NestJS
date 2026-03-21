@@ -357,8 +357,20 @@ export class ReviewController {
   @ApiGetReplies()
   getReviewReplies(
     @Param('id') reviewId: string,
-  ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto[]>> {
-    return this.reviewService.getReviewReplies(reviewId);
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('sortBy') sortBy?: 'createdAt',
+    @Query('order') order?: 'asc' | 'desc',
+  ): Promise<IBeforeTransformPaginationResponseType<ReviewReplyResponseDto>> {
+    const { page: normalizedPage, limit: normalizedLimit } =
+      normalizePaginationParams({ page, limit });
+
+    return this.reviewService.getReviewReplies(reviewId, {
+      page: normalizedPage,
+      limit: normalizedLimit,
+      sortBy,
+      order,
+    });
   }
 
   @Post(':id/reply')
