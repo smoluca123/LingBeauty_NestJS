@@ -278,7 +278,8 @@ export const MediaType: {
   AVATAR: 'AVATAR',
   CATEGORY_IMAGE: 'CATEGORY_IMAGE',
   BRAND_LOGO: 'BRAND_LOGO',
-  BANNER_IMAGE: 'BANNER_IMAGE'
+  BANNER_IMAGE: 'BANNER_IMAGE',
+  GENERAL_IMAGE: 'GENERAL_IMAGE'
 };
 
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
