@@ -160,18 +160,34 @@ export const ERROR_MESSAGES = {
 
   // Flash Sale
   [ERROR_CODES.FLASH_SALE_NOT_FOUND]: 'Không tìm thấy chương trình Flash Sale',
-  [ERROR_CODES.FLASH_SALE_SLUG_EXISTS]: 'Đường dẫn (slug) Flash Sale đã tồn tại',
-  [ERROR_CODES.FLASH_SALE_INVALID_TIME]: 'Thời gian bắt đầu phải trước thời gian kết thúc',
-  [ERROR_CODES.FLASH_SALE_PRODUCT_NOT_FOUND]: 'Không tìm thấy sản phẩm trong Flash Sale',
+  [ERROR_CODES.FLASH_SALE_SLUG_EXISTS]:
+    'Đường dẫn (slug) Flash Sale đã tồn tại',
+  [ERROR_CODES.FLASH_SALE_INVALID_TIME]:
+    'Thời gian bắt đầu phải trước thời gian kết thúc',
+  [ERROR_CODES.FLASH_SALE_PRODUCT_NOT_FOUND]:
+    'Không tìm thấy sản phẩm trong Flash Sale',
 
   // Coupon
   [ERROR_CODES.COUPON_NOT_FOUND]: 'Không tìm thấy mã giảm giá',
   [ERROR_CODES.COUPON_ALREADY_EXISTS]: 'Mã giảm giá đã tồn tại',
-  [ERROR_CODES.COUPON_NOT_ACTIVE]: 'Mã giảm giá chưa được kích hoạt hoặc đã bị khóa',
+  [ERROR_CODES.COUPON_NOT_ACTIVE]:
+    'Mã giảm giá chưa được kích hoạt hoặc đã bị khóa',
   [ERROR_CODES.COUPON_EXPIRED]: 'Mã giảm giá đã hết hạn',
   [ERROR_CODES.COUPON_NOT_STARTED]: 'Mã giảm giá chưa đến thời gian áp dụng',
   [ERROR_CODES.COUPON_USAGE_LIMIT_REACHED]: 'Mã giảm giá đã hết lượt sử dụng',
-  [ERROR_CODES.COUPON_MIN_PURCHASE_NOT_MET]: 'Chưa đạt giá trị đơn hàng tối thiểu để áp dụng mã giảm giá này',
+  [ERROR_CODES.COUPON_MIN_PURCHASE_NOT_MET]:
+    'Chưa đạt giá trị đơn hàng tối thiểu để áp dụng mã giảm giá này',
+
+  // Product Question
+  [ERROR_CODES.QUESTION_NOT_FOUND]: 'Không tìm thấy câu hỏi',
+  [ERROR_CODES.QUESTION_NOT_OWNED]:
+    'Bạn không có quyền thực hiện thao tác này với câu hỏi',
+  [ERROR_CODES.QUESTION_NOT_ANSWERED]: 'Câu hỏi chưa được trả lời',
+  [ERROR_CODES.QUESTION_ADMIN_NOT_FOUND]: 'Không tìm thấy admin được chỉ định',
+  [ERROR_CODES.QUESTION_ADMIN_INVALID_ROLE]:
+    'Người dùng được chỉ định không phải là admin',
+  [ERROR_CODES.QUESTION_ALREADY_ANSWERED]:
+    'Không thể chỉnh sửa câu hỏi đã được trả lời',
 
   // System Errors
   [ERROR_CODES.DATABASE_ERROR]: 'Thao tác cơ sở dữ liệu thất bại',

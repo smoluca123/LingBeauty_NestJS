@@ -31,6 +31,8 @@ model User {
   avatarMedia           Media?                 @relation("UserAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
   uploadedMedia         Media[]                @relation("UserUploadedMedia")
   emailVerificationLogs EmailVerificationLog[]
+  questions             ProductQuestion[]      @relation("UserQuestions")
+  answeredQuestions     ProductQuestion[]      @relation("UserAnswers")
 
   @@index([email])
   @@index([phone])
@@ -39,9 +41,16 @@ model User {
   @@map("users")
 }
 
+enum RoleName {
+  CLIENT
+  COLLABORATOR
+  AGENCY
+  ADMINISTRATOR
+}
+
 model UserRole {
   id        String   @id @default(uuid())
-  name      String   @db.VarChar(255)
+  name      RoleName @default(CLIENT)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
