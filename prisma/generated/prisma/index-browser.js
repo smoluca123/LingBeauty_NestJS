@@ -231,7 +231,6 @@ exports.Prisma.BannerScalarFieldEnum = {
   gradientFrom: 'gradientFrom',
   gradientTo: 'gradientTo',
   imageMediaId: 'imageMediaId',
-  sortOrder: 'sortOrder',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -483,6 +482,19 @@ exports.Prisma.ProductCategoryScalarFieldEnum = {
   productId: 'productId',
   categoryId: 'categoryId',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.ProductQuestionScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  userId: 'userId',
+  question: 'question',
+  answer: 'answer',
+  answeredBy: 'answeredBy',
+  status: 'status',
+  isPublic: 'isPublic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.PromotionScalarFieldEnum = {
@@ -739,6 +751,18 @@ exports.ProductInventoryDisplayStatus = exports.$Enums.ProductInventoryDisplaySt
   OUT_OF_STOCK: 'OUT_OF_STOCK'
 };
 
+exports.ProductQuestionStatus = exports.$Enums.ProductQuestionStatus = {
+  PENDING: 'PENDING',
+  ANSWERED: 'ANSWERED'
+};
+
+exports.RoleName = exports.$Enums.RoleName = {
+  CLIENT: 'CLIENT',
+  COLLABORATOR: 'COLLABORATOR',
+  AGENCY: 'AGENCY',
+  ADMINISTRATOR: 'ADMINISTRATOR'
+};
+
 exports.Prisma.ModelName = {
   Address: 'Address',
   DailyStats: 'DailyStats',
@@ -768,6 +792,7 @@ exports.Prisma.ModelName = {
   ProductImage: 'ProductImage',
   ProductInventory: 'ProductInventory',
   ProductCategory: 'ProductCategory',
+  ProductQuestion: 'ProductQuestion',
   Promotion: 'Promotion',
   PromotionProduct: 'PromotionProduct',
   Coupon: 'Coupon',

@@ -154,6 +154,11 @@ export type ProductInventory = $Result.DefaultSelection<Prisma.$ProductInventory
  */
 export type ProductCategory = $Result.DefaultSelection<Prisma.$ProductCategoryPayload>
 /**
+ * Model ProductQuestion
+ * 
+ */
+export type ProductQuestion = $Result.DefaultSelection<Prisma.$ProductQuestionPayload>
+/**
  * Model Promotion
  * 
  */
@@ -357,6 +362,24 @@ export const ProductInventoryDisplayStatus: {
 
 export type ProductInventoryDisplayStatus = (typeof ProductInventoryDisplayStatus)[keyof typeof ProductInventoryDisplayStatus]
 
+
+export const ProductQuestionStatus: {
+  PENDING: 'PENDING',
+  ANSWERED: 'ANSWERED'
+};
+
+export type ProductQuestionStatus = (typeof ProductQuestionStatus)[keyof typeof ProductQuestionStatus]
+
+
+export const RoleName: {
+  CLIENT: 'CLIENT',
+  COLLABORATOR: 'COLLABORATOR',
+  AGENCY: 'AGENCY',
+  ADMINISTRATOR: 'ADMINISTRATOR'
+};
+
+export type RoleName = (typeof RoleName)[keyof typeof RoleName]
+
 }
 
 export type AddressType = $Enums.AddressType
@@ -414,6 +437,14 @@ export const VariantDisplayType: typeof $Enums.VariantDisplayType
 export type ProductInventoryDisplayStatus = $Enums.ProductInventoryDisplayStatus
 
 export const ProductInventoryDisplayStatus: typeof $Enums.ProductInventoryDisplayStatus
+
+export type ProductQuestionStatus = $Enums.ProductQuestionStatus
+
+export const ProductQuestionStatus: typeof $Enums.ProductQuestionStatus
+
+export type RoleName = $Enums.RoleName
+
+export const RoleName: typeof $Enums.RoleName
 
 /**
  * ##  Prisma Client ʲˢ
@@ -811,6 +842,16 @@ export class PrismaClient<
     * ```
     */
   get productCategory(): Prisma.ProductCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productQuestion`: Exposes CRUD operations for the **ProductQuestion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductQuestions
+    * const productQuestions = await prisma.productQuestion.findMany()
+    * ```
+    */
+  get productQuestion(): Prisma.ProductQuestionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.promotion`: Exposes CRUD operations for the **Promotion** model.
@@ -1393,6 +1434,7 @@ export namespace Prisma {
     ProductImage: 'ProductImage',
     ProductInventory: 'ProductInventory',
     ProductCategory: 'ProductCategory',
+    ProductQuestion: 'ProductQuestion',
     Promotion: 'Promotion',
     PromotionProduct: 'PromotionProduct',
     Coupon: 'Coupon',
@@ -1420,7 +1462,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userRole" | "userRoleAssignment"
+      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "productQuestion" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userRole" | "userRoleAssignment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3496,6 +3538,80 @@ export namespace Prisma {
           }
         }
       }
+      ProductQuestion: {
+        payload: Prisma.$ProductQuestionPayload<ExtArgs>
+        fields: Prisma.ProductQuestionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductQuestionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductQuestionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>
+          }
+          findFirst: {
+            args: Prisma.ProductQuestionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductQuestionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>
+          }
+          findMany: {
+            args: Prisma.ProductQuestionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>[]
+          }
+          create: {
+            args: Prisma.ProductQuestionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>
+          }
+          createMany: {
+            args: Prisma.ProductQuestionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductQuestionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>[]
+          }
+          delete: {
+            args: Prisma.ProductQuestionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>
+          }
+          update: {
+            args: Prisma.ProductQuestionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductQuestionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductQuestionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductQuestionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductQuestionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductQuestionPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductQuestionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductQuestion>
+          }
+          groupBy: {
+            args: Prisma.ProductQuestionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductQuestionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductQuestionCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductQuestionCountAggregateOutputType> | number
+          }
+        }
+      }
       Promotion: {
         payload: Prisma.$PromotionPayload<ExtArgs>
         fields: Prisma.PromotionFieldRefs
@@ -4504,6 +4620,7 @@ export namespace Prisma {
     productImage?: ProductImageOmit
     productInventory?: ProductInventoryOmit
     productCategory?: ProductCategoryOmit
+    productQuestion?: ProductQuestionOmit
     promotion?: PromotionOmit
     promotionProduct?: PromotionProductOmit
     coupon?: CouponOmit
@@ -5016,6 +5133,7 @@ export namespace Prisma {
     flashSaleProducts: number
     productCategories: number
     inventory: number
+    questions: number
   }
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5030,6 +5148,7 @@ export namespace Prisma {
     flashSaleProducts?: boolean | ProductCountOutputTypeCountFlashSaleProductsArgs
     productCategories?: boolean | ProductCountOutputTypeCountProductCategoriesArgs
     inventory?: boolean | ProductCountOutputTypeCountInventoryArgs
+    questions?: boolean | ProductCountOutputTypeCountQuestionsArgs
   }
 
   // Custom InputTypes
@@ -5118,6 +5237,13 @@ export namespace Prisma {
    */
   export type ProductCountOutputTypeCountInventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductInventoryWhereInput
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductQuestionWhereInput
   }
 
 
@@ -5303,6 +5429,8 @@ export namespace Prisma {
     roleAssignments: number
     uploadedMedia: number
     emailVerificationLogs: number
+    questions: number
+    answeredQuestions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5314,6 +5442,8 @@ export namespace Prisma {
     roleAssignments?: boolean | UserCountOutputTypeCountRoleAssignmentsArgs
     uploadedMedia?: boolean | UserCountOutputTypeCountUploadedMediaArgs
     emailVerificationLogs?: boolean | UserCountOutputTypeCountEmailVerificationLogsArgs
+    questions?: boolean | UserCountOutputTypeCountQuestionsArgs
+    answeredQuestions?: boolean | UserCountOutputTypeCountAnsweredQuestionsArgs
   }
 
   // Custom InputTypes
@@ -5381,6 +5511,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountEmailVerificationLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmailVerificationLogWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductQuestionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAnsweredQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductQuestionWhereInput
   }
 
 
@@ -13662,18 +13806,8 @@ export namespace Prisma {
 
   export type AggregateBanner = {
     _count: BannerCountAggregateOutputType | null
-    _avg: BannerAvgAggregateOutputType | null
-    _sum: BannerSumAggregateOutputType | null
     _min: BannerMinAggregateOutputType | null
     _max: BannerMaxAggregateOutputType | null
-  }
-
-  export type BannerAvgAggregateOutputType = {
-    sortOrder: number | null
-  }
-
-  export type BannerSumAggregateOutputType = {
-    sortOrder: number | null
   }
 
   export type BannerMinAggregateOutputType = {
@@ -13690,7 +13824,6 @@ export namespace Prisma {
     gradientFrom: string | null
     gradientTo: string | null
     imageMediaId: string | null
-    sortOrder: number | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13710,7 +13843,6 @@ export namespace Prisma {
     gradientFrom: string | null
     gradientTo: string | null
     imageMediaId: string | null
-    sortOrder: number | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13730,21 +13862,12 @@ export namespace Prisma {
     gradientFrom: number
     gradientTo: number
     imageMediaId: number
-    sortOrder: number
     isActive: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
-
-  export type BannerAvgAggregateInputType = {
-    sortOrder?: true
-  }
-
-  export type BannerSumAggregateInputType = {
-    sortOrder?: true
-  }
 
   export type BannerMinAggregateInputType = {
     id?: true
@@ -13760,7 +13883,6 @@ export namespace Prisma {
     gradientFrom?: true
     gradientTo?: true
     imageMediaId?: true
-    sortOrder?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -13780,7 +13902,6 @@ export namespace Prisma {
     gradientFrom?: true
     gradientTo?: true
     imageMediaId?: true
-    sortOrder?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -13800,7 +13921,6 @@ export namespace Prisma {
     gradientFrom?: true
     gradientTo?: true
     imageMediaId?: true
-    sortOrder?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -13845,18 +13965,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: BannerAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BannerSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: BannerMinAggregateInputType
@@ -13887,8 +13995,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: BannerCountAggregateInputType | true
-    _avg?: BannerAvgAggregateInputType
-    _sum?: BannerSumAggregateInputType
     _min?: BannerMinAggregateInputType
     _max?: BannerMaxAggregateInputType
   }
@@ -13907,13 +14013,10 @@ export namespace Prisma {
     gradientFrom: string | null
     gradientTo: string | null
     imageMediaId: string | null
-    sortOrder: number
     isActive: boolean
     createdAt: Date
     updatedAt: Date
     _count: BannerCountAggregateOutputType | null
-    _avg: BannerAvgAggregateOutputType | null
-    _sum: BannerSumAggregateOutputType | null
     _min: BannerMinAggregateOutputType | null
     _max: BannerMaxAggregateOutputType | null
   }
@@ -13946,7 +14049,6 @@ export namespace Prisma {
     gradientFrom?: boolean
     gradientTo?: boolean
     imageMediaId?: boolean
-    sortOrder?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13969,7 +14071,6 @@ export namespace Prisma {
     gradientFrom?: boolean
     gradientTo?: boolean
     imageMediaId?: boolean
-    sortOrder?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13990,7 +14091,6 @@ export namespace Prisma {
     gradientFrom?: boolean
     gradientTo?: boolean
     imageMediaId?: boolean
-    sortOrder?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14011,13 +14111,12 @@ export namespace Prisma {
     gradientFrom?: boolean
     gradientTo?: boolean
     imageMediaId?: boolean
-    sortOrder?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "position" | "badge" | "title" | "description" | "highlight" | "ctaText" | "ctaLink" | "subLabel" | "gradientFrom" | "gradientTo" | "imageMediaId" | "sortOrder" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
+  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "position" | "badge" | "title" | "description" | "highlight" | "ctaText" | "ctaLink" | "subLabel" | "gradientFrom" | "gradientTo" | "imageMediaId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
   export type BannerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     groups?: boolean | Banner$groupsArgs<ExtArgs>
     imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
@@ -14050,7 +14149,6 @@ export namespace Prisma {
       gradientFrom: string | null
       gradientTo: string | null
       imageMediaId: string | null
-      sortOrder: number
       isActive: boolean
       createdAt: Date
       updatedAt: Date
@@ -14492,7 +14590,6 @@ export namespace Prisma {
     readonly gradientFrom: FieldRef<"Banner", 'String'>
     readonly gradientTo: FieldRef<"Banner", 'String'>
     readonly imageMediaId: FieldRef<"Banner", 'String'>
-    readonly sortOrder: FieldRef<"Banner", 'Int'>
     readonly isActive: FieldRef<"Banner", 'Boolean'>
     readonly createdAt: FieldRef<"Banner", 'DateTime'>
     readonly updatedAt: FieldRef<"Banner", 'DateTime'>
@@ -31979,6 +32076,7 @@ export namespace Prisma {
     productCategories?: boolean | Product$productCategoriesArgs<ExtArgs>
     stats?: boolean | Product$statsArgs<ExtArgs>
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
+    questions?: boolean | Product$questionsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -32056,6 +32154,7 @@ export namespace Prisma {
     productCategories?: boolean | Product$productCategoriesArgs<ExtArgs>
     stats?: boolean | Product$statsArgs<ExtArgs>
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
+    questions?: boolean | Product$questionsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -32081,6 +32180,7 @@ export namespace Prisma {
       productCategories: Prisma.$ProductCategoryPayload<ExtArgs>[]
       stats: Prisma.$ProductStatsPayload<ExtArgs> | null
       inventory: Prisma.$ProductInventoryPayload<ExtArgs>[]
+      questions: Prisma.$ProductQuestionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -32506,6 +32606,7 @@ export namespace Prisma {
     productCategories<T extends Product$productCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, Product$productCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     stats<T extends Product$statsArgs<ExtArgs> = {}>(args?: Subset<T, Product$statsArgs<ExtArgs>>): Prisma__ProductStatsClient<$Result.GetResult<Prisma.$ProductStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     inventory<T extends Product$inventoryArgs<ExtArgs> = {}>(args?: Subset<T, Product$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductInventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    questions<T extends Product$questionsArgs<ExtArgs> = {}>(args?: Subset<T, Product$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -33246,6 +33347,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProductInventoryScalarFieldEnum | ProductInventoryScalarFieldEnum[]
+  }
+
+  /**
+   * Product.questions
+   */
+  export type Product$questionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    where?: ProductQuestionWhereInput
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    cursor?: ProductQuestionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductQuestionScalarFieldEnum | ProductQuestionScalarFieldEnum[]
   }
 
   /**
@@ -39135,6 +39260,1164 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductQuestion
+   */
+
+  export type AggregateProductQuestion = {
+    _count: ProductQuestionCountAggregateOutputType | null
+    _min: ProductQuestionMinAggregateOutputType | null
+    _max: ProductQuestionMaxAggregateOutputType | null
+  }
+
+  export type ProductQuestionMinAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    userId: string | null
+    question: string | null
+    answer: string | null
+    answeredBy: string | null
+    status: $Enums.ProductQuestionStatus | null
+    isPublic: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductQuestionMaxAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    userId: string | null
+    question: string | null
+    answer: string | null
+    answeredBy: string | null
+    status: $Enums.ProductQuestionStatus | null
+    isPublic: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductQuestionCountAggregateOutputType = {
+    id: number
+    productId: number
+    userId: number
+    question: number
+    answer: number
+    answeredBy: number
+    status: number
+    isPublic: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductQuestionMinAggregateInputType = {
+    id?: true
+    productId?: true
+    userId?: true
+    question?: true
+    answer?: true
+    answeredBy?: true
+    status?: true
+    isPublic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductQuestionMaxAggregateInputType = {
+    id?: true
+    productId?: true
+    userId?: true
+    question?: true
+    answer?: true
+    answeredBy?: true
+    status?: true
+    isPublic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductQuestionCountAggregateInputType = {
+    id?: true
+    productId?: true
+    userId?: true
+    question?: true
+    answer?: true
+    answeredBy?: true
+    status?: true
+    isPublic?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductQuestionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductQuestion to aggregate.
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductQuestions to fetch.
+     */
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductQuestions
+    **/
+    _count?: true | ProductQuestionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductQuestionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductQuestionMaxAggregateInputType
+  }
+
+  export type GetProductQuestionAggregateType<T extends ProductQuestionAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductQuestion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductQuestion[P]>
+      : GetScalarType<T[P], AggregateProductQuestion[P]>
+  }
+
+
+
+
+  export type ProductQuestionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductQuestionWhereInput
+    orderBy?: ProductQuestionOrderByWithAggregationInput | ProductQuestionOrderByWithAggregationInput[]
+    by: ProductQuestionScalarFieldEnum[] | ProductQuestionScalarFieldEnum
+    having?: ProductQuestionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductQuestionCountAggregateInputType | true
+    _min?: ProductQuestionMinAggregateInputType
+    _max?: ProductQuestionMaxAggregateInputType
+  }
+
+  export type ProductQuestionGroupByOutputType = {
+    id: string
+    productId: string
+    userId: string
+    question: string
+    answer: string | null
+    answeredBy: string | null
+    status: $Enums.ProductQuestionStatus
+    isPublic: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductQuestionCountAggregateOutputType | null
+    _min: ProductQuestionMinAggregateOutputType | null
+    _max: ProductQuestionMaxAggregateOutputType | null
+  }
+
+  type GetProductQuestionGroupByPayload<T extends ProductQuestionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductQuestionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductQuestionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductQuestionGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductQuestionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductQuestionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    userId?: boolean
+    question?: boolean
+    answer?: boolean
+    answeredBy?: boolean
+    status?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    answeredByUser?: boolean | ProductQuestion$answeredByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["productQuestion"]>
+
+  export type ProductQuestionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    userId?: boolean
+    question?: boolean
+    answer?: boolean
+    answeredBy?: boolean
+    status?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    answeredByUser?: boolean | ProductQuestion$answeredByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["productQuestion"]>
+
+  export type ProductQuestionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    userId?: boolean
+    question?: boolean
+    answer?: boolean
+    answeredBy?: boolean
+    status?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    answeredByUser?: boolean | ProductQuestion$answeredByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["productQuestion"]>
+
+  export type ProductQuestionSelectScalar = {
+    id?: boolean
+    productId?: boolean
+    userId?: boolean
+    question?: boolean
+    answer?: boolean
+    answeredBy?: boolean
+    status?: boolean
+    isPublic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProductQuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "userId" | "question" | "answer" | "answeredBy" | "status" | "isPublic" | "createdAt" | "updatedAt", ExtArgs["result"]["productQuestion"]>
+  export type ProductQuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    answeredByUser?: boolean | ProductQuestion$answeredByUserArgs<ExtArgs>
+  }
+  export type ProductQuestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    answeredByUser?: boolean | ProductQuestion$answeredByUserArgs<ExtArgs>
+  }
+  export type ProductQuestionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    answeredByUser?: boolean | ProductQuestion$answeredByUserArgs<ExtArgs>
+  }
+
+  export type $ProductQuestionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductQuestion"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      answeredByUser: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      productId: string
+      userId: string
+      question: string
+      answer: string | null
+      answeredBy: string | null
+      status: $Enums.ProductQuestionStatus
+      isPublic: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productQuestion"]>
+    composites: {}
+  }
+
+  type ProductQuestionGetPayload<S extends boolean | null | undefined | ProductQuestionDefaultArgs> = $Result.GetResult<Prisma.$ProductQuestionPayload, S>
+
+  type ProductQuestionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductQuestionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductQuestionCountAggregateInputType | true
+    }
+
+  export interface ProductQuestionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductQuestion'], meta: { name: 'ProductQuestion' } }
+    /**
+     * Find zero or one ProductQuestion that matches the filter.
+     * @param {ProductQuestionFindUniqueArgs} args - Arguments to find a ProductQuestion
+     * @example
+     * // Get one ProductQuestion
+     * const productQuestion = await prisma.productQuestion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductQuestionFindUniqueArgs>(args: SelectSubset<T, ProductQuestionFindUniqueArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductQuestion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductQuestionFindUniqueOrThrowArgs} args - Arguments to find a ProductQuestion
+     * @example
+     * // Get one ProductQuestion
+     * const productQuestion = await prisma.productQuestion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductQuestionFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductQuestionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductQuestion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionFindFirstArgs} args - Arguments to find a ProductQuestion
+     * @example
+     * // Get one ProductQuestion
+     * const productQuestion = await prisma.productQuestion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductQuestionFindFirstArgs>(args?: SelectSubset<T, ProductQuestionFindFirstArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductQuestion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionFindFirstOrThrowArgs} args - Arguments to find a ProductQuestion
+     * @example
+     * // Get one ProductQuestion
+     * const productQuestion = await prisma.productQuestion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductQuestionFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductQuestionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductQuestions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductQuestions
+     * const productQuestions = await prisma.productQuestion.findMany()
+     * 
+     * // Get first 10 ProductQuestions
+     * const productQuestions = await prisma.productQuestion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productQuestionWithIdOnly = await prisma.productQuestion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductQuestionFindManyArgs>(args?: SelectSubset<T, ProductQuestionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductQuestion.
+     * @param {ProductQuestionCreateArgs} args - Arguments to create a ProductQuestion.
+     * @example
+     * // Create one ProductQuestion
+     * const ProductQuestion = await prisma.productQuestion.create({
+     *   data: {
+     *     // ... data to create a ProductQuestion
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductQuestionCreateArgs>(args: SelectSubset<T, ProductQuestionCreateArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductQuestions.
+     * @param {ProductQuestionCreateManyArgs} args - Arguments to create many ProductQuestions.
+     * @example
+     * // Create many ProductQuestions
+     * const productQuestion = await prisma.productQuestion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductQuestionCreateManyArgs>(args?: SelectSubset<T, ProductQuestionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductQuestions and returns the data saved in the database.
+     * @param {ProductQuestionCreateManyAndReturnArgs} args - Arguments to create many ProductQuestions.
+     * @example
+     * // Create many ProductQuestions
+     * const productQuestion = await prisma.productQuestion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductQuestions and only return the `id`
+     * const productQuestionWithIdOnly = await prisma.productQuestion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductQuestionCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductQuestionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductQuestion.
+     * @param {ProductQuestionDeleteArgs} args - Arguments to delete one ProductQuestion.
+     * @example
+     * // Delete one ProductQuestion
+     * const ProductQuestion = await prisma.productQuestion.delete({
+     *   where: {
+     *     // ... filter to delete one ProductQuestion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductQuestionDeleteArgs>(args: SelectSubset<T, ProductQuestionDeleteArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductQuestion.
+     * @param {ProductQuestionUpdateArgs} args - Arguments to update one ProductQuestion.
+     * @example
+     * // Update one ProductQuestion
+     * const productQuestion = await prisma.productQuestion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductQuestionUpdateArgs>(args: SelectSubset<T, ProductQuestionUpdateArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductQuestions.
+     * @param {ProductQuestionDeleteManyArgs} args - Arguments to filter ProductQuestions to delete.
+     * @example
+     * // Delete a few ProductQuestions
+     * const { count } = await prisma.productQuestion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductQuestionDeleteManyArgs>(args?: SelectSubset<T, ProductQuestionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductQuestions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductQuestions
+     * const productQuestion = await prisma.productQuestion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductQuestionUpdateManyArgs>(args: SelectSubset<T, ProductQuestionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductQuestions and returns the data updated in the database.
+     * @param {ProductQuestionUpdateManyAndReturnArgs} args - Arguments to update many ProductQuestions.
+     * @example
+     * // Update many ProductQuestions
+     * const productQuestion = await prisma.productQuestion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductQuestions and only return the `id`
+     * const productQuestionWithIdOnly = await prisma.productQuestion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductQuestionUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductQuestionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductQuestion.
+     * @param {ProductQuestionUpsertArgs} args - Arguments to update or create a ProductQuestion.
+     * @example
+     * // Update or create a ProductQuestion
+     * const productQuestion = await prisma.productQuestion.upsert({
+     *   create: {
+     *     // ... data to create a ProductQuestion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductQuestion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductQuestionUpsertArgs>(args: SelectSubset<T, ProductQuestionUpsertArgs<ExtArgs>>): Prisma__ProductQuestionClient<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductQuestions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionCountArgs} args - Arguments to filter ProductQuestions to count.
+     * @example
+     * // Count the number of ProductQuestions
+     * const count = await prisma.productQuestion.count({
+     *   where: {
+     *     // ... the filter for the ProductQuestions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductQuestionCountArgs>(
+      args?: Subset<T, ProductQuestionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductQuestionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductQuestion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductQuestionAggregateArgs>(args: Subset<T, ProductQuestionAggregateArgs>): Prisma.PrismaPromise<GetProductQuestionAggregateType<T>>
+
+    /**
+     * Group by ProductQuestion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductQuestionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductQuestionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductQuestionGroupByArgs['orderBy'] }
+        : { orderBy?: ProductQuestionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductQuestionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductQuestionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductQuestion model
+   */
+  readonly fields: ProductQuestionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductQuestion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductQuestionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    answeredByUser<T extends ProductQuestion$answeredByUserArgs<ExtArgs> = {}>(args?: Subset<T, ProductQuestion$answeredByUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductQuestion model
+   */
+  interface ProductQuestionFieldRefs {
+    readonly id: FieldRef<"ProductQuestion", 'String'>
+    readonly productId: FieldRef<"ProductQuestion", 'String'>
+    readonly userId: FieldRef<"ProductQuestion", 'String'>
+    readonly question: FieldRef<"ProductQuestion", 'String'>
+    readonly answer: FieldRef<"ProductQuestion", 'String'>
+    readonly answeredBy: FieldRef<"ProductQuestion", 'String'>
+    readonly status: FieldRef<"ProductQuestion", 'ProductQuestionStatus'>
+    readonly isPublic: FieldRef<"ProductQuestion", 'Boolean'>
+    readonly createdAt: FieldRef<"ProductQuestion", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProductQuestion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductQuestion findUnique
+   */
+  export type ProductQuestionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductQuestion to fetch.
+     */
+    where: ProductQuestionWhereUniqueInput
+  }
+
+  /**
+   * ProductQuestion findUniqueOrThrow
+   */
+  export type ProductQuestionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductQuestion to fetch.
+     */
+    where: ProductQuestionWhereUniqueInput
+  }
+
+  /**
+   * ProductQuestion findFirst
+   */
+  export type ProductQuestionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductQuestion to fetch.
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductQuestions to fetch.
+     */
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductQuestions.
+     */
+    cursor?: ProductQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductQuestions.
+     */
+    distinct?: ProductQuestionScalarFieldEnum | ProductQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * ProductQuestion findFirstOrThrow
+   */
+  export type ProductQuestionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductQuestion to fetch.
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductQuestions to fetch.
+     */
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductQuestions.
+     */
+    cursor?: ProductQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductQuestions.
+     */
+    distinct?: ProductQuestionScalarFieldEnum | ProductQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * ProductQuestion findMany
+   */
+  export type ProductQuestionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductQuestions to fetch.
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductQuestions to fetch.
+     */
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductQuestions.
+     */
+    cursor?: ProductQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductQuestions.
+     */
+    skip?: number
+    distinct?: ProductQuestionScalarFieldEnum | ProductQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * ProductQuestion create
+   */
+  export type ProductQuestionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductQuestion.
+     */
+    data: XOR<ProductQuestionCreateInput, ProductQuestionUncheckedCreateInput>
+  }
+
+  /**
+   * ProductQuestion createMany
+   */
+  export type ProductQuestionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductQuestions.
+     */
+    data: ProductQuestionCreateManyInput | ProductQuestionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductQuestion createManyAndReturn
+   */
+  export type ProductQuestionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductQuestions.
+     */
+    data: ProductQuestionCreateManyInput | ProductQuestionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductQuestion update
+   */
+  export type ProductQuestionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductQuestion.
+     */
+    data: XOR<ProductQuestionUpdateInput, ProductQuestionUncheckedUpdateInput>
+    /**
+     * Choose, which ProductQuestion to update.
+     */
+    where: ProductQuestionWhereUniqueInput
+  }
+
+  /**
+   * ProductQuestion updateMany
+   */
+  export type ProductQuestionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductQuestions.
+     */
+    data: XOR<ProductQuestionUpdateManyMutationInput, ProductQuestionUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductQuestions to update
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * Limit how many ProductQuestions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductQuestion updateManyAndReturn
+   */
+  export type ProductQuestionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductQuestions.
+     */
+    data: XOR<ProductQuestionUpdateManyMutationInput, ProductQuestionUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductQuestions to update
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * Limit how many ProductQuestions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductQuestion upsert
+   */
+  export type ProductQuestionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductQuestion to update in case it exists.
+     */
+    where: ProductQuestionWhereUniqueInput
+    /**
+     * In case the ProductQuestion found by the `where` argument doesn't exist, create a new ProductQuestion with this data.
+     */
+    create: XOR<ProductQuestionCreateInput, ProductQuestionUncheckedCreateInput>
+    /**
+     * In case the ProductQuestion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductQuestionUpdateInput, ProductQuestionUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductQuestion delete
+   */
+  export type ProductQuestionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    /**
+     * Filter which ProductQuestion to delete.
+     */
+    where: ProductQuestionWhereUniqueInput
+  }
+
+  /**
+   * ProductQuestion deleteMany
+   */
+  export type ProductQuestionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductQuestions to delete
+     */
+    where?: ProductQuestionWhereInput
+    /**
+     * Limit how many ProductQuestions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductQuestion.answeredByUser
+   */
+  export type ProductQuestion$answeredByUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ProductQuestion without action
+   */
+  export type ProductQuestionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
   }
 
 
@@ -49526,6 +50809,8 @@ export namespace Prisma {
     avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
     uploadedMedia?: boolean | User$uploadedMediaArgs<ExtArgs>
     emailVerificationLogs?: boolean | User$emailVerificationLogsArgs<ExtArgs>
+    questions?: boolean | User$questionsArgs<ExtArgs>
+    answeredQuestions?: boolean | User$answeredQuestionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -49610,6 +50895,8 @@ export namespace Prisma {
     avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
     uploadedMedia?: boolean | User$uploadedMediaArgs<ExtArgs>
     emailVerificationLogs?: boolean | User$emailVerificationLogsArgs<ExtArgs>
+    questions?: boolean | User$questionsArgs<ExtArgs>
+    answeredQuestions?: boolean | User$answeredQuestionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -49633,6 +50920,8 @@ export namespace Prisma {
       avatarMedia: Prisma.$MediaPayload<ExtArgs> | null
       uploadedMedia: Prisma.$MediaPayload<ExtArgs>[]
       emailVerificationLogs: Prisma.$EmailVerificationLogPayload<ExtArgs>[]
+      questions: Prisma.$ProductQuestionPayload<ExtArgs>[]
+      answeredQuestions: Prisma.$ProductQuestionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -50059,6 +51348,8 @@ export namespace Prisma {
     avatarMedia<T extends User$avatarMediaArgs<ExtArgs> = {}>(args?: Subset<T, User$avatarMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     uploadedMedia<T extends User$uploadedMediaArgs<ExtArgs> = {}>(args?: Subset<T, User$uploadedMediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     emailVerificationLogs<T extends User$emailVerificationLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$emailVerificationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    questions<T extends User$questionsArgs<ExtArgs> = {}>(args?: Subset<T, User$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    answeredQuestions<T extends User$answeredQuestionsArgs<ExtArgs> = {}>(args?: Subset<T, User$answeredQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -50752,6 +52043,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.questions
+   */
+  export type User$questionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    where?: ProductQuestionWhereInput
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    cursor?: ProductQuestionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductQuestionScalarFieldEnum | ProductQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * User.answeredQuestions
+   */
+  export type User$answeredQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductQuestion
+     */
+    select?: ProductQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductQuestion
+     */
+    omit?: ProductQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductQuestionInclude<ExtArgs> | null
+    where?: ProductQuestionWhereInput
+    orderBy?: ProductQuestionOrderByWithRelationInput | ProductQuestionOrderByWithRelationInput[]
+    cursor?: ProductQuestionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductQuestionScalarFieldEnum | ProductQuestionScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -50782,14 +52121,14 @@ export namespace Prisma {
 
   export type UserRoleMinAggregateOutputType = {
     id: string | null
-    name: string | null
+    name: $Enums.RoleName | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type UserRoleMaxAggregateOutputType = {
     id: string | null
-    name: string | null
+    name: $Enums.RoleName | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -50899,7 +52238,7 @@ export namespace Prisma {
 
   export type UserRoleGroupByOutputType = {
     id: string
-    name: string
+    name: $Enums.RoleName
     createdAt: Date
     updatedAt: Date
     _count: UserRoleCountAggregateOutputType | null
@@ -50966,7 +52305,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
+      name: $Enums.RoleName
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["userRole"]>
@@ -51394,7 +52733,7 @@ export namespace Prisma {
    */
   interface UserRoleFieldRefs {
     readonly id: FieldRef<"UserRole", 'String'>
-    readonly name: FieldRef<"UserRole", 'String'>
+    readonly name: FieldRef<"UserRole", 'RoleName'>
     readonly createdAt: FieldRef<"UserRole", 'DateTime'>
     readonly updatedAt: FieldRef<"UserRole", 'DateTime'>
   }
@@ -53039,7 +54378,6 @@ export namespace Prisma {
     gradientFrom: 'gradientFrom',
     gradientTo: 'gradientTo',
     imageMediaId: 'imageMediaId',
-    sortOrder: 'sortOrder',
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -53354,6 +54692,22 @@ export namespace Prisma {
   };
 
   export type ProductCategoryScalarFieldEnum = (typeof ProductCategoryScalarFieldEnum)[keyof typeof ProductCategoryScalarFieldEnum]
+
+
+  export const ProductQuestionScalarFieldEnum: {
+    id: 'id',
+    productId: 'productId',
+    userId: 'userId',
+    question: 'question',
+    answer: 'answer',
+    answeredBy: 'answeredBy',
+    status: 'status',
+    isPublic: 'isPublic',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductQuestionScalarFieldEnum = (typeof ProductQuestionScalarFieldEnum)[keyof typeof ProductQuestionScalarFieldEnum]
 
 
   export const PromotionScalarFieldEnum: {
@@ -53839,6 +55193,34 @@ export namespace Prisma {
    * Reference to a field of type 'ProductInventoryDisplayStatus[]'
    */
   export type ListEnumProductInventoryDisplayStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInventoryDisplayStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductQuestionStatus'
+   */
+  export type EnumProductQuestionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductQuestionStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductQuestionStatus[]'
+   */
+  export type ListEnumProductQuestionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductQuestionStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoleName'
+   */
+  export type EnumRoleNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoleName'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoleName[]'
+   */
+  export type ListEnumRoleNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoleName[]'>
     
 
 
@@ -54485,7 +55867,6 @@ export namespace Prisma {
     gradientFrom?: StringNullableFilter<"Banner"> | string | null
     gradientTo?: StringNullableFilter<"Banner"> | string | null
     imageMediaId?: StringNullableFilter<"Banner"> | string | null
-    sortOrder?: IntFilter<"Banner"> | number
     isActive?: BoolFilter<"Banner"> | boolean
     createdAt?: DateTimeFilter<"Banner"> | Date | string
     updatedAt?: DateTimeFilter<"Banner"> | Date | string
@@ -54507,7 +55888,6 @@ export namespace Prisma {
     gradientFrom?: SortOrderInput | SortOrder
     gradientTo?: SortOrderInput | SortOrder
     imageMediaId?: SortOrderInput | SortOrder
-    sortOrder?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -54532,7 +55912,6 @@ export namespace Prisma {
     gradientFrom?: StringNullableFilter<"Banner"> | string | null
     gradientTo?: StringNullableFilter<"Banner"> | string | null
     imageMediaId?: StringNullableFilter<"Banner"> | string | null
-    sortOrder?: IntFilter<"Banner"> | number
     isActive?: BoolFilter<"Banner"> | boolean
     createdAt?: DateTimeFilter<"Banner"> | Date | string
     updatedAt?: DateTimeFilter<"Banner"> | Date | string
@@ -54554,15 +55933,12 @@ export namespace Prisma {
     gradientFrom?: SortOrderInput | SortOrder
     gradientTo?: SortOrderInput | SortOrder
     imageMediaId?: SortOrderInput | SortOrder
-    sortOrder?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BannerCountOrderByAggregateInput
-    _avg?: BannerAvgOrderByAggregateInput
     _max?: BannerMaxOrderByAggregateInput
     _min?: BannerMinOrderByAggregateInput
-    _sum?: BannerSumOrderByAggregateInput
   }
 
   export type BannerScalarWhereWithAggregatesInput = {
@@ -54582,7 +55958,6 @@ export namespace Prisma {
     gradientFrom?: StringNullableWithAggregatesFilter<"Banner"> | string | null
     gradientTo?: StringNullableWithAggregatesFilter<"Banner"> | string | null
     imageMediaId?: StringNullableWithAggregatesFilter<"Banner"> | string | null
-    sortOrder?: IntWithAggregatesFilter<"Banner"> | number
     isActive?: BoolWithAggregatesFilter<"Banner"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
@@ -55798,6 +57173,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryListRelationFilter
     stats?: XOR<ProductStatsNullableScalarRelationFilter, ProductStatsWhereInput> | null
     inventory?: ProductInventoryListRelationFilter
+    questions?: ProductQuestionListRelationFilter
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -55830,6 +57206,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryOrderByRelationAggregateInput
     stats?: ProductStatsOrderByWithRelationInput
     inventory?: ProductInventoryOrderByRelationAggregateInput
+    questions?: ProductQuestionOrderByRelationAggregateInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -55865,6 +57242,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryListRelationFilter
     stats?: XOR<ProductStatsNullableScalarRelationFilter, ProductStatsWhereInput> | null
     inventory?: ProductInventoryListRelationFilter
+    questions?: ProductQuestionListRelationFilter
   }, "id" | "slug" | "sku">
 
   export type ProductOrderByWithAggregationInput = {
@@ -56307,6 +57685,92 @@ export namespace Prisma {
     productId?: StringWithAggregatesFilter<"ProductCategory"> | string
     categoryId?: StringWithAggregatesFilter<"ProductCategory"> | string
     createdAt?: DateTimeWithAggregatesFilter<"ProductCategory"> | Date | string
+  }
+
+  export type ProductQuestionWhereInput = {
+    AND?: ProductQuestionWhereInput | ProductQuestionWhereInput[]
+    OR?: ProductQuestionWhereInput[]
+    NOT?: ProductQuestionWhereInput | ProductQuestionWhereInput[]
+    id?: StringFilter<"ProductQuestion"> | string
+    productId?: StringFilter<"ProductQuestion"> | string
+    userId?: StringFilter<"ProductQuestion"> | string
+    question?: StringFilter<"ProductQuestion"> | string
+    answer?: StringNullableFilter<"ProductQuestion"> | string | null
+    answeredBy?: StringNullableFilter<"ProductQuestion"> | string | null
+    status?: EnumProductQuestionStatusFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
+    isPublic?: BoolFilter<"ProductQuestion"> | boolean
+    createdAt?: DateTimeFilter<"ProductQuestion"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductQuestion"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    answeredByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type ProductQuestionOrderByWithRelationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    userId?: SortOrder
+    question?: SortOrder
+    answer?: SortOrderInput | SortOrder
+    answeredBy?: SortOrderInput | SortOrder
+    status?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    product?: ProductOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    answeredByUser?: UserOrderByWithRelationInput
+  }
+
+  export type ProductQuestionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProductQuestionWhereInput | ProductQuestionWhereInput[]
+    OR?: ProductQuestionWhereInput[]
+    NOT?: ProductQuestionWhereInput | ProductQuestionWhereInput[]
+    productId?: StringFilter<"ProductQuestion"> | string
+    userId?: StringFilter<"ProductQuestion"> | string
+    question?: StringFilter<"ProductQuestion"> | string
+    answer?: StringNullableFilter<"ProductQuestion"> | string | null
+    answeredBy?: StringNullableFilter<"ProductQuestion"> | string | null
+    status?: EnumProductQuestionStatusFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
+    isPublic?: BoolFilter<"ProductQuestion"> | boolean
+    createdAt?: DateTimeFilter<"ProductQuestion"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductQuestion"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    answeredByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type ProductQuestionOrderByWithAggregationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    userId?: SortOrder
+    question?: SortOrder
+    answer?: SortOrderInput | SortOrder
+    answeredBy?: SortOrderInput | SortOrder
+    status?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProductQuestionCountOrderByAggregateInput
+    _max?: ProductQuestionMaxOrderByAggregateInput
+    _min?: ProductQuestionMinOrderByAggregateInput
+  }
+
+  export type ProductQuestionScalarWhereWithAggregatesInput = {
+    AND?: ProductQuestionScalarWhereWithAggregatesInput | ProductQuestionScalarWhereWithAggregatesInput[]
+    OR?: ProductQuestionScalarWhereWithAggregatesInput[]
+    NOT?: ProductQuestionScalarWhereWithAggregatesInput | ProductQuestionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProductQuestion"> | string
+    productId?: StringWithAggregatesFilter<"ProductQuestion"> | string
+    userId?: StringWithAggregatesFilter<"ProductQuestion"> | string
+    question?: StringWithAggregatesFilter<"ProductQuestion"> | string
+    answer?: StringNullableWithAggregatesFilter<"ProductQuestion"> | string | null
+    answeredBy?: StringNullableWithAggregatesFilter<"ProductQuestion"> | string | null
+    status?: EnumProductQuestionStatusWithAggregatesFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
+    isPublic?: BoolWithAggregatesFilter<"ProductQuestion"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ProductQuestion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProductQuestion"> | Date | string
   }
 
   export type PromotionWhereInput = {
@@ -56985,6 +58449,8 @@ export namespace Prisma {
     avatarMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     uploadedMedia?: MediaListRelationFilter
     emailVerificationLogs?: EmailVerificationLogListRelationFilter
+    questions?: ProductQuestionListRelationFilter
+    answeredQuestions?: ProductQuestionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -57018,6 +58484,8 @@ export namespace Prisma {
     avatarMedia?: MediaOrderByWithRelationInput
     uploadedMedia?: MediaOrderByRelationAggregateInput
     emailVerificationLogs?: EmailVerificationLogOrderByRelationAggregateInput
+    questions?: ProductQuestionOrderByRelationAggregateInput
+    answeredQuestions?: ProductQuestionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -57054,6 +58522,8 @@ export namespace Prisma {
     avatarMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     uploadedMedia?: MediaListRelationFilter
     emailVerificationLogs?: EmailVerificationLogListRelationFilter
+    questions?: ProductQuestionListRelationFilter
+    answeredQuestions?: ProductQuestionListRelationFilter
   }, "id" | "email" | "phone" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -57111,7 +58581,7 @@ export namespace Prisma {
     OR?: UserRoleWhereInput[]
     NOT?: UserRoleWhereInput | UserRoleWhereInput[]
     id?: StringFilter<"UserRole"> | string
-    name?: StringFilter<"UserRole"> | string
+    name?: EnumRoleNameFilter<"UserRole"> | $Enums.RoleName
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeFilter<"UserRole"> | Date | string
     roleAssignments?: UserRoleAssignmentListRelationFilter
@@ -57130,7 +58600,7 @@ export namespace Prisma {
     AND?: UserRoleWhereInput | UserRoleWhereInput[]
     OR?: UserRoleWhereInput[]
     NOT?: UserRoleWhereInput | UserRoleWhereInput[]
-    name?: StringFilter<"UserRole"> | string
+    name?: EnumRoleNameFilter<"UserRole"> | $Enums.RoleName
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeFilter<"UserRole"> | Date | string
     roleAssignments?: UserRoleAssignmentListRelationFilter
@@ -57151,7 +58621,7 @@ export namespace Prisma {
     OR?: UserRoleScalarWhereWithAggregatesInput[]
     NOT?: UserRoleScalarWhereWithAggregatesInput | UserRoleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"UserRole"> | string
-    name?: StringWithAggregatesFilter<"UserRole"> | string
+    name?: EnumRoleNameWithAggregatesFilter<"UserRole"> | $Enums.RoleName
     createdAt?: DateTimeWithAggregatesFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"UserRole"> | Date | string
   }
@@ -57917,7 +59387,6 @@ export namespace Prisma {
     subLabel?: string | null
     gradientFrom?: string | null
     gradientTo?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -57939,7 +59408,6 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     imageMediaId?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -57959,7 +59427,6 @@ export namespace Prisma {
     subLabel?: NullableStringFieldUpdateOperationsInput | string | null
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -57981,7 +59448,6 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58002,7 +59468,6 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     imageMediaId?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -58021,7 +59486,6 @@ export namespace Prisma {
     subLabel?: NullableStringFieldUpdateOperationsInput | string | null
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58041,7 +59505,6 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -59328,6 +60791,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -59359,6 +60823,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -59390,6 +60855,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -59421,6 +60887,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -59887,6 +61354,94 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionCreateInput = {
+    id?: string
+    question: string
+    answer?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutQuestionsInput
+    user: UserCreateNestedOneWithoutQuestionsInput
+    answeredByUser?: UserCreateNestedOneWithoutAnsweredQuestionsInput
+  }
+
+  export type ProductQuestionUncheckedCreateInput = {
+    id?: string
+    productId: string
+    userId: string
+    question: string
+    answer?: string | null
+    answeredBy?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutQuestionsNestedInput
+    user?: UserUpdateOneRequiredWithoutQuestionsNestedInput
+    answeredByUser?: UserUpdateOneWithoutAnsweredQuestionsNestedInput
+  }
+
+  export type ProductQuestionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionCreateManyInput = {
+    id?: string
+    productId: string
+    userId: string
+    question: string
+    answer?: string | null
+    answeredBy?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PromotionCreateInput = {
@@ -60585,6 +62140,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -60617,6 +62174,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUpdateInput = {
@@ -60649,6 +62208,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -60681,6 +62242,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -60750,7 +62313,7 @@ export namespace Prisma {
 
   export type UserRoleCreateInput = {
     id?: string
-    name: string
+    name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutRoleInput
@@ -60758,7 +62321,7 @@ export namespace Prisma {
 
   export type UserRoleUncheckedCreateInput = {
     id?: string
-    name: string
+    name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutRoleInput
@@ -60766,7 +62329,7 @@ export namespace Prisma {
 
   export type UserRoleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutRoleNestedInput
@@ -60774,7 +62337,7 @@ export namespace Prisma {
 
   export type UserRoleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutRoleNestedInput
@@ -60782,21 +62345,21 @@ export namespace Prisma {
 
   export type UserRoleCreateManyInput = {
     id?: string
-    name: string
+    name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UserRoleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -61516,14 +63079,9 @@ export namespace Prisma {
     gradientFrom?: SortOrder
     gradientTo?: SortOrder
     imageMediaId?: SortOrder
-    sortOrder?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type BannerAvgOrderByAggregateInput = {
-    sortOrder?: SortOrder
   }
 
   export type BannerMaxOrderByAggregateInput = {
@@ -61540,7 +63098,6 @@ export namespace Prisma {
     gradientFrom?: SortOrder
     gradientTo?: SortOrder
     imageMediaId?: SortOrder
-    sortOrder?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -61560,14 +63117,9 @@ export namespace Prisma {
     gradientFrom?: SortOrder
     gradientTo?: SortOrder
     imageMediaId?: SortOrder
-    sortOrder?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type BannerSumOrderByAggregateInput = {
-    sortOrder?: SortOrder
   }
 
   export type EnumBannerTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -62661,6 +64213,12 @@ export namespace Prisma {
     none?: ProductInventoryWhereInput
   }
 
+  export type ProductQuestionListRelationFilter = {
+    every?: ProductQuestionWhereInput
+    some?: ProductQuestionWhereInput
+    none?: ProductQuestionWhereInput
+  }
+
   export type ProductBadgeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -62682,6 +64240,10 @@ export namespace Prisma {
   }
 
   export type ProductInventoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductQuestionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -63049,6 +64611,62 @@ export namespace Prisma {
     productId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type EnumProductQuestionStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductQuestionStatus | EnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductQuestionStatusFilter<$PrismaModel> | $Enums.ProductQuestionStatus
+  }
+
+  export type ProductQuestionCountOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    userId?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    answeredBy?: SortOrder
+    status?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductQuestionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    userId?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    answeredBy?: SortOrder
+    status?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductQuestionMinOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    userId?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    answeredBy?: SortOrder
+    status?: SortOrder
+    isPublic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumProductQuestionStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductQuestionStatus | EnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductQuestionStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductQuestionStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductQuestionStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductQuestionStatusFilter<$PrismaModel>
   }
 
   export type PromotionCountOrderByAggregateInput = {
@@ -63590,6 +65208,13 @@ export namespace Prisma {
     phoneVerifiedAt?: SortOrder
   }
 
+  export type EnumRoleNameFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleName | EnumRoleNameFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleNameFilter<$PrismaModel> | $Enums.RoleName
+  }
+
   export type UserRoleCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -63609,6 +65234,16 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumRoleNameWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleName | EnumRoleNameFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleNameWithAggregatesFilter<$PrismaModel> | $Enums.RoleName
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleNameFilter<$PrismaModel>
+    _max?: NestedEnumRoleNameFilter<$PrismaModel>
   }
 
   export type UserRoleScalarRelationFilter = {
@@ -65218,6 +66853,13 @@ export namespace Prisma {
     connect?: ProductInventoryWhereUniqueInput | ProductInventoryWhereUniqueInput[]
   }
 
+  export type ProductQuestionCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductQuestionCreateWithoutProductInput, ProductQuestionUncheckedCreateWithoutProductInput> | ProductQuestionCreateWithoutProductInput[] | ProductQuestionUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutProductInput | ProductQuestionCreateOrConnectWithoutProductInput[]
+    createMany?: ProductQuestionCreateManyProductInputEnvelope
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+  }
+
   export type ProductBadgeUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<ProductBadgeCreateWithoutProductInput, ProductBadgeUncheckedCreateWithoutProductInput> | ProductBadgeCreateWithoutProductInput[] | ProductBadgeUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductBadgeCreateOrConnectWithoutProductInput | ProductBadgeCreateOrConnectWithoutProductInput[]
@@ -65299,6 +66941,13 @@ export namespace Prisma {
     connectOrCreate?: ProductInventoryCreateOrConnectWithoutProductInput | ProductInventoryCreateOrConnectWithoutProductInput[]
     createMany?: ProductInventoryCreateManyProductInputEnvelope
     connect?: ProductInventoryWhereUniqueInput | ProductInventoryWhereUniqueInput[]
+  }
+
+  export type ProductQuestionUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductQuestionCreateWithoutProductInput, ProductQuestionUncheckedCreateWithoutProductInput> | ProductQuestionCreateWithoutProductInput[] | ProductQuestionUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutProductInput | ProductQuestionCreateOrConnectWithoutProductInput[]
+    createMany?: ProductQuestionCreateManyProductInputEnvelope
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
   }
 
   export type BrandUpdateOneWithoutProductsNestedInput = {
@@ -65475,6 +67124,20 @@ export namespace Prisma {
     deleteMany?: ProductInventoryScalarWhereInput | ProductInventoryScalarWhereInput[]
   }
 
+  export type ProductQuestionUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductQuestionCreateWithoutProductInput, ProductQuestionUncheckedCreateWithoutProductInput> | ProductQuestionCreateWithoutProductInput[] | ProductQuestionUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutProductInput | ProductQuestionCreateOrConnectWithoutProductInput[]
+    upsert?: ProductQuestionUpsertWithWhereUniqueWithoutProductInput | ProductQuestionUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductQuestionCreateManyProductInputEnvelope
+    set?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    disconnect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    delete?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    update?: ProductQuestionUpdateWithWhereUniqueWithoutProductInput | ProductQuestionUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductQuestionUpdateManyWithWhereWithoutProductInput | ProductQuestionUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+  }
+
   export type ProductBadgeUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ProductBadgeCreateWithoutProductInput, ProductBadgeUncheckedCreateWithoutProductInput> | ProductBadgeCreateWithoutProductInput[] | ProductBadgeUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductBadgeCreateOrConnectWithoutProductInput | ProductBadgeCreateOrConnectWithoutProductInput[]
@@ -65637,6 +67300,20 @@ export namespace Prisma {
     update?: ProductInventoryUpdateWithWhereUniqueWithoutProductInput | ProductInventoryUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: ProductInventoryUpdateManyWithWhereWithoutProductInput | ProductInventoryUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: ProductInventoryScalarWhereInput | ProductInventoryScalarWhereInput[]
+  }
+
+  export type ProductQuestionUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductQuestionCreateWithoutProductInput, ProductQuestionUncheckedCreateWithoutProductInput> | ProductQuestionCreateWithoutProductInput[] | ProductQuestionUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutProductInput | ProductQuestionCreateOrConnectWithoutProductInput[]
+    upsert?: ProductQuestionUpsertWithWhereUniqueWithoutProductInput | ProductQuestionUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductQuestionCreateManyProductInputEnvelope
+    set?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    disconnect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    delete?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    update?: ProductQuestionUpdateWithWhereUniqueWithoutProductInput | ProductQuestionUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductQuestionUpdateManyWithWhereWithoutProductInput | ProductQuestionUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
   }
 
   export type ProductCreateNestedOneWithoutBadgesInput = {
@@ -65983,6 +67660,54 @@ export namespace Prisma {
     upsert?: CategoryUpsertWithoutProductCategoriesInput
     connect?: CategoryWhereUniqueInput
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutProductCategoriesInput, CategoryUpdateWithoutProductCategoriesInput>, CategoryUncheckedUpdateWithoutProductCategoriesInput>
+  }
+
+  export type ProductCreateNestedOneWithoutQuestionsInput = {
+    create?: XOR<ProductCreateWithoutQuestionsInput, ProductUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutQuestionsInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutQuestionsInput = {
+    create?: XOR<UserCreateWithoutQuestionsInput, UserUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutQuestionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAnsweredQuestionsInput = {
+    create?: XOR<UserCreateWithoutAnsweredQuestionsInput, UserUncheckedCreateWithoutAnsweredQuestionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnsweredQuestionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumProductQuestionStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ProductQuestionStatus
+  }
+
+  export type ProductUpdateOneRequiredWithoutQuestionsNestedInput = {
+    create?: XOR<ProductCreateWithoutQuestionsInput, ProductUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutQuestionsInput
+    upsert?: ProductUpsertWithoutQuestionsInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutQuestionsInput, ProductUpdateWithoutQuestionsInput>, ProductUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutQuestionsNestedInput = {
+    create?: XOR<UserCreateWithoutQuestionsInput, UserUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutQuestionsInput
+    upsert?: UserUpsertWithoutQuestionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutQuestionsInput, UserUpdateWithoutQuestionsInput>, UserUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type UserUpdateOneWithoutAnsweredQuestionsNestedInput = {
+    create?: XOR<UserCreateWithoutAnsweredQuestionsInput, UserUncheckedCreateWithoutAnsweredQuestionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnsweredQuestionsInput
+    upsert?: UserUpsertWithoutAnsweredQuestionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAnsweredQuestionsInput, UserUpdateWithoutAnsweredQuestionsInput>, UserUncheckedUpdateWithoutAnsweredQuestionsInput>
   }
 
   export type PromotionProductCreateNestedManyWithoutPromotionInput = {
@@ -66445,6 +68170,20 @@ export namespace Prisma {
     connect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
   }
 
+  export type ProductQuestionCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProductQuestionCreateWithoutUserInput, ProductQuestionUncheckedCreateWithoutUserInput> | ProductQuestionCreateWithoutUserInput[] | ProductQuestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutUserInput | ProductQuestionCreateOrConnectWithoutUserInput[]
+    createMany?: ProductQuestionCreateManyUserInputEnvelope
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+  }
+
+  export type ProductQuestionCreateNestedManyWithoutAnsweredByUserInput = {
+    create?: XOR<ProductQuestionCreateWithoutAnsweredByUserInput, ProductQuestionUncheckedCreateWithoutAnsweredByUserInput> | ProductQuestionCreateWithoutAnsweredByUserInput[] | ProductQuestionUncheckedCreateWithoutAnsweredByUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutAnsweredByUserInput | ProductQuestionCreateOrConnectWithoutAnsweredByUserInput[]
+    createMany?: ProductQuestionCreateManyAnsweredByUserInputEnvelope
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+  }
+
   export type CartUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -66511,6 +68250,20 @@ export namespace Prisma {
     connectOrCreate?: EmailVerificationLogCreateOrConnectWithoutUserInput | EmailVerificationLogCreateOrConnectWithoutUserInput[]
     createMany?: EmailVerificationLogCreateManyUserInputEnvelope
     connect?: EmailVerificationLogWhereUniqueInput | EmailVerificationLogWhereUniqueInput[]
+  }
+
+  export type ProductQuestionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProductQuestionCreateWithoutUserInput, ProductQuestionUncheckedCreateWithoutUserInput> | ProductQuestionCreateWithoutUserInput[] | ProductQuestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutUserInput | ProductQuestionCreateOrConnectWithoutUserInput[]
+    createMany?: ProductQuestionCreateManyUserInputEnvelope
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+  }
+
+  export type ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput = {
+    create?: XOR<ProductQuestionCreateWithoutAnsweredByUserInput, ProductQuestionUncheckedCreateWithoutAnsweredByUserInput> | ProductQuestionCreateWithoutAnsweredByUserInput[] | ProductQuestionUncheckedCreateWithoutAnsweredByUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutAnsweredByUserInput | ProductQuestionCreateOrConnectWithoutAnsweredByUserInput[]
+    createMany?: ProductQuestionCreateManyAnsweredByUserInputEnvelope
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
   }
 
   export type CartUpdateOneWithoutUserNestedInput = {
@@ -66655,6 +68408,34 @@ export namespace Prisma {
     deleteMany?: EmailVerificationLogScalarWhereInput | EmailVerificationLogScalarWhereInput[]
   }
 
+  export type ProductQuestionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProductQuestionCreateWithoutUserInput, ProductQuestionUncheckedCreateWithoutUserInput> | ProductQuestionCreateWithoutUserInput[] | ProductQuestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutUserInput | ProductQuestionCreateOrConnectWithoutUserInput[]
+    upsert?: ProductQuestionUpsertWithWhereUniqueWithoutUserInput | ProductQuestionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProductQuestionCreateManyUserInputEnvelope
+    set?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    disconnect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    delete?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    update?: ProductQuestionUpdateWithWhereUniqueWithoutUserInput | ProductQuestionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProductQuestionUpdateManyWithWhereWithoutUserInput | ProductQuestionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+  }
+
+  export type ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput = {
+    create?: XOR<ProductQuestionCreateWithoutAnsweredByUserInput, ProductQuestionUncheckedCreateWithoutAnsweredByUserInput> | ProductQuestionCreateWithoutAnsweredByUserInput[] | ProductQuestionUncheckedCreateWithoutAnsweredByUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutAnsweredByUserInput | ProductQuestionCreateOrConnectWithoutAnsweredByUserInput[]
+    upsert?: ProductQuestionUpsertWithWhereUniqueWithoutAnsweredByUserInput | ProductQuestionUpsertWithWhereUniqueWithoutAnsweredByUserInput[]
+    createMany?: ProductQuestionCreateManyAnsweredByUserInputEnvelope
+    set?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    disconnect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    delete?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    update?: ProductQuestionUpdateWithWhereUniqueWithoutAnsweredByUserInput | ProductQuestionUpdateWithWhereUniqueWithoutAnsweredByUserInput[]
+    updateMany?: ProductQuestionUpdateManyWithWhereWithoutAnsweredByUserInput | ProductQuestionUpdateManyWithWhereWithoutAnsweredByUserInput[]
+    deleteMany?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+  }
+
   export type CartUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -66787,6 +68568,34 @@ export namespace Prisma {
     deleteMany?: EmailVerificationLogScalarWhereInput | EmailVerificationLogScalarWhereInput[]
   }
 
+  export type ProductQuestionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProductQuestionCreateWithoutUserInput, ProductQuestionUncheckedCreateWithoutUserInput> | ProductQuestionCreateWithoutUserInput[] | ProductQuestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutUserInput | ProductQuestionCreateOrConnectWithoutUserInput[]
+    upsert?: ProductQuestionUpsertWithWhereUniqueWithoutUserInput | ProductQuestionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProductQuestionCreateManyUserInputEnvelope
+    set?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    disconnect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    delete?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    update?: ProductQuestionUpdateWithWhereUniqueWithoutUserInput | ProductQuestionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProductQuestionUpdateManyWithWhereWithoutUserInput | ProductQuestionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+  }
+
+  export type ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput = {
+    create?: XOR<ProductQuestionCreateWithoutAnsweredByUserInput, ProductQuestionUncheckedCreateWithoutAnsweredByUserInput> | ProductQuestionCreateWithoutAnsweredByUserInput[] | ProductQuestionUncheckedCreateWithoutAnsweredByUserInput[]
+    connectOrCreate?: ProductQuestionCreateOrConnectWithoutAnsweredByUserInput | ProductQuestionCreateOrConnectWithoutAnsweredByUserInput[]
+    upsert?: ProductQuestionUpsertWithWhereUniqueWithoutAnsweredByUserInput | ProductQuestionUpsertWithWhereUniqueWithoutAnsweredByUserInput[]
+    createMany?: ProductQuestionCreateManyAnsweredByUserInputEnvelope
+    set?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    disconnect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    delete?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    connect?: ProductQuestionWhereUniqueInput | ProductQuestionWhereUniqueInput[]
+    update?: ProductQuestionUpdateWithWhereUniqueWithoutAnsweredByUserInput | ProductQuestionUpdateWithWhereUniqueWithoutAnsweredByUserInput[]
+    updateMany?: ProductQuestionUpdateManyWithWhereWithoutAnsweredByUserInput | ProductQuestionUpdateManyWithWhereWithoutAnsweredByUserInput[]
+    deleteMany?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+  }
+
   export type UserRoleAssignmentCreateNestedManyWithoutRoleInput = {
     create?: XOR<UserRoleAssignmentCreateWithoutRoleInput, UserRoleAssignmentUncheckedCreateWithoutRoleInput> | UserRoleAssignmentCreateWithoutRoleInput[] | UserRoleAssignmentUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRoleAssignmentCreateOrConnectWithoutRoleInput | UserRoleAssignmentCreateOrConnectWithoutRoleInput[]
@@ -66799,6 +68608,10 @@ export namespace Prisma {
     connectOrCreate?: UserRoleAssignmentCreateOrConnectWithoutRoleInput | UserRoleAssignmentCreateOrConnectWithoutRoleInput[]
     createMany?: UserRoleAssignmentCreateManyRoleInputEnvelope
     connect?: UserRoleAssignmentWhereUniqueInput | UserRoleAssignmentWhereUniqueInput[]
+  }
+
+  export type EnumRoleNameFieldUpdateOperationsInput = {
+    set?: $Enums.RoleName
   }
 
   export type UserRoleAssignmentUpdateManyWithoutRoleNestedInput = {
@@ -67346,6 +69159,23 @@ export namespace Prisma {
     _max?: NestedEnumProductInventoryDisplayStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumProductQuestionStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductQuestionStatus | EnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductQuestionStatusFilter<$PrismaModel> | $Enums.ProductQuestionStatus
+  }
+
+  export type NestedEnumProductQuestionStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductQuestionStatus | EnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductQuestionStatus[] | ListEnumProductQuestionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductQuestionStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductQuestionStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductQuestionStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductQuestionStatusFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -67371,6 +69201,23 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumRoleNameFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleName | EnumRoleNameFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleNameFilter<$PrismaModel> | $Enums.RoleName
+  }
+
+  export type NestedEnumRoleNameWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleName | EnumRoleNameFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleName[] | ListEnumRoleNameFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleNameWithAggregatesFilter<$PrismaModel> | $Enums.RoleName
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleNameFilter<$PrismaModel>
+    _max?: NestedEnumRoleNameFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutAddressesInput = {
@@ -67402,6 +69249,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutAddressesInput = {
@@ -67433,6 +69282,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutAddressesInput = {
@@ -67534,6 +69385,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAddressesInput = {
@@ -67565,6 +69418,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type OrderUpsertWithWhereUniqueWithoutShippingAddressInput = {
@@ -67633,6 +69488,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutAffiliateInput = {
@@ -67664,6 +69521,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutAffiliateInput = {
@@ -67773,6 +69632,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAffiliateInput = {
@@ -67804,6 +69665,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type AffiliateLinkUpsertWithWhereUniqueWithoutAffiliateInput = {
@@ -68159,6 +70022,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCommRatesInput = {
@@ -68189,6 +70053,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCommRatesInput = {
@@ -68235,6 +70100,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCommRatesInput = {
@@ -68265,6 +70131,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type BannerGroupMappingCreateWithoutBannerGroupInput = {
@@ -68463,7 +70330,6 @@ export namespace Prisma {
     subLabel?: string | null
     gradientFrom?: string | null
     gradientTo?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -68484,7 +70350,6 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     imageMediaId?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -68548,7 +70413,6 @@ export namespace Prisma {
     subLabel?: NullableStringFieldUpdateOperationsInput | string | null
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -68569,7 +70433,6 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -68639,6 +70502,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutEmailVerificationLogsInput = {
@@ -68670,6 +70535,8 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutEmailVerificationLogsInput = {
@@ -68717,6 +70584,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailVerificationLogsInput = {
@@ -68748,6 +70617,8 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type FlashSaleProductCreateWithoutFlashSaleInput = {
@@ -68938,6 +70809,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutFlashSaleProductsInput = {
@@ -68968,6 +70840,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutFlashSaleProductsInput = {
@@ -69100,6 +70973,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutFlashSaleProductsInput = {
@@ -69130,6 +71004,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutFlashSaleProductsInput = {
@@ -69394,6 +71269,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutUploadedMediaInput = {
@@ -69425,6 +71302,8 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutUploadedMediaInput = {
@@ -69515,6 +71394,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutAvatarMediaInput = {
@@ -69546,6 +71427,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutAvatarMediaInput = {
@@ -69649,7 +71532,6 @@ export namespace Prisma {
     subLabel?: string | null
     gradientFrom?: string | null
     gradientTo?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -69669,7 +71551,6 @@ export namespace Prisma {
     subLabel?: string | null
     gradientFrom?: string | null
     gradientTo?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -69726,6 +71607,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUploadedMediaInput = {
@@ -69757,6 +71640,8 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type ProductImageUpsertWithWhereUniqueWithoutMediaInput = {
@@ -69955,7 +71840,6 @@ export namespace Prisma {
     gradientFrom?: StringNullableFilter<"Banner"> | string | null
     gradientTo?: StringNullableFilter<"Banner"> | string | null
     imageMediaId?: StringNullableFilter<"Banner"> | string | null
-    sortOrder?: IntFilter<"Banner"> | number
     isActive?: BoolFilter<"Banner"> | boolean
     createdAt?: DateTimeFilter<"Banner"> | Date | string
     updatedAt?: DateTimeFilter<"Banner"> | Date | string
@@ -69990,6 +71874,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutCartInput = {
@@ -70021,6 +71907,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutCartInput = {
@@ -70096,6 +71984,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCartInput = {
@@ -70127,6 +72017,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type CartItemUpsertWithWhereUniqueWithoutCartInput = {
@@ -70205,6 +72097,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCartItemsInput = {
@@ -70235,6 +72128,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCartItemsInput = {
@@ -70349,6 +72243,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCartItemsInput = {
@@ -70379,6 +72274,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutCartItemsInput = {
@@ -70459,6 +72355,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -70490,6 +72388,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -70712,6 +72612,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -70743,6 +72645,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type AddressUpsertWithoutOrdersInput = {
@@ -70995,6 +72899,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutOrderItemsInput = {
@@ -71025,6 +72930,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutOrderItemsInput = {
@@ -71169,6 +73075,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutOrderItemsInput = {
@@ -71199,6 +73106,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutOrderItemsInput = {
@@ -71382,6 +73290,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutStatsInput = {
@@ -71412,6 +73321,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutStatsInput = {
@@ -71458,6 +73368,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutStatsInput = {
@@ -71488,6 +73399,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type CategoryCreateWithoutChildrenInput = {
@@ -71864,6 +73776,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutBrandInput = {
@@ -71894,6 +73807,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutBrandInput = {
@@ -72512,6 +74426,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductQuestionCreateWithoutProductInput = {
+    id?: string
+    question: string
+    answer?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutQuestionsInput
+    answeredByUser?: UserCreateNestedOneWithoutAnsweredQuestionsInput
+  }
+
+  export type ProductQuestionUncheckedCreateWithoutProductInput = {
+    id?: string
+    userId: string
+    question: string
+    answer?: string | null
+    answeredBy?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionCreateOrConnectWithoutProductInput = {
+    where: ProductQuestionWhereUniqueInput
+    create: XOR<ProductQuestionCreateWithoutProductInput, ProductQuestionUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductQuestionCreateManyProductInputEnvelope = {
+    data: ProductQuestionCreateManyProductInput | ProductQuestionCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BrandUpsertWithoutProductsInput = {
     update: XOR<BrandUpdateWithoutProductsInput, BrandUncheckedUpdateWithoutProductsInput>
     create: XOR<BrandCreateWithoutProductsInput, BrandUncheckedCreateWithoutProductsInput>
@@ -72848,6 +74796,38 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProductInventory"> | Date | string
   }
 
+  export type ProductQuestionUpsertWithWhereUniqueWithoutProductInput = {
+    where: ProductQuestionWhereUniqueInput
+    update: XOR<ProductQuestionUpdateWithoutProductInput, ProductQuestionUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductQuestionCreateWithoutProductInput, ProductQuestionUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductQuestionUpdateWithWhereUniqueWithoutProductInput = {
+    where: ProductQuestionWhereUniqueInput
+    data: XOR<ProductQuestionUpdateWithoutProductInput, ProductQuestionUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductQuestionUpdateManyWithWhereWithoutProductInput = {
+    where: ProductQuestionScalarWhereInput
+    data: XOR<ProductQuestionUpdateManyMutationInput, ProductQuestionUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type ProductQuestionScalarWhereInput = {
+    AND?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+    OR?: ProductQuestionScalarWhereInput[]
+    NOT?: ProductQuestionScalarWhereInput | ProductQuestionScalarWhereInput[]
+    id?: StringFilter<"ProductQuestion"> | string
+    productId?: StringFilter<"ProductQuestion"> | string
+    userId?: StringFilter<"ProductQuestion"> | string
+    question?: StringFilter<"ProductQuestion"> | string
+    answer?: StringNullableFilter<"ProductQuestion"> | string | null
+    answeredBy?: StringNullableFilter<"ProductQuestion"> | string | null
+    status?: EnumProductQuestionStatusFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
+    isPublic?: BoolFilter<"ProductQuestion"> | boolean
+    createdAt?: DateTimeFilter<"ProductQuestion"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductQuestion"> | Date | string
+  }
+
   export type ProductCreateWithoutBadgesInput = {
     id?: string
     name: string
@@ -72876,6 +74856,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutBadgesInput = {
@@ -72906,6 +74887,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutBadgesInput = {
@@ -72952,6 +74934,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutBadgesInput = {
@@ -72982,6 +74965,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateWithoutVariantsInput = {
@@ -73012,6 +74996,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutVariantsInput = {
@@ -73042,6 +75027,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutVariantsInput = {
@@ -73247,6 +75233,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutVariantsInput = {
@@ -73277,6 +75264,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductInventoryUpsertWithoutVariantInput = {
@@ -73404,6 +75392,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutImagesInput = {
@@ -73434,6 +75423,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutImagesInput = {
@@ -73566,6 +75556,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutImagesInput = {
@@ -73596,6 +75587,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutImagesInput = {
@@ -73724,6 +75716,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutInventoryInput = {
@@ -73754,6 +75747,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutInventoryInput = {
@@ -73843,6 +75837,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutInventoryInput = {
@@ -73873,6 +75868,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductVariantUpsertWithoutInventoryInput = {
@@ -73952,6 +75948,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutProductCategoriesInput = {
@@ -73982,6 +75979,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutProductCategoriesInput = {
@@ -74065,6 +76063,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutProductCategoriesInput = {
@@ -74095,6 +76094,7 @@ export namespace Prisma {
     flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type CategoryUpsertWithoutProductCategoriesInput = {
@@ -74138,6 +76138,442 @@ export namespace Prisma {
     brandId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCateGoryTypeFieldUpdateOperationsInput | $Enums.CateGoryType
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type ProductCreateWithoutQuestionsInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    shortDesc?: string | null
+    sku: string
+    basePrice: Decimal | DecimalJsLike | number | string
+    comparePrice?: Decimal | DecimalJsLike | number | string | null
+    isActive?: boolean
+    isFeatured?: boolean
+    weight?: Decimal | DecimalJsLike | number | string | null
+    metaTitle?: string | null
+    metaDesc?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand?: BrandCreateNestedOneWithoutProductsInput
+    badges?: ProductBadgeCreateNestedManyWithoutProductInput
+    variants?: ProductVariantCreateNestedManyWithoutProductInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
+    reviews?: ProductReviewCreateNestedManyWithoutProductInput
+    orderItems?: OrderItemCreateNestedManyWithoutProductInput
+    cartItems?: CartItemCreateNestedManyWithoutProductInput
+    promotions?: PromotionProductCreateNestedManyWithoutProductInput
+    commRates?: CommissionRateCreateNestedManyWithoutProductInput
+    flashSaleProducts?: FlashSaleProductCreateNestedManyWithoutProductInput
+    productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
+    stats?: ProductStatsCreateNestedOneWithoutProductInput
+    inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutQuestionsInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    shortDesc?: string | null
+    sku: string
+    brandId?: string | null
+    basePrice: Decimal | DecimalJsLike | number | string
+    comparePrice?: Decimal | DecimalJsLike | number | string | null
+    isActive?: boolean
+    isFeatured?: boolean
+    weight?: Decimal | DecimalJsLike | number | string | null
+    metaTitle?: string | null
+    metaDesc?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
+    variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutProductInput
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
+    promotions?: PromotionProductUncheckedCreateNestedManyWithoutProductInput
+    commRates?: CommissionRateUncheckedCreateNestedManyWithoutProductInput
+    flashSaleProducts?: FlashSaleProductUncheckedCreateNestedManyWithoutProductInput
+    productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
+    stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
+    inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutQuestionsInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutQuestionsInput, ProductUncheckedCreateWithoutQuestionsInput>
+  }
+
+  export type UserCreateWithoutQuestionsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutQuestionsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    avatarMediaId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutQuestionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutQuestionsInput, UserUncheckedCreateWithoutQuestionsInput>
+  }
+
+  export type UserCreateWithoutAnsweredQuestionsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAnsweredQuestionsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    avatarMediaId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAnsweredQuestionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAnsweredQuestionsInput, UserUncheckedCreateWithoutAnsweredQuestionsInput>
+  }
+
+  export type ProductUpsertWithoutQuestionsInput = {
+    update: XOR<ProductUpdateWithoutQuestionsInput, ProductUncheckedUpdateWithoutQuestionsInput>
+    create: XOR<ProductCreateWithoutQuestionsInput, ProductUncheckedCreateWithoutQuestionsInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutQuestionsInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutQuestionsInput, ProductUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type ProductUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    sku?: StringFieldUpdateOperationsInput | string
+    basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: BrandUpdateOneWithoutProductsNestedInput
+    badges?: ProductBadgeUpdateManyWithoutProductNestedInput
+    variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
+    reviews?: ProductReviewUpdateManyWithoutProductNestedInput
+    orderItems?: OrderItemUpdateManyWithoutProductNestedInput
+    cartItems?: CartItemUpdateManyWithoutProductNestedInput
+    promotions?: PromotionProductUpdateManyWithoutProductNestedInput
+    commRates?: CommissionRateUpdateManyWithoutProductNestedInput
+    flashSaleProducts?: FlashSaleProductUpdateManyWithoutProductNestedInput
+    productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUpdateOneWithoutProductNestedInput
+    inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    sku?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    basePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
+    variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutProductNestedInput
+    orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
+    promotions?: PromotionProductUncheckedUpdateManyWithoutProductNestedInput
+    commRates?: CommissionRateUncheckedUpdateManyWithoutProductNestedInput
+    flashSaleProducts?: FlashSaleProductUncheckedUpdateManyWithoutProductNestedInput
+    productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
+    stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
+    inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type UserUpsertWithoutQuestionsInput = {
+    update: XOR<UserUpdateWithoutQuestionsInput, UserUncheckedUpdateWithoutQuestionsInput>
+    create: XOR<UserCreateWithoutQuestionsInput, UserUncheckedCreateWithoutQuestionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutQuestionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutQuestionsInput, UserUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type UserUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
+  }
+
+  export type UserUpsertWithoutAnsweredQuestionsInput = {
+    update: XOR<UserUpdateWithoutAnsweredQuestionsInput, UserUncheckedUpdateWithoutAnsweredQuestionsInput>
+    create: XOR<UserCreateWithoutAnsweredQuestionsInput, UserUncheckedCreateWithoutAnsweredQuestionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAnsweredQuestionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAnsweredQuestionsInput, UserUncheckedUpdateWithoutAnsweredQuestionsInput>
+  }
+
+  export type UserUpdateWithoutAnsweredQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAnsweredQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PromotionProductCreateWithoutPromotionInput = {
@@ -74241,6 +76677,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutPromotionsInput = {
@@ -74271,6 +76708,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutPromotionsInput = {
@@ -74358,6 +76796,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutPromotionsInput = {
@@ -74388,6 +76827,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type CouponUsageCreateWithoutCouponInput = {
@@ -74653,6 +77093,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryCreateNestedManyWithoutProductInput
     stats?: ProductStatsCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutReviewsInput = {
@@ -74683,6 +77124,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedCreateNestedManyWithoutProductInput
     stats?: ProductStatsUncheckedCreateNestedOneWithoutProductInput
     inventory?: ProductInventoryUncheckedCreateNestedManyWithoutProductInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutReviewsInput = {
@@ -74719,6 +77161,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -74750,6 +77194,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -74872,6 +77318,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutReviewsInput = {
@@ -74902,6 +77349,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type UserUpsertWithoutReviewsInput = {
@@ -74944,6 +77392,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -74975,6 +77425,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type ReviewImageUpsertWithWhereUniqueWithoutReviewInput = {
@@ -75287,6 +77739,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewRepliesInput = {
@@ -75318,6 +77772,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewRepliesInput = {
@@ -75408,6 +77864,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewRepliesInput = {
@@ -75439,6 +77897,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type ProductReviewCreateWithoutHelpfulMarksInput = {
@@ -75507,6 +77967,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewHelpfulMarksInput = {
@@ -75538,6 +78000,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewHelpfulMarksInput = {
@@ -75628,6 +78092,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewHelpfulMarksInput = {
@@ -75659,6 +78125,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type CartCreateWithoutUserInput = {
@@ -76054,6 +78522,74 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductQuestionCreateWithoutUserInput = {
+    id?: string
+    question: string
+    answer?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutQuestionsInput
+    answeredByUser?: UserCreateNestedOneWithoutAnsweredQuestionsInput
+  }
+
+  export type ProductQuestionUncheckedCreateWithoutUserInput = {
+    id?: string
+    productId: string
+    question: string
+    answer?: string | null
+    answeredBy?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionCreateOrConnectWithoutUserInput = {
+    where: ProductQuestionWhereUniqueInput
+    create: XOR<ProductQuestionCreateWithoutUserInput, ProductQuestionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProductQuestionCreateManyUserInputEnvelope = {
+    data: ProductQuestionCreateManyUserInput | ProductQuestionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductQuestionCreateWithoutAnsweredByUserInput = {
+    id?: string
+    question: string
+    answer?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutQuestionsInput
+    user: UserCreateNestedOneWithoutQuestionsInput
+  }
+
+  export type ProductQuestionUncheckedCreateWithoutAnsweredByUserInput = {
+    id?: string
+    productId: string
+    userId: string
+    question: string
+    answer?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionCreateOrConnectWithoutAnsweredByUserInput = {
+    where: ProductQuestionWhereUniqueInput
+    create: XOR<ProductQuestionCreateWithoutAnsweredByUserInput, ProductQuestionUncheckedCreateWithoutAnsweredByUserInput>
+  }
+
+  export type ProductQuestionCreateManyAnsweredByUserInputEnvelope = {
+    data: ProductQuestionCreateManyAnsweredByUserInput | ProductQuestionCreateManyAnsweredByUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CartUpsertWithoutUserInput = {
     update: XOR<CartUpdateWithoutUserInput, CartUncheckedUpdateWithoutUserInput>
     create: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
@@ -76361,6 +78897,38 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"EmailVerificationLog"> | Date | string
   }
 
+  export type ProductQuestionUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProductQuestionWhereUniqueInput
+    update: XOR<ProductQuestionUpdateWithoutUserInput, ProductQuestionUncheckedUpdateWithoutUserInput>
+    create: XOR<ProductQuestionCreateWithoutUserInput, ProductQuestionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProductQuestionUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProductQuestionWhereUniqueInput
+    data: XOR<ProductQuestionUpdateWithoutUserInput, ProductQuestionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProductQuestionUpdateManyWithWhereWithoutUserInput = {
+    where: ProductQuestionScalarWhereInput
+    data: XOR<ProductQuestionUpdateManyMutationInput, ProductQuestionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProductQuestionUpsertWithWhereUniqueWithoutAnsweredByUserInput = {
+    where: ProductQuestionWhereUniqueInput
+    update: XOR<ProductQuestionUpdateWithoutAnsweredByUserInput, ProductQuestionUncheckedUpdateWithoutAnsweredByUserInput>
+    create: XOR<ProductQuestionCreateWithoutAnsweredByUserInput, ProductQuestionUncheckedCreateWithoutAnsweredByUserInput>
+  }
+
+  export type ProductQuestionUpdateWithWhereUniqueWithoutAnsweredByUserInput = {
+    where: ProductQuestionWhereUniqueInput
+    data: XOR<ProductQuestionUpdateWithoutAnsweredByUserInput, ProductQuestionUncheckedUpdateWithoutAnsweredByUserInput>
+  }
+
+  export type ProductQuestionUpdateManyWithWhereWithoutAnsweredByUserInput = {
+    where: ProductQuestionScalarWhereInput
+    data: XOR<ProductQuestionUpdateManyMutationInput, ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserInput>
+  }
+
   export type UserRoleAssignmentCreateWithoutRoleInput = {
     id?: string
     createdAt?: Date | string
@@ -76430,6 +78998,8 @@ export namespace Prisma {
     avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleAssignmentsInput = {
@@ -76461,6 +79031,8 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleAssignmentsInput = {
@@ -76470,14 +79042,14 @@ export namespace Prisma {
 
   export type UserRoleCreateWithoutRoleAssignmentsInput = {
     id?: string
-    name: string
+    name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UserRoleUncheckedCreateWithoutRoleAssignmentsInput = {
     id?: string
-    name: string
+    name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76527,6 +79099,8 @@ export namespace Prisma {
     avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleAssignmentsInput = {
@@ -76558,6 +79132,8 @@ export namespace Prisma {
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserRoleUpsertWithoutRoleAssignmentsInput = {
@@ -76573,14 +79149,14 @@ export namespace Prisma {
 
   export type UserRoleUpdateWithoutRoleAssignmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleUncheckedUpdateWithoutRoleAssignmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -76963,7 +79539,6 @@ export namespace Prisma {
     subLabel?: string | null
     gradientFrom?: string | null
     gradientTo?: string | null
-    sortOrder?: number
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77049,6 +79624,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAvatarMediaInput = {
@@ -77080,6 +79657,8 @@ export namespace Prisma {
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAvatarMediaInput = {
@@ -77199,7 +79778,6 @@ export namespace Prisma {
     subLabel?: NullableStringFieldUpdateOperationsInput | string | null
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77219,7 +79797,6 @@ export namespace Prisma {
     subLabel?: NullableStringFieldUpdateOperationsInput | string | null
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77239,7 +79816,6 @@ export namespace Prisma {
     subLabel?: NullableStringFieldUpdateOperationsInput | string | null
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
-    sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77565,6 +80141,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutBrandInput = {
@@ -77595,6 +80172,7 @@ export namespace Prisma {
     productCategories?: ProductCategoryUncheckedUpdateManyWithoutProductNestedInput
     stats?: ProductStatsUncheckedUpdateOneWithoutProductNestedInput
     inventory?: ProductInventoryUncheckedUpdateManyWithoutProductNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutBrandInput = {
@@ -77773,6 +80351,18 @@ export namespace Prisma {
     displayStatus?: $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: number
     minStockQuantity?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionCreateManyProductInput = {
+    id?: string
+    userId: string
+    question: string
+    answer?: string | null
+    answeredBy?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -78137,6 +80727,42 @@ export namespace Prisma {
     displayStatus?: EnumProductInventoryDisplayStatusFieldUpdateOperationsInput | $Enums.ProductInventoryDisplayStatus
     lowStockThreshold?: IntFieldUpdateOperationsInput | number
     minStockQuantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutQuestionsNestedInput
+    answeredByUser?: UserUpdateOneWithoutAnsweredQuestionsNestedInput
+  }
+
+  export type ProductQuestionUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -78561,6 +81187,30 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ProductQuestionCreateManyUserInput = {
+    id?: string
+    productId: string
+    question: string
+    answer?: string | null
+    answeredBy?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductQuestionCreateManyAnsweredByUserInput = {
+    id?: string
+    productId: string
+    userId: string
+    question: string
+    answer?: string | null
+    status?: $Enums.ProductQuestionStatus
+    isPublic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type OrderUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderNumber?: StringFieldUpdateOperationsInput | string
@@ -78865,6 +81515,78 @@ export namespace Prisma {
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutQuestionsNestedInput
+    answeredByUser?: UserUpdateOneWithoutAnsweredQuestionsNestedInput
+  }
+
+  export type ProductQuestionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUpdateWithoutAnsweredByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutQuestionsNestedInput
+    user?: UserUpdateOneRequiredWithoutQuestionsNestedInput
+  }
+
+  export type ProductQuestionUncheckedUpdateWithoutAnsweredByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleAssignmentCreateManyRoleInput = {
