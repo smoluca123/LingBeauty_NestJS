@@ -34,6 +34,7 @@ import {
   ApiUploadProductVideo,
   ApiUploadReviewImage,
   ApiUploadReviewVideo,
+  ApiUploadGeneralImage,
 } from 'src/modules/storage/decorators/storage.decorator';
 
 @ApiTags('Storage')
@@ -159,6 +160,26 @@ export class StorageController {
     return {
       type: 'response',
       message: 'Brand logo uploaded successfully',
+      data: result,
+    };
+  }
+
+  @Post('upload/general-image')
+  @ApiUploadGeneralImage()
+  async uploadGeneralImage(
+    @UploadedFile() file: Express.Multer.File,
+    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
+  ): Promise<IBeforeTransformResponseType<UploadResponseDto>> {
+    const userId = decodedAccessToken.userId;
+    const result = await this.storageService.uploadFile({
+      file,
+      type: MediaType.GENERAL_IMAGE,
+      userId,
+    });
+
+    return {
+      type: 'response',
+      message: 'Image uploaded successfully',
       data: result,
     };
   }

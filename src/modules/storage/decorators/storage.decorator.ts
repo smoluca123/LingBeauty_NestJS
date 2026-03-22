@@ -89,3 +89,19 @@ export function ApiUploadBrandLogo() {
     }),
   );
 }
+
+export function ApiUploadGeneralImage() {
+  return applyDecorators(
+    ApiProtectedAuthOperation({
+      summary: 'Upload general image (e.g., from editor)',
+    }),
+    UseInterceptors(
+      FileInterceptor('file'),
+      new FileValidationInterceptor({ type: MediaType.GENERAL_IMAGE }),
+    ),
+    ApiConsumes('multipart/form-data'),
+    ApiBody({
+      type: BaseUploadFileDto,
+    }),
+  );
+}

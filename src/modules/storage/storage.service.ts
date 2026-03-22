@@ -223,6 +223,7 @@ export class StorageService {
       MediaType.AVATAR,
       MediaType.CATEGORY_IMAGE,
       MediaType.BRAND_LOGO,
+      MediaType.GENERAL_IMAGE,
     ];
 
     const videoTypes: MediaType[] = [
@@ -269,6 +270,7 @@ export class StorageService {
       [MediaType.CATEGORY_IMAGE]: 'categories',
       [MediaType.BRAND_LOGO]: 'brands',
       [MediaType.BANNER_IMAGE]: 'banners/images',
+      [MediaType.GENERAL_IMAGE]: 'general/images',
     };
 
     const folder = typeMap[type] || 'misc';
