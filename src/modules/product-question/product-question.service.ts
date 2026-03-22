@@ -431,7 +431,6 @@ export class ProductQuestionService {
   }
 
   async updateAnswer(
-    adminId: string,
     questionId: string,
     dto: AnswerQuestionDto,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
@@ -456,7 +455,7 @@ export class ProductQuestionService {
       }
 
       // If answeredBy is provided in DTO, verify the user exists and is admin
-      const answeredByUserId = dto.answeredBy || adminId;
+      const answeredByUserId = dto.answeredBy;
 
       if (dto.answeredBy) {
         const answeredByUser = await this.prisma.user.findUnique({

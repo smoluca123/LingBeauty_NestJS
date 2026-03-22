@@ -166,11 +166,7 @@ export class ProductQuestionController {
     @Param('id') questionId: string,
     @Body() answerDto: AnswerQuestionDto,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
-    return this.questionService.updateAnswer(
-      decodedAccessToken.userId,
-      questionId,
-      answerDto,
-    );
+    return this.questionService.updateAnswer(questionId, answerDto);
   }
 
   @Delete(':id/admin')
