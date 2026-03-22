@@ -56,6 +56,7 @@ import {
 } from './dto/hot-products-query.dto';
 import { FilterCategoryResponseDto } from './dto/filter-category-response.dto';
 import { ProductStatsResponseDto } from './dto/product-stats-response.dto';
+import sanitizeHtml from 'sanitize-html';
 
 export interface GetProductsParams {
   page?: number;
@@ -83,6 +84,41 @@ export class ProductService {
     private readonly prismaService: PrismaService,
     private readonly storageService: StorageService,
   ) {}
+
+  /**
+   * Sanitize HTML content to prevent XSS attacks
+   */
+  private sanitizeHtmlContent(html: string | null | undefined): string | null {
+    if (!html) return null;
+
+    return sanitizeHtml(html, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        'img',
+        'h1',
+        'h2',
+        'figure',
+        'figcaption',
+        'video',
+        'audio',
+        'source',
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        '*': ['class', 'style', 'id'],
+        img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
+        video: ['src', 'controls', 'width', 'height'],
+        audio: ['src', 'controls'],
+        source: ['src', 'type'],
+      },
+      allowedStyles: {
+        '*': {
+          color: [/^#(0x)?[0-9a-f]+$/i, /^rgb\(/],
+          'text-align': [/^left$/, /^right$/, /^center$/],
+          'font-size': [/^\d+(?:px|em|rem|%)$/],
+        },
+      },
+    });
+  }
 
   /**
    * Build a shared Prisma where clause from product filter params.
@@ -924,7 +960,7 @@ export class ProductService {
         data: {
           name: createProductDto.name,
           slug,
-          description: createProductDto.description,
+          description: this.sanitizeHtmlContent(createProductDto.description),
           shortDesc: createProductDto.shortDesc,
           sku: productSku,
           productCategories: {
@@ -959,12 +995,11 @@ export class ProductService {
 
       // Create inventory records for variants (outside nested create to satisfy productId constraint)
       if (createProductDto.variants && createProductDto.variants.length > 0) {
-        const createdVariants = await this.prismaService.productVariant.findMany(
-          {
+        const createdVariants =
+          await this.prismaService.productVariant.findMany({
             where: { productId: product.id },
             select: { id: true, sku: true },
-          },
-        );
+          });
 
         // Match created variants back to DTO by SKU to assign correct quantity
         const variantSkuMap = new Map<
@@ -1118,7 +1153,9 @@ export class ProductService {
         }
       }
       if (updateProductDto.description !== undefined)
-        updateData.description = updateProductDto.description;
+        updateData.description = this.sanitizeHtmlContent(
+          updateProductDto.description,
+        );
       if (updateProductDto.shortDesc !== undefined)
         updateData.shortDesc = updateProductDto.shortDesc;
       if (updateProductDto.sku !== undefined)
