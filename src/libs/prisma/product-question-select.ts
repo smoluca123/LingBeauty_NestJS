@@ -1,5 +1,6 @@
 import { Prisma } from 'prisma/generated/prisma/client';
 import { productImageSelect } from './product-select';
+import { userSelect } from './user-select';
 
 export const questionSelect: Prisma.ProductQuestionSelect = {
   id: true,
@@ -13,11 +14,7 @@ export const questionSelect: Prisma.ProductQuestionSelect = {
   createdAt: true,
   updatedAt: true,
   user: {
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
-    },
+    select: userSelect,
   },
   answeredByUser: {
     select: {
@@ -53,17 +50,9 @@ export const questionPublicSelect: Prisma.ProductQuestionSelect = {
   createdAt: true,
   updatedAt: true,
   user: {
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
-    },
+    select: userSelect,
   },
   answeredByUser: {
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
-    },
+    select: userSelect,
   },
 };

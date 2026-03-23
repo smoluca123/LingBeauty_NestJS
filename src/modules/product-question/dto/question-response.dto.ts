@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 import { ProductQuestionStatus } from 'prisma/generated/prisma/client';
+import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto';
 
 class UserBasicDto {
   @ApiProperty()
@@ -81,15 +82,15 @@ export class QuestionResponseDto {
   @Expose()
   updatedAt: Date;
 
-  @ApiProperty({ type: UserBasicDto })
+  @ApiProperty({ type: UserResponseDto })
   @Expose()
-  @Type(() => UserBasicDto)
-  user: UserBasicDto;
+  @Type(() => UserResponseDto)
+  user: UserResponseDto;
 
-  @ApiProperty({ type: UserBasicDto, nullable: true })
+  @ApiProperty({ type: UserResponseDto, nullable: true })
   @Expose()
-  @Type(() => UserBasicDto)
-  answeredByUser: UserBasicDto | null;
+  @Type(() => UserResponseDto)
+  answeredByUser: UserResponseDto | null;
 }
 
 export class QuestionWithProductResponseDto extends QuestionResponseDto {
