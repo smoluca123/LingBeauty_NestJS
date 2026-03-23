@@ -523,6 +523,57 @@ export class ProductQuestionService {
     }
   }
 
+  async deleteAnswer(
+    questionId: string,
+  ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
+    try {
+      const existingQuestion = await this.prisma.productQuestion.findUnique({
+        where: { id: questionId },
+        select: { id: true, status: true },
+      });
+
+      if (!existingQuestion) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.QUESTION_NOT_FOUND],
+          ERROR_CODES.QUESTION_NOT_FOUND,
+        );
+      }
+
+      if (existingQuestion.status !== ProductQuestionStatus.ANSWERED) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.QUESTION_NOT_ANSWERED],
+          ERROR_CODES.QUESTION_NOT_ANSWERED,
+        );
+      }
+
+      const updated = await this.prisma.productQuestion.update({
+        where: { id: questionId },
+        data: {
+          answer: null,
+          answeredBy: null,
+          status: ProductQuestionStatus.PENDING,
+        },
+        select: questionSelect,
+      });
+
+      const result = toResponseDto(QuestionResponseDto, updated);
+
+      return {
+        type: 'response',
+        message: 'Xóa câu trả lời thành công',
+        data: result,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
+
   async deleteQuestionByAdmin(
     questionId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
