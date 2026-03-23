@@ -40,6 +40,7 @@ import {
   ApiDeleteQuestion,
   ApiAnswerQuestion,
   ApiUpdateAnswer,
+  ApiDeleteAnswer,
   ApiDeleteQuestionByAdmin,
   ApiGetPublicProductQuestions,
 } from './decorators/product-question.decorators';
@@ -167,6 +168,14 @@ export class ProductQuestionController {
     @Body() answerDto: AnswerQuestionDto,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
     return this.questionService.updateAnswer(questionId, answerDto);
+  }
+
+  @Delete(':id/answer')
+  @ApiDeleteAnswer()
+  deleteAnswer(
+    @Param('id') questionId: string,
+  ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
+    return this.questionService.deleteAnswer(questionId);
   }
 
   @Delete(':id/admin')

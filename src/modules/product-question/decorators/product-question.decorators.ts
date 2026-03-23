@@ -113,6 +113,24 @@ export const ApiUpdateAnswer = () =>
     }),
   );
 
+export const ApiDeleteAnswer = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      summary: 'Delete answer (Admin)',
+      description: 'Admin deletes an answer from a question',
+      roles: [RolesLevel.MANAGER],
+    }),
+    ApiParam({
+      name: 'id',
+      description: 'Question ID',
+      type: String,
+    }),
+    ApiResponse({
+      status: 200,
+      type: QuestionResponseDto,
+    }),
+  );
+
 export const ApiDeleteQuestionByAdmin = () =>
   applyDecorators(
     ApiRoleProtectedOperation({
