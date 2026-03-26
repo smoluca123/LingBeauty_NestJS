@@ -91,7 +91,7 @@ export class ReviewService {
       const [reviews, totalCount] = await Promise.all([
         this.prismaService.productReview.findMany({
           where: whereQuery,
-          select: reviewSelect,
+          select: reviewWithProductSelect,
           orderBy: { [sortBy]: order },
           skip: (page - 1) * limit,
           take: limit,
