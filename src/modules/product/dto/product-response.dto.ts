@@ -5,90 +5,90 @@ import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
 
 export class ProductCategoryDto {
   @ApiProperty({ example: 'uuid-category-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'Lipstick' })
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 'lipstick' })
-  slug: string;
+  slug!: string;
 }
 
 export class ProductBrandDto {
   @ApiProperty({ example: 'uuid-brand-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: "L'Oreal" })
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 'loreal' })
-  slug: string;
+  slug!: string;
 }
 
 export class ProductImageMediaDto {
   @ApiProperty({ example: 'uuid-media-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'https://example.com/image.jpg' })
-  url: string;
+  url!: string;
 
   @ApiProperty({ example: 'image/jpeg' })
-  mimetype: string;
+  mimetype!: string;
 }
 
 export class ProductImageDto {
   @ApiProperty({ example: 'uuid-image-id' })
-  id: string;
+  id!: string;
 
   @ApiPropertyOptional({ example: 'Product front view' })
   alt?: string;
 
   @ApiProperty({ example: 0 })
-  sortOrder: number;
+  sortOrder!: number;
 
   @ApiProperty({ example: true })
-  isPrimary: boolean;
+  isPrimary!: boolean;
 
   @ApiProperty({ type: ProductImageMediaDto })
   @Type(() => ProductImageMediaDto)
-  media: ProductImageMediaDto;
+  media!: ProductImageMediaDto;
 }
 
 export class ProductInventoryDto {
   @ApiProperty({ example: 'uuid-inventory-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'uuid-product-id' })
-  productId: string;
+  productId!: string;
 
   @ApiPropertyOptional({ example: 'uuid-variant-id', nullable: true })
   variantId?: string | null;
 
   @ApiProperty({ example: 100 })
-  quantity: number;
+  quantity!: number;
 
   @ApiProperty({ example: 'IN_STOCK' })
-  displayStatus: string;
+  displayStatus!: string;
 
   @ApiProperty({ example: 10 })
-  lowStockThreshold: number;
+  lowStockThreshold!: number;
 }
 
 export class ProductBadgeResponseDto {
   @ApiProperty({ example: 'uuid-badge-id', description: 'Badge ID' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'uuid-product-id', description: 'Product ID' })
-  productId: string;
+  productId!: string;
 
   @ApiProperty({ example: 'New Arrival', description: 'Badge name' })
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 0, description: 'Sort order for display' })
-  sortOrder: number;
+  sortOrder!: number;
 
   @ApiProperty({ example: true, description: 'Whether the badge is active' })
-  isActive: boolean;
+  isActive!: boolean;
 
   @ApiPropertyOptional({
     example: ProductBadgeVariant.INFO,
@@ -107,13 +107,13 @@ export class ProductBadgeResponseDto {
 
 export class ProductVariantDto {
   @ApiProperty({ example: 'uuid-variant-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'SKU-001-RED' })
-  sku: string;
+  sku!: string;
 
   @ApiProperty({ example: 'Red - Size M' })
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({ example: 'Red' })
   color?: string;
@@ -125,10 +125,10 @@ export class ProductVariantDto {
   type?: string;
 
   @ApiProperty({ example: '150000' })
-  price: string;
+  price!: string;
 
   @ApiProperty({ example: 0 })
-  sortOrder: number;
+  sortOrder!: number;
 
   @ApiPropertyOptional({ type: ProductInventoryDto })
   @Type(() => ProductInventoryDto)
@@ -137,19 +137,19 @@ export class ProductVariantDto {
 
 export class ProductStatsDto {
   @ApiProperty({ example: 150, description: 'Total quantity sold' })
-  totalSold: number;
+  totalSold!: number;
 
   @ApiProperty({ example: '15000000', description: 'Total revenue generated' })
-  totalRevenue: string;
+  totalRevenue!: string;
 
   @ApiPropertyOptional({ example: '4.5', description: 'Average rating (1-5)' })
   avgRating?: string;
 
   @ApiProperty({ example: 25, description: 'Number of approved reviews' })
-  reviewCount: number;
+  reviewCount!: number;
 
   @ApiProperty({ example: 1250, description: 'Number of product views' })
-  viewCount: number;
+  viewCount!: number;
 
   @ApiPropertyOptional({
     example: '2024-01-15T10:30:00Z',
@@ -163,13 +163,13 @@ export class ProductResponseDto extends BaseResponseDto {
     example: 'Lipstick Matte Red',
     description: 'Product name',
   })
-  name: string;
+  name!: string;
 
   @ApiProperty({
     example: 'lipstick-matte-red',
     description: 'Product slug',
   })
-  slug: string;
+  slug!: string;
 
   @ApiPropertyOptional({
     example: 'A beautiful matte red lipstick with long-lasting formula',
@@ -187,13 +187,13 @@ export class ProductResponseDto extends BaseResponseDto {
     example: 'LP-MAT-001',
     description: 'SKU code',
   })
-  sku: string;
+  sku!: string;
 
   @ApiProperty({
     example: '250000',
     description: 'Base price',
   })
-  basePrice: string;
+  basePrice!: string;
 
   @ApiPropertyOptional({
     example: '300000',
@@ -205,13 +205,13 @@ export class ProductResponseDto extends BaseResponseDto {
     example: true,
     description: 'Whether the product is active',
   })
-  isActive: boolean;
+  isActive!: boolean;
 
   @ApiProperty({
     example: false,
     description: 'Whether the product is featured',
   })
-  isFeatured: boolean;
+  isFeatured!: boolean;
 
   @ApiPropertyOptional({
     example: '50.5',
@@ -231,13 +231,9 @@ export class ProductResponseDto extends BaseResponseDto {
   })
   metaDesc?: string;
 
-  @ApiPropertyOptional({ type: ProductImageDto })
-  @Type(() => ProductImageDto)
-  primaryImage?: ProductImageDto;
-
   @ApiProperty({ type: [ProductCategoryDto] })
   @Type(() => ProductCategoryDto)
-  categories: ProductCategoryDto[];
+  categories!: ProductCategoryDto[];
 
   @ApiPropertyOptional({ type: ProductBrandDto })
   @Type(() => ProductBrandDto)
@@ -245,15 +241,15 @@ export class ProductResponseDto extends BaseResponseDto {
 
   @ApiProperty({ type: [ProductImageDto] })
   @Type(() => ProductImageDto)
-  images: ProductImageDto[];
+  images!: ProductImageDto[];
 
   @ApiProperty({ type: [ProductVariantDto] })
   @Type(() => ProductVariantDto)
-  variants: ProductVariantDto[];
+  variants!: ProductVariantDto[];
 
   @ApiProperty({ type: [ProductBadgeResponseDto] })
   @Type(() => ProductBadgeResponseDto)
-  badges: ProductBadgeResponseDto[];
+  badges!: ProductBadgeResponseDto[];
 
   @ApiPropertyOptional({
     type: ProductStatsDto,
@@ -284,25 +280,25 @@ export class ProductResponseDto extends BaseResponseDto {
  */
 export class ProductSummaryResponseDto {
   @ApiProperty({ example: 'uuid-product-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'Son môi đỏ Matte' })
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 'son-moi-do-matte' })
-  slug: string;
+  slug!: string;
 
   @ApiPropertyOptional({ example: 'LP-MAT-001', nullable: true })
-  sku: string | null;
+  sku!: string | null;
 
   @ApiProperty({ example: '299000' })
-  basePrice: string;
+  basePrice!: string;
 
   @ApiPropertyOptional({ example: '350000', nullable: true })
   comparePrice?: string | null;
 
   @ApiProperty({ example: true })
-  isActive: boolean;
+  isActive!: boolean;
 
   @ApiPropertyOptional({ type: ProductBrandDto, nullable: true })
   @Type(() => ProductBrandDto)
@@ -310,5 +306,5 @@ export class ProductSummaryResponseDto {
 
   @ApiProperty({ type: [ProductImageDto] })
   @Type(() => ProductImageDto)
-  images: ProductImageDto[];
+  images!: ProductImageDto[];
 }

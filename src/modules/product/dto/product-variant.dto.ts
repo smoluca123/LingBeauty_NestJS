@@ -28,7 +28,7 @@ export class CreateSingleVariantDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({
     example: 'Red',
@@ -200,16 +200,16 @@ export class UpdateSingleVariantDto {
 
 export class ProductVariantResponseDto {
   @ApiProperty({ example: 'uuid-variant-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'uuid-product-id' })
-  productId: string;
+  productId!: string;
 
   @ApiProperty({ example: 'SKU-001-RED' })
-  sku: string;
+  sku!: string;
 
   @ApiProperty({ example: 'Red - Size M' })
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({ example: 'Red' })
   color?: string;
@@ -221,23 +221,23 @@ export class ProductVariantResponseDto {
   type?: string;
 
   @ApiProperty({ example: '150000' })
-  price: string;
+  price!: string;
 
   @ApiProperty({ example: 0 })
-  sortOrder: number;
+  sortOrder!: number;
 
   @ApiProperty({
     enum: VariantDisplayType,
     example: VariantDisplayType.COLOR,
     description: 'Controls how the variant button is rendered',
   })
-  displayType: VariantDisplayType;
+  displayType!: VariantDisplayType;
 
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @ApiPropertyOptional({ type: ProductInventoryDto })
   @Type(() => ProductInventoryDto)
@@ -249,13 +249,13 @@ export class ProductVariantResponseDto {
  */
 export class VariantSummaryResponseDto {
   @ApiProperty({ example: 'uuid-variant-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'SKU-001-RED' })
-  sku: string;
+  sku!: string;
 
   @ApiProperty({ example: 'Rờ - Size M' })
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({ example: 'Red', nullable: true })
   color?: string | null;
@@ -267,12 +267,12 @@ export class VariantSummaryResponseDto {
   type?: string | null;
 
   @ApiProperty({ example: '150000' })
-  price: string;
+  price!: string;
 
   @ApiProperty({ enum: VariantDisplayType, example: VariantDisplayType.COLOR })
-  displayType: VariantDisplayType;
+  displayType!: VariantDisplayType;
 
   @ApiProperty({ type: [ProductImageDto] })
   @Type(() => ProductImageDto)
-  images: ProductImageDto[];
+  images!: ProductImageDto[];
 }

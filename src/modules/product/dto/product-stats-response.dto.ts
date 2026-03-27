@@ -9,11 +9,11 @@ export class ProductStatsResponseDto {
     example: 42,
     description: 'Total number of matching products',
   })
-  productCount: number;
+  productCount!: number;
 
   @ApiProperty({
     example: 1250,
     description: 'Total units sold across matching products',
   })
-  totalSold: number;
+  totalSold!: number;
 }

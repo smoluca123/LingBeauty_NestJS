@@ -24,7 +24,7 @@ export class CreateSingleBadgeDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({
     example: 0,
@@ -75,7 +75,7 @@ export class CreateMultipleBadgesDto {
   @ValidateNested({ each: true })
   @Type(() => CreateSingleBadgeDto)
   @ArrayMinSize(1)
-  badges: CreateSingleBadgeDto[];
+  badges!: CreateSingleBadgeDto[];
 }
 
 export class UpdateBadgeDto {

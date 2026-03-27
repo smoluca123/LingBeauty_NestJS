@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 import { Injectable } from '@nestjs/common';
 import {
   MediaType,
@@ -1694,7 +1695,7 @@ export class ProductService {
 
       const images = await this.prismaService.productImage.findMany({
         where: { productId },
-        orderBy: { sortOrder: 'asc' },
+        orderBy: [{ isPrimary: 'desc' }, { sortOrder: 'asc' }],
         select: productImageSelect,
       });
 
@@ -2434,7 +2435,6 @@ export class ProductService {
     console.log(product);
     return toResponseDto(ProductResponseDto, {
       ...product,
-      primaryImage: product.images.find((image) => image.isPrimary),
       // Expose the product-level inventory (first record where variantId is null)
       inventory: product.inventory?.[0] ?? null,
     });
