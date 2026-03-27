@@ -48,38 +48,35 @@ export class CartService {
 
   /**
    * Resolve stock data for a cart item.
-   * - Variant products: reads from the variant's linked inventory.
-   * - No-variant products: reads from product-level inventory (variantId IS NULL).
+   * After migration, all cart items have variantId.
    */
   private async resolveItemInventory(
-    variantId: string | null,
+    variantId: string,
     productId: string,
-    variantInventory: { quantity: number; minStockQuantity: number } | null | undefined,
+    variantInventory:
+      | { quantity: number; minStockQuantity: number }
+      | null
+      | undefined,
   ): Promise<{ quantity: number; minStockQuantity: number }> {
     if (variantInventory !== undefined) {
       // Inventory already fetched with the variant — use it directly
       return {
         quantity: variantInventory?.quantity ?? 0,
-        minStockQuantity: variantInventory?.minStockQuantity ?? DEFAULT_MIN_STOCK_QUANTITY,
+        minStockQuantity:
+          variantInventory?.minStockQuantity ?? DEFAULT_MIN_STOCK_QUANTITY,
       };
     }
 
-    if (variantId) {
-      // Variant exists but inventory wasn't pre-fetched — load it
-      const inv = await this.prismaService.productVariant
-        .findFirst({ where: { id: variantId }, select: { inventory: { select: { quantity: true, minStockQuantity: true } } } })
-        .then((v) => v?.inventory ?? null);
-      return {
-        quantity: inv?.quantity ?? 0,
-        minStockQuantity: inv?.minStockQuantity ?? DEFAULT_MIN_STOCK_QUANTITY,
-      };
-    }
+    // Variant exists but inventory wasn't pre-fetched — load it
+    const inv = await this.prismaService.productVariant
+      .findFirst({
+        where: { id: variantId },
+        select: {
+          inventory: { select: { quantity: true, minStockQuantity: true } },
+        },
+      })
+      .then((v) => v?.inventory ?? null);
 
-    // No-variant product: load product-level inventory
-    const inv = await this.prismaService.productInventory.findFirst({
-      where: { productId, variantId: null },
-      select: { quantity: true, minStockQuantity: true },
-    });
     return {
       quantity: inv?.quantity ?? 0,
       minStockQuantity: inv?.minStockQuantity ?? DEFAULT_MIN_STOCK_QUANTITY,
@@ -125,7 +122,8 @@ export class CartService {
     if (!flashSale) return map;
 
     for (const p of flashSale.products) {
-      const key = p.variantId ? `${p.productId}_${p.variantId}` : `${p.productId}_null`;
+      // After migration, all flash sale products have variantId
+      const key = `${p.productId}_${p.variantId}`;
       map[key] = p;
     }
     return map;
@@ -134,42 +132,39 @@ export class CartService {
   /**
    * Map a CartItemSelect DB entity to CartItemResponseDto.
    */
-  private mapCartItem(item: CartItemSelect, flashSaleMap: Record<string, any> = {}): CartItemResponseDto {
-    const fsKey = item.variantId ? `${item.productId}_${item.variantId}` : `${item.productId}_null`;
+  private mapCartItem(
+    item: CartItemSelect,
+    flashSaleMap: Record<string, any> = {},
+  ): CartItemResponseDto {
+    // After migration, all cart items have variantId
+    const fsKey = `${item.productId}_${item.variantId}`;
     const fsProduct = flashSaleMap[fsKey];
 
-    // For no-variant products, fall back to product basePrice
+    // Get price from variant (all items have variant now)
     const baseItemPrice = item.variant
       ? Number(item.variant.price)
-      : Number(item.product.basePrice);
-    
+      : Number(item.product.basePrice); // Fallback for safety
+
     // Apply Flash Sale price if available
     const price = fsProduct ? Number(fsProduct.flashPrice) : baseItemPrice;
     const lineTotal = (price * item.quantity).toFixed(2);
     const thumbnailImage = item.product.images[0] ?? null;
 
-    // Product-level inventory for no-variant products (pre-fetched via cartItemProductSelect)
-    const productInventory = item.product.inventory[0] ?? null;
-
-    // stockInfo: always use variant inventory first, then product-level inventory
+    // stockInfo: use variant inventory (all items have variant now)
     const stockInfo = {
-      stockQuantity:
-        item.variant?.inventory?.quantity ?? productInventory?.quantity ?? 0,
+      stockQuantity: item.variant?.inventory?.quantity ?? 0,
       minStockQuantity:
-        item.variant?.inventory?.minStockQuantity ??
-        productInventory?.minStockQuantity ??
-        DEFAULT_MIN_STOCK_QUANTITY,
-      stockStatus:
-        item.variant?.inventory?.displayStatus ??
-        productInventory?.displayStatus ??
-        'OUT_OF_STOCK',
+        item.variant?.inventory?.minStockQuantity ?? DEFAULT_MIN_STOCK_QUANTITY,
+      stockStatus: item.variant?.inventory?.displayStatus ?? 'OUT_OF_STOCK',
     };
 
-    const flashSaleInfo = fsProduct ? {
-      flashPrice: fsProduct.flashPrice.toString(),
-      limitPerOrder: fsProduct.limitPerOrder,
-      availableQuantity: fsProduct.maxQuantity - fsProduct.soldQuantity,
-    } : null;
+    const flashSaleInfo = fsProduct
+      ? {
+          flashPrice: fsProduct.flashPrice.toString(),
+          limitPerOrder: fsProduct.limitPerOrder,
+          availableQuantity: fsProduct.maxQuantity - fsProduct.soldQuantity,
+        }
+      : null;
 
     return {
       id: item.id,
@@ -196,7 +191,6 @@ export class CartService {
             }
           : null,
       },
-      // Null for no-variant products — only display fields (color/size/type) when present
       variant: item.variant
         ? {
             id: item.variant.id,
@@ -234,8 +228,13 @@ export class CartService {
   /**
    * Map a full CartSelect DB entity to CartResponseDto.
    */
-  private mapCart(cart: CartSelect, flashSaleMap: Record<string, any> = {}): CartResponseDto {
-    const items = cart.items.map((item) => this.mapCartItem(item, flashSaleMap));
+  private mapCart(
+    cart: CartSelect,
+    flashSaleMap: Record<string, any> = {},
+  ): CartResponseDto {
+    const items = cart.items.map((item) =>
+      this.mapCartItem(item, flashSaleMap),
+    );
     const summary = this.buildCartSummary(items);
 
     return {
@@ -316,68 +315,99 @@ export class CartService {
 
       const cartRef = await this.getOrCreateCart(userId);
 
-      let resolvedVariantId: string | null = null;
-      let existingItem: { id: string; quantity: number } | null = null;
+      // Resolve variantId: use provided or get default variant
+      let resolvedVariantId = dto.variantId;
 
-      if (dto.variantId) {
-        // ── Variant product ────────────────────────────────────────────────
-        const variant = await this.prismaService.productVariant.findFirst({
-          where: { id: dto.variantId, productId: dto.productId },
-          orderBy: { sortOrder: 'asc' },
-          select: { id: true, inventory: { select: { quantity: true, minStockQuantity: true } } },
-        });
+      if (!resolvedVariantId) {
+        // Get default variant (prioritize -DEFAULT suffix, then first by sortOrder)
+        const defaultVariant =
+          await this.prismaService.productVariant.findFirst({
+            where: {
+              productId: dto.productId,
+              OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+            },
+            orderBy: [
+              { sku: 'asc' }, // Prioritize -DEFAULT suffix
+              { sortOrder: 'asc' },
+            ],
+            select: { id: true },
+          });
 
-        if (!variant) {
+        if (!defaultVariant) {
           throw new BusinessException(
-            ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND],
+            'Sản phẩm không có variant nào',
             ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND,
           );
         }
 
-        resolvedVariantId = variant.id;
-
-        // Check for existing cart item by variantId
-        existingItem = await this.prismaService.cartItem.findUnique({
-          where: { cartId_variantId: { cartId: cartRef.id, variantId: resolvedVariantId } },
-          select: { id: true, quantity: true },
-        });
-
-        const newQuantity = existingItem ? existingItem.quantity + quantity : quantity;
-        const inv = await this.resolveItemInventory(resolvedVariantId, dto.productId, variant.inventory);
-        this.assertBackorderLimit(inv.quantity, newQuantity, inv.minStockQuantity);
-      } else {
-        // ── No-variant product ─────────────────────────────────────────────
-        // Check for existing cart item by productId (variantId IS NULL)
-        existingItem = await this.prismaService.cartItem.findFirst({
-          where: { cartId: cartRef.id, productId: dto.productId, variantId: null },
-          select: { id: true, quantity: true },
-        });
-
-        const newQuantity = existingItem ? existingItem.quantity + quantity : quantity;
-        const inv = await this.resolveItemInventory(null, dto.productId, undefined);
-        this.assertBackorderLimit(inv.quantity, newQuantity, inv.minStockQuantity);
+        resolvedVariantId = defaultVariant.id;
       }
 
-      // newQuantity is computed after existingItem is resolved in both branches above
-      const newQuantity = (existingItem?.quantity ?? 0) + quantity;
+      // Validate variant exists and belongs to product
+      const variant = await this.prismaService.productVariant.findFirst({
+        where: { id: resolvedVariantId, productId: dto.productId },
+        select: {
+          id: true,
+          inventory: {
+            select: {
+              quantity: true,
+              minStockQuantity: true,
+            },
+          },
+        },
+      });
+
+      if (!variant) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND],
+          ERROR_CODES.PRODUCT_VARIANT_NOT_FOUND,
+        );
+      }
+
+      // Check for existing cart item by variantId
+      const existingItem = await this.prismaService.cartItem.findUnique({
+        where: {
+          cartId_variantId: {
+            cartId: cartRef.id,
+            variantId: resolvedVariantId,
+          },
+        },
+        select: { id: true, quantity: true },
+      });
+
+      const newQuantity = existingItem
+        ? existingItem.quantity + quantity
+        : quantity;
+
+      // Check inventory
+      const inv = await this.resolveItemInventory(
+        resolvedVariantId,
+        dto.productId,
+        variant.inventory,
+      );
+      this.assertBackorderLimit(
+        inv.quantity,
+        newQuantity,
+        inv.minStockQuantity,
+      );
 
       // Flash Sale Check Before Update
       const fsMap = await this.getActiveFlashSaleMap();
-      const variantKey = resolvedVariantId ? `${dto.productId}_${resolvedVariantId}` : `${dto.productId}_null`;
+      const variantKey = `${dto.productId}_${resolvedVariantId}`;
       const fsProduct = fsMap[variantKey];
 
       if (fsProduct) {
         if (newQuantity > fsProduct.limitPerOrder) {
           throw new BusinessException(
             `${ERROR_MESSAGES[ERROR_CODES.CART_FS_LIMIT_EXCEEDED]} (Tối đa: ${fsProduct.limitPerOrder})`,
-            ERROR_CODES.CART_FS_LIMIT_EXCEEDED
+            ERROR_CODES.CART_FS_LIMIT_EXCEEDED,
           );
         }
         const fsAvailable = fsProduct.maxQuantity - fsProduct.soldQuantity;
         if (newQuantity > fsAvailable) {
           throw new BusinessException(
-            ERROR_MESSAGES[ERROR_CODES.CART_FS_OUT_OF_STOCK], 
-            ERROR_CODES.CART_FS_OUT_OF_STOCK
+            ERROR_MESSAGES[ERROR_CODES.CART_FS_OUT_OF_STOCK],
+            ERROR_CODES.CART_FS_OUT_OF_STOCK,
           );
         }
       }
@@ -393,7 +423,7 @@ export class CartService {
         });
         cartItemId = updated.id;
       } else {
-        // Create new cart item (variantId may be null for no-variant products)
+        // Create new cart item
         const created = await this.prismaService.cartItem.create({
           data: {
             cartId: cartRef.id,
@@ -435,10 +465,6 @@ export class CartService {
       );
     }
   }
-
-  /**
-   * Update quantity of a specific cart item.
-   */
   async updateCartItem(
     userId: string,
     itemId: string,
@@ -467,7 +493,11 @@ export class CartService {
           variant: {
             select: {
               inventory: {
-                select: { quantity: true, displayStatus: true, minStockQuantity: true },
+                select: {
+                  quantity: true,
+                  displayStatus: true,
+                  minStockQuantity: true,
+                },
               },
             },
           },
@@ -482,30 +512,35 @@ export class CartService {
       }
 
       // Validate new quantity against backorder floor using shared helper
+      // After migration, all cart items have variantId
       const inv = await this.resolveItemInventory(
-        item.variant ? item.variantId : null,
+        item.variantId!,
         item.productId,
         item.variant ? item.variant.inventory : undefined,
       );
-      this.assertBackorderLimit(inv.quantity, dto.quantity, inv.minStockQuantity);
+      this.assertBackorderLimit(
+        inv.quantity,
+        dto.quantity,
+        inv.minStockQuantity,
+      );
 
       // Flash Sale Check
       const fsMap = await this.getActiveFlashSaleMap();
-      const variantKey = item.variantId ? `${item.productId}_${item.variantId}` : `${item.productId}_null`;
+      const variantKey = `${item.productId}_${item.variantId}`;
       const fsProduct = fsMap[variantKey];
 
       if (fsProduct) {
         if (dto.quantity > fsProduct.limitPerOrder) {
           throw new BusinessException(
             `${ERROR_MESSAGES[ERROR_CODES.CART_FS_LIMIT_EXCEEDED]} (Tối đa: ${fsProduct.limitPerOrder})`,
-            ERROR_CODES.CART_FS_LIMIT_EXCEEDED
+            ERROR_CODES.CART_FS_LIMIT_EXCEEDED,
           );
         }
         const fsAvailable = fsProduct.maxQuantity - fsProduct.soldQuantity;
         if (dto.quantity > fsAvailable) {
           throw new BusinessException(
-            ERROR_MESSAGES[ERROR_CODES.CART_FS_OUT_OF_STOCK], 
-            ERROR_CODES.CART_FS_OUT_OF_STOCK
+            ERROR_MESSAGES[ERROR_CODES.CART_FS_OUT_OF_STOCK],
+            ERROR_CODES.CART_FS_OUT_OF_STOCK,
           );
         }
       }

@@ -50,26 +50,39 @@ export class InventoryService {
   // ─── Product-Level Inventory ──────────────────────────────────────────────
 
   /**
-   * Get inventory for a simple product (no variants).
-   * Throws INVENTORY_PRODUCT_HAS_VARIANTS if the product has variants.
+   * Get inventory for a product's default variant.
+   * After migration, all products have at least one variant (default variant).
    */
   async getProductInventory(
     productId: string,
   ): Promise<IBeforeTransformResponseType<InventoryResponseDto>> {
     try {
-      const variantCount = await this.prismaService.productVariant.count({
-        where: { productId },
+      // Find default variant (prioritize -DEFAULT suffix, then first by sortOrder)
+      const defaultVariant = await this.prismaService.productVariant.findFirst({
+        where: {
+          productId,
+          OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+        },
+        orderBy: [
+          { sku: 'asc' }, // Prioritize -DEFAULT suffix
+          { sortOrder: 'asc' },
+        ],
+        select: { id: true },
       });
 
-      if (variantCount > 0) {
+      if (!defaultVariant) {
         throw new BusinessException(
-          ERROR_MESSAGES[ERROR_CODES.INVENTORY_PRODUCT_HAS_VARIANTS],
-          ERROR_CODES.INVENTORY_PRODUCT_HAS_VARIANTS,
+          'Sản phẩm không có variant nào',
+          ERROR_CODES.INVENTORY_NOT_FOUND,
         );
       }
 
+      // Get inventory for default variant
       const inventory = await this.prismaService.productInventory.findFirst({
-        where: { productId, variantId: null },
+        where: {
+          productId,
+          variantId: defaultVariant.id,
+        },
         select: inventoryFullSelect,
       });
 
@@ -95,15 +108,35 @@ export class InventoryService {
   }
 
   /**
-   * Update inventory for a simple product (absolute quantity set).
+   * Update inventory for a product's default variant (absolute quantity set).
    */
   async updateProductInventory(
     productId: string,
     dto: UpdateInventoryDto,
   ): Promise<IBeforeTransformResponseType<InventoryResponseDto>> {
     try {
+      // Find default variant
+      const defaultVariant = await this.prismaService.productVariant.findFirst({
+        where: {
+          productId,
+          OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+        },
+        orderBy: [{ sku: 'asc' }, { sortOrder: 'asc' }],
+        select: { id: true },
+      });
+
+      if (!defaultVariant) {
+        throw new BusinessException(
+          'Sản phẩm không có variant nào',
+          ERROR_CODES.INVENTORY_NOT_FOUND,
+        );
+      }
+
       const inventory = await this.prismaService.productInventory.findFirst({
-        where: { productId, variantId: null },
+        where: {
+          productId,
+          variantId: defaultVariant.id,
+        },
         select: { id: true, quantity: true, lowStockThreshold: true },
       });
 
@@ -147,15 +180,35 @@ export class InventoryService {
   }
 
   /**
-   * Adjust inventory for a simple product (relative delta).
+   * Adjust inventory for a product's default variant (relative delta).
    */
   async adjustProductInventory(
     productId: string,
     dto: AdjustInventoryDto,
   ): Promise<IBeforeTransformResponseType<InventoryResponseDto>> {
     try {
+      // Find default variant
+      const defaultVariant = await this.prismaService.productVariant.findFirst({
+        where: {
+          productId,
+          OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+        },
+        orderBy: [{ sku: 'asc' }, { sortOrder: 'asc' }],
+        select: { id: true },
+      });
+
+      if (!defaultVariant) {
+        throw new BusinessException(
+          'Sản phẩm không có variant nào',
+          ERROR_CODES.INVENTORY_NOT_FOUND,
+        );
+      }
+
       const inventory = await this.prismaService.productInventory.findFirst({
-        where: { productId, variantId: null },
+        where: {
+          productId,
+          variantId: defaultVariant.id,
+        },
         select: { id: true, quantity: true, lowStockThreshold: true },
       });
 
@@ -440,7 +493,8 @@ export class InventoryService {
   }
 
   /**
-   * Get all product-level inventory records (variantId IS NULL) with pagination, search and filter.
+   * Get all default variant inventory records with pagination, search and filter.
+   * After migration, this returns inventory for products' default variants.
    */
   async getAllProducts(
     query: InventoryListQueryDto,
@@ -451,9 +505,11 @@ export class InventoryService {
       const { page = 1, limit = 20, search, status } = query;
       const skip = (page - 1) * limit;
 
-      // Build dynamic where clause
+      // Build dynamic where clause for default variants
       const where = {
-        variantId: null,
+        variant: {
+          OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+        },
         ...(status && { displayStatus: status }),
         ...(search && {
           product: {
@@ -476,7 +532,10 @@ export class InventoryService {
         }),
       ]);
 
-      const mappedItems = toResponseDtoArray(InventoryProductResponseDto, items);
+      const mappedItems = toResponseDtoArray(
+        InventoryProductResponseDto,
+        items,
+      );
 
       return {
         type: 'pagination',
@@ -546,7 +605,10 @@ export class InventoryService {
         }),
       ]);
 
-      const mappedItems = toResponseDtoArray(InventoryVariantResponseDto, items);
+      const mappedItems = toResponseDtoArray(
+        InventoryVariantResponseDto,
+        items,
+      );
 
       return {
         type: 'pagination',
@@ -568,7 +630,7 @@ export class InventoryService {
   }
 
   /**
-   * Get low-stock inventory for simple products (no variant, variantId IS NULL).
+   * Get low-stock inventory for default variants.
    * Raw SQL is used only to filter by column-to-column comparison (quantity <= low_stock_threshold),
    * then Prisma fetches full relations via inventoryFullSelect.
    */
@@ -582,22 +644,25 @@ export class InventoryService {
       const skip = (page - 1) * limit;
 
       // Step 1: Get matching IDs and total count via raw SQL (column-to-column comparison)
+      // Query default variants (SKU ends with -DEFAULT or sortOrder = 0)
       const [idRows, totalCount] = await Promise.all([
         this.prismaService.$queryRaw<{ id: string }[]>`
-          SELECT id
-          FROM product_inventory
-          WHERE variant_id IS NULL
-            AND quantity > 0
-            AND quantity <= low_stock_threshold
-          ORDER BY quantity ASC
+          SELECT pi.id
+          FROM product_inventory pi
+          INNER JOIN product_variants pv ON pi.variant_id = pv.id
+          WHERE (pv.sku LIKE '%-DEFAULT' OR pv.sort_order = 0)
+            AND pi.quantity > 0
+            AND pi.quantity <= pi.low_stock_threshold
+          ORDER BY pi.quantity ASC
           LIMIT ${limit} OFFSET ${skip}
         `,
         this.prismaService.$queryRaw<{ count: bigint }[]>`
           SELECT COUNT(*)::int as count
-          FROM product_inventory
-          WHERE variant_id IS NULL
-            AND quantity > 0
-            AND quantity <= low_stock_threshold
+          FROM product_inventory pi
+          INNER JOIN product_variants pv ON pi.variant_id = pv.id
+          WHERE (pv.sku LIKE '%-DEFAULT' OR pv.sort_order = 0)
+            AND pi.quantity > 0
+            AND pi.quantity <= pi.low_stock_threshold
         `,
       ]);
 
@@ -609,7 +674,10 @@ export class InventoryService {
         orderBy: { quantity: 'asc' },
       });
 
-      const mappedItems = toResponseDtoArray(InventoryProductResponseDto, items);
+      const mappedItems = toResponseDtoArray(
+        InventoryProductResponseDto,
+        items,
+      );
       const total = Number(totalCount[0]?.count ?? 0);
 
       return {
@@ -673,7 +741,10 @@ export class InventoryService {
         orderBy: { quantity: 'asc' },
       });
 
-      const mappedItems = toResponseDtoArray(InventoryVariantResponseDto, items);
+      const mappedItems = toResponseDtoArray(
+        InventoryVariantResponseDto,
+        items,
+      );
       const total = Number(totalCount[0]?.count ?? 0);
 
       return {
@@ -696,7 +767,7 @@ export class InventoryService {
   }
 
   /**
-   * Get out-of-stock inventory for simple products (variantId IS NULL).
+   * Get out-of-stock inventory for default variants.
    */
   async getOutOfStockProducts(
     page = 1,
@@ -707,18 +778,18 @@ export class InventoryService {
     try {
       const skip = (page - 1) * limit;
 
+      // Query default variants that are out of stock
+      const where = {
+        displayStatus: ProductInventoryDisplayStatus.OUT_OF_STOCK,
+        variant: {
+          OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+        },
+      };
+
       const [total, items] = await Promise.all([
-        this.prismaService.productInventory.count({
-          where: {
-            displayStatus: ProductInventoryDisplayStatus.OUT_OF_STOCK,
-            variantId: null,
-          },
-        }),
+        this.prismaService.productInventory.count({ where }),
         this.prismaService.productInventory.findMany({
-          where: {
-            displayStatus: ProductInventoryDisplayStatus.OUT_OF_STOCK,
-            variantId: null,
-          },
+          where,
           select: inventoryFullSelect,
           skip,
           take: limit,
@@ -868,6 +939,4 @@ export class InventoryService {
       );
     }
   }
-
 }
-

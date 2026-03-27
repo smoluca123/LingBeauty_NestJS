@@ -189,6 +189,15 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.QUESTION_ALREADY_ANSWERED]:
     'Không thể chỉnh sửa câu hỏi đã được trả lời',
 
+  // Order
+  [ERROR_CODES.ORDER_NOT_FOUND]: 'Không tìm thấy đơn hàng',
+  [ERROR_CODES.ORDER_CANNOT_BE_CANCELLED]:
+    'Không thể hủy đơn hàng ở trạng thái hiện tại',
+  [ERROR_CODES.INVALID_ORDER_STATUS_TRANSITION]:
+    'Không thể chuyển trạng thái đơn hàng',
+  [ERROR_CODES.ORDER_ALREADY_PAID]: 'Đơn hàng đã được thanh toán',
+  [ERROR_CODES.ORDER_PAYMENT_FAILED]: 'Thanh toán đơn hàng thất bại',
+
   // System Errors
   [ERROR_CODES.DATABASE_ERROR]: 'Thao tác cơ sở dữ liệu thất bại',
   [ERROR_CODES.EXTERNAL_SERVICE_ERROR]: 'Dịch vụ bên ngoài không khả dụng',
