@@ -10,19 +10,27 @@ import {
   UpdateFlashSaleProductDto,
 } from './dto/flash-sale.dto';
 import { FlashSaleStatus } from 'prisma/generated/prisma/client';
-import { FlashSaleResponseDto, FlashSaleProductResponseDto } from './dto/flash-sale-response.dto';
+import {
+  FlashSaleResponseDto,
+  FlashSaleProductResponseDto,
+} from './dto/flash-sale-response.dto';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import {
   IBeforeTransformResponseType,
   IBeforeTransformPaginationResponseType,
 } from 'src/libs/types/interfaces/response.interface';
-import { flashSaleSelect, flashSaleProductSelect } from 'src/libs/prisma/flash-sale-select';
+import {
+  flashSaleSelect,
+  flashSaleProductSelect,
+} from 'src/libs/prisma/flash-sale-select';
 
 @Injectable()
 export class FlashSaleService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createFlashSale(dto: CreateFlashSaleDto): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
+  async createFlashSale(
+    dto: CreateFlashSaleDto,
+  ): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
     if (dto.startTime >= dto.endTime) {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_INVALID_TIME],
@@ -56,7 +64,10 @@ export class FlashSaleService {
     };
   }
 
-  async getAllFlashSales(params: { page?: number; limit?: number }): Promise<IBeforeTransformPaginationResponseType<FlashSaleResponseDto>> {
+  async getAllFlashSales(params: {
+    page?: number;
+    limit?: number;
+  }): Promise<IBeforeTransformPaginationResponseType<FlashSaleResponseDto>> {
     const page = params.page && params.page > 0 ? params.page : 1;
     const limit = params.limit && params.limit > 0 ? params.limit : 10;
     const skip = (page - 1) * limit;
@@ -74,7 +85,10 @@ export class FlashSaleService {
       type: 'pagination',
       message: 'Lấy danh sách Flash sale thành công',
       data: {
-        items: toResponseDto(FlashSaleResponseDto, items) as unknown as FlashSaleResponseDto[],
+        items: toResponseDto(
+          FlashSaleResponseDto,
+          items,
+        ) as unknown as FlashSaleResponseDto[],
         totalCount: total,
         currentPage: page,
         pageSize: limit,
@@ -82,7 +96,9 @@ export class FlashSaleService {
     };
   }
 
-  async getFlashSaleById(id: string): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
+  async getFlashSaleById(
+    id: string,
+  ): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
     const flashSale = await this.prisma.flashSale.findUnique({
       where: { id },
       select: flashSaleSelect,
@@ -102,7 +118,10 @@ export class FlashSaleService {
     };
   }
 
-  async updateFlashSale(id: string, dto: UpdateFlashSaleDto): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
+  async updateFlashSale(
+    id: string,
+    dto: UpdateFlashSaleDto,
+  ): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
     const flashSale = await this.prisma.flashSale.findUnique({ where: { id } });
     if (!flashSale) {
       throw new BusinessException(
@@ -116,12 +135,20 @@ export class FlashSaleService {
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_INVALID_TIME],
         ERROR_CODES.FLASH_SALE_INVALID_TIME,
       );
-    } else if (dto.startTime && flashSale.endTime && dto.startTime >= flashSale.endTime) {
+    } else if (
+      dto.startTime &&
+      flashSale.endTime &&
+      dto.startTime >= flashSale.endTime
+    ) {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_INVALID_TIME],
         ERROR_CODES.FLASH_SALE_INVALID_TIME,
       );
-    } else if (dto.endTime && flashSale.startTime && flashSale.startTime >= dto.endTime) {
+    } else if (
+      dto.endTime &&
+      flashSale.startTime &&
+      flashSale.startTime >= dto.endTime
+    ) {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_INVALID_TIME],
         ERROR_CODES.FLASH_SALE_INVALID_TIME,
@@ -152,7 +179,9 @@ export class FlashSaleService {
     };
   }
 
-  async deleteFlashSale(id: string): Promise<IBeforeTransformResponseType<{ message: string }>> {
+  async deleteFlashSale(
+    id: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     const flashSale = await this.prisma.flashSale.findUnique({ where: { id } });
     if (!flashSale) {
       throw new BusinessException(
@@ -168,7 +197,10 @@ export class FlashSaleService {
     };
   }
 
-  async addProductsToFlashSale(id: string, dtos: AddFlashSaleProductDto[]): Promise<IBeforeTransformResponseType<FlashSaleProductResponseDto[]>> {
+  async addProductsToFlashSale(
+    id: string,
+    dtos: AddFlashSaleProductDto[],
+  ): Promise<IBeforeTransformResponseType<FlashSaleProductResponseDto[]>> {
     const flashSale = await this.prisma.flashSale.findUnique({ where: { id } });
     if (!flashSale) {
       throw new BusinessException(
@@ -179,18 +211,35 @@ export class FlashSaleService {
 
     const results: any[] = [];
     for (const dto of dtos) {
-      const productInput: any = {
-        flashSaleId: id,
-        productId: dto.productId,
-        variantId: null,
-      };
-      
-      if(dto.variantId) {
-          productInput.variantId = dto.variantId;
+      // If no variantId provided, get the default variant (first variant or the one with -DEFAULT suffix)
+      let variantId = dto.variantId;
+      if (!variantId) {
+        const defaultVariant = await this.prisma.productVariant.findFirst({
+          where: {
+            productId: dto.productId,
+            OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+          },
+          orderBy: [
+            { sku: 'asc' }, // Prioritize -DEFAULT suffix
+            { sortOrder: 'asc' },
+          ],
+        });
+
+        if (!defaultVariant) {
+          throw new BusinessException(
+            `Sản phẩm ${dto.productId} không có variant nào`,
+            ERROR_CODES.PRODUCT_NOT_FOUND,
+          );
+        }
+        variantId = defaultVariant.id;
       }
-      
+
       const exists = await this.prisma.flashSaleProduct.findFirst({
-        where: productInput
+        where: {
+          flashSaleId: id,
+          productId: dto.productId,
+          variantId: variantId,
+        },
       });
 
       if (exists) {
@@ -204,7 +253,7 @@ export class FlashSaleService {
               limitPerOrder: dto.limitPerOrder ?? 1,
               sortOrder: dto.sortOrder ?? 0,
             },
-          })
+          }),
         );
       } else {
         results.push(
@@ -212,14 +261,14 @@ export class FlashSaleService {
             data: {
               flashSaleId: id,
               productId: dto.productId,
-              variantId: dto.variantId,
+              variantId: variantId,
               flashPrice: dto.flashPrice,
               originalPrice: dto.originalPrice,
               maxQuantity: dto.maxQuantity,
               limitPerOrder: dto.limitPerOrder ?? 1,
               sortOrder: dto.sortOrder ?? 0,
             },
-          })
+          }),
         );
       }
     }
@@ -227,11 +276,19 @@ export class FlashSaleService {
     return {
       type: 'response',
       message: 'Thêm sản phẩm vào Flash sale thành công',
-      data: toResponseDto(FlashSaleProductResponseDto, results) as unknown as FlashSaleProductResponseDto[],
+      data: toResponseDto(
+        FlashSaleProductResponseDto,
+        results,
+      ) as unknown as FlashSaleProductResponseDto[],
     };
   }
 
-  async updateFlashSaleProduct(id: string, productId: string, variantId: string | undefined, dto: UpdateFlashSaleProductDto): Promise<IBeforeTransformResponseType<FlashSaleProductResponseDto>> {
+  async updateFlashSaleProduct(
+    id: string,
+    productId: string,
+    variantId: string | undefined,
+    dto: UpdateFlashSaleProductDto,
+  ): Promise<IBeforeTransformResponseType<FlashSaleProductResponseDto>> {
     const filters: any = { flashSaleId: id, productId };
     if (variantId) filters.variantId = variantId;
 
@@ -264,7 +321,11 @@ export class FlashSaleService {
     };
   }
 
-  async removeProductFromFlashSale(id: string, productId: string, variantId?: string): Promise<IBeforeTransformResponseType<{ message: string }>> {
+  async removeProductFromFlashSale(
+    id: string,
+    productId: string,
+    variantId?: string,
+  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     const filters: any = { flashSaleId: id, productId };
     if (variantId) filters.variantId = variantId;
 
@@ -290,7 +351,9 @@ export class FlashSaleService {
     };
   }
 
-  async getCurrentFlashSale(): Promise<IBeforeTransformResponseType<FlashSaleResponseDto | null>> {
+  async getCurrentFlashSale(): Promise<
+    IBeforeTransformResponseType<FlashSaleResponseDto | null>
+  > {
     const now = new Date();
     const flashSale = await this.prisma.flashSale.findFirst({
       where: {
@@ -300,9 +363,9 @@ export class FlashSaleService {
         status: FlashSaleStatus.ACTIVE,
       },
       select: flashSaleSelect,
-      orderBy: { startTime: 'asc' }
+      orderBy: { startTime: 'asc' },
     });
-    
+
     return {
       type: 'response',
       message: 'Lấy Flash sale hiện tại thành công',
@@ -310,7 +373,9 @@ export class FlashSaleService {
     };
   }
 
-  async getUpcomingFlashSales(): Promise<IBeforeTransformResponseType<FlashSaleResponseDto[]>> {
+  async getUpcomingFlashSales(): Promise<
+    IBeforeTransformResponseType<FlashSaleResponseDto[]>
+  > {
     const now = new Date();
     const flashSales = await this.prisma.flashSale.findMany({
       where: {
@@ -325,7 +390,10 @@ export class FlashSaleService {
     return {
       type: 'response',
       message: 'Lấy danh sách Flash sale sắp tới thành công',
-      data: toResponseDto(FlashSaleResponseDto, flashSales) as unknown as FlashSaleResponseDto[],
+      data: toResponseDto(
+        FlashSaleResponseDto,
+        flashSales,
+      ) as unknown as FlashSaleResponseDto[],
     };
   }
 }

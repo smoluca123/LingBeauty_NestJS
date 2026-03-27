@@ -28,6 +28,7 @@ import { InventoryModule } from 'src/modules/inventory/inventory.module';
 import { FlashSaleModule } from 'src/modules/flash-sale/flash-sale.module';
 import { CouponModule } from 'src/modules/coupon/coupon.module';
 import { ProductQuestionModule } from 'src/modules/product-question/product-question.module';
+import { OrderModule } from 'src/modules/order/order.module';
 
 @Module({
   imports: [
@@ -79,6 +80,7 @@ import { ProductQuestionModule } from 'src/modules/product-question/product-ques
     FlashSaleModule,
     CouponModule,
     ProductQuestionModule,
+    OrderModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

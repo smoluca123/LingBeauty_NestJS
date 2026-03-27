@@ -18704,7 +18704,7 @@ export namespace Prisma {
     id: string
     flashSaleId: string
     productId: string
-    variantId: string | null
+    variantId: string
     flashPrice: Decimal
     originalPrice: Decimal
     maxQuantity: number
@@ -18751,7 +18751,7 @@ export namespace Prisma {
     updatedAt?: boolean
     flashSale?: boolean | FlashSaleDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
-    variant?: boolean | FlashSaleProduct$variantArgs<ExtArgs>
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flashSaleProduct"]>
 
   export type FlashSaleProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18770,7 +18770,7 @@ export namespace Prisma {
     updatedAt?: boolean
     flashSale?: boolean | FlashSaleDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
-    variant?: boolean | FlashSaleProduct$variantArgs<ExtArgs>
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flashSaleProduct"]>
 
   export type FlashSaleProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18789,7 +18789,7 @@ export namespace Prisma {
     updatedAt?: boolean
     flashSale?: boolean | FlashSaleDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
-    variant?: boolean | FlashSaleProduct$variantArgs<ExtArgs>
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flashSaleProduct"]>
 
   export type FlashSaleProductSelectScalar = {
@@ -18812,17 +18812,17 @@ export namespace Prisma {
   export type FlashSaleProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     flashSale?: boolean | FlashSaleDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
-    variant?: boolean | FlashSaleProduct$variantArgs<ExtArgs>
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
   }
   export type FlashSaleProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     flashSale?: boolean | FlashSaleDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
-    variant?: boolean | FlashSaleProduct$variantArgs<ExtArgs>
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
   }
   export type FlashSaleProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     flashSale?: boolean | FlashSaleDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
-    variant?: boolean | FlashSaleProduct$variantArgs<ExtArgs>
+    variant?: boolean | ProductVariantDefaultArgs<ExtArgs>
   }
 
   export type $FlashSaleProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18830,13 +18830,13 @@ export namespace Prisma {
     objects: {
       flashSale: Prisma.$FlashSalePayload<ExtArgs>
       product: Prisma.$ProductPayload<ExtArgs>
-      variant: Prisma.$ProductVariantPayload<ExtArgs> | null
+      variant: Prisma.$ProductVariantPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       flashSaleId: string
       productId: string
-      variantId: string | null
+      variantId: string
       flashPrice: Prisma.Decimal
       originalPrice: Prisma.Decimal
       maxQuantity: number
@@ -19242,7 +19242,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     flashSale<T extends FlashSaleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FlashSaleDefaultArgs<ExtArgs>>): Prisma__FlashSaleClient<$Result.GetResult<Prisma.$FlashSalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    variant<T extends FlashSaleProduct$variantArgs<ExtArgs> = {}>(args?: Subset<T, FlashSaleProduct$variantArgs<ExtArgs>>): Prisma__ProductVariantClient<$Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    variant<T extends ProductVariantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductVariantDefaultArgs<ExtArgs>>): Prisma__ProductVariantClient<$Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19678,25 +19678,6 @@ export namespace Prisma {
      * Limit how many FlashSaleProducts to delete.
      */
     limit?: number
-  }
-
-  /**
-   * FlashSaleProduct.variant
-   */
-  export type FlashSaleProduct$variantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductVariant
-     */
-    select?: ProductVariantSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductVariant
-     */
-    omit?: ProductVariantOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductVariantInclude<ExtArgs> | null
-    where?: ProductVariantWhereInput
   }
 
   /**
@@ -56197,7 +56178,7 @@ export namespace Prisma {
     id?: StringFilter<"FlashSaleProduct"> | string
     flashSaleId?: StringFilter<"FlashSaleProduct"> | string
     productId?: StringFilter<"FlashSaleProduct"> | string
-    variantId?: StringNullableFilter<"FlashSaleProduct"> | string | null
+    variantId?: StringFilter<"FlashSaleProduct"> | string
     flashPrice?: DecimalFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFilter<"FlashSaleProduct"> | number
@@ -56209,14 +56190,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FlashSaleProduct"> | Date | string
     flashSale?: XOR<FlashSaleScalarRelationFilter, FlashSaleWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    variant?: XOR<ProductVariantNullableScalarRelationFilter, ProductVariantWhereInput> | null
+    variant?: XOR<ProductVariantScalarRelationFilter, ProductVariantWhereInput>
   }
 
   export type FlashSaleProductOrderByWithRelationInput = {
     id?: SortOrder
     flashSaleId?: SortOrder
     productId?: SortOrder
-    variantId?: SortOrderInput | SortOrder
+    variantId?: SortOrder
     flashPrice?: SortOrder
     originalPrice?: SortOrder
     maxQuantity?: SortOrder
@@ -56239,7 +56220,7 @@ export namespace Prisma {
     NOT?: FlashSaleProductWhereInput | FlashSaleProductWhereInput[]
     flashSaleId?: StringFilter<"FlashSaleProduct"> | string
     productId?: StringFilter<"FlashSaleProduct"> | string
-    variantId?: StringNullableFilter<"FlashSaleProduct"> | string | null
+    variantId?: StringFilter<"FlashSaleProduct"> | string
     flashPrice?: DecimalFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFilter<"FlashSaleProduct"> | number
@@ -56251,14 +56232,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FlashSaleProduct"> | Date | string
     flashSale?: XOR<FlashSaleScalarRelationFilter, FlashSaleWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    variant?: XOR<ProductVariantNullableScalarRelationFilter, ProductVariantWhereInput> | null
+    variant?: XOR<ProductVariantScalarRelationFilter, ProductVariantWhereInput>
   }, "id" | "flashSaleId_productId_variantId">
 
   export type FlashSaleProductOrderByWithAggregationInput = {
     id?: SortOrder
     flashSaleId?: SortOrder
     productId?: SortOrder
-    variantId?: SortOrderInput | SortOrder
+    variantId?: SortOrder
     flashPrice?: SortOrder
     originalPrice?: SortOrder
     maxQuantity?: SortOrder
@@ -56282,7 +56263,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"FlashSaleProduct"> | string
     flashSaleId?: StringWithAggregatesFilter<"FlashSaleProduct"> | string
     productId?: StringWithAggregatesFilter<"FlashSaleProduct"> | string
-    variantId?: StringNullableWithAggregatesFilter<"FlashSaleProduct"> | string | null
+    variantId?: StringWithAggregatesFilter<"FlashSaleProduct"> | string
     flashPrice?: DecimalWithAggregatesFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalWithAggregatesFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntWithAggregatesFilter<"FlashSaleProduct"> | number
@@ -59767,14 +59748,14 @@ export namespace Prisma {
     updatedAt?: Date | string
     flashSale: FlashSaleCreateNestedOneWithoutProductsInput
     product: ProductCreateNestedOneWithoutFlashSaleProductsInput
-    variant?: ProductVariantCreateNestedOneWithoutFlashSaleProductsInput
+    variant: ProductVariantCreateNestedOneWithoutFlashSaleProductsInput
   }
 
   export type FlashSaleProductUncheckedCreateInput = {
     id?: string
     flashSaleId: string
     productId: string
-    variantId?: string | null
+    variantId: string
     flashPrice: Decimal | DecimalJsLike | number | string
     originalPrice: Decimal | DecimalJsLike | number | string
     maxQuantity: number
@@ -59799,14 +59780,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     flashSale?: FlashSaleUpdateOneRequiredWithoutProductsNestedInput
     product?: ProductUpdateOneRequiredWithoutFlashSaleProductsNestedInput
-    variant?: ProductVariantUpdateOneWithoutFlashSaleProductsNestedInput
+    variant?: ProductVariantUpdateOneRequiredWithoutFlashSaleProductsNestedInput
   }
 
   export type FlashSaleProductUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     flashSaleId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    variantId?: NullableStringFieldUpdateOperationsInput | string | null
+    variantId?: StringFieldUpdateOperationsInput | string
     flashPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFieldUpdateOperationsInput | number
@@ -59822,7 +59803,7 @@ export namespace Prisma {
     id?: string
     flashSaleId: string
     productId: string
-    variantId?: string | null
+    variantId: string
     flashPrice: Decimal | DecimalJsLike | number | string
     originalPrice: Decimal | DecimalJsLike | number | string
     maxQuantity: number
@@ -59851,7 +59832,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     flashSaleId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    variantId?: NullableStringFieldUpdateOperationsInput | string | null
+    variantId?: StringFieldUpdateOperationsInput | string
     flashPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFieldUpdateOperationsInput | number
@@ -63387,9 +63368,9 @@ export namespace Prisma {
     isNot?: ProductWhereInput
   }
 
-  export type ProductVariantNullableScalarRelationFilter = {
-    is?: ProductVariantWhereInput | null
-    isNot?: ProductVariantWhereInput | null
+  export type ProductVariantScalarRelationFilter = {
+    is?: ProductVariantWhereInput
+    isNot?: ProductVariantWhereInput
   }
 
   export type FlashSaleProductFlashSaleIdProductIdVariantIdCompoundUniqueInput = {
@@ -63653,6 +63634,11 @@ export namespace Prisma {
     isNot?: CartWhereInput
   }
 
+  export type ProductVariantNullableScalarRelationFilter = {
+    is?: ProductVariantWhereInput | null
+    isNot?: ProductVariantWhereInput | null
+  }
+
   export type CartItemCartIdVariantIdCompoundUniqueInput = {
     cartId: string
     variantId: string
@@ -63816,11 +63802,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type ProductVariantScalarRelationFilter = {
-    is?: ProductVariantWhereInput
-    isNot?: ProductVariantWhereInput
   }
 
   export type OrderItemCountOrderByAggregateInput = {
@@ -65809,12 +65790,10 @@ export namespace Prisma {
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutFlashSaleProductsInput, ProductUpdateWithoutFlashSaleProductsInput>, ProductUncheckedUpdateWithoutFlashSaleProductsInput>
   }
 
-  export type ProductVariantUpdateOneWithoutFlashSaleProductsNestedInput = {
+  export type ProductVariantUpdateOneRequiredWithoutFlashSaleProductsNestedInput = {
     create?: XOR<ProductVariantCreateWithoutFlashSaleProductsInput, ProductVariantUncheckedCreateWithoutFlashSaleProductsInput>
     connectOrCreate?: ProductVariantCreateOrConnectWithoutFlashSaleProductsInput
     upsert?: ProductVariantUpsertWithoutFlashSaleProductsInput
-    disconnect?: ProductVariantWhereInput | boolean
-    delete?: ProductVariantWhereInput | boolean
     connect?: ProductVariantWhereUniqueInput
     update?: XOR<XOR<ProductVariantUpdateToOneWithWhereWithoutFlashSaleProductsInput, ProductVariantUpdateWithoutFlashSaleProductsInput>, ProductVariantUncheckedUpdateWithoutFlashSaleProductsInput>
   }
@@ -70634,13 +70613,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutFlashSaleProductsInput
-    variant?: ProductVariantCreateNestedOneWithoutFlashSaleProductsInput
+    variant: ProductVariantCreateNestedOneWithoutFlashSaleProductsInput
   }
 
   export type FlashSaleProductUncheckedCreateWithoutFlashSaleInput = {
     id?: string
     productId: string
-    variantId?: string | null
+    variantId: string
     flashPrice: Decimal | DecimalJsLike | number | string
     originalPrice: Decimal | DecimalJsLike | number | string
     maxQuantity: number
@@ -70707,7 +70686,7 @@ export namespace Prisma {
     id?: StringFilter<"FlashSaleProduct"> | string
     flashSaleId?: StringFilter<"FlashSaleProduct"> | string
     productId?: StringFilter<"FlashSaleProduct"> | string
-    variantId?: StringNullableFilter<"FlashSaleProduct"> | string | null
+    variantId?: StringFilter<"FlashSaleProduct"> | string
     flashPrice?: DecimalFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFilter<"FlashSaleProduct"> | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFilter<"FlashSaleProduct"> | number
@@ -74316,13 +74295,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     flashSale: FlashSaleCreateNestedOneWithoutProductsInput
-    variant?: ProductVariantCreateNestedOneWithoutFlashSaleProductsInput
+    variant: ProductVariantCreateNestedOneWithoutFlashSaleProductsInput
   }
 
   export type FlashSaleProductUncheckedCreateWithoutProductInput = {
     id?: string
     flashSaleId: string
-    variantId?: string | null
+    variantId: string
     flashPrice: Decimal | DecimalJsLike | number | string
     originalPrice: Decimal | DecimalJsLike | number | string
     maxQuantity: number
@@ -79383,7 +79362,7 @@ export namespace Prisma {
   export type FlashSaleProductCreateManyFlashSaleInput = {
     id?: string
     productId: string
-    variantId?: string | null
+    variantId: string
     flashPrice: Decimal | DecimalJsLike | number | string
     originalPrice: Decimal | DecimalJsLike | number | string
     maxQuantity: number
@@ -79413,13 +79392,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutFlashSaleProductsNestedInput
-    variant?: ProductVariantUpdateOneWithoutFlashSaleProductsNestedInput
+    variant?: ProductVariantUpdateOneRequiredWithoutFlashSaleProductsNestedInput
   }
 
   export type FlashSaleProductUncheckedUpdateWithoutFlashSaleInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    variantId?: NullableStringFieldUpdateOperationsInput | string | null
+    variantId?: StringFieldUpdateOperationsInput | string
     flashPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFieldUpdateOperationsInput | number
@@ -79434,7 +79413,7 @@ export namespace Prisma {
   export type FlashSaleProductUncheckedUpdateManyWithoutFlashSaleInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    variantId?: NullableStringFieldUpdateOperationsInput | string | null
+    variantId?: StringFieldUpdateOperationsInput | string
     flashPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFieldUpdateOperationsInput | number
@@ -80327,7 +80306,7 @@ export namespace Prisma {
   export type FlashSaleProductCreateManyProductInput = {
     id?: string
     flashSaleId: string
-    variantId?: string | null
+    variantId: string
     flashPrice: Decimal | DecimalJsLike | number | string
     originalPrice: Decimal | DecimalJsLike | number | string
     maxQuantity: number
@@ -80648,13 +80627,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     flashSale?: FlashSaleUpdateOneRequiredWithoutProductsNestedInput
-    variant?: ProductVariantUpdateOneWithoutFlashSaleProductsNestedInput
+    variant?: ProductVariantUpdateOneRequiredWithoutFlashSaleProductsNestedInput
   }
 
   export type FlashSaleProductUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     flashSaleId?: StringFieldUpdateOperationsInput | string
-    variantId?: NullableStringFieldUpdateOperationsInput | string | null
+    variantId?: StringFieldUpdateOperationsInput | string
     flashPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFieldUpdateOperationsInput | number
@@ -80669,7 +80648,7 @@ export namespace Prisma {
   export type FlashSaleProductUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     flashSaleId?: StringFieldUpdateOperationsInput | string
-    variantId?: NullableStringFieldUpdateOperationsInput | string | null
+    variantId?: StringFieldUpdateOperationsInput | string
     flashPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     originalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     maxQuantity?: IntFieldUpdateOperationsInput | number

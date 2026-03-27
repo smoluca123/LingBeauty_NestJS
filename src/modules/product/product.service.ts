@@ -956,6 +956,21 @@ export class ProductService {
 
       const slug = await this.ensureUniqueSlug(createProductDto.name);
 
+      // If no variants provided, create a default variant
+      const variantsToCreate =
+        createProductDto.variants && createProductDto.variants.length > 0
+          ? createProductDto.variants
+          : [
+              {
+                sku: `${productSku}-DEFAULT`,
+                name: 'Mặc định',
+                price: createProductDto.basePrice,
+                sortOrder: 0,
+                quantity: createProductDto.quantity,
+                lowStockThreshold: createProductDto.lowStockThreshold,
+              },
+            ];
+
       const product = await this.prismaService.product.create({
         data: {
           name: createProductDto.name,
@@ -976,74 +991,54 @@ export class ProductService {
           weight: createProductDto.weight,
           metaTitle: createProductDto.metaTitle,
           metaDesc: createProductDto.metaDesc,
-          variants: createProductDto.variants
-            ? {
-                create: createProductDto.variants.map((variant) => ({
-                  sku: variant.sku || generateSkuCode(),
-                  name: variant.name,
-                  color: variant.color,
-                  size: variant.size,
-                  type: variant.type,
-                  price: variant.price,
-                  sortOrder: variant.sortOrder ?? 0,
-                })),
-              }
-            : undefined,
+          variants: {
+            create: variantsToCreate.map((variant) => ({
+              sku: variant.sku || generateSkuCode(),
+              name: variant.name,
+              color: variant.color,
+              size: variant.size,
+              type: variant.type,
+              price: variant.price,
+              sortOrder: variant.sortOrder ?? 0,
+            })),
+          },
         },
         select: productSelect,
       });
 
-      // Create inventory records for variants (outside nested create to satisfy productId constraint)
-      if (createProductDto.variants && createProductDto.variants.length > 0) {
-        const createdVariants =
-          await this.prismaService.productVariant.findMany({
-            where: { productId: product.id },
-            select: { id: true, sku: true },
-          });
+      // Create inventory records for all variants
+      const createdVariants = await this.prismaService.productVariant.findMany({
+        where: { productId: product.id },
+        select: { id: true, sku: true },
+      });
 
-        // Match created variants back to DTO by SKU to assign correct quantity
-        const variantSkuMap = new Map<
-          string,
-          { quantity?: number; lowStockThreshold?: number }
-        >(
-          createProductDto.variants.map((v) => [
-            v.sku || '',
-            { quantity: v.quantity, lowStockThreshold: v.lowStockThreshold },
-          ]),
-        );
+      // Match created variants back to DTO by SKU to assign correct quantity
+      const variantSkuMap = new Map<
+        string,
+        { quantity?: number; lowStockThreshold?: number }
+      >(
+        variantsToCreate.map((v) => [
+          v.sku || '',
+          { quantity: v.quantity, lowStockThreshold: v.lowStockThreshold },
+        ]),
+      );
 
-        await this.prismaService.productInventory.createMany({
-          data: createdVariants.map((v) => {
-            const inv = variantSkuMap.get(v.sku) ?? {};
-            const qty = inv.quantity ?? 0;
-            return {
-              productId: product.id,
-              variantId: v.id,
-              quantity: qty,
-              lowStockThreshold: inv.lowStockThreshold ?? 10,
-              displayStatus:
-                qty > 0
-                  ? ProductInventoryDisplayStatus.IN_STOCK
-                  : ProductInventoryDisplayStatus.OUT_OF_STOCK,
-            };
-          }),
-        });
-      } else {
-        // Create product-level inventory for simple products (no variants)
-        const initQty = createProductDto.quantity ?? 0;
-        await this.prismaService.productInventory.create({
-          data: {
+      await this.prismaService.productInventory.createMany({
+        data: createdVariants.map((v) => {
+          const inv = variantSkuMap.get(v.sku) ?? {};
+          const qty = inv.quantity ?? 0;
+          return {
             productId: product.id,
-            variantId: null,
-            quantity: initQty,
-            lowStockThreshold: createProductDto.lowStockThreshold ?? 10,
+            variantId: v.id,
+            quantity: qty,
+            lowStockThreshold: inv.lowStockThreshold ?? 10,
             displayStatus:
-              initQty > 0
+              qty > 0
                 ? ProductInventoryDisplayStatus.IN_STOCK
                 : ProductInventoryDisplayStatus.OUT_OF_STOCK,
-          },
-        });
-      }
+          };
+        }),
+      });
 
       // Re-fetch product to include inventory in response
       const productWithInventory = await this.prismaService.product.findUnique({
@@ -1191,7 +1186,8 @@ export class ProductService {
 
       // Handle variants update
       if (updateProductDto.variants !== undefined) {
-        // When switching TO variants mode: remove the product-level inventory
+        // Note: After migration, all products have variants (at least default variant)
+        // This cleanup is kept for safety but should not find any records
         await this.prismaService.productInventory.deleteMany({
           where: { productId, variantId: null },
         });
@@ -1287,16 +1283,26 @@ export class ProductService {
         updateProductDto.quantity !== undefined ||
         updateProductDto.lowStockThreshold !== undefined
       ) {
-        // Update product-level inventory (only for products without variants)
-        const hasVariants = await this.prismaService.productVariant.count({
-          where: { productId },
-        });
+        // Update default variant inventory
+        // After migration, all products have at least one variant (default variant)
+        const defaultVariant =
+          await this.prismaService.productVariant.findFirst({
+            where: {
+              productId,
+              OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+            },
+            orderBy: [{ sku: 'asc' }, { sortOrder: 'asc' }],
+            select: { id: true },
+          });
 
-        if (hasVariants === 0) {
+        if (defaultVariant) {
           const newQty = updateProductDto.quantity;
           const existingInventory =
             await this.prismaService.productInventory.findFirst({
-              where: { productId, variantId: null },
+              where: {
+                productId,
+                variantId: defaultVariant.id,
+              },
               select: { id: true },
             });
 
@@ -1317,10 +1323,11 @@ export class ProductService {
               },
             });
           } else {
+            // Create inventory for default variant if not exists
             await this.prismaService.productInventory.create({
               data: {
                 productId,
-                variantId: null,
+                variantId: defaultVariant.id,
                 quantity: newQty ?? 0,
                 lowStockThreshold: updateProductDto.lowStockThreshold ?? 10,
                 displayStatus:
