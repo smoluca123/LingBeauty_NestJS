@@ -77,8 +77,22 @@ export class OrderController {
   }
 
   /**
+   * GET /order/admin/:orderId (Admin only)
+   * Lấy chi tiết đơn hàng bất kỳ (không check userId)
+   */
+  @Get('admin/:orderId')
+  @UseGuards(RoleGuard)
+  @Roles([3]) // Admin role
+  @ApiGetOrder()
+  getOrderAdmin(
+    @Param('orderId') orderId: string,
+  ): Promise<IBeforeTransformResponseType<OrderResponseDto>> {
+    return this.orderService.getOrderById(orderId);
+  }
+
+  /**
    * GET /order/:orderId
-   * Lấy chi tiết đơn hàng
+   * Lấy chi tiết đơn hàng (chỉ của user hiện tại)
    */
   @Get(':orderId')
   @ApiGetOrder()
