@@ -81,6 +81,7 @@ model Product {
   stats             ProductStats?
   inventory         ProductInventory[]
   questions         ProductQuestion[]
+  wishlists         Wishlist[]
 
   @@index([slug])
   @@index([brandId])
@@ -143,6 +144,7 @@ model ProductVariant {
   orderItems        OrderItem[]
   cartItems         CartItem[]
   flashSaleProducts FlashSaleProduct[]
+  wishlists         Wishlist[]
 
   @@index([productId])
   @@index([sku])
@@ -228,8 +230,8 @@ model ProductQuestion {
   createdAt  DateTime              @default(now()) @map("created_at")
   updatedAt  DateTime              @updatedAt @map("updated_at")
 
-  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user          User    @relation("UserQuestions", fields: [userId], references: [id], onDelete: Cascade)
+  product        Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user           User    @relation("UserQuestions", fields: [userId], references: [id], onDelete: Cascade)
   answeredByUser User?   @relation("UserAnswers", fields: [answeredBy], references: [id], onDelete: SetNull)
 
   @@index([productId])

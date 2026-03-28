@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.0.0
- * Query Engine version: 0c19ccc313cf9911a90d99d2ac2eb0280c76c513
+ * Prisma Client JS version: 7.6.0
+ * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
  */
 Prisma.prismaVersion = {
-  client: "7.0.0",
-  engine: "0c19ccc313cf9911a90d99d2ac2eb0280c76c513"
+  client: "7.6.0",
+  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -628,6 +628,29 @@ exports.Prisma.UserRoleAssignmentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.WishlistScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  variantId: 'variantId',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SharedWishlistScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  shareToken: 'shareToken',
+  title: 'title',
+  description: 'description',
+  isPublic: 'isPublic',
+  expiresAt: 'expiresAt',
+  viewCount: 'viewCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -805,7 +828,9 @@ exports.Prisma.ModelName = {
   AuthCode: 'AuthCode',
   User: 'User',
   UserRole: 'UserRole',
-  UserRoleAssignment: 'UserRoleAssignment'
+  UserRoleAssignment: 'UserRoleAssignment',
+  Wishlist: 'Wishlist',
+  SharedWishlist: 'SharedWishlist'
 };
 
 /**

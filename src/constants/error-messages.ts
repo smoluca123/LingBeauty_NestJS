@@ -198,6 +198,14 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.ORDER_ALREADY_PAID]: 'Đơn hàng đã được thanh toán',
   [ERROR_CODES.ORDER_PAYMENT_FAILED]: 'Thanh toán đơn hàng thất bại',
 
+  // Wishlist
+  [ERROR_CODES.WISHLIST_ITEM_NOT_FOUND]:
+    'Không tìm thấy sản phẩm trong danh sách yêu thích',
+  [ERROR_CODES.WISHLIST_ITEM_ALREADY_EXISTS]:
+    'Sản phẩm đã có trong danh sách yêu thích',
+  [ERROR_CODES.SHARED_WISHLIST_NOT_FOUND]: 'Không tìm thấy danh sách chia sẻ',
+  [ERROR_CODES.SHARED_WISHLIST_EXPIRED]: 'Link chia sẻ đã hết hạn',
+
   // System Errors
   [ERROR_CODES.DATABASE_ERROR]: 'Thao tác cơ sở dữ liệu thất bại',
   [ERROR_CODES.EXTERNAL_SERVICE_ERROR]: 'Dịch vụ bên ngoài không khả dụng',

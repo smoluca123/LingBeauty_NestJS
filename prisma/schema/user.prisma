@@ -33,6 +33,8 @@ model User {
   emailVerificationLogs EmailVerificationLog[]
   questions             ProductQuestion[]      @relation("UserQuestions")
   answeredQuestions     ProductQuestion[]      @relation("UserAnswers")
+  wishlists             Wishlist[]
+  sharedWishlists       SharedWishlist[]
 
   @@index([email])
   @@index([phone])
