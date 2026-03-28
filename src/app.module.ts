@@ -29,6 +29,7 @@ import { FlashSaleModule } from 'src/modules/flash-sale/flash-sale.module';
 import { CouponModule } from 'src/modules/coupon/coupon.module';
 import { ProductQuestionModule } from 'src/modules/product-question/product-question.module';
 import { OrderModule } from 'src/modules/order/order.module';
+import { WishlistModule } from 'src/modules/wishlist/wishlist.module';
 
 @Module({
   imports: [
@@ -81,6 +82,7 @@ import { OrderModule } from 'src/modules/order/order.module';
     CouponModule,
     ProductQuestionModule,
     OrderModule,
+    WishlistModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
