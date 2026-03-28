@@ -78,7 +78,8 @@ export class CartItemStockInfoDto {
 
   @ApiProperty({
     example: -10,
-    description: 'Backorder floor: orders blocked when quantity drops to/below this value.',
+    description:
+      'Backorder floor: orders blocked when quantity drops to/below this value.',
   })
   minStockQuantity: number;
 
@@ -141,14 +142,26 @@ export class CartItemProductDto {
 }
 
 export class CartItemFlashSaleDto {
+  @ApiProperty({ example: 'uuid-flash-sale-id' })
+  flashSaleId: string;
+
+  @ApiProperty({ example: 'Flash Sale Tết 2024' })
+  flashSaleName: string;
+
   @ApiProperty({ example: '150000' })
   flashPrice: string;
+
+  @ApiProperty({ example: '200000' })
+  originalPrice: string;
 
   @ApiProperty({ example: 2 })
   limitPerOrder: number;
 
-  @ApiProperty({ example: 10 })
-  availableQuantity: number;
+  @ApiProperty({ example: 100 })
+  maxQuantity: number;
+
+  @ApiProperty({ example: 50 })
+  soldQuantity: number;
 }
 
 export class CartItemResponseDto {
@@ -187,7 +200,8 @@ export class CartItemResponseDto {
 
   @ApiProperty({
     type: CartItemStockInfoDto,
-    description: 'Stock snapshot — always present. Use this for stock logic, not variant.',
+    description:
+      'Stock snapshot — always present. Use this for stock logic, not variant.',
   })
   @Type(() => CartItemStockInfoDto)
   stockInfo: CartItemStockInfoDto;

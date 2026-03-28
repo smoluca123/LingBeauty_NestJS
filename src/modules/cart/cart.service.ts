@@ -124,7 +124,11 @@ export class CartService {
     for (const p of flashSale.products) {
       // After migration, all flash sale products have variantId
       const key = `${p.productId}_${p.variantId}`;
-      map[key] = p;
+      map[key] = {
+        ...p,
+        flashSaleId: flashSale.id,
+        flashSaleName: flashSale.name,
+      };
     }
     return map;
   }
@@ -145,6 +149,18 @@ export class CartService {
       ? Number(item.variant.price)
       : Number(item.product.basePrice); // Fallback for safety
 
+    // Debug logging
+    if (fsProduct) {
+      console.log('Flash Sale Item Debug:', {
+        productId: item.productId,
+        variantId: item.variantId,
+        variantPrice: item.variant?.price,
+        basePrice: item.product.basePrice,
+        baseItemPrice,
+        flashPrice: fsProduct.flashPrice,
+      });
+    }
+
     // Apply Flash Sale price if available
     const price = fsProduct ? Number(fsProduct.flashPrice) : baseItemPrice;
     const lineTotal = (price * item.quantity).toFixed(2);
@@ -160,9 +176,13 @@ export class CartService {
 
     const flashSaleInfo = fsProduct
       ? {
+          flashSaleId: fsProduct.flashSaleId,
+          flashSaleName: fsProduct.flashSaleName,
           flashPrice: fsProduct.flashPrice.toString(),
+          originalPrice: baseItemPrice.toString(),
           limitPerOrder: fsProduct.limitPerOrder,
-          availableQuantity: fsProduct.maxQuantity - fsProduct.soldQuantity,
+          maxQuantity: fsProduct.maxQuantity,
+          soldQuantity: fsProduct.soldQuantity,
         }
       : null;
 
