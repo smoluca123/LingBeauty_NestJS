@@ -19,7 +19,7 @@ export class AddProductImageDto {
   })
   @IsUUID()
   @IsNotEmpty()
-  mediaId: string;
+  mediaId!: string;
 
   @ApiPropertyOptional({
     description: 'Variant ID (optional, for variant-specific image)',
@@ -77,32 +77,32 @@ export class UpdateProductImageDto {
 
 export class ProductImageResponseDto {
   @ApiProperty({ example: 'uuid-image-id' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'uuid-product-id' })
-  productId: string;
+  productId!: string;
 
   @ApiPropertyOptional({ example: 'uuid-variant-id', nullable: true })
-  variantId: string | null;
+  variantId!: string | null;
 
   @ApiProperty({ example: 'uuid-media-id' })
-  mediaId: string;
+  mediaId!: string;
 
   @ApiPropertyOptional({ example: 'Product front view', nullable: true })
-  alt: string | null;
+  alt!: string | null;
 
   @ApiProperty({ example: 0 })
-  sortOrder: number;
+  sortOrder!: number;
 
   @ApiProperty({ example: true })
-  isPrimary: boolean;
+  isPrimary!: boolean;
 
   @ApiProperty({
     type: MediaResponseDto,
     description: 'Media object',
   })
   @Type(() => MediaResponseDto)
-  media: MediaResponseDto;
+  media!: MediaResponseDto;
 }
 
 export class ReorderProductImagesDto {
@@ -113,7 +113,7 @@ export class ReorderProductImagesDto {
   })
   @IsUUID('4', { each: true })
   @IsNotEmpty()
-  imageIds: string[];
+  imageIds!: string[];
 }
 
 export class UploadProductImageDto {
@@ -122,7 +122,7 @@ export class UploadProductImageDto {
     format: 'binary',
     description: 'Image file to upload',
   })
-  file: Express.Multer.File;
+  file!: Express.Multer.File;
 
   @ApiPropertyOptional({
     description: 'Variant ID (optional, for variant-specific image)',
@@ -156,7 +156,7 @@ export class UploadProductVideoDto {
     format: 'binary',
     description: 'Video file to upload',
   })
-  file: Express.Multer.File;
+  file!: Express.Multer.File;
 
   @ApiPropertyOptional({
     description: 'Variant ID (optional, for variant-specific video)',

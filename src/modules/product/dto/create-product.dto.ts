@@ -19,7 +19,7 @@ export class CreateProductVariantDto {
   })
   @IsString()
   @IsNotEmpty()
-  sku: string;
+  sku!: string;
 
   @ApiProperty({
     example: 'Red - Size M',
@@ -27,7 +27,7 @@ export class CreateProductVariantDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({
     example: 'Red',
@@ -60,7 +60,7 @@ export class CreateProductVariantDto {
   @IsNumber()
   @Min(0)
   @Transform(({ value }) => Number(value))
-  price: number;
+  price!: number;
 
   @ApiPropertyOptional({
     example: 0,
@@ -100,7 +100,7 @@ export class CreateProductDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiPropertyOptional({
     example: 'A beautiful matte red lipstick with long-lasting formula',
@@ -134,7 +134,7 @@ export class CreateProductDto {
   @IsArray()
   @IsUUID('4', { each: true })
   @IsNotEmpty()
-  categoryIds: string[];
+  categoryIds!: string[];
 
   @ApiPropertyOptional({
     example: 'uuid-brand-id',
@@ -151,7 +151,7 @@ export class CreateProductDto {
   @IsNumber()
   @Min(0)
   @Transform(({ value }) => Number(value))
-  basePrice: number;
+  basePrice!: number;
 
   @ApiPropertyOptional({
     example: 300000,

@@ -8,7 +8,7 @@ export class TrackProductViewResponseDto {
     description: 'Success message',
     example: 'Product view tracked successfully',
   })
-  message: string;
+  message!: string;
 }
 
 /**
@@ -20,17 +20,17 @@ export class HotProductsResponseMetaDto {
     description: 'Total number of hot products returned',
     example: 10,
   })
-  total: number;
+  total!: number;
 
   @ApiProperty({
     description: 'Criteria used for filtering',
     example: 'composite',
   })
-  criteria: string;
+  criteria!: string;
 
   @ApiProperty({
     description: 'Period used for calculation',
     example: '30d',
   })
-  period: string;
+  period!: string;
 }

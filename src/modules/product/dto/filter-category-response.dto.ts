@@ -6,17 +6,17 @@ import { ApiProperty } from '@nestjs/swagger';
  */
 export class FilterCategoryResponseDto {
   @ApiProperty({ example: 'uuid-category-id', description: 'Category ID' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ example: 'Son môi', description: 'Category name' })
-  name: string;
+  name!: string;
 
   @ApiProperty({ example: 'son-moi', description: 'Category slug' })
-  slug: string;
+  slug!: string;
 
   @ApiProperty({
     example: 5,
     description: 'Number of products in this category matching the filter',
   })
-  count: number;
+  count!: number;
 }
