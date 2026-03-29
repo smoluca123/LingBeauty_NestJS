@@ -85,12 +85,12 @@ export class ReviewService {
     } = params;
 
     try {
-      const whereQuery = {
+      const whereQuery = withoutDeleted({
         ...(productId && { productId }),
         ...(userId && { userId }),
         ...(rating && { rating }),
         ...(isApproved !== undefined && { isApproved }),
-      };
+      });
 
       const [reviews, totalCount] = await Promise.all([
         this.prismaService.productReview.findMany({
@@ -132,8 +132,8 @@ export class ReviewService {
     reviewId: string,
   ): Promise<IBeforeTransformResponseType<ReviewWithProductResponseDto>> {
     try {
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: reviewWithProductSelect,
       });
 
@@ -167,9 +167,9 @@ export class ReviewService {
     dto: CreateReviewDto,
   ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
     try {
-      // Check if product exists
-      const product = await this.prismaService.product.findUnique({
-        where: { id: dto.productId },
+      // Check if product exists and not deleted
+      const product = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ id: dto.productId }),
         select: { id: true },
       });
 
@@ -180,14 +180,12 @@ export class ReviewService {
         );
       }
 
-      // Check if user already reviewed this product
-      const existingReview = await this.prismaService.productReview.findUnique({
-        where: {
-          productId_userId: {
-            productId: dto.productId,
-            userId,
-          },
-        },
+      // Check if user already reviewed this product (exclude deleted reviews)
+      const existingReview = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({
+          productId: dto.productId,
+          userId,
+        }),
         select: { id: true },
       });
 
@@ -263,15 +261,16 @@ export class ReviewService {
    * Create review with uploaded images (multipart/form-data)
    * Atomic operation: creates review + uploads images in one request
    */
+
   async createReviewWithImages(
     userId: string,
     dto: CreateReviewWithImagesDto,
     files: Express.Multer.File[],
   ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
     try {
-      // Check if product exists
-      const product = await this.prismaService.product.findUnique({
-        where: { id: dto.productId },
+      // Check if product exists and not deleted
+      const product = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ id: dto.productId }),
         select: { id: true },
       });
       if (!product) {
@@ -280,14 +279,12 @@ export class ReviewService {
           ERROR_CODES.PRODUCT_NOT_FOUND,
         );
       }
-      // Check if user already reviewed this product
-      const existingReview = await this.prismaService.productReview.findUnique({
-        where: {
-          productId_userId: {
-            productId: dto.productId,
-            userId,
-          },
-        },
+      // Check if user already reviewed this product (exclude deleted reviews)
+      const existingReview = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({
+          productId: dto.productId,
+          userId,
+        }),
         select: { id: true },
       });
       if (existingReview) {
@@ -361,8 +358,8 @@ export class ReviewService {
   ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
     let productIdToSync: string | null = null;
     try {
-      const existingReview = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      const existingReview = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, userId: true, productId: true },
       });
 
@@ -491,9 +488,9 @@ export class ReviewService {
     dto: AddReviewImageDto,
   ): Promise<IBeforeTransformResponseType<ReviewImageResponseDto>> {
     try {
-      // Check if review exists and belongs to user
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists, belongs to user, and not deleted
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, userId: true },
       });
 
@@ -511,9 +508,9 @@ export class ReviewService {
         );
       }
 
-      // Check if media exists
-      const media = await this.prismaService.media.findUnique({
-        where: { id: dto.mediaId },
+      // Check if media exists and not deleted
+      const media = await this.prismaService.media.findFirst({
+        where: withoutDeleted({ id: dto.mediaId }),
         select: { id: true, type: true },
       });
 
@@ -580,9 +577,9 @@ export class ReviewService {
     imageId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      // Check if review exists and belongs to user
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists, belongs to user, and not deleted
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, userId: true },
       });
 
@@ -690,8 +687,8 @@ export class ReviewService {
   ): Promise<IBeforeTransformResponseType<ReviewResponseDto>> {
     let productId: string | null = null;
     try {
-      const existingReview = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      const existingReview = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, productId: true },
       });
 
@@ -932,9 +929,9 @@ export class ReviewService {
     } = params;
 
     try {
-      // Check if product exists
-      const product = await this.prismaService.product.findUnique({
-        where: { id: productId },
+      // Check if product exists and not deleted
+      const product = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ id: productId }),
         select: { id: true },
       });
 
@@ -945,11 +942,11 @@ export class ReviewService {
         );
       }
 
-      const whereQuery = {
+      const whereQuery = withoutDeleted({
         productId,
         isApproved: true,
         ...(rating && { rating }),
-      };
+      });
 
       const [reviews, totalCount] = await Promise.all([
         this.prismaService.productReview.findMany({
@@ -992,7 +989,7 @@ export class ReviewService {
   ): Promise<IBeforeTransformResponseType<ReviewWithProductResponseDto>> {
     try {
       const review = await this.prismaService.productReview.findFirst({
-        where: { id: reviewId, isApproved: true },
+        where: withoutDeleted({ id: reviewId, isApproved: true }),
         select: {
           ...reviewPublicSelect,
           product: {
@@ -1034,9 +1031,9 @@ export class ReviewService {
     productId: string,
   ): Promise<IBeforeTransformResponseType<ReviewSummaryResponseDto>> {
     try {
-      // Check if product exists
-      const product = await this.prismaService.product.findUnique({
-        where: { id: productId },
+      // Check if product exists and not deleted
+      const product = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ id: productId }),
         select: { id: true },
       });
 
@@ -1047,9 +1044,9 @@ export class ReviewService {
         );
       }
 
-      // Get all reviews for this product
+      // Get all non-deleted reviews for this product
       const reviews = await this.prismaService.productReview.findMany({
-        where: { productId },
+        where: withoutDeleted({ productId }),
         select: { rating: true, isApproved: true },
       });
 
@@ -1121,10 +1118,10 @@ export class ReviewService {
     } = params;
 
     try {
-      const whereQuery = {
+      const whereQuery = withoutDeleted({
         userId,
         ...(isApproved !== undefined && { isApproved }),
-      };
+      });
 
       const [reviews, totalCount] = await Promise.all([
         this.prismaService.productReview.findMany({
@@ -1171,9 +1168,9 @@ export class ReviewService {
     isHelpful: boolean,
   ): Promise<IBeforeTransformResponseType<MarkHelpfulResponseDto>> {
     try {
-      // Check if review exists and is approved
+      // Check if review exists, is approved, and not deleted
       const review = await this.prismaService.productReview.findFirst({
-        where: { id: reviewId, isApproved: true },
+        where: withoutDeleted({ id: reviewId, isApproved: true }),
         select: { id: true, helpfulCount: true },
       });
 
@@ -1249,9 +1246,9 @@ export class ReviewService {
     reviewId: string,
   ): Promise<IBeforeTransformResponseType<MarkHelpfulResponseDto>> {
     try {
-      // Check if review exists
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists and not deleted
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, helpfulCount: true },
       });
 
@@ -1329,9 +1326,9 @@ export class ReviewService {
     dto: CreateReviewReplyDto,
   ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
     try {
-      // Check if review exists
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists and not deleted
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, isApproved: true },
       });
 
@@ -1375,9 +1372,9 @@ export class ReviewService {
     dto: UpdateReviewReplyDto,
   ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
     try {
-      // Check if reply exists and belongs to user
-      const existingReply = await this.prismaService.reviewReply.findUnique({
-        where: { id: replyId },
+      // Check if reply exists, belongs to user, and not deleted
+      const existingReply = await this.prismaService.reviewReply.findFirst({
+        where: withoutDeleted({ id: replyId }),
         select: { id: true, userId: true },
       });
 
@@ -1483,9 +1480,9 @@ export class ReviewService {
     } = params || {};
 
     try {
-      // Check if review exists
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists and not deleted
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true },
       });
 
@@ -1498,14 +1495,14 @@ export class ReviewService {
 
       const [replies, totalCount] = await Promise.all([
         this.prismaService.reviewReply.findMany({
-          where: { reviewId },
+          where: withoutDeleted({ reviewId }),
           select: reviewReplySelect,
           orderBy: { [sortBy]: order },
           skip: (page - 1) * limit,
           take: limit,
         }),
         this.prismaService.reviewReply.count({
-          where: { reviewId },
+          where: withoutDeleted({ reviewId }),
         }),
       ]);
 
@@ -1550,16 +1547,18 @@ export class ReviewService {
     } = params;
 
     try {
+      const whereQuery = withoutDeleted({ isApproved: false });
+
       const [reviews, totalCount] = await Promise.all([
         this.prismaService.productReview.findMany({
-          where: { isApproved: false },
+          where: whereQuery,
           select: reviewWithProductSelect,
           orderBy: { [sortBy]: order },
           skip: (page - 1) * limit,
           take: limit,
         }),
         this.prismaService.productReview.count({
-          where: { isApproved: false },
+          where: whereQuery,
         }),
       ]);
 
@@ -1595,9 +1594,9 @@ export class ReviewService {
     dto: CreateReviewReplyDto,
   ): Promise<IBeforeTransformResponseType<ReviewReplyResponseDto>> {
     try {
-      // Check if review exists
-      const review = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists and not deleted
+      const review = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true },
       });
 

@@ -11,6 +11,10 @@ import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import { BusinessException } from 'src/exceptions/business.exception';
 import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
+import {
   IBeforeTransformResponseType,
   IBeforeTransformPaginationResponseType,
 } from 'src/libs/types/interfaces/response.interface';
@@ -44,7 +48,7 @@ export class BannerService {
       const page = params?.page || 1;
       const limit = params?.limit || 10;
 
-      const where: Prisma.BannerGroupWhereInput = {};
+      const where: Prisma.BannerGroupWhereInput = withoutDeleted({});
 
       if (params?.bannerId) {
         where.banners = {
@@ -95,8 +99,8 @@ export class BannerService {
     groupId: string,
   ): Promise<IBeforeTransformResponseType<BannerGroupResponseDto>> {
     try {
-      const group = await this.prismaService.bannerGroup.findUnique({
-        where: { id: groupId },
+      const group = await this.prismaService.bannerGroup.findFirst({
+        where: withoutDeleted({ id: groupId }),
         select: bannerGroupSelect,
       });
 
@@ -132,7 +136,7 @@ export class BannerService {
       const now = new Date();
 
       const group = await this.prismaService.bannerGroup.findFirst({
-        where: {
+        where: withoutDeleted({
           isActive: true,
           OR: [
             {
@@ -142,7 +146,7 @@ export class BannerService {
               AND: [{ startDate: null }, { endDate: null }],
             },
           ],
-        },
+        }),
         select: bannerGroupSelect,
         orderBy: { createdAt: 'desc' },
       });
@@ -178,8 +182,8 @@ export class BannerService {
   ): Promise<IBeforeTransformResponseType<BannerGroupResponseDto>> {
     try {
       // Check if slug already exists
-      const existing = await this.prismaService.bannerGroup.findUnique({
-        where: { slug: dto.slug },
+      const existing = await this.prismaService.bannerGroup.findFirst({
+        where: withoutDeleted({ slug: dto.slug }),
       });
 
       if (existing) {
@@ -227,8 +231,8 @@ export class BannerService {
     dto: UpdateBannerGroupDto,
   ): Promise<IBeforeTransformResponseType<BannerGroupResponseDto>> {
     try {
-      const existing = await this.prismaService.bannerGroup.findUnique({
-        where: { id: groupId },
+      const existing = await this.prismaService.bannerGroup.findFirst({
+        where: withoutDeleted({ id: groupId }),
       });
 
       if (!existing) {
@@ -276,8 +280,8 @@ export class BannerService {
     groupId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const existing = await this.prismaService.bannerGroup.findUnique({
-        where: { id: groupId },
+      const existing = await this.prismaService.bannerGroup.findFirst({
+        where: withoutDeleted({ id: groupId }),
       });
 
       if (!existing) {
@@ -287,9 +291,25 @@ export class BannerService {
         );
       }
 
-      await this.prismaService.bannerGroup.delete({
-        where: { id: groupId },
-      });
+      // Soft delete banner group and all associated banners in transaction
+      await this.prismaService.$transaction([
+        // Soft delete all banners in this group
+        this.prismaService.banner.updateMany({
+          where: {
+            groups: {
+              some: {
+                bannerGroupId: groupId,
+              },
+            },
+          },
+          data: softDeleteData(),
+        }),
+        // Soft delete the banner group
+        this.prismaService.bannerGroup.update({
+          where: { id: groupId },
+          data: softDeleteData(),
+        }),
+      ]);
 
       return {
         type: 'response',
@@ -319,7 +339,7 @@ export class BannerService {
       const page = params?.page || 1;
       const limit = params?.limit || 10;
 
-      const where: Prisma.BannerWhereInput = {};
+      const where: Prisma.BannerWhereInput = withoutDeleted({});
 
       if (params?.search) {
         where.OR = [
@@ -380,11 +400,15 @@ export class BannerService {
     dto: CreateBannerDto,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
-      const { groupId, bgClass: _, ...restDto } = await processDataObject(dto) as any;
+      const {
+        groupId,
+        bgClass: _,
+        ...restDto
+      } = (await processDataObject(dto)) as any;
 
       if (groupId) {
-        const group = await this.prismaService.bannerGroup.findUnique({
-          where: { id: groupId },
+        const group = await this.prismaService.bannerGroup.findFirst({
+          where: withoutDeleted({ id: groupId }),
         });
 
         if (!group) {
@@ -459,11 +483,13 @@ export class BannerService {
     file: Express.Multer.File,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
-      const { groupId, ...processedDto } = await processDataObject(dto) as any;
+      const { groupId, ...processedDto } = (await processDataObject(
+        dto,
+      )) as any;
 
       if (groupId) {
-        const group = await this.prismaService.bannerGroup.findUnique({
-          where: { id: groupId },
+        const group = await this.prismaService.bannerGroup.findFirst({
+          where: withoutDeleted({ id: groupId }),
           select: bannerGroupSelect,
         });
 
@@ -545,8 +571,8 @@ export class BannerService {
     dto: UpdateBannerDto,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
-      const existing = await this.prismaService.banner.findUnique({
-        where: { id: bannerId },
+      const existing = await this.prismaService.banner.findFirst({
+        where: withoutDeleted({ id: bannerId }),
       });
 
       if (!existing) {
@@ -600,8 +626,8 @@ export class BannerService {
     userId: string,
   ): Promise<IBeforeTransformResponseType<BannerResponseDto>> {
     try {
-      const existing = await this.prismaService.banner.findUnique({
-        where: { id: bannerId },
+      const existing = await this.prismaService.banner.findFirst({
+        where: withoutDeleted({ id: bannerId }),
         include: { imageMedia: true },
       });
 
@@ -667,8 +693,8 @@ export class BannerService {
     bannerId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const group = await this.prismaService.bannerGroup.findUnique({
-        where: { id: groupId },
+      const group = await this.prismaService.bannerGroup.findFirst({
+        where: withoutDeleted({ id: groupId }),
       });
 
       if (!group) {
@@ -678,8 +704,8 @@ export class BannerService {
         );
       }
 
-      const banner = await this.prismaService.banner.findUnique({
-        where: { id: bannerId },
+      const banner = await this.prismaService.banner.findFirst({
+        where: withoutDeleted({ id: bannerId }),
       });
 
       if (!banner) {
@@ -689,14 +715,15 @@ export class BannerService {
         );
       }
 
-      const existingMapping = await this.prismaService.bannerGroupMapping.findUnique({
-        where: {
-          bannerId_bannerGroupId: {
-            bannerId,
-            bannerGroupId: groupId,
+      const existingMapping =
+        await this.prismaService.bannerGroupMapping.findUnique({
+          where: {
+            bannerId_bannerGroupId: {
+              bannerId,
+              bannerGroupId: groupId,
+            },
           },
-        },
-      });
+        });
 
       if (existingMapping) {
         throw new BusinessException(
@@ -742,8 +769,8 @@ export class BannerService {
     bannerId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const existing = await this.prismaService.banner.findUnique({
-        where: { id: bannerId },
+      const existing = await this.prismaService.banner.findFirst({
+        where: withoutDeleted({ id: bannerId }),
       });
 
       if (!existing) {
@@ -753,8 +780,9 @@ export class BannerService {
         );
       }
 
-      await this.prismaService.banner.delete({
+      await this.prismaService.banner.update({
         where: { id: bannerId },
+        data: softDeleteData(),
       });
 
       return {
@@ -818,7 +846,10 @@ export class BannerService {
       return {
         type: 'response',
         message: 'Gỡ hàng loạt banner khỏi nhóm thành công',
-        data: { message: 'Gỡ hàng loạt banner khỏi nhóm thành công', count: result.count },
+        data: {
+          message: 'Gỡ hàng loạt banner khỏi nhóm thành công',
+          count: result.count,
+        },
       };
     } catch (error) {
       if (error instanceof BusinessException) {

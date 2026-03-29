@@ -443,7 +443,7 @@ export class UserService {
       // Validate roleIds if provided
       if (updateDto.roleIds && updateDto.roleIds.length > 0) {
         const existingRoles = await this.prismaService.userRole.findMany({
-          where: { id: { in: updateDto.roleIds } },
+          where: withoutDeleted({ id: { in: updateDto.roleIds } }),
           select: { id: true },
         });
 
@@ -925,10 +925,10 @@ export class UserService {
       // Resolve roleId: use provided roleId or fall back to default USER role
       const roleId = createUserByAdminDto.roleId ?? configData.USER_ROLE_ID;
 
-      // Validate that the provided roleId actually exists
+      // Validate that the provided roleId actually exists and is not deleted
       if (createUserByAdminDto.roleId) {
-        const roleExists = await this.prismaService.userRole.findUnique({
-          where: { id: createUserByAdminDto.roleId },
+        const roleExists = await this.prismaService.userRole.findFirst({
+          where: withoutDeleted({ id: createUserByAdminDto.roleId }),
           select: { id: true },
         });
         if (!roleExists) {
@@ -1001,7 +1001,7 @@ export class UserService {
     assignRolesDto: AssignRolesDto,
   ): Promise<IBeforeTransformResponseType<UserRoleAssignmentsResponseDto[]>> {
     try {
-      // Verify target user exists
+      // Verify target user exists and is not deleted
       const targetUser = await this.prismaService.user.findFirst({
         where: withoutDeleted({ id: targetUserId }),
         select: { id: true },
@@ -1014,9 +1014,9 @@ export class UserService {
         );
       }
 
-      // Validate all provided roleIds exist
+      // Validate all provided roleIds exist and are not deleted
       const existingRoles = await this.prismaService.userRole.findMany({
-        where: { id: { in: assignRolesDto.roleIds } },
+        where: withoutDeleted({ id: { in: assignRolesDto.roleIds } }),
         select: { id: true },
       });
 
@@ -1077,6 +1077,7 @@ export class UserService {
   > {
     try {
       const roles = await this.prismaService.userRole.findMany({
+        where: withoutDeleted(),
         select: userRoleSelect,
         orderBy: { createdAt: 'asc' },
       });

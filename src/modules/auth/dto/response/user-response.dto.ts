@@ -74,12 +74,6 @@ export class UserResponseDto extends BaseResponseDto {
   isBanned: boolean;
 
   @ApiProperty({
-    description: 'User deleted status',
-    example: false,
-  })
-  isDeleted: boolean;
-
-  @ApiProperty({
     description: 'Email verified status',
     example: false,
   })
@@ -107,11 +101,11 @@ export class UserResponseDto extends BaseResponseDto {
   // @Transform(({ value }) => value?.toISOString())
   phoneVerifiedAt?: Date | null;
 
-  @ApiPropertyOptional({
-    description: 'Deleted timestamp',
-    example: '2024-01-01T00:00:00.000Z',
-    nullable: true,
-  })
+  // Exclude soft delete fields from API response (internal use only)
+  @Exclude()
+  isDeleted: boolean;
+
+  @Exclude()
   deletedAt?: Date | null;
 
   // Exclude sensitive fields from response

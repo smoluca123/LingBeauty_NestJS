@@ -367,7 +367,7 @@ export class ProductService {
       const dateFilter = this.getDateFilter(period);
 
       // Build base where clause
-      const baseWhere: Prisma.ProductWhereInput = {
+      const baseWhere: Prisma.ProductWhereInput = withoutDeleted({
         isActive: true,
         ...(categoryId && {
           productCategories: {
@@ -375,7 +375,7 @@ export class ProductService {
           },
         }),
         ...(brandId && { brandId }),
-      };
+      });
 
       let products: ProductListSelect[] = [];
 
@@ -832,8 +832,8 @@ export class ProductService {
     productId: string,
   ): Promise<IBeforeTransformResponseType<ProductResponseDto>> {
     try {
-      const product = await this.prismaService.product.findUnique({
-        where: { id: productId },
+      const product = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ id: productId }),
         select: productSelect,
       });
 
@@ -867,8 +867,8 @@ export class ProductService {
     slug: string,
   ): Promise<IBeforeTransformResponseType<ProductResponseDto>> {
     try {
-      const product = await this.prismaService.product.findUnique({
-        where: { slug },
+      const product = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ slug }),
         select: productSelect,
       });
 
@@ -932,7 +932,7 @@ export class ProductService {
       // Check if brand exists (if provided)
       if (createProductDto.brandId) {
         const brand = await this.prismaService.brand.findUnique({
-          where: { id: createProductDto.brandId },
+          where: withoutDeleted({ id: createProductDto.brandId }),
           select: { id: true },
         });
 
@@ -1015,7 +1015,7 @@ export class ProductService {
 
       // Create inventory records for all variants
       const createdVariants = await this.prismaService.productVariant.findMany({
-        where: { productId: product.id },
+        where: withoutDeleted({ productId: product.id }),
         select: { id: true, sku: true },
       });
 
@@ -1049,7 +1049,7 @@ export class ProductService {
 
       // Re-fetch product to include inventory in response
       const productWithInventory = await this.prismaService.product.findUnique({
-        where: { id: product.id },
+        where: withoutDeleted({ id: product.id }),
         select: productSelect,
       });
 
@@ -1130,7 +1130,7 @@ export class ProductService {
       // Check if brand exists (if changing)
       if (updateProductDto.brandId) {
         const brand = await this.prismaService.brand.findUnique({
-          where: { id: updateProductDto.brandId },
+          where: withoutDeleted({ id: updateProductDto.brandId }),
           select: { id: true },
         });
 
@@ -1376,8 +1376,9 @@ export class ProductService {
     productId: string,
   ): Promise<IBeforeTransformResponseType<ProductResponseDto>> {
     try {
-      const existing = await this.prismaService.product.findUnique({
-        where: { id: productId },
+      // Verify product exists and is not deleted
+      const existing = await this.prismaService.product.findFirst({
+        where: withoutDeleted({ id: productId }),
         select: productSelect,
       });
 
@@ -1400,11 +1401,19 @@ export class ProductService {
         );
       }
 
-      await this.prismaService.product.update({
-        where: { id: productId },
-        data: softDeleteData(),
-        select: productSelect,
-      });
+      // Cascading soft delete in transaction
+      await this.prismaService.$transaction([
+        // Soft delete all variants first
+        this.prismaService.productVariant.updateMany({
+          where: { productId },
+          data: softDeleteData(),
+        }),
+        // Then soft delete product
+        this.prismaService.product.update({
+          where: { id: productId },
+          data: softDeleteData(),
+        }),
+      ]);
 
       const productResponse = this.mapProductEntity(existing);
 
@@ -2150,10 +2159,10 @@ export class ProductService {
     variantId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      // Check if variant exists and belongs to product
+      // Check if variant exists and belongs to product (and is not deleted)
       const existingVariant = await this.prismaService.productVariant.findFirst(
         {
-          where: { id: variantId, productId },
+          where: withoutDeleted({ id: variantId, productId }),
           select: { id: true },
         },
       );
@@ -2177,9 +2186,10 @@ export class ProductService {
         );
       }
 
-      // Delete the variant (cascade will delete inventory and images)
-      await this.prismaService.productVariant.delete({
+      // Soft delete the variant
+      await this.prismaService.productVariant.update({
         where: { id: variantId },
+        data: softDeleteData(),
       });
 
       return {

@@ -3,6 +3,10 @@ import { CateGoryType, MediaType } from 'prisma/generated/prisma/client';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { BusinessException } from 'src/exceptions/business.exception';
 import { categorySelect } from 'src/libs/prisma/category-select';
+import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
 import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
 import { toResponseDto } from 'src/libs/utils/transform.utils';
 import { processDataObject } from 'src/libs/utils/utils';
@@ -33,8 +37,8 @@ export class CategoryService {
   }): Promise<IBeforeTransformResponseType<CategoryResponseDto>> {
     try {
       if (createCategoryDto.parentId) {
-        const parent = await this.prismaService.category.findUnique({
-          where: { id: createCategoryDto.parentId },
+        const parent = await this.prismaService.category.findFirst({
+          where: withoutDeleted({ id: createCategoryDto.parentId }),
         });
 
         if (!parent) {
@@ -143,8 +147,8 @@ export class CategoryService {
     image?: Express.Multer.File;
   }): Promise<IBeforeTransformResponseType<CategoryResponseDto>> {
     try {
-      const existing = await this.prismaService.category.findUnique({
-        where: { id: categoryId },
+      const existing = await this.prismaService.category.findFirst({
+        where: withoutDeleted({ id: categoryId }),
       });
 
       if (!existing) {
@@ -162,8 +166,8 @@ export class CategoryService {
           );
         }
 
-        const parent = await this.prismaService.category.findUnique({
-          where: { id: updateCategoryDto.parentId },
+        const parent = await this.prismaService.category.findFirst({
+          where: withoutDeleted({ id: updateCategoryDto.parentId }),
         });
 
         if (!parent) {
@@ -226,8 +230,8 @@ export class CategoryService {
     categoryId: string,
   ): Promise<IBeforeTransformResponseType<CategoryResponseDto>> {
     try {
-      const existing = await this.prismaService.category.findUnique({
-        where: { id: categoryId },
+      const existing = await this.prismaService.category.findFirst({
+        where: withoutDeleted({ id: categoryId }),
         select: categorySelect,
       });
 
@@ -239,7 +243,7 @@ export class CategoryService {
       }
 
       const childrenCount = await this.prismaService.category.count({
-        where: { parentId: categoryId },
+        where: withoutDeleted({ parentId: categoryId }),
       });
 
       if (childrenCount > 0) {
@@ -260,8 +264,9 @@ export class CategoryService {
         );
       }
 
-      await this.prismaService.category.delete({
+      await this.prismaService.category.update({
         where: { id: categoryId },
+        data: softDeleteData(),
       });
 
       const message = 'Xóa danh mục thành công';
@@ -288,6 +293,7 @@ export class CategoryService {
   > {
     try {
       const categories = await this.prismaService.category.findMany({
+        where: withoutDeleted(),
         orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
         select: categorySelect,
       });
@@ -347,10 +353,10 @@ export class CategoryService {
 
     while (true) {
       const existing = await this.prismaService.category.findFirst({
-        where: {
+        where: withoutDeleted({
           slug,
           ...(excludeCategoryId ? { id: { not: excludeCategoryId } } : {}),
-        },
+        }),
         select: { id: true },
       });
 
