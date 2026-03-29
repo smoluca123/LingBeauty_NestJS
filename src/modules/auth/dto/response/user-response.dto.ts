@@ -45,7 +45,8 @@ export class UserResponseDto extends BaseResponseDto {
     type: MediaResponseDto,
     nullable: true,
   })
-  avatarMedia?: MediaResponseDto;
+  @Transform(({ value }) => value?.media || null)
+  avatar?: { media: MediaResponseDto } | null;
 
   @ApiProperty({
     description: 'User role assignments',
@@ -106,12 +107,16 @@ export class UserResponseDto extends BaseResponseDto {
   // @Transform(({ value }) => value?.toISOString())
   phoneVerifiedAt?: Date | null;
 
+  @ApiPropertyOptional({
+    description: 'Deleted timestamp',
+    example: '2024-01-01T00:00:00.000Z',
+    nullable: true,
+  })
+  deletedAt?: Date | null;
+
   // Exclude sensitive fields from response
   @Exclude()
   password: string;
-
-  @Exclude()
-  avatarMediaId: string;
 
   @Exclude()
   refreshToken?: string | null;

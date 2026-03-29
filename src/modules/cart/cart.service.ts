@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from 'prisma/generated/prisma/client';
+import { FlashSaleStatus, Prisma } from 'prisma/generated/prisma/client';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import { BusinessException } from 'src/exceptions/business.exception';
@@ -9,6 +9,7 @@ import {
   cartSelect,
   CartSelect,
 } from 'src/libs/prisma/cart-select';
+import { withoutDeleted } from 'src/libs/prisma/soft-delete.helpers';
 import { IBeforeTransformResponseType } from 'src/libs/types/interfaces/response.interface';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import {
@@ -33,8 +34,8 @@ export class CartService {
    * Each user has exactly one cart (enforced by unique userId on Cart model).
    */
   private async getOrCreateCart(userId: string): Promise<{ id: string }> {
-    const existing = await this.prismaService.cart.findUnique({
-      where: { userId },
+    const existing = await this.prismaService.cart.findFirst({
+      where: withoutDeleted({ userId }),
       select: { id: true },
     });
 
@@ -104,12 +105,12 @@ export class CartService {
   private async getActiveFlashSaleMap(): Promise<Record<string, any>> {
     const now = new Date();
     const flashSale = await this.prismaService.flashSale.findFirst({
-      where: {
+      where: withoutDeleted({
         isActive: true,
         startTime: { lte: now },
         endTime: { gte: now },
-        status: 'ACTIVE',
-      },
+        status: FlashSaleStatus.ACTIVE,
+      }),
       include: {
         products: {
           where: { isActive: true },
@@ -322,7 +323,7 @@ export class CartService {
 
       // Validate product exists and is active
       const product = await this.prismaService.product.findFirst({
-        where: { id: dto.productId, isActive: true },
+        where: withoutDeleted({ id: dto.productId, isActive: true }),
         select: { id: true },
       });
 
@@ -342,10 +343,10 @@ export class CartService {
         // Get default variant (prioritize -DEFAULT suffix, then first by sortOrder)
         const defaultVariant =
           await this.prismaService.productVariant.findFirst({
-            where: {
+            where: withoutDeleted({
               productId: dto.productId,
               OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
-            },
+            }),
             orderBy: [
               { sku: 'asc' }, // Prioritize -DEFAULT suffix
               { sortOrder: 'asc' },
@@ -365,7 +366,10 @@ export class CartService {
 
       // Validate variant exists and belongs to product
       const variant = await this.prismaService.productVariant.findFirst({
-        where: { id: resolvedVariantId, productId: dto.productId },
+        where: withoutDeleted({
+          id: resolvedVariantId,
+          productId: dto.productId,
+        }),
         select: {
           id: true,
           inventory: {
@@ -492,8 +496,8 @@ export class CartService {
   ): Promise<IBeforeTransformResponseType<CartItemResponseDto>> {
     try {
       // Verify item belongs to the user's cart
-      const cartRef = await this.prismaService.cart.findUnique({
-        where: { userId },
+      const cartRef = await this.prismaService.cart.findFirst({
+        where: withoutDeleted({ userId }),
         select: { id: true },
       });
 
@@ -593,8 +597,8 @@ export class CartService {
     itemId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const cartRef = await this.prismaService.cart.findUnique({
-        where: { userId },
+      const cartRef = await this.prismaService.cart.findFirst({
+        where: withoutDeleted({ userId }),
         select: { id: true },
       });
 
@@ -640,8 +644,8 @@ export class CartService {
     userId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const cartRef = await this.prismaService.cart.findUnique({
-        where: { userId },
+      const cartRef = await this.prismaService.cart.findFirst({
+        where: withoutDeleted({ userId }),
         select: { id: true },
       });
 
@@ -681,8 +685,8 @@ export class CartService {
     IBeforeTransformResponseType<{ itemCount: number; totalQuantity: number }>
   > {
     try {
-      const cart = await this.prismaService.cart.findUnique({
-        where: { userId },
+      const cart = await this.prismaService.cart.findFirst({
+        where: withoutDeleted({ userId }),
         select: {
           items: {
             select: { quantity: true },

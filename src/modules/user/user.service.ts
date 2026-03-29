@@ -19,6 +19,10 @@ import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressResponseDto } from './dto/address-response.dto';
 import { processDataObject } from 'src/libs/utils/utils';
 import { addressSelect } from 'src/libs/prisma/address-select';
+import {
+  softDeleteData,
+  withoutDeleted,
+} from 'src/libs/prisma/soft-delete.helpers';
 import { BanUserBulkItemDto, BanUserBulkResultDto } from './dto/ban-user.dto';
 import {
   userRoleAssignmentsSelect,
@@ -66,7 +70,7 @@ export class UserService {
     IBeforeTransformPaginationResponseType<UserResponseDto>
   > {
     try {
-      const whereQuery: Prisma.UserWhereInput = {
+      const whereQuery: Prisma.UserWhereInput = withoutDeleted({
         ...(search && {
           OR: [
             { email: { contains: search, mode: 'insensitive' } },
@@ -79,7 +83,7 @@ export class UserService {
         ...(isActive !== undefined && { isActive }),
         ...(isBanned !== undefined && { isBanned }),
         ...(isVerified !== undefined && { isVerified }),
-      };
+      });
 
       const [totalCount, users] = await Promise.all([
         this.prismaService.user.count({ where: whereQuery }),
@@ -120,8 +124,8 @@ export class UserService {
   async getUserById(
     userId: string,
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
+    const user = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ id: userId }),
       select: userSelect,
     });
 
@@ -146,8 +150,8 @@ export class UserService {
     isBanned: boolean,
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     // Verify user exists before updating
-    const existingUser = await this.prismaService.user.findUnique({
-      where: { id: userId },
+    const existingUser = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ id: userId }),
     });
 
     if (!existingUser) {
@@ -191,7 +195,9 @@ export class UserService {
       if (toBan.length > 0) {
         updates.push(
           this.prismaService.user.updateMany({
-            where: { id: { in: toBan } },
+            where: withoutDeleted({
+              id: { in: toBan },
+            }),
             data: { isBanned: true },
           }),
         );
@@ -200,7 +206,9 @@ export class UserService {
       if (toUnban.length > 0) {
         updates.push(
           this.prismaService.user.updateMany({
-            where: { id: { in: toUnban } },
+            where: withoutDeleted({
+              id: { in: toUnban },
+            }),
             data: { isBanned: false },
           }),
         );
@@ -235,6 +243,7 @@ export class UserService {
     file: Express.Multer.File,
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     try {
+      // Upload new avatar media
       const uploadedMedia = await this.storageService.uploadFile(
         {
           file,
@@ -245,9 +254,22 @@ export class UserService {
           getDirectUrl: true,
         },
       );
-      const updatedUser = await this.prismaService.user.update({
-        where: { id: userId },
-        data: { avatarMediaId: uploadedMedia.id },
+
+      // Update or create UserAvatar record
+      await this.prismaService.userAvatar.upsert({
+        where: { userId },
+        create: {
+          userId,
+          mediaId: uploadedMedia.id,
+        },
+        update: {
+          mediaId: uploadedMedia.id,
+        },
+      });
+
+      // Fetch updated user with avatar
+      const updatedUser = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: userSelect,
       });
 
@@ -272,8 +294,8 @@ export class UserService {
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     try {
       // Get current user data
-      const currentUser = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const currentUser = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
       });
 
       if (!currentUser) {
@@ -285,8 +307,8 @@ export class UserService {
 
       // Validate uniqueness for email, phone, username if they are being updated
       if (updateDto.email && updateDto.email !== currentUser.email) {
-        const existingEmail = await this.prismaService.user.findUnique({
-          where: { email: updateDto.email },
+        const existingEmail = await this.prismaService.user.findFirst({
+          where: withoutDeleted({ email: updateDto.email }),
         });
         if (existingEmail) {
           throw new BusinessException(
@@ -297,8 +319,8 @@ export class UserService {
       }
 
       if (updateDto.phone && updateDto.phone !== currentUser.phone) {
-        const existingPhone = await this.prismaService.user.findUnique({
-          where: { phone: updateDto.phone },
+        const existingPhone = await this.prismaService.user.findFirst({
+          where: withoutDeleted({ phone: updateDto.phone }),
         });
         if (existingPhone) {
           throw new BusinessException(
@@ -309,8 +331,8 @@ export class UserService {
       }
 
       if (updateDto.username && updateDto.username !== currentUser.username) {
-        const existingUsername = await this.prismaService.user.findUnique({
-          where: { username: updateDto.username },
+        const existingUsername = await this.prismaService.user.findFirst({
+          where: withoutDeleted({ username: updateDto.username }),
         });
         if (existingUsername) {
           throw new BusinessException(
@@ -370,8 +392,8 @@ export class UserService {
   }): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     try {
       // Verify target user exists
-      const targetUser = await this.prismaService.user.findUnique({
-        where: { id: targetUserId },
+      const targetUser = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: targetUserId }),
       });
 
       if (!targetUser) {
@@ -383,8 +405,8 @@ export class UserService {
 
       // Validate uniqueness for email, phone, username if they are being updated
       if (updateDto.email && updateDto.email !== targetUser.email) {
-        const existingEmail = await this.prismaService.user.findUnique({
-          where: { email: updateDto.email },
+        const existingEmail = await this.prismaService.user.findFirst({
+          where: withoutDeleted({ email: updateDto.email }),
         });
         if (existingEmail) {
           throw new BusinessException(
@@ -395,8 +417,8 @@ export class UserService {
       }
 
       if (updateDto.phone && updateDto.phone !== targetUser.phone) {
-        const existingPhone = await this.prismaService.user.findUnique({
-          where: { phone: updateDto.phone },
+        const existingPhone = await this.prismaService.user.findFirst({
+          where: withoutDeleted({ phone: updateDto.phone }),
         });
         if (existingPhone) {
           throw new BusinessException(
@@ -407,8 +429,8 @@ export class UserService {
       }
 
       if (updateDto.username && updateDto.username !== targetUser.username) {
-        const existingUsername = await this.prismaService.user.findUnique({
-          where: { username: updateDto.username },
+        const existingUsername = await this.prismaService.user.findFirst({
+          where: withoutDeleted({ username: updateDto.username }),
         });
         if (existingUsername) {
           throw new BusinessException(
@@ -507,8 +529,8 @@ export class UserService {
   }): Promise<IBeforeTransformPaginationResponseType<AddressResponseDto>> {
     try {
       // Check if user exists
-      const user = await this.prismaService.user.findUnique({
-        where: { id: targetUserId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: targetUserId }),
       });
 
       if (!user) {
@@ -518,7 +540,7 @@ export class UserService {
         );
       }
 
-      const whereQuery: Prisma.AddressWhereInput = {
+      const whereQuery: Prisma.AddressWhereInput = withoutDeleted({
         userId: targetUserId,
         ...(search && {
           OR: [
@@ -572,7 +594,7 @@ export class UserService {
             },
           ],
         }),
-      };
+      });
 
       const [totalCount, addresses] = await Promise.all([
         this.prismaService.address.count({ where: whereQuery }),
@@ -672,10 +694,10 @@ export class UserService {
       // If this address is set as default, unset all other default addresses for this user
       if (createAddressDto.isDefault) {
         await this.prismaService.address.updateMany({
-          where: {
+          where: withoutDeleted({
             userId,
             isDefault: true,
-          },
+          }),
           data: {
             isDefault: false,
           },
@@ -720,9 +742,9 @@ export class UserService {
     updateAddressDto: UpdateAddressDto,
   ): Promise<IBeforeTransformResponseType<AddressResponseDto>> {
     try {
-      // Check if address exists
-      const existingAddress = await this.prismaService.address.findUnique({
-        where: { id: addressId },
+      // Check if address exists and not deleted
+      const existingAddress = await this.prismaService.address.findFirst({
+        where: withoutDeleted({ id: addressId }),
       });
 
       if (!existingAddress) {
@@ -743,11 +765,11 @@ export class UserService {
       // If this address is being set as default, unset all other default addresses for this user
       if (updateAddressDto.isDefault) {
         await this.prismaService.address.updateMany({
-          where: {
+          where: withoutDeleted({
             userId,
             isDefault: true,
             id: { not: addressId },
-          },
+          }),
           data: {
             isDefault: false,
           },
@@ -818,9 +840,9 @@ export class UserService {
     addressId: string;
   }): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      // Check if address exists
-      const existingAddress = await this.prismaService.address.findUnique({
-        where: { id: addressId },
+      // Check if address exists and not already deleted
+      const existingAddress = await this.prismaService.address.findFirst({
+        where: withoutDeleted({ id: addressId }),
       });
 
       if (!existingAddress) {
@@ -838,9 +860,10 @@ export class UserService {
         );
       }
 
-      // Delete the address
-      await this.prismaService.address.delete({
+      // Soft delete the address
+      await this.prismaService.address.update({
         where: { id: addressId },
+        data: softDeleteData(),
       });
 
       return {
@@ -864,8 +887,8 @@ export class UserService {
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     try {
       // Validate email uniqueness
-      const existingEmail = await this.prismaService.user.findUnique({
-        where: { email: createUserByAdminDto.email },
+      const existingEmail = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ email: createUserByAdminDto.email }),
         select: { id: true },
       });
       if (existingEmail) {
@@ -876,8 +899,8 @@ export class UserService {
       }
 
       // Validate phone uniqueness
-      const existingPhone = await this.prismaService.user.findUnique({
-        where: { phone: createUserByAdminDto.phone },
+      const existingPhone = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ phone: createUserByAdminDto.phone }),
         select: { id: true },
       });
       if (existingPhone) {
@@ -888,8 +911,8 @@ export class UserService {
       }
 
       // Validate username uniqueness
-      const existingUsername = await this.prismaService.user.findUnique({
-        where: { username: createUserByAdminDto.username },
+      const existingUsername = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ username: createUserByAdminDto.username }),
         select: { id: true },
       });
       if (existingUsername) {
@@ -979,8 +1002,8 @@ export class UserService {
   ): Promise<IBeforeTransformResponseType<UserRoleAssignmentsResponseDto[]>> {
     try {
       // Verify target user exists
-      const targetUser = await this.prismaService.user.findUnique({
-        where: { id: targetUserId },
+      const targetUser = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: targetUserId }),
         select: { id: true },
       });
 

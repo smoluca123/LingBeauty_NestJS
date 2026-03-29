@@ -12,7 +12,7 @@
  Target Server Version : 170006 (170006)
  File Encoding         : 65001
 
- Date: 22/03/2026 15:51:41
+ Date: 29/03/2026 00:54:23
 */
 
 
@@ -43,6 +43,7 @@ CREATE TABLE "public"."addresses" (
 -- ----------------------------
 INSERT INTO "public"."addresses" VALUES ('3a90605b-bb9f-4f0e-ab76-adb3bba122fe', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'Kan Tan', '3090557033', 'hcm33', '', 'Quận Ba Đình', 'Thành phố Hà Nội', 'Phường Trúc Bạch', 'Vietnam', 'f', '2026-02-16 09:43:42.703', '2026-02-24 06:37:53.545', 'HOME');
 INSERT INTO "public"."addresses" VALUES ('2d7a9b06-68a9-4104-8694-8242151a6923', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'Ebe Lingg', '0359719793', 'ngõ 158a phú thái tân thịnh', '', 'Thành phố Thái Nguyên', 'Tỉnh Thái Nguyên', 'Phường Tân Thịnh', 'Vietnam', 't', '2026-02-20 15:28:08.506', '2026-02-28 14:33:48.068', 'HOME');
+INSERT INTO "public"."addresses" VALUES ('3982c640-31d2-4686-abea-def0f0297cea', '2a36312f-f039-4e10-8346-44189bf87362', 'Phồ Thanh Dụng', '03636363636', '120 , Yên Lãng ', '', 'Quận Hà Đông', 'Thành phố Hà Nội', 'Phường Mộ Lao', 'Vietnam', 't', '2026-03-28 05:19:06.819', '2026-03-28 05:19:06.819', 'HOME');
 
 -- ----------------------------
 -- Table structure for affiliate_commissions
@@ -159,6 +160,7 @@ INSERT INTO "public"."banner_group_mappings" VALUES ('6ca86e94-8bc5-412f-83bd-28
 INSERT INTO "public"."banner_group_mappings" VALUES ('e33e04c1-562e-4182-a67c-e8693c48fb04', '547f5e59-9403-4745-a190-d65728447a1c', '07496266-01b0-4212-9133-48e551a40aec', 3, '2026-03-19 08:35:16.283');
 INSERT INTO "public"."banner_group_mappings" VALUES ('ee5cbe4c-2817-4976-8b64-30da41fadb51', '7e66e6d1-f9c9-48a7-aa0b-a9c406666d40', '07496266-01b0-4212-9133-48e551a40aec', 4, '2026-03-19 09:12:51.02');
 INSERT INTO "public"."banner_group_mappings" VALUES ('b78bb28d-c423-44bf-959e-f7112b81c9d4', 'ef82cd6f-6131-4005-ad2a-4110d28a5caa', '07496266-01b0-4212-9133-48e551a40aec', 5, '2026-03-19 09:12:53.747');
+INSERT INTO "public"."banner_group_mappings" VALUES ('b147f871-c4dd-43f8-afe1-7ff56dd3ea6d', '82f22a69-29b5-4893-afc8-34862a5dcdd2', 'd8b8ae6b-a067-4d34-ae6c-11748d1ba682', 0, '2026-03-26 09:46:22.92');
 
 -- ----------------------------
 -- Table structure for banner_groups
@@ -183,6 +185,7 @@ CREATE TABLE "public"."banner_groups" (
 INSERT INTO "public"."banner_groups" VALUES ('78e55817-81ee-4312-923e-f8ab28960ffd', 'Homepage Main Banners', 'homepage-main', 'Main banner group for homepage display', 't', NULL, NULL, '2026-01-07 10:11:41.818', '2026-01-07 10:11:41.818');
 INSERT INTO "public"."banner_groups" VALUES ('058ad3c5-be6a-410e-9d06-394ae17bea12', 'banner tet 2026 clone 3', 'banner-tet-2026- clon clon', 'agsg', 't', '2026-03-15 00:00:00', '2026-03-17 00:00:00', '2026-03-15 15:31:35.255', '2026-03-18 06:46:43.829');
 INSERT INTO "public"."banner_groups" VALUES ('07496266-01b0-4212-9133-48e551a40aec', 'banner lễ 30/4', 'banner-le-3004', '30/4', 't', '2026-04-30 00:00:00', '2026-05-03 00:00:00', '2026-03-18 06:47:49.252', '2026-03-18 06:47:49.252');
+INSERT INTO "public"."banner_groups" VALUES ('d8b8ae6b-a067-4d34-ae6c-11748d1ba682', 'Banner 22-3 22-4', 'banner-22-3-22-4', 'Banner 22-3 22-4', 't', '2026-03-22 00:00:00', '2026-04-22 00:00:00', '2026-03-26 09:23:09.709', '2026-03-26 09:23:09.709');
 
 -- ----------------------------
 -- Table structure for banners
@@ -223,6 +226,7 @@ INSERT INTO "public"."banners" VALUES ('866d9dbf-3fca-44e1-8a6a-41f4c7c3d98f', '
 INSERT INTO "public"."banners" VALUES ('7e66e6d1-f9c9-48a7-aa0b-a9c406666d40', 'IMAGE', 'SIDE_TOP', 'Beauty Box', 'abccc', 'Áp dụng trên website và mua online nhận hàng nhanh tại cửa hàng.', 'Mua 1 tặng 3', 'Mua ngay', '/products/flash-sale', 'Số lượng quà tặng có hạn.', '3a84f7f1-965b-49f9-a369-f969bf79d8bd', 't', '2026-03-16 09:08:33.879', '2026-03-16 09:08:33.879', '#ffe4f0', '#fff5fb');
 INSERT INTO "public"."banners" VALUES ('ef82cd6f-6131-4005-ad2a-4110d28a5caa', 'IMAGE', 'SIDE_TOP', 'Beauty Box', 'abccc', 'Áp dụng trên website và mua online nhận hàng nhanh tại cửa hàng.', 'Mua 1 tặng 3', 'Mua ngay', '/products/flash-sale', 'Số lượng quà tặng có hạn.', '4fa17852-82f9-402f-8e80-535304ada5c4', 't', '2026-03-16 09:13:05.525', '2026-03-16 09:13:05.525', '#ffe4f0', '#fff5fb');
 INSERT INTO "public"."banners" VALUES ('547f5e59-9403-4745-a190-d65728447a1c', 'IMAGE', 'SIDE_TOP', '1bc', 'ahiahi', 'ahihi', 'ahihi', 'aduduu', NULL, NULL, 'dddf1a70-67a3-44ea-84f5-93c465647995', 't', '2026-03-17 07:06:22.89', '2026-03-19 09:14:41.618', '#FF6B9D', '#FF8E53');
+INSERT INTO "public"."banners" VALUES ('82f22a69-29b5-4893-afc8-34862a5dcdd2', 'IMAGE', 'MAIN_CAROUSEL', NULL, 'Banner chính 1', '1aa', NULL, NULL, '#', NULL, '2dac9985-4763-4b8c-b13c-cae32dd9f933', 't', '2026-03-26 09:46:22.871', '2026-03-26 10:11:05.17', '#FF6B9D', '#FF8E53');
 
 -- ----------------------------
 -- Table structure for brands
@@ -268,8 +272,11 @@ CREATE TABLE "public"."cart_items" (
 -- ----------------------------
 -- Records of cart_items
 -- ----------------------------
-INSERT INTO "public"."cart_items" VALUES ('90b92a09-e07d-4121-a7d8-a896fae08614', '6a11a171-e7a6-4eed-88d0-29bf7b38ee72', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 2, '2026-03-17 13:16:37.146', '2026-03-19 13:37:09.645');
-INSERT INTO "public"."cart_items" VALUES ('43a24f3f-838a-4773-bd38-707ce8a606fe', '6a11a171-e7a6-4eed-88d0-29bf7b38ee72', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', NULL, 20, '2026-03-10 14:04:31.748', '2026-03-10 14:07:49.056');
+INSERT INTO "public"."cart_items" VALUES ('10acda0b-88b2-42aa-8c5a-59072f8d0b25', '463cf7ef-dc9d-42ed-a452-b09c75664118', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 2, '2026-03-28 10:08:01.081', '2026-03-28 10:08:06.116');
+INSERT INTO "public"."cart_items" VALUES ('5dd20288-3310-4ab7-a90e-01fed3ee2f3f', '6a11a171-e7a6-4eed-88d0-29bf7b38ee72', 'f3f7b181-034e-4e28-846e-0a14ac37a821', 'c1284bd1-507f-4e54-9e00-52d80295d31c', 1, '2026-03-28 10:12:26.081', '2026-03-28 10:12:26.081');
+INSERT INTO "public"."cart_items" VALUES ('d2d2ca42-b534-4f2f-847d-6eb801a75c34', '6a11a171-e7a6-4eed-88d0-29bf7b38ee72', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '804bd14c-c2bf-45ee-8ffe-73642ae69076', 1, '2026-03-28 14:53:34.634', '2026-03-28 14:53:34.634');
+INSERT INTO "public"."cart_items" VALUES ('ec09a63c-5748-4496-8b10-b8dfd4b14ca3', '463cf7ef-dc9d-42ed-a452-b09c75664118', 'f3f7b181-034e-4e28-846e-0a14ac37a821', 'a6334c84-e558-418d-9e1a-3aab6ef68f2d', 1, '2026-03-28 15:17:15.782', '2026-03-28 15:17:15.782');
+INSERT INTO "public"."cart_items" VALUES ('6acd006a-8b35-469a-9359-033ee8996c1c', '463cf7ef-dc9d-42ed-a452-b09c75664118', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '4f2c1c1b-7a25-420a-b239-ab90002503a2', 1, '2026-03-28 16:10:19.806', '2026-03-28 16:10:19.806');
 
 -- ----------------------------
 -- Table structure for carts
@@ -422,6 +429,7 @@ INSERT INTO "public"."daily_stats" VALUES ('b4b7a5ff-43d5-4299-a9c2-5b5b28671bba
 INSERT INTO "public"."daily_stats" VALUES ('64b5c011-ab35-4cd3-9b9c-c5e2169149a7', '2026-03-18', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 0, 0, 0, '2026-03-18 17:27:11.603', '2026-03-18 17:27:11.603');
 INSERT INTO "public"."daily_stats" VALUES ('27f316b7-f6c5-4011-8025-4ddebeed2971', '2026-03-20', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 0, 0, 10, '2026-03-20 08:48:13.353', '2026-03-20 14:21:11.131');
 INSERT INTO "public"."daily_stats" VALUES ('530e1b43-6f49-4f7d-8f76-51a6af5ed291', '2026-03-21', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 0, 1, 1, '2026-03-21 07:32:26.174', '2026-03-21 08:06:04.353');
+INSERT INTO "public"."daily_stats" VALUES ('2924a283-f645-4ab1-8bbd-b7528604597a', '2026-03-26', 0, 0, 0, 0, 0, 0, 0, 0.00, 0, 0, 0, 0, 0, '2026-03-26 14:38:10.134', '2026-03-26 14:38:10.134');
 
 -- ----------------------------
 -- Table structure for email_verification_logs
@@ -485,6 +493,11 @@ CREATE TABLE "public"."flash_sale_orders" (
 -- ----------------------------
 -- Records of flash_sale_orders
 -- ----------------------------
+INSERT INTO "public"."flash_sale_orders" VALUES ('270f795a-c213-4e16-a214-9287acb9da57', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', '02a246ae-a28b-402e-bd4c-6af5e0fe4e7f', '2026-03-27 04:08:08.588');
+INSERT INTO "public"."flash_sale_orders" VALUES ('e7eb9b81-f4dc-4b97-9800-8e9f1aab2df3', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', '0906e456-fc12-4411-97b2-9ef7654447c5', '2026-03-27 05:17:57.746');
+INSERT INTO "public"."flash_sale_orders" VALUES ('50445c39-1a59-4efa-a3f9-7f24e1a1c4da', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'c3a5d834-8bff-4d7f-90b1-a31269ee57dd', '2026-03-27 16:24:57.815');
+INSERT INTO "public"."flash_sale_orders" VALUES ('0ecc36f7-bd88-4d03-8683-d090ecb41f1f', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'a6f1dc86-7150-4755-97ee-1504b220417f', '2026-03-27 16:36:58.385');
+INSERT INTO "public"."flash_sale_orders" VALUES ('c547fa8f-a2f7-4be7-8282-8ed427c59c79', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', '11bcd9c6-3ded-46aa-9b60-d8a2b30be176', '2026-03-28 05:20:13.11');
 
 -- ----------------------------
 -- Table structure for flash_sale_products
@@ -494,7 +507,7 @@ CREATE TABLE "public"."flash_sale_products" (
   "id" text COLLATE "pg_catalog"."default" NOT NULL,
   "flash_sale_id" text COLLATE "pg_catalog"."default" NOT NULL,
   "product_id" text COLLATE "pg_catalog"."default" NOT NULL,
-  "variant_id" text COLLATE "pg_catalog"."default",
+  "variant_id" text COLLATE "pg_catalog"."default" NOT NULL,
   "flash_price" numeric(10,2) NOT NULL,
   "original_price" numeric(10,2) NOT NULL,
   "max_quantity" int4 NOT NULL,
@@ -510,12 +523,12 @@ CREATE TABLE "public"."flash_sale_products" (
 -- ----------------------------
 -- Records of flash_sale_products
 -- ----------------------------
-INSERT INTO "public"."flash_sale_products" VALUES ('a6deaf49-c361-4544-8384-5909a69965aa', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', '9b34afd5-72e9-46f6-aaff-9e3c18e0d197', NULL, 187600.00, 234500.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.177', '2026-03-20 07:52:54.177');
-INSERT INTO "public"."flash_sale_products" VALUES ('eb1d7782-36d4-42fc-a7d6-8f1a04f4257a', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 120000.00, 150000.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.188', '2026-03-20 07:52:54.188');
 INSERT INTO "public"."flash_sale_products" VALUES ('65f14578-af54-4812-9afc-6399574dc818', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '15feeed5-0d9e-4da1-88ff-50c8fb95aa09', 646400.00, 808000.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.197', '2026-03-20 07:52:54.197');
-INSERT INTO "public"."flash_sale_products" VALUES ('9ed0516e-b28e-4a07-b732-8fdef050f040', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'd004cc21-a835-4d5f-a949-3bf9db98ccbd', 646400.00, 808000.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.223', '2026-03-20 07:52:54.223');
-INSERT INTO "public"."flash_sale_products" VALUES ('7bd40673-b1cb-4eef-9ca2-ec417f0229d9', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'c876a2fe-40da-4f5c-9ff8-9478c3ecd93e', 646400.00, 808000.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.232', '2026-03-20 07:52:54.232');
-INSERT INTO "public"."flash_sale_products" VALUES ('357d360b-2c01-4ec1-a52c-1e2277226d42', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '1db18ed7-865b-4d69-87b8-c88656eff292', 646400.00, 808000.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.24', '2026-03-20 07:52:54.24');
+INSERT INTO "public"."flash_sale_products" VALUES ('a6deaf49-c361-4544-8384-5909a69965aa', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', '9b34afd5-72e9-46f6-aaff-9e3c18e0d197', '2aa54c6a-7c94-4f1c-aca5-2c0ed3ab5581', 187600.00, 234500.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.177', '2026-03-26 17:56:09.701');
+INSERT INTO "public"."flash_sale_products" VALUES ('357d360b-2c01-4ec1-a52c-1e2277226d42', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '1db18ed7-865b-4d69-87b8-c88656eff292', 646400.00, 808000.00, 100, 1, 2, 0, 't', '2026-03-20 07:52:54.24', '2026-03-27 05:17:57.703');
+INSERT INTO "public"."flash_sale_products" VALUES ('7bd40673-b1cb-4eef-9ca2-ec417f0229d9', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'c876a2fe-40da-4f5c-9ff8-9478c3ecd93e', 646400.00, 808000.00, 100, 0, 2, 0, 't', '2026-03-20 07:52:54.232', '2026-03-27 16:25:20.577');
+INSERT INTO "public"."flash_sale_products" VALUES ('9ed0516e-b28e-4a07-b732-8fdef050f040', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'd004cc21-a835-4d5f-a949-3bf9db98ccbd', 646400.00, 808000.00, 100, 2, 2, 0, 't', '2026-03-20 07:52:54.223', '2026-03-27 16:36:58.342');
+INSERT INTO "public"."flash_sale_products" VALUES ('eb1d7782-36d4-42fc-a7d6-8f1a04f4257a', 'b8c32f86-75ed-4339-9321-d8abbbd2dda2', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 120000.00, 150000.00, 100, 2, 2, 0, 't', '2026-03-20 07:52:54.188', '2026-03-28 05:20:13.106');
 
 -- ----------------------------
 -- Table structure for flash_sales
@@ -639,6 +652,27 @@ INSERT INTO "public"."media" VALUES ('9020bce4-f347-4dce-bc23-aa699a903f7e', 'ht
 INSERT INTO "public"."media" VALUES ('c7344039-1504-4ad6-ae6a-ca8cd5f60b5c', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/banners/images/channels4_profile_1773652203632_d61e5a0f.jpg?wrap=0', 'uploads/public/banners/images/channels4_profile_1773652203632_d61e5a0f.jpg', 'channels4_profile.jpg', 'image/jpeg', 39727, 'BANNER_IMAGE', NULL, 'f', '2026-03-16 09:10:06.063', '2026-03-16 09:10:06.063');
 INSERT INTO "public"."media" VALUES ('f5125a9e-c480-4802-a782-480b00138fca', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/banners/images/image_background_screenshot_for_stack_1773739698722_93d7672a.png?wrap=0', 'uploads/public/banners/images/image_background_screenshot_for_stack_1773739698722_93d7672a.png', 'image_background_screenshot_for_stack.png', 'image/png', 1950277, 'BANNER_IMAGE', NULL, 'f', '2026-03-17 09:28:20.357', '2026-03-17 09:28:20.357');
 INSERT INTO "public"."media" VALUES ('f36e928a-b6c8-4f21-b6cf-0f67bb59edeb', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/avatars/438293719_423347727110950_4655747533506456618_n__2__1774011858704_9459682f.jpg?wrap=0', 'uploads/public/avatars/438293719_423347727110950_4655747533506456618_n__2__1774011858704_9459682f.jpg', '438293719_423347727110950_4655747533506456618_n (2).jpg', 'image/jpeg', 465055, 'AVATAR', '2a36312f-f039-4e10-8346-44189bf87362', 'f', '2026-03-20 13:04:19.483', '2026-03-20 13:04:19.483');
+INSERT INTO "public"."media" VALUES ('5f27fafb-436e-4a1e-9460-d1bedf308ee6', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/general/images/channels4_profile_1774183121445_3e20ae5e.jpg?wrap=0', 'uploads/public/general/images/channels4_profile_1774183121445_3e20ae5e.jpg', 'channels4_profile.jpg', 'image/jpeg', 39727, 'GENERAL_IMAGE', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'f', '2026-03-22 12:38:43.339', '2026-03-22 12:38:43.339');
+INSERT INTO "public"."media" VALUES ('d7082e4b-d8fc-4682-8e94-611dd29b2601', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/general/images/channels4_profile_1774183915010_58af2ac5.jpg?wrap=0', 'uploads/public/general/images/channels4_profile_1774183915010_58af2ac5.jpg', 'channels4_profile.jpg', 'image/jpeg', 39727, 'GENERAL_IMAGE', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'f', '2026-03-22 12:51:55.72', '2026-03-22 12:51:55.72');
+INSERT INTO "public"."media" VALUES ('b48375bc-a6a2-40f2-802e-156946b5fe7c', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/general/images/69a40152405e6_1774187756879_84efc279.jpg?wrap=0', 'uploads/public/general/images/69a40152405e6_1774187756879_84efc279.jpg', '69a40152405e6.jpg', 'image/jpeg', 433274, 'GENERAL_IMAGE', '2a36312f-f039-4e10-8346-44189bf87362', 'f', '2026-03-22 13:55:57.391', '2026-03-22 13:55:57.391');
+INSERT INTO "public"."media" VALUES ('95a66b86-d23d-4a1d-83b8-dad6b443ae5a', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/general/images/69a40152405e6_1774187788258_4b60a188.jpg?wrap=0', 'uploads/public/general/images/69a40152405e6_1774187788258_4b60a188.jpg', '69a40152405e6.jpg', 'image/jpeg', 433274, 'GENERAL_IMAGE', '2a36312f-f039-4e10-8346-44189bf87362', 'f', '2026-03-22 13:56:28.626', '2026-03-22 13:56:28.626');
+INSERT INTO "public"."media" VALUES ('2dac9985-4763-4b8c-b13c-cae32dd9f933', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/banners/images/289a71d7-d708-43cd-92ee-7a16ccf4a561_1774518380741_5e9b8886.webp?wrap=0', 'uploads/public/banners/images/289a71d7-d708-43cd-92ee-7a16ccf4a561_1774518380741_5e9b8886.webp', '289a71d7-d708-43cd-92ee-7a16ccf4a561.webp', 'image/webp', 127074, 'BANNER_IMAGE', NULL, 'f', '2026-03-26 09:46:22.821', '2026-03-26 09:46:22.821');
+INSERT INTO "public"."media" VALUES ('34c09faa-34fa-4c08-a113-29e75ee29a0e', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/pngtree-cute-cow-cartoon-vector-png-image_5057875_1774536770321_0c42cf32.jpg?wrap=0', 'uploads/public/products/images/pngtree-cute-cow-cartoon-vector-png-image_5057875_1774536770321_0c42cf32.jpg', 'pngtree-cute-cow-cartoon-vector-png-image_5057875.jpg', 'image/jpeg', 89440, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-26 14:52:50.82', '2026-03-26 14:52:50.82');
+INSERT INTO "public"."media" VALUES ('701952c8-2222-4b54-87dc-de951f1d77d0', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/4cc88c2c-1049-4407-8091-e42394452b5b_1774685027301_3a36aac5.webp?wrap=0', 'uploads/public/products/images/4cc88c2c-1049-4407-8091-e42394452b5b_1774685027301_3a36aac5.webp', '4cc88c2c-1049-4407-8091-e42394452b5b.webp', 'image/webp', 102858, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:03:47.836', '2026-03-28 08:03:47.836');
+INSERT INTO "public"."media" VALUES ('f3daa491-cc07-4988-8a1f-57149db13ddb', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/4cc88c2c-1049-4407-8091-e42394452b5b__1__1774685027420_b5a74439.webp?wrap=0', 'uploads/public/products/images/4cc88c2c-1049-4407-8091-e42394452b5b__1__1774685027420_b5a74439.webp', '4cc88c2c-1049-4407-8091-e42394452b5b (1).webp', 'image/webp', 102858, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:03:47.833', '2026-03-28 08:03:47.833');
+INSERT INTO "public"."media" VALUES ('e585624d-0d42-42f5-a5b1-5118c74ba3fe', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/e7cd2392-0f50-485c-9fad-b560875d2e9f_1774685027217_65758d2e.webp?wrap=0', 'uploads/public/products/images/e7cd2392-0f50-485c-9fad-b560875d2e9f_1774685027217_65758d2e.webp', 'e7cd2392-0f50-485c-9fad-b560875d2e9f.webp', 'image/webp', 46364, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:03:47.909', '2026-03-28 08:03:47.909');
+INSERT INTO "public"."media" VALUES ('42b757f8-257f-4cf7-b130-63b8a19dbf2f', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/1312e610-8b26-4408-bc8e-4a9cb49b0e96_1774685468143_7e900bf0.webp?wrap=0', 'uploads/public/products/images/1312e610-8b26-4408-bc8e-4a9cb49b0e96_1774685468143_7e900bf0.webp', '1312e610-8b26-4408-bc8e-4a9cb49b0e96.webp', 'image/webp', 36234, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:11:08.608', '2026-03-28 08:11:08.608');
+INSERT INTO "public"."media" VALUES ('825ec6a2-1c64-4549-b775-4eec4f46002f', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/ddfac2c2-87cc-4214-b642-2775a6891fc1_1774686170267_48213e0f.webp?wrap=0', 'uploads/public/products/images/ddfac2c2-87cc-4214-b642-2775a6891fc1_1774686170267_48213e0f.webp', 'ddfac2c2-87cc-4214-b642-2775a6891fc1.webp', 'image/webp', 36900, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:22:50.734', '2026-03-28 08:22:50.734');
+INSERT INTO "public"."media" VALUES ('807b2fb6-7dee-44c6-a7b6-ea6afd00c922', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/51e65aef-c5fa-4ab9-8776-534426997123_1774686294846_2af96b33.webp?wrap=0', 'uploads/public/products/images/51e65aef-c5fa-4ab9-8776-534426997123_1774686294846_2af96b33.webp', '51e65aef-c5fa-4ab9-8776-534426997123.webp', 'image/webp', 39488, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:24:55.225', '2026-03-28 08:24:55.225');
+INSERT INTO "public"."media" VALUES ('c10ae4de-2ad3-47da-9702-3334a889d74f', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/8cd91ebf-d6dc-4a62-99aa-e41c21fca30b_1774686445320_27fea8f7.webp?wrap=0', 'uploads/public/products/images/8cd91ebf-d6dc-4a62-99aa-e41c21fca30b_1774686445320_27fea8f7.webp', '8cd91ebf-d6dc-4a62-99aa-e41c21fca30b.webp', 'image/webp', 36348, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:27:25.767', '2026-03-28 08:27:25.767');
+INSERT INTO "public"."media" VALUES ('51ad43ba-65b1-49f9-bccb-4ab139915b1c', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/7c61053d-6b55-4f52-9d87-437e4c0c61d5_1774687098873_1489e0b8.webp?wrap=0', 'uploads/public/products/images/7c61053d-6b55-4f52-9d87-437e4c0c61d5_1774687098873_1489e0b8.webp', '7c61053d-6b55-4f52-9d87-437e4c0c61d5.webp', 'image/webp', 34988, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:38:19.24', '2026-03-28 08:38:19.24');
+INSERT INTO "public"."media" VALUES ('8890c5f8-2a48-48e9-a77a-10cf1ec59e8b', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/9ddc33fc-799e-43c9-92ac-b565431d908e_1774687192004_3c83cc39.webp?wrap=0', 'uploads/public/products/images/9ddc33fc-799e-43c9-92ac-b565431d908e_1774687192004_3c83cc39.webp', '9ddc33fc-799e-43c9-92ac-b565431d908e.webp', 'image/webp', 34838, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:39:52.393', '2026-03-28 08:39:52.393');
+INSERT INTO "public"."media" VALUES ('e50a9f7a-ac92-4a84-a8bb-82967c41e553', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/d8208594-31a9-48e9-a97b-c5075b63ebe6_1774687829965_e6cc9ef8.webp?wrap=0', 'uploads/public/products/images/d8208594-31a9-48e9-a97b-c5075b63ebe6_1774687829965_e6cc9ef8.webp', 'd8208594-31a9-48e9-a97b-c5075b63ebe6.webp', 'image/webp', 36792, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:50:31.604', '2026-03-28 08:50:31.604');
+INSERT INTO "public"."media" VALUES ('806a3ce3-2086-41b4-8705-d753fab552e1', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/f3a96cdb-eb16-421d-b43a-59a4d8a14dd7_1774687899160_60c5a2a8.webp?wrap=0', 'uploads/public/products/images/f3a96cdb-eb16-421d-b43a-59a4d8a14dd7_1774687899160_60c5a2a8.webp', 'f3a96cdb-eb16-421d-b43a-59a4d8a14dd7.webp', 'image/webp', 35900, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:51:40.252', '2026-03-28 08:51:40.252');
+INSERT INTO "public"."media" VALUES ('8cbb787c-eba8-4032-98bb-df2e71e41581', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/796175fb-0559-4215-a4df-60fa9a76edc0_1774687975614_50f1b55d.webp?wrap=0', 'uploads/public/products/images/796175fb-0559-4215-a4df-60fa9a76edc0_1774687975614_50f1b55d.webp', '796175fb-0559-4215-a4df-60fa9a76edc0.webp', 'image/webp', 37230, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:52:56.695', '2026-03-28 08:52:56.695');
+INSERT INTO "public"."media" VALUES ('43c4e910-918a-4f94-b6d8-e63a3d3c0f3f', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/c1314b9a-ff75-4f6d-a6dc-863363a73648_1774688035931_714e71fb.webp?wrap=0', 'uploads/public/products/images/c1314b9a-ff75-4f6d-a6dc-863363a73648_1774688035931_714e71fb.webp', 'c1314b9a-ff75-4f6d-a6dc-863363a73648.webp', 'image/webp', 35370, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:53:56.98', '2026-03-28 08:53:56.98');
+INSERT INTO "public"."media" VALUES ('c06b081a-ae35-4e75-a914-4de431a9f129', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/e7cd2392-0f50-485c-9fad-b560875d2e9f_1774688345020_679cb33f.webp?wrap=0', 'uploads/public/products/images/e7cd2392-0f50-485c-9fad-b560875d2e9f_1774688345020_679cb33f.webp', 'e7cd2392-0f50-485c-9fad-b560875d2e9f.webp', 'image/webp', 46364, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 08:59:06.224', '2026-03-28 08:59:06.224');
+INSERT INTO "public"."media" VALUES ('d0d91f28-86c4-414c-ae6e-66f2d4a9523b', 'https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/products/images/236fc58c-8599-40f5-ae93-50bb246fa84e_1774688429971_8b5afa68.webp?wrap=0', 'uploads/public/products/images/236fc58c-8599-40f5-ae93-50bb246fa84e_1774688429971_8b5afa68.webp', '236fc58c-8599-40f5-ae93-50bb246fa84e.webp', 'image/webp', 90976, 'PRODUCT_IMAGE', NULL, 'f', '2026-03-28 09:00:31.058', '2026-03-28 09:00:31.058');
 
 -- ----------------------------
 -- Table structure for order_items
@@ -661,6 +695,11 @@ CREATE TABLE "public"."order_items" (
 -- ----------------------------
 -- Records of order_items
 -- ----------------------------
+INSERT INTO "public"."order_items" VALUES ('e7f91667-7022-4029-b0cc-c4070cc9f00d', '02a246ae-a28b-402e-bd4c-6af5e0fe4e7f', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 'Son Thạch Bóng Thuần Chay Amuse Jel-Fit Tint 3.8g', 'SKU-001-RED', 120000.00, 1, 120000.00, '2026-03-27 04:08:07.29');
+INSERT INTO "public"."order_items" VALUES ('19d5604f-8c78-4a63-99c1-c062c1f39884', '0906e456-fc12-4411-97b2-9ef7654447c5', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '1db18ed7-865b-4d69-87b8-c88656eff292', 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', '79102357', 646400.00, 1, 646400.00, '2026-03-27 05:17:56.321');
+INSERT INTO "public"."order_items" VALUES ('e9bb4408-b2ba-408f-ab85-7921393136b1', 'c3a5d834-8bff-4d7f-90b1-a31269ee57dd', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'c876a2fe-40da-4f5c-9ff8-9478c3ecd93e', 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', '77286589', 646400.00, 2, 1292800.00, '2026-03-27 16:24:56.53');
+INSERT INTO "public"."order_items" VALUES ('ba53a774-2f00-42b6-9fa1-2e35ffb8e560', 'a6f1dc86-7150-4755-97ee-1504b220417f', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'd004cc21-a835-4d5f-a949-3bf9db98ccbd', 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', '95183175', 646400.00, 2, 1292800.00, '2026-03-27 16:36:56.916');
+INSERT INTO "public"."order_items" VALUES ('5d2b990a-7d3b-4074-9d57-3512734f6757', '11bcd9c6-3ded-46aa-9b60-d8a2b30be176', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 'Son Thạch Bóng Thuần Chay Amuse Jel-Fit Tint 3.8g', 'SKU-001-RED', 120000.00, 2, 240000.00, '2026-03-28 05:20:12.949');
 
 -- ----------------------------
 -- Table structure for orders
@@ -688,6 +727,11 @@ CREATE TABLE "public"."orders" (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
+INSERT INTO "public"."orders" VALUES ('02a246ae-a28b-402e-bd4c-6af5e0fe4e7f', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'ORD-260327-0001', 'CANCELLED', 120000.00, 0.00, 0.00, 0.00, 120000.00, '2d7a9b06-68a9-4104-8694-8242151a6923', NULL, NULL, 'Đã hủy bởi khách hàng', '2026-03-27 04:08:07.29', '2026-03-27 04:20:22.562');
+INSERT INTO "public"."orders" VALUES ('0906e456-fc12-4411-97b2-9ef7654447c5', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'ORD-260327-0002', 'SHIPPED', 646400.00, 0.00, 0.00, 0.00, 646400.00, '2d7a9b06-68a9-4104-8694-8242151a6923', NULL, NULL, '', '2026-03-27 05:17:56.321', '2026-03-27 15:28:46.356');
+INSERT INTO "public"."orders" VALUES ('c3a5d834-8bff-4d7f-90b1-a31269ee57dd', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'ORD-260327-0003', 'CANCELLED', 1292800.00, 0.00, 0.00, 0.00, 1292800.00, '2d7a9b06-68a9-4104-8694-8242151a6923', NULL, NULL, 'Đã hủy bởi khách hàng', '2026-03-27 16:24:56.53', '2026-03-27 16:25:19.315');
+INSERT INTO "public"."orders" VALUES ('a6f1dc86-7150-4755-97ee-1504b220417f', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'ORD-260327-0004', 'PENDING', 1292800.00, 0.00, 0.00, 0.00, 1292800.00, '2d7a9b06-68a9-4104-8694-8242151a6923', NULL, NULL, NULL, '2026-03-27 16:36:56.916', '2026-03-27 16:36:56.916');
+INSERT INTO "public"."orders" VALUES ('11bcd9c6-3ded-46aa-9b60-d8a2b30be176', '2a36312f-f039-4e10-8346-44189bf87362', 'ORD-260328-0001', 'CONFIRMED', 240000.00, 0.00, 0.00, 0.00, 240000.00, '3982c640-31d2-4686-abea-def0f0297cea', NULL, NULL, '', '2026-03-28 05:20:12.949', '2026-03-28 06:37:58.708');
 
 -- ----------------------------
 -- Table structure for payments
@@ -710,6 +754,11 @@ CREATE TABLE "public"."payments" (
 -- ----------------------------
 -- Records of payments
 -- ----------------------------
+INSERT INTO "public"."payments" VALUES ('3003a574-fd1b-43a2-848d-4546b1b68c46', '02a246ae-a28b-402e-bd4c-6af5e0fe4e7f', 'COD', 120000.00, 'PENDING', NULL, NULL, NULL, '2026-03-27 04:08:07.29', '2026-03-27 04:08:07.29');
+INSERT INTO "public"."payments" VALUES ('c32b508c-f990-447a-aec1-6ef65793d782', '0906e456-fc12-4411-97b2-9ef7654447c5', 'COD', 646400.00, 'PENDING', NULL, NULL, NULL, '2026-03-27 05:17:56.321', '2026-03-27 05:17:56.321');
+INSERT INTO "public"."payments" VALUES ('dac54517-19c6-4ed6-9a1a-87c1b7a2aafa', 'c3a5d834-8bff-4d7f-90b1-a31269ee57dd', 'BANK_TRANSFER', 1292800.00, 'PENDING', NULL, NULL, NULL, '2026-03-27 16:24:56.53', '2026-03-27 16:24:56.53');
+INSERT INTO "public"."payments" VALUES ('ed2e8627-59b9-4e0b-be8a-7f0fa3daacd7', 'a6f1dc86-7150-4755-97ee-1504b220417f', 'COD', 1292800.00, 'PENDING', NULL, NULL, NULL, '2026-03-27 16:36:56.916', '2026-03-27 16:36:56.916');
+INSERT INTO "public"."payments" VALUES ('9b123174-2487-4a3e-85bf-640208a2d04b', '11bcd9c6-3ded-46aa-9b60-d8a2b30be176', 'COD', 240000.00, 'PENDING', NULL, NULL, NULL, '2026-03-28 05:20:12.949', '2026-03-28 05:20:12.949');
 
 -- ----------------------------
 -- Table structure for product_badges
@@ -733,27 +782,7 @@ CREATE TABLE "public"."product_badges" (
 -- ----------------------------
 INSERT INTO "public"."product_badges" VALUES ('e92b7eee-821c-4de8-94a6-96a3e786359c', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'New', 0, 't', 'INFO', 'NEW', '2025-11-28 19:41:36.846', '2025-11-28 19:41:36.846');
 INSERT INTO "public"."product_badges" VALUES ('63d2ccc4-1246-4c0f-87e8-03fd2eba7575', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'New', 0, 't', 'INFO', 'NEW', '2026-01-16 16:58:44.428', '2026-01-16 16:58:44.428');
-
--- ----------------------------
--- Table structure for product_categories
--- ----------------------------
-DROP TABLE IF EXISTS "public"."product_categories";
-CREATE TABLE "public"."product_categories" (
-  "id" text COLLATE "pg_catalog"."default" NOT NULL,
-  "product_id" text COLLATE "pg_catalog"."default" NOT NULL,
-  "category_id" text COLLATE "pg_catalog"."default" NOT NULL,
-  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-)
-;
-
--- ----------------------------
--- Records of product_categories
--- ----------------------------
-INSERT INTO "public"."product_categories" VALUES ('9007f361-5f47-4513-9cb3-dc2a6115c04f', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '22efe8cc-9307-491f-8a4e-52164998b55b', '2025-11-24 23:18:57.297');
-INSERT INTO "public"."product_categories" VALUES ('4907c35d-d456-4dda-bb72-2263311ecb04', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', '39f1cbdc-41c6-4d11-b785-94cbf1996177', '2025-12-15 14:07:55.1');
-INSERT INTO "public"."product_categories" VALUES ('d9d14d10-21db-4303-9977-9e24b32b1c57', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '39f1cbdc-41c6-4d11-b785-94cbf1996177', '2026-02-28 06:45:45.209');
-INSERT INTO "public"."product_categories" VALUES ('dafe33cd-994f-4474-a4bd-b27f1a16c6c5', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', '0b5bf4d6-7af2-4e0f-94fb-8383ce06f33c', '2026-03-06 15:08:58.296');
-INSERT INTO "public"."product_categories" VALUES ('ad3bd5bd-2f76-4280-8c09-e9f191b87e17', '9b34afd5-72e9-46f6-aaff-9e3c18e0d197', '0b5bf4d6-7af2-4e0f-94fb-8383ce06f33c', '2026-03-10 13:43:35.582');
+INSERT INTO "public"."product_badges" VALUES ('df66979f-5840-4562-88e0-30bd6cd710ff', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', 'free ship extra', 0, 't', 'NEUTRAL', 'FREESHIPPING', '2026-03-26 14:54:04.85', '2026-03-26 14:55:18.16');
 
 -- ----------------------------
 -- Table structure for product_images
@@ -802,8 +831,22 @@ INSERT INTO "public"."product_images" VALUES ('cdf9c012-58a0-4192-81e7-e7a16e392
 INSERT INTO "public"."product_images" VALUES ('f50be763-704e-45aa-868f-a6a8eec5e410', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'Image', 8, 'f', '2026-01-16 16:52:29.379', '0fb7a1fa-ab9b-459b-a3f2-c6ba7f54b548', 'd004cc21-a835-4d5f-a949-3bf9db98ccbd');
 INSERT INTO "public"."product_images" VALUES ('4cb98471-3964-4e7e-8bd7-ac5e724b2054', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'Image', 9, 'f', '2026-01-16 16:55:27.53', '6b98ccf3-38bc-4ff8-9ffd-4956d893c820', 'c876a2fe-40da-4f5c-9ff8-9478c3ecd93e');
 INSERT INTO "public"."product_images" VALUES ('9c69bfd1-40c8-4745-b2ae-3600b1d5200e', 'f387017f-3306-404a-8a15-584a4d3bf7c9', 'Image', 10, 'f', '2026-01-16 16:56:58.918', '8ebebdfa-0db0-4118-81cf-bc48534eaa3d', '1db18ed7-865b-4d69-87b8-c88656eff292');
-INSERT INTO "public"."product_images" VALUES ('acca5394-646a-46a7-b1ec-876d2574ebb1', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', NULL, 1, 'f', '2026-03-06 15:18:54.082', '41af639e-ab67-4468-8ac0-8e899f1e485e', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73');
 INSERT INTO "public"."product_images" VALUES ('b558e542-1d02-4459-b8de-eb0f223a6207', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', NULL, 0, 't', '2026-03-06 15:14:18.402', '7494920f-d885-47f9-8e45-30c30f0c531c', NULL);
+INSERT INTO "public"."product_images" VALUES ('acca5394-646a-46a7-b1ec-876d2574ebb1', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', NULL, 1, 'f', '2026-03-06 15:18:54.082', '41af639e-ab67-4468-8ac0-8e899f1e485e', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73');
+INSERT INTO "public"."product_images" VALUES ('a5c9c32e-1e83-42c5-b008-deead8839bfb', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', NULL, 2, 'f', '2026-03-26 14:52:50.836', '34c09faa-34fa-4c08-a113-29e75ee29a0e', NULL);
+INSERT INTO "public"."product_images" VALUES ('68a1aff9-ef6b-4f78-b7c9-974862ee5b6e', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 0, 't', '2026-03-28 08:03:47.902', 'f3daa491-cc07-4988-8a1f-57149db13ddb', NULL);
+INSERT INTO "public"."product_images" VALUES ('f071ad8f-ebbd-4b57-91ed-64425ff0987e', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 3, 'f', '2026-03-28 08:11:08.621', '42b757f8-257f-4cf7-b130-63b8a19dbf2f', '216e5791-6703-4900-8404-b0eecf62aa6a');
+INSERT INTO "public"."product_images" VALUES ('503a7989-1b98-48d2-b513-298f0cb2d735', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 4, 'f', '2026-03-28 08:22:50.746', '825ec6a2-1c64-4549-b775-4eec4f46002f', '7d630e2b-2c6c-4196-9dce-213502188d51');
+INSERT INTO "public"."product_images" VALUES ('c3407425-b5f7-4861-9995-4aaeec56afa4', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 6, 'f', '2026-03-28 08:27:26.029', 'c10ae4de-2ad3-47da-9702-3334a889d74f', '35e1c255-66df-452a-bb90-55944f0225ac');
+INSERT INTO "public"."product_images" VALUES ('5d56178b-f266-41b3-a524-54259019db50', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 5, 'f', '2026-03-28 08:24:55.238', '807b2fb6-7dee-44c6-a7b6-ea6afd00c922', 'e6fd98f3-9220-433b-b0de-3da630b7a669');
+INSERT INTO "public"."product_images" VALUES ('21ec3748-e070-4d5d-bd1d-64a5640dd4d6', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 7, 'f', '2026-03-28 08:38:19.252', '51ad43ba-65b1-49f9-bccb-4ab139915b1c', 'c54735fd-2658-4c3a-86d6-afd8516c5bd5');
+INSERT INTO "public"."product_images" VALUES ('6c42748a-f807-42aa-aa7e-f68b589a9885', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 8, 'f', '2026-03-28 08:39:52.405', '8890c5f8-2a48-48e9-a77a-10cf1ec59e8b', '8aa2f5bf-71c4-43da-b298-310133aad55d');
+INSERT INTO "public"."product_images" VALUES ('b3a666ae-bdb1-4312-8d88-fbae0b20f47a', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 9, 'f', '2026-03-28 08:50:31.616', 'e50a9f7a-ac92-4a84-a8bb-82967c41e553', '804bd14c-c2bf-45ee-8ffe-73642ae69076');
+INSERT INTO "public"."product_images" VALUES ('36640a72-2663-4454-97a5-78bc286b0fed', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 10, 'f', '2026-03-28 08:51:40.264', '806a3ce3-2086-41b4-8705-d753fab552e1', 'a6334c84-e558-418d-9e1a-3aab6ef68f2d');
+INSERT INTO "public"."product_images" VALUES ('a3a7d6e2-f82a-41aa-96ce-6155b1ba46c2', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 11, 'f', '2026-03-28 08:52:56.709', '8cbb787c-eba8-4032-98bb-df2e71e41581', '7022882b-0227-4ac0-9664-ab942692394c');
+INSERT INTO "public"."product_images" VALUES ('0541e974-74b3-4ac1-9a67-9281cc3f05cc', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 12, 'f', '2026-03-28 08:53:56.992', '43c4e910-918a-4f94-b6d8-e63a3d3c0f3f', '67344a6a-9a15-4aea-8b89-c19152778212');
+INSERT INTO "public"."product_images" VALUES ('8a51cf99-4d3b-45d8-9d89-fc8e5fe00aaa', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 2, 'f', '2026-03-28 08:59:06.237', 'c06b081a-ae35-4e75-a914-4de431a9f129', NULL);
+INSERT INTO "public"."product_images" VALUES ('ee49ae96-6fa2-4b02-9dcd-5ae07b86facf', 'f3f7b181-034e-4e28-846e-0a14ac37a821', NULL, 1, 'f', '2026-03-28 09:00:31.069', 'd0d91f28-86c4-414c-ae6e-66f2d4a9523b', NULL);
 
 -- ----------------------------
 -- Table structure for product_inventory
@@ -825,18 +868,30 @@ CREATE TABLE "public"."product_inventory" (
 -- ----------------------------
 -- Records of product_inventory
 -- ----------------------------
-INSERT INTO "public"."product_inventory" VALUES ('6013c6db-2a72-4eb6-b1b4-e603ff92b023', '1db18ed7-865b-4d69-87b8-c88656eff292', 100, 10, '2026-01-16 16:56:38.31', '2026-01-16 16:56:38.31', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
+INSERT INTO "public"."product_inventory" VALUES ('a55cb5ef-1148-452d-8a7c-7d2252792c1a', 'c1284bd1-507f-4e54-9e00-52d80295d31c', 100, 10, '2026-03-28 08:32:19.222', '2026-03-28 08:32:19.222', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('5d434e9a-eae1-4241-afff-22ad937f051f', '35e1c255-66df-452a-bb90-55944f0225ac', 100, 10, '2026-03-28 08:27:16.342', '2026-03-28 08:32:33.312', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
 INSERT INTO "public"."product_inventory" VALUES ('b902e703-7c10-44cf-b907-06c45676b711', '16d13d2a-fce2-4d21-a72c-9e2cb7a75202', 0, 10, '2025-11-26 20:58:38.476', '2025-11-26 20:58:38.476', 'IN_STOCK', '139e4863-8f90-4cc4-8aad-3cb004a0759c', -10);
 INSERT INTO "public"."product_inventory" VALUES ('ceefbd45-1f3c-4d5e-925a-4483f81a7f82', '8caffe21-d0f6-421d-9068-a824440187a8', 0, 10, '2025-11-26 20:23:53.559', '2025-11-26 20:23:53.559', 'IN_STOCK', '139e4863-8f90-4cc4-8aad-3cb004a0759c', -10);
+INSERT INTO "public"."product_inventory" VALUES ('68d93a5e-01dd-4acd-8d2c-85f2cc27eb6b', 'ebaf26c3-df7d-4b74-9f7e-302676d919fb', 1000, 10, '2026-03-28 08:34:59.317', '2026-03-28 08:34:59.317', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('6d76d7b9-b61a-4649-957c-433ce85c6f1f', 'c54735fd-2658-4c3a-86d6-afd8516c5bd5', 1000, 10, '2026-03-28 08:38:01.016', '2026-03-28 08:38:01.016', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
 INSERT INTO "public"."product_inventory" VALUES ('29023227-0932-47cc-aca8-cfcc164dc13a', '4f2c1c1b-7a25-420a-b239-ab90002503a2', 0, 10, '2025-11-26 20:04:58.042', '2025-11-26 20:04:58.042', 'IN_STOCK', '139e4863-8f90-4cc4-8aad-3cb004a0759c', -10);
-INSERT INTO "public"."product_inventory" VALUES ('7d024ab0-f04a-4818-bec1-31a141dffba3', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 100, 10, '2026-03-06 15:18:37.512', '2026-03-10 05:48:27.506', 'IN_STOCK', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', -10);
-INSERT INTO "public"."product_inventory" VALUES ('a8f45c8b-759a-4e1c-bb92-55a754fe60d9', 'd004cc21-a835-4d5f-a949-3bf9db98ccbd', 520, 10, '2026-01-16 16:51:29.543', '2026-03-10 06:21:31.983', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
-INSERT INTO "public"."product_inventory" VALUES ('69e87f95-d71c-4aad-b042-f711bcd0f23c', NULL, 9, 10, '2026-03-10 13:43:35.621', '2026-03-10 13:48:26.349', 'IN_STOCK', '9b34afd5-72e9-46f6-aaff-9e3c18e0d197', -10);
-INSERT INTO "public"."product_inventory" VALUES ('d6572365-d0d9-4378-8e4c-4a88f467a5e4', NULL, 10, 10, '2026-01-16 16:55:07.123', '2026-01-16 16:55:07.123', 'IN_STOCK', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', -10);
+INSERT INTO "public"."product_inventory" VALUES ('1af6ac81-54ed-47fe-b2e8-a589242b0a18', '8aa2f5bf-71c4-43da-b298-310133aad55d', 100, 10, '2026-03-28 08:39:22.605', '2026-03-28 08:39:22.605', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('f60b8205-f343-4fcb-ae81-d0af3a4e98e1', '804bd14c-c2bf-45ee-8ffe-73642ae69076', 100, 10, '2026-03-28 08:45:56.193', '2026-03-28 08:45:56.193', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('ba22549d-f9b9-4bd3-b490-9f2344456c04', 'a6334c84-e558-418d-9e1a-3aab6ef68f2d', 100, 10, '2026-03-28 08:51:18.956', '2026-03-28 08:51:18.956', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('a219d8e2-6136-4a81-a271-38baaf594d29', '7022882b-0227-4ac0-9664-ab942692394c', 100, 10, '2026-03-28 08:52:40.463', '2026-03-28 08:52:40.463', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('20d519d0-7324-4f7c-9cfa-a52c1e965283', '67344a6a-9a15-4aea-8b89-c19152778212', 100, 10, '2026-03-28 08:53:36.265', '2026-03-28 08:53:36.265', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('0ac356db-07e5-4dcd-befe-c7e053de6878', 'f34b4e2c-b599-425b-a999-afc485e3674f', 10, 10, '2026-03-26 17:56:09.332', '2026-03-26 17:56:09.332', 'IN_STOCK', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', -10);
+INSERT INTO "public"."product_inventory" VALUES ('9616db54-479d-4ff4-82a6-63b19facc12e', '2aa54c6a-7c94-4f1c-aca5-2c0ed3ab5581', 10, 10, '2026-03-26 17:56:09.579', '2026-03-26 17:56:09.579', 'IN_STOCK', '9b34afd5-72e9-46f6-aaff-9e3c18e0d197', -10);
+INSERT INTO "public"."product_inventory" VALUES ('6013c6db-2a72-4eb6-b1b4-e603ff92b023', '1db18ed7-865b-4d69-87b8-c88656eff292', 99, 10, '2026-01-16 16:56:38.31', '2026-03-27 05:17:57.66', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
 INSERT INTO "public"."product_inventory" VALUES ('5c8b369c-1be4-4b5c-bb21-dbc49e8f718f', '15feeed5-0d9e-4da1-88ff-50c8fb95aa09', 0, 10, '2026-01-16 16:41:38.562', '2026-01-16 16:41:38.562', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
 INSERT INTO "public"."product_inventory" VALUES ('12006b0d-ae8b-4c29-8951-bfd7d31d282d', 'f336f788-48a5-4f02-89e6-f5349001a1b3', 0, 10, '2025-11-26 21:03:23.963', '2025-11-26 21:03:23.963', 'IN_STOCK', '139e4863-8f90-4cc4-8aad-3cb004a0759c', -10);
 INSERT INTO "public"."product_inventory" VALUES ('c0427b61-6126-4583-b3a2-a0bbec8b10e7', 'c7bba2e6-f70b-4688-a3e7-1a9d238112a5', 0, 10, '2025-11-26 21:02:23.644', '2025-11-26 21:02:23.644', 'IN_STOCK', '139e4863-8f90-4cc4-8aad-3cb004a0759c', -10);
-INSERT INTO "public"."product_inventory" VALUES ('d6572365-d0d9-4378-8e4c-4a88f467a5e3', 'c876a2fe-40da-4f5c-9ff8-9478c3ecd93e', 100, 10, '2026-01-16 16:55:07.123', '2026-01-16 16:55:07.123', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
+INSERT INTO "public"."product_inventory" VALUES ('d6572365-d0d9-4378-8e4c-4a88f467a5e3', 'c876a2fe-40da-4f5c-9ff8-9478c3ecd93e', 100, 10, '2026-01-16 16:55:07.123', '2026-03-27 16:25:20.498', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
+INSERT INTO "public"."product_inventory" VALUES ('a8f45c8b-759a-4e1c-bb92-55a754fe60d9', 'd004cc21-a835-4d5f-a949-3bf9db98ccbd', 518, 10, '2026-01-16 16:51:29.543', '2026-03-27 16:36:58.298', 'IN_STOCK', 'f387017f-3306-404a-8a15-584a4d3bf7c9', -10);
+INSERT INTO "public"."product_inventory" VALUES ('7d024ab0-f04a-4818-bec1-31a141dffba3', '67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 98, 10, '2026-03-06 15:18:37.512', '2026-03-28 05:20:13.103', 'IN_STOCK', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', -10);
+INSERT INTO "public"."product_inventory" VALUES ('7e1cab43-9790-41ba-b43f-116d92807477', '216e5791-6703-4900-8404-b0eecf62aa6a', 125, 10, '2026-03-28 08:10:16.541', '2026-03-28 08:10:16.541', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('1e3d3bb6-b611-4e6d-a78b-39b54e309c03', '7d630e2b-2c6c-4196-9dce-213502188d51', 100, 10, '2026-03-28 08:22:21.242', '2026-03-28 08:22:21.242', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
+INSERT INTO "public"."product_inventory" VALUES ('15ad2b7d-7a73-4a84-b2f4-f57521fe12e5', 'e6fd98f3-9220-433b-b0de-3da630b7a669', 254, 10, '2026-03-28 08:00:12.488', '2026-03-28 08:24:33.072', 'IN_STOCK', 'f3f7b181-034e-4e28-846e-0a14ac37a821', -10);
 
 -- ----------------------------
 -- Table structure for product_questions
@@ -859,7 +914,7 @@ CREATE TABLE "public"."product_questions" (
 -- ----------------------------
 -- Records of product_questions
 -- ----------------------------
-INSERT INTO "public"."product_questions" VALUES ('f8b7c102-5521-4b49-a8b7-55daafb2d83c', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'có uy tín ko?', NULL, NULL, 'PENDING', 't', '2026-03-22 04:14:41.17', '2026-03-22 04:14:41.17');
+INSERT INTO "public"."product_questions" VALUES ('a4969f73-22b8-4196-9718-2363ab41acfa', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '2a36312f-f039-4e10-8346-44189bf87362', 'tốt ko?', 'cái này sài tốt á bạn , không có gây kích wungs da', '2a36312f-f039-4e10-8346-44189bf87362', 'ANSWERED', 't', '2026-03-23 13:51:08.657', '2026-03-26 14:35:27.915');
 
 -- ----------------------------
 -- Table structure for product_reviews
@@ -885,7 +940,7 @@ CREATE TABLE "public"."product_reviews" (
 -- ----------------------------
 INSERT INTO "public"."product_reviews" VALUES ('504c0305-dbb8-477a-a85b-2aeb500b4459', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 5, 'cung  dd', 'good', 'f', 't', 1, '2026-03-18 17:27:11.003', '2026-03-20 14:21:11.072');
 INSERT INTO "public"."product_reviews" VALUES ('f169ca31-ad22-4460-a802-cbbbcb71ab6f', '139e4863-8f90-4cc4-8aad-3cb004a0759c', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 5, 'Đỉnh nha mấy bà', '', 'f', 't', 0, '2026-01-06 08:28:18.993', '2026-03-21 07:32:26.117');
-INSERT INTO "public"."product_reviews" VALUES ('df20b098-7bc5-4e1d-b81f-4ae187149be2', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '2a36312f-f039-4e10-8346-44189bf87362', 1, 'Great product!', 'I really love this product. It works perfectly for my skin.', 'f', 't', 0, '2026-03-21 08:05:44.349', '2026-03-21 08:06:04.268');
+INSERT INTO "public"."product_reviews" VALUES ('df20b098-7bc5-4e1d-b81f-4ae187149be2', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '2a36312f-f039-4e10-8346-44189bf87362', 1, 'Great product!', 'I really love this product. It works perfectly for my skin.', 'f', 't', 1, '2026-03-21 08:05:44.349', '2026-03-25 16:39:43.528');
 
 -- ----------------------------
 -- Table structure for product_stats
@@ -934,6 +989,10 @@ CREATE TABLE "public"."product_variants" (
 -- ----------------------------
 -- Records of product_variants
 -- ----------------------------
+INSERT INTO "public"."product_variants" VALUES ('804bd14c-c2bf-45ee-8ffe-73642ae69076', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '28870565', '12 Sunday - hồng đỏ', '#E53C51', NULL, NULL, 339150.00, 0, '2026-03-28 08:45:56.193', '2026-03-28 08:45:56.193', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('a6334c84-e558-418d-9e1a-3aab6ef68f2d', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '97474538', '13 Dew Boksoonga - hồng nude', '#F7B7AB', NULL, NULL, 339150.00, 0, '2026-03-28 08:51:18.956', '2026-03-28 08:51:18.956', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('7022882b-0227-4ac0-9664-ab942692394c', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '71707677', '04 Pomelo Nude - cam nude', '#FBB0AA', NULL, NULL, 339150.00, 0, '2026-03-28 08:52:40.463', '2026-03-28 08:52:40.463', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('67344a6a-9a15-4aea-8b89-c19152778212', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '18890077', '07 Rose Water - hồng hoa hồng', '#D56980', NULL, NULL, 339150.00, 0, '2026-03-28 08:53:36.265', '2026-03-28 08:53:36.265', 'COLOR');
 INSERT INTO "public"."product_variants" VALUES ('4f2c1c1b-7a25-420a-b239-ab90002503a2', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '87185538', '19C Light - da trắng sáng (tone da lạnh beige pink)', '#fee7da', NULL, 'Standard', 349000.00, 0, '2025-11-26 20:04:58.042', '2025-11-26 20:04:58.042', 'COLOR');
 INSERT INTO "public"."product_variants" VALUES ('8caffe21-d0f6-421d-9068-a824440187a8', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '78006188', '21C Lingerie - da trắng hồng (tone lạnh beige pink)', '#fdd8c4', NULL, 'Standard', 349000.00, 1, '2025-11-26 20:23:53.559', '2025-11-26 20:27:46.593', 'COLOR');
 INSERT INTO "public"."product_variants" VALUES ('16d13d2a-fce2-4d21-a72c-9e2cb7a75202', '139e4863-8f90-4cc4-8aad-3cb004a0759c', '11025156', '21N linen - da sáng tự nhiên (tone beige yellow)', '#fee1c4', NULL, 'Standard', 349000.00, 2, '2025-11-26 20:58:38.476', '2025-11-26 20:58:38.476', 'COLOR');
@@ -944,6 +1003,16 @@ INSERT INTO "public"."product_variants" VALUES ('d004cc21-a835-4d5f-a949-3bf9db9
 INSERT INTO "public"."product_variants" VALUES ('c876a2fe-40da-4f5c-9ff8-9478c3ecd93e', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '77286589', '22 Natural', '#e8ccb1', NULL, 'Standard', 808000.00, 2, '2026-01-16 16:55:07.123', '2026-01-16 16:55:07.123', 'COLOR');
 INSERT INTO "public"."product_variants" VALUES ('1db18ed7-865b-4d69-87b8-c88656eff292', 'f387017f-3306-404a-8a15-584a4d3bf7c9', '79102357', '23 Medium', '#eac8ab', NULL, 'Standard', 808000.00, 3, '2026-01-16 16:56:38.31', '2026-01-16 16:56:38.31', 'COLOR');
 INSERT INTO "public"."product_variants" VALUES ('67ed2f93-57c0-4dc5-8ed7-c2b3df5dec73', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', 'SKU-001-RED', 'Red - Size M', '#d01966', 'M', 'Standard', 150000.00, 0, '2026-03-06 15:18:37.512', '2026-03-10 05:48:27.469', 'IMAGE');
+INSERT INTO "public"."product_variants" VALUES ('f34b4e2c-b599-425b-a999-afc485e3674f', '6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', '95440379-DEFAULT', 'Mặc định', NULL, NULL, NULL, 515755.00, 0, '2026-03-26 17:56:09.286', '2026-03-26 17:56:09.286', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('2aa54c6a-7c94-4f1c-aca5-2c0ed3ab5581', '9b34afd5-72e9-46f6-aaff-9e3c18e0d197', 'XPL-9624-DEFAULT', 'Mặc định', NULL, NULL, NULL, 234500.00, 0, '2026-03-26 17:56:09.539', '2026-03-26 17:56:09.539', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('216e5791-6703-4900-8404-b0eecf62aa6a', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '63708644', '03 Healthy Boksoonga - hồng đào nude', '#E8ACB4', NULL, 'color', 339150.00, 0, '2026-03-28 08:10:16.541', '2026-03-28 08:10:16.541', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('7d630e2b-2c6c-4196-9dce-213502188d51', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '49834183', '02 Breeze - hồng tươi tắn', '#FF8087', NULL, NULL, 339150.00, 0, '2026-03-28 08:22:21.242', '2026-03-28 08:22:21.242', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('e6fd98f3-9220-433b-b0de-3da630b7a669', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '88846591-DEFAULT', '01 La Vie En Coral - hồng san hô', '#FB7F73', NULL, NULL, 339150.00, 0, '2026-03-28 08:00:12.399', '2026-03-28 08:24:33.059', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('c1284bd1-507f-4e54-9e00-52d80295d31c', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '52880154', '05 Strawberry - hồng dâu', '#E96E9D', NULL, NULL, 339150.00, 0, '2026-03-28 08:32:19.222', '2026-03-28 08:32:19.222', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('35e1c255-66df-452a-bb90-55944f0225ac', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '20689546', '06 Fig Dew - hồng đất', '#CB5B57', NULL, NULL, 339150.00, 0, '2026-03-28 08:27:16.342', '2026-03-28 08:32:33.301', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('ebaf26c3-df7d-4b74-9f7e-302676d919fb', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '25802001', '08 Amethyst - hồng tím nhạt', '#EA97AB', NULL, NULL, 339150.00, 0, '2026-03-28 08:34:59.317', '2026-03-28 08:34:59.317', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('c54735fd-2658-4c3a-86d6-afd8516c5bd5', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '22527551', '10 Peach Bunny - hồng đào nhạt', '#E79D9A', NULL, NULL, 339150.00, 0, '2026-03-28 08:38:01.016', '2026-03-28 08:38:01.016', 'COLOR');
+INSERT INTO "public"."product_variants" VALUES ('8aa2f5bf-71c4-43da-b298-310133aad55d', 'f3f7b181-034e-4e28-846e-0a14ac37a821', '21468913', '09 Mauve Grape - tím nho', '#CC93A4', NULL, NULL, 339150.00, 0, '2026-03-28 08:39:22.605', '2026-03-28 08:39:22.605', 'COLOR');
 
 -- ----------------------------
 -- Table structure for products
@@ -976,7 +1045,8 @@ INSERT INTO "public"."products" VALUES ('6a8a8632-289e-4ff3-8afd-b4b8c77d64d3', 
 INSERT INTO "public"."products" VALUES ('f387017f-3306-404a-8a15-584a4d3bf7c9', 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', 'kem-nen-li-min-muot-da-banila-co-covericious-power-fit-foundation-30ml-(phien-ban-moi)', 'Sản phẩm trang điểm tuyệt vời của thương hiệu Banila Co, chuyên gia trong việc tạo lớp nền make-up hoàn hảo giúp cho đi từng lỗ chân lông, duy trì độ che phủ ưu việt trong nhiều giờ liền. Nhờ chất kem siêu mỏng và dễ phân tán khi lên da, nhanh chóng bám vào bề mặt và tạo nên lớp nền bền chặt mịn màng khi thoa, che lấp những vùng xỉn màu, thô ráp. Banila Co Covericious Power Fit Foundation giúp tạo ra diện mạo da mới đều màu, mịn màng và trẻ trung hơn.', 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', '11206214', '7931cc87-0c28-46a3-b2d0-4f073e0d8cd4', 3660000.00, 808000.00, 't', 't', 30.00, 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', 'Kem Nền Lì, Mịn Mướt Da Banila Co Covericious Power Fit Foundation 30Ml (phiên bản mới)', '2026-01-16 14:44:58.072', '2026-02-28 06:45:45.245');
 INSERT INTO "public"."products" VALUES ('139e4863-8f90-4cc4-8aad-3cb004a0759c', 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml', 'kem-nen-che-khuyet-djiem-clio-kill-cover-founwear-foundation-the-original-35ml', 'Kem nền Clio Kill Cover Founwear Foundation The Original nổi bật với khả năng che phủ mỏng nhẹ và hoàn hảo, bền màu và bảo vệ da khỏi tác hại của tia UV.​ The Original sở hữu công thức  mới kem mỏng nhẹ, tạo lớp nền trông rất tự nhiên, nhẹ & mỏng mịn trên da, mang đến hiệu ứng da rạng rỡ, mượt mà', 'Kem nền Clio Kill Cover Founwear Foundation The Original nổi bật với khả năng che phủ mỏng nhẹ và hoàn hảo, bền màu và bảo vệ da khỏi tác hại của tia UV.​ The Original sở hữu công thức  mới kem mỏng nhẹ, tạo lớp nền trông rất tự nhiên, nhẹ & mỏng mịn trên da, mang đến hiệu ứng da rạng rỡ, mượt mà', '14554829', 'e6f24ef7-0eff-467e-93b6-14b51af43723', 349000.00, 399000.00, 't', 't', 50.00, 'Kem Nền Che Khuyết Điểm Clio Kill Cover Founwear Foundation The Original 35ml', 'Kem nền Clio Kill Cover Founwear Foundation The Original nổi bật với khả năng che phủ mỏng nhẹ và hoàn hảo, bền màu và bảo vệ da khỏi tác hại của tia UV.​ The Original sở hữu công thức  mới kem mỏng nhẹ, tạo lớp nền trông rất tự nhiên, nhẹ & mỏng mịn trên da, mang đến hiệu ứng da rạng rỡ, mượt mà', '2025-11-24 23:18:57.297', '2025-11-24 23:18:57.297');
 INSERT INTO "public"."products" VALUES ('e6d50dd9-7784-4f8a-82f4-2c84403a050c', 'Son Thạch Bóng Thuần Chay Amuse Jel-Fit Tint 3.8g', 'son-thach-bong-thuan-chay-amuse-jel-fit-tint-3.8g', '<p><strong><em>Công dụng chính</em></strong><em>: Son tint với công thức Jel-fit độc đáo vừa giúp duy trì màu sắc lâu trôi suốt 12h, đồng thời tạo hiệu ứng môi căng mướt, tươi tắn đầy sức sống.</em></p><p><strong><em>Hiệu ứng:</em></strong><em> bóng</em></p><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/14d384ff-977c-4bff-a60d-9ff156068ab3.webp"><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/d585c1bd-d5c5-49aa-afee-a90183aec6eb.webp"><p></p>', 'lorrem', 'SON-2604', 'cddce1ef-8fd4-438a-bd1d-d3eee302fe25', 289000.00, NULL, 't', 't', 38.00, NULL, NULL, '2026-03-06 15:08:58.296', '2026-03-19 13:36:49.757');
-INSERT INTO "public"."products" VALUES ('9b34afd5-72e9-46f6-aaff-9e3c18e0d197', '(Pleasure - xạ hương) Kem Dưỡng Tay Thuần Chay Amuse Vegan Soybean Hand Cream 50ml (HSD dưới 12 tháng)', '(pleasure-xa-huong)-kem-duong-tay-thuan-chay-amuse-vegan-soybean-hand-cream-50ml-(hsd-duoi-12-thang)', '<h2 style="text-align: center;"><strong>Điểm nổi bật</strong> của kem dưỡng tay Amuse Vegan Soybean Hand Cream Kem dưỡng tay thuần chay được chiết từ đậu, loại hạt giàu dưỡng chất giúp giúp dưỡng ẩm và chăm sóc vùng da tay đàn hồi, mềm mại, mịn màng hơn. Với hơn 5.000 ppm ceramide đậu nành được tạo ra bằng cách lên men đậu xanh (từ đảo Jeju, Hàn Quốc) sẽ tập trung cải thiện sự mệt mỏi, khô nứt của đôi bàn tay Amuse Vegan Soybean Hand Cream chứa các chiết xuất bơ hạt mỡ, panthenol &amp; Ceramide giúp cấp ẩm vượt trội,</h2><img class="rounded-lg max-w-full h-auto" src="https://i.pinimg.com/1200x/f4/ff/89/f4ff891c866fe0a74f0e07f57c5a91a6.jpg"><h2 style="text-align: center;">dưỡng ẩm sâu cho vùng da tay khô, nứt nẻ. Sản</h2><img class="rounded-lg max-w-full h-auto" src="https://i.pinimg.com/736x/a5/e1/7d/a5e17d50989f4bbf5d28614557e147db.jpg"><h2 style="text-align: center;">phẩm cải thiện nếp nhăn và vùng chai sạm ở tay, giúp đôi tay bạn khỏe mạnh và tươi trẻ với thành phần sạch và không gây dị ứng.</h2><p style="text-align: center;"></p><p style="text-align: center;"><span data-hashtag="" class="hashtag" data-tag="skincare">#skincare</span></p><p style="text-align: center;"></p>', '(Pleasure - xạ hương) Kem Dưỡng Tay Thuần Chay Amuse Vegan Soybean Hand Cream 50ml (HSD dưới 12 tháng)', 'XPL-9624', 'cddce1ef-8fd4-438a-bd1d-d3eee302fe25', 234500.00, NULL, 't', 't', NULL, NULL, NULL, '2026-03-10 13:43:35.582', '2026-03-19 10:19:23.283');
+INSERT INTO "public"."products" VALUES ('9b34afd5-72e9-46f6-aaff-9e3c18e0d197', '(Pleasure - xạ hương) Kem Dưỡng Tay Thuần Chay Amuse Vegan Soybean Hand Cream 50ml (HSD dưới 12 tháng)', '(pleasure-xa-huong)-kem-duong-tay-thuan-chay-amuse-vegan-soybean-hand-cream-50ml-(hsd-duoi-12-thang)', '<p><img class="rounded-lg max-w-full h-auto" src="https://link.storjshare.io/s/jwit43cwbeakiaqcsijm4chhehta/lingbeauty/uploads/public/general/images/69a40152405e6_1774187788258_4b60a188.jpg?wrap=0" /><strong>Điểm</strong> <strong>nổi bật </strong>của kem dưỡng tay Amuse Vegan Soybean Hand Cream Kem dưỡng tay thuần chay được chiết từ đậu, loại hạt giàu dưỡng chất giúp giúp dưỡng ẩm và chăm sóc vùng da tay đàn hồi, mềm mại, mịn màng hơn. Với hơn 5.000 ppm ceramide đậu nành được tạo ra bằng cách lên men đậu xanh (từ đảo Jeju, Hàn Quốc) sẽ tập trung cải thiện sự mệt mỏi, khô nứt của đôi bàn tay Amuse Vegan Soybean Hand Cream chứa các chiết xuất bơ hạt mỡ, panthenol &amp; Ceramide giúp cấp ẩm vượt trội,</p><p style="text-align:center"><img class="rounded-lg max-w-full h-auto" src="https://i.pinimg.com/1200x/f4/ff/89/f4ff891c866fe0a74f0e07f57c5a91a6.jpg" /></p><h2 style="text-align:center">dưỡng ẩm sâu cho vùng da tay khô, nứt nẻ. Sản</h2><p style="text-align:center"><img class="rounded-lg max-w-full h-auto" src="https://i.pinimg.com/736x/a5/e1/7d/a5e17d50989f4bbf5d28614557e147db.jpg" /></p><h2 style="text-align:center">phẩm cải thiện nếp nhăn và vùng chai sạm ở tay, giúp đôi tay bạn khỏe mạnh và tươi trẻ với thành phần sạch và không gây dị ứng.</h2><p style="text-align:center"></p><p style="text-align:center">#skincare</p><p style="text-align:center"></p>', '(Pleasure - xạ hương) Kem Dưỡng Tay Thuần Chay Amuse Vegan Soybean Hand Cream 50ml (HSD dưới 12 tháng)', 'XPL-9624', 'cddce1ef-8fd4-438a-bd1d-d3eee302fe25', 234500.00, NULL, 't', 't', NULL, NULL, NULL, '2026-03-10 13:43:35.582', '2026-03-26 06:51:18.885');
+INSERT INTO "public"."products" VALUES ('f3f7b181-034e-4e28-846e-0a14ac37a821', 'Son Nước Bóng Thuần Chay Amuse Dew Tint 4g', 'son-nuoc-bong-thuan-chay-amuse-dew-tint-4g', '<p style="text-align:center"><strong><em>Công dụng chính:</em></strong><em> Son tint Amuse mang đến màu sắc trong trẻo, sống động, nhẹ nhàng tô điểm cho đôi môi căng mướt với lớp màu không nhòe hay bết dính nhờ lớp phủ nước.</em></p><p style="text-align:center"><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/a7875436-1c69-4b07-a392-093164537347.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/06e7726a-644a-4a62-aefd-9502d2661c2e.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/9ce20549-672c-4391-8a13-f3c1c324cdad.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/ea48541a-3950-4863-a806-3065a9cdcde5.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/ede09350-4d94-4b7c-ac3b-35488a263f50.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/999bfca7-fcce-4e08-b737-685ef2ce16bf.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/23ef3cfa-ff34-4b3d-be94-c76dda1b9c89.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/2672e9a7-fb55-45a5-89f8-3f531a2be0db.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/03166339-2040-4b5f-bee5-22aa9e424c63.webp" /><img class="rounded-lg max-w-full h-auto" src="https://image.hsv-tech.io/bbx/common/573dcd10-9570-4936-ac54-4f748cea2427.webp" /></p><p style="text-align:center"></p><p style="text-align:center">Sở hữu son nước bóng Amuse Dew Tint giúp đôi môi của bạn trông căng bóng rạng rỡ. Sản phẩm tạo hiệu ứng môi đầy đặn, không rãnh môi, không khô sạm nhờ chứa các thành phần dưỡng ẩm và kết cấu 3 lớp nước- dầu-nước.</p><p style="text-align:center">Đây là son môi thuần chay Amuse được lấy cảm hứng từ những cánh hoa đang nở, đầy màu sắc và rạng rỡ. Chứa đến 35% dưỡng chất cung cấp độ ẩm, mang đến lớp màu trong suốt, dewy glow cực kỳ tươi tắn với hiệu ứng nhẹ nhàng, bền màu suốt cả ngày mà không bị trôi.</p><p style="text-align:center">Với phiên bản cải tiến mới từ dòng son bán chạy nhất của Amuse, son Dew Tint bám màu tốt hơn, hạn chế xỉn màu son và duy trì độ bóng lâu dài. Sở hữu 12 tông màu đa dạng với nhiều undertone, có thiết kế độc đáo với hình tượng cúc daisy mang lại vẻ ngoài xinh xắn nổi bật khi mới nhìn vào thỏi son nước này.</p><h2 style="text-align:center"><strong>Điểm nổi bật của son nước Amuse Dew Tint</strong></h2><p style="text-align:center">- Son tint chứa 35% nước mang lại độ bóng mướt tự nhiên trên môi. Kết cấu tươi mát và nhẹ nhàng bám chặt vào môi bạn, với cấu trúc ba thành phần nước-dầu-nước</p><p style="text-align:center">- Tạo lớp phủ bóng trên môi và màu sắc trong như nước mang đến cho đôi môi bạn vẻ tươi tắn và màu sắc lâu trôi</p><p style="text-align:center">- Sở hữu bảng màu sắc tươi tắn, rạng rỡ của Amuse giúp màu sắc tự nhiên của đôi môi rạng rỡ</p><p style="text-align:center">- Son đạt chứng nhận thuần chay từ Eve Vegan của Pháp.</p><p style="text-align:center">- Thiết kế trong suốt mang tính biểu tượng của Amuse với thân vỏ trong suốt, nắp đậy được mô phỏng hình cánh hoa, kết hợp các màu sắc trong trẻo của cánh hoa sương.</p><p style="text-align:center">- Chứa thành phần: chiết xuất từ ​​xoài giúp môi bạn mềm mại và ẩm mượt; Chiết xuất từ ​​táo và Vitamin E acetate bảo vệ môi bạn khỏi môi trường bên ngoài.</p><h2 style="text-align:center"><strong>Bảng màu son Dew Tint</strong></h2><p style="text-align:center">01 La Vie En Coral: hồng san hô</p><p style="text-align:center">02 Breeze: hồng tươi tắn</p><p style="text-align:center">03 Healthy Boksoonga: hồng đào nude</p><p style="text-align:center">04 Pomelo Nude: cam nude</p><p style="text-align:center">05 Strawberry: hồng dâu</p><p style="text-align:center">06 Fig Dew: hồng đất</p><p style="text-align:center">07 Rose Water: hồng hoa hồng</p><p style="text-align:center">08 Amethyst: hồng tím nhạt</p><p style="text-align:center">09 Mauve Grape: tím nho</p><p style="text-align:center">10 Peach Bunny: hồng đào nhạt</p><p style="text-align:center">12 Sunday: hồng đỏ</p><p style="text-align:center">13 Dew Boksoonga: hồng nude</p><p style="text-align:center"><em>*Màu son lên môi sẽ khác nhau, tùy vào sắc độ môi của mỗi người. Đối với các dòng son Amuse, màu son thực tế sẽ có màu khác (nhạt hơn, vì kết cấu dạng tint cho sắc thái trong trẻo, tự nhiên hơn) so với màu vỏ son bên ngoài. Do đó, khách hàng cần tham khảo kỹ trước khi chọn mua</em></p><h2 style="text-align:center"><strong>Hướng dẫn sử dụng</strong></h2><p style="text-align:center">Thoa trực tiếp lên môi, theo sở thích tô lòng môi hoặc full môi</p>', 'Son Nước Bóng Thuần Chay Amuse Dew Tint 4g', '88846591', 'cddce1ef-8fd4-438a-bd1d-d3eee302fe25', 339150.00, NULL, 't', 't', 4.00, NULL, NULL, '2026-03-28 08:00:12.399', '2026-03-28 08:00:12.399');
 
 -- ----------------------------
 -- Table structure for promotion_products
@@ -1035,6 +1105,7 @@ CREATE TABLE "public"."review_helpful" (
 -- Records of review_helpful
 -- ----------------------------
 INSERT INTO "public"."review_helpful" VALUES ('414cd1c0-921e-4215-a0eb-1d7c65cbff60', '504c0305-dbb8-477a-a85b-2aeb500b4459', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 't', '2026-03-18 17:34:22.093');
+INSERT INTO "public"."review_helpful" VALUES ('45c67dda-e31d-4251-9395-8085f5adca2b', 'df20b098-7bc5-4e1d-b81f-4ae187149be2', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 't', '2026-03-25 16:39:43.488');
 
 -- ----------------------------
 -- Table structure for review_images
@@ -1079,6 +1150,29 @@ INSERT INTO "public"."review_replies" VALUES ('33881db5-99ce-45b5-853a-c6b2be1dc
 INSERT INTO "public"."review_replies" VALUES ('d58be8ef-ed09-435c-b33d-d6e6a83e8c63', 'f169ca31-ad22-4460-a802-cbbbcb71ab6f', '2a36312f-f039-4e10-8346-44189bf87362', 'shop cảm on bạn nhiều nha', 'f', '2026-03-21 08:18:08.565', '2026-03-21 08:18:08.565');
 
 -- ----------------------------
+-- Table structure for shared_wishlists
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."shared_wishlists";
+CREATE TABLE "public"."shared_wishlists" (
+  "id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "user_id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "share_token" text COLLATE "pg_catalog"."default" NOT NULL,
+  "title" varchar(255) COLLATE "pg_catalog"."default",
+  "description" text COLLATE "pg_catalog"."default",
+  "is_public" bool NOT NULL DEFAULT false,
+  "expires_at" timestamp(3),
+  "view_count" int4 NOT NULL DEFAULT 0,
+  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(3) NOT NULL
+)
+;
+
+-- ----------------------------
+-- Records of shared_wishlists
+-- ----------------------------
+INSERT INTO "public"."shared_wishlists" VALUES ('63dd199e-42f9-40fd-bdd2-d21a4f8c8f93', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'dadda3b486e3957c3d84353c4597a879', NULL, NULL, 't', '2026-04-28 16:13:00', 4, '2026-03-28 16:14:23.283', '2026-03-28 16:53:49.948');
+
+-- ----------------------------
 -- Table structure for user_role_assignments
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."user_role_assignments";
@@ -1099,6 +1193,7 @@ INSERT INTO "public"."user_role_assignments" VALUES ('019ad73b-4b16-706d-94b3-f7
 INSERT INTO "public"."user_role_assignments" VALUES ('d1f7f430-5d1b-4b8d-8b88-b7cce8b411aa', '24a11dc4-296e-4acb-badf-6d7929d3f7c8', '019ad71b-5d94-7788-8816-5c28161bd32b', '2025-12-11 10:03:26.466', '2025-12-11 10:03:26.466');
 INSERT INTO "public"."user_role_assignments" VALUES ('f5146403-c60b-476c-a2c8-72a43d566268', '56832406-b274-47e6-b3fd-4f8e604253e6', '019ad71b-5d94-7788-8816-5c28161bd32b', '2026-02-26 15:40:17.167', '2026-02-26 15:40:17.167');
 INSERT INTO "public"."user_role_assignments" VALUES ('37ada17c-0436-4940-b9d7-56ab02d29be4', '2a36312f-f039-4e10-8346-44189bf87362', '019ad71c-0363-77dd-8909-2bb9f6360eff', '2026-01-26 09:47:57.23', '2026-01-26 09:47:57.23');
+INSERT INTO "public"."user_role_assignments" VALUES ('d0c3d28e-6898-44e9-916f-1999861c7540', '31a61d3a-1812-4d2d-b8e4-4d27b82eb011', '019ad71c-0363-7ddb-8b7c-fc270e6c33d6', '2026-03-26 14:38:45.734', '2026-03-26 14:38:45.734');
 
 -- ----------------------------
 -- Table structure for user_roles
@@ -1106,19 +1201,19 @@ INSERT INTO "public"."user_role_assignments" VALUES ('37ada17c-0436-4940-b9d7-56
 DROP TABLE IF EXISTS "public"."user_roles";
 CREATE TABLE "public"."user_roles" (
   "id" text COLLATE "pg_catalog"."default" NOT NULL,
-  "name" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" timestamp(3) NOT NULL
+  "updated_at" timestamp(3) NOT NULL,
+  "name" "public"."RoleName" NOT NULL DEFAULT 'CLIENT'::"RoleName"
 )
 ;
 
 -- ----------------------------
 -- Records of user_roles
 -- ----------------------------
-INSERT INTO "public"."user_roles" VALUES ('019ad71b-5d94-7788-8816-5c28161bd32b', 'CLIENT', '2025-12-01 06:31:56', '2025-12-01 06:32:00');
-INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-789f-8218-cf4a01088597', 'COLLABORATOR', '2025-12-01 06:32:37', '2025-12-01 06:32:39');
-INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-7ddb-8b7c-fc270e6c33d6', 'AGENCY', '2025-12-01 06:32:37', '2025-12-01 06:32:39');
-INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-77dd-8909-2bb9f6360eff', 'ADMINISTRATOR', '2025-12-01 06:38:51', '2025-12-01 06:38:54');
+INSERT INTO "public"."user_roles" VALUES ('019ad71b-5d94-7788-8816-5c28161bd32b', '2025-12-01 06:31:56', '2025-12-01 06:32:00', 'CLIENT');
+INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-7ddb-8b7c-fc270e6c33d6', '2025-12-01 06:32:37', '2025-12-01 06:32:39', 'AGENCY');
+INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-77dd-8909-2bb9f6360eff', '2025-12-01 06:38:51', '2025-12-01 06:38:54', 'ADMINISTRATOR');
+INSERT INTO "public"."user_roles" VALUES ('019ad71c-0363-789f-8218-cf4a01088597', '2025-12-01 06:32:37', '2025-12-01 06:32:39', 'CLIENT');
 
 -- ----------------------------
 -- Table structure for users
@@ -1153,9 +1248,31 @@ CREATE TABLE "public"."users" (
 INSERT INTO "public"."users" VALUES ('edfd5d77-bd20-4aec-ae70-4a2976847fa3', 'user1@example.com', 'John', 'Doe', '+1234567891', 'user1', '$2b$10$NhJ/s.Ms5lToR8JCwLzhC.5rqk4EM3mu9ImcX482sM0MYfXdkgogO', '2025-11-30 23:43:53.845', '2026-03-02 09:20:07.159', NULL, 't', 'f', 'f', 'f', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlZGZkNWQ3Ny1iZDIwLTRhZWMtYWU3MC00YTI5NzY4NDdmYTMiLCJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNzY0NTQ3NTMzLCJleHAiOjE3NjcxMzk1MzN9.BcHzJUFFqqVZmaAleh30ZGnnFXnVKDVuAEokqht-y24', NULL);
 INSERT INTO "public"."users" VALUES ('24a11dc4-296e-4acb-badf-6d7929d3f7c8', 'lucan1@lingdethuong.com', 'Nguyễn', 'Lu', '0123456789', 'lucan1', '$2b$10$3RgYDM3n9/3tGFwszsqk5eYVIZid89huDbKVxfYOW.v0mqdqEcYvG', '2025-12-11 10:03:26.466', '2025-12-11 10:29:43.93', '2025-12-11 10:29:43.927', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGExMWRjNC0yOTZlLTRhY2ItYmFkZi02ZDc5MjlkM2Y3YzgiLCJ1c2VybmFtZSI6Imx1Y2FuMSIsImlhdCI6MTc2NTQ0ODYxNywiZXhwIjoxNzY4MDQwNjE3fQ.MtSC0YTOA4uwmuZjHT0TGr55g8nGOPgc3etxdnXHLJE', NULL);
 INSERT INTO "public"."users" VALUES ('56832406-b274-47e6-b3fd-4f8e604253e6', 'devyuki2005@imail.edu.vnde', 'Uyển Nhi', 'Nguyễn Ngọc', '0363639639636', 'yeudauvai3003', '$2b$10$YkNCwrKG0qMSb2DDAluCNeMsUJ6sKwVU4aqrxv5rd3GBcW6Vv7JKe', '2026-02-26 15:40:17.167', '2026-02-26 15:40:17.167', NULL, 't', 'f', 'f', 'f', 'f', 'f', NULL, NULL, NULL);
-INSERT INTO "public"."users" VALUES ('bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'Hàn Tiểu', 'Ling', '+1234567890', 'htligz', '$2b$10$P2vJiwVIE4TIJ7fW9cYaXe24qV8W0QnjsgmN8KwpZCRUC5VpGKile', '2025-11-05 17:44:38.293', '2026-03-21 06:07:48.738', '2026-01-30 08:29:35.591', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZDlmZGNjMS01MjQ3LTQ5YTItOWVkNC0xZjAwNWRkNDdjZDIiLCJ1c2VybmFtZSI6Imh0bGlneiIsImlhdCI6MTc3NDA3MzI2OCwiZXhwIjoxNzc2NjY1MjY4fQ.L55tuYQfZlI8ssktU3q6u9d3rtDZB14QhoG81BpPIUE', '510ac388-76b1-4158-954d-ef3e7753d31a');
-INSERT INTO "public"."users" VALUES ('2a36312f-f039-4e10-8346-44189bf87362', 'ogyminecraft497@gmail.com', 'Lý', 'Vân Tư', '0363636363', 'yukidev2005', '$2b$10$kj2m97sva9IfBNUz/LynDe4XhDHvmHA2sFDg7QUWCjKENWDRkuXra', '2026-01-26 09:47:57.23', '2026-03-21 07:10:06.964', '2026-02-05 04:39:36.61', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyYTM2MzEyZi1mMDM5LTRlMTAtODM0Ni00NDE4OWJmODczNjIiLCJ1c2VybmFtZSI6Inl1a2lkZXYyMDA1IiwiaWF0IjoxNzc0MDc3MDA2LCJleHAiOjE3NzY2NjkwMDZ9.VUMkoMw0Szozfx5paQJZDwTEiOMdrOZ5Snhib0KbjQg', 'f36e928a-b6c8-4f21-b6cf-0f67bb59edeb');
-INSERT INTO "public"."users" VALUES ('4f1a4a71-8afc-4609-9f21-97c5e25f816a', 'alovuavu222@gmail.com', 'pham thi', ' yen vy', '036363636', 'vyyyy', '$2b$10$TfGcm1ifVE2LC9jbePscSufY8Tnv92Rlu7cHQMV6EdlSj1JoPaneW', '2026-03-02 09:33:16.426', '2026-03-05 08:20:49.782', '2026-03-02 09:33:16.424', 'f', 't', 'f', 'f', 'f', 'f', '2026-03-02 09:33:16.424', NULL, NULL);
+INSERT INTO "public"."users" VALUES ('4f1a4a71-8afc-4609-9f21-97c5e25f816a', 'alovuavu222@gmail.com', 'pham thi', ' yen vy', '036363636', 'vyyyy', '$2b$10$TfGcm1ifVE2LC9jbePscSufY8Tnv92Rlu7cHQMV6EdlSj1JoPaneW', '2026-03-02 09:33:16.426', '2026-03-26 14:36:18.307', '2026-03-02 09:33:16.424', 'f', 't', 'f', 'f', 'f', 'f', '2026-03-02 09:33:16.424', NULL, NULL);
+INSERT INTO "public"."users" VALUES ('31a61d3a-1812-4d2d-b8e4-4d27b82eb011', 'ogyminecraft497+taybocha@gmail.com', 'Độ', 'Phùng Thanh', '0356618545', 'taybocha3636', '$2b$10$2eojdX27emt7c3ihsoYc0OPve3X/VnEPHkSiLCWLfYba5pXHtjwNe', '2026-03-26 14:38:09.846', '2026-03-26 14:38:45.553', NULL, 't', 'f', 'f', 't', 't', 't', NULL, NULL, NULL);
+INSERT INTO "public"."users" VALUES ('bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'admin@lingdethuong.com', 'Hàn Tiểu', 'Ling', '+1234567890', 'htligz', '$2b$10$P2vJiwVIE4TIJ7fW9cYaXe24qV8W0QnjsgmN8KwpZCRUC5VpGKile', '2025-11-05 17:44:38.293', '2026-03-28 05:48:03.254', '2026-01-30 08:29:35.591', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZDlmZGNjMS01MjQ3LTQ5YTItOWVkNC0xZjAwNWRkNDdjZDIiLCJ1c2VybmFtZSI6Imh0bGlneiIsImlhdCI6MTc3NDY3Njg4MywiZXhwIjoxNzc3MjY4ODgzfQ.TlVdrI7OE3fX-99iXYqI5ks3YVWiJ0E1HJMKN2caNN4', '510ac388-76b1-4158-954d-ef3e7753d31a');
+INSERT INTO "public"."users" VALUES ('2a36312f-f039-4e10-8346-44189bf87362', 'ogyminecraft497@gmail.com', 'Lý', 'Vân Tư', '0363636363', 'yukidev2005', '$2b$10$kj2m97sva9IfBNUz/LynDe4XhDHvmHA2sFDg7QUWCjKENWDRkuXra', '2026-01-26 09:47:57.23', '2026-03-28 07:13:42.338', '2026-02-05 04:39:36.61', 't', 'f', 'f', 't', 'f', 'f', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyYTM2MzEyZi1mMDM5LTRlMTAtODM0Ni00NDE4OWJmODczNjIiLCJ1c2VybmFtZSI6Inl1a2lkZXYyMDA1IiwiaWF0IjoxNzc0NjgyMDIyLCJleHAiOjE3NzcyNzQwMjJ9.jjep0yf2_Xxisv7kGGitqFK1a_1Di8SL3s5yMaG8lgs', 'f36e928a-b6c8-4f21-b6cf-0f67bb59edeb');
+
+-- ----------------------------
+-- Table structure for wishlists
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."wishlists";
+CREATE TABLE "public"."wishlists" (
+  "id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "user_id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "product_id" text COLLATE "pg_catalog"."default" NOT NULL,
+  "variant_id" text COLLATE "pg_catalog"."default",
+  "note" text COLLATE "pg_catalog"."default",
+  "created_at" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(3) NOT NULL
+)
+;
+
+-- ----------------------------
+-- Records of wishlists
+-- ----------------------------
+INSERT INTO "public"."wishlists" VALUES ('3be00c20-23c0-4e31-9406-5f4f3d12fcbb', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', '139e4863-8f90-4cc4-8aad-3cb004a0759c', NULL, NULL, '2026-03-28 16:59:30.653', '2026-03-28 16:59:30.653');
+INSERT INTO "public"."wishlists" VALUES ('47d39153-3fb4-47a9-83cb-4f35792524b1', 'bd9fdcc1-5247-49a2-9ed4-1f005dd47cd2', 'e6d50dd9-7784-4f8a-82f4-2c84403a050c', NULL, NULL, '2026-03-28 16:59:30.786', '2026-03-28 16:59:30.786');
 
 -- ----------------------------
 -- Indexes structure for table addresses
@@ -1618,25 +1735,6 @@ CREATE INDEX "product_badges_product_id_idx" ON "public"."product_badges" USING 
 ALTER TABLE "public"."product_badges" ADD CONSTRAINT "product_badges_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
--- Indexes structure for table product_categories
--- ----------------------------
-CREATE INDEX "product_categories_category_id_idx" ON "public"."product_categories" USING btree (
-  "category_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
-);
-CREATE UNIQUE INDEX "product_categories_product_id_category_id_key" ON "public"."product_categories" USING btree (
-  "product_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
-  "category_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
-);
-CREATE INDEX "product_categories_product_id_idx" ON "public"."product_categories" USING btree (
-  "product_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
-);
-
--- ----------------------------
--- Primary Key structure for table product_categories
--- ----------------------------
-ALTER TABLE "public"."product_categories" ADD CONSTRAINT "product_categories_pkey" PRIMARY KEY ("id");
-
--- ----------------------------
 -- Indexes structure for table product_images
 -- ----------------------------
 CREATE INDEX "product_images_media_id_idx" ON "public"."product_images" USING btree (
@@ -1862,6 +1960,24 @@ CREATE INDEX "review_replies_user_id_idx" ON "public"."review_replies" USING btr
 ALTER TABLE "public"."review_replies" ADD CONSTRAINT "review_replies_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
+-- Indexes structure for table shared_wishlists
+-- ----------------------------
+CREATE INDEX "shared_wishlists_share_token_idx" ON "public"."shared_wishlists" USING btree (
+  "share_token" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE UNIQUE INDEX "shared_wishlists_share_token_key" ON "public"."shared_wishlists" USING btree (
+  "share_token" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE INDEX "shared_wishlists_user_id_idx" ON "public"."shared_wishlists" USING btree (
+  "user_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table shared_wishlists
+-- ----------------------------
+ALTER TABLE "public"."shared_wishlists" ADD CONSTRAINT "shared_wishlists_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
 -- Indexes structure for table user_role_assignments
 -- ----------------------------
 CREATE INDEX "user_role_assignments_role_id_idx" ON "public"."user_role_assignments" USING btree (
@@ -1884,7 +2000,7 @@ ALTER TABLE "public"."user_role_assignments" ADD CONSTRAINT "user_role_assignmen
 -- Indexes structure for table user_roles
 -- ----------------------------
 CREATE INDEX "user_roles_name_idx" ON "public"."user_roles" USING btree (
-  "name" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+  "name" "pg_catalog"."enum_ops" ASC NULLS LAST
 );
 
 -- ----------------------------
@@ -1921,6 +2037,26 @@ CREATE UNIQUE INDEX "users_username_key" ON "public"."users" USING btree (
 -- Primary Key structure for table users
 -- ----------------------------
 ALTER TABLE "public"."users" ADD CONSTRAINT "users_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table wishlists
+-- ----------------------------
+CREATE INDEX "wishlists_product_id_idx" ON "public"."wishlists" USING btree (
+  "product_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE INDEX "wishlists_user_id_idx" ON "public"."wishlists" USING btree (
+  "user_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+CREATE UNIQUE INDEX "wishlists_user_id_product_id_variant_id_key" ON "public"."wishlists" USING btree (
+  "user_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
+  "product_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST,
+  "variant_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table wishlists
+-- ----------------------------
+ALTER TABLE "public"."wishlists" ADD CONSTRAINT "wishlists_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Foreign Keys structure for table addresses
@@ -2036,12 +2172,6 @@ ALTER TABLE "public"."payments" ADD CONSTRAINT "payments_order_id_fkey" FOREIGN 
 ALTER TABLE "public"."product_badges" ADD CONSTRAINT "product_badges_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
--- Foreign Keys structure for table product_categories
--- ----------------------------
-ALTER TABLE "public"."product_categories" ADD CONSTRAINT "product_categories_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "public"."categories" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE "public"."product_categories" ADD CONSTRAINT "product_categories_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- ----------------------------
 -- Foreign Keys structure for table product_images
 -- ----------------------------
 ALTER TABLE "public"."product_images" ADD CONSTRAINT "product_images_media_id_fkey" FOREIGN KEY ("media_id") REFERENCES "public"."media" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -2107,6 +2237,11 @@ ALTER TABLE "public"."review_replies" ADD CONSTRAINT "review_replies_review_id_f
 ALTER TABLE "public"."review_replies" ADD CONSTRAINT "review_replies_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
+-- Foreign Keys structure for table shared_wishlists
+-- ----------------------------
+ALTER TABLE "public"."shared_wishlists" ADD CONSTRAINT "shared_wishlists_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- ----------------------------
 -- Foreign Keys structure for table user_role_assignments
 -- ----------------------------
 ALTER TABLE "public"."user_role_assignments" ADD CONSTRAINT "user_role_assignments_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "public"."user_roles" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -2116,3 +2251,10 @@ ALTER TABLE "public"."user_role_assignments" ADD CONSTRAINT "user_role_assignmen
 -- Foreign Keys structure for table users
 -- ----------------------------
 ALTER TABLE "public"."users" ADD CONSTRAINT "users_avatar_media_id_fkey" FOREIGN KEY ("avatar_media_id") REFERENCES "public"."media" ("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- ----------------------------
+-- Foreign Keys structure for table wishlists
+-- ----------------------------
+ALTER TABLE "public"."wishlists" ADD CONSTRAINT "wishlists_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."wishlists" ADD CONSTRAINT "wishlists_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "public"."wishlists" ADD CONSTRAINT "wishlists_variant_id_fkey" FOREIGN KEY ("variant_id") REFERENCES "public"."product_variants" ("id") ON DELETE CASCADE ON UPDATE CASCADE;

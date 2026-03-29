@@ -15,6 +15,8 @@ model FlashSale {
   endTime     DateTime        @map("end_time")
   status      FlashSaleStatus @default(UPCOMING)
   isActive    Boolean         @default(true) @map("is_active")
+  isDeleted   Boolean         @default(false) @map("is_deleted")
+  deletedAt   DateTime?       @map("deleted_at")
   sortOrder   Int             @default(0) @map("sort_order")
   createdAt   DateTime        @default(now()) @map("created_at")
   updatedAt   DateTime        @updatedAt @map("updated_at")
@@ -27,6 +29,7 @@ model FlashSale {
   @@index([endTime])
   @@index([status])
   @@index([isActive])
+  @@index([isDeleted])
   @@map("flash_sales")
 }
 
@@ -45,9 +48,9 @@ model FlashSaleProduct {
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
-  flashSale FlashSale      @relation(fields: [flashSaleId], references: [id], onDelete: Cascade)
-  product   Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  flashSale FlashSale      @relation(fields: [flashSaleId], references: [id], onDelete: Restrict)
+  product   Product        @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
 
   @@unique([flashSaleId, productId, variantId])
   @@index([flashSaleId])
@@ -63,8 +66,8 @@ model FlashSaleOrder {
   orderId     String   @unique @map("order_id")
   createdAt   DateTime @default(now()) @map("created_at")
 
-  flashSale FlashSale @relation(fields: [flashSaleId], references: [id], onDelete: Cascade)
-  order     Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  flashSale FlashSale @relation(fields: [flashSaleId], references: [id], onDelete: Restrict)
+  order     Order     @relation(fields: [orderId], references: [id], onDelete: Restrict)
 
   @@index([flashSaleId])
   @@index([orderId])

@@ -1,18 +1,20 @@
 model ProductReview {
-  id           String   @id @default(uuid())
-  productId    String   @map("product_id")
-  userId       String   @map("user_id")
-  rating       Int      @db.SmallInt
-  title        String?  @db.VarChar(255)
-  comment      String?  @db.Text
-  isVerified   Boolean  @default(false) @map("is_verified")
-  isApproved   Boolean  @default(false) @map("is_approved")
-  helpfulCount Int      @default(0) @map("helpful_count")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id           String    @id @default(uuid())
+  productId    String    @map("product_id")
+  userId       String    @map("user_id")
+  rating       Int       @db.SmallInt
+  title        String?   @db.VarChar(255)
+  comment      String?   @db.Text
+  isVerified   Boolean   @default(false) @map("is_verified")
+  isApproved   Boolean   @default(false) @map("is_approved")
+  isDeleted    Boolean   @default(false) @map("is_deleted")
+  deletedAt    DateTime? @map("deleted_at")
+  helpfulCount Int       @default(0) @map("helpful_count")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
 
-  product      Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product      Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  user         User            @relation(fields: [userId], references: [id], onDelete: Restrict)
   reviewImages ReviewImage[]
   replies      ReviewReply[]
   helpfulMarks ReviewHelpful[]
@@ -21,6 +23,7 @@ model ProductReview {
   @@index([productId])
   @@index([userId])
   @@index([rating])
+  @@index([isDeleted])
   @@map("product_reviews")
 }
 
@@ -31,8 +34,8 @@ model ReviewImage {
   alt       String?  @db.VarChar(255)
   createdAt DateTime @default(now()) @map("created_at")
 
-  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
-  media  Media         @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Restrict)
+  media  Media         @relation(fields: [mediaId], references: [id], onDelete: Restrict)
 
   @@index([reviewId])
   @@index([mediaId])
@@ -40,19 +43,22 @@ model ReviewImage {
 }
 
 model ReviewReply {
-  id        String   @id @default(uuid())
-  reviewId  String   @map("review_id")
-  userId    String   @map("user_id")
-  content   String   @db.Text
-  isAdmin   Boolean  @default(false) @map("is_admin")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id        String    @id @default(uuid())
+  reviewId  String    @map("review_id")
+  userId    String    @map("user_id")
+  content   String    @db.Text
+  isAdmin   Boolean   @default(false) @map("is_admin")
+  isDeleted Boolean   @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
-  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
-  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Restrict)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Restrict)
 
   @@index([reviewId])
   @@index([userId])
+  @@index([isDeleted])
   @@map("review_replies")
 }
 
@@ -63,8 +69,8 @@ model ReviewHelpful {
   isHelpful Boolean  @map("is_helpful")
   createdAt DateTime @default(now()) @map("created_at")
 
-  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
-  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review ProductReview @relation(fields: [reviewId], references: [id], onDelete: Restrict)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Restrict)
 
   @@unique([reviewId, userId])
   @@index([reviewId])

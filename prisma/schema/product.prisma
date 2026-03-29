@@ -11,6 +11,8 @@ model Category {
   imageMediaId String?      @map("image_media_id")
   parentId     String?      @map("parent_id")
   isActive     Boolean      @default(true) @map("is_active")
+  isDeleted    Boolean      @default(false) @map("is_deleted")
+  deletedAt    DateTime?    @map("deleted_at")
   sortOrder    Int          @default(0) @map("sort_order")
   createdAt    DateTime     @default(now()) @map("created_at")
   updatedAt    DateTime     @updatedAt @map("updated_at")
@@ -19,53 +21,59 @@ model Category {
 
   parent            Category?         @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
   children          Category[]        @relation("CategoryTree")
-  imageMedia        Media?            @relation("CategoryImage", fields: [imageMediaId], references: [id], onDelete: SetNull)
+  imageMedia        Media?            @relation("CategoryImage", fields: [imageMediaId], references: [id], onDelete: Restrict)
   brand             Brand?            @relation("BrandCategory", fields: [brandId], references: [id], onDelete: SetNull)
   productCategories ProductCategory[]
 
   @@index([slug])
   @@index([parentId])
   @@index([imageMediaId])
+  @@index([isDeleted])
   @@map("categories")
 }
 
 model Brand {
-  id          String   @id @default(uuid())
-  name        String   @db.VarChar(255)
-  slug        String   @unique @db.VarChar(255)
-  description String?  @db.Text
-  logoMediaId String?  @map("logo_media_id")
-  website     String?  @db.VarChar(500)
-  isActive    Boolean  @default(true) @map("is_active")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(255)
+  slug        String    @unique @db.VarChar(255)
+  description String?   @db.Text
+  logoMediaId String?   @map("logo_media_id")
+  website     String?   @db.VarChar(500)
+  isActive    Boolean   @default(true) @map("is_active")
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  deletedAt   DateTime? @map("deleted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
 
   products   Product[]
-  logoMedia  Media?     @relation("BrandLogo", fields: [logoMediaId], references: [id], onDelete: SetNull)
+  logoMedia  Media?     @relation("BrandLogo", fields: [logoMediaId], references: [id], onDelete: Restrict)
   categories Category[] @relation("BrandCategory")
 
   @@index([slug])
   @@index([logoMediaId])
+  @@index([isDeleted])
   @@map("brands")
 }
 
 model Product {
-  id           String   @id @default(uuid())
-  name         String   @db.VarChar(255)
-  slug         String   @unique @db.VarChar(255)
-  description  String?  @db.Text
-  shortDesc    String?  @map("short_desc") @db.VarChar(500)
-  sku          String   @unique @db.VarChar(100)
-  brandId      String?  @map("brand_id")
-  basePrice    Decimal  @map("base_price") @db.Decimal(10, 2)
-  comparePrice Decimal? @map("compare_price") @db.Decimal(10, 2)
-  isActive     Boolean  @default(true) @map("is_active")
-  isFeatured   Boolean  @default(false) @map("is_featured")
-  weight       Decimal? @db.Decimal(8, 2)
-  metaTitle    String?  @map("meta_title") @db.VarChar(255)
-  metaDesc     String?  @map("meta_desc") @db.Text
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id           String    @id @default(uuid())
+  name         String    @db.VarChar(255)
+  slug         String    @unique @db.VarChar(255)
+  description  String?   @db.Text
+  shortDesc    String?   @map("short_desc") @db.VarChar(500)
+  sku          String    @unique @db.VarChar(100)
+  brandId      String?   @map("brand_id")
+  basePrice    Decimal   @map("base_price") @db.Decimal(10, 2)
+  comparePrice Decimal?  @map("compare_price") @db.Decimal(10, 2)
+  isActive     Boolean   @default(true) @map("is_active")
+  isFeatured   Boolean   @default(false) @map("is_featured")
+  isDeleted    Boolean   @default(false) @map("is_deleted")
+  deletedAt    DateTime? @map("deleted_at")
+  weight       Decimal?  @db.Decimal(8, 2)
+  metaTitle    String?   @map("meta_title") @db.VarChar(255)
+  metaDesc     String?   @map("meta_desc") @db.Text
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
 
   brand             Brand?             @relation(fields: [brandId], references: [id], onDelete: SetNull)
   badges            ProductBadge[]
@@ -86,6 +94,7 @@ model Product {
   @@index([slug])
   @@index([brandId])
   @@index([sku])
+  @@index([isDeleted])
   @@map("products")
 }
 
@@ -113,7 +122,7 @@ model ProductBadge {
   createdAt DateTime            @default(now()) @map("created_at")
   updatedAt DateTime            @updatedAt @map("updated_at")
 
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
 
   @@index([productId])
   @@map("product_badges")
@@ -135,10 +144,12 @@ model ProductVariant {
   price       Decimal            @db.Decimal(10, 2)
   displayType VariantDisplayType @default(COLOR) @map("display_type")
   sortOrder   Int                @default(0) @map("sort_order")
+  isDeleted   Boolean            @default(false) @map("is_deleted")
+  deletedAt   DateTime?          @map("deleted_at")
   createdAt   DateTime           @default(now()) @map("created_at")
   updatedAt   DateTime           @updatedAt @map("updated_at")
 
-  product           Product            @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product           Product            @relation(fields: [productId], references: [id], onDelete: Restrict)
   inventory         ProductInventory?
   images            ProductImage[]
   orderItems        OrderItem[]
@@ -148,6 +159,7 @@ model ProductVariant {
 
   @@index([productId])
   @@index([sku])
+  @@index([isDeleted])
   @@map("product_variants")
 }
 
@@ -161,9 +173,9 @@ model ProductImage {
   isPrimary Boolean  @default(false) @map("is_primary")
   createdAt DateTime @default(now()) @map("created_at")
 
-  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
-  media   Media           @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  product Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Restrict)
+  media   Media           @relation(fields: [mediaId], references: [id], onDelete: Restrict)
 
   @@index([productId])
   @@index([mediaId])
@@ -190,8 +202,8 @@ model ProductInventory {
   createdAt         DateTime                      @default(now()) @map("created_at")
   updatedAt         DateTime                      @updatedAt @map("updated_at")
 
-  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  product Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Restrict)
 
   @@index([productId])
   @@index([variantId])
@@ -204,8 +216,8 @@ model ProductCategory {
   categoryId String   @map("category_id")
   createdAt  DateTime @default(now()) @map("created_at")
 
-  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   @@unique([productId, categoryId])
   @@index([productId])
@@ -230,8 +242,8 @@ model ProductQuestion {
   createdAt  DateTime              @default(now()) @map("created_at")
   updatedAt  DateTime              @updatedAt @map("updated_at")
 
-  product        Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user           User    @relation("UserQuestions", fields: [userId], references: [id], onDelete: Cascade)
+  product        Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  user           User    @relation("UserQuestions", fields: [userId], references: [id], onDelete: Restrict)
   answeredByUser User?   @relation("UserAnswers", fields: [answeredBy], references: [id], onDelete: SetNull)
 
   @@index([productId])
