@@ -4,6 +4,10 @@ import { BusinessException } from 'src/exceptions/business.exception';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
+import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
@@ -50,8 +54,8 @@ export class ProductQuestionService {
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
     try {
       // Check if product exists
-      const product = await this.prisma.product.findUnique({
-        where: { id: dto.productId },
+      const product = await this.prisma.product.findFirst({
+        where: withoutDeleted({ id: dto.productId }),
         select: { id: true },
       });
 
@@ -104,11 +108,11 @@ export class ProductQuestionService {
     } = await processDataObject(params);
 
     try {
-      const whereQuery = {
+      const whereQuery = withoutDeleted({
         ...(productId && { productId }),
         ...(userId && { userId }),
         ...(status && { status }),
-      };
+      });
 
       const [questions, totalCount] = await Promise.all([
         this.prisma.productQuestion.findMany({
@@ -164,10 +168,10 @@ export class ProductQuestionService {
     } = params;
 
     try {
-      const whereQuery = {
+      const whereQuery = withoutDeleted({
         userId,
         ...(status && { status }),
-      };
+      });
 
       const [questions, totalCount] = await Promise.all([
         this.prisma.productQuestion.findMany({
@@ -212,8 +216,8 @@ export class ProductQuestionService {
     questionId: string,
   ): Promise<IBeforeTransformResponseType<QuestionWithProductResponseDto>> {
     try {
-      const question = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const question = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: questionWithProductSelect,
       });
 
@@ -248,8 +252,8 @@ export class ProductQuestionService {
     dto: UpdateQuestionDto,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
     try {
-      const existingQuestion = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const existingQuestion = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: { id: true, userId: true, status: true },
       });
 
@@ -305,8 +309,8 @@ export class ProductQuestionService {
     questionId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const existingQuestion = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const existingQuestion = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: { id: true, userId: true },
       });
 
@@ -324,8 +328,9 @@ export class ProductQuestionService {
         );
       }
 
-      await this.prisma.productQuestion.delete({
+      await this.prisma.productQuestion.update({
         where: { id: questionId },
+        data: softDeleteData(),
       });
 
       return {
@@ -351,8 +356,8 @@ export class ProductQuestionService {
     dto: AnswerQuestionDto,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
     try {
-      const existingQuestion = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const existingQuestion = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: { id: true },
       });
 
@@ -367,8 +372,8 @@ export class ProductQuestionService {
       const answeredByUserId = dto.answeredBy;
 
       if (dto.answeredBy) {
-        const answeredByUser = await this.prisma.user.findUnique({
-          where: { id: dto.answeredBy },
+        const answeredByUser = await this.prisma.user.findFirst({
+          where: withoutDeleted({ id: dto.answeredBy }),
           select: {
             id: true,
             roleAssignments: {
@@ -435,8 +440,8 @@ export class ProductQuestionService {
     dto: AnswerQuestionDto,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
     try {
-      const existingQuestion = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const existingQuestion = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: { id: true, status: true },
       });
 
@@ -458,8 +463,8 @@ export class ProductQuestionService {
       const answeredByUserId = dto.answeredBy;
 
       if (dto.answeredBy) {
-        const answeredByUser = await this.prisma.user.findUnique({
-          where: { id: dto.answeredBy },
+        const answeredByUser = await this.prisma.user.findFirst({
+          where: withoutDeleted({ id: dto.answeredBy }),
           select: {
             id: true,
             roleAssignments: {
@@ -527,8 +532,8 @@ export class ProductQuestionService {
     questionId: string,
   ): Promise<IBeforeTransformResponseType<QuestionResponseDto>> {
     try {
-      const existingQuestion = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const existingQuestion = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: { id: true, status: true },
       });
 
@@ -578,8 +583,8 @@ export class ProductQuestionService {
     questionId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      const existingQuestion = await this.prisma.productQuestion.findUnique({
-        where: { id: questionId },
+      const existingQuestion = await this.prisma.productQuestion.findFirst({
+        where: withoutDeleted({ id: questionId }),
         select: { id: true },
       });
 
@@ -590,8 +595,9 @@ export class ProductQuestionService {
         );
       }
 
-      await this.prisma.productQuestion.delete({
+      await this.prisma.productQuestion.update({
         where: { id: questionId },
+        data: softDeleteData(),
       });
 
       return {
@@ -626,8 +632,8 @@ export class ProductQuestionService {
 
     try {
       // Check if product exists
-      const product = await this.prisma.product.findUnique({
-        where: { id: productId },
+      const product = await this.prisma.product.findFirst({
+        where: withoutDeleted({ id: productId }),
         select: { id: true },
       });
 
@@ -638,11 +644,11 @@ export class ProductQuestionService {
         );
       }
 
-      const whereQuery = {
+      const whereQuery = withoutDeleted({
         productId,
         isPublic: true,
         ...(status && { status }),
-      };
+      });
 
       const [questions, totalCount] = await Promise.all([
         this.prisma.productQuestion.findMany({

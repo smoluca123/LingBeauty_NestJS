@@ -21,6 +21,10 @@ import {
   Prisma,
 } from 'prisma/generated/prisma/client';
 import { StatsService } from 'src/modules/stats/stats.service';
+import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
 
 export interface GetOrdersParams {
   page?: number;
@@ -51,10 +55,10 @@ export class OrderService {
     try {
       // Validate địa chỉ giao hàng
       const shippingAddress = await this.prismaService.address.findFirst({
-        where: {
+        where: withoutDeleted({
           id: dto.shippingAddressId,
           userId,
-        },
+        }),
       });
 
       if (!shippingAddress) {
@@ -67,8 +71,8 @@ export class OrderService {
       // Validate và tính toán giá cho từng item
       const orderItemsData = await Promise.all(
         dto.items.map(async (item) => {
-          const variant = await this.prismaService.productVariant.findUnique({
-            where: { id: item.variantId },
+          const variant = await this.prismaService.productVariant.findFirst({
+            where: withoutDeleted({ id: item.variantId }),
             include: {
               product: {
                 select: {
@@ -184,8 +188,8 @@ export class OrderService {
 
       // Áp dụng coupon nếu có
       if (dto.couponCode) {
-        const coupon = await this.prismaService.coupon.findUnique({
-          where: { code: dto.couponCode },
+        const coupon = await this.prismaService.coupon.findFirst({
+          where: withoutDeleted({ code: dto.couponCode }),
         });
 
         if (!coupon || !coupon.isActive) {
@@ -348,8 +352,8 @@ export class OrderService {
         }
 
         // Xóa cart items nếu đặt hàng từ giỏ hàng
-        const cart = await tx.cart.findUnique({
-          where: { userId },
+        const cart = await tx.cart.findFirst({
+          where: withoutDeleted({ userId }),
           select: { id: true },
         });
 
@@ -417,14 +421,14 @@ export class OrderService {
 
       const [orders, totalCount] = await Promise.all([
         this.prismaService.order.findMany({
-          where: whereQuery,
+          where: withoutDeleted(whereQuery),
           select: orderListSelect,
           orderBy: { [sortBy]: order },
           skip: (page - 1) * limit,
           take: limit,
         }),
         this.prismaService.order.count({
-          where: whereQuery,
+          where: withoutDeleted(whereQuery),
         }),
       ]);
 
@@ -468,13 +472,13 @@ export class OrderService {
     userId?: string,
   ): Promise<IBeforeTransformResponseType<OrderResponseDto>> {
     try {
-      const whereQuery: Prisma.OrderWhereUniqueInput = {
+      const whereQuery: Prisma.OrderWhereInput = {
         id: orderId,
         ...(userId && { userId }),
       };
 
-      const order = await this.prismaService.order.findUnique({
-        where: whereQuery,
+      const order = await this.prismaService.order.findFirst({
+        where: withoutDeleted(whereQuery),
         select: orderSelect,
       });
 
@@ -645,6 +649,18 @@ export class OrderService {
               });
             }
           }
+
+          // Soft delete all OrderItems first
+          await tx.orderItem.updateMany({
+            where: { orderId },
+            data: softDeleteData(),
+          });
+
+          // Then soft delete the Order
+          await tx.order.update({
+            where: { id: orderId },
+            data: softDeleteData(),
+          });
 
           return updated;
         },

@@ -17,9 +17,11 @@ export const orderItemSelect = {
   createdAt: true,
   product: {
     select: productSelect,
+    // where: { isDeleted: false },
   },
   variant: {
     select: productVariantSelect,
+    // where: { isDeleted: false },
   },
 } satisfies Prisma.OrderItemSelect;
 
@@ -63,9 +65,11 @@ export const orderSelect = {
   updatedAt: true,
   user: {
     select: userSelect,
+    // where: { isDeleted: false },
   },
   shippingAddress: {
     select: addressSelect,
+    where: { isDeleted: false },
   },
   items: {
     select: orderItemSelect,
@@ -97,6 +101,7 @@ export const orderListSelect = {
       firstName: true,
       lastName: true,
     },
+    // where: { isDeleted: false },
   },
   items: {
     select: {

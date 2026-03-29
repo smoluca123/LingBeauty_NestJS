@@ -72,6 +72,10 @@ export const cartSelect = {
   items: {
     select: cartItemSelect,
     orderBy: { createdAt: 'desc' as const },
+    where: {
+      product: { isDeleted: false },
+      variant: { isDeleted: false },
+    },
   },
 } satisfies Prisma.CartSelect;
 

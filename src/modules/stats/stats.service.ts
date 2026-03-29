@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from 'prisma/generated/prisma/client';
 import { PrismaService } from 'src/services/prisma/prisma.service';
+import { withoutDeleted } from 'src/libs/prisma/soft-delete.helpers';
 import {
   AggregatedStatsDto,
   DailyStatsDto,
@@ -93,35 +94,39 @@ export class StatsService {
       totalProducts,
       totalReviews,
     ] = await this.prismaService.$transaction([
-      this.prismaService.user.count({ where: { isDeleted: false } }),
+      this.prismaService.user.count({ where: withoutDeleted() }),
       this.prismaService.user.count({
-        where: { createdAt: { gte: startOfToday } },
+        where: withoutDeleted({ createdAt: { gte: startOfToday } }),
       }),
       this.prismaService.user.count({
-        where: { createdAt: { gte: startOfMonth } },
+        where: withoutDeleted({ createdAt: { gte: startOfMonth } }),
       }),
-      this.prismaService.order.count(),
-      this.prismaService.order.count({ where: { status: 'PENDING' } }),
+      this.prismaService.order.count({ where: withoutDeleted() }),
+      this.prismaService.order.count({
+        where: withoutDeleted({ status: 'PENDING' }),
+      }),
       this.prismaService.order.aggregate({
-        where: { status: { in: ['DELIVERED', 'CONFIRMED'] } },
+        where: withoutDeleted({ status: { in: ['DELIVERED', 'CONFIRMED'] } }),
         _sum: { total: true },
       }),
       this.prismaService.order.aggregate({
-        where: {
+        where: withoutDeleted({
           status: { in: ['DELIVERED', 'CONFIRMED'] },
           createdAt: { gte: startOfToday },
-        },
+        }),
         _sum: { total: true },
       }),
       this.prismaService.order.aggregate({
-        where: {
+        where: withoutDeleted({
           status: { in: ['DELIVERED', 'CONFIRMED'] },
           createdAt: { gte: startOfMonth },
-        },
+        }),
         _sum: { total: true },
       }),
-      this.prismaService.product.count({ where: { isActive: true } }),
-      this.prismaService.productReview.count(),
+      this.prismaService.product.count({
+        where: withoutDeleted({ isActive: true }),
+      }),
+      this.prismaService.productReview.count({ where: withoutDeleted() }),
     ]);
 
     return {
@@ -270,10 +275,10 @@ export class StatsService {
       : this.getDefaultStartDate(period, new Date());
 
     const orders = await this.prismaService.order.findMany({
-      where: {
+      where: withoutDeleted({
         status: { in: ['DELIVERED', 'CONFIRMED'] },
         createdAt: { gte: start, lte: end },
-      },
+      }),
       select: { total: true, createdAt: true },
       orderBy: { createdAt: 'asc' },
     });
@@ -331,7 +336,9 @@ export class StatsService {
 
     const counts = await this.prismaService.$transaction(
       statuses.map((status) =>
-        this.prismaService.order.count({ where: { status } }),
+        this.prismaService.order.count({
+          where: withoutDeleted({ status }),
+        }),
       ),
     );
 
@@ -404,45 +411,54 @@ export class StatsService {
       newReviews,
       approvedReviews,
     ] = await this.prismaService.$transaction([
-      this.prismaService.user.count({ where: { isDeleted: false } }),
+      this.prismaService.user.count({ where: withoutDeleted() }),
       this.prismaService.user.count({
-        where: { createdAt: { gte: startOfToday, lt: endOfToday } },
+        where: withoutDeleted({
+          createdAt: { gte: startOfToday, lt: endOfToday },
+        }),
       }),
       this.prismaService.order.count({
-        where: { createdAt: { gte: startOfToday, lt: endOfToday } },
+        where: withoutDeleted({
+          createdAt: { gte: startOfToday, lt: endOfToday },
+        }),
       }),
       this.prismaService.order.count({
-        where: {
+        where: withoutDeleted({
           status: 'CONFIRMED',
           createdAt: { gte: startOfToday, lt: endOfToday },
-        },
+        }),
       }),
       this.prismaService.order.count({
-        where: {
+        where: withoutDeleted({
           status: 'CANCELLED',
           createdAt: { gte: startOfToday, lt: endOfToday },
-        },
+        }),
       }),
       this.prismaService.order.count({
-        where: {
+        where: withoutDeleted({
           status: 'DELIVERED',
           createdAt: { gte: startOfToday, lt: endOfToday },
-        },
+        }),
       }),
       this.prismaService.order.aggregate({
-        where: {
+        where: withoutDeleted({
           status: { in: ['DELIVERED', 'CONFIRMED'] },
           createdAt: { gte: startOfToday, lt: endOfToday },
-        },
+        }),
         _sum: { total: true },
       }),
-      this.prismaService.product.count({ where: { isActive: true } }),
       this.prismaService.product.count({
-        where: { createdAt: { gte: startOfToday, lt: endOfToday } },
+        where: withoutDeleted({ isActive: true }),
+      }),
+      this.prismaService.product.count({
+        where: withoutDeleted({
+          createdAt: { gte: startOfToday, lt: endOfToday },
+        }),
       }),
       this.prismaService.orderItem.aggregate({
         where: {
           order: {
+            isDeleted: false,
             status: { in: ['DELIVERED', 'CONFIRMED'] },
             createdAt: { gte: startOfToday, lt: endOfToday },
           },
@@ -450,13 +466,15 @@ export class StatsService {
         _sum: { quantity: true },
       }),
       this.prismaService.productReview.count({
-        where: { createdAt: { gte: startOfToday, lt: endOfToday } },
+        where: withoutDeleted({
+          createdAt: { gte: startOfToday, lt: endOfToday },
+        }),
       }),
       this.prismaService.productReview.count({
-        where: {
+        where: withoutDeleted({
           isApproved: true,
           updatedAt: { gte: startOfToday, lt: endOfToday },
-        },
+        }),
       }),
     ]);
 
@@ -509,8 +527,8 @@ export class StatsService {
     orderId: string,
     newStatus: string,
   ): Promise<void> {
-    const order = await this.prismaService.order.findUnique({
-      where: { id: orderId },
+    const order = await this.prismaService.order.findFirst({
+      where: withoutDeleted({ id: orderId }),
       select: { total: true },
     });
     if (!order) return;

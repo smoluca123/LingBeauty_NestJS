@@ -65,6 +65,9 @@ export const reviewSelect = {
     select: reviewImageSelect,
   },
   replies: {
+    where: {
+      isDeleted: false,
+    },
     select: reviewReplySelect,
   },
 };
@@ -103,6 +106,9 @@ export const reviewPublicSelect = {
     select: reviewImageSelect,
   },
   replies: {
+    where: {
+      isDeleted: false,
+    },
     select: reviewReplySelect,
   },
 };

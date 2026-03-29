@@ -8,6 +8,10 @@ import { BusinessException } from 'src/exceptions/business.exception';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
+import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
@@ -23,8 +27,8 @@ export class CouponService {
   async createCoupon(
     createDto: CreateCouponDto,
   ): Promise<IBeforeTransformResponseType<CouponResponseDto>> {
-    const existing = await this.prisma.coupon.findUnique({
-      where: { code: createDto.code },
+    const existing = await this.prisma.coupon.findFirst({
+      where: withoutDeleted({ code: createDto.code }),
     });
     if (existing) {
       throw new BusinessException(
@@ -66,8 +70,10 @@ export class CouponService {
     const skip = (page - 1) * limit;
 
     const where = options.search
-      ? { code: { contains: options.search, mode: 'insensitive' as const } }
-      : {};
+      ? withoutDeleted({
+          code: { contains: options.search, mode: 'insensitive' as const },
+        })
+      : withoutDeleted({});
 
     const [total, items] = await Promise.all([
       this.prisma.coupon.count({ where }),
@@ -100,9 +106,9 @@ export class CouponService {
     idOrCode: string,
   ): Promise<IBeforeTransformResponseType<CouponResponseDto>> {
     const coupon = await this.prisma.coupon.findFirst({
-      where: {
+      where: withoutDeleted({
         OR: [{ id: idOrCode }, { code: idOrCode }],
-      },
+      }),
       select: couponSelect,
     });
 
@@ -127,8 +133,8 @@ export class CouponService {
     id: string;
     updateDto: UpdateCouponDto;
   }): Promise<IBeforeTransformResponseType<CouponResponseDto>> {
-    const existing = await this.prisma.coupon.findUnique({
-      where: { id },
+    const existing = await this.prisma.coupon.findFirst({
+      where: withoutDeleted({ id }),
     });
 
     if (!existing) {
@@ -139,8 +145,8 @@ export class CouponService {
     }
 
     if (updateDto.code && updateDto.code !== existing.code) {
-      const codeTaken = await this.prisma.coupon.findUnique({
-        where: { code: updateDto.code },
+      const codeTaken = await this.prisma.coupon.findFirst({
+        where: withoutDeleted({ code: updateDto.code }),
       });
       if (codeTaken) {
         throw new BusinessException(
@@ -159,7 +165,9 @@ export class CouponService {
         minPurchase: updateDto.minPurchase,
         maxDiscount: updateDto.maxDiscount,
         usageLimit: updateDto.usageLimit,
-        startDate: updateDto.startDate ? new Date(updateDto.startDate) : undefined,
+        startDate: updateDto.startDate
+          ? new Date(updateDto.startDate)
+          : undefined,
         endDate: updateDto.endDate ? new Date(updateDto.endDate) : undefined,
         isActive: updateDto.isActive,
       },
@@ -176,8 +184,8 @@ export class CouponService {
   async deleteCoupon(
     id: string,
   ): Promise<IBeforeTransformResponseType<CouponResponseDto>> {
-    const existing = await this.prisma.coupon.findUnique({
-      where: { id },
+    const existing = await this.prisma.coupon.findFirst({
+      where: withoutDeleted({ id }),
     });
 
     if (!existing) {
@@ -187,7 +195,10 @@ export class CouponService {
       );
     }
 
-    await this.prisma.coupon.delete({ where: { id } });
+    await this.prisma.coupon.update({
+      where: { id },
+      data: softDeleteData(),
+    });
 
     return {
       type: 'response',
@@ -206,8 +217,8 @@ export class CouponService {
       );
     }
 
-    const coupon = await this.prisma.coupon.findUnique({
-      where: { code: applyDto.code },
+    const coupon = await this.prisma.coupon.findFirst({
+      where: withoutDeleted({ code: applyDto.code }),
       select: couponSelect,
     });
 

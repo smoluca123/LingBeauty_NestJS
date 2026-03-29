@@ -4,6 +4,10 @@ import { BusinessException } from 'src/exceptions/business.exception';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
+import {
   CreateFlashSaleDto,
   UpdateFlashSaleDto,
   AddFlashSaleProductDto,
@@ -37,8 +41,8 @@ export class FlashSaleService {
         ERROR_CODES.FLASH_SALE_INVALID_TIME,
       );
     }
-    const slugExists = await this.prisma.flashSale.findUnique({
-      where: { slug: dto.slug },
+    const slugExists = await this.prisma.flashSale.findFirst({
+      where: withoutDeleted({ slug: dto.slug }),
     });
     if (slugExists) {
       throw new BusinessException(
@@ -74,11 +78,12 @@ export class FlashSaleService {
 
     const [items, total] = await Promise.all([
       this.prisma.flashSale.findMany({
+        where: withoutDeleted(),
         skip,
         take: limit,
         orderBy: { createdAt: 'desc' },
       }),
-      this.prisma.flashSale.count(),
+      this.prisma.flashSale.count({ where: withoutDeleted() }),
     ]);
 
     return {
@@ -99,8 +104,8 @@ export class FlashSaleService {
   async getFlashSaleById(
     id: string,
   ): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
-    const flashSale = await this.prisma.flashSale.findUnique({
-      where: { id },
+    const flashSale = await this.prisma.flashSale.findFirst({
+      where: withoutDeleted({ id }),
       select: flashSaleSelect,
     });
 
@@ -122,7 +127,9 @@ export class FlashSaleService {
     id: string,
     dto: UpdateFlashSaleDto,
   ): Promise<IBeforeTransformResponseType<FlashSaleResponseDto>> {
-    const flashSale = await this.prisma.flashSale.findUnique({ where: { id } });
+    const flashSale = await this.prisma.flashSale.findFirst({
+      where: withoutDeleted({ id }),
+    });
     if (!flashSale) {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_NOT_FOUND],
@@ -156,8 +163,8 @@ export class FlashSaleService {
     }
 
     if (dto.slug && dto.slug !== flashSale.slug) {
-      const slugExists = await this.prisma.flashSale.findUnique({
-        where: { slug: dto.slug },
+      const slugExists = await this.prisma.flashSale.findFirst({
+        where: withoutDeleted({ slug: dto.slug }),
       });
       if (slugExists) {
         throw new BusinessException(
@@ -182,14 +189,19 @@ export class FlashSaleService {
   async deleteFlashSale(
     id: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
-    const flashSale = await this.prisma.flashSale.findUnique({ where: { id } });
+    const flashSale = await this.prisma.flashSale.findFirst({
+      where: withoutDeleted({ id }),
+    });
     if (!flashSale) {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_NOT_FOUND],
         ERROR_CODES.FLASH_SALE_NOT_FOUND,
       );
     }
-    await this.prisma.flashSale.delete({ where: { id } });
+    await this.prisma.flashSale.update({
+      where: { id },
+      data: softDeleteData(),
+    });
     return {
       type: 'response',
       message: 'Xóa Flash sale thành công',
@@ -201,7 +213,9 @@ export class FlashSaleService {
     id: string,
     dtos: AddFlashSaleProductDto[],
   ): Promise<IBeforeTransformResponseType<FlashSaleProductResponseDto[]>> {
-    const flashSale = await this.prisma.flashSale.findUnique({ where: { id } });
+    const flashSale = await this.prisma.flashSale.findFirst({
+      where: withoutDeleted({ id }),
+    });
     if (!flashSale) {
       throw new BusinessException(
         ERROR_MESSAGES[ERROR_CODES.FLASH_SALE_NOT_FOUND],
@@ -356,12 +370,12 @@ export class FlashSaleService {
   > {
     const now = new Date();
     const flashSale = await this.prisma.flashSale.findFirst({
-      where: {
+      where: withoutDeleted({
         isActive: true,
         startTime: { lte: now },
         endTime: { gte: now },
         status: FlashSaleStatus.ACTIVE,
-      },
+      }),
       select: flashSaleSelect,
       orderBy: { startTime: 'asc' },
     });
@@ -378,11 +392,11 @@ export class FlashSaleService {
   > {
     const now = new Date();
     const flashSales = await this.prisma.flashSale.findMany({
-      where: {
+      where: withoutDeleted({
         isActive: true,
         startTime: { gt: now },
         status: FlashSaleStatus.UPCOMING,
-      },
+      }),
       orderBy: { startTime: 'asc' },
       take: 5,
     });

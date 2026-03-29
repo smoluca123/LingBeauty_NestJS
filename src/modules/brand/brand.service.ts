@@ -5,6 +5,10 @@ import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import { BusinessException } from 'src/exceptions/business.exception';
 import { BrandSelect, brandSelect } from 'src/libs/prisma/brand-select';
 import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
+import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
@@ -37,11 +41,11 @@ export class BrandService {
     order?: 'asc' | 'desc';
   }): Promise<IBeforeTransformPaginationResponseType<BrandResponseDto>> {
     try {
-      const whereQuery: Prisma.BrandWhereInput = {
+      const whereQuery: Prisma.BrandWhereInput = withoutDeleted({
         name: {
           contains: search,
         },
-      };
+      });
 
       const brands = await this.prismaService.brand.findMany({
         select: brandSelect,
@@ -147,8 +151,8 @@ export class BrandService {
     brandId: string,
   ): Promise<IBeforeTransformResponseType<BrandResponseDto>> {
     try {
-      const brand = await this.prismaService.brand.findUnique({
-        where: { id: brandId },
+      const brand = await this.prismaService.brand.findFirst({
+        where: withoutDeleted({ id: brandId }),
         select: brandSelect,
       });
 
@@ -190,8 +194,8 @@ export class BrandService {
     logo?: Express.Multer.File;
   }): Promise<IBeforeTransformResponseType<BrandResponseDto>> {
     try {
-      const existing = await this.prismaService.brand.findUnique({
-        where: { id: brandId },
+      const existing = await this.prismaService.brand.findFirst({
+        where: withoutDeleted({ id: brandId }),
       });
 
       if (!existing) {
@@ -253,8 +257,8 @@ export class BrandService {
     brandId: string,
   ): Promise<IBeforeTransformResponseType<BrandResponseDto>> {
     try {
-      const existing = await this.prismaService.brand.findUnique({
-        where: { id: brandId },
+      const existing = await this.prismaService.brand.findFirst({
+        where: withoutDeleted({ id: brandId }),
         select: brandSelect,
       });
 
@@ -266,7 +270,7 @@ export class BrandService {
       }
 
       const productsCount = await this.prismaService.product.count({
-        where: { brandId },
+        where: withoutDeleted({ brandId }),
       });
 
       if (productsCount > 0) {
@@ -276,8 +280,9 @@ export class BrandService {
         );
       }
 
-      await this.prismaService.brand.delete({
+      await this.prismaService.brand.update({
         where: { id: brandId },
+        data: softDeleteData(),
       });
 
       // Delete logo from S3
@@ -316,10 +321,10 @@ export class BrandService {
 
     while (true) {
       const existing = await this.prismaService.brand.findFirst({
-        where: {
+        where: withoutDeleted({
           slug,
           ...(excludeBrandId ? { id: { not: excludeBrandId } } : {}),
-        },
+        }),
         select: { id: true },
       });
 

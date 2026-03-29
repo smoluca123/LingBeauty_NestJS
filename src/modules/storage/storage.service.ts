@@ -11,6 +11,10 @@ import { MediaType } from 'prisma/generated/prisma/client';
 import { BusinessException } from 'src/exceptions/business.exception';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import {
+  withoutDeleted,
+  softDeleteData,
+} from 'src/libs/prisma/soft-delete.helpers';
+import {
   UploadFileResult,
   UploadToS3Params,
   DeleteFromS3Params,
@@ -108,8 +112,8 @@ export class StorageService {
    */
   async deleteFile(mediaId: string): Promise<{ message: string }> {
     // Find media record
-    const media = await this.prismaService.media.findUnique({
-      where: { id: mediaId },
+    const media = await this.prismaService.media.findFirst({
+      where: withoutDeleted({ id: mediaId }),
     });
 
     if (!media) {
@@ -119,20 +123,14 @@ export class StorageService {
       );
     }
 
-    if (media.isDeleted) {
-      throw new BusinessException(
-        'Media already deleted',
-        ERROR_CODES.MEDIA_NOT_FOUND,
-      );
-    }
-
     try {
       // Delete from S3
       await this.deleteFromS3({ key: media.key });
 
       // Soft delete in database
-      await this.prismaService.media.delete({
+      await this.prismaService.media.update({
         where: { id: mediaId },
+        data: softDeleteData(),
       });
 
       return { message: 'File deleted successfully' };
@@ -148,8 +146,8 @@ export class StorageService {
    * Get media by ID
    */
   async getMediaById(mediaId: string) {
-    const media = await this.prismaService.media.findUnique({
-      where: { id: mediaId, isDeleted: false },
+    const media = await this.prismaService.media.findFirst({
+      where: withoutDeleted({ id: mediaId }),
     });
 
     if (!media) {

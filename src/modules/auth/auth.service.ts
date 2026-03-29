@@ -28,6 +28,7 @@ import { userSelect } from 'src/libs/prisma/user-select';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
 import { MailService } from 'src/modules/mail/mail.service';
 import { EmailVerificationAction } from 'prisma/generated/prisma';
+import { withoutDeleted } from 'src/libs/prisma/soft-delete.helpers';
 import { StatsService } from 'src/modules/stats/stats.service';
 
 // Interface for request metadata (IP, User Agent)
@@ -124,8 +125,8 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     // Using Prisma Select to only fetch needed fields (optimization)
     // Note: We still need password for validation, but it will be excluded by UserResponseDto
-    const user = await this.prismaService.user.findUnique({
-      where: { email },
+    const user = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ email }),
       select: {
         id: true,
         email: true,
@@ -175,8 +176,8 @@ export class AuthService {
     id: string,
   ): Promise<IBeforeTransformResponseType<UserResponseDto>> {
     // Optimized: Exclude password and refreshToken at Prisma query level
-    const user = await this.prismaService.user.findUnique({
-      where: { id },
+    const user = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ id }),
       select: {
         id: true,
         email: true,
@@ -223,8 +224,8 @@ export class AuthService {
     registerDto: RegisterDto,
   ): Promise<IBeforeTransformResponseType<AuthResponseDto>> {
     // Check if email already exists
-    const existingEmail = await this.prismaService.user.findUnique({
-      where: { email: registerDto.email },
+    const existingEmail = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ email: registerDto.email }),
       select: { id: true },
     });
     if (existingEmail) {
@@ -235,8 +236,8 @@ export class AuthService {
     }
 
     // Check if phone already exists
-    const existingPhone = await this.prismaService.user.findUnique({
-      where: { phone: registerDto.phone },
+    const existingPhone = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ phone: registerDto.phone }),
       select: { id: true },
     });
     if (existingPhone) {
@@ -247,8 +248,8 @@ export class AuthService {
     }
 
     // Check if username already exists
-    const existingUsername = await this.prismaService.user.findUnique({
-      where: { username: registerDto.username },
+    const existingUsername = await this.prismaService.user.findFirst({
+      where: withoutDeleted({ username: registerDto.username }),
       select: { id: true },
     });
     if (existingUsername) {
@@ -324,7 +325,9 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<AuthResponseDto>> {
     // Find user by email or username
     const user = await this.prismaService.user.findFirst({
-      where: { OR: [{ email: loginDto.email }, { username: loginDto.email }] },
+      where: withoutDeleted({
+        OR: [{ email: loginDto.email }, { username: loginDto.email }],
+      }),
       select: { ...userSelect, password: true },
     });
 
@@ -340,14 +343,6 @@ export class AuthService {
       throw new CustomUnauthorizedException(
         ERROR_MESSAGES[ERROR_CODES.INVALID_PASSWORD],
         ERROR_CODES.INVALID_PASSWORD,
-      );
-    }
-
-    // Check if user is deleted
-    if (user.isDeleted) {
-      throw new CustomUnauthorizedException(
-        ERROR_MESSAGES[ERROR_CODES.USER_DELETED],
-        ERROR_CODES.USER_DELETED,
       );
     }
 
@@ -427,8 +422,8 @@ export class AuthService {
       }
 
       // Find user by userId from token payload
-      const user = await this.prismaService.user.findUnique({
-        where: { id: decodedPayload.userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: decodedPayload.userId }),
         select: userSelect,
       });
 
@@ -436,14 +431,6 @@ export class AuthService {
         throw new CustomUnauthorizedException(
           ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
-        );
-      }
-
-      // Check if user is deleted
-      if (user.isDeleted) {
-        throw new CustomUnauthorizedException(
-          ERROR_MESSAGES[ERROR_CODES.USER_DELETED],
-          ERROR_CODES.USER_DELETED,
         );
       }
 
@@ -513,8 +500,8 @@ export class AuthService {
   > {
     try {
       // Get user to check email and verification status
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: {
           id: true,
           email: true,
@@ -627,8 +614,8 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
       // Get user
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: {
           id: true,
           email: true,
@@ -742,8 +729,8 @@ export class AuthService {
   > {
     try {
       // Get user email for logging
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: { email: true },
       });
 
@@ -785,8 +772,8 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<{ message: string; code?: string }>> {
     try {
       // Get user to check phone and verification status
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: {
           id: true,
           phone: true,
@@ -857,8 +844,8 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
       // Get user
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: {
           id: true,
           phone: true,
@@ -945,8 +932,8 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<ValidateTokenResponseDto>> {
     try {
       // Get user data
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: userSelect,
       });
 
@@ -997,26 +984,17 @@ export class AuthService {
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
       // Get user with password field
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
+      const user = await this.prismaService.user.findFirst({
+        where: withoutDeleted({ id: userId }),
         select: {
           id: true,
           password: true,
-          isDeleted: true,
           isBanned: true,
           isActive: true,
         },
       });
 
       if (!user) {
-        throw new CustomUnauthorizedException(
-          ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
-          ERROR_CODES.USER_NOT_FOUND,
-        );
-      }
-
-      // Check if user is deleted
-      if (user.isDeleted) {
         throw new CustomUnauthorizedException(
           ERROR_MESSAGES[ERROR_CODES.USER_NOT_FOUND],
           ERROR_CODES.USER_NOT_FOUND,
