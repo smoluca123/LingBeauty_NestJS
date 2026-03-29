@@ -9,14 +9,17 @@ enum OrderStatus {
 }
 
 model Cart {
-  id        String   @id @default(uuid())
-  userId    String   @unique @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id        String    @id @default(uuid())
+  userId    String    @unique @map("user_id")
+  isDeleted Boolean   @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
-  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User       @relation(fields: [userId], references: [id], onDelete: Restrict)
   items CartItem[]
 
+  @@index([isDeleted])
   @@map("carts")
 }
 
@@ -30,9 +33,9 @@ model CartItem {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  cart    Cart            @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  cart    Cart            @relation(fields: [cartId], references: [id], onDelete: Restrict)
+  product Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Restrict)
 
   /// Unique per variant when variantId IS NOT NULL (Postgres: NULL != NULL so multiple NULLs allowed).
   /// For no-variant products the service enforces uniqueness via a findFirst check before insert.
@@ -57,10 +60,12 @@ model Order {
   affiliateCode     String?     @map("affiliate_code") @db.VarChar(50)
   couponCode        String?     @map("coupon_code") @db.VarChar(50)
   notes             String?     @db.Text
+  isDeleted         Boolean     @default(false) @map("is_deleted")
+  deletedAt         DateTime?   @map("deleted_at")
   createdAt         DateTime    @default(now()) @map("created_at")
   updatedAt         DateTime    @updatedAt @map("updated_at")
 
-  user            User                  @relation(fields: [userId], references: [id])
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Restrict)
   shippingAddress Address?              @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
   items           OrderItem[]
   payments        Payment[]
@@ -72,27 +77,31 @@ model Order {
   @@index([orderNumber])
   @@index([status])
   @@index([affiliateCode])
+  @@index([isDeleted])
   @@map("orders")
 }
 
 model OrderItem {
-  id        String   @id @default(uuid())
-  orderId   String   @map("order_id")
-  productId String   @map("product_id")
-  variantId String   @map("variant_id")
-  name      String   @db.VarChar(255)
-  sku       String   @db.VarChar(100)
-  price     Decimal  @db.Decimal(10, 2)
-  quantity  Int      @default(1)
-  total     Decimal  @db.Decimal(10, 2)
-  createdAt DateTime @default(now()) @map("created_at")
+  id        String    @id @default(uuid())
+  orderId   String    @map("order_id")
+  productId String    @map("product_id")
+  variantId String    @map("variant_id")
+  name      String    @db.VarChar(255)
+  sku       String    @db.VarChar(100)
+  price     Decimal   @db.Decimal(10, 2)
+  quantity  Int       @default(1)
+  total     Decimal   @db.Decimal(10, 2)
+  isDeleted Boolean   @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
 
-  order   Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product        @relation(fields: [productId], references: [id])
-  variant ProductVariant @relation(fields: [variantId], references: [id])
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  product Product        @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
 
   @@index([orderId])
   @@index([productId])
   @@index([variantId])
+  @@index([isDeleted])
   @@map("order_items")
 }

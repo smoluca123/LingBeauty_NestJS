@@ -29,9 +29,9 @@ export const userSelect = {
   lastName: true,
   phone: true,
   username: true,
-  avatarMediaId: true,
   createdAt: true,
   updatedAt: true,
+  deletedAt: true,
   isActive: true,
   isVerified: true,
   isBanned: true,
@@ -40,8 +40,16 @@ export const userSelect = {
   isPhoneVerified: true,
   emailVerifiedAt: true,
   phoneVerifiedAt: true,
-  avatarMedia: {
-    select: mediaSelect,
+  avatar: {
+    select: {
+      id: true,
+      mediaId: true,
+      createdAt: true,
+      updatedAt: true,
+      media: {
+        select: mediaSelect,
+      },
+    },
   },
   roleAssignments: {
     select: userRoleAssignmentsSelect,

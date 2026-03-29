@@ -209,6 +209,11 @@ export type AuthCode = $Result.DefaultSelection<Prisma.$AuthCodePayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model UserAvatar
+ * 
+ */
+export type UserAvatar = $Result.DefaultSelection<Prisma.$UserAvatarPayload>
+/**
  * Model UserRole
  * 
  */
@@ -969,6 +974,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.userAvatar`: Exposes CRUD operations for the **UserAvatar** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserAvatars
+    * const userAvatars = await prisma.userAvatar.findMany()
+    * ```
+    */
+  get userAvatar(): Prisma.UserAvatarDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.userRole`: Exposes CRUD operations for the **UserRole** model.
     * Example usage:
     * ```ts
@@ -1480,6 +1495,7 @@ export namespace Prisma {
     ReviewHelpful: 'ReviewHelpful',
     AuthCode: 'AuthCode',
     User: 'User',
+    UserAvatar: 'UserAvatar',
     UserRole: 'UserRole',
     UserRoleAssignment: 'UserRoleAssignment',
     Wishlist: 'Wishlist',
@@ -1499,7 +1515,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "productQuestion" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userRole" | "userRoleAssignment" | "wishlist" | "sharedWishlist"
+      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "productQuestion" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userAvatar" | "userRole" | "userRoleAssignment" | "wishlist" | "sharedWishlist"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4389,6 +4405,80 @@ export namespace Prisma {
           }
         }
       }
+      UserAvatar: {
+        payload: Prisma.$UserAvatarPayload<ExtArgs>
+        fields: Prisma.UserAvatarFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserAvatarFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserAvatarFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>
+          }
+          findFirst: {
+            args: Prisma.UserAvatarFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserAvatarFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>
+          }
+          findMany: {
+            args: Prisma.UserAvatarFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>[]
+          }
+          create: {
+            args: Prisma.UserAvatarCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>
+          }
+          createMany: {
+            args: Prisma.UserAvatarCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserAvatarCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>[]
+          }
+          delete: {
+            args: Prisma.UserAvatarDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>
+          }
+          update: {
+            args: Prisma.UserAvatarUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserAvatarDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserAvatarUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserAvatarUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserAvatarUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAvatarPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAvatarAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserAvatar>
+          }
+          groupBy: {
+            args: Prisma.UserAvatarGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserAvatarGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserAvatarCountArgs<ExtArgs>
+            result: $Utils.Optional<UserAvatarCountAggregateOutputType> | number
+          }
+        }
+      }
       UserRole: {
         payload: Prisma.$UserRolePayload<ExtArgs>
         fields: Prisma.UserRoleFieldRefs
@@ -4832,6 +4922,7 @@ export namespace Prisma {
     reviewHelpful?: ReviewHelpfulOmit
     authCode?: AuthCodeOmit
     user?: UserOmit
+    userAvatar?: UserAvatarOmit
     userRole?: UserRoleOmit
     userRoleAssignment?: UserRoleAssignmentOmit
     wishlist?: WishlistOmit
@@ -5095,6 +5186,7 @@ export namespace Prisma {
     categories: number
     brands: number
     banners: number
+    users: number
   }
 
   export type MediaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5104,6 +5196,7 @@ export namespace Prisma {
     categories?: boolean | MediaCountOutputTypeCountCategoriesArgs
     brands?: boolean | MediaCountOutputTypeCountBrandsArgs
     banners?: boolean | MediaCountOutputTypeCountBannersArgs
+    users?: boolean | MediaCountOutputTypeCountUsersArgs
   }
 
   // Custom InputTypes
@@ -5135,7 +5228,7 @@ export namespace Prisma {
    * MediaCountOutputType without action
    */
   export type MediaCountOutputTypeCountUserAvatarsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
+    where?: UserAvatarWhereInput
   }
 
   /**
@@ -5157,6 +5250,13 @@ export namespace Prisma {
    */
   export type MediaCountOutputTypeCountBannersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BannerWhereInput
+  }
+
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
 
@@ -5825,6 +5925,8 @@ export namespace Prisma {
     country: string | null
     type: $Enums.AddressType | null
     isDefault: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5842,6 +5944,8 @@ export namespace Prisma {
     country: string | null
     type: $Enums.AddressType | null
     isDefault: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5859,6 +5963,8 @@ export namespace Prisma {
     country: number
     type: number
     isDefault: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5878,6 +5984,8 @@ export namespace Prisma {
     country?: true
     type?: true
     isDefault?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5895,6 +6003,8 @@ export namespace Prisma {
     country?: true
     type?: true
     isDefault?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5912,6 +6022,8 @@ export namespace Prisma {
     country?: true
     type?: true
     isDefault?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6002,6 +6114,8 @@ export namespace Prisma {
     country: string
     type: $Enums.AddressType
     isDefault: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: AddressCountAggregateOutputType | null
@@ -6036,6 +6150,8 @@ export namespace Prisma {
     country?: boolean
     type?: boolean
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6056,6 +6172,8 @@ export namespace Prisma {
     country?: boolean
     type?: boolean
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6074,6 +6192,8 @@ export namespace Prisma {
     country?: boolean
     type?: boolean
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6092,11 +6212,13 @@ export namespace Prisma {
     country?: boolean
     type?: boolean
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fullName" | "phone" | "addressLine1" | "addressLine2" | "city" | "province" | "postalCode" | "country" | "type" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["address"]>
+  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fullName" | "phone" | "addressLine1" | "addressLine2" | "city" | "province" | "postalCode" | "country" | "type" | "isDefault" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["address"]>
   export type AddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     orders?: boolean | Address$ordersArgs<ExtArgs>
@@ -6128,6 +6250,8 @@ export namespace Prisma {
       country: string
       type: $Enums.AddressType
       isDefault: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["address"]>
@@ -6567,6 +6691,8 @@ export namespace Prisma {
     readonly country: FieldRef<"Address", 'String'>
     readonly type: FieldRef<"Address", 'AddressType'>
     readonly isDefault: FieldRef<"Address", 'Boolean'>
+    readonly isDeleted: FieldRef<"Address", 'Boolean'>
+    readonly deletedAt: FieldRef<"Address", 'DateTime'>
     readonly createdAt: FieldRef<"Address", 'DateTime'>
     readonly updatedAt: FieldRef<"Address", 'DateTime'>
   }
@@ -8285,6 +8411,8 @@ export namespace Prisma {
     bankAccount: string | null
     bankName: string | null
     accountHolder: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8300,6 +8428,8 @@ export namespace Prisma {
     bankAccount: string | null
     bankName: string | null
     accountHolder: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8315,6 +8445,8 @@ export namespace Prisma {
     bankAccount: number
     bankName: number
     accountHolder: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8344,6 +8476,8 @@ export namespace Prisma {
     bankAccount?: true
     bankName?: true
     accountHolder?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8359,6 +8493,8 @@ export namespace Prisma {
     bankAccount?: true
     bankName?: true
     accountHolder?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8374,6 +8510,8 @@ export namespace Prisma {
     bankAccount?: true
     bankName?: true
     accountHolder?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8476,6 +8614,8 @@ export namespace Prisma {
     bankAccount: string | null
     bankName: string | null
     accountHolder: string | null
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: AffiliateCountAggregateOutputType | null
@@ -8510,6 +8650,8 @@ export namespace Prisma {
     bankAccount?: boolean
     bankName?: boolean
     accountHolder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8529,6 +8671,8 @@ export namespace Prisma {
     bankAccount?: boolean
     bankName?: boolean
     accountHolder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8545,6 +8689,8 @@ export namespace Prisma {
     bankAccount?: boolean
     bankName?: boolean
     accountHolder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8561,11 +8707,13 @@ export namespace Prisma {
     bankAccount?: boolean
     bankName?: boolean
     accountHolder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AffiliateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "code" | "status" | "totalEarnings" | "paidEarnings" | "pendingEarnings" | "bankAccount" | "bankName" | "accountHolder" | "createdAt" | "updatedAt", ExtArgs["result"]["affiliate"]>
+  export type AffiliateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "code" | "status" | "totalEarnings" | "paidEarnings" | "pendingEarnings" | "bankAccount" | "bankName" | "accountHolder" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["affiliate"]>
   export type AffiliateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     links?: boolean | Affiliate$linksArgs<ExtArgs>
@@ -8597,6 +8745,8 @@ export namespace Prisma {
       bankAccount: string | null
       bankName: string | null
       accountHolder: string | null
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["affiliate"]>
@@ -9035,6 +9185,8 @@ export namespace Prisma {
     readonly bankAccount: FieldRef<"Affiliate", 'String'>
     readonly bankName: FieldRef<"Affiliate", 'String'>
     readonly accountHolder: FieldRef<"Affiliate", 'String'>
+    readonly isDeleted: FieldRef<"Affiliate", 'Boolean'>
+    readonly deletedAt: FieldRef<"Affiliate", 'DateTime'>
     readonly createdAt: FieldRef<"Affiliate", 'DateTime'>
     readonly updatedAt: FieldRef<"Affiliate", 'DateTime'>
   }
@@ -9533,6 +9685,8 @@ export namespace Prisma {
     url: string | null
     clicks: number | null
     conversions: number | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9544,6 +9698,8 @@ export namespace Prisma {
     url: string | null
     clicks: number | null
     conversions: number | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9555,6 +9711,8 @@ export namespace Prisma {
     url: number
     clicks: number
     conversions: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -9578,6 +9736,8 @@ export namespace Prisma {
     url?: true
     clicks?: true
     conversions?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9589,6 +9749,8 @@ export namespace Prisma {
     url?: true
     clicks?: true
     conversions?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9600,6 +9762,8 @@ export namespace Prisma {
     url?: true
     clicks?: true
     conversions?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -9698,6 +9862,8 @@ export namespace Prisma {
     url: string
     clicks: number
     conversions: number
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: AffiliateLinkCountAggregateOutputType | null
@@ -9728,6 +9894,8 @@ export namespace Prisma {
     url?: boolean
     clicks?: boolean
     conversions?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
@@ -9740,6 +9908,8 @@ export namespace Prisma {
     url?: boolean
     clicks?: boolean
     conversions?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
@@ -9752,6 +9922,8 @@ export namespace Prisma {
     url?: boolean
     clicks?: boolean
     conversions?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
@@ -9764,11 +9936,13 @@ export namespace Prisma {
     url?: boolean
     clicks?: boolean
     conversions?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AffiliateLinkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "affiliateId" | "productId" | "url" | "clicks" | "conversions" | "createdAt" | "updatedAt", ExtArgs["result"]["affiliateLink"]>
+  export type AffiliateLinkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "affiliateId" | "productId" | "url" | "clicks" | "conversions" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["affiliateLink"]>
   export type AffiliateLinkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
   }
@@ -9791,6 +9965,8 @@ export namespace Prisma {
       url: string
       clicks: number
       conversions: number
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["affiliateLink"]>
@@ -10223,6 +10399,8 @@ export namespace Prisma {
     readonly url: FieldRef<"AffiliateLink", 'String'>
     readonly clicks: FieldRef<"AffiliateLink", 'Int'>
     readonly conversions: FieldRef<"AffiliateLink", 'Int'>
+    readonly isDeleted: FieldRef<"AffiliateLink", 'Boolean'>
+    readonly deletedAt: FieldRef<"AffiliateLink", 'DateTime'>
     readonly createdAt: FieldRef<"AffiliateLink", 'DateTime'>
     readonly updatedAt: FieldRef<"AffiliateLink", 'DateTime'>
   }
@@ -10674,6 +10852,8 @@ export namespace Prisma {
     rate: Decimal | null
     status: string | null
     paidAt: Date | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10686,6 +10866,8 @@ export namespace Prisma {
     rate: Decimal | null
     status: string | null
     paidAt: Date | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10698,6 +10880,8 @@ export namespace Prisma {
     rate: number
     status: number
     paidAt: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10722,6 +10906,8 @@ export namespace Prisma {
     rate?: true
     status?: true
     paidAt?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10734,6 +10920,8 @@ export namespace Prisma {
     rate?: true
     status?: true
     paidAt?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10746,6 +10934,8 @@ export namespace Prisma {
     rate?: true
     status?: true
     paidAt?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10845,6 +11035,8 @@ export namespace Prisma {
     rate: Decimal
     status: string
     paidAt: Date | null
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: AffiliateCommissionCountAggregateOutputType | null
@@ -10876,6 +11068,8 @@ export namespace Prisma {
     rate?: boolean
     status?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
@@ -10890,6 +11084,8 @@ export namespace Prisma {
     rate?: boolean
     status?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
@@ -10904,6 +11100,8 @@ export namespace Prisma {
     rate?: boolean
     status?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
@@ -10918,11 +11116,13 @@ export namespace Prisma {
     rate?: boolean
     status?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AffiliateCommissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "affiliateId" | "orderId" | "amount" | "rate" | "status" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["affiliateCommission"]>
+  export type AffiliateCommissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "affiliateId" | "orderId" | "amount" | "rate" | "status" | "paidAt" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["affiliateCommission"]>
   export type AffiliateCommissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     affiliate?: boolean | AffiliateDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -10950,6 +11150,8 @@ export namespace Prisma {
       rate: Prisma.Decimal
       status: string
       paidAt: Date | null
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["affiliateCommission"]>
@@ -11384,6 +11586,8 @@ export namespace Prisma {
     readonly rate: FieldRef<"AffiliateCommission", 'Decimal'>
     readonly status: FieldRef<"AffiliateCommission", 'String'>
     readonly paidAt: FieldRef<"AffiliateCommission", 'DateTime'>
+    readonly isDeleted: FieldRef<"AffiliateCommission", 'Boolean'>
+    readonly deletedAt: FieldRef<"AffiliateCommission", 'DateTime'>
     readonly createdAt: FieldRef<"AffiliateCommission", 'DateTime'>
     readonly updatedAt: FieldRef<"AffiliateCommission", 'DateTime'>
   }
@@ -11831,6 +12035,8 @@ export namespace Prisma {
     categoryId: string | null
     rate: Decimal | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11841,6 +12047,8 @@ export namespace Prisma {
     categoryId: string | null
     rate: Decimal | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11851,6 +12059,8 @@ export namespace Prisma {
     categoryId: number
     rate: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -11871,6 +12081,8 @@ export namespace Prisma {
     categoryId?: true
     rate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11881,6 +12093,8 @@ export namespace Prisma {
     categoryId?: true
     rate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11891,6 +12105,8 @@ export namespace Prisma {
     categoryId?: true
     rate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -11988,6 +12204,8 @@ export namespace Prisma {
     categoryId: string | null
     rate: Decimal
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: CommissionRateCountAggregateOutputType | null
@@ -12017,6 +12235,8 @@ export namespace Prisma {
     categoryId?: boolean
     rate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | CommissionRate$productArgs<ExtArgs>
@@ -12028,6 +12248,8 @@ export namespace Prisma {
     categoryId?: boolean
     rate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | CommissionRate$productArgs<ExtArgs>
@@ -12039,6 +12261,8 @@ export namespace Prisma {
     categoryId?: boolean
     rate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | CommissionRate$productArgs<ExtArgs>
@@ -12050,11 +12274,13 @@ export namespace Prisma {
     categoryId?: boolean
     rate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CommissionRateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "categoryId" | "rate" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["commissionRate"]>
+  export type CommissionRateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "categoryId" | "rate" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["commissionRate"]>
   export type CommissionRateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | CommissionRate$productArgs<ExtArgs>
   }
@@ -12076,6 +12302,8 @@ export namespace Prisma {
       categoryId: string | null
       rate: Prisma.Decimal
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["commissionRate"]>
@@ -12507,6 +12735,8 @@ export namespace Prisma {
     readonly categoryId: FieldRef<"CommissionRate", 'String'>
     readonly rate: FieldRef<"CommissionRate", 'Decimal'>
     readonly isActive: FieldRef<"CommissionRate", 'Boolean'>
+    readonly isDeleted: FieldRef<"CommissionRate", 'Boolean'>
+    readonly deletedAt: FieldRef<"CommissionRate", 'DateTime'>
     readonly createdAt: FieldRef<"CommissionRate", 'DateTime'>
     readonly updatedAt: FieldRef<"CommissionRate", 'DateTime'>
   }
@@ -12963,6 +13193,8 @@ export namespace Prisma {
     slug: string | null
     description: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     startDate: Date | null
     endDate: Date | null
     createdAt: Date | null
@@ -12975,6 +13207,8 @@ export namespace Prisma {
     slug: string | null
     description: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     startDate: Date | null
     endDate: Date | null
     createdAt: Date | null
@@ -12987,6 +13221,8 @@ export namespace Prisma {
     slug: number
     description: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     startDate: number
     endDate: number
     createdAt: number
@@ -13001,6 +13237,8 @@ export namespace Prisma {
     slug?: true
     description?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     startDate?: true
     endDate?: true
     createdAt?: true
@@ -13013,6 +13251,8 @@ export namespace Prisma {
     slug?: true
     description?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     startDate?: true
     endDate?: true
     createdAt?: true
@@ -13025,6 +13265,8 @@ export namespace Prisma {
     slug?: true
     description?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     startDate?: true
     endDate?: true
     createdAt?: true
@@ -13110,6 +13352,8 @@ export namespace Prisma {
     slug: string
     description: string | null
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     startDate: Date | null
     endDate: Date | null
     createdAt: Date
@@ -13139,6 +13383,8 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     startDate?: boolean
     endDate?: boolean
     createdAt?: boolean
@@ -13153,6 +13399,8 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     startDate?: boolean
     endDate?: boolean
     createdAt?: boolean
@@ -13165,6 +13413,8 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     startDate?: boolean
     endDate?: boolean
     createdAt?: boolean
@@ -13177,13 +13427,15 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     startDate?: boolean
     endDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BannerGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "isActive" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["bannerGroup"]>
+  export type BannerGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "isActive" | "isDeleted" | "deletedAt" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["bannerGroup"]>
   export type BannerGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     banners?: boolean | BannerGroup$bannersArgs<ExtArgs>
     _count?: boolean | BannerGroupCountOutputTypeDefaultArgs<ExtArgs>
@@ -13202,6 +13454,8 @@ export namespace Prisma {
       slug: string
       description: string | null
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       startDate: Date | null
       endDate: Date | null
       createdAt: Date
@@ -13635,6 +13889,8 @@ export namespace Prisma {
     readonly slug: FieldRef<"BannerGroup", 'String'>
     readonly description: FieldRef<"BannerGroup", 'String'>
     readonly isActive: FieldRef<"BannerGroup", 'Boolean'>
+    readonly isDeleted: FieldRef<"BannerGroup", 'Boolean'>
+    readonly deletedAt: FieldRef<"BannerGroup", 'DateTime'>
     readonly startDate: FieldRef<"BannerGroup", 'DateTime'>
     readonly endDate: FieldRef<"BannerGroup", 'DateTime'>
     readonly createdAt: FieldRef<"BannerGroup", 'DateTime'>
@@ -14099,6 +14355,8 @@ export namespace Prisma {
     gradientTo: string | null
     imageMediaId: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14118,6 +14376,8 @@ export namespace Prisma {
     gradientTo: string | null
     imageMediaId: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14137,6 +14397,8 @@ export namespace Prisma {
     gradientTo: number
     imageMediaId: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -14158,6 +14420,8 @@ export namespace Prisma {
     gradientTo?: true
     imageMediaId?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -14177,6 +14441,8 @@ export namespace Prisma {
     gradientTo?: true
     imageMediaId?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -14196,6 +14462,8 @@ export namespace Prisma {
     gradientTo?: true
     imageMediaId?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -14288,6 +14556,8 @@ export namespace Prisma {
     gradientTo: string | null
     imageMediaId: string | null
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: BannerCountAggregateOutputType | null
@@ -14324,6 +14594,8 @@ export namespace Prisma {
     gradientTo?: boolean
     imageMediaId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     groups?: boolean | Banner$groupsArgs<ExtArgs>
@@ -14346,6 +14618,8 @@ export namespace Prisma {
     gradientTo?: boolean
     imageMediaId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
@@ -14366,6 +14640,8 @@ export namespace Prisma {
     gradientTo?: boolean
     imageMediaId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
@@ -14386,11 +14662,13 @@ export namespace Prisma {
     gradientTo?: boolean
     imageMediaId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "position" | "badge" | "title" | "description" | "highlight" | "ctaText" | "ctaLink" | "subLabel" | "gradientFrom" | "gradientTo" | "imageMediaId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
+  export type BannerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "position" | "badge" | "title" | "description" | "highlight" | "ctaText" | "ctaLink" | "subLabel" | "gradientFrom" | "gradientTo" | "imageMediaId" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["banner"]>
   export type BannerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     groups?: boolean | Banner$groupsArgs<ExtArgs>
     imageMedia?: boolean | Banner$imageMediaArgs<ExtArgs>
@@ -14424,6 +14702,8 @@ export namespace Prisma {
       gradientTo: string | null
       imageMediaId: string | null
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["banner"]>
@@ -14865,6 +15145,8 @@ export namespace Prisma {
     readonly gradientTo: FieldRef<"Banner", 'String'>
     readonly imageMediaId: FieldRef<"Banner", 'String'>
     readonly isActive: FieldRef<"Banner", 'Boolean'>
+    readonly isDeleted: FieldRef<"Banner", 'Boolean'>
+    readonly deletedAt: FieldRef<"Banner", 'DateTime'>
     readonly createdAt: FieldRef<"Banner", 'DateTime'>
     readonly updatedAt: FieldRef<"Banner", 'DateTime'>
   }
@@ -17562,6 +17844,8 @@ export namespace Prisma {
     endTime: Date | null
     status: $Enums.FlashSaleStatus | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     sortOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17577,6 +17861,8 @@ export namespace Prisma {
     endTime: Date | null
     status: $Enums.FlashSaleStatus | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     sortOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17592,6 +17878,8 @@ export namespace Prisma {
     endTime: number
     status: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     sortOrder: number
     createdAt: number
     updatedAt: number
@@ -17617,6 +17905,8 @@ export namespace Prisma {
     endTime?: true
     status?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -17632,6 +17922,8 @@ export namespace Prisma {
     endTime?: true
     status?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -17647,6 +17939,8 @@ export namespace Prisma {
     endTime?: true
     status?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -17749,6 +18043,8 @@ export namespace Prisma {
     endTime: Date
     status: $Enums.FlashSaleStatus
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     sortOrder: number
     createdAt: Date
     updatedAt: Date
@@ -17783,6 +18079,8 @@ export namespace Prisma {
     endTime?: boolean
     status?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17801,6 +18099,8 @@ export namespace Prisma {
     endTime?: boolean
     status?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17816,6 +18116,8 @@ export namespace Prisma {
     endTime?: boolean
     status?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17831,12 +18133,14 @@ export namespace Prisma {
     endTime?: boolean
     status?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type FlashSaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "slug" | "banner" | "startTime" | "endTime" | "status" | "isActive" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["flashSale"]>
+  export type FlashSaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "slug" | "banner" | "startTime" | "endTime" | "status" | "isActive" | "isDeleted" | "deletedAt" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["flashSale"]>
   export type FlashSaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | FlashSale$productsArgs<ExtArgs>
     orders?: boolean | FlashSale$ordersArgs<ExtArgs>
@@ -17861,6 +18165,8 @@ export namespace Prisma {
       endTime: Date
       status: $Enums.FlashSaleStatus
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       sortOrder: number
       createdAt: Date
       updatedAt: Date
@@ -18298,6 +18604,8 @@ export namespace Prisma {
     readonly endTime: FieldRef<"FlashSale", 'DateTime'>
     readonly status: FieldRef<"FlashSale", 'FlashSaleStatus'>
     readonly isActive: FieldRef<"FlashSale", 'Boolean'>
+    readonly isDeleted: FieldRef<"FlashSale", 'Boolean'>
+    readonly deletedAt: FieldRef<"FlashSale", 'DateTime'>
     readonly sortOrder: FieldRef<"FlashSale", 'Int'>
     readonly createdAt: FieldRef<"FlashSale", 'DateTime'>
     readonly updatedAt: FieldRef<"FlashSale", 'DateTime'>
@@ -21085,6 +21393,7 @@ export namespace Prisma {
     type: $Enums.MediaType | null
     uploadedById: string | null
     isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21099,6 +21408,7 @@ export namespace Prisma {
     type: $Enums.MediaType | null
     uploadedById: string | null
     isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21113,6 +21423,7 @@ export namespace Prisma {
     type: number
     uploadedById: number
     isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -21137,6 +21448,7 @@ export namespace Prisma {
     type?: true
     uploadedById?: true
     isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21151,6 +21463,7 @@ export namespace Prisma {
     type?: true
     uploadedById?: true
     isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21165,6 +21478,7 @@ export namespace Prisma {
     type?: true
     uploadedById?: true
     isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -21266,6 +21580,7 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById: string | null
     isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: MediaCountAggregateOutputType | null
@@ -21299,6 +21614,7 @@ export namespace Prisma {
     type?: boolean
     uploadedById?: boolean
     isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     uploadedBy?: boolean | Media$uploadedByArgs<ExtArgs>
@@ -21308,6 +21624,7 @@ export namespace Prisma {
     categories?: boolean | Media$categoriesArgs<ExtArgs>
     brands?: boolean | Media$brandsArgs<ExtArgs>
     banners?: boolean | Media$bannersArgs<ExtArgs>
+    users?: boolean | Media$usersArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
@@ -21321,6 +21638,7 @@ export namespace Prisma {
     type?: boolean
     uploadedById?: boolean
     isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     uploadedBy?: boolean | Media$uploadedByArgs<ExtArgs>
@@ -21336,6 +21654,7 @@ export namespace Prisma {
     type?: boolean
     uploadedById?: boolean
     isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     uploadedBy?: boolean | Media$uploadedByArgs<ExtArgs>
@@ -21351,11 +21670,12 @@ export namespace Prisma {
     type?: boolean
     uploadedById?: boolean
     isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "key" | "filename" | "mimetype" | "size" | "type" | "uploadedById" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["media"]>
+  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "key" | "filename" | "mimetype" | "size" | "type" | "uploadedById" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["media"]>
   export type MediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     uploadedBy?: boolean | Media$uploadedByArgs<ExtArgs>
     productImages?: boolean | Media$productImagesArgs<ExtArgs>
@@ -21364,6 +21684,7 @@ export namespace Prisma {
     categories?: boolean | Media$categoriesArgs<ExtArgs>
     brands?: boolean | Media$brandsArgs<ExtArgs>
     banners?: boolean | Media$bannersArgs<ExtArgs>
+    users?: boolean | Media$usersArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21379,10 +21700,11 @@ export namespace Prisma {
       uploadedBy: Prisma.$UserPayload<ExtArgs> | null
       productImages: Prisma.$ProductImagePayload<ExtArgs>[]
       reviewImages: Prisma.$ReviewImagePayload<ExtArgs>[]
-      userAvatars: Prisma.$UserPayload<ExtArgs>[]
+      userAvatars: Prisma.$UserAvatarPayload<ExtArgs>[]
       categories: Prisma.$CategoryPayload<ExtArgs>[]
       brands: Prisma.$BrandPayload<ExtArgs>[]
       banners: Prisma.$BannerPayload<ExtArgs>[]
+      users: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21394,6 +21716,7 @@ export namespace Prisma {
       type: $Enums.MediaType
       uploadedById: string | null
       isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["media"]>
@@ -21793,10 +22116,11 @@ export namespace Prisma {
     uploadedBy<T extends Media$uploadedByArgs<ExtArgs> = {}>(args?: Subset<T, Media$uploadedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     productImages<T extends Media$productImagesArgs<ExtArgs> = {}>(args?: Subset<T, Media$productImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviewImages<T extends Media$reviewImagesArgs<ExtArgs> = {}>(args?: Subset<T, Media$reviewImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    userAvatars<T extends Media$userAvatarsArgs<ExtArgs> = {}>(args?: Subset<T, Media$userAvatarsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userAvatars<T extends Media$userAvatarsArgs<ExtArgs> = {}>(args?: Subset<T, Media$userAvatarsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends Media$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Media$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     brands<T extends Media$brandsArgs<ExtArgs> = {}>(args?: Subset<T, Media$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     banners<T extends Media$bannersArgs<ExtArgs> = {}>(args?: Subset<T, Media$bannersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends Media$usersArgs<ExtArgs> = {}>(args?: Subset<T, Media$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21835,6 +22159,7 @@ export namespace Prisma {
     readonly type: FieldRef<"Media", 'MediaType'>
     readonly uploadedById: FieldRef<"Media", 'String'>
     readonly isDeleted: FieldRef<"Media", 'Boolean'>
+    readonly deletedAt: FieldRef<"Media", 'DateTime'>
     readonly createdAt: FieldRef<"Media", 'DateTime'>
     readonly updatedAt: FieldRef<"Media", 'DateTime'>
   }
@@ -22309,23 +22634,23 @@ export namespace Prisma {
    */
   export type Media$userAvatarsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the UserAvatar
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UserAvatarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the UserAvatar
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: UserAvatarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
+    include?: UserAvatarInclude<ExtArgs> | null
+    where?: UserAvatarWhereInput
+    orderBy?: UserAvatarOrderByWithRelationInput | UserAvatarOrderByWithRelationInput[]
+    cursor?: UserAvatarWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: UserAvatarScalarFieldEnum | UserAvatarScalarFieldEnum[]
   }
 
   /**
@@ -22401,6 +22726,30 @@ export namespace Prisma {
   }
 
   /**
+   * Media.users
+   */
+  export type Media$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
    * Media without action
    */
   export type MediaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22432,6 +22781,8 @@ export namespace Prisma {
   export type CartMinAggregateOutputType = {
     id: string | null
     userId: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -22439,6 +22790,8 @@ export namespace Prisma {
   export type CartMaxAggregateOutputType = {
     id: string | null
     userId: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -22446,6 +22799,8 @@ export namespace Prisma {
   export type CartCountAggregateOutputType = {
     id: number
     userId: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -22455,6 +22810,8 @@ export namespace Prisma {
   export type CartMinAggregateInputType = {
     id?: true
     userId?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -22462,6 +22819,8 @@ export namespace Prisma {
   export type CartMaxAggregateInputType = {
     id?: true
     userId?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -22469,6 +22828,8 @@ export namespace Prisma {
   export type CartCountAggregateInputType = {
     id?: true
     userId?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -22549,6 +22910,8 @@ export namespace Prisma {
   export type CartGroupByOutputType = {
     id: string
     userId: string
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: CartCountAggregateOutputType | null
@@ -22573,6 +22936,8 @@ export namespace Prisma {
   export type CartSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -22583,6 +22948,8 @@ export namespace Prisma {
   export type CartSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -22591,6 +22958,8 @@ export namespace Prisma {
   export type CartSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -22599,11 +22968,13 @@ export namespace Prisma {
   export type CartSelectScalar = {
     id?: boolean
     userId?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CartOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["cart"]>
+  export type CartOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["cart"]>
   export type CartInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Cart$itemsArgs<ExtArgs>
@@ -22625,6 +22996,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["cart"]>
@@ -23054,6 +23427,8 @@ export namespace Prisma {
   interface CartFieldRefs {
     readonly id: FieldRef<"Cart", 'String'>
     readonly userId: FieldRef<"Cart", 'String'>
+    readonly isDeleted: FieldRef<"Cart", 'Boolean'>
+    readonly deletedAt: FieldRef<"Cart", 'DateTime'>
     readonly createdAt: FieldRef<"Cart", 'DateTime'>
     readonly updatedAt: FieldRef<"Cart", 'DateTime'>
   }
@@ -24702,6 +25077,8 @@ export namespace Prisma {
     affiliateCode: string | null
     couponCode: string | null
     notes: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -24720,6 +25097,8 @@ export namespace Prisma {
     affiliateCode: string | null
     couponCode: string | null
     notes: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -24738,6 +25117,8 @@ export namespace Prisma {
     affiliateCode: number
     couponCode: number
     notes: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -24774,6 +25155,8 @@ export namespace Prisma {
     affiliateCode?: true
     couponCode?: true
     notes?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -24792,6 +25175,8 @@ export namespace Prisma {
     affiliateCode?: true
     couponCode?: true
     notes?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -24810,6 +25195,8 @@ export namespace Prisma {
     affiliateCode?: true
     couponCode?: true
     notes?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -24915,6 +25302,8 @@ export namespace Prisma {
     affiliateCode: string | null
     couponCode: string | null
     notes: string | null
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: OrderCountAggregateOutputType | null
@@ -24952,6 +25341,8 @@ export namespace Prisma {
     affiliateCode?: boolean
     couponCode?: boolean
     notes?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -24978,6 +25369,8 @@ export namespace Prisma {
     affiliateCode?: boolean
     couponCode?: boolean
     notes?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -24998,6 +25391,8 @@ export namespace Prisma {
     affiliateCode?: boolean
     couponCode?: boolean
     notes?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -25018,11 +25413,13 @@ export namespace Prisma {
     affiliateCode?: boolean
     couponCode?: boolean
     notes?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "orderNumber" | "status" | "subtotal" | "tax" | "shipping" | "discount" | "total" | "shippingAddressId" | "affiliateCode" | "couponCode" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "orderNumber" | "status" | "subtotal" | "tax" | "shipping" | "discount" | "total" | "shippingAddressId" | "affiliateCode" | "couponCode" | "notes" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     shippingAddress?: boolean | Order$shippingAddressArgs<ExtArgs>
@@ -25067,6 +25464,8 @@ export namespace Prisma {
       affiliateCode: string | null
       couponCode: string | null
       notes: string | null
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["order"]>
@@ -25512,6 +25911,8 @@ export namespace Prisma {
     readonly affiliateCode: FieldRef<"Order", 'String'>
     readonly couponCode: FieldRef<"Order", 'String'>
     readonly notes: FieldRef<"Order", 'String'>
+    readonly isDeleted: FieldRef<"Order", 'Boolean'>
+    readonly deletedAt: FieldRef<"Order", 'DateTime'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
   }
@@ -26096,6 +26497,8 @@ export namespace Prisma {
     price: Decimal | null
     quantity: number | null
     total: Decimal | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
   }
 
@@ -26109,6 +26512,8 @@ export namespace Prisma {
     price: Decimal | null
     quantity: number | null
     total: Decimal | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
   }
 
@@ -26122,6 +26527,8 @@ export namespace Prisma {
     price: number
     quantity: number
     total: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     _all: number
   }
@@ -26149,6 +26556,8 @@ export namespace Prisma {
     price?: true
     quantity?: true
     total?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
   }
 
@@ -26162,6 +26571,8 @@ export namespace Prisma {
     price?: true
     quantity?: true
     total?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
   }
 
@@ -26175,6 +26586,8 @@ export namespace Prisma {
     price?: true
     quantity?: true
     total?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     _all?: true
   }
@@ -26275,6 +26688,8 @@ export namespace Prisma {
     price: Decimal
     quantity: number
     total: Decimal
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     _count: OrderItemCountAggregateOutputType | null
     _avg: OrderItemAvgAggregateOutputType | null
@@ -26307,6 +26722,8 @@ export namespace Prisma {
     price?: boolean
     quantity?: boolean
     total?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26323,6 +26740,8 @@ export namespace Prisma {
     price?: boolean
     quantity?: boolean
     total?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26339,6 +26758,8 @@ export namespace Prisma {
     price?: boolean
     quantity?: boolean
     total?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26355,10 +26776,12 @@ export namespace Prisma {
     price?: boolean
     quantity?: boolean
     total?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
   }
 
-  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "variantId" | "name" | "sku" | "price" | "quantity" | "total" | "createdAt", ExtArgs["result"]["orderItem"]>
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "variantId" | "name" | "sku" | "price" | "quantity" | "total" | "isDeleted" | "deletedAt" | "createdAt", ExtArgs["result"]["orderItem"]>
   export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26392,6 +26815,8 @@ export namespace Prisma {
       price: Prisma.Decimal
       quantity: number
       total: Prisma.Decimal
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
     }, ExtArgs["result"]["orderItem"]>
     composites: {}
@@ -26828,6 +27253,8 @@ export namespace Prisma {
     readonly price: FieldRef<"OrderItem", 'Decimal'>
     readonly quantity: FieldRef<"OrderItem", 'Int'>
     readonly total: FieldRef<"OrderItem", 'Decimal'>
+    readonly isDeleted: FieldRef<"OrderItem", 'Boolean'>
+    readonly deletedAt: FieldRef<"OrderItem", 'DateTime'>
     readonly createdAt: FieldRef<"OrderItem", 'DateTime'>
   }
     
@@ -27277,6 +27704,8 @@ export namespace Prisma {
     transactionId: string | null
     paymentData: string | null
     paidAt: Date | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -27290,6 +27719,8 @@ export namespace Prisma {
     transactionId: string | null
     paymentData: string | null
     paidAt: Date | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -27303,6 +27734,8 @@ export namespace Prisma {
     transactionId: number
     paymentData: number
     paidAt: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -27326,6 +27759,8 @@ export namespace Prisma {
     transactionId?: true
     paymentData?: true
     paidAt?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -27339,6 +27774,8 @@ export namespace Prisma {
     transactionId?: true
     paymentData?: true
     paidAt?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -27352,6 +27789,8 @@ export namespace Prisma {
     transactionId?: true
     paymentData?: true
     paidAt?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -27452,6 +27891,8 @@ export namespace Prisma {
     transactionId: string | null
     paymentData: string | null
     paidAt: Date | null
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: PaymentCountAggregateOutputType | null
@@ -27484,6 +27925,8 @@ export namespace Prisma {
     transactionId?: boolean
     paymentData?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -27498,6 +27941,8 @@ export namespace Prisma {
     transactionId?: boolean
     paymentData?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -27512,6 +27957,8 @@ export namespace Prisma {
     transactionId?: boolean
     paymentData?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -27526,11 +27973,13 @@ export namespace Prisma {
     transactionId?: boolean
     paymentData?: boolean
     paidAt?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "method" | "amount" | "status" | "transactionId" | "paymentData" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
+  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "method" | "amount" | "status" | "transactionId" | "paymentData" | "paidAt" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>
   }
@@ -27555,6 +28004,8 @@ export namespace Prisma {
       transactionId: string | null
       paymentData: string | null
       paidAt: Date | null
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["payment"]>
@@ -27989,6 +28440,8 @@ export namespace Prisma {
     readonly transactionId: FieldRef<"Payment", 'String'>
     readonly paymentData: FieldRef<"Payment", 'String'>
     readonly paidAt: FieldRef<"Payment", 'DateTime'>
+    readonly isDeleted: FieldRef<"Payment", 'Boolean'>
+    readonly deletedAt: FieldRef<"Payment", 'DateTime'>
     readonly createdAt: FieldRef<"Payment", 'DateTime'>
     readonly updatedAt: FieldRef<"Payment", 'DateTime'>
   }
@@ -29616,6 +30069,8 @@ export namespace Prisma {
     imageMediaId: string | null
     parentId: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     sortOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -29631,6 +30086,8 @@ export namespace Prisma {
     imageMediaId: string | null
     parentId: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     sortOrder: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -29646,6 +30103,8 @@ export namespace Prisma {
     imageMediaId: number
     parentId: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     sortOrder: number
     createdAt: number
     updatedAt: number
@@ -29671,6 +30130,8 @@ export namespace Prisma {
     imageMediaId?: true
     parentId?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -29686,6 +30147,8 @@ export namespace Prisma {
     imageMediaId?: true
     parentId?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -29701,6 +30164,8 @@ export namespace Prisma {
     imageMediaId?: true
     parentId?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     sortOrder?: true
     createdAt?: true
     updatedAt?: true
@@ -29803,6 +30268,8 @@ export namespace Prisma {
     imageMediaId: string | null
     parentId: string | null
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     sortOrder: number
     createdAt: Date
     updatedAt: Date
@@ -29837,6 +30304,8 @@ export namespace Prisma {
     imageMediaId?: boolean
     parentId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -29858,6 +30327,8 @@ export namespace Prisma {
     imageMediaId?: boolean
     parentId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -29876,6 +30347,8 @@ export namespace Prisma {
     imageMediaId?: boolean
     parentId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -29894,6 +30367,8 @@ export namespace Prisma {
     imageMediaId?: boolean
     parentId?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     sortOrder?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -29901,7 +30376,7 @@ export namespace Prisma {
     type?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "imageMediaId" | "parentId" | "isActive" | "sortOrder" | "createdAt" | "updatedAt" | "brandId" | "type", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "imageMediaId" | "parentId" | "isActive" | "isDeleted" | "deletedAt" | "sortOrder" | "createdAt" | "updatedAt" | "brandId" | "type", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | Category$parentArgs<ExtArgs>
     children?: boolean | Category$childrenArgs<ExtArgs>
@@ -29938,6 +30413,8 @@ export namespace Prisma {
       imageMediaId: string | null
       parentId: string | null
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       sortOrder: number
       createdAt: Date
       updatedAt: Date
@@ -30378,6 +30855,8 @@ export namespace Prisma {
     readonly imageMediaId: FieldRef<"Category", 'String'>
     readonly parentId: FieldRef<"Category", 'String'>
     readonly isActive: FieldRef<"Category", 'Boolean'>
+    readonly isDeleted: FieldRef<"Category", 'Boolean'>
+    readonly deletedAt: FieldRef<"Category", 'DateTime'>
     readonly sortOrder: FieldRef<"Category", 'Int'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
     readonly updatedAt: FieldRef<"Category", 'DateTime'>
@@ -30925,6 +31404,8 @@ export namespace Prisma {
     logoMediaId: string | null
     website: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -30937,6 +31418,8 @@ export namespace Prisma {
     logoMediaId: string | null
     website: string | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -30949,6 +31432,8 @@ export namespace Prisma {
     logoMediaId: number
     website: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -30963,6 +31448,8 @@ export namespace Prisma {
     logoMediaId?: true
     website?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -30975,6 +31462,8 @@ export namespace Prisma {
     logoMediaId?: true
     website?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -30987,6 +31476,8 @@ export namespace Prisma {
     logoMediaId?: true
     website?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -31072,6 +31563,8 @@ export namespace Prisma {
     logoMediaId: string | null
     website: string | null
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: BrandCountAggregateOutputType | null
@@ -31101,6 +31594,8 @@ export namespace Prisma {
     logoMediaId?: boolean
     website?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     products?: boolean | Brand$productsArgs<ExtArgs>
@@ -31117,6 +31612,8 @@ export namespace Prisma {
     logoMediaId?: boolean
     website?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     logoMedia?: boolean | Brand$logoMediaArgs<ExtArgs>
@@ -31130,6 +31627,8 @@ export namespace Prisma {
     logoMediaId?: boolean
     website?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     logoMedia?: boolean | Brand$logoMediaArgs<ExtArgs>
@@ -31143,11 +31642,13 @@ export namespace Prisma {
     logoMediaId?: boolean
     website?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "logoMediaId" | "website" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
+  export type BrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "logoMediaId" | "website" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Brand$productsArgs<ExtArgs>
     logoMedia?: boolean | Brand$logoMediaArgs<ExtArgs>
@@ -31176,6 +31677,8 @@ export namespace Prisma {
       logoMediaId: string | null
       website: string | null
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["brand"]>
@@ -31611,6 +32114,8 @@ export namespace Prisma {
     readonly logoMediaId: FieldRef<"Brand", 'String'>
     readonly website: FieldRef<"Brand", 'String'>
     readonly isActive: FieldRef<"Brand", 'Boolean'>
+    readonly isDeleted: FieldRef<"Brand", 'Boolean'>
+    readonly deletedAt: FieldRef<"Brand", 'DateTime'>
     readonly createdAt: FieldRef<"Brand", 'DateTime'>
     readonly updatedAt: FieldRef<"Brand", 'DateTime'>
   }
@@ -32135,6 +32640,8 @@ export namespace Prisma {
     comparePrice: Decimal | null
     isActive: boolean | null
     isFeatured: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     weight: Decimal | null
     metaTitle: string | null
     metaDesc: string | null
@@ -32154,6 +32661,8 @@ export namespace Prisma {
     comparePrice: Decimal | null
     isActive: boolean | null
     isFeatured: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     weight: Decimal | null
     metaTitle: string | null
     metaDesc: string | null
@@ -32173,6 +32682,8 @@ export namespace Prisma {
     comparePrice: number
     isActive: number
     isFeatured: number
+    isDeleted: number
+    deletedAt: number
     weight: number
     metaTitle: number
     metaDesc: number
@@ -32206,6 +32717,8 @@ export namespace Prisma {
     comparePrice?: true
     isActive?: true
     isFeatured?: true
+    isDeleted?: true
+    deletedAt?: true
     weight?: true
     metaTitle?: true
     metaDesc?: true
@@ -32225,6 +32738,8 @@ export namespace Prisma {
     comparePrice?: true
     isActive?: true
     isFeatured?: true
+    isDeleted?: true
+    deletedAt?: true
     weight?: true
     metaTitle?: true
     metaDesc?: true
@@ -32244,6 +32759,8 @@ export namespace Prisma {
     comparePrice?: true
     isActive?: true
     isFeatured?: true
+    isDeleted?: true
+    deletedAt?: true
     weight?: true
     metaTitle?: true
     metaDesc?: true
@@ -32350,6 +32867,8 @@ export namespace Prisma {
     comparePrice: Decimal | null
     isActive: boolean
     isFeatured: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     weight: Decimal | null
     metaTitle: string | null
     metaDesc: string | null
@@ -32388,6 +32907,8 @@ export namespace Prisma {
     comparePrice?: boolean
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
@@ -32423,6 +32944,8 @@ export namespace Prisma {
     comparePrice?: boolean
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
@@ -32443,6 +32966,8 @@ export namespace Prisma {
     comparePrice?: boolean
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
@@ -32463,6 +32988,8 @@ export namespace Prisma {
     comparePrice?: boolean
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
@@ -32470,7 +32997,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "shortDesc" | "sku" | "brandId" | "basePrice" | "comparePrice" | "isActive" | "isFeatured" | "weight" | "metaTitle" | "metaDesc" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "shortDesc" | "sku" | "brandId" | "basePrice" | "comparePrice" | "isActive" | "isFeatured" | "isDeleted" | "deletedAt" | "weight" | "metaTitle" | "metaDesc" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     brand?: boolean | Product$brandArgs<ExtArgs>
     badges?: boolean | Product$badgesArgs<ExtArgs>
@@ -32527,6 +33054,8 @@ export namespace Prisma {
       comparePrice: Prisma.Decimal | null
       isActive: boolean
       isFeatured: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       weight: Prisma.Decimal | null
       metaTitle: string | null
       metaDesc: string | null
@@ -32981,6 +33510,8 @@ export namespace Prisma {
     readonly comparePrice: FieldRef<"Product", 'Decimal'>
     readonly isActive: FieldRef<"Product", 'Boolean'>
     readonly isFeatured: FieldRef<"Product", 'Boolean'>
+    readonly isDeleted: FieldRef<"Product", 'Boolean'>
+    readonly deletedAt: FieldRef<"Product", 'DateTime'>
     readonly weight: FieldRef<"Product", 'Decimal'>
     readonly metaTitle: FieldRef<"Product", 'String'>
     readonly metaDesc: FieldRef<"Product", 'String'>
@@ -34937,6 +35468,8 @@ export namespace Prisma {
     price: Decimal | null
     displayType: $Enums.VariantDisplayType | null
     sortOrder: number | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -34952,6 +35485,8 @@ export namespace Prisma {
     price: Decimal | null
     displayType: $Enums.VariantDisplayType | null
     sortOrder: number | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -34967,6 +35502,8 @@ export namespace Prisma {
     price: number
     displayType: number
     sortOrder: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -34994,6 +35531,8 @@ export namespace Prisma {
     price?: true
     displayType?: true
     sortOrder?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -35009,6 +35548,8 @@ export namespace Prisma {
     price?: true
     displayType?: true
     sortOrder?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -35024,6 +35565,8 @@ export namespace Prisma {
     price?: true
     displayType?: true
     sortOrder?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -35126,6 +35669,8 @@ export namespace Prisma {
     price: Decimal
     displayType: $Enums.VariantDisplayType
     sortOrder: number
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ProductVariantCountAggregateOutputType | null
@@ -35160,6 +35705,8 @@ export namespace Prisma {
     price?: boolean
     displayType?: boolean
     sortOrder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -35183,6 +35730,8 @@ export namespace Prisma {
     price?: boolean
     displayType?: boolean
     sortOrder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -35199,6 +35748,8 @@ export namespace Prisma {
     price?: boolean
     displayType?: boolean
     sortOrder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -35215,11 +35766,13 @@ export namespace Prisma {
     price?: boolean
     displayType?: boolean
     sortOrder?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "sku" | "name" | "color" | "size" | "type" | "price" | "displayType" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
+  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "sku" | "name" | "color" | "size" | "type" | "price" | "displayType" | "sortOrder" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
   export type ProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     inventory?: boolean | ProductVariant$inventoryArgs<ExtArgs>
@@ -35259,6 +35812,8 @@ export namespace Prisma {
       price: Prisma.Decimal
       displayType: $Enums.VariantDisplayType
       sortOrder: number
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productVariant"]>
@@ -35701,6 +36256,8 @@ export namespace Prisma {
     readonly price: FieldRef<"ProductVariant", 'Decimal'>
     readonly displayType: FieldRef<"ProductVariant", 'VariantDisplayType'>
     readonly sortOrder: FieldRef<"ProductVariant", 'Int'>
+    readonly isDeleted: FieldRef<"ProductVariant", 'Boolean'>
+    readonly deletedAt: FieldRef<"ProductVariant", 'DateTime'>
     readonly createdAt: FieldRef<"ProductVariant", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductVariant", 'DateTime'>
   }
@@ -40877,6 +41434,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -40892,6 +41451,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -40907,6 +41468,8 @@ export namespace Prisma {
     startDate: number
     endDate: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -40936,6 +41499,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -40951,6 +41516,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -40966,6 +41533,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -41068,6 +41637,8 @@ export namespace Prisma {
     startDate: Date
     endDate: Date
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: PromotionCountAggregateOutputType | null
@@ -41102,6 +41673,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     products?: boolean | Promotion$productsArgs<ExtArgs>
@@ -41119,6 +41692,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["promotion"]>
@@ -41134,6 +41709,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["promotion"]>
@@ -41149,11 +41726,13 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type" | "value" | "minPurchase" | "maxDiscount" | "startDate" | "endDate" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
+  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type" | "value" | "minPurchase" | "maxDiscount" | "startDate" | "endDate" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
   export type PromotionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Promotion$productsArgs<ExtArgs>
     _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
@@ -41177,6 +41756,8 @@ export namespace Prisma {
       startDate: Date
       endDate: Date
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["promotion"]>
@@ -41613,6 +42194,8 @@ export namespace Prisma {
     readonly startDate: FieldRef<"Promotion", 'DateTime'>
     readonly endDate: FieldRef<"Promotion", 'DateTime'>
     readonly isActive: FieldRef<"Promotion", 'Boolean'>
+    readonly isDeleted: FieldRef<"Promotion", 'Boolean'>
+    readonly deletedAt: FieldRef<"Promotion", 'DateTime'>
     readonly createdAt: FieldRef<"Promotion", 'DateTime'>
     readonly updatedAt: FieldRef<"Promotion", 'DateTime'>
   }
@@ -43148,6 +43731,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -43164,6 +43749,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     isActive: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -43180,6 +43767,8 @@ export namespace Prisma {
     startDate: number
     endDate: number
     isActive: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -43214,6 +43803,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -43230,6 +43821,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -43246,6 +43839,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     isActive?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -43349,6 +43944,8 @@ export namespace Prisma {
     startDate: Date
     endDate: Date
     isActive: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: CouponCountAggregateOutputType | null
@@ -43384,6 +43981,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     usages?: boolean | Coupon$usagesArgs<ExtArgs>
@@ -43402,6 +44001,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["coupon"]>
@@ -43418,6 +44019,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["coupon"]>
@@ -43434,11 +44037,13 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CouponOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "type" | "value" | "minPurchase" | "maxDiscount" | "usageLimit" | "usedCount" | "startDate" | "endDate" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["coupon"]>
+  export type CouponOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "type" | "value" | "minPurchase" | "maxDiscount" | "usageLimit" | "usedCount" | "startDate" | "endDate" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["coupon"]>
   export type CouponInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usages?: boolean | Coupon$usagesArgs<ExtArgs>
     _count?: boolean | CouponCountOutputTypeDefaultArgs<ExtArgs>
@@ -43463,6 +44068,8 @@ export namespace Prisma {
       startDate: Date
       endDate: Date
       isActive: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["coupon"]>
@@ -43900,6 +44507,8 @@ export namespace Prisma {
     readonly startDate: FieldRef<"Coupon", 'DateTime'>
     readonly endDate: FieldRef<"Coupon", 'DateTime'>
     readonly isActive: FieldRef<"Coupon", 'Boolean'>
+    readonly isDeleted: FieldRef<"Coupon", 'Boolean'>
+    readonly deletedAt: FieldRef<"Coupon", 'DateTime'>
     readonly createdAt: FieldRef<"Coupon", 'DateTime'>
     readonly updatedAt: FieldRef<"Coupon", 'DateTime'>
   }
@@ -45473,6 +46082,8 @@ export namespace Prisma {
     comment: string | null
     isVerified: boolean | null
     isApproved: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     helpfulCount: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -45487,6 +46098,8 @@ export namespace Prisma {
     comment: string | null
     isVerified: boolean | null
     isApproved: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     helpfulCount: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -45501,6 +46114,8 @@ export namespace Prisma {
     comment: number
     isVerified: number
     isApproved: number
+    isDeleted: number
+    deletedAt: number
     helpfulCount: number
     createdAt: number
     updatedAt: number
@@ -45527,6 +46142,8 @@ export namespace Prisma {
     comment?: true
     isVerified?: true
     isApproved?: true
+    isDeleted?: true
+    deletedAt?: true
     helpfulCount?: true
     createdAt?: true
     updatedAt?: true
@@ -45541,6 +46158,8 @@ export namespace Prisma {
     comment?: true
     isVerified?: true
     isApproved?: true
+    isDeleted?: true
+    deletedAt?: true
     helpfulCount?: true
     createdAt?: true
     updatedAt?: true
@@ -45555,6 +46174,8 @@ export namespace Prisma {
     comment?: true
     isVerified?: true
     isApproved?: true
+    isDeleted?: true
+    deletedAt?: true
     helpfulCount?: true
     createdAt?: true
     updatedAt?: true
@@ -45656,6 +46277,8 @@ export namespace Prisma {
     comment: string | null
     isVerified: boolean
     isApproved: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     helpfulCount: number
     createdAt: Date
     updatedAt: Date
@@ -45689,6 +46312,8 @@ export namespace Prisma {
     comment?: boolean
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     helpfulCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -45709,6 +46334,8 @@ export namespace Prisma {
     comment?: boolean
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     helpfulCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -45725,6 +46352,8 @@ export namespace Prisma {
     comment?: boolean
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     helpfulCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -45741,12 +46370,14 @@ export namespace Prisma {
     comment?: boolean
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     helpfulCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "userId" | "rating" | "title" | "comment" | "isVerified" | "isApproved" | "helpfulCount" | "createdAt" | "updatedAt", ExtArgs["result"]["productReview"]>
+  export type ProductReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "userId" | "rating" | "title" | "comment" | "isVerified" | "isApproved" | "isDeleted" | "deletedAt" | "helpfulCount" | "createdAt" | "updatedAt", ExtArgs["result"]["productReview"]>
   export type ProductReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -45782,6 +46413,8 @@ export namespace Prisma {
       comment: string | null
       isVerified: boolean
       isApproved: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       helpfulCount: number
       createdAt: Date
       updatedAt: Date
@@ -46221,6 +46854,8 @@ export namespace Prisma {
     readonly comment: FieldRef<"ProductReview", 'String'>
     readonly isVerified: FieldRef<"ProductReview", 'Boolean'>
     readonly isApproved: FieldRef<"ProductReview", 'Boolean'>
+    readonly isDeleted: FieldRef<"ProductReview", 'Boolean'>
+    readonly deletedAt: FieldRef<"ProductReview", 'DateTime'>
     readonly helpfulCount: FieldRef<"ProductReview", 'Int'>
     readonly createdAt: FieldRef<"ProductReview", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductReview", 'DateTime'>
@@ -47802,6 +48437,8 @@ export namespace Prisma {
     userId: string | null
     content: string | null
     isAdmin: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -47812,6 +48449,8 @@ export namespace Prisma {
     userId: string | null
     content: string | null
     isAdmin: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -47822,6 +48461,8 @@ export namespace Prisma {
     userId: number
     content: number
     isAdmin: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -47834,6 +48475,8 @@ export namespace Prisma {
     userId?: true
     content?: true
     isAdmin?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -47844,6 +48487,8 @@ export namespace Prisma {
     userId?: true
     content?: true
     isAdmin?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -47854,6 +48499,8 @@ export namespace Prisma {
     userId?: true
     content?: true
     isAdmin?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -47937,6 +48584,8 @@ export namespace Prisma {
     userId: string
     content: string
     isAdmin: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ReviewReplyCountAggregateOutputType | null
@@ -47964,6 +48613,8 @@ export namespace Prisma {
     userId?: boolean
     content?: boolean
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     review?: boolean | ProductReviewDefaultArgs<ExtArgs>
@@ -47976,6 +48627,8 @@ export namespace Prisma {
     userId?: boolean
     content?: boolean
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     review?: boolean | ProductReviewDefaultArgs<ExtArgs>
@@ -47988,6 +48641,8 @@ export namespace Prisma {
     userId?: boolean
     content?: boolean
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     review?: boolean | ProductReviewDefaultArgs<ExtArgs>
@@ -48000,11 +48655,13 @@ export namespace Prisma {
     userId?: boolean
     content?: boolean
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ReviewReplyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reviewId" | "userId" | "content" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["reviewReply"]>
+  export type ReviewReplyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reviewId" | "userId" | "content" | "isAdmin" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["reviewReply"]>
   export type ReviewReplyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     review?: boolean | ProductReviewDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -48030,6 +48687,8 @@ export namespace Prisma {
       userId: string
       content: string
       isAdmin: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["reviewReply"]>
@@ -48462,6 +49121,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"ReviewReply", 'String'>
     readonly content: FieldRef<"ReviewReply", 'String'>
     readonly isAdmin: FieldRef<"ReviewReply", 'Boolean'>
+    readonly isDeleted: FieldRef<"ReviewReply", 'Boolean'>
+    readonly deletedAt: FieldRef<"ReviewReply", 'DateTime'>
     readonly createdAt: FieldRef<"ReviewReply", 'DateTime'>
     readonly updatedAt: FieldRef<"ReviewReply", 'DateTime'>
   }
@@ -51006,9 +51667,9 @@ export namespace Prisma {
     phone: string | null
     username: string | null
     password: string | null
-    avatarMediaId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     refreshToken: string | null
     isActive: boolean | null
     isVerified: boolean | null
@@ -51018,6 +51679,7 @@ export namespace Prisma {
     isPhoneVerified: boolean | null
     emailVerifiedAt: Date | null
     phoneVerifiedAt: Date | null
+    mediaId: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -51028,9 +51690,9 @@ export namespace Prisma {
     phone: string | null
     username: string | null
     password: string | null
-    avatarMediaId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     refreshToken: string | null
     isActive: boolean | null
     isVerified: boolean | null
@@ -51040,6 +51702,7 @@ export namespace Prisma {
     isPhoneVerified: boolean | null
     emailVerifiedAt: Date | null
     phoneVerifiedAt: Date | null
+    mediaId: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -51050,9 +51713,9 @@ export namespace Prisma {
     phone: number
     username: number
     password: number
-    avatarMediaId: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     refreshToken: number
     isActive: number
     isVerified: number
@@ -51062,6 +51725,7 @@ export namespace Prisma {
     isPhoneVerified: number
     emailVerifiedAt: number
     phoneVerifiedAt: number
+    mediaId: number
     _all: number
   }
 
@@ -51074,9 +51738,9 @@ export namespace Prisma {
     phone?: true
     username?: true
     password?: true
-    avatarMediaId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     refreshToken?: true
     isActive?: true
     isVerified?: true
@@ -51086,6 +51750,7 @@ export namespace Prisma {
     isPhoneVerified?: true
     emailVerifiedAt?: true
     phoneVerifiedAt?: true
+    mediaId?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -51096,9 +51761,9 @@ export namespace Prisma {
     phone?: true
     username?: true
     password?: true
-    avatarMediaId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     refreshToken?: true
     isActive?: true
     isVerified?: true
@@ -51108,6 +51773,7 @@ export namespace Prisma {
     isPhoneVerified?: true
     emailVerifiedAt?: true
     phoneVerifiedAt?: true
+    mediaId?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -51118,9 +51784,9 @@ export namespace Prisma {
     phone?: true
     username?: true
     password?: true
-    avatarMediaId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     refreshToken?: true
     isActive?: true
     isVerified?: true
@@ -51130,6 +51796,7 @@ export namespace Prisma {
     isPhoneVerified?: true
     emailVerifiedAt?: true
     phoneVerifiedAt?: true
+    mediaId?: true
     _all?: true
   }
 
@@ -51213,9 +51880,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId: string | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     refreshToken: string | null
     isActive: boolean
     isVerified: boolean
@@ -51225,6 +51892,7 @@ export namespace Prisma {
     isPhoneVerified: boolean
     emailVerifiedAt: Date | null
     phoneVerifiedAt: Date | null
+    mediaId: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -51252,9 +51920,9 @@ export namespace Prisma {
     phone?: boolean
     username?: boolean
     password?: boolean
-    avatarMediaId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     refreshToken?: boolean
     isActive?: boolean
     isVerified?: boolean
@@ -51264,6 +51932,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: boolean
     phoneVerifiedAt?: boolean
+    mediaId?: boolean
     cart?: boolean | User$cartArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
@@ -51272,13 +51941,14 @@ export namespace Prisma {
     addresses?: boolean | User$addressesArgs<ExtArgs>
     affiliate?: boolean | User$affiliateArgs<ExtArgs>
     roleAssignments?: boolean | User$roleAssignmentsArgs<ExtArgs>
-    avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
+    avatar?: boolean | User$avatarArgs<ExtArgs>
     uploadedMedia?: boolean | User$uploadedMediaArgs<ExtArgs>
     emailVerificationLogs?: boolean | User$emailVerificationLogsArgs<ExtArgs>
     questions?: boolean | User$questionsArgs<ExtArgs>
     answeredQuestions?: boolean | User$answeredQuestionsArgs<ExtArgs>
     wishlists?: boolean | User$wishlistsArgs<ExtArgs>
     sharedWishlists?: boolean | User$sharedWishlistsArgs<ExtArgs>
+    media?: boolean | User$mediaArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -51290,9 +51960,9 @@ export namespace Prisma {
     phone?: boolean
     username?: boolean
     password?: boolean
-    avatarMediaId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     refreshToken?: boolean
     isActive?: boolean
     isVerified?: boolean
@@ -51302,7 +51972,8 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: boolean
     phoneVerifiedAt?: boolean
-    avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
+    mediaId?: boolean
+    media?: boolean | User$mediaArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -51313,9 +51984,9 @@ export namespace Prisma {
     phone?: boolean
     username?: boolean
     password?: boolean
-    avatarMediaId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     refreshToken?: boolean
     isActive?: boolean
     isVerified?: boolean
@@ -51325,7 +51996,8 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: boolean
     phoneVerifiedAt?: boolean
-    avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
+    mediaId?: boolean
+    media?: boolean | User$mediaArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -51336,9 +52008,9 @@ export namespace Prisma {
     phone?: boolean
     username?: boolean
     password?: boolean
-    avatarMediaId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     refreshToken?: boolean
     isActive?: boolean
     isVerified?: boolean
@@ -51348,9 +52020,10 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: boolean
     phoneVerifiedAt?: boolean
+    mediaId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "phone" | "username" | "password" | "avatarMediaId" | "createdAt" | "updatedAt" | "refreshToken" | "isActive" | "isVerified" | "isBanned" | "isDeleted" | "isEmailVerified" | "isPhoneVerified" | "emailVerifiedAt" | "phoneVerifiedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "phone" | "username" | "password" | "createdAt" | "updatedAt" | "deletedAt" | "refreshToken" | "isActive" | "isVerified" | "isBanned" | "isDeleted" | "isEmailVerified" | "isPhoneVerified" | "emailVerifiedAt" | "phoneVerifiedAt" | "mediaId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cart?: boolean | User$cartArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
@@ -51360,20 +52033,21 @@ export namespace Prisma {
     addresses?: boolean | User$addressesArgs<ExtArgs>
     affiliate?: boolean | User$affiliateArgs<ExtArgs>
     roleAssignments?: boolean | User$roleAssignmentsArgs<ExtArgs>
-    avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
+    avatar?: boolean | User$avatarArgs<ExtArgs>
     uploadedMedia?: boolean | User$uploadedMediaArgs<ExtArgs>
     emailVerificationLogs?: boolean | User$emailVerificationLogsArgs<ExtArgs>
     questions?: boolean | User$questionsArgs<ExtArgs>
     answeredQuestions?: boolean | User$answeredQuestionsArgs<ExtArgs>
     wishlists?: boolean | User$wishlistsArgs<ExtArgs>
     sharedWishlists?: boolean | User$sharedWishlistsArgs<ExtArgs>
+    media?: boolean | User$mediaArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
+    media?: boolean | User$mediaArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    avatarMedia?: boolean | User$avatarMediaArgs<ExtArgs>
+    media?: boolean | User$mediaArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -51387,13 +52061,14 @@ export namespace Prisma {
       addresses: Prisma.$AddressPayload<ExtArgs>[]
       affiliate: Prisma.$AffiliatePayload<ExtArgs> | null
       roleAssignments: Prisma.$UserRoleAssignmentPayload<ExtArgs>[]
-      avatarMedia: Prisma.$MediaPayload<ExtArgs> | null
+      avatar: Prisma.$UserAvatarPayload<ExtArgs> | null
       uploadedMedia: Prisma.$MediaPayload<ExtArgs>[]
       emailVerificationLogs: Prisma.$EmailVerificationLogPayload<ExtArgs>[]
       questions: Prisma.$ProductQuestionPayload<ExtArgs>[]
       answeredQuestions: Prisma.$ProductQuestionPayload<ExtArgs>[]
       wishlists: Prisma.$WishlistPayload<ExtArgs>[]
       sharedWishlists: Prisma.$SharedWishlistPayload<ExtArgs>[]
+      media: Prisma.$MediaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -51403,9 +52078,9 @@ export namespace Prisma {
       phone: string
       username: string
       password: string
-      avatarMediaId: string | null
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       refreshToken: string | null
       isActive: boolean
       isVerified: boolean
@@ -51415,6 +52090,7 @@ export namespace Prisma {
       isPhoneVerified: boolean
       emailVerifiedAt: Date | null
       phoneVerifiedAt: Date | null
+      mediaId: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -51817,13 +52493,14 @@ export namespace Prisma {
     addresses<T extends User$addressesArgs<ExtArgs> = {}>(args?: Subset<T, User$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     affiliate<T extends User$affiliateArgs<ExtArgs> = {}>(args?: Subset<T, User$affiliateArgs<ExtArgs>>): Prisma__AffiliateClient<$Result.GetResult<Prisma.$AffiliatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     roleAssignments<T extends User$roleAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$roleAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    avatarMedia<T extends User$avatarMediaArgs<ExtArgs> = {}>(args?: Subset<T, User$avatarMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    avatar<T extends User$avatarArgs<ExtArgs> = {}>(args?: Subset<T, User$avatarArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     uploadedMedia<T extends User$uploadedMediaArgs<ExtArgs> = {}>(args?: Subset<T, User$uploadedMediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     emailVerificationLogs<T extends User$emailVerificationLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$emailVerificationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     questions<T extends User$questionsArgs<ExtArgs> = {}>(args?: Subset<T, User$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     answeredQuestions<T extends User$answeredQuestionsArgs<ExtArgs> = {}>(args?: Subset<T, User$answeredQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     wishlists<T extends User$wishlistsArgs<ExtArgs> = {}>(args?: Subset<T, User$wishlistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sharedWishlists<T extends User$sharedWishlistsArgs<ExtArgs> = {}>(args?: Subset<T, User$sharedWishlistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SharedWishlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    media<T extends User$mediaArgs<ExtArgs> = {}>(args?: Subset<T, User$mediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -51860,9 +52537,9 @@ export namespace Prisma {
     readonly phone: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly avatarMediaId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly deletedAt: FieldRef<"User", 'DateTime'>
     readonly refreshToken: FieldRef<"User", 'String'>
     readonly isActive: FieldRef<"User", 'Boolean'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
@@ -51872,6 +52549,7 @@ export namespace Prisma {
     readonly isPhoneVerified: FieldRef<"User", 'Boolean'>
     readonly emailVerifiedAt: FieldRef<"User", 'DateTime'>
     readonly phoneVerifiedAt: FieldRef<"User", 'DateTime'>
+    readonly mediaId: FieldRef<"User", 'String'>
   }
     
 
@@ -52455,22 +53133,22 @@ export namespace Prisma {
   }
 
   /**
-   * User.avatarMedia
+   * User.avatar
    */
-  export type User$avatarMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$avatarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Media
+     * Select specific fields to fetch from the UserAvatar
      */
-    select?: MediaSelect<ExtArgs> | null
+    select?: UserAvatarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Media
+     * Omit specific fields from the UserAvatar
      */
-    omit?: MediaOmit<ExtArgs> | null
+    omit?: UserAvatarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MediaInclude<ExtArgs> | null
-    where?: MediaWhereInput
+    include?: UserAvatarInclude<ExtArgs> | null
+    where?: UserAvatarWhereInput
   }
 
   /**
@@ -52618,6 +53296,25 @@ export namespace Prisma {
   }
 
   /**
+   * User.media
+   */
+  export type User$mediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -52637,6 +53334,1077 @@ export namespace Prisma {
 
 
   /**
+   * Model UserAvatar
+   */
+
+  export type AggregateUserAvatar = {
+    _count: UserAvatarCountAggregateOutputType | null
+    _min: UserAvatarMinAggregateOutputType | null
+    _max: UserAvatarMaxAggregateOutputType | null
+  }
+
+  export type UserAvatarMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mediaId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAvatarMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mediaId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAvatarCountAggregateOutputType = {
+    id: number
+    userId: number
+    mediaId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserAvatarMinAggregateInputType = {
+    id?: true
+    userId?: true
+    mediaId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAvatarMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    mediaId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAvatarCountAggregateInputType = {
+    id?: true
+    userId?: true
+    mediaId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserAvatarAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAvatar to aggregate.
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAvatars to fetch.
+     */
+    orderBy?: UserAvatarOrderByWithRelationInput | UserAvatarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserAvatarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAvatars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAvatars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserAvatars
+    **/
+    _count?: true | UserAvatarCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserAvatarMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserAvatarMaxAggregateInputType
+  }
+
+  export type GetUserAvatarAggregateType<T extends UserAvatarAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserAvatar]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserAvatar[P]>
+      : GetScalarType<T[P], AggregateUserAvatar[P]>
+  }
+
+
+
+
+  export type UserAvatarGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAvatarWhereInput
+    orderBy?: UserAvatarOrderByWithAggregationInput | UserAvatarOrderByWithAggregationInput[]
+    by: UserAvatarScalarFieldEnum[] | UserAvatarScalarFieldEnum
+    having?: UserAvatarScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserAvatarCountAggregateInputType | true
+    _min?: UserAvatarMinAggregateInputType
+    _max?: UserAvatarMaxAggregateInputType
+  }
+
+  export type UserAvatarGroupByOutputType = {
+    id: string
+    userId: string
+    mediaId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserAvatarCountAggregateOutputType | null
+    _min: UserAvatarMinAggregateOutputType | null
+    _max: UserAvatarMaxAggregateOutputType | null
+  }
+
+  type GetUserAvatarGroupByPayload<T extends UserAvatarGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserAvatarGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserAvatarGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserAvatarGroupByOutputType[P]>
+            : GetScalarType<T[P], UserAvatarGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserAvatarSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mediaId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAvatar"]>
+
+  export type UserAvatarSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mediaId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAvatar"]>
+
+  export type UserAvatarSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mediaId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAvatar"]>
+
+  export type UserAvatarSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    mediaId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserAvatarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "mediaId" | "createdAt" | "updatedAt", ExtArgs["result"]["userAvatar"]>
+  export type UserAvatarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+  }
+  export type UserAvatarIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+  }
+  export type UserAvatarIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+  }
+
+  export type $UserAvatarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserAvatar"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      media: Prisma.$MediaPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      mediaId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userAvatar"]>
+    composites: {}
+  }
+
+  type UserAvatarGetPayload<S extends boolean | null | undefined | UserAvatarDefaultArgs> = $Result.GetResult<Prisma.$UserAvatarPayload, S>
+
+  type UserAvatarCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserAvatarFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserAvatarCountAggregateInputType | true
+    }
+
+  export interface UserAvatarDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserAvatar'], meta: { name: 'UserAvatar' } }
+    /**
+     * Find zero or one UserAvatar that matches the filter.
+     * @param {UserAvatarFindUniqueArgs} args - Arguments to find a UserAvatar
+     * @example
+     * // Get one UserAvatar
+     * const userAvatar = await prisma.userAvatar.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserAvatarFindUniqueArgs>(args: SelectSubset<T, UserAvatarFindUniqueArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserAvatar that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserAvatarFindUniqueOrThrowArgs} args - Arguments to find a UserAvatar
+     * @example
+     * // Get one UserAvatar
+     * const userAvatar = await prisma.userAvatar.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserAvatarFindUniqueOrThrowArgs>(args: SelectSubset<T, UserAvatarFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAvatar that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarFindFirstArgs} args - Arguments to find a UserAvatar
+     * @example
+     * // Get one UserAvatar
+     * const userAvatar = await prisma.userAvatar.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserAvatarFindFirstArgs>(args?: SelectSubset<T, UserAvatarFindFirstArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAvatar that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarFindFirstOrThrowArgs} args - Arguments to find a UserAvatar
+     * @example
+     * // Get one UserAvatar
+     * const userAvatar = await prisma.userAvatar.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserAvatarFindFirstOrThrowArgs>(args?: SelectSubset<T, UserAvatarFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserAvatars that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserAvatars
+     * const userAvatars = await prisma.userAvatar.findMany()
+     * 
+     * // Get first 10 UserAvatars
+     * const userAvatars = await prisma.userAvatar.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userAvatarWithIdOnly = await prisma.userAvatar.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserAvatarFindManyArgs>(args?: SelectSubset<T, UserAvatarFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserAvatar.
+     * @param {UserAvatarCreateArgs} args - Arguments to create a UserAvatar.
+     * @example
+     * // Create one UserAvatar
+     * const UserAvatar = await prisma.userAvatar.create({
+     *   data: {
+     *     // ... data to create a UserAvatar
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserAvatarCreateArgs>(args: SelectSubset<T, UserAvatarCreateArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserAvatars.
+     * @param {UserAvatarCreateManyArgs} args - Arguments to create many UserAvatars.
+     * @example
+     * // Create many UserAvatars
+     * const userAvatar = await prisma.userAvatar.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserAvatarCreateManyArgs>(args?: SelectSubset<T, UserAvatarCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserAvatars and returns the data saved in the database.
+     * @param {UserAvatarCreateManyAndReturnArgs} args - Arguments to create many UserAvatars.
+     * @example
+     * // Create many UserAvatars
+     * const userAvatar = await prisma.userAvatar.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserAvatars and only return the `id`
+     * const userAvatarWithIdOnly = await prisma.userAvatar.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserAvatarCreateManyAndReturnArgs>(args?: SelectSubset<T, UserAvatarCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserAvatar.
+     * @param {UserAvatarDeleteArgs} args - Arguments to delete one UserAvatar.
+     * @example
+     * // Delete one UserAvatar
+     * const UserAvatar = await prisma.userAvatar.delete({
+     *   where: {
+     *     // ... filter to delete one UserAvatar
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserAvatarDeleteArgs>(args: SelectSubset<T, UserAvatarDeleteArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserAvatar.
+     * @param {UserAvatarUpdateArgs} args - Arguments to update one UserAvatar.
+     * @example
+     * // Update one UserAvatar
+     * const userAvatar = await prisma.userAvatar.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserAvatarUpdateArgs>(args: SelectSubset<T, UserAvatarUpdateArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserAvatars.
+     * @param {UserAvatarDeleteManyArgs} args - Arguments to filter UserAvatars to delete.
+     * @example
+     * // Delete a few UserAvatars
+     * const { count } = await prisma.userAvatar.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserAvatarDeleteManyArgs>(args?: SelectSubset<T, UserAvatarDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAvatars.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserAvatars
+     * const userAvatar = await prisma.userAvatar.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserAvatarUpdateManyArgs>(args: SelectSubset<T, UserAvatarUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAvatars and returns the data updated in the database.
+     * @param {UserAvatarUpdateManyAndReturnArgs} args - Arguments to update many UserAvatars.
+     * @example
+     * // Update many UserAvatars
+     * const userAvatar = await prisma.userAvatar.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserAvatars and only return the `id`
+     * const userAvatarWithIdOnly = await prisma.userAvatar.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserAvatarUpdateManyAndReturnArgs>(args: SelectSubset<T, UserAvatarUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserAvatar.
+     * @param {UserAvatarUpsertArgs} args - Arguments to update or create a UserAvatar.
+     * @example
+     * // Update or create a UserAvatar
+     * const userAvatar = await prisma.userAvatar.upsert({
+     *   create: {
+     *     // ... data to create a UserAvatar
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserAvatar we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserAvatarUpsertArgs>(args: SelectSubset<T, UserAvatarUpsertArgs<ExtArgs>>): Prisma__UserAvatarClient<$Result.GetResult<Prisma.$UserAvatarPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserAvatars.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarCountArgs} args - Arguments to filter UserAvatars to count.
+     * @example
+     * // Count the number of UserAvatars
+     * const count = await prisma.userAvatar.count({
+     *   where: {
+     *     // ... the filter for the UserAvatars we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserAvatarCountArgs>(
+      args?: Subset<T, UserAvatarCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserAvatarCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserAvatar.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAvatarAggregateArgs>(args: Subset<T, UserAvatarAggregateArgs>): Prisma.PrismaPromise<GetUserAvatarAggregateType<T>>
+
+    /**
+     * Group by UserAvatar.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAvatarGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserAvatarGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserAvatarGroupByArgs['orderBy'] }
+        : { orderBy?: UserAvatarGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserAvatarGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserAvatarGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserAvatar model
+   */
+  readonly fields: UserAvatarFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserAvatar.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserAvatarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    media<T extends MediaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MediaDefaultArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserAvatar model
+   */
+  interface UserAvatarFieldRefs {
+    readonly id: FieldRef<"UserAvatar", 'String'>
+    readonly userId: FieldRef<"UserAvatar", 'String'>
+    readonly mediaId: FieldRef<"UserAvatar", 'String'>
+    readonly createdAt: FieldRef<"UserAvatar", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserAvatar", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserAvatar findUnique
+   */
+  export type UserAvatarFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAvatar to fetch.
+     */
+    where: UserAvatarWhereUniqueInput
+  }
+
+  /**
+   * UserAvatar findUniqueOrThrow
+   */
+  export type UserAvatarFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAvatar to fetch.
+     */
+    where: UserAvatarWhereUniqueInput
+  }
+
+  /**
+   * UserAvatar findFirst
+   */
+  export type UserAvatarFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAvatar to fetch.
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAvatars to fetch.
+     */
+    orderBy?: UserAvatarOrderByWithRelationInput | UserAvatarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAvatars.
+     */
+    cursor?: UserAvatarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAvatars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAvatars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAvatars.
+     */
+    distinct?: UserAvatarScalarFieldEnum | UserAvatarScalarFieldEnum[]
+  }
+
+  /**
+   * UserAvatar findFirstOrThrow
+   */
+  export type UserAvatarFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAvatar to fetch.
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAvatars to fetch.
+     */
+    orderBy?: UserAvatarOrderByWithRelationInput | UserAvatarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAvatars.
+     */
+    cursor?: UserAvatarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAvatars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAvatars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAvatars.
+     */
+    distinct?: UserAvatarScalarFieldEnum | UserAvatarScalarFieldEnum[]
+  }
+
+  /**
+   * UserAvatar findMany
+   */
+  export type UserAvatarFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAvatars to fetch.
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAvatars to fetch.
+     */
+    orderBy?: UserAvatarOrderByWithRelationInput | UserAvatarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserAvatars.
+     */
+    cursor?: UserAvatarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAvatars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAvatars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAvatars.
+     */
+    distinct?: UserAvatarScalarFieldEnum | UserAvatarScalarFieldEnum[]
+  }
+
+  /**
+   * UserAvatar create
+   */
+  export type UserAvatarCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserAvatar.
+     */
+    data: XOR<UserAvatarCreateInput, UserAvatarUncheckedCreateInput>
+  }
+
+  /**
+   * UserAvatar createMany
+   */
+  export type UserAvatarCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserAvatars.
+     */
+    data: UserAvatarCreateManyInput | UserAvatarCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserAvatar createManyAndReturn
+   */
+  export type UserAvatarCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserAvatars.
+     */
+    data: UserAvatarCreateManyInput | UserAvatarCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAvatar update
+   */
+  export type UserAvatarUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserAvatar.
+     */
+    data: XOR<UserAvatarUpdateInput, UserAvatarUncheckedUpdateInput>
+    /**
+     * Choose, which UserAvatar to update.
+     */
+    where: UserAvatarWhereUniqueInput
+  }
+
+  /**
+   * UserAvatar updateMany
+   */
+  export type UserAvatarUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserAvatars.
+     */
+    data: XOR<UserAvatarUpdateManyMutationInput, UserAvatarUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAvatars to update
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * Limit how many UserAvatars to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAvatar updateManyAndReturn
+   */
+  export type UserAvatarUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * The data used to update UserAvatars.
+     */
+    data: XOR<UserAvatarUpdateManyMutationInput, UserAvatarUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAvatars to update
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * Limit how many UserAvatars to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAvatar upsert
+   */
+  export type UserAvatarUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserAvatar to update in case it exists.
+     */
+    where: UserAvatarWhereUniqueInput
+    /**
+     * In case the UserAvatar found by the `where` argument doesn't exist, create a new UserAvatar with this data.
+     */
+    create: XOR<UserAvatarCreateInput, UserAvatarUncheckedCreateInput>
+    /**
+     * In case the UserAvatar was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserAvatarUpdateInput, UserAvatarUncheckedUpdateInput>
+  }
+
+  /**
+   * UserAvatar delete
+   */
+  export type UserAvatarDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+    /**
+     * Filter which UserAvatar to delete.
+     */
+    where: UserAvatarWhereUniqueInput
+  }
+
+  /**
+   * UserAvatar deleteMany
+   */
+  export type UserAvatarDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAvatars to delete
+     */
+    where?: UserAvatarWhereInput
+    /**
+     * Limit how many UserAvatars to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAvatar without action
+   */
+  export type UserAvatarDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAvatar
+     */
+    select?: UserAvatarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAvatar
+     */
+    omit?: UserAvatarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAvatarInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model UserRole
    */
 
@@ -52651,6 +54419,8 @@ export namespace Prisma {
     name: $Enums.RoleName | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    isDeleted: boolean | null
   }
 
   export type UserRoleMaxAggregateOutputType = {
@@ -52658,6 +54428,8 @@ export namespace Prisma {
     name: $Enums.RoleName | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    isDeleted: boolean | null
   }
 
   export type UserRoleCountAggregateOutputType = {
@@ -52665,6 +54437,8 @@ export namespace Prisma {
     name: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
+    isDeleted: number
     _all: number
   }
 
@@ -52674,6 +54448,8 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    isDeleted?: true
   }
 
   export type UserRoleMaxAggregateInputType = {
@@ -52681,6 +54457,8 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    isDeleted?: true
   }
 
   export type UserRoleCountAggregateInputType = {
@@ -52688,6 +54466,8 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    isDeleted?: true
     _all?: true
   }
 
@@ -52768,6 +54548,8 @@ export namespace Prisma {
     name: $Enums.RoleName
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
+    isDeleted: boolean
     _count: UserRoleCountAggregateOutputType | null
     _min: UserRoleMinAggregateOutputType | null
     _max: UserRoleMaxAggregateOutputType | null
@@ -52792,6 +54574,8 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    isDeleted?: boolean
     roleAssignments?: boolean | UserRole$roleAssignmentsArgs<ExtArgs>
     _count?: boolean | UserRoleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userRole"]>
@@ -52801,6 +54585,8 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    isDeleted?: boolean
   }, ExtArgs["result"]["userRole"]>
 
   export type UserRoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -52808,6 +54594,8 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    isDeleted?: boolean
   }, ExtArgs["result"]["userRole"]>
 
   export type UserRoleSelectScalar = {
@@ -52815,9 +54603,11 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    isDeleted?: boolean
   }
 
-  export type UserRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["userRole"]>
+  export type UserRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "deletedAt" | "isDeleted", ExtArgs["result"]["userRole"]>
   export type UserRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     roleAssignments?: boolean | UserRole$roleAssignmentsArgs<ExtArgs>
     _count?: boolean | UserRoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -52835,6 +54625,8 @@ export namespace Prisma {
       name: $Enums.RoleName
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
+      isDeleted: boolean
     }, ExtArgs["result"]["userRole"]>
     composites: {}
   }
@@ -53263,6 +55055,8 @@ export namespace Prisma {
     readonly name: FieldRef<"UserRole", 'RoleName'>
     readonly createdAt: FieldRef<"UserRole", 'DateTime'>
     readonly updatedAt: FieldRef<"UserRole", 'DateTime'>
+    readonly deletedAt: FieldRef<"UserRole", 'DateTime'>
+    readonly isDeleted: FieldRef<"UserRole", 'Boolean'>
   }
     
 
@@ -54785,6 +56579,8 @@ export namespace Prisma {
     productId: string | null
     variantId: string | null
     note: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -54795,6 +56591,8 @@ export namespace Prisma {
     productId: string | null
     variantId: string | null
     note: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -54805,6 +56603,8 @@ export namespace Prisma {
     productId: number
     variantId: number
     note: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -54817,6 +56617,8 @@ export namespace Prisma {
     productId?: true
     variantId?: true
     note?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -54827,6 +56629,8 @@ export namespace Prisma {
     productId?: true
     variantId?: true
     note?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -54837,6 +56641,8 @@ export namespace Prisma {
     productId?: true
     variantId?: true
     note?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -54920,6 +56726,8 @@ export namespace Prisma {
     productId: string
     variantId: string | null
     note: string | null
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: WishlistCountAggregateOutputType | null
@@ -54947,6 +56755,8 @@ export namespace Prisma {
     productId?: boolean
     variantId?: boolean
     note?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -54960,6 +56770,8 @@ export namespace Prisma {
     productId?: boolean
     variantId?: boolean
     note?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -54973,6 +56785,8 @@ export namespace Prisma {
     productId?: boolean
     variantId?: boolean
     note?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -54986,11 +56800,13 @@ export namespace Prisma {
     productId?: boolean
     variantId?: boolean
     note?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WishlistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "productId" | "variantId" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["wishlist"]>
+  export type WishlistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "productId" | "variantId" | "note" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["wishlist"]>
   export type WishlistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -55020,6 +56836,8 @@ export namespace Prisma {
       productId: string
       variantId: string | null
       note: string | null
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["wishlist"]>
@@ -55453,6 +57271,8 @@ export namespace Prisma {
     readonly productId: FieldRef<"Wishlist", 'String'>
     readonly variantId: FieldRef<"Wishlist", 'String'>
     readonly note: FieldRef<"Wishlist", 'String'>
+    readonly isDeleted: FieldRef<"Wishlist", 'Boolean'>
+    readonly deletedAt: FieldRef<"Wishlist", 'DateTime'>
     readonly createdAt: FieldRef<"Wishlist", 'DateTime'>
     readonly updatedAt: FieldRef<"Wishlist", 'DateTime'>
   }
@@ -55920,6 +57740,8 @@ export namespace Prisma {
     title: string | null
     description: string | null
     isPublic: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     expiresAt: Date | null
     viewCount: number | null
     createdAt: Date | null
@@ -55933,6 +57755,8 @@ export namespace Prisma {
     title: string | null
     description: string | null
     isPublic: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     expiresAt: Date | null
     viewCount: number | null
     createdAt: Date | null
@@ -55946,6 +57770,8 @@ export namespace Prisma {
     title: number
     description: number
     isPublic: number
+    isDeleted: number
+    deletedAt: number
     expiresAt: number
     viewCount: number
     createdAt: number
@@ -55969,6 +57795,8 @@ export namespace Prisma {
     title?: true
     description?: true
     isPublic?: true
+    isDeleted?: true
+    deletedAt?: true
     expiresAt?: true
     viewCount?: true
     createdAt?: true
@@ -55982,6 +57810,8 @@ export namespace Prisma {
     title?: true
     description?: true
     isPublic?: true
+    isDeleted?: true
+    deletedAt?: true
     expiresAt?: true
     viewCount?: true
     createdAt?: true
@@ -55995,6 +57825,8 @@ export namespace Prisma {
     title?: true
     description?: true
     isPublic?: true
+    isDeleted?: true
+    deletedAt?: true
     expiresAt?: true
     viewCount?: true
     createdAt?: true
@@ -56095,6 +57927,8 @@ export namespace Prisma {
     title: string | null
     description: string | null
     isPublic: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     expiresAt: Date | null
     viewCount: number
     createdAt: Date
@@ -56127,6 +57961,8 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     expiresAt?: boolean
     viewCount?: boolean
     createdAt?: boolean
@@ -56141,6 +57977,8 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     expiresAt?: boolean
     viewCount?: boolean
     createdAt?: boolean
@@ -56155,6 +57993,8 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     expiresAt?: boolean
     viewCount?: boolean
     createdAt?: boolean
@@ -56169,13 +58009,15 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     expiresAt?: boolean
     viewCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SharedWishlistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "shareToken" | "title" | "description" | "isPublic" | "expiresAt" | "viewCount" | "createdAt" | "updatedAt", ExtArgs["result"]["sharedWishlist"]>
+  export type SharedWishlistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "shareToken" | "title" | "description" | "isPublic" | "isDeleted" | "deletedAt" | "expiresAt" | "viewCount" | "createdAt" | "updatedAt", ExtArgs["result"]["sharedWishlist"]>
   export type SharedWishlistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -56198,6 +58040,8 @@ export namespace Prisma {
       title: string | null
       description: string | null
       isPublic: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       expiresAt: Date | null
       viewCount: number
       createdAt: Date
@@ -56632,6 +58476,8 @@ export namespace Prisma {
     readonly title: FieldRef<"SharedWishlist", 'String'>
     readonly description: FieldRef<"SharedWishlist", 'String'>
     readonly isPublic: FieldRef<"SharedWishlist", 'Boolean'>
+    readonly isDeleted: FieldRef<"SharedWishlist", 'Boolean'>
+    readonly deletedAt: FieldRef<"SharedWishlist", 'DateTime'>
     readonly expiresAt: FieldRef<"SharedWishlist", 'DateTime'>
     readonly viewCount: FieldRef<"SharedWishlist", 'Int'>
     readonly createdAt: FieldRef<"SharedWishlist", 'DateTime'>
@@ -57082,6 +58928,8 @@ export namespace Prisma {
     country: 'country',
     type: 'type',
     isDefault: 'isDefault',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57123,6 +58971,8 @@ export namespace Prisma {
     bankAccount: 'bankAccount',
     bankName: 'bankName',
     accountHolder: 'accountHolder',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57137,6 +58987,8 @@ export namespace Prisma {
     url: 'url',
     clicks: 'clicks',
     conversions: 'conversions',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57152,6 +59004,8 @@ export namespace Prisma {
     rate: 'rate',
     status: 'status',
     paidAt: 'paidAt',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57165,6 +59019,8 @@ export namespace Prisma {
     categoryId: 'categoryId',
     rate: 'rate',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57178,6 +59034,8 @@ export namespace Prisma {
     slug: 'slug',
     description: 'description',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     startDate: 'startDate',
     endDate: 'endDate',
     createdAt: 'createdAt',
@@ -57202,6 +59060,8 @@ export namespace Prisma {
     gradientTo: 'gradientTo',
     imageMediaId: 'imageMediaId',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57244,6 +59104,8 @@ export namespace Prisma {
     endTime: 'endTime',
     status: 'status',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     sortOrder: 'sortOrder',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -57291,6 +59153,7 @@ export namespace Prisma {
     type: 'type',
     uploadedById: 'uploadedById',
     isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57301,6 +59164,8 @@ export namespace Prisma {
   export const CartScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57335,6 +59200,8 @@ export namespace Prisma {
     affiliateCode: 'affiliateCode',
     couponCode: 'couponCode',
     notes: 'notes',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57352,6 +59219,8 @@ export namespace Prisma {
     price: 'price',
     quantity: 'quantity',
     total: 'total',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt'
   };
 
@@ -57367,6 +59236,8 @@ export namespace Prisma {
     transactionId: 'transactionId',
     paymentData: 'paymentData',
     paidAt: 'paidAt',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57398,6 +59269,8 @@ export namespace Prisma {
     imageMediaId: 'imageMediaId',
     parentId: 'parentId',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     sortOrder: 'sortOrder',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -57416,6 +59289,8 @@ export namespace Prisma {
     logoMediaId: 'logoMediaId',
     website: 'website',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57435,6 +59310,8 @@ export namespace Prisma {
     comparePrice: 'comparePrice',
     isActive: 'isActive',
     isFeatured: 'isFeatured',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     weight: 'weight',
     metaTitle: 'metaTitle',
     metaDesc: 'metaDesc',
@@ -57471,6 +59348,8 @@ export namespace Prisma {
     price: 'price',
     displayType: 'displayType',
     sortOrder: 'sortOrder',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57544,6 +59423,8 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57573,6 +59454,8 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57600,6 +59483,8 @@ export namespace Prisma {
     comment: 'comment',
     isVerified: 'isVerified',
     isApproved: 'isApproved',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     helpfulCount: 'helpfulCount',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -57625,6 +59510,8 @@ export namespace Prisma {
     userId: 'userId',
     content: 'content',
     isAdmin: 'isAdmin',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57662,9 +59549,9 @@ export namespace Prisma {
     phone: 'phone',
     username: 'username',
     password: 'password',
-    avatarMediaId: 'avatarMediaId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     refreshToken: 'refreshToken',
     isActive: 'isActive',
     isVerified: 'isVerified',
@@ -57673,17 +59560,31 @@ export namespace Prisma {
     isEmailVerified: 'isEmailVerified',
     isPhoneVerified: 'isPhoneVerified',
     emailVerifiedAt: 'emailVerifiedAt',
-    phoneVerifiedAt: 'phoneVerifiedAt'
+    phoneVerifiedAt: 'phoneVerifiedAt',
+    mediaId: 'mediaId'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const UserAvatarScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    mediaId: 'mediaId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserAvatarScalarFieldEnum = (typeof UserAvatarScalarFieldEnum)[keyof typeof UserAvatarScalarFieldEnum]
 
 
   export const UserRoleScalarFieldEnum: {
     id: 'id',
     name: 'name',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    isDeleted: 'isDeleted'
   };
 
   export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
@@ -57706,6 +59607,8 @@ export namespace Prisma {
     productId: 'productId',
     variantId: 'variantId',
     note: 'note',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -57720,6 +59623,8 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     isPublic: 'isPublic',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     expiresAt: 'expiresAt',
     viewCount: 'viewCount',
     createdAt: 'createdAt',
@@ -58109,6 +60014,8 @@ export namespace Prisma {
     country?: StringFilter<"Address"> | string
     type?: EnumAddressTypeFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolFilter<"Address"> | boolean
+    isDeleted?: BoolFilter<"Address"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Address"> | Date | string | null
     createdAt?: DateTimeFilter<"Address"> | Date | string
     updatedAt?: DateTimeFilter<"Address"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -58128,6 +60035,8 @@ export namespace Prisma {
     country?: SortOrder
     type?: SortOrder
     isDefault?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -58150,6 +60059,8 @@ export namespace Prisma {
     country?: StringFilter<"Address"> | string
     type?: EnumAddressTypeFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolFilter<"Address"> | boolean
+    isDeleted?: BoolFilter<"Address"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Address"> | Date | string | null
     createdAt?: DateTimeFilter<"Address"> | Date | string
     updatedAt?: DateTimeFilter<"Address"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -58169,6 +60080,8 @@ export namespace Prisma {
     country?: SortOrder
     type?: SortOrder
     isDefault?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AddressCountOrderByAggregateInput
@@ -58192,6 +60105,8 @@ export namespace Prisma {
     country?: StringWithAggregatesFilter<"Address"> | string
     type?: EnumAddressTypeWithAggregatesFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolWithAggregatesFilter<"Address"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Address"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Address"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
   }
@@ -58324,6 +60239,8 @@ export namespace Prisma {
     bankAccount?: StringNullableFilter<"Affiliate"> | string | null
     bankName?: StringNullableFilter<"Affiliate"> | string | null
     accountHolder?: StringNullableFilter<"Affiliate"> | string | null
+    isDeleted?: BoolFilter<"Affiliate"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Affiliate"> | Date | string | null
     createdAt?: DateTimeFilter<"Affiliate"> | Date | string
     updatedAt?: DateTimeFilter<"Affiliate"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -58342,6 +60259,8 @@ export namespace Prisma {
     bankAccount?: SortOrderInput | SortOrder
     bankName?: SortOrderInput | SortOrder
     accountHolder?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -58363,6 +60282,8 @@ export namespace Prisma {
     bankAccount?: StringNullableFilter<"Affiliate"> | string | null
     bankName?: StringNullableFilter<"Affiliate"> | string | null
     accountHolder?: StringNullableFilter<"Affiliate"> | string | null
+    isDeleted?: BoolFilter<"Affiliate"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Affiliate"> | Date | string | null
     createdAt?: DateTimeFilter<"Affiliate"> | Date | string
     updatedAt?: DateTimeFilter<"Affiliate"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -58381,6 +60302,8 @@ export namespace Prisma {
     bankAccount?: SortOrderInput | SortOrder
     bankName?: SortOrderInput | SortOrder
     accountHolder?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AffiliateCountOrderByAggregateInput
@@ -58404,6 +60327,8 @@ export namespace Prisma {
     bankAccount?: StringNullableWithAggregatesFilter<"Affiliate"> | string | null
     bankName?: StringNullableWithAggregatesFilter<"Affiliate"> | string | null
     accountHolder?: StringNullableWithAggregatesFilter<"Affiliate"> | string | null
+    isDeleted?: BoolWithAggregatesFilter<"Affiliate"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Affiliate"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Affiliate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Affiliate"> | Date | string
   }
@@ -58418,6 +60343,8 @@ export namespace Prisma {
     url?: StringFilter<"AffiliateLink"> | string
     clicks?: IntFilter<"AffiliateLink"> | number
     conversions?: IntFilter<"AffiliateLink"> | number
+    isDeleted?: BoolFilter<"AffiliateLink"> | boolean
+    deletedAt?: DateTimeNullableFilter<"AffiliateLink"> | Date | string | null
     createdAt?: DateTimeFilter<"AffiliateLink"> | Date | string
     updatedAt?: DateTimeFilter<"AffiliateLink"> | Date | string
     affiliate?: XOR<AffiliateScalarRelationFilter, AffiliateWhereInput>
@@ -58430,6 +60357,8 @@ export namespace Prisma {
     url?: SortOrder
     clicks?: SortOrder
     conversions?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     affiliate?: AffiliateOrderByWithRelationInput
@@ -58445,6 +60374,8 @@ export namespace Prisma {
     url?: StringFilter<"AffiliateLink"> | string
     clicks?: IntFilter<"AffiliateLink"> | number
     conversions?: IntFilter<"AffiliateLink"> | number
+    isDeleted?: BoolFilter<"AffiliateLink"> | boolean
+    deletedAt?: DateTimeNullableFilter<"AffiliateLink"> | Date | string | null
     createdAt?: DateTimeFilter<"AffiliateLink"> | Date | string
     updatedAt?: DateTimeFilter<"AffiliateLink"> | Date | string
     affiliate?: XOR<AffiliateScalarRelationFilter, AffiliateWhereInput>
@@ -58457,6 +60388,8 @@ export namespace Prisma {
     url?: SortOrder
     clicks?: SortOrder
     conversions?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AffiliateLinkCountOrderByAggregateInput
@@ -58476,6 +60409,8 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"AffiliateLink"> | string
     clicks?: IntWithAggregatesFilter<"AffiliateLink"> | number
     conversions?: IntWithAggregatesFilter<"AffiliateLink"> | number
+    isDeleted?: BoolWithAggregatesFilter<"AffiliateLink"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"AffiliateLink"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AffiliateLink"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AffiliateLink"> | Date | string
   }
@@ -58491,6 +60426,8 @@ export namespace Prisma {
     rate?: DecimalFilter<"AffiliateCommission"> | Decimal | DecimalJsLike | number | string
     status?: StringFilter<"AffiliateCommission"> | string
     paidAt?: DateTimeNullableFilter<"AffiliateCommission"> | Date | string | null
+    isDeleted?: BoolFilter<"AffiliateCommission"> | boolean
+    deletedAt?: DateTimeNullableFilter<"AffiliateCommission"> | Date | string | null
     createdAt?: DateTimeFilter<"AffiliateCommission"> | Date | string
     updatedAt?: DateTimeFilter<"AffiliateCommission"> | Date | string
     affiliate?: XOR<AffiliateScalarRelationFilter, AffiliateWhereInput>
@@ -58505,6 +60442,8 @@ export namespace Prisma {
     rate?: SortOrder
     status?: SortOrder
     paidAt?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     affiliate?: AffiliateOrderByWithRelationInput
@@ -58522,6 +60461,8 @@ export namespace Prisma {
     rate?: DecimalFilter<"AffiliateCommission"> | Decimal | DecimalJsLike | number | string
     status?: StringFilter<"AffiliateCommission"> | string
     paidAt?: DateTimeNullableFilter<"AffiliateCommission"> | Date | string | null
+    isDeleted?: BoolFilter<"AffiliateCommission"> | boolean
+    deletedAt?: DateTimeNullableFilter<"AffiliateCommission"> | Date | string | null
     createdAt?: DateTimeFilter<"AffiliateCommission"> | Date | string
     updatedAt?: DateTimeFilter<"AffiliateCommission"> | Date | string
     affiliate?: XOR<AffiliateScalarRelationFilter, AffiliateWhereInput>
@@ -58536,6 +60477,8 @@ export namespace Prisma {
     rate?: SortOrder
     status?: SortOrder
     paidAt?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AffiliateCommissionCountOrderByAggregateInput
@@ -58556,6 +60499,8 @@ export namespace Prisma {
     rate?: DecimalWithAggregatesFilter<"AffiliateCommission"> | Decimal | DecimalJsLike | number | string
     status?: StringWithAggregatesFilter<"AffiliateCommission"> | string
     paidAt?: DateTimeNullableWithAggregatesFilter<"AffiliateCommission"> | Date | string | null
+    isDeleted?: BoolWithAggregatesFilter<"AffiliateCommission"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"AffiliateCommission"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AffiliateCommission"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AffiliateCommission"> | Date | string
   }
@@ -58569,6 +60514,8 @@ export namespace Prisma {
     categoryId?: StringNullableFilter<"CommissionRate"> | string | null
     rate?: DecimalFilter<"CommissionRate"> | Decimal | DecimalJsLike | number | string
     isActive?: BoolFilter<"CommissionRate"> | boolean
+    isDeleted?: BoolFilter<"CommissionRate"> | boolean
+    deletedAt?: DateTimeNullableFilter<"CommissionRate"> | Date | string | null
     createdAt?: DateTimeFilter<"CommissionRate"> | Date | string
     updatedAt?: DateTimeFilter<"CommissionRate"> | Date | string
     product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
@@ -58580,6 +60527,8 @@ export namespace Prisma {
     categoryId?: SortOrderInput | SortOrder
     rate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     product?: ProductOrderByWithRelationInput
@@ -58594,6 +60543,8 @@ export namespace Prisma {
     categoryId?: StringNullableFilter<"CommissionRate"> | string | null
     rate?: DecimalFilter<"CommissionRate"> | Decimal | DecimalJsLike | number | string
     isActive?: BoolFilter<"CommissionRate"> | boolean
+    isDeleted?: BoolFilter<"CommissionRate"> | boolean
+    deletedAt?: DateTimeNullableFilter<"CommissionRate"> | Date | string | null
     createdAt?: DateTimeFilter<"CommissionRate"> | Date | string
     updatedAt?: DateTimeFilter<"CommissionRate"> | Date | string
     product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
@@ -58605,6 +60556,8 @@ export namespace Prisma {
     categoryId?: SortOrderInput | SortOrder
     rate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CommissionRateCountOrderByAggregateInput
@@ -58623,6 +60576,8 @@ export namespace Prisma {
     categoryId?: StringNullableWithAggregatesFilter<"CommissionRate"> | string | null
     rate?: DecimalWithAggregatesFilter<"CommissionRate"> | Decimal | DecimalJsLike | number | string
     isActive?: BoolWithAggregatesFilter<"CommissionRate"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"CommissionRate"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"CommissionRate"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"CommissionRate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CommissionRate"> | Date | string
   }
@@ -58636,6 +60591,8 @@ export namespace Prisma {
     slug?: StringFilter<"BannerGroup"> | string
     description?: StringNullableFilter<"BannerGroup"> | string | null
     isActive?: BoolFilter<"BannerGroup"> | boolean
+    isDeleted?: BoolFilter<"BannerGroup"> | boolean
+    deletedAt?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
     startDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
     endDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
     createdAt?: DateTimeFilter<"BannerGroup"> | Date | string
@@ -58649,6 +60606,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -58665,6 +60624,8 @@ export namespace Prisma {
     name?: StringFilter<"BannerGroup"> | string
     description?: StringNullableFilter<"BannerGroup"> | string | null
     isActive?: BoolFilter<"BannerGroup"> | boolean
+    isDeleted?: BoolFilter<"BannerGroup"> | boolean
+    deletedAt?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
     startDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
     endDate?: DateTimeNullableFilter<"BannerGroup"> | Date | string | null
     createdAt?: DateTimeFilter<"BannerGroup"> | Date | string
@@ -58678,6 +60639,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -58696,6 +60659,8 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"BannerGroup"> | string
     description?: StringNullableWithAggregatesFilter<"BannerGroup"> | string | null
     isActive?: BoolWithAggregatesFilter<"BannerGroup"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"BannerGroup"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
     startDate?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
     endDate?: DateTimeNullableWithAggregatesFilter<"BannerGroup"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"BannerGroup"> | Date | string
@@ -58720,6 +60685,8 @@ export namespace Prisma {
     gradientTo?: StringNullableFilter<"Banner"> | string | null
     imageMediaId?: StringNullableFilter<"Banner"> | string | null
     isActive?: BoolFilter<"Banner"> | boolean
+    isDeleted?: BoolFilter<"Banner"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Banner"> | Date | string | null
     createdAt?: DateTimeFilter<"Banner"> | Date | string
     updatedAt?: DateTimeFilter<"Banner"> | Date | string
     groups?: BannerGroupMappingListRelationFilter
@@ -58741,6 +60708,8 @@ export namespace Prisma {
     gradientTo?: SortOrderInput | SortOrder
     imageMediaId?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     groups?: BannerGroupMappingOrderByRelationAggregateInput
@@ -58765,6 +60734,8 @@ export namespace Prisma {
     gradientTo?: StringNullableFilter<"Banner"> | string | null
     imageMediaId?: StringNullableFilter<"Banner"> | string | null
     isActive?: BoolFilter<"Banner"> | boolean
+    isDeleted?: BoolFilter<"Banner"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Banner"> | Date | string | null
     createdAt?: DateTimeFilter<"Banner"> | Date | string
     updatedAt?: DateTimeFilter<"Banner"> | Date | string
     groups?: BannerGroupMappingListRelationFilter
@@ -58786,6 +60757,8 @@ export namespace Prisma {
     gradientTo?: SortOrderInput | SortOrder
     imageMediaId?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BannerCountOrderByAggregateInput
@@ -58811,6 +60784,8 @@ export namespace Prisma {
     gradientTo?: StringNullableWithAggregatesFilter<"Banner"> | string | null
     imageMediaId?: StringNullableWithAggregatesFilter<"Banner"> | string | null
     isActive?: BoolWithAggregatesFilter<"Banner"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Banner"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Banner"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Banner"> | Date | string
   }
@@ -58959,6 +60934,8 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"FlashSale"> | Date | string
     status?: EnumFlashSaleStatusFilter<"FlashSale"> | $Enums.FlashSaleStatus
     isActive?: BoolFilter<"FlashSale"> | boolean
+    isDeleted?: BoolFilter<"FlashSale"> | boolean
+    deletedAt?: DateTimeNullableFilter<"FlashSale"> | Date | string | null
     sortOrder?: IntFilter<"FlashSale"> | number
     createdAt?: DateTimeFilter<"FlashSale"> | Date | string
     updatedAt?: DateTimeFilter<"FlashSale"> | Date | string
@@ -58976,6 +60953,8 @@ export namespace Prisma {
     endTime?: SortOrder
     status?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -58996,6 +60975,8 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"FlashSale"> | Date | string
     status?: EnumFlashSaleStatusFilter<"FlashSale"> | $Enums.FlashSaleStatus
     isActive?: BoolFilter<"FlashSale"> | boolean
+    isDeleted?: BoolFilter<"FlashSale"> | boolean
+    deletedAt?: DateTimeNullableFilter<"FlashSale"> | Date | string | null
     sortOrder?: IntFilter<"FlashSale"> | number
     createdAt?: DateTimeFilter<"FlashSale"> | Date | string
     updatedAt?: DateTimeFilter<"FlashSale"> | Date | string
@@ -59013,6 +60994,8 @@ export namespace Prisma {
     endTime?: SortOrder
     status?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59036,6 +61019,8 @@ export namespace Prisma {
     endTime?: DateTimeWithAggregatesFilter<"FlashSale"> | Date | string
     status?: EnumFlashSaleStatusWithAggregatesFilter<"FlashSale"> | $Enums.FlashSaleStatus
     isActive?: BoolWithAggregatesFilter<"FlashSale"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"FlashSale"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"FlashSale"> | Date | string | null
     sortOrder?: IntWithAggregatesFilter<"FlashSale"> | number
     createdAt?: DateTimeWithAggregatesFilter<"FlashSale"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"FlashSale"> | Date | string
@@ -59211,15 +61196,17 @@ export namespace Prisma {
     type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
     uploadedById?: StringNullableFilter<"Media"> | string | null
     isDeleted?: BoolFilter<"Media"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Media"> | Date | string | null
     createdAt?: DateTimeFilter<"Media"> | Date | string
     updatedAt?: DateTimeFilter<"Media"> | Date | string
     uploadedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     productImages?: ProductImageListRelationFilter
     reviewImages?: ReviewImageListRelationFilter
-    userAvatars?: UserListRelationFilter
+    userAvatars?: UserAvatarListRelationFilter
     categories?: CategoryListRelationFilter
     brands?: BrandListRelationFilter
     banners?: BannerListRelationFilter
+    users?: UserListRelationFilter
   }
 
   export type MediaOrderByWithRelationInput = {
@@ -59232,15 +61219,17 @@ export namespace Prisma {
     type?: SortOrder
     uploadedById?: SortOrderInput | SortOrder
     isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     uploadedBy?: UserOrderByWithRelationInput
     productImages?: ProductImageOrderByRelationAggregateInput
     reviewImages?: ReviewImageOrderByRelationAggregateInput
-    userAvatars?: UserOrderByRelationAggregateInput
+    userAvatars?: UserAvatarOrderByRelationAggregateInput
     categories?: CategoryOrderByRelationAggregateInput
     brands?: BrandOrderByRelationAggregateInput
     banners?: BannerOrderByRelationAggregateInput
+    users?: UserOrderByRelationAggregateInput
   }
 
   export type MediaWhereUniqueInput = Prisma.AtLeast<{
@@ -59256,15 +61245,17 @@ export namespace Prisma {
     type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
     uploadedById?: StringNullableFilter<"Media"> | string | null
     isDeleted?: BoolFilter<"Media"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Media"> | Date | string | null
     createdAt?: DateTimeFilter<"Media"> | Date | string
     updatedAt?: DateTimeFilter<"Media"> | Date | string
     uploadedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     productImages?: ProductImageListRelationFilter
     reviewImages?: ReviewImageListRelationFilter
-    userAvatars?: UserListRelationFilter
+    userAvatars?: UserAvatarListRelationFilter
     categories?: CategoryListRelationFilter
     brands?: BrandListRelationFilter
     banners?: BannerListRelationFilter
+    users?: UserListRelationFilter
   }, "id">
 
   export type MediaOrderByWithAggregationInput = {
@@ -59277,6 +61268,7 @@ export namespace Prisma {
     type?: SortOrder
     uploadedById?: SortOrderInput | SortOrder
     isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MediaCountOrderByAggregateInput
@@ -59299,6 +61291,7 @@ export namespace Prisma {
     type?: EnumMediaTypeWithAggregatesFilter<"Media"> | $Enums.MediaType
     uploadedById?: StringNullableWithAggregatesFilter<"Media"> | string | null
     isDeleted?: BoolWithAggregatesFilter<"Media"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Media"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Media"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Media"> | Date | string
   }
@@ -59309,6 +61302,8 @@ export namespace Prisma {
     NOT?: CartWhereInput | CartWhereInput[]
     id?: StringFilter<"Cart"> | string
     userId?: StringFilter<"Cart"> | string
+    isDeleted?: BoolFilter<"Cart"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Cart"> | Date | string | null
     createdAt?: DateTimeFilter<"Cart"> | Date | string
     updatedAt?: DateTimeFilter<"Cart"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -59318,6 +61313,8 @@ export namespace Prisma {
   export type CartOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -59330,6 +61327,8 @@ export namespace Prisma {
     AND?: CartWhereInput | CartWhereInput[]
     OR?: CartWhereInput[]
     NOT?: CartWhereInput | CartWhereInput[]
+    isDeleted?: BoolFilter<"Cart"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Cart"> | Date | string | null
     createdAt?: DateTimeFilter<"Cart"> | Date | string
     updatedAt?: DateTimeFilter<"Cart"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -59339,6 +61338,8 @@ export namespace Prisma {
   export type CartOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CartCountOrderByAggregateInput
@@ -59352,6 +61353,8 @@ export namespace Prisma {
     NOT?: CartScalarWhereWithAggregatesInput | CartScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Cart"> | string
     userId?: StringWithAggregatesFilter<"Cart"> | string
+    isDeleted?: BoolWithAggregatesFilter<"Cart"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Cart"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Cart"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Cart"> | Date | string
   }
@@ -59447,6 +61450,8 @@ export namespace Prisma {
     affiliateCode?: StringNullableFilter<"Order"> | string | null
     couponCode?: StringNullableFilter<"Order"> | string | null
     notes?: StringNullableFilter<"Order"> | string | null
+    isDeleted?: BoolFilter<"Order"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -59472,6 +61477,8 @@ export namespace Prisma {
     affiliateCode?: SortOrderInput | SortOrder
     couponCode?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -59500,6 +61507,8 @@ export namespace Prisma {
     affiliateCode?: StringNullableFilter<"Order"> | string | null
     couponCode?: StringNullableFilter<"Order"> | string | null
     notes?: StringNullableFilter<"Order"> | string | null
+    isDeleted?: BoolFilter<"Order"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -59525,6 +61534,8 @@ export namespace Prisma {
     affiliateCode?: SortOrderInput | SortOrder
     couponCode?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: OrderCountOrderByAggregateInput
@@ -59551,6 +61562,8 @@ export namespace Prisma {
     affiliateCode?: StringNullableWithAggregatesFilter<"Order"> | string | null
     couponCode?: StringNullableWithAggregatesFilter<"Order"> | string | null
     notes?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    isDeleted?: BoolWithAggregatesFilter<"Order"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
   }
@@ -59568,6 +61581,8 @@ export namespace Prisma {
     price?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     quantity?: IntFilter<"OrderItem"> | number
     total?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFilter<"OrderItem"> | boolean
+    deletedAt?: DateTimeNullableFilter<"OrderItem"> | Date | string | null
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -59584,6 +61599,8 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     total?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     order?: OrderOrderByWithRelationInput
     product?: ProductOrderByWithRelationInput
@@ -59603,6 +61620,8 @@ export namespace Prisma {
     price?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     quantity?: IntFilter<"OrderItem"> | number
     total?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFilter<"OrderItem"> | boolean
+    deletedAt?: DateTimeNullableFilter<"OrderItem"> | Date | string | null
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -59619,6 +61638,8 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     total?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: OrderItemCountOrderByAggregateInput
     _avg?: OrderItemAvgOrderByAggregateInput
@@ -59640,6 +61661,8 @@ export namespace Prisma {
     price?: DecimalWithAggregatesFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     quantity?: IntWithAggregatesFilter<"OrderItem"> | number
     total?: DecimalWithAggregatesFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolWithAggregatesFilter<"OrderItem"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"OrderItem"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
   }
 
@@ -59655,6 +61678,8 @@ export namespace Prisma {
     transactionId?: StringNullableFilter<"Payment"> | string | null
     paymentData?: StringNullableFilter<"Payment"> | string | null
     paidAt?: DateTimeNullableFilter<"Payment"> | Date | string | null
+    isDeleted?: BoolFilter<"Payment"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Payment"> | Date | string | null
     createdAt?: DateTimeFilter<"Payment"> | Date | string
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -59669,6 +61694,8 @@ export namespace Prisma {
     transactionId?: SortOrderInput | SortOrder
     paymentData?: SortOrderInput | SortOrder
     paidAt?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     order?: OrderOrderByWithRelationInput
@@ -59686,6 +61713,8 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
     paymentData?: StringNullableFilter<"Payment"> | string | null
     paidAt?: DateTimeNullableFilter<"Payment"> | Date | string | null
+    isDeleted?: BoolFilter<"Payment"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Payment"> | Date | string | null
     createdAt?: DateTimeFilter<"Payment"> | Date | string
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -59700,6 +61729,8 @@ export namespace Prisma {
     transactionId?: SortOrderInput | SortOrder
     paymentData?: SortOrderInput | SortOrder
     paidAt?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PaymentCountOrderByAggregateInput
@@ -59721,6 +61752,8 @@ export namespace Prisma {
     transactionId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     paymentData?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     paidAt?: DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
+    isDeleted?: BoolWithAggregatesFilter<"Payment"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
@@ -59818,6 +61851,8 @@ export namespace Prisma {
     imageMediaId?: StringNullableFilter<"Category"> | string | null
     parentId?: StringNullableFilter<"Category"> | string | null
     isActive?: BoolFilter<"Category"> | boolean
+    isDeleted?: BoolFilter<"Category"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Category"> | Date | string | null
     sortOrder?: IntFilter<"Category"> | number
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
@@ -59838,6 +61873,8 @@ export namespace Prisma {
     imageMediaId?: SortOrderInput | SortOrder
     parentId?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59861,6 +61898,8 @@ export namespace Prisma {
     imageMediaId?: StringNullableFilter<"Category"> | string | null
     parentId?: StringNullableFilter<"Category"> | string | null
     isActive?: BoolFilter<"Category"> | boolean
+    isDeleted?: BoolFilter<"Category"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Category"> | Date | string | null
     sortOrder?: IntFilter<"Category"> | number
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
@@ -59881,6 +61920,8 @@ export namespace Prisma {
     imageMediaId?: SortOrderInput | SortOrder
     parentId?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59904,6 +61945,8 @@ export namespace Prisma {
     imageMediaId?: StringNullableWithAggregatesFilter<"Category"> | string | null
     parentId?: StringNullableWithAggregatesFilter<"Category"> | string | null
     isActive?: BoolWithAggregatesFilter<"Category"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Category"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Category"> | Date | string | null
     sortOrder?: IntWithAggregatesFilter<"Category"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
@@ -59922,6 +61965,8 @@ export namespace Prisma {
     logoMediaId?: StringNullableFilter<"Brand"> | string | null
     website?: StringNullableFilter<"Brand"> | string | null
     isActive?: BoolFilter<"Brand"> | boolean
+    isDeleted?: BoolFilter<"Brand"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
     products?: ProductListRelationFilter
@@ -59937,6 +61982,8 @@ export namespace Prisma {
     logoMediaId?: SortOrderInput | SortOrder
     website?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     products?: ProductOrderByRelationAggregateInput
@@ -59955,6 +62002,8 @@ export namespace Prisma {
     logoMediaId?: StringNullableFilter<"Brand"> | string | null
     website?: StringNullableFilter<"Brand"> | string | null
     isActive?: BoolFilter<"Brand"> | boolean
+    isDeleted?: BoolFilter<"Brand"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
     products?: ProductListRelationFilter
@@ -59970,6 +62019,8 @@ export namespace Prisma {
     logoMediaId?: SortOrderInput | SortOrder
     website?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BrandCountOrderByAggregateInput
@@ -59988,6 +62039,8 @@ export namespace Prisma {
     logoMediaId?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     website?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     isActive?: BoolWithAggregatesFilter<"Brand"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Brand"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Brand"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Brand"> | Date | string
   }
@@ -60007,6 +62060,8 @@ export namespace Prisma {
     comparePrice?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFilter<"Product"> | boolean
     isFeatured?: BoolFilter<"Product"> | boolean
+    isDeleted?: BoolFilter<"Product"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     weight?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDesc?: StringNullableFilter<"Product"> | string | null
@@ -60041,6 +62096,8 @@ export namespace Prisma {
     comparePrice?: SortOrderInput | SortOrder
     isActive?: SortOrder
     isFeatured?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDesc?: SortOrderInput | SortOrder
@@ -60078,6 +62135,8 @@ export namespace Prisma {
     comparePrice?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFilter<"Product"> | boolean
     isFeatured?: BoolFilter<"Product"> | boolean
+    isDeleted?: BoolFilter<"Product"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     weight?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDesc?: StringNullableFilter<"Product"> | string | null
@@ -60112,6 +62171,8 @@ export namespace Prisma {
     comparePrice?: SortOrderInput | SortOrder
     isActive?: SortOrder
     isFeatured?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDesc?: SortOrderInput | SortOrder
@@ -60139,6 +62200,8 @@ export namespace Prisma {
     comparePrice?: DecimalNullableWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolWithAggregatesFilter<"Product"> | boolean
     isFeatured?: BoolWithAggregatesFilter<"Product"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Product"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Product"> | Date | string | null
     weight?: DecimalNullableWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
     metaDesc?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -60237,6 +62300,8 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntFilter<"ProductVariant"> | number
+    isDeleted?: BoolFilter<"ProductVariant"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -60259,6 +62324,8 @@ export namespace Prisma {
     price?: SortOrder
     displayType?: SortOrder
     sortOrder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     product?: ProductOrderByWithRelationInput
@@ -60284,6 +62351,8 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntFilter<"ProductVariant"> | number
+    isDeleted?: BoolFilter<"ProductVariant"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -60306,6 +62375,8 @@ export namespace Prisma {
     price?: SortOrder
     displayType?: SortOrder
     sortOrder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductVariantCountOrderByAggregateInput
@@ -60329,6 +62400,8 @@ export namespace Prisma {
     price?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeWithAggregatesFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntWithAggregatesFilter<"ProductVariant"> | number
+    isDeleted?: BoolWithAggregatesFilter<"ProductVariant"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string
   }
@@ -60645,6 +62718,8 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     isActive?: BoolFilter<"Promotion"> | boolean
+    isDeleted?: BoolFilter<"Promotion"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Promotion"> | Date | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     products?: PromotionProductListRelationFilter
@@ -60661,6 +62736,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     products?: PromotionProductOrderByRelationAggregateInput
@@ -60680,6 +62757,8 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     isActive?: BoolFilter<"Promotion"> | boolean
+    isDeleted?: BoolFilter<"Promotion"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Promotion"> | Date | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     products?: PromotionProductListRelationFilter
@@ -60696,6 +62775,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PromotionCountOrderByAggregateInput
@@ -60719,6 +62800,8 @@ export namespace Prisma {
     startDate?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     isActive?: BoolWithAggregatesFilter<"Promotion"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Promotion"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Promotion"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
   }
@@ -60792,6 +62875,8 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Coupon"> | Date | string
     endDate?: DateTimeFilter<"Coupon"> | Date | string
     isActive?: BoolFilter<"Coupon"> | boolean
+    isDeleted?: BoolFilter<"Coupon"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Coupon"> | Date | string | null
     createdAt?: DateTimeFilter<"Coupon"> | Date | string
     updatedAt?: DateTimeFilter<"Coupon"> | Date | string
     usages?: CouponUsageListRelationFilter
@@ -60809,6 +62894,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usages?: CouponUsageOrderByRelationAggregateInput
@@ -60829,6 +62916,8 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Coupon"> | Date | string
     endDate?: DateTimeFilter<"Coupon"> | Date | string
     isActive?: BoolFilter<"Coupon"> | boolean
+    isDeleted?: BoolFilter<"Coupon"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Coupon"> | Date | string | null
     createdAt?: DateTimeFilter<"Coupon"> | Date | string
     updatedAt?: DateTimeFilter<"Coupon"> | Date | string
     usages?: CouponUsageListRelationFilter
@@ -60846,6 +62935,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CouponCountOrderByAggregateInput
@@ -60870,6 +62961,8 @@ export namespace Prisma {
     startDate?: DateTimeWithAggregatesFilter<"Coupon"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"Coupon"> | Date | string
     isActive?: BoolWithAggregatesFilter<"Coupon"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"Coupon"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Coupon"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Coupon"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Coupon"> | Date | string
   }
@@ -60946,6 +63039,8 @@ export namespace Prisma {
     comment?: StringNullableFilter<"ProductReview"> | string | null
     isVerified?: BoolFilter<"ProductReview"> | boolean
     isApproved?: BoolFilter<"ProductReview"> | boolean
+    isDeleted?: BoolFilter<"ProductReview"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductReview"> | Date | string | null
     helpfulCount?: IntFilter<"ProductReview"> | number
     createdAt?: DateTimeFilter<"ProductReview"> | Date | string
     updatedAt?: DateTimeFilter<"ProductReview"> | Date | string
@@ -60965,6 +63060,8 @@ export namespace Prisma {
     comment?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     helpfulCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -60988,6 +63085,8 @@ export namespace Prisma {
     comment?: StringNullableFilter<"ProductReview"> | string | null
     isVerified?: BoolFilter<"ProductReview"> | boolean
     isApproved?: BoolFilter<"ProductReview"> | boolean
+    isDeleted?: BoolFilter<"ProductReview"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductReview"> | Date | string | null
     helpfulCount?: IntFilter<"ProductReview"> | number
     createdAt?: DateTimeFilter<"ProductReview"> | Date | string
     updatedAt?: DateTimeFilter<"ProductReview"> | Date | string
@@ -61007,6 +63106,8 @@ export namespace Prisma {
     comment?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     helpfulCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -61029,6 +63130,8 @@ export namespace Prisma {
     comment?: StringNullableWithAggregatesFilter<"ProductReview"> | string | null
     isVerified?: BoolWithAggregatesFilter<"ProductReview"> | boolean
     isApproved?: BoolWithAggregatesFilter<"ProductReview"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"ProductReview"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ProductReview"> | Date | string | null
     helpfulCount?: IntWithAggregatesFilter<"ProductReview"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ProductReview"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductReview"> | Date | string
@@ -61101,6 +63204,8 @@ export namespace Prisma {
     userId?: StringFilter<"ReviewReply"> | string
     content?: StringFilter<"ReviewReply"> | string
     isAdmin?: BoolFilter<"ReviewReply"> | boolean
+    isDeleted?: BoolFilter<"ReviewReply"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ReviewReply"> | Date | string | null
     createdAt?: DateTimeFilter<"ReviewReply"> | Date | string
     updatedAt?: DateTimeFilter<"ReviewReply"> | Date | string
     review?: XOR<ProductReviewScalarRelationFilter, ProductReviewWhereInput>
@@ -61113,6 +63218,8 @@ export namespace Prisma {
     userId?: SortOrder
     content?: SortOrder
     isAdmin?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     review?: ProductReviewOrderByWithRelationInput
@@ -61128,6 +63235,8 @@ export namespace Prisma {
     userId?: StringFilter<"ReviewReply"> | string
     content?: StringFilter<"ReviewReply"> | string
     isAdmin?: BoolFilter<"ReviewReply"> | boolean
+    isDeleted?: BoolFilter<"ReviewReply"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ReviewReply"> | Date | string | null
     createdAt?: DateTimeFilter<"ReviewReply"> | Date | string
     updatedAt?: DateTimeFilter<"ReviewReply"> | Date | string
     review?: XOR<ProductReviewScalarRelationFilter, ProductReviewWhereInput>
@@ -61140,6 +63249,8 @@ export namespace Prisma {
     userId?: SortOrder
     content?: SortOrder
     isAdmin?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ReviewReplyCountOrderByAggregateInput
@@ -61156,6 +63267,8 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"ReviewReply"> | string
     content?: StringWithAggregatesFilter<"ReviewReply"> | string
     isAdmin?: BoolWithAggregatesFilter<"ReviewReply"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"ReviewReply"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ReviewReply"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ReviewReply"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ReviewReply"> | Date | string
   }
@@ -61284,9 +63397,9 @@ export namespace Prisma {
     phone?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    avatarMediaId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     isVerified?: BoolFilter<"User"> | boolean
@@ -61296,6 +63409,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFilter<"User"> | boolean
     emailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     phoneVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    mediaId?: StringNullableFilter<"User"> | string | null
     cart?: XOR<CartNullableScalarRelationFilter, CartWhereInput> | null
     orders?: OrderListRelationFilter
     reviews?: ProductReviewListRelationFilter
@@ -61304,13 +63418,14 @@ export namespace Prisma {
     addresses?: AddressListRelationFilter
     affiliate?: XOR<AffiliateNullableScalarRelationFilter, AffiliateWhereInput> | null
     roleAssignments?: UserRoleAssignmentListRelationFilter
-    avatarMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    avatar?: XOR<UserAvatarNullableScalarRelationFilter, UserAvatarWhereInput> | null
     uploadedMedia?: MediaListRelationFilter
     emailVerificationLogs?: EmailVerificationLogListRelationFilter
     questions?: ProductQuestionListRelationFilter
     answeredQuestions?: ProductQuestionListRelationFilter
     wishlists?: WishlistListRelationFilter
     sharedWishlists?: SharedWishlistListRelationFilter
+    media?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -61321,9 +63436,9 @@ export namespace Prisma {
     phone?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    avatarMediaId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
     isActive?: SortOrder
     isVerified?: SortOrder
@@ -61333,6 +63448,7 @@ export namespace Prisma {
     isPhoneVerified?: SortOrder
     emailVerifiedAt?: SortOrderInput | SortOrder
     phoneVerifiedAt?: SortOrderInput | SortOrder
+    mediaId?: SortOrderInput | SortOrder
     cart?: CartOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
     reviews?: ProductReviewOrderByRelationAggregateInput
@@ -61341,13 +63457,14 @@ export namespace Prisma {
     addresses?: AddressOrderByRelationAggregateInput
     affiliate?: AffiliateOrderByWithRelationInput
     roleAssignments?: UserRoleAssignmentOrderByRelationAggregateInput
-    avatarMedia?: MediaOrderByWithRelationInput
+    avatar?: UserAvatarOrderByWithRelationInput
     uploadedMedia?: MediaOrderByRelationAggregateInput
     emailVerificationLogs?: EmailVerificationLogOrderByRelationAggregateInput
     questions?: ProductQuestionOrderByRelationAggregateInput
     answeredQuestions?: ProductQuestionOrderByRelationAggregateInput
     wishlists?: WishlistOrderByRelationAggregateInput
     sharedWishlists?: SharedWishlistOrderByRelationAggregateInput
+    media?: MediaOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -61361,9 +63478,9 @@ export namespace Prisma {
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    avatarMediaId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     isVerified?: BoolFilter<"User"> | boolean
@@ -61373,6 +63490,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFilter<"User"> | boolean
     emailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     phoneVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    mediaId?: StringNullableFilter<"User"> | string | null
     cart?: XOR<CartNullableScalarRelationFilter, CartWhereInput> | null
     orders?: OrderListRelationFilter
     reviews?: ProductReviewListRelationFilter
@@ -61381,13 +63499,14 @@ export namespace Prisma {
     addresses?: AddressListRelationFilter
     affiliate?: XOR<AffiliateNullableScalarRelationFilter, AffiliateWhereInput> | null
     roleAssignments?: UserRoleAssignmentListRelationFilter
-    avatarMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    avatar?: XOR<UserAvatarNullableScalarRelationFilter, UserAvatarWhereInput> | null
     uploadedMedia?: MediaListRelationFilter
     emailVerificationLogs?: EmailVerificationLogListRelationFilter
     questions?: ProductQuestionListRelationFilter
     answeredQuestions?: ProductQuestionListRelationFilter
     wishlists?: WishlistListRelationFilter
     sharedWishlists?: SharedWishlistListRelationFilter
+    media?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
   }, "id" | "email" | "phone" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -61398,9 +63517,9 @@ export namespace Prisma {
     phone?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    avatarMediaId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
     isActive?: SortOrder
     isVerified?: SortOrder
@@ -61410,6 +63529,7 @@ export namespace Prisma {
     isPhoneVerified?: SortOrder
     emailVerifiedAt?: SortOrderInput | SortOrder
     phoneVerifiedAt?: SortOrderInput | SortOrder
+    mediaId?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -61426,9 +63546,9 @@ export namespace Prisma {
     phone?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
-    avatarMediaId?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     refreshToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
@@ -61438,6 +63558,65 @@ export namespace Prisma {
     isPhoneVerified?: BoolWithAggregatesFilter<"User"> | boolean
     emailVerifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     phoneVerifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    mediaId?: StringNullableWithAggregatesFilter<"User"> | string | null
+  }
+
+  export type UserAvatarWhereInput = {
+    AND?: UserAvatarWhereInput | UserAvatarWhereInput[]
+    OR?: UserAvatarWhereInput[]
+    NOT?: UserAvatarWhereInput | UserAvatarWhereInput[]
+    id?: StringFilter<"UserAvatar"> | string
+    userId?: StringFilter<"UserAvatar"> | string
+    mediaId?: StringFilter<"UserAvatar"> | string
+    createdAt?: DateTimeFilter<"UserAvatar"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAvatar"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    media?: XOR<MediaScalarRelationFilter, MediaWhereInput>
+  }
+
+  export type UserAvatarOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mediaId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    media?: MediaOrderByWithRelationInput
+  }
+
+  export type UserAvatarWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: UserAvatarWhereInput | UserAvatarWhereInput[]
+    OR?: UserAvatarWhereInput[]
+    NOT?: UserAvatarWhereInput | UserAvatarWhereInput[]
+    mediaId?: StringFilter<"UserAvatar"> | string
+    createdAt?: DateTimeFilter<"UserAvatar"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAvatar"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    media?: XOR<MediaScalarRelationFilter, MediaWhereInput>
+  }, "id" | "userId">
+
+  export type UserAvatarOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mediaId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserAvatarCountOrderByAggregateInput
+    _max?: UserAvatarMaxOrderByAggregateInput
+    _min?: UserAvatarMinOrderByAggregateInput
+  }
+
+  export type UserAvatarScalarWhereWithAggregatesInput = {
+    AND?: UserAvatarScalarWhereWithAggregatesInput | UserAvatarScalarWhereWithAggregatesInput[]
+    OR?: UserAvatarScalarWhereWithAggregatesInput[]
+    NOT?: UserAvatarScalarWhereWithAggregatesInput | UserAvatarScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserAvatar"> | string
+    userId?: StringWithAggregatesFilter<"UserAvatar"> | string
+    mediaId?: StringWithAggregatesFilter<"UserAvatar"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserAvatar"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserAvatar"> | Date | string
   }
 
   export type UserRoleWhereInput = {
@@ -61448,6 +63627,8 @@ export namespace Prisma {
     name?: EnumRoleNameFilter<"UserRole"> | $Enums.RoleName
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeFilter<"UserRole"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserRole"> | Date | string | null
+    isDeleted?: BoolFilter<"UserRole"> | boolean
     roleAssignments?: UserRoleAssignmentListRelationFilter
   }
 
@@ -61456,6 +63637,8 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
     roleAssignments?: UserRoleAssignmentOrderByRelationAggregateInput
   }
 
@@ -61467,6 +63650,8 @@ export namespace Prisma {
     name?: EnumRoleNameFilter<"UserRole"> | $Enums.RoleName
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeFilter<"UserRole"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserRole"> | Date | string | null
+    isDeleted?: BoolFilter<"UserRole"> | boolean
     roleAssignments?: UserRoleAssignmentListRelationFilter
   }, "id">
 
@@ -61475,6 +63660,8 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
     _count?: UserRoleCountOrderByAggregateInput
     _max?: UserRoleMaxOrderByAggregateInput
     _min?: UserRoleMinOrderByAggregateInput
@@ -61488,6 +63675,8 @@ export namespace Prisma {
     name?: EnumRoleNameWithAggregatesFilter<"UserRole"> | $Enums.RoleName
     createdAt?: DateTimeWithAggregatesFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"UserRole"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"UserRole"> | Date | string | null
+    isDeleted?: BoolWithAggregatesFilter<"UserRole"> | boolean
   }
 
   export type UserRoleAssignmentWhereInput = {
@@ -61558,6 +63747,8 @@ export namespace Prisma {
     productId?: StringFilter<"Wishlist"> | string
     variantId?: StringNullableFilter<"Wishlist"> | string | null
     note?: StringNullableFilter<"Wishlist"> | string | null
+    isDeleted?: BoolFilter<"Wishlist"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Wishlist"> | Date | string | null
     createdAt?: DateTimeFilter<"Wishlist"> | Date | string
     updatedAt?: DateTimeFilter<"Wishlist"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -61571,6 +63762,8 @@ export namespace Prisma {
     productId?: SortOrder
     variantId?: SortOrderInput | SortOrder
     note?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -61588,6 +63781,8 @@ export namespace Prisma {
     productId?: StringFilter<"Wishlist"> | string
     variantId?: StringNullableFilter<"Wishlist"> | string | null
     note?: StringNullableFilter<"Wishlist"> | string | null
+    isDeleted?: BoolFilter<"Wishlist"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Wishlist"> | Date | string | null
     createdAt?: DateTimeFilter<"Wishlist"> | Date | string
     updatedAt?: DateTimeFilter<"Wishlist"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -61601,6 +63796,8 @@ export namespace Prisma {
     productId?: SortOrder
     variantId?: SortOrderInput | SortOrder
     note?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WishlistCountOrderByAggregateInput
@@ -61617,6 +63814,8 @@ export namespace Prisma {
     productId?: StringWithAggregatesFilter<"Wishlist"> | string
     variantId?: StringNullableWithAggregatesFilter<"Wishlist"> | string | null
     note?: StringNullableWithAggregatesFilter<"Wishlist"> | string | null
+    isDeleted?: BoolWithAggregatesFilter<"Wishlist"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Wishlist"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Wishlist"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Wishlist"> | Date | string
   }
@@ -61631,6 +63830,8 @@ export namespace Prisma {
     title?: StringNullableFilter<"SharedWishlist"> | string | null
     description?: StringNullableFilter<"SharedWishlist"> | string | null
     isPublic?: BoolFilter<"SharedWishlist"> | boolean
+    isDeleted?: BoolFilter<"SharedWishlist"> | boolean
+    deletedAt?: DateTimeNullableFilter<"SharedWishlist"> | Date | string | null
     expiresAt?: DateTimeNullableFilter<"SharedWishlist"> | Date | string | null
     viewCount?: IntFilter<"SharedWishlist"> | number
     createdAt?: DateTimeFilter<"SharedWishlist"> | Date | string
@@ -61645,6 +63846,8 @@ export namespace Prisma {
     title?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     expiresAt?: SortOrderInput | SortOrder
     viewCount?: SortOrder
     createdAt?: SortOrder
@@ -61662,6 +63865,8 @@ export namespace Prisma {
     title?: StringNullableFilter<"SharedWishlist"> | string | null
     description?: StringNullableFilter<"SharedWishlist"> | string | null
     isPublic?: BoolFilter<"SharedWishlist"> | boolean
+    isDeleted?: BoolFilter<"SharedWishlist"> | boolean
+    deletedAt?: DateTimeNullableFilter<"SharedWishlist"> | Date | string | null
     expiresAt?: DateTimeNullableFilter<"SharedWishlist"> | Date | string | null
     viewCount?: IntFilter<"SharedWishlist"> | number
     createdAt?: DateTimeFilter<"SharedWishlist"> | Date | string
@@ -61676,6 +63881,8 @@ export namespace Prisma {
     title?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     expiresAt?: SortOrderInput | SortOrder
     viewCount?: SortOrder
     createdAt?: SortOrder
@@ -61697,6 +63904,8 @@ export namespace Prisma {
     title?: StringNullableWithAggregatesFilter<"SharedWishlist"> | string | null
     description?: StringNullableWithAggregatesFilter<"SharedWishlist"> | string | null
     isPublic?: BoolWithAggregatesFilter<"SharedWishlist"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"SharedWishlist"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"SharedWishlist"> | Date | string | null
     expiresAt?: DateTimeNullableWithAggregatesFilter<"SharedWishlist"> | Date | string | null
     viewCount?: IntWithAggregatesFilter<"SharedWishlist"> | number
     createdAt?: DateTimeWithAggregatesFilter<"SharedWishlist"> | Date | string
@@ -61715,6 +63924,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAddressesInput
@@ -61734,6 +63945,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderUncheckedCreateNestedManyWithoutShippingAddressInput
@@ -61751,6 +63964,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAddressesNestedInput
@@ -61770,6 +63985,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUncheckedUpdateManyWithoutShippingAddressNestedInput
@@ -61788,6 +64005,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -61804,6 +64023,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -61821,6 +64042,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -61975,6 +64198,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAffiliateInput
@@ -61993,6 +64218,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     links?: AffiliateLinkUncheckedCreateNestedManyWithoutAffiliateInput
@@ -62009,6 +64236,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAffiliateNestedInput
@@ -62027,6 +64256,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     links?: AffiliateLinkUncheckedUpdateManyWithoutAffiliateNestedInput
@@ -62044,6 +64275,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62058,6 +64291,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62073,6 +64308,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62083,6 +64320,8 @@ export namespace Prisma {
     url: string
     clicks?: number
     conversions?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     affiliate: AffiliateCreateNestedOneWithoutLinksInput
@@ -62095,6 +64334,8 @@ export namespace Prisma {
     url: string
     clicks?: number
     conversions?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62105,6 +64346,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     affiliate?: AffiliateUpdateOneRequiredWithoutLinksNestedInput
@@ -62117,6 +64360,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62128,6 +64373,8 @@ export namespace Prisma {
     url: string
     clicks?: number
     conversions?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62138,6 +64385,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62149,6 +64398,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62159,6 +64410,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     affiliate: AffiliateCreateNestedOneWithoutCommissionsInput
@@ -62173,6 +64426,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62183,6 +64438,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     affiliate?: AffiliateUpdateOneRequiredWithoutCommissionsNestedInput
@@ -62197,6 +64454,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62209,6 +64468,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62219,6 +64480,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62231,6 +64494,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62240,6 +64505,8 @@ export namespace Prisma {
     categoryId?: string | null
     rate: Decimal | DecimalJsLike | number | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product?: ProductCreateNestedOneWithoutCommRatesInput
@@ -62251,6 +64518,8 @@ export namespace Prisma {
     categoryId?: string | null
     rate: Decimal | DecimalJsLike | number | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62260,6 +64529,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneWithoutCommRatesNestedInput
@@ -62271,6 +64542,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62281,6 +64554,8 @@ export namespace Prisma {
     categoryId?: string | null
     rate: Decimal | DecimalJsLike | number | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62290,6 +64565,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62300,6 +64577,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62310,6 +64589,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     createdAt?: Date | string
@@ -62323,6 +64604,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     createdAt?: Date | string
@@ -62336,6 +64619,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62349,6 +64634,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62362,6 +64649,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     createdAt?: Date | string
@@ -62374,6 +64663,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62386,6 +64677,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62406,6 +64699,8 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groups?: BannerGroupMappingCreateNestedManyWithoutBannerInput
@@ -62427,6 +64722,8 @@ export namespace Prisma {
     gradientTo?: string | null
     imageMediaId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groups?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput
@@ -62446,6 +64743,8 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groups?: BannerGroupMappingUpdateManyWithoutBannerNestedInput
@@ -62467,6 +64766,8 @@ export namespace Prisma {
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groups?: BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput
@@ -62487,6 +64788,8 @@ export namespace Prisma {
     gradientTo?: string | null
     imageMediaId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62505,6 +64808,8 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62524,6 +64829,8 @@ export namespace Prisma {
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62668,6 +64975,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62685,6 +64994,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62702,6 +65013,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62719,6 +65032,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62736,6 +65051,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62751,6 +65068,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62766,6 +65085,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62936,15 +65257,17 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
     productImages?: ProductImageCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
     banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateInput = {
@@ -62957,14 +65280,16 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
     banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUpdateInput = {
@@ -62976,15 +65301,17 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
     productImages?: ProductImageUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateInput = {
@@ -62997,14 +65324,16 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaCreateManyInput = {
@@ -63017,6 +65346,7 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63030,6 +65360,7 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63044,12 +65375,15 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CartCreateInput = {
     id?: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCartInput
@@ -63059,6 +65393,8 @@ export namespace Prisma {
   export type CartUncheckedCreateInput = {
     id?: string
     userId: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: CartItemUncheckedCreateNestedManyWithoutCartInput
@@ -63066,6 +65402,8 @@ export namespace Prisma {
 
   export type CartUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCartNestedInput
@@ -63075,6 +65413,8 @@ export namespace Prisma {
   export type CartUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: CartItemUncheckedUpdateManyWithoutCartNestedInput
@@ -63083,12 +65423,16 @@ export namespace Prisma {
   export type CartCreateManyInput = {
     id?: string
     userId: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CartUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63096,6 +65440,8 @@ export namespace Prisma {
   export type CartUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63179,6 +65525,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -63204,6 +65552,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -63225,6 +65575,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -63250,6 +65602,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -63273,6 +65627,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63289,6 +65645,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63307,6 +65665,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63318,6 +65678,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     order: OrderCreateNestedOneWithoutItemsInput
     product: ProductCreateNestedOneWithoutOrderItemsInput
@@ -63334,6 +65696,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -63344,6 +65708,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
     product?: ProductUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -63360,6 +65726,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -63373,6 +65741,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -63383,6 +65753,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -63396,6 +65768,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -63407,6 +65781,8 @@ export namespace Prisma {
     transactionId?: string | null
     paymentData?: string | null
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutPaymentsInput
@@ -63421,6 +65797,8 @@ export namespace Prisma {
     transactionId?: string | null
     paymentData?: string | null
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63433,6 +65811,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutPaymentsNestedInput
@@ -63447,6 +65827,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63460,6 +65842,8 @@ export namespace Prisma {
     transactionId?: string | null
     paymentData?: string | null
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63472,6 +65856,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63485,6 +65871,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63585,6 +65973,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -63604,6 +65994,8 @@ export namespace Prisma {
     imageMediaId?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -63619,6 +66011,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63638,6 +66032,8 @@ export namespace Prisma {
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63655,6 +66051,8 @@ export namespace Prisma {
     imageMediaId?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -63668,6 +66066,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63682,6 +66082,8 @@ export namespace Prisma {
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63696,6 +66098,8 @@ export namespace Prisma {
     description?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutBrandInput
@@ -63711,6 +66115,8 @@ export namespace Prisma {
     logoMediaId?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutBrandInput
@@ -63724,6 +66130,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutBrandNestedInput
@@ -63739,6 +66147,8 @@ export namespace Prisma {
     logoMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
@@ -63753,6 +66163,8 @@ export namespace Prisma {
     logoMediaId?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -63764,6 +66176,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63776,6 +66190,8 @@ export namespace Prisma {
     logoMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -63791,6 +66207,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -63825,6 +66243,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -63857,6 +66277,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63891,6 +66313,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63924,6 +66348,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -63942,6 +66368,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -63961,6 +66389,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -64061,6 +66491,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -64083,6 +66515,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -64103,6 +66537,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -64125,6 +66561,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -64146,6 +66584,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -64160,6 +66600,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64175,6 +66617,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64481,6 +66925,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: PromotionProductCreateNestedManyWithoutPromotionInput
@@ -64497,6 +66943,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: PromotionProductUncheckedCreateNestedManyWithoutPromotionInput
@@ -64513,6 +66961,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: PromotionProductUpdateManyWithoutPromotionNestedInput
@@ -64529,6 +66979,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: PromotionProductUncheckedUpdateManyWithoutPromotionNestedInput
@@ -64545,6 +66997,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -64560,6 +67014,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64575,6 +67031,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64638,6 +67096,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usages?: CouponUsageCreateNestedManyWithoutCouponInput
@@ -64655,6 +67115,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usages?: CouponUsageUncheckedCreateNestedManyWithoutCouponInput
@@ -64672,6 +67134,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usages?: CouponUsageUpdateManyWithoutCouponNestedInput
@@ -64689,6 +67153,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usages?: CouponUsageUncheckedUpdateManyWithoutCouponNestedInput
@@ -64706,6 +67172,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -64722,6 +67190,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64738,6 +67208,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64803,6 +67275,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -64822,6 +67296,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -64837,6 +67313,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64856,6 +67334,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64873,6 +67353,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -64885,6 +67367,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64899,6 +67383,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -64962,6 +67448,8 @@ export namespace Prisma {
     id?: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     review: ProductReviewCreateNestedOneWithoutRepliesInput
@@ -64974,6 +67462,8 @@ export namespace Prisma {
     userId: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -64982,6 +67472,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     review?: ProductReviewUpdateOneRequiredWithoutRepliesNestedInput
@@ -64994,6 +67486,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65004,6 +67498,8 @@ export namespace Prisma {
     userId: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65012,6 +67508,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65022,6 +67520,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65146,6 +67646,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -65163,13 +67664,14 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -65180,9 +67682,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -65192,6 +67694,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -65200,6 +67703,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -65218,6 +67722,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -65235,13 +67740,14 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -65252,9 +67758,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -65264,6 +67770,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -65272,6 +67779,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -65288,9 +67796,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -65300,6 +67808,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -65312,6 +67821,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -65331,9 +67841,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -65343,6 +67853,61 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserAvatarCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAvatarInput
+    media: MediaCreateNestedOneWithoutUserAvatarsInput
+  }
+
+  export type UserAvatarUncheckedCreateInput = {
+    id?: string
+    userId: string
+    mediaId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAvatarUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAvatarNestedInput
+    media?: MediaUpdateOneRequiredWithoutUserAvatarsNestedInput
+  }
+
+  export type UserAvatarUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mediaId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAvatarCreateManyInput = {
+    id?: string
+    userId: string
+    mediaId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAvatarUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAvatarUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mediaId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleCreateInput = {
@@ -65350,6 +67915,8 @@ export namespace Prisma {
     name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    isDeleted?: boolean
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutRoleInput
   }
 
@@ -65358,6 +67925,8 @@ export namespace Prisma {
     name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    isDeleted?: boolean
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutRoleInput
   }
 
@@ -65366,6 +67935,8 @@ export namespace Prisma {
     name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutRoleNestedInput
   }
 
@@ -65374,6 +67945,8 @@ export namespace Prisma {
     name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutRoleNestedInput
   }
 
@@ -65382,6 +67955,8 @@ export namespace Prisma {
     name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    isDeleted?: boolean
   }
 
   export type UserRoleUpdateManyMutationInput = {
@@ -65389,6 +67964,8 @@ export namespace Prisma {
     name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserRoleUncheckedUpdateManyInput = {
@@ -65396,6 +67973,8 @@ export namespace Prisma {
     name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserRoleAssignmentCreateInput = {
@@ -65455,6 +68034,8 @@ export namespace Prisma {
   export type WishlistCreateInput = {
     id?: string
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutWishlistsInput
@@ -65468,6 +68049,8 @@ export namespace Prisma {
     productId: string
     variantId?: string | null
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65475,6 +68058,8 @@ export namespace Prisma {
   export type WishlistUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutWishlistsNestedInput
@@ -65488,6 +68073,8 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     variantId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65498,6 +68085,8 @@ export namespace Prisma {
     productId: string
     variantId?: string | null
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65505,6 +68094,8 @@ export namespace Prisma {
   export type WishlistUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65515,6 +68106,8 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     variantId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65525,6 +68118,8 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     expiresAt?: Date | string | null
     viewCount?: number
     createdAt?: Date | string
@@ -65539,6 +68134,8 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     expiresAt?: Date | string | null
     viewCount?: number
     createdAt?: Date | string
@@ -65551,6 +68148,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65565,6 +68164,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65578,6 +68179,8 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     expiresAt?: Date | string | null
     viewCount?: number
     createdAt?: Date | string
@@ -65590,6 +68193,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65603,6 +68208,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65651,6 +68258,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -65695,6 +68313,8 @@ export namespace Prisma {
     country?: SortOrder
     type?: SortOrder
     isDefault?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -65712,6 +68332,8 @@ export namespace Prisma {
     country?: SortOrder
     type?: SortOrder
     isDefault?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -65729,6 +68351,8 @@ export namespace Prisma {
     country?: SortOrder
     type?: SortOrder
     isDefault?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -65785,6 +68409,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -65978,6 +68616,8 @@ export namespace Prisma {
     bankAccount?: SortOrder
     bankName?: SortOrder
     accountHolder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -65999,6 +68639,8 @@ export namespace Prisma {
     bankAccount?: SortOrder
     bankName?: SortOrder
     accountHolder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66014,6 +68656,8 @@ export namespace Prisma {
     bankAccount?: SortOrder
     bankName?: SortOrder
     accountHolder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66036,6 +68680,8 @@ export namespace Prisma {
     url?: SortOrder
     clicks?: SortOrder
     conversions?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66052,6 +68698,8 @@ export namespace Prisma {
     url?: SortOrder
     clicks?: SortOrder
     conversions?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66063,6 +68711,8 @@ export namespace Prisma {
     url?: SortOrder
     clicks?: SortOrder
     conversions?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66070,17 +68720,6 @@ export namespace Prisma {
   export type AffiliateLinkSumOrderByAggregateInput = {
     clicks?: SortOrder
     conversions?: SortOrder
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type OrderScalarRelationFilter = {
@@ -66096,6 +68735,8 @@ export namespace Prisma {
     rate?: SortOrder
     status?: SortOrder
     paidAt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66113,6 +68754,8 @@ export namespace Prisma {
     rate?: SortOrder
     status?: SortOrder
     paidAt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66125,6 +68768,8 @@ export namespace Prisma {
     rate?: SortOrder
     status?: SortOrder
     paidAt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66132,20 +68777,6 @@ export namespace Prisma {
   export type AffiliateCommissionSumOrderByAggregateInput = {
     amount?: SortOrder
     rate?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ProductNullableScalarRelationFilter = {
@@ -66159,6 +68790,8 @@ export namespace Prisma {
     categoryId?: SortOrder
     rate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66173,6 +68806,8 @@ export namespace Prisma {
     categoryId?: SortOrder
     rate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66183,6 +68818,8 @@ export namespace Prisma {
     categoryId?: SortOrder
     rate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66207,6 +68844,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     createdAt?: SortOrder
@@ -66219,6 +68858,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     createdAt?: SortOrder
@@ -66231,6 +68872,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     createdAt?: SortOrder
@@ -66271,6 +68914,8 @@ export namespace Prisma {
     gradientTo?: SortOrder
     imageMediaId?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66290,6 +68935,8 @@ export namespace Prisma {
     gradientTo?: SortOrder
     imageMediaId?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66309,6 +68956,8 @@ export namespace Prisma {
     gradientTo?: SortOrder
     imageMediaId?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66514,6 +69163,8 @@ export namespace Prisma {
     endTime?: SortOrder
     status?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -66533,6 +69184,8 @@ export namespace Prisma {
     endTime?: SortOrder
     status?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -66548,6 +69201,8 @@ export namespace Prisma {
     endTime?: SortOrder
     status?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -66699,10 +69354,10 @@ export namespace Prisma {
     none?: ReviewImageWhereInput
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
+  export type UserAvatarListRelationFilter = {
+    every?: UserAvatarWhereInput
+    some?: UserAvatarWhereInput
+    none?: UserAvatarWhereInput
   }
 
   export type CategoryListRelationFilter = {
@@ -66723,6 +69378,12 @@ export namespace Prisma {
     none?: BannerWhereInput
   }
 
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
   export type ProductImageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -66731,7 +69392,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type UserOrderByRelationAggregateInput = {
+  export type UserAvatarOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -66747,6 +69408,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type MediaCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
@@ -66757,6 +69422,7 @@ export namespace Prisma {
     type?: SortOrder
     uploadedById?: SortOrder
     isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66775,6 +69441,7 @@ export namespace Prisma {
     type?: SortOrder
     uploadedById?: SortOrder
     isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66789,6 +69456,7 @@ export namespace Prisma {
     type?: SortOrder
     uploadedById?: SortOrder
     isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66820,6 +69488,8 @@ export namespace Prisma {
   export type CartCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66827,6 +69497,8 @@ export namespace Prisma {
   export type CartMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66834,6 +69506,8 @@ export namespace Prisma {
   export type CartMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66947,6 +69621,8 @@ export namespace Prisma {
     affiliateCode?: SortOrder
     couponCode?: SortOrder
     notes?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66973,6 +69649,8 @@ export namespace Prisma {
     affiliateCode?: SortOrder
     couponCode?: SortOrder
     notes?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66991,6 +69669,8 @@ export namespace Prisma {
     affiliateCode?: SortOrder
     couponCode?: SortOrder
     notes?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67023,6 +69703,8 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     total?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -67042,6 +69724,8 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     total?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -67055,6 +69739,8 @@ export namespace Prisma {
     price?: SortOrder
     quantity?: SortOrder
     total?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -67087,6 +69773,8 @@ export namespace Prisma {
     transactionId?: SortOrder
     paymentData?: SortOrder
     paidAt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67104,6 +69792,8 @@ export namespace Prisma {
     transactionId?: SortOrder
     paymentData?: SortOrder
     paidAt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67117,6 +69807,8 @@ export namespace Prisma {
     transactionId?: SortOrder
     paymentData?: SortOrder
     paidAt?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67262,6 +69954,8 @@ export namespace Prisma {
     imageMediaId?: SortOrder
     parentId?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -67281,6 +69975,8 @@ export namespace Prisma {
     imageMediaId?: SortOrder
     parentId?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -67296,6 +69992,8 @@ export namespace Prisma {
     imageMediaId?: SortOrder
     parentId?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     sortOrder?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -67335,6 +70033,8 @@ export namespace Prisma {
     logoMediaId?: SortOrder
     website?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67347,6 +70047,8 @@ export namespace Prisma {
     logoMediaId?: SortOrder
     website?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67359,6 +70061,8 @@ export namespace Prisma {
     logoMediaId?: SortOrder
     website?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67460,6 +70164,8 @@ export namespace Prisma {
     comparePrice?: SortOrder
     isActive?: SortOrder
     isFeatured?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     weight?: SortOrder
     metaTitle?: SortOrder
     metaDesc?: SortOrder
@@ -67485,6 +70191,8 @@ export namespace Prisma {
     comparePrice?: SortOrder
     isActive?: SortOrder
     isFeatured?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     weight?: SortOrder
     metaTitle?: SortOrder
     metaDesc?: SortOrder
@@ -67504,6 +70212,8 @@ export namespace Prisma {
     comparePrice?: SortOrder
     isActive?: SortOrder
     isFeatured?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     weight?: SortOrder
     metaTitle?: SortOrder
     metaDesc?: SortOrder
@@ -67618,6 +70328,8 @@ export namespace Prisma {
     price?: SortOrder
     displayType?: SortOrder
     sortOrder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67638,6 +70350,8 @@ export namespace Prisma {
     price?: SortOrder
     displayType?: SortOrder
     sortOrder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67653,6 +70367,8 @@ export namespace Prisma {
     price?: SortOrder
     displayType?: SortOrder
     sortOrder?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67881,6 +70597,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67902,6 +70620,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67917,6 +70637,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67991,6 +70713,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68015,6 +70739,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68031,6 +70757,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68130,6 +70858,8 @@ export namespace Prisma {
     comment?: SortOrder
     isVerified?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     helpfulCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -68149,6 +70879,8 @@ export namespace Prisma {
     comment?: SortOrder
     isVerified?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     helpfulCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -68163,6 +70895,8 @@ export namespace Prisma {
     comment?: SortOrder
     isVerified?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     helpfulCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -68208,6 +70942,8 @@ export namespace Prisma {
     userId?: SortOrder
     content?: SortOrder
     isAdmin?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68218,6 +70954,8 @@ export namespace Prisma {
     userId?: SortOrder
     content?: SortOrder
     isAdmin?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68228,6 +70966,8 @@ export namespace Prisma {
     userId?: SortOrder
     content?: SortOrder
     isAdmin?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68315,6 +71055,11 @@ export namespace Prisma {
     none?: UserRoleAssignmentWhereInput
   }
 
+  export type UserAvatarNullableScalarRelationFilter = {
+    is?: UserAvatarWhereInput | null
+    isNot?: UserAvatarWhereInput | null
+  }
+
   export type MediaListRelationFilter = {
     every?: MediaWhereInput
     some?: MediaWhereInput
@@ -68361,9 +71106,9 @@ export namespace Prisma {
     phone?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    avatarMediaId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     refreshToken?: SortOrder
     isActive?: SortOrder
     isVerified?: SortOrder
@@ -68373,6 +71118,7 @@ export namespace Prisma {
     isPhoneVerified?: SortOrder
     emailVerifiedAt?: SortOrder
     phoneVerifiedAt?: SortOrder
+    mediaId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -68383,9 +71129,9 @@ export namespace Prisma {
     phone?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    avatarMediaId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     refreshToken?: SortOrder
     isActive?: SortOrder
     isVerified?: SortOrder
@@ -68395,6 +71141,7 @@ export namespace Prisma {
     isPhoneVerified?: SortOrder
     emailVerifiedAt?: SortOrder
     phoneVerifiedAt?: SortOrder
+    mediaId?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -68405,9 +71152,9 @@ export namespace Prisma {
     phone?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    avatarMediaId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     refreshToken?: SortOrder
     isActive?: SortOrder
     isVerified?: SortOrder
@@ -68417,6 +71164,31 @@ export namespace Prisma {
     isPhoneVerified?: SortOrder
     emailVerifiedAt?: SortOrder
     phoneVerifiedAt?: SortOrder
+    mediaId?: SortOrder
+  }
+
+  export type UserAvatarCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mediaId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAvatarMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mediaId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAvatarMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mediaId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumRoleNameFilter<$PrismaModel = never> = {
@@ -68431,6 +71203,8 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type UserRoleMaxOrderByAggregateInput = {
@@ -68438,6 +71212,8 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type UserRoleMinOrderByAggregateInput = {
@@ -68445,6 +71221,8 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type EnumRoleNameWithAggregatesFilter<$PrismaModel = never> = {
@@ -68503,6 +71281,8 @@ export namespace Prisma {
     productId?: SortOrder
     variantId?: SortOrder
     note?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68513,6 +71293,8 @@ export namespace Prisma {
     productId?: SortOrder
     variantId?: SortOrder
     note?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68523,6 +71305,8 @@ export namespace Prisma {
     productId?: SortOrder
     variantId?: SortOrder
     note?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68534,6 +71318,8 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     expiresAt?: SortOrder
     viewCount?: SortOrder
     createdAt?: SortOrder
@@ -68551,6 +71337,8 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     expiresAt?: SortOrder
     viewCount?: SortOrder
     createdAt?: SortOrder
@@ -68564,6 +71352,8 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     expiresAt?: SortOrder
     viewCount?: SortOrder
     createdAt?: SortOrder
@@ -68608,6 +71398,10 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -68788,10 +71582,6 @@ export namespace Prisma {
     create?: XOR<OrderCreateWithoutCommissionsInput, OrderUncheckedCreateWithoutCommissionsInput>
     connectOrCreate?: OrderCreateOrConnectWithoutCommissionsInput
     connect?: OrderWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type AffiliateUpdateOneRequiredWithoutCommissionsNestedInput = {
@@ -69158,11 +71948,11 @@ export namespace Prisma {
     connect?: ReviewImageWhereUniqueInput | ReviewImageWhereUniqueInput[]
   }
 
-  export type UserCreateNestedManyWithoutAvatarMediaInput = {
-    create?: XOR<UserCreateWithoutAvatarMediaInput, UserUncheckedCreateWithoutAvatarMediaInput> | UserCreateWithoutAvatarMediaInput[] | UserUncheckedCreateWithoutAvatarMediaInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAvatarMediaInput | UserCreateOrConnectWithoutAvatarMediaInput[]
-    createMany?: UserCreateManyAvatarMediaInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  export type UserAvatarCreateNestedManyWithoutMediaInput = {
+    create?: XOR<UserAvatarCreateWithoutMediaInput, UserAvatarUncheckedCreateWithoutMediaInput> | UserAvatarCreateWithoutMediaInput[] | UserAvatarUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutMediaInput | UserAvatarCreateOrConnectWithoutMediaInput[]
+    createMany?: UserAvatarCreateManyMediaInputEnvelope
+    connect?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
   }
 
   export type CategoryCreateNestedManyWithoutImageMediaInput = {
@@ -69186,6 +71976,13 @@ export namespace Prisma {
     connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
   }
 
+  export type UserCreateNestedManyWithoutMediaInput = {
+    create?: XOR<UserCreateWithoutMediaInput, UserUncheckedCreateWithoutMediaInput> | UserCreateWithoutMediaInput[] | UserUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMediaInput | UserCreateOrConnectWithoutMediaInput[]
+    createMany?: UserCreateManyMediaInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type ProductImageUncheckedCreateNestedManyWithoutMediaInput = {
     create?: XOR<ProductImageCreateWithoutMediaInput, ProductImageUncheckedCreateWithoutMediaInput> | ProductImageCreateWithoutMediaInput[] | ProductImageUncheckedCreateWithoutMediaInput[]
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaInput | ProductImageCreateOrConnectWithoutMediaInput[]
@@ -69200,11 +71997,11 @@ export namespace Prisma {
     connect?: ReviewImageWhereUniqueInput | ReviewImageWhereUniqueInput[]
   }
 
-  export type UserUncheckedCreateNestedManyWithoutAvatarMediaInput = {
-    create?: XOR<UserCreateWithoutAvatarMediaInput, UserUncheckedCreateWithoutAvatarMediaInput> | UserCreateWithoutAvatarMediaInput[] | UserUncheckedCreateWithoutAvatarMediaInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAvatarMediaInput | UserCreateOrConnectWithoutAvatarMediaInput[]
-    createMany?: UserCreateManyAvatarMediaInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  export type UserAvatarUncheckedCreateNestedManyWithoutMediaInput = {
+    create?: XOR<UserAvatarCreateWithoutMediaInput, UserAvatarUncheckedCreateWithoutMediaInput> | UserAvatarCreateWithoutMediaInput[] | UserAvatarUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutMediaInput | UserAvatarCreateOrConnectWithoutMediaInput[]
+    createMany?: UserAvatarCreateManyMediaInputEnvelope
+    connect?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
   }
 
   export type CategoryUncheckedCreateNestedManyWithoutImageMediaInput = {
@@ -69226,6 +72023,13 @@ export namespace Prisma {
     connectOrCreate?: BannerCreateOrConnectWithoutImageMediaInput | BannerCreateOrConnectWithoutImageMediaInput[]
     createMany?: BannerCreateManyImageMediaInputEnvelope
     connect?: BannerWhereUniqueInput | BannerWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutMediaInput = {
+    create?: XOR<UserCreateWithoutMediaInput, UserUncheckedCreateWithoutMediaInput> | UserCreateWithoutMediaInput[] | UserUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMediaInput | UserCreateOrConnectWithoutMediaInput[]
+    createMany?: UserCreateManyMediaInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type EnumMediaTypeFieldUpdateOperationsInput = {
@@ -69270,18 +72074,18 @@ export namespace Prisma {
     deleteMany?: ReviewImageScalarWhereInput | ReviewImageScalarWhereInput[]
   }
 
-  export type UserUpdateManyWithoutAvatarMediaNestedInput = {
-    create?: XOR<UserCreateWithoutAvatarMediaInput, UserUncheckedCreateWithoutAvatarMediaInput> | UserCreateWithoutAvatarMediaInput[] | UserUncheckedCreateWithoutAvatarMediaInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAvatarMediaInput | UserCreateOrConnectWithoutAvatarMediaInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAvatarMediaInput | UserUpsertWithWhereUniqueWithoutAvatarMediaInput[]
-    createMany?: UserCreateManyAvatarMediaInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAvatarMediaInput | UserUpdateWithWhereUniqueWithoutAvatarMediaInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAvatarMediaInput | UserUpdateManyWithWhereWithoutAvatarMediaInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  export type UserAvatarUpdateManyWithoutMediaNestedInput = {
+    create?: XOR<UserAvatarCreateWithoutMediaInput, UserAvatarUncheckedCreateWithoutMediaInput> | UserAvatarCreateWithoutMediaInput[] | UserAvatarUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutMediaInput | UserAvatarCreateOrConnectWithoutMediaInput[]
+    upsert?: UserAvatarUpsertWithWhereUniqueWithoutMediaInput | UserAvatarUpsertWithWhereUniqueWithoutMediaInput[]
+    createMany?: UserAvatarCreateManyMediaInputEnvelope
+    set?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    disconnect?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    delete?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    connect?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    update?: UserAvatarUpdateWithWhereUniqueWithoutMediaInput | UserAvatarUpdateWithWhereUniqueWithoutMediaInput[]
+    updateMany?: UserAvatarUpdateManyWithWhereWithoutMediaInput | UserAvatarUpdateManyWithWhereWithoutMediaInput[]
+    deleteMany?: UserAvatarScalarWhereInput | UserAvatarScalarWhereInput[]
   }
 
   export type CategoryUpdateManyWithoutImageMediaNestedInput = {
@@ -69326,6 +72130,20 @@ export namespace Prisma {
     deleteMany?: BannerScalarWhereInput | BannerScalarWhereInput[]
   }
 
+  export type UserUpdateManyWithoutMediaNestedInput = {
+    create?: XOR<UserCreateWithoutMediaInput, UserUncheckedCreateWithoutMediaInput> | UserCreateWithoutMediaInput[] | UserUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMediaInput | UserCreateOrConnectWithoutMediaInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutMediaInput | UserUpsertWithWhereUniqueWithoutMediaInput[]
+    createMany?: UserCreateManyMediaInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutMediaInput | UserUpdateWithWhereUniqueWithoutMediaInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutMediaInput | UserUpdateManyWithWhereWithoutMediaInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
   export type ProductImageUncheckedUpdateManyWithoutMediaNestedInput = {
     create?: XOR<ProductImageCreateWithoutMediaInput, ProductImageUncheckedCreateWithoutMediaInput> | ProductImageCreateWithoutMediaInput[] | ProductImageUncheckedCreateWithoutMediaInput[]
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaInput | ProductImageCreateOrConnectWithoutMediaInput[]
@@ -69354,18 +72172,18 @@ export namespace Prisma {
     deleteMany?: ReviewImageScalarWhereInput | ReviewImageScalarWhereInput[]
   }
 
-  export type UserUncheckedUpdateManyWithoutAvatarMediaNestedInput = {
-    create?: XOR<UserCreateWithoutAvatarMediaInput, UserUncheckedCreateWithoutAvatarMediaInput> | UserCreateWithoutAvatarMediaInput[] | UserUncheckedCreateWithoutAvatarMediaInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAvatarMediaInput | UserCreateOrConnectWithoutAvatarMediaInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAvatarMediaInput | UserUpsertWithWhereUniqueWithoutAvatarMediaInput[]
-    createMany?: UserCreateManyAvatarMediaInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAvatarMediaInput | UserUpdateWithWhereUniqueWithoutAvatarMediaInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAvatarMediaInput | UserUpdateManyWithWhereWithoutAvatarMediaInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  export type UserAvatarUncheckedUpdateManyWithoutMediaNestedInput = {
+    create?: XOR<UserAvatarCreateWithoutMediaInput, UserAvatarUncheckedCreateWithoutMediaInput> | UserAvatarCreateWithoutMediaInput[] | UserAvatarUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutMediaInput | UserAvatarCreateOrConnectWithoutMediaInput[]
+    upsert?: UserAvatarUpsertWithWhereUniqueWithoutMediaInput | UserAvatarUpsertWithWhereUniqueWithoutMediaInput[]
+    createMany?: UserAvatarCreateManyMediaInputEnvelope
+    set?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    disconnect?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    delete?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    connect?: UserAvatarWhereUniqueInput | UserAvatarWhereUniqueInput[]
+    update?: UserAvatarUpdateWithWhereUniqueWithoutMediaInput | UserAvatarUpdateWithWhereUniqueWithoutMediaInput[]
+    updateMany?: UserAvatarUpdateManyWithWhereWithoutMediaInput | UserAvatarUpdateManyWithWhereWithoutMediaInput[]
+    deleteMany?: UserAvatarScalarWhereInput | UserAvatarScalarWhereInput[]
   }
 
   export type CategoryUncheckedUpdateManyWithoutImageMediaNestedInput = {
@@ -69408,6 +72226,20 @@ export namespace Prisma {
     update?: BannerUpdateWithWhereUniqueWithoutImageMediaInput | BannerUpdateWithWhereUniqueWithoutImageMediaInput[]
     updateMany?: BannerUpdateManyWithWhereWithoutImageMediaInput | BannerUpdateManyWithWhereWithoutImageMediaInput[]
     deleteMany?: BannerScalarWhereInput | BannerScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutMediaNestedInput = {
+    create?: XOR<UserCreateWithoutMediaInput, UserUncheckedCreateWithoutMediaInput> | UserCreateWithoutMediaInput[] | UserUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMediaInput | UserCreateOrConnectWithoutMediaInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutMediaInput | UserUpsertWithWhereUniqueWithoutMediaInput[]
+    createMany?: UserCreateManyMediaInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutMediaInput | UserUpdateWithWhereUniqueWithoutMediaInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutMediaInput | UserUpdateManyWithWhereWithoutMediaInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCartInput = {
@@ -71526,10 +74358,10 @@ export namespace Prisma {
     connect?: UserRoleAssignmentWhereUniqueInput | UserRoleAssignmentWhereUniqueInput[]
   }
 
-  export type MediaCreateNestedOneWithoutUserAvatarsInput = {
-    create?: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
-    connectOrCreate?: MediaCreateOrConnectWithoutUserAvatarsInput
-    connect?: MediaWhereUniqueInput
+  export type UserAvatarCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserAvatarCreateWithoutUserInput, UserAvatarUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutUserInput
+    connect?: UserAvatarWhereUniqueInput
   }
 
   export type MediaCreateNestedManyWithoutUploadedByInput = {
@@ -71572,6 +74404,12 @@ export namespace Prisma {
     connectOrCreate?: SharedWishlistCreateOrConnectWithoutUserInput | SharedWishlistCreateOrConnectWithoutUserInput[]
     createMany?: SharedWishlistCreateManyUserInputEnvelope
     connect?: SharedWishlistWhereUniqueInput | SharedWishlistWhereUniqueInput[]
+  }
+
+  export type MediaCreateNestedOneWithoutUsersInput = {
+    create?: XOR<MediaCreateWithoutUsersInput, MediaUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutUsersInput
+    connect?: MediaWhereUniqueInput
   }
 
   export type CartUncheckedCreateNestedOneWithoutUserInput = {
@@ -71626,6 +74464,12 @@ export namespace Prisma {
     connectOrCreate?: UserRoleAssignmentCreateOrConnectWithoutUserInput | UserRoleAssignmentCreateOrConnectWithoutUserInput[]
     createMany?: UserRoleAssignmentCreateManyUserInputEnvelope
     connect?: UserRoleAssignmentWhereUniqueInput | UserRoleAssignmentWhereUniqueInput[]
+  }
+
+  export type UserAvatarUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserAvatarCreateWithoutUserInput, UserAvatarUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutUserInput
+    connect?: UserAvatarWhereUniqueInput
   }
 
   export type MediaUncheckedCreateNestedManyWithoutUploadedByInput = {
@@ -71774,14 +74618,14 @@ export namespace Prisma {
     deleteMany?: UserRoleAssignmentScalarWhereInput | UserRoleAssignmentScalarWhereInput[]
   }
 
-  export type MediaUpdateOneWithoutUserAvatarsNestedInput = {
-    create?: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
-    connectOrCreate?: MediaCreateOrConnectWithoutUserAvatarsInput
-    upsert?: MediaUpsertWithoutUserAvatarsInput
-    disconnect?: MediaWhereInput | boolean
-    delete?: MediaWhereInput | boolean
-    connect?: MediaWhereUniqueInput
-    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutUserAvatarsInput, MediaUpdateWithoutUserAvatarsInput>, MediaUncheckedUpdateWithoutUserAvatarsInput>
+  export type UserAvatarUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserAvatarCreateWithoutUserInput, UserAvatarUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutUserInput
+    upsert?: UserAvatarUpsertWithoutUserInput
+    disconnect?: UserAvatarWhereInput | boolean
+    delete?: UserAvatarWhereInput | boolean
+    connect?: UserAvatarWhereUniqueInput
+    update?: XOR<XOR<UserAvatarUpdateToOneWithWhereWithoutUserInput, UserAvatarUpdateWithoutUserInput>, UserAvatarUncheckedUpdateWithoutUserInput>
   }
 
   export type MediaUpdateManyWithoutUploadedByNestedInput = {
@@ -71866,6 +74710,16 @@ export namespace Prisma {
     update?: SharedWishlistUpdateWithWhereUniqueWithoutUserInput | SharedWishlistUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SharedWishlistUpdateManyWithWhereWithoutUserInput | SharedWishlistUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SharedWishlistScalarWhereInput | SharedWishlistScalarWhereInput[]
+  }
+
+  export type MediaUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<MediaCreateWithoutUsersInput, MediaUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutUsersInput
+    upsert?: MediaUpsertWithoutUsersInput
+    disconnect?: MediaWhereInput | boolean
+    delete?: MediaWhereInput | boolean
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutUsersInput, MediaUpdateWithoutUsersInput>, MediaUncheckedUpdateWithoutUsersInput>
   }
 
   export type CartUncheckedUpdateOneWithoutUserNestedInput = {
@@ -71972,6 +74826,16 @@ export namespace Prisma {
     deleteMany?: UserRoleAssignmentScalarWhereInput | UserRoleAssignmentScalarWhereInput[]
   }
 
+  export type UserAvatarUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserAvatarCreateWithoutUserInput, UserAvatarUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserAvatarCreateOrConnectWithoutUserInput
+    upsert?: UserAvatarUpsertWithoutUserInput
+    disconnect?: UserAvatarWhereInput | boolean
+    delete?: UserAvatarWhereInput | boolean
+    connect?: UserAvatarWhereUniqueInput
+    update?: XOR<XOR<UserAvatarUpdateToOneWithWhereWithoutUserInput, UserAvatarUpdateWithoutUserInput>, UserAvatarUncheckedUpdateWithoutUserInput>
+  }
+
   export type MediaUncheckedUpdateManyWithoutUploadedByNestedInput = {
     create?: XOR<MediaCreateWithoutUploadedByInput, MediaUncheckedCreateWithoutUploadedByInput> | MediaCreateWithoutUploadedByInput[] | MediaUncheckedCreateWithoutUploadedByInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUploadedByInput | MediaCreateOrConnectWithoutUploadedByInput[]
@@ -72054,6 +74918,34 @@ export namespace Prisma {
     update?: SharedWishlistUpdateWithWhereUniqueWithoutUserInput | SharedWishlistUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SharedWishlistUpdateManyWithWhereWithoutUserInput | SharedWishlistUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SharedWishlistScalarWhereInput | SharedWishlistScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutAvatarInput = {
+    create?: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAvatarInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MediaCreateNestedOneWithoutUserAvatarsInput = {
+    create?: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutUserAvatarsInput
+    connect?: MediaWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAvatarNestedInput = {
+    create?: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAvatarInput
+    upsert?: UserUpsertWithoutAvatarInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAvatarInput, UserUpdateWithoutAvatarInput>, UserUncheckedUpdateWithoutAvatarInput>
+  }
+
+  export type MediaUpdateOneRequiredWithoutUserAvatarsNestedInput = {
+    create?: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutUserAvatarsInput
+    upsert?: MediaUpsertWithoutUserAvatarsInput
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutUserAvatarsInput, MediaUpdateWithoutUserAvatarsInput>, MediaUncheckedUpdateWithoutUserAvatarsInput>
   }
 
   export type UserRoleAssignmentCreateNestedManyWithoutRoleInput = {
@@ -72228,6 +75120,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -72313,6 +75216,20 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -72379,31 +75296,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumBannerTypeFilter<$PrismaModel = never> = {
@@ -72748,6 +75640,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -72764,13 +75657,14 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutAddressesInput = {
@@ -72781,9 +75675,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -72793,6 +75687,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -72800,6 +75695,7 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -72825,6 +75721,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -72848,6 +75746,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -72888,6 +75788,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -72904,13 +75805,14 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAddressesInput = {
@@ -72921,9 +75823,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -72933,6 +75835,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -72940,6 +75843,7 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -72981,6 +75885,8 @@ export namespace Prisma {
     affiliateCode?: StringNullableFilter<"Order"> | string | null
     couponCode?: StringNullableFilter<"Order"> | string | null
     notes?: StringNullableFilter<"Order"> | string | null
+    isDeleted?: BoolFilter<"Order"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
   }
@@ -72995,6 +75901,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -73011,13 +75918,14 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutAffiliateInput = {
@@ -73028,9 +75936,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -73040,6 +75948,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -73047,6 +75956,7 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -73066,6 +75976,8 @@ export namespace Prisma {
     url: string
     clicks?: number
     conversions?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -73076,6 +75988,8 @@ export namespace Prisma {
     url: string
     clicks?: number
     conversions?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -73096,6 +76010,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutCommissionsInput
@@ -73108,6 +76024,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -73143,6 +76061,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -73159,13 +76078,14 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAffiliateInput = {
@@ -73176,9 +76096,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -73188,6 +76108,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -73195,6 +76116,7 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -73229,6 +76151,8 @@ export namespace Prisma {
     url?: StringFilter<"AffiliateLink"> | string
     clicks?: IntFilter<"AffiliateLink"> | number
     conversions?: IntFilter<"AffiliateLink"> | number
+    isDeleted?: BoolFilter<"AffiliateLink"> | boolean
+    deletedAt?: DateTimeNullableFilter<"AffiliateLink"> | Date | string | null
     createdAt?: DateTimeFilter<"AffiliateLink"> | Date | string
     updatedAt?: DateTimeFilter<"AffiliateLink"> | Date | string
   }
@@ -73260,6 +76184,8 @@ export namespace Prisma {
     rate?: DecimalFilter<"AffiliateCommission"> | Decimal | DecimalJsLike | number | string
     status?: StringFilter<"AffiliateCommission"> | string
     paidAt?: DateTimeNullableFilter<"AffiliateCommission"> | Date | string | null
+    isDeleted?: BoolFilter<"AffiliateCommission"> | boolean
+    deletedAt?: DateTimeNullableFilter<"AffiliateCommission"> | Date | string | null
     createdAt?: DateTimeFilter<"AffiliateCommission"> | Date | string
     updatedAt?: DateTimeFilter<"AffiliateCommission"> | Date | string
   }
@@ -73274,6 +76200,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAffiliateInput
@@ -73291,6 +76219,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     commissions?: AffiliateCommissionUncheckedCreateNestedManyWithoutAffiliateInput
@@ -73322,6 +76252,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAffiliateNestedInput
@@ -73339,6 +76271,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     commissions?: AffiliateCommissionUncheckedUpdateManyWithoutAffiliateNestedInput
@@ -73354,6 +76288,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAffiliateInput
@@ -73371,6 +76307,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     links?: AffiliateLinkUncheckedCreateNestedManyWithoutAffiliateInput
@@ -73393,6 +76331,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -73417,6 +76357,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -73451,6 +76393,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAffiliateNestedInput
@@ -73468,6 +76412,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     links?: AffiliateLinkUncheckedUpdateManyWithoutAffiliateNestedInput
@@ -73496,6 +76442,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -73520,6 +76468,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -73539,6 +76489,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -73572,6 +76524,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -73619,6 +76573,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73652,6 +76608,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73756,14 +76714,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
     productImages?: ProductImageCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutBannersInput = {
@@ -73776,13 +76736,15 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaCreateOrConnectWithoutBannersInput = {
@@ -73826,14 +76788,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
     productImages?: ProductImageUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutBannersInput = {
@@ -73846,13 +76810,15 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type BannerCreateWithoutGroupsInput = {
@@ -73869,6 +76835,8 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     imageMedia?: MediaCreateNestedOneWithoutBannersInput
@@ -73889,6 +76857,8 @@ export namespace Prisma {
     gradientTo?: string | null
     imageMediaId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -73904,6 +76874,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     createdAt?: Date | string
@@ -73916,6 +76888,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     createdAt?: Date | string
@@ -73952,6 +76926,8 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     imageMedia?: MediaUpdateOneWithoutBannersNestedInput
@@ -73972,6 +76948,8 @@ export namespace Prisma {
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -73993,6 +76971,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -74005,6 +76985,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -74021,6 +77003,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -74038,12 +77021,13 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutEmailVerificationLogsInput = {
@@ -74054,9 +77038,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -74066,6 +77050,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -74074,6 +77059,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
@@ -74107,6 +77093,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -74124,12 +77111,13 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailVerificationLogsInput = {
@@ -74140,9 +77128,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -74152,6 +77140,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -74160,6 +77149,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
@@ -74300,6 +77290,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74316,6 +77308,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74338,6 +77332,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -74371,6 +77367,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -74406,6 +77404,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -74427,6 +77427,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -74462,6 +77464,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -74478,6 +77482,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -74506,6 +77512,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74539,6 +77547,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74580,6 +77590,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -74601,6 +77613,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -74620,6 +77634,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74636,6 +77652,8 @@ export namespace Prisma {
     endTime: Date | string
     status?: $Enums.FlashSaleStatus
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74659,6 +77677,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -74683,6 +77703,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -74717,6 +77739,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -74733,6 +77757,8 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumFlashSaleStatusFieldUpdateOperationsInput | $Enums.FlashSaleStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -74762,6 +77788,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -74786,6 +77814,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -74804,6 +77834,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -74821,12 +77852,13 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutUploadedMediaInput = {
@@ -74837,9 +77869,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -74849,6 +77881,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -74857,6 +77890,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
@@ -74923,83 +77957,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserCreateWithoutAvatarMediaInput = {
+  export type UserAvatarCreateWithoutMediaInput = {
     id?: string
-    email: string
-    firstName: string
-    lastName: string
-    phone: string
-    username: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    refreshToken?: string | null
-    isActive?: boolean
-    isVerified?: boolean
-    isBanned?: boolean
-    isDeleted?: boolean
-    isEmailVerified?: boolean
-    isPhoneVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    phoneVerifiedAt?: Date | string | null
-    cart?: CartCreateNestedOneWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    reviews?: ProductReviewCreateNestedManyWithoutUserInput
-    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
-    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
-    addresses?: AddressCreateNestedManyWithoutUserInput
-    affiliate?: AffiliateCreateNestedOneWithoutUserInput
-    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
-    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
-    questions?: ProductQuestionCreateNestedManyWithoutUserInput
-    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
-    wishlists?: WishlistCreateNestedManyWithoutUserInput
-    sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    user: UserCreateNestedOneWithoutAvatarInput
   }
 
-  export type UserUncheckedCreateWithoutAvatarMediaInput = {
+  export type UserAvatarUncheckedCreateWithoutMediaInput = {
     id?: string
-    email: string
-    firstName: string
-    lastName: string
-    phone: string
-    username: string
-    password: string
+    userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    refreshToken?: string | null
-    isActive?: boolean
-    isVerified?: boolean
-    isBanned?: boolean
-    isDeleted?: boolean
-    isEmailVerified?: boolean
-    isPhoneVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    phoneVerifiedAt?: Date | string | null
-    cart?: CartUncheckedCreateNestedOneWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
-    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
-    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
-    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
-    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
-    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
-    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
-    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
-    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
-    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
-    wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
-    sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutAvatarMediaInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAvatarMediaInput, UserUncheckedCreateWithoutAvatarMediaInput>
+  export type UserAvatarCreateOrConnectWithoutMediaInput = {
+    where: UserAvatarWhereUniqueInput
+    create: XOR<UserAvatarCreateWithoutMediaInput, UserAvatarUncheckedCreateWithoutMediaInput>
   }
 
-  export type UserCreateManyAvatarMediaInputEnvelope = {
-    data: UserCreateManyAvatarMediaInput | UserCreateManyAvatarMediaInput[]
+  export type UserAvatarCreateManyMediaInputEnvelope = {
+    data: UserAvatarCreateManyMediaInput | UserAvatarCreateManyMediaInput[]
     skipDuplicates?: boolean
   }
 
@@ -75009,6 +77987,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -75026,6 +78006,8 @@ export namespace Prisma {
     description?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -75052,6 +78034,8 @@ export namespace Prisma {
     description?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutBrandInput
@@ -75065,6 +78049,8 @@ export namespace Prisma {
     description?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutBrandInput
@@ -75095,6 +78081,8 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groups?: BannerGroupMappingCreateNestedManyWithoutBannerInput
@@ -75114,6 +78102,8 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     groups?: BannerGroupMappingUncheckedCreateNestedManyWithoutBannerInput
@@ -75126,6 +78116,90 @@ export namespace Prisma {
 
   export type BannerCreateManyImageMediaInputEnvelope = {
     data: BannerCreateManyImageMediaInput | BannerCreateManyImageMediaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutMediaInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMediaInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMediaInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMediaInput, UserUncheckedCreateWithoutMediaInput>
+  }
+
+  export type UserCreateManyMediaInputEnvelope = {
+    data: UserCreateManyMediaInput | UserCreateManyMediaInput[]
     skipDuplicates?: boolean
   }
 
@@ -75150,6 +78224,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -75167,12 +78242,13 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUploadedMediaInput = {
@@ -75183,9 +78259,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -75195,6 +78271,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -75203,6 +78280,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
@@ -75267,45 +78345,31 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ReviewImage"> | Date | string
   }
 
-  export type UserUpsertWithWhereUniqueWithoutAvatarMediaInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutAvatarMediaInput, UserUncheckedUpdateWithoutAvatarMediaInput>
-    create: XOR<UserCreateWithoutAvatarMediaInput, UserUncheckedCreateWithoutAvatarMediaInput>
+  export type UserAvatarUpsertWithWhereUniqueWithoutMediaInput = {
+    where: UserAvatarWhereUniqueInput
+    update: XOR<UserAvatarUpdateWithoutMediaInput, UserAvatarUncheckedUpdateWithoutMediaInput>
+    create: XOR<UserAvatarCreateWithoutMediaInput, UserAvatarUncheckedCreateWithoutMediaInput>
   }
 
-  export type UserUpdateWithWhereUniqueWithoutAvatarMediaInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutAvatarMediaInput, UserUncheckedUpdateWithoutAvatarMediaInput>
+  export type UserAvatarUpdateWithWhereUniqueWithoutMediaInput = {
+    where: UserAvatarWhereUniqueInput
+    data: XOR<UserAvatarUpdateWithoutMediaInput, UserAvatarUncheckedUpdateWithoutMediaInput>
   }
 
-  export type UserUpdateManyWithWhereWithoutAvatarMediaInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAvatarMediaInput>
+  export type UserAvatarUpdateManyWithWhereWithoutMediaInput = {
+    where: UserAvatarScalarWhereInput
+    data: XOR<UserAvatarUpdateManyMutationInput, UserAvatarUncheckedUpdateManyWithoutMediaInput>
   }
 
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    firstName?: StringFilter<"User"> | string
-    lastName?: StringFilter<"User"> | string
-    phone?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    avatarMediaId?: StringNullableFilter<"User"> | string | null
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    refreshToken?: StringNullableFilter<"User"> | string | null
-    isActive?: BoolFilter<"User"> | boolean
-    isVerified?: BoolFilter<"User"> | boolean
-    isBanned?: BoolFilter<"User"> | boolean
-    isDeleted?: BoolFilter<"User"> | boolean
-    isEmailVerified?: BoolFilter<"User"> | boolean
-    isPhoneVerified?: BoolFilter<"User"> | boolean
-    emailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    phoneVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+  export type UserAvatarScalarWhereInput = {
+    AND?: UserAvatarScalarWhereInput | UserAvatarScalarWhereInput[]
+    OR?: UserAvatarScalarWhereInput[]
+    NOT?: UserAvatarScalarWhereInput | UserAvatarScalarWhereInput[]
+    id?: StringFilter<"UserAvatar"> | string
+    userId?: StringFilter<"UserAvatar"> | string
+    mediaId?: StringFilter<"UserAvatar"> | string
+    createdAt?: DateTimeFilter<"UserAvatar"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAvatar"> | Date | string
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutImageMediaInput = {
@@ -75335,6 +78399,8 @@ export namespace Prisma {
     imageMediaId?: StringNullableFilter<"Category"> | string | null
     parentId?: StringNullableFilter<"Category"> | string | null
     isActive?: BoolFilter<"Category"> | boolean
+    isDeleted?: BoolFilter<"Category"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Category"> | Date | string | null
     sortOrder?: IntFilter<"Category"> | number
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
@@ -75369,6 +78435,8 @@ export namespace Prisma {
     logoMediaId?: StringNullableFilter<"Brand"> | string | null
     website?: StringNullableFilter<"Brand"> | string | null
     isActive?: BoolFilter<"Brand"> | boolean
+    isDeleted?: BoolFilter<"Brand"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
   }
@@ -75407,8 +78475,52 @@ export namespace Prisma {
     gradientTo?: StringNullableFilter<"Banner"> | string | null
     imageMediaId?: StringNullableFilter<"Banner"> | string | null
     isActive?: BoolFilter<"Banner"> | boolean
+    isDeleted?: BoolFilter<"Banner"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Banner"> | Date | string | null
     createdAt?: DateTimeFilter<"Banner"> | Date | string
     updatedAt?: DateTimeFilter<"Banner"> | Date | string
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutMediaInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutMediaInput, UserUncheckedUpdateWithoutMediaInput>
+    create: XOR<UserCreateWithoutMediaInput, UserUncheckedCreateWithoutMediaInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutMediaInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutMediaInput, UserUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutMediaInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutMediaInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    firstName?: StringFilter<"User"> | string
+    lastName?: StringFilter<"User"> | string
+    phone?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    refreshToken?: StringNullableFilter<"User"> | string | null
+    isActive?: BoolFilter<"User"> | boolean
+    isVerified?: BoolFilter<"User"> | boolean
+    isBanned?: BoolFilter<"User"> | boolean
+    isDeleted?: BoolFilter<"User"> | boolean
+    isEmailVerified?: BoolFilter<"User"> | boolean
+    isPhoneVerified?: BoolFilter<"User"> | boolean
+    emailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    phoneVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    mediaId?: StringNullableFilter<"User"> | string | null
   }
 
   export type UserCreateWithoutCartInput = {
@@ -75421,6 +78533,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -75437,13 +78550,14 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutCartInput = {
@@ -75454,9 +78568,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -75466,6 +78580,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
     reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
@@ -75473,6 +78588,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -75535,6 +78651,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -75551,13 +78668,14 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCartInput = {
@@ -75568,9 +78686,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -75580,6 +78698,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
@@ -75587,6 +78706,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -75626,6 +78746,8 @@ export namespace Prisma {
 
   export type CartCreateWithoutItemsInput = {
     id?: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCartInput
@@ -75634,6 +78756,8 @@ export namespace Prisma {
   export type CartUncheckedCreateWithoutItemsInput = {
     id?: string
     userId: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -75654,6 +78778,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -75687,6 +78813,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -75722,6 +78850,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -75743,6 +78873,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -75770,6 +78902,8 @@ export namespace Prisma {
 
   export type CartUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCartNestedInput
@@ -75778,6 +78912,8 @@ export namespace Prisma {
   export type CartUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -75804,6 +78940,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75837,6 +78975,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75878,6 +79018,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -75899,6 +79041,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -75918,6 +79062,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -75934,13 +79079,14 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -75951,9 +79097,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -75963,6 +79109,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
     reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
@@ -75970,6 +79117,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -75995,6 +79143,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAddressesInput
@@ -76013,6 +79163,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76029,6 +79181,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     product: ProductCreateNestedOneWithoutOrderItemsInput
     variant: ProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -76043,6 +79197,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -76064,6 +79220,8 @@ export namespace Prisma {
     transactionId?: string | null
     paymentData?: string | null
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76076,6 +79234,8 @@ export namespace Prisma {
     transactionId?: string | null
     paymentData?: string | null
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76096,6 +79256,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     affiliate: AffiliateCreateNestedOneWithoutCommissionsInput
@@ -76108,6 +79270,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76179,6 +79343,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -76195,13 +79360,14 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -76212,9 +79378,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -76224,6 +79390,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
@@ -76231,6 +79398,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -76262,6 +79430,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAddressesNestedInput
@@ -76280,6 +79450,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -76313,6 +79485,8 @@ export namespace Prisma {
     price?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     quantity?: IntFilter<"OrderItem"> | number
     total?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFilter<"OrderItem"> | boolean
+    deletedAt?: DateTimeNullableFilter<"OrderItem"> | Date | string | null
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string
   }
 
@@ -76344,6 +79518,8 @@ export namespace Prisma {
     transactionId?: StringNullableFilter<"Payment"> | string | null
     paymentData?: StringNullableFilter<"Payment"> | string | null
     paidAt?: DateTimeNullableFilter<"Payment"> | Date | string | null
+    isDeleted?: BoolFilter<"Payment"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Payment"> | Date | string | null
     createdAt?: DateTimeFilter<"Payment"> | Date | string
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
   }
@@ -76424,6 +79600,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -76448,6 +79626,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     payments?: PaymentUncheckedCreateNestedManyWithoutOrderInput
@@ -76472,6 +79652,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -76505,6 +79687,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -76540,6 +79724,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -76561,6 +79747,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -76598,6 +79786,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -76622,6 +79812,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payments?: PaymentUncheckedUpdateManyWithoutOrderNestedInput
@@ -76652,6 +79844,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76685,6 +79879,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76726,6 +79922,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -76747,6 +79945,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -76768,6 +79968,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -76792,6 +79994,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -76828,6 +80032,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -76852,6 +80058,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -76871,6 +80079,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -76904,6 +80114,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -76951,6 +80163,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -76984,6 +80198,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77010,6 +80226,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77028,6 +80246,8 @@ export namespace Prisma {
     imageMediaId?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77047,6 +80267,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77064,6 +80286,8 @@ export namespace Prisma {
     description?: string | null
     imageMediaId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77092,14 +80316,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
     productImages?: ProductImageCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
     banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutCategoriesInput = {
@@ -77112,13 +80338,15 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
     banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaCreateOrConnectWithoutCategoriesInput = {
@@ -77133,6 +80361,8 @@ export namespace Prisma {
     description?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutBrandInput
@@ -77147,6 +80377,8 @@ export namespace Prisma {
     logoMediaId?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutBrandInput
@@ -77196,6 +80428,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77214,6 +80448,8 @@ export namespace Prisma {
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77258,14 +80494,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
     productImages?: ProductImageUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutCategoriesInput = {
@@ -77278,13 +80516,15 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type BrandUpsertWithoutCategoriesInput = {
@@ -77305,6 +80545,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutBrandNestedInput
@@ -77319,6 +80561,8 @@ export namespace Prisma {
     logoMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
@@ -77361,6 +80605,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -77393,6 +80639,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -77433,14 +80681,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
     productImages?: ProductImageCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutBrandsInput = {
@@ -77453,13 +80703,15 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaCreateOrConnectWithoutBrandsInput = {
@@ -77473,6 +80725,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77491,6 +80745,8 @@ export namespace Prisma {
     imageMediaId?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77540,6 +80796,8 @@ export namespace Prisma {
     comparePrice?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFilter<"Product"> | boolean
     isFeatured?: BoolFilter<"Product"> | boolean
+    isDeleted?: BoolFilter<"Product"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     weight?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDesc?: StringNullableFilter<"Product"> | string | null
@@ -77567,14 +80825,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
     productImages?: ProductImageUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutBrandsInput = {
@@ -77587,13 +80847,15 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutBrandInput = {
@@ -77619,6 +80881,8 @@ export namespace Prisma {
     description?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     logoMedia?: MediaCreateNestedOneWithoutBrandsInput
@@ -77633,6 +80897,8 @@ export namespace Prisma {
     logoMediaId?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutBrandInput
@@ -77685,6 +80951,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryCreateNestedOneWithoutVariantInput
@@ -77705,6 +80973,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -77762,6 +81032,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77779,6 +81051,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77804,6 +81078,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     order: OrderCreateNestedOneWithoutItemsInput
     variant: ProductVariantCreateNestedOneWithoutOrderItemsInput
@@ -77818,6 +81094,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -77886,6 +81164,8 @@ export namespace Prisma {
     categoryId?: string | null
     rate: Decimal | DecimalJsLike | number | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -77895,6 +81175,8 @@ export namespace Prisma {
     categoryId?: string | null
     rate: Decimal | DecimalJsLike | number | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -78069,6 +81351,8 @@ export namespace Prisma {
   export type WishlistCreateWithoutProductInput = {
     id?: string
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutWishlistsInput
@@ -78080,6 +81364,8 @@ export namespace Prisma {
     userId: string
     variantId?: string | null
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -78112,6 +81398,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     logoMedia?: MediaUpdateOneWithoutBrandsNestedInput
@@ -78126,6 +81414,8 @@ export namespace Prisma {
     logoMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutBrandNestedInput
@@ -78192,6 +81482,8 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFilter<"ProductVariant"> | $Enums.VariantDisplayType
     sortOrder?: IntFilter<"ProductVariant"> | number
+    isDeleted?: BoolFilter<"ProductVariant"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
   }
@@ -78240,6 +81532,8 @@ export namespace Prisma {
     comment?: StringNullableFilter<"ProductReview"> | string | null
     isVerified?: BoolFilter<"ProductReview"> | boolean
     isApproved?: BoolFilter<"ProductReview"> | boolean
+    isDeleted?: BoolFilter<"ProductReview"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductReview"> | Date | string | null
     helpfulCount?: IntFilter<"ProductReview"> | number
     createdAt?: DateTimeFilter<"ProductReview"> | Date | string
     updatedAt?: DateTimeFilter<"ProductReview"> | Date | string
@@ -78328,6 +81622,8 @@ export namespace Prisma {
     categoryId?: StringNullableFilter<"CommissionRate"> | string | null
     rate?: DecimalFilter<"CommissionRate"> | Decimal | DecimalJsLike | number | string
     isActive?: BoolFilter<"CommissionRate"> | boolean
+    isDeleted?: BoolFilter<"CommissionRate"> | boolean
+    deletedAt?: DateTimeNullableFilter<"CommissionRate"> | Date | string | null
     createdAt?: DateTimeFilter<"CommissionRate"> | Date | string
     updatedAt?: DateTimeFilter<"CommissionRate"> | Date | string
   }
@@ -78487,6 +81783,8 @@ export namespace Prisma {
     productId?: StringFilter<"Wishlist"> | string
     variantId?: StringNullableFilter<"Wishlist"> | string | null
     note?: StringNullableFilter<"Wishlist"> | string | null
+    isDeleted?: BoolFilter<"Wishlist"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Wishlist"> | Date | string | null
     createdAt?: DateTimeFilter<"Wishlist"> | Date | string
     updatedAt?: DateTimeFilter<"Wishlist"> | Date | string
   }
@@ -78502,6 +81800,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -78535,6 +81835,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -78582,6 +81884,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78615,6 +81919,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78646,6 +81952,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -78679,6 +81987,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -78768,6 +82078,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     order: OrderCreateNestedOneWithoutItemsInput
     product: ProductCreateNestedOneWithoutOrderItemsInput
@@ -78782,6 +82094,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -78866,6 +82180,8 @@ export namespace Prisma {
   export type WishlistCreateWithoutVariantInput = {
     id?: string
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutWishlistsInput
@@ -78877,6 +82193,8 @@ export namespace Prisma {
     userId: string
     productId: string
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -78913,6 +82231,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78946,6 +82266,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79090,6 +82412,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79123,6 +82447,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79158,6 +82484,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -79179,6 +82507,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -79202,14 +82532,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
     banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutProductImagesInput = {
@@ -79222,13 +82554,15 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
     banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaCreateOrConnectWithoutProductImagesInput = {
@@ -79258,6 +82592,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79291,6 +82627,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79332,6 +82670,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -79353,6 +82693,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -79382,14 +82724,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutProductImagesInput = {
@@ -79402,13 +82746,15 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type ProductCreateWithoutInventoryInput = {
@@ -79422,6 +82768,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79455,6 +82803,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79490,6 +82840,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -79511,6 +82863,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: ProductImageUncheckedCreateNestedManyWithoutVariantInput
@@ -79547,6 +82901,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79580,6 +82936,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79621,6 +82979,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -79642,6 +83002,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ProductImageUncheckedUpdateManyWithoutVariantNestedInput
@@ -79662,6 +83024,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79695,6 +83059,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79726,6 +83092,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -79744,6 +83112,8 @@ export namespace Prisma {
     imageMediaId?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -79779,6 +83149,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79812,6 +83184,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79849,6 +83223,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79867,6 +83243,8 @@ export namespace Prisma {
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79886,6 +83264,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79919,6 +83299,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -79954,6 +83336,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -79971,12 +83354,13 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutQuestionsInput = {
@@ -79987,9 +83371,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -79999,6 +83383,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -80007,6 +83392,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
@@ -80029,6 +83415,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -80046,12 +83433,13 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutAnsweredQuestionsInput = {
@@ -80062,9 +83450,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -80074,6 +83462,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -80082,6 +83471,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -80116,6 +83506,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80149,6 +83541,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80190,6 +83584,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -80207,12 +83602,13 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuestionsInput = {
@@ -80223,9 +83619,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -80235,6 +83631,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -80243,6 +83640,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
@@ -80271,6 +83669,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -80288,12 +83687,13 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAnsweredQuestionsInput = {
@@ -80304,9 +83704,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -80316,6 +83716,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -80324,6 +83725,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -80380,6 +83782,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -80395,6 +83799,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -80415,6 +83821,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -80448,6 +83856,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -80495,6 +83905,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -80510,6 +83922,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -80536,6 +83950,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80569,6 +83985,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80652,6 +84070,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -80668,6 +84088,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -80689,6 +84111,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -80713,6 +84137,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -80749,6 +84175,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -80765,6 +84193,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -80792,6 +84222,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -80816,6 +84248,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -80835,6 +84269,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -80868,6 +84304,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -80903,6 +84341,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -80919,13 +84358,14 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -80936,9 +84376,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -80948,6 +84388,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
@@ -80955,6 +84396,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -80996,6 +84438,8 @@ export namespace Prisma {
     id?: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewRepliesInput
@@ -81006,6 +84450,8 @@ export namespace Prisma {
     userId: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -81066,6 +84512,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -81099,6 +84547,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -81140,6 +84590,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -81156,13 +84607,14 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -81173,9 +84625,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -81185,6 +84637,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
@@ -81192,6 +84645,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -81241,6 +84695,8 @@ export namespace Prisma {
     userId?: StringFilter<"ReviewReply"> | string
     content?: StringFilter<"ReviewReply"> | string
     isAdmin?: BoolFilter<"ReviewReply"> | boolean
+    isDeleted?: BoolFilter<"ReviewReply"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ReviewReply"> | Date | string | null
     createdAt?: DateTimeFilter<"ReviewReply"> | Date | string
     updatedAt?: DateTimeFilter<"ReviewReply"> | Date | string
   }
@@ -81279,6 +84735,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -81297,6 +84755,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -81318,14 +84778,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
     productImages?: ProductImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
     banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutReviewImagesInput = {
@@ -81338,13 +84800,15 @@ export namespace Prisma {
     type: $Enums.MediaType
     uploadedById?: string | null
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
     banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaCreateOrConnectWithoutReviewImagesInput = {
@@ -81370,6 +84834,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81388,6 +84854,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81415,14 +84883,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
     productImages?: ProductImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutReviewImagesInput = {
@@ -81435,13 +84905,15 @@ export namespace Prisma {
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type ProductReviewCreateWithoutRepliesInput = {
@@ -81451,6 +84923,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -81469,6 +84943,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -81491,6 +84967,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -81507,13 +84984,14 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutReviewRepliesInput = {
@@ -81524,9 +85002,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -81536,6 +85014,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -81543,6 +85022,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -81574,6 +85054,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81592,6 +85074,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81620,6 +85104,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -81636,13 +85121,14 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewRepliesInput = {
@@ -81653,9 +85139,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -81665,6 +85151,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -81672,6 +85159,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -81687,6 +85175,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -81705,6 +85195,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -81727,6 +85219,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -81743,13 +85236,14 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutReviewHelpfulMarksInput = {
@@ -81760,9 +85254,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -81772,6 +85266,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -81779,6 +85274,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -81810,6 +85306,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81828,6 +85326,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81856,6 +85356,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -81872,13 +85373,14 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewHelpfulMarksInput = {
@@ -81889,9 +85391,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -81901,6 +85403,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -81908,6 +85411,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -81918,6 +85422,8 @@ export namespace Prisma {
 
   export type CartCreateWithoutUserInput = {
     id?: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: CartItemCreateNestedManyWithoutCartInput
@@ -81925,6 +85431,8 @@ export namespace Prisma {
 
   export type CartUncheckedCreateWithoutUserInput = {
     id?: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: CartItemUncheckedCreateNestedManyWithoutCartInput
@@ -81947,6 +85455,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     shippingAddress?: AddressCreateNestedOneWithoutOrdersInput
@@ -81970,6 +85480,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -81996,6 +85508,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -82013,6 +85527,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -82035,6 +85551,8 @@ export namespace Prisma {
     id?: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     review: ProductReviewCreateNestedOneWithoutRepliesInput
@@ -82045,6 +85563,8 @@ export namespace Prisma {
     reviewId: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -82095,6 +85615,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderCreateNestedManyWithoutShippingAddressInput
@@ -82112,6 +85634,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderUncheckedCreateNestedManyWithoutShippingAddressInput
@@ -82137,6 +85661,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     links?: AffiliateLinkCreateNestedManyWithoutAffiliateInput
@@ -82153,6 +85679,8 @@ export namespace Prisma {
     bankAccount?: string | null
     bankName?: string | null
     accountHolder?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     links?: AffiliateLinkUncheckedCreateNestedManyWithoutAffiliateInput
@@ -82188,47 +85716,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MediaCreateWithoutUserAvatarsInput = {
+  export type UserAvatarCreateWithoutUserInput = {
     id?: string
-    url: string
-    key: string
-    filename: string
-    mimetype: string
-    size: number
-    type: $Enums.MediaType
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
-    productImages?: ProductImageCreateNestedManyWithoutMediaInput
-    reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    categories?: CategoryCreateNestedManyWithoutImageMediaInput
-    brands?: BrandCreateNestedManyWithoutLogoMediaInput
-    banners?: BannerCreateNestedManyWithoutImageMediaInput
+    media: MediaCreateNestedOneWithoutUserAvatarsInput
   }
 
-  export type MediaUncheckedCreateWithoutUserAvatarsInput = {
+  export type UserAvatarUncheckedCreateWithoutUserInput = {
     id?: string
-    url: string
-    key: string
-    filename: string
-    mimetype: string
-    size: number
-    type: $Enums.MediaType
-    uploadedById?: string | null
-    isDeleted?: boolean
+    mediaId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
-    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
-    brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
-    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
   }
 
-  export type MediaCreateOrConnectWithoutUserAvatarsInput = {
-    where: MediaWhereUniqueInput
-    create: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
+  export type UserAvatarCreateOrConnectWithoutUserInput = {
+    where: UserAvatarWhereUniqueInput
+    create: XOR<UserAvatarCreateWithoutUserInput, UserAvatarUncheckedCreateWithoutUserInput>
   }
 
   export type MediaCreateWithoutUploadedByInput = {
@@ -82240,14 +85744,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
-    userAvatars?: UserCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
     categories?: CategoryCreateNestedManyWithoutImageMediaInput
     brands?: BrandCreateNestedManyWithoutLogoMediaInput
     banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutUploadedByInput = {
@@ -82259,14 +85765,16 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
     reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
-    userAvatars?: UserUncheckedCreateNestedManyWithoutAvatarMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
     categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
     brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
     banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaCreateOrConnectWithoutUploadedByInput = {
@@ -82380,6 +85888,8 @@ export namespace Prisma {
   export type WishlistCreateWithoutUserInput = {
     id?: string
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutWishlistsInput
@@ -82391,6 +85901,8 @@ export namespace Prisma {
     productId: string
     variantId?: string | null
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -82411,6 +85923,8 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     expiresAt?: Date | string | null
     viewCount?: number
     createdAt?: Date | string
@@ -82423,6 +85937,8 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     expiresAt?: Date | string | null
     viewCount?: number
     createdAt?: Date | string
@@ -82439,6 +85955,53 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MediaCreateWithoutUsersInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
+    productImages?: ProductImageCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
+    userAvatars?: UserAvatarCreateNestedManyWithoutMediaInput
+    categories?: CategoryCreateNestedManyWithoutImageMediaInput
+    brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutUsersInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    uploadedById?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
+    userAvatars?: UserAvatarUncheckedCreateNestedManyWithoutMediaInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
+    brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+  }
+
+  export type MediaCreateOrConnectWithoutUsersInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutUsersInput, MediaUncheckedCreateWithoutUsersInput>
+  }
+
   export type CartUpsertWithoutUserInput = {
     update: XOR<CartUpdateWithoutUserInput, CartUncheckedUpdateWithoutUserInput>
     create: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
@@ -82452,6 +86015,8 @@ export namespace Prisma {
 
   export type CartUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: CartItemUpdateManyWithoutCartNestedInput
@@ -82459,6 +86024,8 @@ export namespace Prisma {
 
   export type CartUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: CartItemUncheckedUpdateManyWithoutCartNestedInput
@@ -82560,6 +86127,8 @@ export namespace Prisma {
     country?: StringFilter<"Address"> | string
     type?: EnumAddressTypeFilter<"Address"> | $Enums.AddressType
     isDefault?: BoolFilter<"Address"> | boolean
+    isDeleted?: BoolFilter<"Address"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Address"> | Date | string | null
     createdAt?: DateTimeFilter<"Address"> | Date | string
     updatedAt?: DateTimeFilter<"Address"> | Date | string
   }
@@ -82585,6 +86154,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     links?: AffiliateLinkUpdateManyWithoutAffiliateNestedInput
@@ -82601,6 +86172,8 @@ export namespace Prisma {
     bankAccount?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: NullableStringFieldUpdateOperationsInput | string | null
     accountHolder?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     links?: AffiliateLinkUncheckedUpdateManyWithoutAffiliateNestedInput
@@ -82634,53 +86207,29 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserRoleAssignment"> | Date | string
   }
 
-  export type MediaUpsertWithoutUserAvatarsInput = {
-    update: XOR<MediaUpdateWithoutUserAvatarsInput, MediaUncheckedUpdateWithoutUserAvatarsInput>
-    create: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
-    where?: MediaWhereInput
+  export type UserAvatarUpsertWithoutUserInput = {
+    update: XOR<UserAvatarUpdateWithoutUserInput, UserAvatarUncheckedUpdateWithoutUserInput>
+    create: XOR<UserAvatarCreateWithoutUserInput, UserAvatarUncheckedCreateWithoutUserInput>
+    where?: UserAvatarWhereInput
   }
 
-  export type MediaUpdateToOneWithWhereWithoutUserAvatarsInput = {
-    where?: MediaWhereInput
-    data: XOR<MediaUpdateWithoutUserAvatarsInput, MediaUncheckedUpdateWithoutUserAvatarsInput>
+  export type UserAvatarUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserAvatarWhereInput
+    data: XOR<UserAvatarUpdateWithoutUserInput, UserAvatarUncheckedUpdateWithoutUserInput>
   }
 
-  export type MediaUpdateWithoutUserAvatarsInput = {
+  export type UserAvatarUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    filename?: StringFieldUpdateOperationsInput | string
-    mimetype?: StringFieldUpdateOperationsInput | string
-    size?: IntFieldUpdateOperationsInput | number
-    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
-    productImages?: ProductImageUpdateManyWithoutMediaNestedInput
-    reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    categories?: CategoryUpdateManyWithoutImageMediaNestedInput
-    brands?: BrandUpdateManyWithoutLogoMediaNestedInput
-    banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    media?: MediaUpdateOneRequiredWithoutUserAvatarsNestedInput
   }
 
-  export type MediaUncheckedUpdateWithoutUserAvatarsInput = {
+  export type UserAvatarUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    filename?: StringFieldUpdateOperationsInput | string
-    mimetype?: StringFieldUpdateOperationsInput | string
-    size?: IntFieldUpdateOperationsInput | number
-    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
-    uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    mediaId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
-    reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
-    brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
-    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
   export type MediaUpsertWithWhereUniqueWithoutUploadedByInput = {
@@ -82712,6 +86261,7 @@ export namespace Prisma {
     type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
     uploadedById?: StringNullableFilter<"Media"> | string | null
     isDeleted?: BoolFilter<"Media"> | boolean
+    deletedAt?: DateTimeNullableFilter<"Media"> | Date | string | null
     createdAt?: DateTimeFilter<"Media"> | Date | string
     updatedAt?: DateTimeFilter<"Media"> | Date | string
   }
@@ -82820,10 +86370,329 @@ export namespace Prisma {
     title?: StringNullableFilter<"SharedWishlist"> | string | null
     description?: StringNullableFilter<"SharedWishlist"> | string | null
     isPublic?: BoolFilter<"SharedWishlist"> | boolean
+    isDeleted?: BoolFilter<"SharedWishlist"> | boolean
+    deletedAt?: DateTimeNullableFilter<"SharedWishlist"> | Date | string | null
     expiresAt?: DateTimeNullableFilter<"SharedWishlist"> | Date | string | null
     viewCount?: IntFilter<"SharedWishlist"> | number
     createdAt?: DateTimeFilter<"SharedWishlist"> | Date | string
     updatedAt?: DateTimeFilter<"SharedWishlist"> | Date | string
+  }
+
+  export type MediaUpsertWithoutUsersInput = {
+    update: XOR<MediaUpdateWithoutUsersInput, MediaUncheckedUpdateWithoutUsersInput>
+    create: XOR<MediaCreateWithoutUsersInput, MediaUncheckedCreateWithoutUsersInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutUsersInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutUsersInput, MediaUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type MediaUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
+    productImages?: ProductImageUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
+    categories?: CategoryUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+  }
+
+  export type UserCreateWithoutAvatarInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutAvatarInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAvatarInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
+  }
+
+  export type MediaCreateWithoutUserAvatarsInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    uploadedBy?: UserCreateNestedOneWithoutUploadedMediaInput
+    productImages?: ProductImageCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageCreateNestedManyWithoutMediaInput
+    categories?: CategoryCreateNestedManyWithoutImageMediaInput
+    brands?: BrandCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerCreateNestedManyWithoutImageMediaInput
+    users?: UserCreateNestedManyWithoutMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutUserAvatarsInput = {
+    id?: string
+    url: string
+    key: string
+    filename: string
+    mimetype: string
+    size: number
+    type: $Enums.MediaType
+    uploadedById?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productImages?: ProductImageUncheckedCreateNestedManyWithoutMediaInput
+    reviewImages?: ReviewImageUncheckedCreateNestedManyWithoutMediaInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutImageMediaInput
+    brands?: BrandUncheckedCreateNestedManyWithoutLogoMediaInput
+    banners?: BannerUncheckedCreateNestedManyWithoutImageMediaInput
+    users?: UserUncheckedCreateNestedManyWithoutMediaInput
+  }
+
+  export type MediaCreateOrConnectWithoutUserAvatarsInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
+  }
+
+  export type UserUpsertWithoutAvatarInput = {
+    update: XOR<UserUpdateWithoutAvatarInput, UserUncheckedUpdateWithoutAvatarInput>
+    create: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAvatarInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAvatarInput, UserUncheckedUpdateWithoutAvatarInput>
+  }
+
+  export type UserUpdateWithoutAvatarInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAvatarInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MediaUpsertWithoutUserAvatarsInput = {
+    update: XOR<MediaUpdateWithoutUserAvatarsInput, MediaUncheckedUpdateWithoutUserAvatarsInput>
+    create: XOR<MediaCreateWithoutUserAvatarsInput, MediaUncheckedCreateWithoutUserAvatarsInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutUserAvatarsInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutUserAvatarsInput, MediaUncheckedUpdateWithoutUserAvatarsInput>
+  }
+
+  export type MediaUpdateWithoutUserAvatarsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    uploadedBy?: UserUpdateOneWithoutUploadedMediaNestedInput
+    productImages?: ProductImageUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
+    categories?: CategoryUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutUserAvatarsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    mimetype?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    uploadedById?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
+    reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
+    banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type UserRoleAssignmentCreateWithoutRoleInput = {
@@ -82876,6 +86745,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -82892,13 +86762,14 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutRoleAssignmentsInput = {
@@ -82909,9 +86780,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -82921,6 +86792,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -82928,6 +86800,7 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -82946,6 +86819,8 @@ export namespace Prisma {
     name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    isDeleted?: boolean
   }
 
   export type UserRoleUncheckedCreateWithoutRoleAssignmentsInput = {
@@ -82953,6 +86828,8 @@ export namespace Prisma {
     name?: $Enums.RoleName
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    isDeleted?: boolean
   }
 
   export type UserRoleCreateOrConnectWithoutRoleAssignmentsInput = {
@@ -82981,6 +86858,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -82997,13 +86875,14 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleAssignmentsInput = {
@@ -83014,9 +86893,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -83026,6 +86905,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -83033,6 +86913,7 @@ export namespace Prisma {
     reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -83057,6 +86938,8 @@ export namespace Prisma {
     name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserRoleUncheckedUpdateWithoutRoleAssignmentsInput = {
@@ -83064,6 +86947,8 @@ export namespace Prisma {
     name?: EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserCreateWithoutWishlistsInput = {
@@ -83076,6 +86961,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -83093,12 +86979,13 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutWishlistsInput = {
@@ -83109,9 +86996,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -83121,6 +87008,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -83129,6 +87017,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -83152,6 +87041,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -83185,6 +87076,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -83220,6 +87113,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -83241,6 +87136,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory?: ProductInventoryUncheckedCreateNestedOneWithoutVariantInput
@@ -83276,6 +87173,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -83293,12 +87191,13 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWishlistsInput = {
@@ -83309,9 +87208,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -83321,6 +87220,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -83329,6 +87229,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -83358,6 +87259,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83391,6 +87294,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83432,6 +87337,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -83453,6 +87360,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -83472,6 +87381,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -83489,12 +87399,13 @@ export namespace Prisma {
     addresses?: AddressCreateNestedManyWithoutUserInput
     affiliate?: AffiliateCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
-    avatarMedia?: MediaCreateNestedOneWithoutUserAvatarsInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
     questions?: ProductQuestionCreateNestedManyWithoutUserInput
     answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutSharedWishlistsInput = {
@@ -83505,9 +87416,9 @@ export namespace Prisma {
     phone: string
     username: string
     password: string
-    avatarMediaId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     refreshToken?: string | null
     isActive?: boolean
     isVerified?: boolean
@@ -83517,6 +87428,7 @@ export namespace Prisma {
     isPhoneVerified?: boolean
     emailVerifiedAt?: Date | string | null
     phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
@@ -83525,6 +87437,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
     roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
     uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
     emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
     questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
@@ -83558,6 +87471,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -83575,12 +87489,13 @@ export namespace Prisma {
     addresses?: AddressUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    avatarMedia?: MediaUpdateOneWithoutUserAvatarsNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUpdateManyWithoutUserNestedInput
     answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSharedWishlistsInput = {
@@ -83591,9 +87506,9 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    avatarMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -83603,6 +87518,7 @@ export namespace Prisma {
     isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -83611,6 +87527,7 @@ export namespace Prisma {
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
     roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
     uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
     emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
     questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
@@ -83631,6 +87548,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -83647,6 +87566,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -83670,6 +87591,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -83692,6 +87615,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -83702,6 +87627,8 @@ export namespace Prisma {
     url: string
     clicks?: number
     conversions?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -83713,6 +87640,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -83723,6 +87652,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -83733,6 +87664,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -83743,6 +87676,8 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     clicks?: IntFieldUpdateOperationsInput | number
     conversions?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -83753,6 +87688,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutCommissionsNestedInput
@@ -83765,6 +87702,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -83776,6 +87715,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -83937,25 +87878,11 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type UserCreateManyAvatarMediaInput = {
+  export type UserAvatarCreateManyMediaInput = {
     id?: string
-    email: string
-    firstName: string
-    lastName: string
-    phone: string
-    username: string
-    password: string
+    userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    refreshToken?: string | null
-    isActive?: boolean
-    isVerified?: boolean
-    isBanned?: boolean
-    isDeleted?: boolean
-    isEmailVerified?: boolean
-    isPhoneVerified?: boolean
-    emailVerifiedAt?: Date | string | null
-    phoneVerifiedAt?: Date | string | null
   }
 
   export type CategoryCreateManyImageMediaInput = {
@@ -83965,6 +87892,8 @@ export namespace Prisma {
     description?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -83979,6 +87908,8 @@ export namespace Prisma {
     description?: string | null
     website?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -83997,8 +87928,32 @@ export namespace Prisma {
     gradientFrom?: string | null
     gradientTo?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type UserCreateManyMediaInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
   }
 
   export type ProductImageUpdateWithoutMediaInput = {
@@ -84052,95 +88007,25 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUpdateWithoutAvatarMediaInput = {
+  export type UserAvatarUpdateWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    isBanned?: BoolFieldUpdateOperationsInput | boolean
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cart?: CartUpdateOneWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
-    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
-    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
-    addresses?: AddressUpdateManyWithoutUserNestedInput
-    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
-    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
-    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
-    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
-    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
-    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
-    wishlists?: WishlistUpdateManyWithoutUserNestedInput
-    sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    user?: UserUpdateOneRequiredWithoutAvatarNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutAvatarMediaInput = {
+  export type UserAvatarUncheckedUpdateWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    isBanned?: BoolFieldUpdateOperationsInput | boolean
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
-    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
-    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
-    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
-    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
-    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
-    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
-    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
-    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
-    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
-    wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
-    sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateManyWithoutAvatarMediaInput = {
+  export type UserAvatarUncheckedUpdateManyWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    isBanned?: BoolFieldUpdateOperationsInput | boolean
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CategoryUpdateWithoutImageMediaInput = {
@@ -84149,6 +88034,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84166,6 +88053,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84182,6 +88071,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84196,6 +88087,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutBrandNestedInput
@@ -84209,6 +88102,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
@@ -84222,6 +88117,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     website?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84240,6 +88137,8 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groups?: BannerGroupMappingUpdateManyWithoutBannerNestedInput
@@ -84259,6 +88158,8 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     groups?: BannerGroupMappingUncheckedUpdateManyWithoutBannerNestedInput
@@ -84278,8 +88179,106 @@ export namespace Prisma {
     gradientFrom?: NullableStringFieldUpdateOperationsInput | string | null
     gradientTo?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CartItemCreateManyCartInput = {
@@ -84327,6 +88326,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -84338,6 +88339,8 @@ export namespace Prisma {
     transactionId?: string | null
     paymentData?: string | null
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -84349,6 +88352,8 @@ export namespace Prisma {
     rate: Decimal | DecimalJsLike | number | string
     status?: string
     paidAt?: Date | string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -84360,6 +88365,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutOrderItemsNestedInput
     variant?: ProductVariantUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -84374,6 +88381,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -84386,6 +88395,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -84397,6 +88408,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84409,6 +88422,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84421,6 +88436,8 @@ export namespace Prisma {
     transactionId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentData?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84431,6 +88448,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     affiliate?: AffiliateUpdateOneRequiredWithoutCommissionsNestedInput
@@ -84443,6 +88462,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84454,6 +88475,8 @@ export namespace Prisma {
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: StringFieldUpdateOperationsInput | string
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84465,6 +88488,8 @@ export namespace Prisma {
     description?: string | null
     imageMediaId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -84484,6 +88509,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84501,6 +88528,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84517,6 +88546,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84553,6 +88584,8 @@ export namespace Prisma {
     comparePrice?: Decimal | DecimalJsLike | number | string | null
     isActive?: boolean
     isFeatured?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
@@ -84568,6 +88601,8 @@ export namespace Prisma {
     imageMediaId?: string | null
     parentId?: string | null
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -84585,6 +88620,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84617,6 +88654,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84649,6 +88688,8 @@ export namespace Prisma {
     comparePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84662,6 +88703,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84680,6 +88723,8 @@ export namespace Prisma {
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84696,6 +88741,8 @@ export namespace Prisma {
     imageMediaId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84723,6 +88770,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     displayType?: $Enums.VariantDisplayType
     sortOrder?: number
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -84745,6 +88794,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -84759,6 +88810,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -84782,6 +88835,8 @@ export namespace Prisma {
     categoryId?: string | null
     rate: Decimal | DecimalJsLike | number | string
     isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -84835,6 +88890,8 @@ export namespace Prisma {
     userId: string
     variantId?: string | null
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -84882,6 +88939,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUpdateOneWithoutVariantNestedInput
@@ -84902,6 +88961,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: ProductInventoryUncheckedUpdateOneWithoutVariantNestedInput
@@ -84922,6 +88983,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     displayType?: EnumVariantDisplayTypeFieldUpdateOperationsInput | $Enums.VariantDisplayType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -84963,6 +89026,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84980,6 +89045,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84996,6 +89063,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85008,6 +89077,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
     variant?: ProductVariantUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -85022,6 +89093,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -85034,6 +89107,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -85087,6 +89162,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85096,6 +89173,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85105,6 +89184,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     rate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85244,6 +89325,8 @@ export namespace Prisma {
   export type WishlistUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutWishlistsNestedInput
@@ -85255,6 +89338,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     variantId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85264,6 +89349,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     variantId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85287,6 +89374,8 @@ export namespace Prisma {
     price: Decimal | DecimalJsLike | number | string
     quantity?: number
     total: Decimal | DecimalJsLike | number | string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -85319,6 +89408,8 @@ export namespace Prisma {
     userId: string
     productId: string
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85360,6 +89451,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
     product?: ProductUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -85374,6 +89467,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -85386,6 +89481,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     quantity?: IntFieldUpdateOperationsInput | number
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -85464,6 +89561,8 @@ export namespace Prisma {
   export type WishlistUpdateWithoutVariantInput = {
     id?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutWishlistsNestedInput
@@ -85475,6 +89574,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85484,6 +89585,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85552,6 +89655,8 @@ export namespace Prisma {
     userId: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85588,6 +89693,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewRepliesNestedInput
@@ -85598,6 +89705,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85607,6 +89716,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85645,6 +89756,8 @@ export namespace Prisma {
     affiliateCode?: string | null
     couponCode?: string | null
     notes?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85657,6 +89770,8 @@ export namespace Prisma {
     comment?: string | null
     isVerified?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     helpfulCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -85667,6 +89782,8 @@ export namespace Prisma {
     reviewId: string
     content: string
     isAdmin?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85690,6 +89807,8 @@ export namespace Prisma {
     country?: string
     type?: $Enums.AddressType
     isDefault?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85710,6 +89829,7 @@ export namespace Prisma {
     size: number
     type: $Enums.MediaType
     isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85753,6 +89873,8 @@ export namespace Prisma {
     productId: string
     variantId?: string | null
     note?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85763,6 +89885,8 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     expiresAt?: Date | string | null
     viewCount?: number
     createdAt?: Date | string
@@ -85781,6 +89905,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     shippingAddress?: AddressUpdateOneWithoutOrdersNestedInput
@@ -85804,6 +89930,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -85826,6 +89954,8 @@ export namespace Prisma {
     affiliateCode?: NullableStringFieldUpdateOperationsInput | string | null
     couponCode?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85837,6 +89967,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85854,6 +89986,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85870,6 +90004,8 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     helpfulCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85879,6 +90015,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     review?: ProductReviewUpdateOneRequiredWithoutRepliesNestedInput
@@ -85889,6 +90027,8 @@ export namespace Prisma {
     reviewId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85898,6 +90038,8 @@ export namespace Prisma {
     reviewId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85935,6 +90077,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUpdateManyWithoutShippingAddressNestedInput
@@ -85952,6 +90096,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUncheckedUpdateManyWithoutShippingAddressNestedInput
@@ -85969,6 +90115,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     type?: EnumAddressTypeFieldUpdateOperationsInput | $Enums.AddressType
     isDefault?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86003,14 +90151,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUpdateManyWithoutMediaNestedInput
     categories?: CategoryUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUpdateManyWithoutImageMediaNestedInput
+    users?: UserUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutUploadedByInput = {
@@ -86022,14 +90172,16 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productImages?: ProductImageUncheckedUpdateManyWithoutMediaNestedInput
     reviewImages?: ReviewImageUncheckedUpdateManyWithoutMediaNestedInput
-    userAvatars?: UserUncheckedUpdateManyWithoutAvatarMediaNestedInput
+    userAvatars?: UserAvatarUncheckedUpdateManyWithoutMediaNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutImageMediaNestedInput
     brands?: BrandUncheckedUpdateManyWithoutLogoMediaNestedInput
     banners?: BannerUncheckedUpdateManyWithoutImageMediaNestedInput
+    users?: UserUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateManyWithoutUploadedByInput = {
@@ -86041,6 +90193,7 @@ export namespace Prisma {
     size?: IntFieldUpdateOperationsInput | number
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86150,6 +90303,8 @@ export namespace Prisma {
   export type WishlistUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutWishlistsNestedInput
@@ -86161,6 +90316,8 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     variantId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86170,6 +90327,8 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     variantId?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86180,6 +90339,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86192,6 +90353,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86204,6 +90367,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

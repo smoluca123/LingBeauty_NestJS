@@ -133,6 +133,8 @@ exports.Prisma.AddressScalarFieldEnum = {
   country: 'country',
   type: 'type',
   isDefault: 'isDefault',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -168,6 +170,8 @@ exports.Prisma.AffiliateScalarFieldEnum = {
   bankAccount: 'bankAccount',
   bankName: 'bankName',
   accountHolder: 'accountHolder',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -179,6 +183,8 @@ exports.Prisma.AffiliateLinkScalarFieldEnum = {
   url: 'url',
   clicks: 'clicks',
   conversions: 'conversions',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -191,6 +197,8 @@ exports.Prisma.AffiliateCommissionScalarFieldEnum = {
   rate: 'rate',
   status: 'status',
   paidAt: 'paidAt',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -201,6 +209,8 @@ exports.Prisma.CommissionRateScalarFieldEnum = {
   categoryId: 'categoryId',
   rate: 'rate',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -211,6 +221,8 @@ exports.Prisma.BannerGroupScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   startDate: 'startDate',
   endDate: 'endDate',
   createdAt: 'createdAt',
@@ -232,6 +244,8 @@ exports.Prisma.BannerScalarFieldEnum = {
   gradientTo: 'gradientTo',
   imageMediaId: 'imageMediaId',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -265,6 +279,8 @@ exports.Prisma.FlashSaleScalarFieldEnum = {
   endTime: 'endTime',
   status: 'status',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -303,6 +319,7 @@ exports.Prisma.MediaScalarFieldEnum = {
   type: 'type',
   uploadedById: 'uploadedById',
   isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -310,6 +327,8 @@ exports.Prisma.MediaScalarFieldEnum = {
 exports.Prisma.CartScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -338,6 +357,8 @@ exports.Prisma.OrderScalarFieldEnum = {
   affiliateCode: 'affiliateCode',
   couponCode: 'couponCode',
   notes: 'notes',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -352,6 +373,8 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   price: 'price',
   quantity: 'quantity',
   total: 'total',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt'
 };
 
@@ -364,6 +387,8 @@ exports.Prisma.PaymentScalarFieldEnum = {
   transactionId: 'transactionId',
   paymentData: 'paymentData',
   paidAt: 'paidAt',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -389,6 +414,8 @@ exports.Prisma.CategoryScalarFieldEnum = {
   imageMediaId: 'imageMediaId',
   parentId: 'parentId',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -404,6 +431,8 @@ exports.Prisma.BrandScalarFieldEnum = {
   logoMediaId: 'logoMediaId',
   website: 'website',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -420,6 +449,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   comparePrice: 'comparePrice',
   isActive: 'isActive',
   isFeatured: 'isFeatured',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   weight: 'weight',
   metaTitle: 'metaTitle',
   metaDesc: 'metaDesc',
@@ -450,6 +481,8 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   price: 'price',
   displayType: 'displayType',
   sortOrder: 'sortOrder',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -508,6 +541,8 @@ exports.Prisma.PromotionScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -531,6 +566,8 @@ exports.Prisma.CouponScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -552,6 +589,8 @@ exports.Prisma.ProductReviewScalarFieldEnum = {
   comment: 'comment',
   isVerified: 'isVerified',
   isApproved: 'isApproved',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   helpfulCount: 'helpfulCount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -571,6 +610,8 @@ exports.Prisma.ReviewReplyScalarFieldEnum = {
   userId: 'userId',
   content: 'content',
   isAdmin: 'isAdmin',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -599,9 +640,9 @@ exports.Prisma.UserScalarFieldEnum = {
   phone: 'phone',
   username: 'username',
   password: 'password',
-  avatarMediaId: 'avatarMediaId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
   refreshToken: 'refreshToken',
   isActive: 'isActive',
   isVerified: 'isVerified',
@@ -610,14 +651,25 @@ exports.Prisma.UserScalarFieldEnum = {
   isEmailVerified: 'isEmailVerified',
   isPhoneVerified: 'isPhoneVerified',
   emailVerifiedAt: 'emailVerifiedAt',
-  phoneVerifiedAt: 'phoneVerifiedAt'
+  phoneVerifiedAt: 'phoneVerifiedAt',
+  mediaId: 'mediaId'
+};
+
+exports.Prisma.UserAvatarScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mediaId: 'mediaId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.UserRoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isDeleted: 'isDeleted'
 };
 
 exports.Prisma.UserRoleAssignmentScalarFieldEnum = {
@@ -634,6 +686,8 @@ exports.Prisma.WishlistScalarFieldEnum = {
   productId: 'productId',
   variantId: 'variantId',
   note: 'note',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -645,6 +699,8 @@ exports.Prisma.SharedWishlistScalarFieldEnum = {
   title: 'title',
   description: 'description',
   isPublic: 'isPublic',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   expiresAt: 'expiresAt',
   viewCount: 'viewCount',
   createdAt: 'createdAt',
@@ -827,6 +883,7 @@ exports.Prisma.ModelName = {
   ReviewHelpful: 'ReviewHelpful',
   AuthCode: 'AuthCode',
   User: 'User',
+  UserAvatar: 'UserAvatar',
   UserRole: 'UserRole',
   UserRoleAssignment: 'UserRoleAssignment',
   Wishlist: 'Wishlist',

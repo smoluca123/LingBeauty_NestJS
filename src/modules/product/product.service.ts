@@ -58,6 +58,10 @@ import {
 import { FilterCategoryResponseDto } from './dto/filter-category-response.dto';
 import { ProductStatsResponseDto } from './dto/product-stats-response.dto';
 import sanitizeHtml from 'sanitize-html';
+import {
+  softDeleteData,
+  withoutDeleted,
+} from 'src/libs/prisma/soft-delete.helpers';
 
 export interface GetProductsParams {
   page?: number;
@@ -171,7 +175,9 @@ export class ProductService {
     IBeforeTransformPaginationResponseType<ProductResponseDto>
   > {
     try {
-      const whereQuery = this.buildProductWhereQuery(filterParams);
+      const whereQuery = withoutDeleted(
+        this.buildProductWhereQuery(filterParams),
+      );
 
       const [products, totalCount] = await Promise.all([
         this.prismaService.product.findMany({
@@ -1394,8 +1400,10 @@ export class ProductService {
         );
       }
 
-      await this.prismaService.product.delete({
+      await this.prismaService.product.update({
         where: { id: productId },
+        data: softDeleteData(),
+        select: productSelect,
       });
 
       const productResponse = this.mapProductEntity(existing);
@@ -1406,6 +1414,7 @@ export class ProductService {
         data: productResponse,
       };
     } catch (error) {
+      console.log(error);
       if (error instanceof BusinessException) {
         throw error;
       }

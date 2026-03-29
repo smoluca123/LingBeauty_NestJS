@@ -24,6 +24,10 @@ import {
   toResponseDto,
   toResponseDtoArray,
 } from 'src/libs/utils/transform.utils';
+import {
+  softDeleteData,
+  withoutDeleted,
+} from 'src/libs/prisma/soft-delete.helpers';
 
 @Injectable()
 export class WishlistService {
@@ -57,14 +61,14 @@ export class WishlistService {
 
       const [items, totalCount] = await Promise.all([
         this.prismaService.wishlist.findMany({
-          where: { userId },
+          where: withoutDeleted({ userId }),
           select: wishlistItemSelect,
           orderBy: { createdAt: 'desc' },
           skip,
           take: limit,
         }),
         this.prismaService.wishlist.count({
-          where: { userId },
+          where: withoutDeleted({ userId }),
         }),
       ]);
 
@@ -103,7 +107,7 @@ export class WishlistService {
     try {
       // Validate product exists and is active
       const product = await this.prismaService.product.findFirst({
-        where: { id: dto.productId, isActive: true },
+        where: withoutDeleted({ id: dto.productId, isActive: true }),
         select: { id: true },
       });
 
@@ -117,7 +121,10 @@ export class WishlistService {
       // If variantId provided, validate it
       if (dto.variantId) {
         const variant = await this.prismaService.productVariant.findFirst({
-          where: { id: dto.variantId, productId: dto.productId },
+          where: withoutDeleted({
+            id: dto.variantId,
+            productId: dto.productId,
+          }),
           select: { id: true },
         });
 
@@ -131,11 +138,11 @@ export class WishlistService {
 
       // Check if already in wishlist
       const existing = await this.prismaService.wishlist.findFirst({
-        where: {
+        where: withoutDeleted({
           userId,
           productId: dto.productId,
           variantId: dto.variantId ?? null,
-        },
+        }),
         select: { id: true },
       });
 
@@ -184,9 +191,9 @@ export class WishlistService {
     dto: UpdateWishlistItemDto,
   ): Promise<IBeforeTransformResponseType<WishlistItemResponseDto>> {
     try {
-      // Verify item belongs to user
+      // Verify item belongs to user and not deleted
       const item = await this.prismaService.wishlist.findFirst({
-        where: { id: itemId, userId },
+        where: withoutDeleted({ id: itemId, userId }),
         select: { id: true },
       });
 
@@ -221,16 +228,16 @@ export class WishlistService {
   }
 
   /**
-   * Remove item from wishlist
+   * Remove item from wishlist (soft delete)
    */
   async removeFromWishlist(
     userId: string,
     itemId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      // Verify item belongs to user
+      // Verify item belongs to user and not already deleted
       const item = await this.prismaService.wishlist.findFirst({
-        where: { id: itemId, userId },
+        where: withoutDeleted({ id: itemId, userId }),
         select: { id: true },
       });
 
@@ -241,8 +248,10 @@ export class WishlistService {
         );
       }
 
-      await this.prismaService.wishlist.delete({
+      // Soft delete
+      await this.prismaService.wishlist.update({
         where: { id: itemId },
+        data: softDeleteData(),
       });
 
       return {
@@ -261,14 +270,16 @@ export class WishlistService {
   }
 
   /**
-   * Clear entire wishlist
+   * Clear entire wishlist (soft delete all items)
    */
   async clearWishlist(
     userId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      await this.prismaService.wishlist.deleteMany({
-        where: { userId },
+      // Soft delete all wishlist items
+      await this.prismaService.wishlist.updateMany({
+        where: withoutDeleted({ userId }),
+        data: softDeleteData(),
       });
 
       return {
@@ -295,7 +306,7 @@ export class WishlistService {
     try {
       // Get wishlist item
       const wishlistItem = await this.prismaService.wishlist.findFirst({
-        where: { id: dto.wishlistItemId, userId },
+        where: withoutDeleted({ id: dto.wishlistItemId, userId }),
         select: {
           id: true,
           productId: true,
@@ -311,8 +322,8 @@ export class WishlistService {
       }
 
       // Get or create cart
-      let cart = await this.prismaService.cart.findUnique({
-        where: { userId },
+      let cart = await this.prismaService.cart.findFirst({
+        where: withoutDeleted({ userId }),
         select: { id: true },
       });
 
@@ -352,9 +363,10 @@ export class WishlistService {
         });
       }
 
-      // Remove from wishlist
-      await this.prismaService.wishlist.delete({
+      // Remove from wishlist (soft delete)
+      await this.prismaService.wishlist.update({
         where: { id: dto.wishlistItemId },
+        data: softDeleteData(),
       });
 
       return {
@@ -429,12 +441,10 @@ export class WishlistService {
     query: GetWishlistDto,
   ): Promise<IBeforeTransformResponseType<SharedWishlistDetailDto>> {
     try {
-      const sharedWishlist = await this.prismaService.sharedWishlist.findUnique(
-        {
-          where: { shareToken },
-          select: sharedWishlistSelect,
-        },
-      );
+      const sharedWishlist = await this.prismaService.sharedWishlist.findFirst({
+        where: withoutDeleted({ shareToken }),
+        select: sharedWishlistSelect,
+      });
 
       if (!sharedWishlist) {
         throw new BusinessException(
@@ -464,14 +474,14 @@ export class WishlistService {
       // Get wishlist items with pagination
       const [items, totalCount] = await Promise.all([
         this.prismaService.wishlist.findMany({
-          where: { userId: sharedWishlist.userId },
+          where: withoutDeleted({ userId: sharedWishlist.userId }),
           select: wishlistItemSelect,
           orderBy: { createdAt: 'desc' },
           skip,
           take: limit,
         }),
         this.prismaService.wishlist.count({
-          where: { userId: sharedWishlist.userId },
+          where: withoutDeleted({ userId: sharedWishlist.userId }),
         }),
       ]);
 
@@ -520,7 +530,7 @@ export class WishlistService {
   ): Promise<IBeforeTransformResponseType<SharedWishlistResponseDto[]>> {
     try {
       const sharedWishlists = await this.prismaService.sharedWishlist.findMany({
-        where: { userId },
+        where: withoutDeleted({ userId }),
         select: sharedWishlistSelect,
         orderBy: { createdAt: 'desc' },
       });
@@ -554,16 +564,16 @@ export class WishlistService {
   }
 
   /**
-   * Delete shared wishlist
+   * Delete shared wishlist (soft delete)
    */
   async deleteSharedWishlist(
     userId: string,
     sharedWishlistId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      // Verify ownership
+      // Verify ownership and not already deleted
       const sharedWishlist = await this.prismaService.sharedWishlist.findFirst({
-        where: { id: sharedWishlistId, userId },
+        where: withoutDeleted({ id: sharedWishlistId, userId }),
         select: { id: true },
       });
 
@@ -574,8 +584,10 @@ export class WishlistService {
         );
       }
 
-      await this.prismaService.sharedWishlist.delete({
+      // Soft delete
+      await this.prismaService.sharedWishlist.update({
         where: { id: sharedWishlistId },
+        data: softDeleteData(),
       });
 
       return {
@@ -608,11 +620,11 @@ export class WishlistService {
   > {
     try {
       const wishlistItem = await this.prismaService.wishlist.findFirst({
-        where: {
+        where: withoutDeleted({
           userId,
           productId,
           variantId: variantId ?? null,
-        },
+        }),
         select: { id: true },
       });
 

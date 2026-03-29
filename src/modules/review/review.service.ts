@@ -7,6 +7,10 @@ import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
+import {
+  softDeleteData,
+  withoutDeleted,
+} from 'src/libs/prisma/soft-delete.helpers';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { StorageService } from 'src/modules/storage/storage.service';
 import { ProductStatsService } from 'src/modules/product/product-stats.service';
@@ -424,8 +428,8 @@ export class ReviewService {
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     let productIdToSync: string | null = null;
     try {
-      const existingReview = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      const existingReview = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, userId: true, productId: true },
       });
 
@@ -445,8 +449,10 @@ export class ReviewService {
 
       productIdToSync = existingReview.productId;
 
-      await this.prismaService.productReview.delete({
+      // Soft delete
+      await this.prismaService.productReview.update({
         where: { id: reviewId },
+        data: softDeleteData(),
       });
 
       return {
@@ -1419,8 +1425,8 @@ export class ReviewService {
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
       // Check if reply exists and belongs to user
-      const existingReply = await this.prismaService.reviewReply.findUnique({
-        where: { id: replyId },
+      const existingReply = await this.prismaService.reviewReply.findFirst({
+        where: withoutDeleted({ id: replyId }),
         select: { id: true, userId: true },
       });
 
@@ -1438,8 +1444,10 @@ export class ReviewService {
         );
       }
 
-      await this.prismaService.reviewReply.delete({
+      // Soft delete
+      await this.prismaService.reviewReply.update({
         where: { id: replyId },
+        data: softDeleteData(),
       });
 
       return {
@@ -1631,9 +1639,9 @@ export class ReviewService {
     reviewId: string,
   ): Promise<IBeforeTransformResponseType<{ message: string }>> {
     try {
-      // Check if review exists
-      const existingReview = await this.prismaService.productReview.findUnique({
-        where: { id: reviewId },
+      // Check if review exists and not already deleted
+      const existingReview = await this.prismaService.productReview.findFirst({
+        where: withoutDeleted({ id: reviewId }),
         select: { id: true, productId: true },
       });
 
@@ -1644,8 +1652,10 @@ export class ReviewService {
         );
       }
 
-      await this.prismaService.productReview.delete({
+      // Soft delete
+      await this.prismaService.productReview.update({
         where: { id: reviewId },
+        data: softDeleteData(),
       });
 
       // Sync product stats after deletion
