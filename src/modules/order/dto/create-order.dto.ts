@@ -17,7 +17,7 @@ export class CreateOrderItemDto {
   @IsUUID()
   @IsNotEmpty()
   @ApiProperty({ example: 'uuid-product-id', description: 'ID sản phẩm' })
-  productId: string;
+  productId!: string;
 
   @IsUUID()
   @IsNotEmpty()
@@ -25,12 +25,12 @@ export class CreateOrderItemDto {
     example: 'uuid-variant-id',
     description: 'ID biến thể sản phẩm',
   })
-  variantId: string;
+  variantId!: string;
 
   @IsNumber()
   @Min(1)
   @ApiProperty({ example: 2, description: 'Số lượng' })
-  quantity: number;
+  quantity!: number;
 }
 
 export class CreateOrderDto {
@@ -40,7 +40,7 @@ export class CreateOrderDto {
     example: 'uuid-address-id',
     description: 'ID địa chỉ giao hàng',
   })
-  shippingAddressId: string;
+  shippingAddressId!: string;
 
   @IsArray()
   @ValidateNested({ each: true })
@@ -49,7 +49,7 @@ export class CreateOrderDto {
     type: [CreateOrderItemDto],
     description: 'Danh sách sản phẩm trong đơn hàng',
   })
-  items: CreateOrderItemDto[];
+  items!: CreateOrderItemDto[];
 
   @IsEnum(PaymentMethod)
   @IsNotEmpty()
@@ -58,7 +58,7 @@ export class CreateOrderDto {
     example: PaymentMethod.COD,
     description: 'Phương thức thanh toán',
   })
-  paymentMethod: PaymentMethod;
+  paymentMethod!: PaymentMethod;
 
   @IsString()
   @IsOptional()
