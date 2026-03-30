@@ -999,14 +999,14 @@ export class ProductService {
           metaTitle: createProductDto.metaTitle,
           metaDesc: createProductDto.metaDesc,
           variants: {
-            create: variantsToCreate.map((variant) => ({
+            create: variantsToCreate.map((variant, index) => ({
               sku: variant.sku || generateSkuCode(),
               name: variant.name,
               color: variant.color,
               size: variant.size,
               type: variant.type,
               price: variant.price,
-              sortOrder: variant.sortOrder ?? 0,
+              sortOrder: variant.sortOrder ?? index,
             })),
           },
         },
@@ -1221,14 +1221,14 @@ export class ProductService {
           }
 
           updateData.variants = {
-            create: updateProductDto.variants.map((variant) => ({
+            create: updateProductDto.variants.map((variant, index) => ({
               sku: variant.sku!,
               name: variant.name!,
               color: variant.color,
               size: variant.size,
               type: variant.type,
               price: variant.price!,
-              sortOrder: variant.sortOrder ?? 0,
+              sortOrder: variant.sortOrder ?? index,
             })),
           };
 
@@ -1998,6 +1998,14 @@ export class ProductService {
         );
       }
 
+      // Get the current max sortOrder for this product's variants
+      const maxSortOrder = await this.prismaService.productVariant.aggregate({
+        where: { productId, isDeleted: false },
+        _max: { sortOrder: true },
+      });
+
+      const nextSortOrder = (maxSortOrder._max.sortOrder ?? -1) + 1;
+
       const processedData = await processDataObject(dto);
       const { quantity, lowStockThreshold, ...data } = processedData;
 
@@ -2007,6 +2015,7 @@ export class ProductService {
           ...data,
           sku: productSku,
           price: data.price || product.basePrice,
+          sortOrder: data.sortOrder ?? nextSortOrder,
           inventory: {
             create: {
               productId,

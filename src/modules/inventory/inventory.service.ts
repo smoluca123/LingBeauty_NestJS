@@ -4,6 +4,7 @@ import { PrismaService } from 'src/services/prisma/prisma.service';
 import { BusinessException } from 'src/exceptions/business.exception';
 import { ERROR_CODES } from 'src/constants/error-codes';
 import { ERROR_MESSAGES } from 'src/constants/error-messages';
+import { withoutDeleted } from 'src/libs/prisma/soft-delete.helpers';
 import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
@@ -18,11 +19,6 @@ import { UpdateInventoryDto } from './dto/update-inventory.dto';
 import { AdjustInventoryDto } from './dto/adjust-inventory.dto';
 import { BulkAdjustInventoryDto } from './dto/bulk-adjust-inventory.dto';
 import { InventoryListQueryDto } from './dto/inventory-list-query.dto';
-import {
-  productInventorySelect,
-  productSummarySelect,
-  variantSummarySelect,
-} from 'src/libs/prisma/product-select';
 import { toResponseDtoArray } from 'src/libs/utils/transform.utils';
 import {
   inventoryFullSelect,
@@ -59,10 +55,10 @@ export class InventoryService {
     try {
       // Find default variant (prioritize -DEFAULT suffix, then first by sortOrder)
       const defaultVariant = await this.prismaService.productVariant.findFirst({
-        where: {
+        where: withoutDeleted({
           productId,
           OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
-        },
+        }),
         orderBy: [
           { sku: 'asc' }, // Prioritize -DEFAULT suffix
           { sortOrder: 'asc' },
@@ -117,10 +113,10 @@ export class InventoryService {
     try {
       // Find default variant
       const defaultVariant = await this.prismaService.productVariant.findFirst({
-        where: {
+        where: withoutDeleted({
           productId,
           OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
-        },
+        }),
         orderBy: [{ sku: 'asc' }, { sortOrder: 'asc' }],
         select: { id: true },
       });
@@ -189,10 +185,10 @@ export class InventoryService {
     try {
       // Find default variant
       const defaultVariant = await this.prismaService.productVariant.findFirst({
-        where: {
+        where: withoutDeleted({
           productId,
           OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
-        },
+        }),
         orderBy: [{ sku: 'asc' }, { sortOrder: 'asc' }],
         select: { id: true },
       });
@@ -263,7 +259,7 @@ export class InventoryService {
   ): Promise<IBeforeTransformResponseType<InventoryVariantResponseDto>> {
     try {
       const variant = await this.prismaService.productVariant.findFirst({
-        where: { id: variantId, productId },
+        where: withoutDeleted({ id: variantId, productId }),
         select: { id: true },
       });
 
@@ -310,7 +306,7 @@ export class InventoryService {
   ): Promise<IBeforeTransformResponseType<InventoryVariantResponseDto>> {
     try {
       const variant = await this.prismaService.productVariant.findFirst({
-        where: { id: variantId, productId },
+        where: withoutDeleted({ id: variantId, productId }),
         select: { id: true },
       });
 
@@ -375,7 +371,7 @@ export class InventoryService {
   ): Promise<IBeforeTransformResponseType<InventoryVariantResponseDto>> {
     try {
       const variant = await this.prismaService.productVariant.findFirst({
-        where: { id: variantId, productId },
+        where: withoutDeleted({ id: variantId, productId }),
         select: { id: true },
       });
 
@@ -442,14 +438,22 @@ export class InventoryService {
     try {
       const [totalProducts, totalVariants, statusGroups, totalQuantityResult] =
         await Promise.all([
-          this.prismaService.product.count(),
-          this.prismaService.productVariant.count(),
+          this.prismaService.product.count({ where: withoutDeleted() }),
+          this.prismaService.productVariant.count({ where: withoutDeleted() }),
           this.prismaService.productInventory.groupBy({
             by: ['displayStatus'],
             _count: { id: true },
+            where: {
+              product: { isDeleted: false },
+              variant: { isDeleted: false },
+            },
           }),
           this.prismaService.productInventory.aggregate({
             _sum: { quantity: true },
+            where: {
+              product: { isDeleted: false },
+              variant: { isDeleted: false },
+            },
           }),
         ]);
 
@@ -464,8 +468,13 @@ export class InventoryService {
         { count: bigint }[]
       >`
         SELECT COUNT(*)::int as count
-        FROM product_inventory
-        WHERE quantity > 0 AND quantity <= low_stock_threshold
+        FROM product_inventory pi
+        INNER JOIN products p ON pi.product_id = p.id
+        INNER JOIN product_variants pv ON pi.variant_id = pv.id
+        WHERE pi.quantity > 0 
+          AND pi.quantity <= pi.low_stock_threshold
+          AND p.is_deleted = false
+          AND pv.is_deleted = false
       `;
 
       const overview: InventoryOverviewResponseDto = {
@@ -508,11 +517,16 @@ export class InventoryService {
       // Build dynamic where clause for default variants
       const where = {
         variant: {
+          isDeleted: false,
           OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
+        },
+        product: {
+          isDeleted: false,
         },
         ...(status && { displayStatus: status }),
         ...(search && {
           product: {
+            isDeleted: false,
             OR: [
               { name: { contains: search, mode: 'insensitive' as const } },
               { sku: { contains: search, mode: 'insensitive' as const } },
@@ -571,11 +585,14 @@ export class InventoryService {
       // Build dynamic where clause
       const where = {
         variantId: { not: null as string | null },
+        product: { isDeleted: false },
+        variant: { isDeleted: false },
         ...(status && { displayStatus: status }),
         ...(search && {
           OR: [
             {
               product: {
+                isDeleted: false,
                 OR: [
                   { name: { contains: search, mode: 'insensitive' as const } },
                   { sku: { contains: search, mode: 'insensitive' as const } },
@@ -584,6 +601,7 @@ export class InventoryService {
             },
             {
               variant: {
+                isDeleted: false,
                 OR: [
                   { name: { contains: search, mode: 'insensitive' as const } },
                   { sku: { contains: search, mode: 'insensitive' as const } },
@@ -650,9 +668,12 @@ export class InventoryService {
           SELECT pi.id
           FROM product_inventory pi
           INNER JOIN product_variants pv ON pi.variant_id = pv.id
+          INNER JOIN products p ON pi.product_id = p.id
           WHERE (pv.sku LIKE '%-DEFAULT' OR pv.sort_order = 0)
             AND pi.quantity > 0
             AND pi.quantity <= pi.low_stock_threshold
+            AND p.is_deleted = false
+            AND pv.is_deleted = false
           ORDER BY pi.quantity ASC
           LIMIT ${limit} OFFSET ${skip}
         `,
@@ -660,9 +681,12 @@ export class InventoryService {
           SELECT COUNT(*)::int as count
           FROM product_inventory pi
           INNER JOIN product_variants pv ON pi.variant_id = pv.id
+          INNER JOIN products p ON pi.product_id = p.id
           WHERE (pv.sku LIKE '%-DEFAULT' OR pv.sort_order = 0)
             AND pi.quantity > 0
             AND pi.quantity <= pi.low_stock_threshold
+            AND p.is_deleted = false
+            AND pv.is_deleted = false
         `,
       ]);
 
@@ -716,20 +740,28 @@ export class InventoryService {
       // Step 1: Get matching IDs and total count via raw SQL (column-to-column comparison)
       const [idRows, totalCount] = await Promise.all([
         this.prismaService.$queryRaw<{ id: string }[]>`
-          SELECT id
-          FROM product_inventory
-          WHERE variant_id IS NOT NULL
-            AND quantity > 0
-            AND quantity <= low_stock_threshold
-          ORDER BY quantity ASC
+          SELECT pi.id
+          FROM product_inventory pi
+          INNER JOIN products p ON pi.product_id = p.id
+          INNER JOIN product_variants pv ON pi.variant_id = pv.id
+          WHERE pi.variant_id IS NOT NULL
+            AND pi.quantity > 0
+            AND pi.quantity <= pi.low_stock_threshold
+            AND p.is_deleted = false
+            AND pv.is_deleted = false
+          ORDER BY pi.quantity ASC
           LIMIT ${limit} OFFSET ${skip}
         `,
         this.prismaService.$queryRaw<{ count: bigint }[]>`
           SELECT COUNT(*)::int as count
-          FROM product_inventory
-          WHERE variant_id IS NOT NULL
-            AND quantity > 0
-            AND quantity <= low_stock_threshold
+          FROM product_inventory pi
+          INNER JOIN products p ON pi.product_id = p.id
+          INNER JOIN product_variants pv ON pi.variant_id = pv.id
+          WHERE pi.variant_id IS NOT NULL
+            AND pi.quantity > 0
+            AND pi.quantity <= pi.low_stock_threshold
+            AND p.is_deleted = false
+            AND pv.is_deleted = false
         `,
       ]);
 
@@ -781,7 +813,9 @@ export class InventoryService {
       // Query default variants that are out of stock
       const where = {
         displayStatus: ProductInventoryDisplayStatus.OUT_OF_STOCK,
+        product: { isDeleted: false },
         variant: {
+          isDeleted: false,
           OR: [{ sku: { endsWith: '-DEFAULT' } }, { sortOrder: 0 }],
         },
       };
@@ -838,12 +872,16 @@ export class InventoryService {
           where: {
             displayStatus: ProductInventoryDisplayStatus.OUT_OF_STOCK,
             variantId: { not: null },
+            product: { isDeleted: false },
+            variant: { isDeleted: false },
           },
         }),
         this.prismaService.productInventory.findMany({
           where: {
             displayStatus: ProductInventoryDisplayStatus.OUT_OF_STOCK,
             variantId: { not: null },
+            product: { isDeleted: false },
+            variant: { isDeleted: false },
           },
           select: inventoryVariantFullSelect,
           skip,
