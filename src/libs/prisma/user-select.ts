@@ -7,7 +7,7 @@ export const userRoleSelect = {
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.UserRoleSelect;
-export type UserRoleSelectt = Prisma.UserRoleGetPayload<{
+export type UserRoleSelectType = Prisma.UserRoleGetPayload<{
   select: typeof userRoleSelect;
 }>;
 
@@ -21,6 +21,20 @@ export const userRoleAssignmentsSelect = {
     select: userRoleSelect,
   },
 } satisfies Prisma.UserRoleAssignmentSelect;
+
+export const userAvatarSelect = {
+  id: true,
+  mediaId: true,
+  createdAt: true,
+  updatedAt: true,
+  media: {
+    select: mediaSelect,
+  },
+} satisfies Prisma.UserAvatarSelect;
+
+export type UserAvatarSelectType = Prisma.UserAvatarGetPayload<{
+  select: typeof userAvatarSelect;
+}>;
 
 export const userSelect = {
   id: true,
@@ -39,21 +53,13 @@ export const userSelect = {
   emailVerifiedAt: true,
   phoneVerifiedAt: true,
   avatar: {
-    select: {
-      id: true,
-      mediaId: true,
-      createdAt: true,
-      updatedAt: true,
-      media: {
-        select: mediaSelect,
-      },
-    },
+    select: userAvatarSelect,
   },
   roleAssignments: {
     select: userRoleAssignmentsSelect,
   },
 } satisfies Prisma.UserSelect;
 
-export type UserSelect = Prisma.UserGetPayload<{
+export type UserSelectType = Prisma.UserGetPayload<{
   select: typeof userSelect;
 }>;
