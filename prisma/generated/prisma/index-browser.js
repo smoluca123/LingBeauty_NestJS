@@ -258,6 +258,42 @@ exports.Prisma.BannerGroupMappingScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.BlogTopicScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  parentId: 'parentId',
+  imageMediaId: 'imageMediaId',
+  isActive: 'isActive',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  excerpt: 'excerpt',
+  topicId: 'topicId',
+  authorId: 'authorId',
+  featuredImageId: 'featuredImageId',
+  status: 'status',
+  tags: 'tags',
+  viewCount: 'viewCount',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.EmailVerificationLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -751,6 +787,11 @@ exports.BannerPosition = exports.$Enums.BannerPosition = {
   SIDE_BOTTOM: 'SIDE_BOTTOM'
 };
 
+exports.BlogPostStatus = exports.$Enums.BlogPostStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+};
+
 exports.EmailVerificationAction = exports.$Enums.EmailVerificationAction = {
   SEND_OTP: 'SEND_OTP',
   RESEND_OTP: 'RESEND_OTP',
@@ -775,7 +816,9 @@ exports.MediaType = exports.$Enums.MediaType = {
   CATEGORY_IMAGE: 'CATEGORY_IMAGE',
   BRAND_LOGO: 'BRAND_LOGO',
   BANNER_IMAGE: 'BANNER_IMAGE',
-  GENERAL_IMAGE: 'GENERAL_IMAGE'
+  GENERAL_IMAGE: 'GENERAL_IMAGE',
+  BLOG_TOPIC_IMAGE: 'BLOG_TOPIC_IMAGE',
+  BLOG_POST_IMAGE: 'BLOG_POST_IMAGE'
 };
 
 exports.OrderStatus = exports.$Enums.OrderStatus = {
@@ -855,6 +898,8 @@ exports.Prisma.ModelName = {
   BannerGroup: 'BannerGroup',
   Banner: 'Banner',
   BannerGroupMapping: 'BannerGroupMapping',
+  BlogTopic: 'BlogTopic',
+  BlogPost: 'BlogPost',
   EmailVerificationLog: 'EmailVerificationLog',
   FlashSale: 'FlashSale',
   FlashSaleProduct: 'FlashSaleProduct',

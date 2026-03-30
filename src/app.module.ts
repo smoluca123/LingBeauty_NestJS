@@ -30,6 +30,7 @@ import { CouponModule } from 'src/modules/coupon/coupon.module';
 import { ProductQuestionModule } from 'src/modules/product-question/product-question.module';
 import { OrderModule } from 'src/modules/order/order.module';
 import { WishlistModule } from 'src/modules/wishlist/wishlist.module';
+import { BlogModule } from 'src/modules/blog/blog.module';
 
 @Module({
   imports: [
@@ -83,6 +84,7 @@ import { WishlistModule } from 'src/modules/wishlist/wishlist.module';
     ProductQuestionModule,
     OrderModule,
     WishlistModule,
+    BlogModule,
     MailModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

@@ -269,6 +269,8 @@ export class StorageService {
       [MediaType.BRAND_LOGO]: 'brands',
       [MediaType.BANNER_IMAGE]: 'banners/images',
       [MediaType.GENERAL_IMAGE]: 'general/images',
+      [MediaType.BLOG_TOPIC_IMAGE]: 'blog/topics',
+      [MediaType.BLOG_POST_IMAGE]: 'blog/posts',
     };
 
     const folder = typeMap[type] || 'misc';

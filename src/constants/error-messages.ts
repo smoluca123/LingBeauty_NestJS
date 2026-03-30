@@ -206,6 +206,18 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.SHARED_WISHLIST_NOT_FOUND]: 'Không tìm thấy danh sách chia sẻ',
   [ERROR_CODES.SHARED_WISHLIST_EXPIRED]: 'Link chia sẻ đã hết hạn',
 
+  // Blog
+  [ERROR_CODES.BLOG_TOPIC_NOT_FOUND]: 'Không tìm thấy chủ đề blog',
+  [ERROR_CODES.PARENT_TOPIC_NOT_FOUND]: 'Không tìm thấy chủ đề cha',
+  [ERROR_CODES.DELETE_TOPIC_HAS_CHILDREN]: 'Không thể xóa chủ đề có chủ đề con',
+  [ERROR_CODES.DUPLICATE_TOPIC_SLUG]: 'Đường dẫn (slug) chủ đề đã tồn tại',
+  [ERROR_CODES.TOPIC_CANNOT_BE_OWN_PARENT]:
+    'Chủ đề không thể là chủ đề cha của chính nó',
+  [ERROR_CODES.BLOG_POST_NOT_FOUND]: 'Không tìm thấy bài viết blog',
+  [ERROR_CODES.DUPLICATE_POST_SLUG]: 'Đường dẫn (slug) bài viết đã tồn tại',
+  [ERROR_CODES.INVALID_POST_STATUS]: 'Trạng thái bài viết không hợp lệ',
+  [ERROR_CODES.INVALID_IMAGE_FORMAT]: 'Định dạng hình ảnh không hợp lệ',
+
   // System Errors
   [ERROR_CODES.DATABASE_ERROR]: 'Thao tác cơ sở dữ liệu thất bại',
   [ERROR_CODES.EXTERNAL_SERVICE_ERROR]: 'Dịch vụ bên ngoài không khả dụng',

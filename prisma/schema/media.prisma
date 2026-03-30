@@ -8,6 +8,8 @@ enum MediaType {
   BRAND_LOGO
   BANNER_IMAGE
   GENERAL_IMAGE
+  BLOG_TOPIC_IMAGE
+  BLOG_POST_IMAGE
 }
 
 model Media {
@@ -32,6 +34,8 @@ model Media {
   brands        Brand[]        @relation("BrandLogo")
   banners       Banner[]       @relation("BannerImage")
   users         User[]
+  blogTopics    BlogTopic[]    @relation("BlogTopicImage")
+  blogPosts     BlogPost[]     @relation("BlogPostFeaturedImage")
 
   @@index([type])
   @@index([uploadedById])

@@ -37,6 +37,7 @@ model User {
   sharedWishlists       SharedWishlist[]
   media                 Media?                 @relation(fields: [mediaId], references: [id])
   mediaId               String?
+  blogPosts             BlogPost[]             @relation("BlogPostAuthor")
 
   @@index([email])
   @@index([phone])
