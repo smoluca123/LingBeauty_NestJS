@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Exclude, Transform } from 'class-transformer';
+import { Exclude } from 'class-transformer';
 import { BaseResponseDto } from 'src/libs/dto/base-response.dto';
 import { MediaResponseDto } from 'src/libs/dto/media-response.dto';
 import { UserRoleAssignmentsResponseDto } from 'src/modules/user/dto/response/user-role-response.dto';
@@ -9,44 +9,64 @@ import { UserRoleAssignmentsResponseDto } from 'src/modules/user/dto/response/us
  * Excludes sensitive fields like password and refreshToken
  * Automatically serialized by ClassSerializerInterceptor
  */
+
+export class UserAvatarResponseDto extends BaseResponseDto {
+  @ApiProperty({
+    description: 'User ID',
+    example: 'cm123abc456',
+  })
+  userId!: string;
+
+  @ApiProperty({
+    description: 'Media ID',
+    example: 'cm123abc456',
+  })
+  mediaId!: string;
+
+  @ApiProperty({
+    description: 'Avatar media details',
+    type: MediaResponseDto,
+  })
+  media!: MediaResponseDto;
+}
+
 export class UserResponseDto extends BaseResponseDto {
   @ApiProperty({
     description: 'User email address',
     example: 'user@example.com',
   })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'First name',
     example: 'John',
   })
-  firstName: string;
+  firstName!: string;
 
   @ApiProperty({
     description: 'Last name',
     example: 'Doe',
   })
-  lastName: string;
+  lastName!: string;
 
   @ApiProperty({
     description: 'Phone number',
     example: '+1234567890',
   })
-  phone: string;
+  phone!: string;
 
   @ApiProperty({
     description: 'Username',
     example: 'johndoe',
   })
-  username: string;
+  username!: string;
 
   @ApiProperty({
     description: 'User avatar',
-    type: MediaResponseDto,
+    type: UserAvatarResponseDto,
     nullable: true,
   })
-  @Transform(({ value }) => value?.media || null)
-  avatar?: { media: MediaResponseDto } | null;
+  avatar?: UserAvatarResponseDto | null;
 
   @ApiProperty({
     description: 'User role assignments',
@@ -59,31 +79,31 @@ export class UserResponseDto extends BaseResponseDto {
     description: 'User active status',
     example: true,
   })
-  isActive: boolean;
+  isActive!: boolean;
 
   @ApiProperty({
     description: 'User verified status',
     example: false,
   })
-  isVerified: boolean;
+  isVerified!: boolean;
 
   @ApiProperty({
     description: 'User banned status',
     example: false,
   })
-  isBanned: boolean;
+  isBanned!: boolean;
 
   @ApiProperty({
     description: 'Email verified status',
     example: false,
   })
-  isEmailVerified: boolean;
+  isEmailVerified!: boolean;
 
   @ApiProperty({
     description: 'Phone verified status',
     example: false,
   })
-  isPhoneVerified: boolean;
+  isPhoneVerified!: boolean;
 
   @ApiPropertyOptional({
     description: 'Email verified timestamp',
@@ -103,14 +123,14 @@ export class UserResponseDto extends BaseResponseDto {
 
   // Exclude soft delete fields from API response (internal use only)
   @Exclude()
-  isDeleted: boolean;
+  isDeleted!: boolean;
 
   @Exclude()
   deletedAt?: Date | null;
 
   // Exclude sensitive fields from response
   @Exclude()
-  password: string;
+  password!: string;
 
   @Exclude()
   refreshToken?: string | null;
