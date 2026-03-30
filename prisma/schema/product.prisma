@@ -239,6 +239,8 @@ model ProductQuestion {
   answeredBy String?               @map("answered_by")
   status     ProductQuestionStatus @default(PENDING)
   isPublic   Boolean               @default(true) @map("is_public")
+  isDeleted  Boolean               @default(false) @map("is_deleted")
+  deletedAt  DateTime?             @map("deleted_at")
   createdAt  DateTime              @default(now()) @map("created_at")
   updatedAt  DateTime              @updatedAt @map("updated_at")
 
@@ -249,5 +251,6 @@ model ProductQuestion {
   @@index([productId])
   @@index([userId])
   @@index([status])
+  @@index([isDeleted])
   @@map("product_questions")
 }

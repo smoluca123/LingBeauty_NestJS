@@ -40255,6 +40255,8 @@ export namespace Prisma {
     answeredBy: string | null
     status: $Enums.ProductQuestionStatus | null
     isPublic: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -40268,6 +40270,8 @@ export namespace Prisma {
     answeredBy: string | null
     status: $Enums.ProductQuestionStatus | null
     isPublic: boolean | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -40281,6 +40285,8 @@ export namespace Prisma {
     answeredBy: number
     status: number
     isPublic: number
+    isDeleted: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -40296,6 +40302,8 @@ export namespace Prisma {
     answeredBy?: true
     status?: true
     isPublic?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -40309,6 +40317,8 @@ export namespace Prisma {
     answeredBy?: true
     status?: true
     isPublic?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -40322,6 +40332,8 @@ export namespace Prisma {
     answeredBy?: true
     status?: true
     isPublic?: true
+    isDeleted?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -40408,6 +40420,8 @@ export namespace Prisma {
     answeredBy: string | null
     status: $Enums.ProductQuestionStatus
     isPublic: boolean
+    isDeleted: boolean
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ProductQuestionCountAggregateOutputType | null
@@ -40438,6 +40452,8 @@ export namespace Prisma {
     answeredBy?: boolean
     status?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -40454,6 +40470,8 @@ export namespace Prisma {
     answeredBy?: boolean
     status?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -40470,6 +40488,8 @@ export namespace Prisma {
     answeredBy?: boolean
     status?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -40486,11 +40506,13 @@ export namespace Prisma {
     answeredBy?: boolean
     status?: boolean
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductQuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "userId" | "question" | "answer" | "answeredBy" | "status" | "isPublic" | "createdAt" | "updatedAt", ExtArgs["result"]["productQuestion"]>
+  export type ProductQuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "userId" | "question" | "answer" | "answeredBy" | "status" | "isPublic" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["productQuestion"]>
   export type ProductQuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -40523,6 +40545,8 @@ export namespace Prisma {
       answeredBy: string | null
       status: $Enums.ProductQuestionStatus
       isPublic: boolean
+      isDeleted: boolean
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productQuestion"]>
@@ -40959,6 +40983,8 @@ export namespace Prisma {
     readonly answeredBy: FieldRef<"ProductQuestion", 'String'>
     readonly status: FieldRef<"ProductQuestion", 'ProductQuestionStatus'>
     readonly isPublic: FieldRef<"ProductQuestion", 'Boolean'>
+    readonly isDeleted: FieldRef<"ProductQuestion", 'Boolean'>
+    readonly deletedAt: FieldRef<"ProductQuestion", 'DateTime'>
     readonly createdAt: FieldRef<"ProductQuestion", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductQuestion", 'DateTime'>
   }
@@ -59405,6 +59431,8 @@ export namespace Prisma {
     answeredBy: 'answeredBy',
     status: 'status',
     isPublic: 'isPublic',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -62630,6 +62658,8 @@ export namespace Prisma {
     answeredBy?: StringNullableFilter<"ProductQuestion"> | string | null
     status?: EnumProductQuestionStatusFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
     isPublic?: BoolFilter<"ProductQuestion"> | boolean
+    isDeleted?: BoolFilter<"ProductQuestion"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductQuestion"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductQuestion"> | Date | string
     updatedAt?: DateTimeFilter<"ProductQuestion"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -62646,6 +62676,8 @@ export namespace Prisma {
     answeredBy?: SortOrderInput | SortOrder
     status?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     product?: ProductOrderByWithRelationInput
@@ -62665,6 +62697,8 @@ export namespace Prisma {
     answeredBy?: StringNullableFilter<"ProductQuestion"> | string | null
     status?: EnumProductQuestionStatusFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
     isPublic?: BoolFilter<"ProductQuestion"> | boolean
+    isDeleted?: BoolFilter<"ProductQuestion"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductQuestion"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductQuestion"> | Date | string
     updatedAt?: DateTimeFilter<"ProductQuestion"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -62681,6 +62715,8 @@ export namespace Prisma {
     answeredBy?: SortOrderInput | SortOrder
     status?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductQuestionCountOrderByAggregateInput
@@ -62700,6 +62736,8 @@ export namespace Prisma {
     answeredBy?: StringNullableWithAggregatesFilter<"ProductQuestion"> | string | null
     status?: EnumProductQuestionStatusWithAggregatesFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
     isPublic?: BoolWithAggregatesFilter<"ProductQuestion"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"ProductQuestion"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ProductQuestion"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ProductQuestion"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductQuestion"> | Date | string
   }
@@ -66832,6 +66870,8 @@ export namespace Prisma {
     answer?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutQuestionsInput
@@ -66848,6 +66888,8 @@ export namespace Prisma {
     answeredBy?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -66858,6 +66900,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutQuestionsNestedInput
@@ -66874,6 +66918,8 @@ export namespace Prisma {
     answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66887,6 +66933,8 @@ export namespace Prisma {
     answeredBy?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -66897,6 +66945,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66910,6 +66960,8 @@ export namespace Prisma {
     answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -70546,6 +70598,8 @@ export namespace Prisma {
     answeredBy?: SortOrder
     status?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -70559,6 +70613,8 @@ export namespace Prisma {
     answeredBy?: SortOrder
     status?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -70572,6 +70628,8 @@ export namespace Prisma {
     answeredBy?: SortOrder
     status?: SortOrder
     isPublic?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -81320,6 +81378,8 @@ export namespace Prisma {
     answer?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutQuestionsInput
@@ -81334,6 +81394,8 @@ export namespace Prisma {
     answeredBy?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -81754,6 +81816,8 @@ export namespace Prisma {
     answeredBy?: StringNullableFilter<"ProductQuestion"> | string | null
     status?: EnumProductQuestionStatusFilter<"ProductQuestion"> | $Enums.ProductQuestionStatus
     isPublic?: BoolFilter<"ProductQuestion"> | boolean
+    isDeleted?: BoolFilter<"ProductQuestion"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ProductQuestion"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductQuestion"> | Date | string
     updatedAt?: DateTimeFilter<"ProductQuestion"> | Date | string
   }
@@ -85823,6 +85887,8 @@ export namespace Prisma {
     answer?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutQuestionsInput
@@ -85837,6 +85903,8 @@ export namespace Prisma {
     answeredBy?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85857,6 +85925,8 @@ export namespace Prisma {
     answer?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutQuestionsInput
@@ -85871,6 +85941,8 @@ export namespace Prisma {
     answer?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -88881,6 +88953,8 @@ export namespace Prisma {
     answeredBy?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -89292,6 +89366,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutQuestionsNestedInput
@@ -89306,6 +89382,8 @@ export namespace Prisma {
     answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -89318,6 +89396,8 @@ export namespace Prisma {
     answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -89852,6 +89932,8 @@ export namespace Prisma {
     answeredBy?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -89864,6 +89946,8 @@ export namespace Prisma {
     answer?: string | null
     status?: $Enums.ProductQuestionStatus
     isPublic?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -90234,6 +90318,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutQuestionsNestedInput
@@ -90248,6 +90334,8 @@ export namespace Prisma {
     answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -90260,6 +90348,8 @@ export namespace Prisma {
     answeredBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -90270,6 +90360,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutQuestionsNestedInput
@@ -90284,6 +90376,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -90296,6 +90390,8 @@ export namespace Prisma {
     answer?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumProductQuestionStatusFieldUpdateOperationsInput | $Enums.ProductQuestionStatus
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

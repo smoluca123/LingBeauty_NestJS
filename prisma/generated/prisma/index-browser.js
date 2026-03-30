@@ -526,6 +526,8 @@ exports.Prisma.ProductQuestionScalarFieldEnum = {
   answeredBy: 'answeredBy',
   status: 'status',
   isPublic: 'isPublic',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

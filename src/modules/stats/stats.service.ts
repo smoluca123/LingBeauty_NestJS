@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Prisma } from 'prisma/generated/prisma/client';
+import { OrderStatus, Prisma } from 'prisma/generated/prisma/client';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { withoutDeleted } from 'src/libs/prisma/soft-delete.helpers';
 import {
@@ -103,22 +103,24 @@ export class StatsService {
       }),
       this.prismaService.order.count({ where: withoutDeleted() }),
       this.prismaService.order.count({
-        where: withoutDeleted({ status: 'PENDING' }),
+        where: withoutDeleted({ status: OrderStatus.PENDING }),
       }),
       this.prismaService.order.aggregate({
-        where: withoutDeleted({ status: { in: ['DELIVERED', 'CONFIRMED'] } }),
+        where: withoutDeleted({
+          status: { in: [OrderStatus.DELIVERED, OrderStatus.CONFIRMED] },
+        }),
         _sum: { total: true },
       }),
       this.prismaService.order.aggregate({
         where: withoutDeleted({
-          status: { in: ['DELIVERED', 'CONFIRMED'] },
+          status: { in: [OrderStatus.DELIVERED, OrderStatus.CONFIRMED] },
           createdAt: { gte: startOfToday },
         }),
         _sum: { total: true },
       }),
       this.prismaService.order.aggregate({
         where: withoutDeleted({
-          status: { in: ['DELIVERED', 'CONFIRMED'] },
+          status: { in: [OrderStatus.DELIVERED, OrderStatus.CONFIRMED] },
           createdAt: { gte: startOfMonth },
         }),
         _sum: { total: true },
@@ -276,7 +278,7 @@ export class StatsService {
 
     const orders = await this.prismaService.order.findMany({
       where: withoutDeleted({
-        status: { in: ['DELIVERED', 'CONFIRMED'] },
+        status: { in: [OrderStatus.DELIVERED, OrderStatus.CONFIRMED] },
         createdAt: { gte: start, lte: end },
       }),
       select: { total: true, createdAt: true },
@@ -424,25 +426,25 @@ export class StatsService {
       }),
       this.prismaService.order.count({
         where: withoutDeleted({
-          status: 'CONFIRMED',
+          status: OrderStatus.CONFIRMED,
           createdAt: { gte: startOfToday, lt: endOfToday },
         }),
       }),
       this.prismaService.order.count({
         where: withoutDeleted({
-          status: 'CANCELLED',
+          status: OrderStatus.CANCELLED,
           createdAt: { gte: startOfToday, lt: endOfToday },
         }),
       }),
       this.prismaService.order.count({
         where: withoutDeleted({
-          status: 'DELIVERED',
+          status: OrderStatus.DELIVERED,
           createdAt: { gte: startOfToday, lt: endOfToday },
         }),
       }),
       this.prismaService.order.aggregate({
         where: withoutDeleted({
-          status: { in: ['DELIVERED', 'CONFIRMED'] },
+          status: { in: [OrderStatus.DELIVERED, OrderStatus.CONFIRMED] },
           createdAt: { gte: startOfToday, lt: endOfToday },
         }),
         _sum: { total: true },
@@ -525,7 +527,7 @@ export class StatsService {
    */
   async onOrderStatusChanged(
     orderId: string,
-    newStatus: string,
+    newStatus: OrderStatus,
   ): Promise<void> {
     const order = await this.prismaService.order.findFirst({
       where: withoutDeleted({ id: orderId }),
@@ -535,7 +537,7 @@ export class StatsService {
 
     const statusCountField = this.getStatusCountField(newStatus);
     const revenueField =
-      newStatus === 'DELIVERED' || newStatus === 'CONFIRMED'
+      newStatus === OrderStatus.DELIVERED || newStatus === OrderStatus.CONFIRMED
         ? { revenue: { increment: order.total } }
         : {};
 
@@ -586,11 +588,11 @@ export class StatsService {
   }
 
   /** Map an order status string to its DailyStats count field name. */
-  private getStatusCountField(status: string): string | null {
+  private getStatusCountField(status: OrderStatus): string | null {
     const map: Record<string, string> = {
-      CONFIRMED: 'confirmedOrders',
-      CANCELLED: 'cancelledOrders',
-      DELIVERED: 'deliveredOrders',
+      [OrderStatus.CONFIRMED]: 'confirmedOrders',
+      [OrderStatus.CANCELLED]: 'cancelledOrders',
+      [OrderStatus.DELIVERED]: 'deliveredOrders',
     };
     return map[status] ?? null;
   }
