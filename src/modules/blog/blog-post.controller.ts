@@ -89,12 +89,7 @@ export class BlogPostController {
   uploadFeaturedImage(
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
-    @DecodedAccessToken() decodedAccessToken: IDecodedAccecssTokenType,
   ): Promise<IBeforeTransformResponseType<BlogPostResponseDto>> {
-    return this.blogPostService.uploadFeaturedImage(
-      id,
-      file,
-      decodedAccessToken.userId,
-    );
+    return this.blogPostService.uploadFeaturedImage(id, file);
   }
 }
