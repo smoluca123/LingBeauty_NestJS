@@ -382,6 +382,7 @@ export class BlogPostService {
         data: postResponse,
       };
     } catch (error) {
+      console.log(error);
       if (error instanceof BusinessException) {
         throw error;
       }
