@@ -6,7 +6,8 @@ Documentation cho backend server của dự án.
 
 ```
 server/docs/
-├── api/                    # API-specific documentation
+├── api/                    # API Documentation (for Frontend integration)
+│   ├── BLOG_API.md        # ⭐ Blog API endpoints (Public + Admin)
 │   ├── CHANGE_PASSWORD_API.md
 │   ├── CHANGE_PASSWORD_ERROR_CODES.md
 │   ├── CHANGE_PASSWORD_QUICK_REF.md
@@ -43,11 +44,14 @@ server/docs/
 
 ## 📖 API Documentation (`api/`)
 
-Documentation về các API endpoints cụ thể:
+Documentation về các API endpoints để Frontend team integrate:
 
+- **Blog API** ⭐ - Complete blog endpoints (Public + Admin)
 - Change Password API
 - Hot Products API
 - Error codes và quick references
+
+**Dành cho Frontend Developers:** Đọc các file trong thư mục này để hiểu cách gọi API, request/response format, và error handling.
 
 ## 🔧 Implementation (`implementation/`)
 
@@ -76,10 +80,11 @@ Hướng dẫn migration và API changes:
 1. [Migration Quick Start](./migration/MIGRATION-QUICK-START.md)
 2. [Backend Changes Needed](./implementation/BACKEND-CHANGES-NEEDED.md)
 
-### For API Integration:
+### For API Integration (Frontend):
 
-1. [Change Password API](./api/CHANGE_PASSWORD_API.md)
-2. [Hot Products API](./api/HOT_PRODUCTS_API.md)
+1. [Blog API Documentation](./api/BLOG_API.md) ⭐
+2. [Change Password API](./api/CHANGE_PASSWORD_API.md)
+3. [Hot Products API](./api/HOT_PRODUCTS_API.md)
 
 ### For Testing:
 
