@@ -42,6 +42,9 @@ export class MailService implements OnModuleInit {
           user: this.options.transport.auth.user,
           pass: this.options.transport.auth.pass,
         },
+        tls: {
+          rejectUnauthorized: false, // Accept self-signed certificates
+        },
       });
     } catch (error) {
       this.logger.error('Failed to initialize mail transporter', error);
