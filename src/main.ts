@@ -2,10 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import {
-  ValidationPipe,
-  ClassSerializerInterceptor,
-} from '@nestjs/common';
+import { ValidationPipe, ClassSerializerInterceptor } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { configData } from 'src/configs/configuration';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -48,7 +45,7 @@ async function bootstrap() {
   const logger = await app.resolve(PinoLogger);
   logger.setContext('Bootstrap');
 
-  await app.listen(configData.SERVER_PORT ?? 3000);
+  await app.listen(configData.SERVER_PORT ?? 3000, '0.0.0.0');
   logger.info(
     `Application is running on: http://localhost:${configData.SERVER_PORT ?? 3000}`,
   );
