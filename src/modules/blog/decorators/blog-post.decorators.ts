@@ -3,6 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBody,
   ApiConsumes,
+  ApiOperation,
   ApiParam,
   ApiQuery,
   ApiResponse,
@@ -21,7 +22,7 @@ import { UpdateBlogPostDto } from '../dto/update-blog-post.dto';
 
 export const ApiGetAllPosts = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiOperation({
       summary: 'Get all blog posts with pagination and filters',
       description:
         'Retrieve all blog posts with search, filter, and sort options',
@@ -105,7 +106,7 @@ export const ApiCreatePost = () =>
 
 export const ApiGetPostById = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiOperation({
       summary: 'Get blog post by ID',
       description: 'Retrieve blog post details by ID',
     }),
@@ -122,7 +123,7 @@ export const ApiGetPostById = () =>
 
 export const ApiUpdatePost = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiOperation({
       summary: 'Update blog post',
       description: 'Update blog post information',
     }),
@@ -142,7 +143,7 @@ export const ApiUpdatePost = () =>
 
 export const ApiDeletePost = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiOperation({
       summary: 'Delete blog post',
       description: 'Soft delete a blog post',
     }),
@@ -160,7 +161,7 @@ export const ApiDeletePost = () =>
 
 export const ApiUploadFeaturedImage = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiOperation({
       summary: 'Upload blog post featured image',
       description: 'Upload and attach a featured image to a blog post',
     }),
