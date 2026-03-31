@@ -382,6 +382,7 @@ export class BlogPostService {
         data: postResponse,
       };
     } catch (error) {
+      console.log(error);
       if (error instanceof BusinessException) {
         throw error;
       }
@@ -510,7 +511,6 @@ export class BlogPostService {
   async uploadFeaturedImage(
     postId: string,
     file: Express.Multer.File,
-    userId: string,
   ): Promise<IBeforeTransformResponseType<BlogPostResponseDto>> {
     try {
       // Check if post exists
@@ -544,7 +544,6 @@ export class BlogPostService {
         {
           file,
           type: MediaType.BLOG_POST_IMAGE,
-          userId,
         },
         {
           getDirectUrl: true,

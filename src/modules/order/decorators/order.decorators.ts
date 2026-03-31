@@ -53,6 +53,7 @@ export function ApiGetOrders() {
       ],
     }),
     ApiQuery({ name: 'orderNumber', required: false, type: String }),
+    ApiQuery({ name: 'userId', required: false, type: String }),
     ApiQuery({
       name: 'sortBy',
       required: false,
