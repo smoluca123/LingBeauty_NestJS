@@ -49,9 +49,10 @@ model BlogPost {
   createdAt       DateTime       @default(now()) @map("created_at")
   updatedAt       DateTime       @updatedAt @map("updated_at")
 
-  topic         BlogTopic? @relation(fields: [topicId], references: [id], onDelete: SetNull)
-  author        User       @relation("BlogPostAuthor", fields: [authorId], references: [id], onDelete: Restrict)
-  featuredImage Media?     @relation("BlogPostFeaturedImage", fields: [featuredImageId], references: [id], onDelete: Restrict)
+  topic         BlogTopic?    @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  author        User          @relation("BlogPostAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  featuredImage Media?        @relation("BlogPostFeaturedImage", fields: [featuredImageId], references: [id], onDelete: Restrict)
+  comments      BlogComment[]
 
   @@index([slug])
   @@index([topicId])
