@@ -258,6 +258,31 @@ exports.Prisma.BannerGroupMappingScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.BlogCommentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  parentId: 'parentId',
+  content: 'content',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogCommentReportScalarFieldEnum = {
+  id: 'id',
+  commentId: 'commentId',
+  reporterId: 'reporterId',
+  reason: 'reason',
+  description: 'description',
+  status: 'status',
+  reviewedBy: 'reviewedBy',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.BlogTopicScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -787,6 +812,21 @@ exports.BannerPosition = exports.$Enums.BannerPosition = {
   SIDE_BOTTOM: 'SIDE_BOTTOM'
 };
 
+exports.BlogCommentReportReason = exports.$Enums.BlogCommentReportReason = {
+  SPAM: 'SPAM',
+  INAPPROPRIATE: 'INAPPROPRIATE',
+  HARASSMENT: 'HARASSMENT',
+  MISINFORMATION: 'MISINFORMATION',
+  OTHER: 'OTHER'
+};
+
+exports.BlogCommentReportStatus = exports.$Enums.BlogCommentReportStatus = {
+  PENDING: 'PENDING',
+  REVIEWED: 'REVIEWED',
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED'
+};
+
 exports.BlogPostStatus = exports.$Enums.BlogPostStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED'
@@ -898,6 +938,8 @@ exports.Prisma.ModelName = {
   BannerGroup: 'BannerGroup',
   Banner: 'Banner',
   BannerGroupMapping: 'BannerGroupMapping',
+  BlogComment: 'BlogComment',
+  BlogCommentReport: 'BlogCommentReport',
   BlogTopic: 'BlogTopic',
   BlogPost: 'BlogPost',
   EmailVerificationLog: 'EmailVerificationLog',

@@ -1,0 +1,62 @@
+enum BlogCommentReportReason {
+  SPAM
+  INAPPROPRIATE
+  HARASSMENT
+  MISINFORMATION
+  OTHER
+}
+
+enum BlogCommentReportStatus {
+  PENDING
+  REVIEWED
+  RESOLVED
+  REJECTED
+}
+
+model BlogComment {
+  id        String    @id @default(uuid())
+  postId    String    @map("post_id")
+  userId    String    @map("user_id")
+  parentId  String?   @map("parent_id") // For nested replies
+  content   String    @db.Text
+  isDeleted Boolean   @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  post    BlogPost      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user    User          @relation("BlogCommentUser", fields: [userId], references: [id], onDelete: Restrict)
+  parent  BlogComment?  @relation("BlogCommentTree", fields: [parentId], references: [id], onDelete: Cascade)
+  replies BlogComment[] @relation("BlogCommentTree")
+  reports BlogCommentReport[]
+
+  @@index([postId])
+  @@index([userId])
+  @@index([parentId])
+  @@index([isDeleted])
+  @@index([createdAt])
+  @@map("blog_comments")
+}
+
+model BlogCommentReport {
+  id          String                    @id @default(uuid())
+  commentId   String                    @map("comment_id")
+  reporterId  String                    @map("reporter_id")
+  reason      BlogCommentReportReason
+  description String?                   @db.Text
+  status      BlogCommentReportStatus   @default(PENDING)
+  reviewedBy  String?                   @map("reviewed_by")
+  reviewedAt  DateTime?                 @map("reviewed_at")
+  createdAt   DateTime                  @default(now()) @map("created_at")
+  updatedAt   DateTime                  @updatedAt @map("updated_at")
+
+  comment   BlogComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  reporter  User        @relation("BlogCommentReporter", fields: [reporterId], references: [id], onDelete: Restrict)
+  reviewer  User?       @relation("BlogCommentReviewer", fields: [reviewedBy], references: [id], onDelete: Restrict)
+
+  @@index([commentId])
+  @@index([reporterId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("blog_comment_reports")
+}

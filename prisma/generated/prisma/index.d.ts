@@ -59,6 +59,16 @@ export type Banner = $Result.DefaultSelection<Prisma.$BannerPayload>
  */
 export type BannerGroupMapping = $Result.DefaultSelection<Prisma.$BannerGroupMappingPayload>
 /**
+ * Model BlogComment
+ * 
+ */
+export type BlogComment = $Result.DefaultSelection<Prisma.$BlogCommentPayload>
+/**
+ * Model BlogCommentReport
+ * 
+ */
+export type BlogCommentReport = $Result.DefaultSelection<Prisma.$BlogCommentReportPayload>
+/**
  * Model BlogTopic
  * 
  */
@@ -274,6 +284,27 @@ export const BannerPosition: {
 export type BannerPosition = (typeof BannerPosition)[keyof typeof BannerPosition]
 
 
+export const BlogCommentReportReason: {
+  SPAM: 'SPAM',
+  INAPPROPRIATE: 'INAPPROPRIATE',
+  HARASSMENT: 'HARASSMENT',
+  MISINFORMATION: 'MISINFORMATION',
+  OTHER: 'OTHER'
+};
+
+export type BlogCommentReportReason = (typeof BlogCommentReportReason)[keyof typeof BlogCommentReportReason]
+
+
+export const BlogCommentReportStatus: {
+  PENDING: 'PENDING',
+  REVIEWED: 'REVIEWED',
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED'
+};
+
+export type BlogCommentReportStatus = (typeof BlogCommentReportStatus)[keyof typeof BlogCommentReportStatus]
+
+
 export const BlogPostStatus: {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED'
@@ -429,6 +460,14 @@ export const BannerType: typeof $Enums.BannerType
 export type BannerPosition = $Enums.BannerPosition
 
 export const BannerPosition: typeof $Enums.BannerPosition
+
+export type BlogCommentReportReason = $Enums.BlogCommentReportReason
+
+export const BlogCommentReportReason: typeof $Enums.BlogCommentReportReason
+
+export type BlogCommentReportStatus = $Enums.BlogCommentReportStatus
+
+export const BlogCommentReportStatus: typeof $Enums.BlogCommentReportStatus
 
 export type BlogPostStatus = $Enums.BlogPostStatus
 
@@ -696,6 +735,26 @@ export class PrismaClient<
     * ```
     */
   get bannerGroupMapping(): Prisma.BannerGroupMappingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.blogComment`: Exposes CRUD operations for the **BlogComment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlogComments
+    * const blogComments = await prisma.blogComment.findMany()
+    * ```
+    */
+  get blogComment(): Prisma.BlogCommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.blogCommentReport`: Exposes CRUD operations for the **BlogCommentReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlogCommentReports
+    * const blogCommentReports = await prisma.blogCommentReport.findMany()
+    * ```
+    */
+  get blogCommentReport(): Prisma.BlogCommentReportDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.blogTopic`: Exposes CRUD operations for the **BlogTopic** model.
@@ -1509,6 +1568,8 @@ export namespace Prisma {
     BannerGroup: 'BannerGroup',
     Banner: 'Banner',
     BannerGroupMapping: 'BannerGroupMapping',
+    BlogComment: 'BlogComment',
+    BlogCommentReport: 'BlogCommentReport',
     BlogTopic: 'BlogTopic',
     BlogPost: 'BlogPost',
     EmailVerificationLog: 'EmailVerificationLog',
@@ -1561,7 +1622,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "blogTopic" | "blogPost" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "productQuestion" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userAvatar" | "userRole" | "userRoleAssignment" | "wishlist" | "sharedWishlist"
+      modelProps: "address" | "dailyStats" | "affiliate" | "affiliateLink" | "affiliateCommission" | "commissionRate" | "bannerGroup" | "banner" | "bannerGroupMapping" | "blogComment" | "blogCommentReport" | "blogTopic" | "blogPost" | "emailVerificationLog" | "flashSale" | "flashSaleProduct" | "flashSaleOrder" | "media" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "productStats" | "category" | "brand" | "product" | "productBadge" | "productVariant" | "productImage" | "productInventory" | "productCategory" | "productQuestion" | "promotion" | "promotionProduct" | "coupon" | "couponUsage" | "productReview" | "reviewImage" | "reviewReply" | "reviewHelpful" | "authCode" | "user" | "userAvatar" | "userRole" | "userRoleAssignment" | "wishlist" | "sharedWishlist"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2228,6 +2289,154 @@ export namespace Prisma {
           count: {
             args: Prisma.BannerGroupMappingCountArgs<ExtArgs>
             result: $Utils.Optional<BannerGroupMappingCountAggregateOutputType> | number
+          }
+        }
+      }
+      BlogComment: {
+        payload: Prisma.$BlogCommentPayload<ExtArgs>
+        fields: Prisma.BlogCommentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BlogCommentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BlogCommentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>
+          }
+          findFirst: {
+            args: Prisma.BlogCommentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BlogCommentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>
+          }
+          findMany: {
+            args: Prisma.BlogCommentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>[]
+          }
+          create: {
+            args: Prisma.BlogCommentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>
+          }
+          createMany: {
+            args: Prisma.BlogCommentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BlogCommentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>[]
+          }
+          delete: {
+            args: Prisma.BlogCommentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>
+          }
+          update: {
+            args: Prisma.BlogCommentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>
+          }
+          deleteMany: {
+            args: Prisma.BlogCommentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BlogCommentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BlogCommentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>[]
+          }
+          upsert: {
+            args: Prisma.BlogCommentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentPayload>
+          }
+          aggregate: {
+            args: Prisma.BlogCommentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBlogComment>
+          }
+          groupBy: {
+            args: Prisma.BlogCommentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BlogCommentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BlogCommentCountArgs<ExtArgs>
+            result: $Utils.Optional<BlogCommentCountAggregateOutputType> | number
+          }
+        }
+      }
+      BlogCommentReport: {
+        payload: Prisma.$BlogCommentReportPayload<ExtArgs>
+        fields: Prisma.BlogCommentReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BlogCommentReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BlogCommentReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>
+          }
+          findFirst: {
+            args: Prisma.BlogCommentReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BlogCommentReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>
+          }
+          findMany: {
+            args: Prisma.BlogCommentReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>[]
+          }
+          create: {
+            args: Prisma.BlogCommentReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>
+          }
+          createMany: {
+            args: Prisma.BlogCommentReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BlogCommentReportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>[]
+          }
+          delete: {
+            args: Prisma.BlogCommentReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>
+          }
+          update: {
+            args: Prisma.BlogCommentReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.BlogCommentReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BlogCommentReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BlogCommentReportUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>[]
+          }
+          upsert: {
+            args: Prisma.BlogCommentReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogCommentReportPayload>
+          }
+          aggregate: {
+            args: Prisma.BlogCommentReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBlogCommentReport>
+          }
+          groupBy: {
+            args: Prisma.BlogCommentReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BlogCommentReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BlogCommentReportCountArgs<ExtArgs>
+            result: $Utils.Optional<BlogCommentReportCountAggregateOutputType> | number
           }
         }
       }
@@ -5086,6 +5295,8 @@ export namespace Prisma {
     bannerGroup?: BannerGroupOmit
     banner?: BannerOmit
     bannerGroupMapping?: BannerGroupMappingOmit
+    blogComment?: BlogCommentOmit
+    blogCommentReport?: BlogCommentReportOmit
     blogTopic?: BlogTopicOmit
     blogPost?: BlogPostOmit
     emailVerificationLog?: EmailVerificationLogOmit
@@ -5332,6 +5543,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type BlogCommentCountOutputType
+   */
+
+  export type BlogCommentCountOutputType = {
+    replies: number
+    reports: number
+  }
+
+  export type BlogCommentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replies?: boolean | BlogCommentCountOutputTypeCountRepliesArgs
+    reports?: boolean | BlogCommentCountOutputTypeCountReportsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BlogCommentCountOutputType without action
+   */
+  export type BlogCommentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentCountOutputType
+     */
+    select?: BlogCommentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BlogCommentCountOutputType without action
+   */
+  export type BlogCommentCountOutputTypeCountRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentWhereInput
+  }
+
+  /**
+   * BlogCommentCountOutputType without action
+   */
+  export type BlogCommentCountOutputTypeCountReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentReportWhereInput
+  }
+
+
+  /**
    * Count Type BlogTopicCountOutputType
    */
 
@@ -5368,6 +5619,37 @@ export namespace Prisma {
    */
   export type BlogTopicCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BlogPostWhereInput
+  }
+
+
+  /**
+   * Count Type BlogPostCountOutputType
+   */
+
+  export type BlogPostCountOutputType = {
+    comments: number
+  }
+
+  export type BlogPostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | BlogPostCountOutputTypeCountCommentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPostCountOutputType
+     */
+    select?: BlogPostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentWhereInput
   }
 
 
@@ -6009,6 +6291,9 @@ export namespace Prisma {
     wishlists: number
     sharedWishlists: number
     blogPosts: number
+    blogComments: number
+    blogCommentReports: number
+    reviewedCommentReports: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6025,6 +6310,9 @@ export namespace Prisma {
     wishlists?: boolean | UserCountOutputTypeCountWishlistsArgs
     sharedWishlists?: boolean | UserCountOutputTypeCountSharedWishlistsArgs
     blogPosts?: boolean | UserCountOutputTypeCountBlogPostsArgs
+    blogComments?: boolean | UserCountOutputTypeCountBlogCommentsArgs
+    blogCommentReports?: boolean | UserCountOutputTypeCountBlogCommentReportsArgs
+    reviewedCommentReports?: boolean | UserCountOutputTypeCountReviewedCommentReportsArgs
   }
 
   // Custom InputTypes
@@ -6127,6 +6415,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBlogPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BlogPostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlogCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlogCommentReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentReportWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewedCommentReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentReportWhereInput
   }
 
 
@@ -16980,6 +17289,2377 @@ export namespace Prisma {
 
 
   /**
+   * Model BlogComment
+   */
+
+  export type AggregateBlogComment = {
+    _count: BlogCommentCountAggregateOutputType | null
+    _min: BlogCommentMinAggregateOutputType | null
+    _max: BlogCommentMaxAggregateOutputType | null
+  }
+
+  export type BlogCommentMinAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    userId: string | null
+    parentId: string | null
+    content: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogCommentMaxAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    userId: string | null
+    parentId: string | null
+    content: string | null
+    isDeleted: boolean | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogCommentCountAggregateOutputType = {
+    id: number
+    postId: number
+    userId: number
+    parentId: number
+    content: number
+    isDeleted: number
+    deletedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BlogCommentMinAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    parentId?: true
+    content?: true
+    isDeleted?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogCommentMaxAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    parentId?: true
+    content?: true
+    isDeleted?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogCommentCountAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    parentId?: true
+    content?: true
+    isDeleted?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BlogCommentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogComment to aggregate.
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogComments to fetch.
+     */
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BlogCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BlogComments
+    **/
+    _count?: true | BlogCommentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BlogCommentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BlogCommentMaxAggregateInputType
+  }
+
+  export type GetBlogCommentAggregateType<T extends BlogCommentAggregateArgs> = {
+        [P in keyof T & keyof AggregateBlogComment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBlogComment[P]>
+      : GetScalarType<T[P], AggregateBlogComment[P]>
+  }
+
+
+
+
+  export type BlogCommentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentWhereInput
+    orderBy?: BlogCommentOrderByWithAggregationInput | BlogCommentOrderByWithAggregationInput[]
+    by: BlogCommentScalarFieldEnum[] | BlogCommentScalarFieldEnum
+    having?: BlogCommentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BlogCommentCountAggregateInputType | true
+    _min?: BlogCommentMinAggregateInputType
+    _max?: BlogCommentMaxAggregateInputType
+  }
+
+  export type BlogCommentGroupByOutputType = {
+    id: string
+    postId: string
+    userId: string
+    parentId: string | null
+    content: string
+    isDeleted: boolean
+    deletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BlogCommentCountAggregateOutputType | null
+    _min: BlogCommentMinAggregateOutputType | null
+    _max: BlogCommentMaxAggregateOutputType | null
+  }
+
+  type GetBlogCommentGroupByPayload<T extends BlogCommentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BlogCommentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BlogCommentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BlogCommentGroupByOutputType[P]>
+            : GetScalarType<T[P], BlogCommentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BlogCommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    post?: boolean | BlogPostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | BlogComment$parentArgs<ExtArgs>
+    replies?: boolean | BlogComment$repliesArgs<ExtArgs>
+    reports?: boolean | BlogComment$reportsArgs<ExtArgs>
+    _count?: boolean | BlogCommentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["blogComment"]>
+
+  export type BlogCommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    post?: boolean | BlogPostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | BlogComment$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["blogComment"]>
+
+  export type BlogCommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    post?: boolean | BlogPostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | BlogComment$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["blogComment"]>
+
+  export type BlogCommentSelectScalar = {
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    isDeleted?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BlogCommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "userId" | "parentId" | "content" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["blogComment"]>
+  export type BlogCommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | BlogPostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | BlogComment$parentArgs<ExtArgs>
+    replies?: boolean | BlogComment$repliesArgs<ExtArgs>
+    reports?: boolean | BlogComment$reportsArgs<ExtArgs>
+    _count?: boolean | BlogCommentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BlogCommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | BlogPostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | BlogComment$parentArgs<ExtArgs>
+  }
+  export type BlogCommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | BlogPostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | BlogComment$parentArgs<ExtArgs>
+  }
+
+  export type $BlogCommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BlogComment"
+    objects: {
+      post: Prisma.$BlogPostPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      parent: Prisma.$BlogCommentPayload<ExtArgs> | null
+      replies: Prisma.$BlogCommentPayload<ExtArgs>[]
+      reports: Prisma.$BlogCommentReportPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      postId: string
+      userId: string
+      parentId: string | null
+      content: string
+      isDeleted: boolean
+      deletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["blogComment"]>
+    composites: {}
+  }
+
+  type BlogCommentGetPayload<S extends boolean | null | undefined | BlogCommentDefaultArgs> = $Result.GetResult<Prisma.$BlogCommentPayload, S>
+
+  type BlogCommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BlogCommentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BlogCommentCountAggregateInputType | true
+    }
+
+  export interface BlogCommentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlogComment'], meta: { name: 'BlogComment' } }
+    /**
+     * Find zero or one BlogComment that matches the filter.
+     * @param {BlogCommentFindUniqueArgs} args - Arguments to find a BlogComment
+     * @example
+     * // Get one BlogComment
+     * const blogComment = await prisma.blogComment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BlogCommentFindUniqueArgs>(args: SelectSubset<T, BlogCommentFindUniqueArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BlogComment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BlogCommentFindUniqueOrThrowArgs} args - Arguments to find a BlogComment
+     * @example
+     * // Get one BlogComment
+     * const blogComment = await prisma.blogComment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BlogCommentFindUniqueOrThrowArgs>(args: SelectSubset<T, BlogCommentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogComment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentFindFirstArgs} args - Arguments to find a BlogComment
+     * @example
+     * // Get one BlogComment
+     * const blogComment = await prisma.blogComment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BlogCommentFindFirstArgs>(args?: SelectSubset<T, BlogCommentFindFirstArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogComment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentFindFirstOrThrowArgs} args - Arguments to find a BlogComment
+     * @example
+     * // Get one BlogComment
+     * const blogComment = await prisma.blogComment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BlogCommentFindFirstOrThrowArgs>(args?: SelectSubset<T, BlogCommentFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BlogComments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BlogComments
+     * const blogComments = await prisma.blogComment.findMany()
+     * 
+     * // Get first 10 BlogComments
+     * const blogComments = await prisma.blogComment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const blogCommentWithIdOnly = await prisma.blogComment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BlogCommentFindManyArgs>(args?: SelectSubset<T, BlogCommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BlogComment.
+     * @param {BlogCommentCreateArgs} args - Arguments to create a BlogComment.
+     * @example
+     * // Create one BlogComment
+     * const BlogComment = await prisma.blogComment.create({
+     *   data: {
+     *     // ... data to create a BlogComment
+     *   }
+     * })
+     * 
+     */
+    create<T extends BlogCommentCreateArgs>(args: SelectSubset<T, BlogCommentCreateArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BlogComments.
+     * @param {BlogCommentCreateManyArgs} args - Arguments to create many BlogComments.
+     * @example
+     * // Create many BlogComments
+     * const blogComment = await prisma.blogComment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BlogCommentCreateManyArgs>(args?: SelectSubset<T, BlogCommentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BlogComments and returns the data saved in the database.
+     * @param {BlogCommentCreateManyAndReturnArgs} args - Arguments to create many BlogComments.
+     * @example
+     * // Create many BlogComments
+     * const blogComment = await prisma.blogComment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BlogComments and only return the `id`
+     * const blogCommentWithIdOnly = await prisma.blogComment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BlogCommentCreateManyAndReturnArgs>(args?: SelectSubset<T, BlogCommentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BlogComment.
+     * @param {BlogCommentDeleteArgs} args - Arguments to delete one BlogComment.
+     * @example
+     * // Delete one BlogComment
+     * const BlogComment = await prisma.blogComment.delete({
+     *   where: {
+     *     // ... filter to delete one BlogComment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BlogCommentDeleteArgs>(args: SelectSubset<T, BlogCommentDeleteArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BlogComment.
+     * @param {BlogCommentUpdateArgs} args - Arguments to update one BlogComment.
+     * @example
+     * // Update one BlogComment
+     * const blogComment = await prisma.blogComment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BlogCommentUpdateArgs>(args: SelectSubset<T, BlogCommentUpdateArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BlogComments.
+     * @param {BlogCommentDeleteManyArgs} args - Arguments to filter BlogComments to delete.
+     * @example
+     * // Delete a few BlogComments
+     * const { count } = await prisma.blogComment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BlogCommentDeleteManyArgs>(args?: SelectSubset<T, BlogCommentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BlogComments
+     * const blogComment = await prisma.blogComment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BlogCommentUpdateManyArgs>(args: SelectSubset<T, BlogCommentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogComments and returns the data updated in the database.
+     * @param {BlogCommentUpdateManyAndReturnArgs} args - Arguments to update many BlogComments.
+     * @example
+     * // Update many BlogComments
+     * const blogComment = await prisma.blogComment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BlogComments and only return the `id`
+     * const blogCommentWithIdOnly = await prisma.blogComment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BlogCommentUpdateManyAndReturnArgs>(args: SelectSubset<T, BlogCommentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BlogComment.
+     * @param {BlogCommentUpsertArgs} args - Arguments to update or create a BlogComment.
+     * @example
+     * // Update or create a BlogComment
+     * const blogComment = await prisma.blogComment.upsert({
+     *   create: {
+     *     // ... data to create a BlogComment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BlogComment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BlogCommentUpsertArgs>(args: SelectSubset<T, BlogCommentUpsertArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BlogComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentCountArgs} args - Arguments to filter BlogComments to count.
+     * @example
+     * // Count the number of BlogComments
+     * const count = await prisma.blogComment.count({
+     *   where: {
+     *     // ... the filter for the BlogComments we want to count
+     *   }
+     * })
+    **/
+    count<T extends BlogCommentCountArgs>(
+      args?: Subset<T, BlogCommentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BlogCommentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BlogComment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BlogCommentAggregateArgs>(args: Subset<T, BlogCommentAggregateArgs>): Prisma.PrismaPromise<GetBlogCommentAggregateType<T>>
+
+    /**
+     * Group by BlogComment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BlogCommentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BlogCommentGroupByArgs['orderBy'] }
+        : { orderBy?: BlogCommentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BlogCommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlogCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BlogComment model
+   */
+  readonly fields: BlogCommentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BlogComment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BlogCommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    post<T extends BlogPostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BlogPostDefaultArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    parent<T extends BlogComment$parentArgs<ExtArgs> = {}>(args?: Subset<T, BlogComment$parentArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replies<T extends BlogComment$repliesArgs<ExtArgs> = {}>(args?: Subset<T, BlogComment$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reports<T extends BlogComment$reportsArgs<ExtArgs> = {}>(args?: Subset<T, BlogComment$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BlogComment model
+   */
+  interface BlogCommentFieldRefs {
+    readonly id: FieldRef<"BlogComment", 'String'>
+    readonly postId: FieldRef<"BlogComment", 'String'>
+    readonly userId: FieldRef<"BlogComment", 'String'>
+    readonly parentId: FieldRef<"BlogComment", 'String'>
+    readonly content: FieldRef<"BlogComment", 'String'>
+    readonly isDeleted: FieldRef<"BlogComment", 'Boolean'>
+    readonly deletedAt: FieldRef<"BlogComment", 'DateTime'>
+    readonly createdAt: FieldRef<"BlogComment", 'DateTime'>
+    readonly updatedAt: FieldRef<"BlogComment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BlogComment findUnique
+   */
+  export type BlogCommentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogComment to fetch.
+     */
+    where: BlogCommentWhereUniqueInput
+  }
+
+  /**
+   * BlogComment findUniqueOrThrow
+   */
+  export type BlogCommentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogComment to fetch.
+     */
+    where: BlogCommentWhereUniqueInput
+  }
+
+  /**
+   * BlogComment findFirst
+   */
+  export type BlogCommentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogComment to fetch.
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogComments to fetch.
+     */
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogComments.
+     */
+    cursor?: BlogCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogComments.
+     */
+    distinct?: BlogCommentScalarFieldEnum | BlogCommentScalarFieldEnum[]
+  }
+
+  /**
+   * BlogComment findFirstOrThrow
+   */
+  export type BlogCommentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogComment to fetch.
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogComments to fetch.
+     */
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogComments.
+     */
+    cursor?: BlogCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogComments.
+     */
+    distinct?: BlogCommentScalarFieldEnum | BlogCommentScalarFieldEnum[]
+  }
+
+  /**
+   * BlogComment findMany
+   */
+  export type BlogCommentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogComments to fetch.
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogComments to fetch.
+     */
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BlogComments.
+     */
+    cursor?: BlogCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogComments.
+     */
+    distinct?: BlogCommentScalarFieldEnum | BlogCommentScalarFieldEnum[]
+  }
+
+  /**
+   * BlogComment create
+   */
+  export type BlogCommentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BlogComment.
+     */
+    data: XOR<BlogCommentCreateInput, BlogCommentUncheckedCreateInput>
+  }
+
+  /**
+   * BlogComment createMany
+   */
+  export type BlogCommentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BlogComments.
+     */
+    data: BlogCommentCreateManyInput | BlogCommentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlogComment createManyAndReturn
+   */
+  export type BlogCommentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * The data used to create many BlogComments.
+     */
+    data: BlogCommentCreateManyInput | BlogCommentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BlogComment update
+   */
+  export type BlogCommentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BlogComment.
+     */
+    data: XOR<BlogCommentUpdateInput, BlogCommentUncheckedUpdateInput>
+    /**
+     * Choose, which BlogComment to update.
+     */
+    where: BlogCommentWhereUniqueInput
+  }
+
+  /**
+   * BlogComment updateMany
+   */
+  export type BlogCommentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BlogComments.
+     */
+    data: XOR<BlogCommentUpdateManyMutationInput, BlogCommentUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogComments to update
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * Limit how many BlogComments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogComment updateManyAndReturn
+   */
+  export type BlogCommentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * The data used to update BlogComments.
+     */
+    data: XOR<BlogCommentUpdateManyMutationInput, BlogCommentUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogComments to update
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * Limit how many BlogComments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BlogComment upsert
+   */
+  export type BlogCommentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BlogComment to update in case it exists.
+     */
+    where: BlogCommentWhereUniqueInput
+    /**
+     * In case the BlogComment found by the `where` argument doesn't exist, create a new BlogComment with this data.
+     */
+    create: XOR<BlogCommentCreateInput, BlogCommentUncheckedCreateInput>
+    /**
+     * In case the BlogComment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BlogCommentUpdateInput, BlogCommentUncheckedUpdateInput>
+  }
+
+  /**
+   * BlogComment delete
+   */
+  export type BlogCommentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    /**
+     * Filter which BlogComment to delete.
+     */
+    where: BlogCommentWhereUniqueInput
+  }
+
+  /**
+   * BlogComment deleteMany
+   */
+  export type BlogCommentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogComments to delete
+     */
+    where?: BlogCommentWhereInput
+    /**
+     * Limit how many BlogComments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogComment.parent
+   */
+  export type BlogComment$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    where?: BlogCommentWhereInput
+  }
+
+  /**
+   * BlogComment.replies
+   */
+  export type BlogComment$repliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    where?: BlogCommentWhereInput
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    cursor?: BlogCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogCommentScalarFieldEnum | BlogCommentScalarFieldEnum[]
+  }
+
+  /**
+   * BlogComment.reports
+   */
+  export type BlogComment$reportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    where?: BlogCommentReportWhereInput
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    cursor?: BlogCommentReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogCommentReportScalarFieldEnum | BlogCommentReportScalarFieldEnum[]
+  }
+
+  /**
+   * BlogComment without action
+   */
+  export type BlogCommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BlogCommentReport
+   */
+
+  export type AggregateBlogCommentReport = {
+    _count: BlogCommentReportCountAggregateOutputType | null
+    _min: BlogCommentReportMinAggregateOutputType | null
+    _max: BlogCommentReportMaxAggregateOutputType | null
+  }
+
+  export type BlogCommentReportMinAggregateOutputType = {
+    id: string | null
+    commentId: string | null
+    reporterId: string | null
+    reason: $Enums.BlogCommentReportReason | null
+    description: string | null
+    status: $Enums.BlogCommentReportStatus | null
+    reviewedBy: string | null
+    reviewedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogCommentReportMaxAggregateOutputType = {
+    id: string | null
+    commentId: string | null
+    reporterId: string | null
+    reason: $Enums.BlogCommentReportReason | null
+    description: string | null
+    status: $Enums.BlogCommentReportStatus | null
+    reviewedBy: string | null
+    reviewedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogCommentReportCountAggregateOutputType = {
+    id: number
+    commentId: number
+    reporterId: number
+    reason: number
+    description: number
+    status: number
+    reviewedBy: number
+    reviewedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BlogCommentReportMinAggregateInputType = {
+    id?: true
+    commentId?: true
+    reporterId?: true
+    reason?: true
+    description?: true
+    status?: true
+    reviewedBy?: true
+    reviewedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogCommentReportMaxAggregateInputType = {
+    id?: true
+    commentId?: true
+    reporterId?: true
+    reason?: true
+    description?: true
+    status?: true
+    reviewedBy?: true
+    reviewedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogCommentReportCountAggregateInputType = {
+    id?: true
+    commentId?: true
+    reporterId?: true
+    reason?: true
+    description?: true
+    status?: true
+    reviewedBy?: true
+    reviewedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BlogCommentReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogCommentReport to aggregate.
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogCommentReports to fetch.
+     */
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BlogCommentReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogCommentReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogCommentReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BlogCommentReports
+    **/
+    _count?: true | BlogCommentReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BlogCommentReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BlogCommentReportMaxAggregateInputType
+  }
+
+  export type GetBlogCommentReportAggregateType<T extends BlogCommentReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateBlogCommentReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBlogCommentReport[P]>
+      : GetScalarType<T[P], AggregateBlogCommentReport[P]>
+  }
+
+
+
+
+  export type BlogCommentReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogCommentReportWhereInput
+    orderBy?: BlogCommentReportOrderByWithAggregationInput | BlogCommentReportOrderByWithAggregationInput[]
+    by: BlogCommentReportScalarFieldEnum[] | BlogCommentReportScalarFieldEnum
+    having?: BlogCommentReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BlogCommentReportCountAggregateInputType | true
+    _min?: BlogCommentReportMinAggregateInputType
+    _max?: BlogCommentReportMaxAggregateInputType
+  }
+
+  export type BlogCommentReportGroupByOutputType = {
+    id: string
+    commentId: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description: string | null
+    status: $Enums.BlogCommentReportStatus
+    reviewedBy: string | null
+    reviewedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BlogCommentReportCountAggregateOutputType | null
+    _min: BlogCommentReportMinAggregateOutputType | null
+    _max: BlogCommentReportMaxAggregateOutputType | null
+  }
+
+  type GetBlogCommentReportGroupByPayload<T extends BlogCommentReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BlogCommentReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BlogCommentReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BlogCommentReportGroupByOutputType[P]>
+            : GetScalarType<T[P], BlogCommentReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BlogCommentReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    commentId?: boolean
+    reporterId?: boolean
+    reason?: boolean
+    description?: boolean
+    status?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    comment?: boolean | BlogCommentDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | BlogCommentReport$reviewerArgs<ExtArgs>
+  }, ExtArgs["result"]["blogCommentReport"]>
+
+  export type BlogCommentReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    commentId?: boolean
+    reporterId?: boolean
+    reason?: boolean
+    description?: boolean
+    status?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    comment?: boolean | BlogCommentDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | BlogCommentReport$reviewerArgs<ExtArgs>
+  }, ExtArgs["result"]["blogCommentReport"]>
+
+  export type BlogCommentReportSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    commentId?: boolean
+    reporterId?: boolean
+    reason?: boolean
+    description?: boolean
+    status?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    comment?: boolean | BlogCommentDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | BlogCommentReport$reviewerArgs<ExtArgs>
+  }, ExtArgs["result"]["blogCommentReport"]>
+
+  export type BlogCommentReportSelectScalar = {
+    id?: boolean
+    commentId?: boolean
+    reporterId?: boolean
+    reason?: boolean
+    description?: boolean
+    status?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BlogCommentReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "commentId" | "reporterId" | "reason" | "description" | "status" | "reviewedBy" | "reviewedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["blogCommentReport"]>
+  export type BlogCommentReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment?: boolean | BlogCommentDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | BlogCommentReport$reviewerArgs<ExtArgs>
+  }
+  export type BlogCommentReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment?: boolean | BlogCommentDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | BlogCommentReport$reviewerArgs<ExtArgs>
+  }
+  export type BlogCommentReportIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment?: boolean | BlogCommentDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | BlogCommentReport$reviewerArgs<ExtArgs>
+  }
+
+  export type $BlogCommentReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BlogCommentReport"
+    objects: {
+      comment: Prisma.$BlogCommentPayload<ExtArgs>
+      reporter: Prisma.$UserPayload<ExtArgs>
+      reviewer: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      commentId: string
+      reporterId: string
+      reason: $Enums.BlogCommentReportReason
+      description: string | null
+      status: $Enums.BlogCommentReportStatus
+      reviewedBy: string | null
+      reviewedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["blogCommentReport"]>
+    composites: {}
+  }
+
+  type BlogCommentReportGetPayload<S extends boolean | null | undefined | BlogCommentReportDefaultArgs> = $Result.GetResult<Prisma.$BlogCommentReportPayload, S>
+
+  type BlogCommentReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BlogCommentReportFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BlogCommentReportCountAggregateInputType | true
+    }
+
+  export interface BlogCommentReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlogCommentReport'], meta: { name: 'BlogCommentReport' } }
+    /**
+     * Find zero or one BlogCommentReport that matches the filter.
+     * @param {BlogCommentReportFindUniqueArgs} args - Arguments to find a BlogCommentReport
+     * @example
+     * // Get one BlogCommentReport
+     * const blogCommentReport = await prisma.blogCommentReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BlogCommentReportFindUniqueArgs>(args: SelectSubset<T, BlogCommentReportFindUniqueArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BlogCommentReport that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BlogCommentReportFindUniqueOrThrowArgs} args - Arguments to find a BlogCommentReport
+     * @example
+     * // Get one BlogCommentReport
+     * const blogCommentReport = await prisma.blogCommentReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BlogCommentReportFindUniqueOrThrowArgs>(args: SelectSubset<T, BlogCommentReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogCommentReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportFindFirstArgs} args - Arguments to find a BlogCommentReport
+     * @example
+     * // Get one BlogCommentReport
+     * const blogCommentReport = await prisma.blogCommentReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BlogCommentReportFindFirstArgs>(args?: SelectSubset<T, BlogCommentReportFindFirstArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogCommentReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportFindFirstOrThrowArgs} args - Arguments to find a BlogCommentReport
+     * @example
+     * // Get one BlogCommentReport
+     * const blogCommentReport = await prisma.blogCommentReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BlogCommentReportFindFirstOrThrowArgs>(args?: SelectSubset<T, BlogCommentReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BlogCommentReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BlogCommentReports
+     * const blogCommentReports = await prisma.blogCommentReport.findMany()
+     * 
+     * // Get first 10 BlogCommentReports
+     * const blogCommentReports = await prisma.blogCommentReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const blogCommentReportWithIdOnly = await prisma.blogCommentReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BlogCommentReportFindManyArgs>(args?: SelectSubset<T, BlogCommentReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BlogCommentReport.
+     * @param {BlogCommentReportCreateArgs} args - Arguments to create a BlogCommentReport.
+     * @example
+     * // Create one BlogCommentReport
+     * const BlogCommentReport = await prisma.blogCommentReport.create({
+     *   data: {
+     *     // ... data to create a BlogCommentReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends BlogCommentReportCreateArgs>(args: SelectSubset<T, BlogCommentReportCreateArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BlogCommentReports.
+     * @param {BlogCommentReportCreateManyArgs} args - Arguments to create many BlogCommentReports.
+     * @example
+     * // Create many BlogCommentReports
+     * const blogCommentReport = await prisma.blogCommentReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BlogCommentReportCreateManyArgs>(args?: SelectSubset<T, BlogCommentReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BlogCommentReports and returns the data saved in the database.
+     * @param {BlogCommentReportCreateManyAndReturnArgs} args - Arguments to create many BlogCommentReports.
+     * @example
+     * // Create many BlogCommentReports
+     * const blogCommentReport = await prisma.blogCommentReport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BlogCommentReports and only return the `id`
+     * const blogCommentReportWithIdOnly = await prisma.blogCommentReport.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BlogCommentReportCreateManyAndReturnArgs>(args?: SelectSubset<T, BlogCommentReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BlogCommentReport.
+     * @param {BlogCommentReportDeleteArgs} args - Arguments to delete one BlogCommentReport.
+     * @example
+     * // Delete one BlogCommentReport
+     * const BlogCommentReport = await prisma.blogCommentReport.delete({
+     *   where: {
+     *     // ... filter to delete one BlogCommentReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BlogCommentReportDeleteArgs>(args: SelectSubset<T, BlogCommentReportDeleteArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BlogCommentReport.
+     * @param {BlogCommentReportUpdateArgs} args - Arguments to update one BlogCommentReport.
+     * @example
+     * // Update one BlogCommentReport
+     * const blogCommentReport = await prisma.blogCommentReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BlogCommentReportUpdateArgs>(args: SelectSubset<T, BlogCommentReportUpdateArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BlogCommentReports.
+     * @param {BlogCommentReportDeleteManyArgs} args - Arguments to filter BlogCommentReports to delete.
+     * @example
+     * // Delete a few BlogCommentReports
+     * const { count } = await prisma.blogCommentReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BlogCommentReportDeleteManyArgs>(args?: SelectSubset<T, BlogCommentReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogCommentReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BlogCommentReports
+     * const blogCommentReport = await prisma.blogCommentReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BlogCommentReportUpdateManyArgs>(args: SelectSubset<T, BlogCommentReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogCommentReports and returns the data updated in the database.
+     * @param {BlogCommentReportUpdateManyAndReturnArgs} args - Arguments to update many BlogCommentReports.
+     * @example
+     * // Update many BlogCommentReports
+     * const blogCommentReport = await prisma.blogCommentReport.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BlogCommentReports and only return the `id`
+     * const blogCommentReportWithIdOnly = await prisma.blogCommentReport.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BlogCommentReportUpdateManyAndReturnArgs>(args: SelectSubset<T, BlogCommentReportUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BlogCommentReport.
+     * @param {BlogCommentReportUpsertArgs} args - Arguments to update or create a BlogCommentReport.
+     * @example
+     * // Update or create a BlogCommentReport
+     * const blogCommentReport = await prisma.blogCommentReport.upsert({
+     *   create: {
+     *     // ... data to create a BlogCommentReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BlogCommentReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BlogCommentReportUpsertArgs>(args: SelectSubset<T, BlogCommentReportUpsertArgs<ExtArgs>>): Prisma__BlogCommentReportClient<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BlogCommentReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportCountArgs} args - Arguments to filter BlogCommentReports to count.
+     * @example
+     * // Count the number of BlogCommentReports
+     * const count = await prisma.blogCommentReport.count({
+     *   where: {
+     *     // ... the filter for the BlogCommentReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends BlogCommentReportCountArgs>(
+      args?: Subset<T, BlogCommentReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BlogCommentReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BlogCommentReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BlogCommentReportAggregateArgs>(args: Subset<T, BlogCommentReportAggregateArgs>): Prisma.PrismaPromise<GetBlogCommentReportAggregateType<T>>
+
+    /**
+     * Group by BlogCommentReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogCommentReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BlogCommentReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BlogCommentReportGroupByArgs['orderBy'] }
+        : { orderBy?: BlogCommentReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BlogCommentReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlogCommentReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BlogCommentReport model
+   */
+  readonly fields: BlogCommentReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BlogCommentReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BlogCommentReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    comment<T extends BlogCommentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BlogCommentDefaultArgs<ExtArgs>>): Prisma__BlogCommentClient<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reporter<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reviewer<T extends BlogCommentReport$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, BlogCommentReport$reviewerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BlogCommentReport model
+   */
+  interface BlogCommentReportFieldRefs {
+    readonly id: FieldRef<"BlogCommentReport", 'String'>
+    readonly commentId: FieldRef<"BlogCommentReport", 'String'>
+    readonly reporterId: FieldRef<"BlogCommentReport", 'String'>
+    readonly reason: FieldRef<"BlogCommentReport", 'BlogCommentReportReason'>
+    readonly description: FieldRef<"BlogCommentReport", 'String'>
+    readonly status: FieldRef<"BlogCommentReport", 'BlogCommentReportStatus'>
+    readonly reviewedBy: FieldRef<"BlogCommentReport", 'String'>
+    readonly reviewedAt: FieldRef<"BlogCommentReport", 'DateTime'>
+    readonly createdAt: FieldRef<"BlogCommentReport", 'DateTime'>
+    readonly updatedAt: FieldRef<"BlogCommentReport", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BlogCommentReport findUnique
+   */
+  export type BlogCommentReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogCommentReport to fetch.
+     */
+    where: BlogCommentReportWhereUniqueInput
+  }
+
+  /**
+   * BlogCommentReport findUniqueOrThrow
+   */
+  export type BlogCommentReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogCommentReport to fetch.
+     */
+    where: BlogCommentReportWhereUniqueInput
+  }
+
+  /**
+   * BlogCommentReport findFirst
+   */
+  export type BlogCommentReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogCommentReport to fetch.
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogCommentReports to fetch.
+     */
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogCommentReports.
+     */
+    cursor?: BlogCommentReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogCommentReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogCommentReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogCommentReports.
+     */
+    distinct?: BlogCommentReportScalarFieldEnum | BlogCommentReportScalarFieldEnum[]
+  }
+
+  /**
+   * BlogCommentReport findFirstOrThrow
+   */
+  export type BlogCommentReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogCommentReport to fetch.
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogCommentReports to fetch.
+     */
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogCommentReports.
+     */
+    cursor?: BlogCommentReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogCommentReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogCommentReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogCommentReports.
+     */
+    distinct?: BlogCommentReportScalarFieldEnum | BlogCommentReportScalarFieldEnum[]
+  }
+
+  /**
+   * BlogCommentReport findMany
+   */
+  export type BlogCommentReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogCommentReports to fetch.
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogCommentReports to fetch.
+     */
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BlogCommentReports.
+     */
+    cursor?: BlogCommentReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogCommentReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogCommentReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogCommentReports.
+     */
+    distinct?: BlogCommentReportScalarFieldEnum | BlogCommentReportScalarFieldEnum[]
+  }
+
+  /**
+   * BlogCommentReport create
+   */
+  export type BlogCommentReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BlogCommentReport.
+     */
+    data: XOR<BlogCommentReportCreateInput, BlogCommentReportUncheckedCreateInput>
+  }
+
+  /**
+   * BlogCommentReport createMany
+   */
+  export type BlogCommentReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BlogCommentReports.
+     */
+    data: BlogCommentReportCreateManyInput | BlogCommentReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlogCommentReport createManyAndReturn
+   */
+  export type BlogCommentReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * The data used to create many BlogCommentReports.
+     */
+    data: BlogCommentReportCreateManyInput | BlogCommentReportCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BlogCommentReport update
+   */
+  export type BlogCommentReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BlogCommentReport.
+     */
+    data: XOR<BlogCommentReportUpdateInput, BlogCommentReportUncheckedUpdateInput>
+    /**
+     * Choose, which BlogCommentReport to update.
+     */
+    where: BlogCommentReportWhereUniqueInput
+  }
+
+  /**
+   * BlogCommentReport updateMany
+   */
+  export type BlogCommentReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BlogCommentReports.
+     */
+    data: XOR<BlogCommentReportUpdateManyMutationInput, BlogCommentReportUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogCommentReports to update
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * Limit how many BlogCommentReports to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogCommentReport updateManyAndReturn
+   */
+  export type BlogCommentReportUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * The data used to update BlogCommentReports.
+     */
+    data: XOR<BlogCommentReportUpdateManyMutationInput, BlogCommentReportUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogCommentReports to update
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * Limit how many BlogCommentReports to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BlogCommentReport upsert
+   */
+  export type BlogCommentReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BlogCommentReport to update in case it exists.
+     */
+    where: BlogCommentReportWhereUniqueInput
+    /**
+     * In case the BlogCommentReport found by the `where` argument doesn't exist, create a new BlogCommentReport with this data.
+     */
+    create: XOR<BlogCommentReportCreateInput, BlogCommentReportUncheckedCreateInput>
+    /**
+     * In case the BlogCommentReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BlogCommentReportUpdateInput, BlogCommentReportUncheckedUpdateInput>
+  }
+
+  /**
+   * BlogCommentReport delete
+   */
+  export type BlogCommentReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    /**
+     * Filter which BlogCommentReport to delete.
+     */
+    where: BlogCommentReportWhereUniqueInput
+  }
+
+  /**
+   * BlogCommentReport deleteMany
+   */
+  export type BlogCommentReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogCommentReports to delete
+     */
+    where?: BlogCommentReportWhereInput
+    /**
+     * Limit how many BlogCommentReports to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogCommentReport.reviewer
+   */
+  export type BlogCommentReport$reviewerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * BlogCommentReport without action
+   */
+  export type BlogCommentReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model BlogTopic
    */
 
@@ -18572,6 +21252,8 @@ export namespace Prisma {
     topic?: boolean | BlogPost$topicArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     featuredImage?: boolean | BlogPost$featuredImageArgs<ExtArgs>
+    comments?: boolean | BlogPost$commentsArgs<ExtArgs>
+    _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["blogPost"]>
 
   export type BlogPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18648,6 +21330,8 @@ export namespace Prisma {
     topic?: boolean | BlogPost$topicArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     featuredImage?: boolean | BlogPost$featuredImageArgs<ExtArgs>
+    comments?: boolean | BlogPost$commentsArgs<ExtArgs>
+    _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type BlogPostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     topic?: boolean | BlogPost$topicArgs<ExtArgs>
@@ -18666,6 +21350,7 @@ export namespace Prisma {
       topic: Prisma.$BlogTopicPayload<ExtArgs> | null
       author: Prisma.$UserPayload<ExtArgs>
       featuredImage: Prisma.$MediaPayload<ExtArgs> | null
+      comments: Prisma.$BlogCommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19083,6 +21768,7 @@ export namespace Prisma {
     topic<T extends BlogPost$topicArgs<ExtArgs> = {}>(args?: Subset<T, BlogPost$topicArgs<ExtArgs>>): Prisma__BlogTopicClient<$Result.GetResult<Prisma.$BlogTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     featuredImage<T extends BlogPost$featuredImageArgs<ExtArgs> = {}>(args?: Subset<T, BlogPost$featuredImageArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    comments<T extends BlogPost$commentsArgs<ExtArgs> = {}>(args?: Subset<T, BlogPost$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19566,6 +22252,30 @@ export namespace Prisma {
      */
     include?: MediaInclude<ExtArgs> | null
     where?: MediaWhereInput
+  }
+
+  /**
+   * BlogPost.comments
+   */
+  export type BlogPost$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    where?: BlogCommentWhereInput
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    cursor?: BlogCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogCommentScalarFieldEnum | BlogCommentScalarFieldEnum[]
   }
 
   /**
@@ -54903,6 +57613,9 @@ export namespace Prisma {
     sharedWishlists?: boolean | User$sharedWishlistsArgs<ExtArgs>
     media?: boolean | User$mediaArgs<ExtArgs>
     blogPosts?: boolean | User$blogPostsArgs<ExtArgs>
+    blogComments?: boolean | User$blogCommentsArgs<ExtArgs>
+    blogCommentReports?: boolean | User$blogCommentReportsArgs<ExtArgs>
+    reviewedCommentReports?: boolean | User$reviewedCommentReportsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -54996,6 +57709,9 @@ export namespace Prisma {
     sharedWishlists?: boolean | User$sharedWishlistsArgs<ExtArgs>
     media?: boolean | User$mediaArgs<ExtArgs>
     blogPosts?: boolean | User$blogPostsArgs<ExtArgs>
+    blogComments?: boolean | User$blogCommentsArgs<ExtArgs>
+    blogCommentReports?: boolean | User$blogCommentReportsArgs<ExtArgs>
+    reviewedCommentReports?: boolean | User$reviewedCommentReportsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -55025,6 +57741,9 @@ export namespace Prisma {
       sharedWishlists: Prisma.$SharedWishlistPayload<ExtArgs>[]
       media: Prisma.$MediaPayload<ExtArgs> | null
       blogPosts: Prisma.$BlogPostPayload<ExtArgs>[]
+      blogComments: Prisma.$BlogCommentPayload<ExtArgs>[]
+      blogCommentReports: Prisma.$BlogCommentReportPayload<ExtArgs>[]
+      reviewedCommentReports: Prisma.$BlogCommentReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -55458,6 +58177,9 @@ export namespace Prisma {
     sharedWishlists<T extends User$sharedWishlistsArgs<ExtArgs> = {}>(args?: Subset<T, User$sharedWishlistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SharedWishlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     media<T extends User$mediaArgs<ExtArgs> = {}>(args?: Subset<T, User$mediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     blogPosts<T extends User$blogPostsArgs<ExtArgs> = {}>(args?: Subset<T, User$blogPostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blogComments<T extends User$blogCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$blogCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blogCommentReports<T extends User$blogCommentReportsArgs<ExtArgs> = {}>(args?: Subset<T, User$blogCommentReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewedCommentReports<T extends User$reviewedCommentReportsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedCommentReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogCommentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -56293,6 +59015,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * User.blogComments
+   */
+  export type User$blogCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogComment
+     */
+    select?: BlogCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogComment
+     */
+    omit?: BlogCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentInclude<ExtArgs> | null
+    where?: BlogCommentWhereInput
+    orderBy?: BlogCommentOrderByWithRelationInput | BlogCommentOrderByWithRelationInput[]
+    cursor?: BlogCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogCommentScalarFieldEnum | BlogCommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.blogCommentReports
+   */
+  export type User$blogCommentReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    where?: BlogCommentReportWhereInput
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    cursor?: BlogCommentReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogCommentReportScalarFieldEnum | BlogCommentReportScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewedCommentReports
+   */
+  export type User$reviewedCommentReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCommentReport
+     */
+    select?: BlogCommentReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogCommentReport
+     */
+    omit?: BlogCommentReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogCommentReportInclude<ExtArgs> | null
+    where?: BlogCommentReportWhereInput
+    orderBy?: BlogCommentReportOrderByWithRelationInput | BlogCommentReportOrderByWithRelationInput[]
+    cursor?: BlogCommentReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogCommentReportScalarFieldEnum | BlogCommentReportScalarFieldEnum[]
   }
 
   /**
@@ -62061,6 +64855,37 @@ export namespace Prisma {
   export type BannerGroupMappingScalarFieldEnum = (typeof BannerGroupMappingScalarFieldEnum)[keyof typeof BannerGroupMappingScalarFieldEnum]
 
 
+  export const BlogCommentScalarFieldEnum: {
+    id: 'id',
+    postId: 'postId',
+    userId: 'userId',
+    parentId: 'parentId',
+    content: 'content',
+    isDeleted: 'isDeleted',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BlogCommentScalarFieldEnum = (typeof BlogCommentScalarFieldEnum)[keyof typeof BlogCommentScalarFieldEnum]
+
+
+  export const BlogCommentReportScalarFieldEnum: {
+    id: 'id',
+    commentId: 'commentId',
+    reporterId: 'reporterId',
+    reason: 'reason',
+    description: 'description',
+    status: 'status',
+    reviewedBy: 'reviewedBy',
+    reviewedAt: 'reviewedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BlogCommentReportScalarFieldEnum = (typeof BlogCommentReportScalarFieldEnum)[keyof typeof BlogCommentReportScalarFieldEnum]
+
+
   export const BlogTopicScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -62807,6 +65632,34 @@ export namespace Prisma {
    * Reference to a field of type 'BannerPosition[]'
    */
   export type ListEnumBannerPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BannerPosition[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BlogCommentReportReason'
+   */
+  export type EnumBlogCommentReportReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogCommentReportReason'>
+    
+
+
+  /**
+   * Reference to a field of type 'BlogCommentReportReason[]'
+   */
+  export type ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogCommentReportReason[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BlogCommentReportStatus'
+   */
+  export type EnumBlogCommentReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogCommentReportStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'BlogCommentReportStatus[]'
+   */
+  export type ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogCommentReportStatus[]'>
     
 
 
@@ -63890,6 +66743,179 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"BannerGroupMapping"> | Date | string
   }
 
+  export type BlogCommentWhereInput = {
+    AND?: BlogCommentWhereInput | BlogCommentWhereInput[]
+    OR?: BlogCommentWhereInput[]
+    NOT?: BlogCommentWhereInput | BlogCommentWhereInput[]
+    id?: StringFilter<"BlogComment"> | string
+    postId?: StringFilter<"BlogComment"> | string
+    userId?: StringFilter<"BlogComment"> | string
+    parentId?: StringNullableFilter<"BlogComment"> | string | null
+    content?: StringFilter<"BlogComment"> | string
+    isDeleted?: BoolFilter<"BlogComment"> | boolean
+    deletedAt?: DateTimeNullableFilter<"BlogComment"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogComment"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogComment"> | Date | string
+    post?: XOR<BlogPostScalarRelationFilter, BlogPostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    parent?: XOR<BlogCommentNullableScalarRelationFilter, BlogCommentWhereInput> | null
+    replies?: BlogCommentListRelationFilter
+    reports?: BlogCommentReportListRelationFilter
+  }
+
+  export type BlogCommentOrderByWithRelationInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    post?: BlogPostOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    parent?: BlogCommentOrderByWithRelationInput
+    replies?: BlogCommentOrderByRelationAggregateInput
+    reports?: BlogCommentReportOrderByRelationAggregateInput
+  }
+
+  export type BlogCommentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BlogCommentWhereInput | BlogCommentWhereInput[]
+    OR?: BlogCommentWhereInput[]
+    NOT?: BlogCommentWhereInput | BlogCommentWhereInput[]
+    postId?: StringFilter<"BlogComment"> | string
+    userId?: StringFilter<"BlogComment"> | string
+    parentId?: StringNullableFilter<"BlogComment"> | string | null
+    content?: StringFilter<"BlogComment"> | string
+    isDeleted?: BoolFilter<"BlogComment"> | boolean
+    deletedAt?: DateTimeNullableFilter<"BlogComment"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogComment"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogComment"> | Date | string
+    post?: XOR<BlogPostScalarRelationFilter, BlogPostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    parent?: XOR<BlogCommentNullableScalarRelationFilter, BlogCommentWhereInput> | null
+    replies?: BlogCommentListRelationFilter
+    reports?: BlogCommentReportListRelationFilter
+  }, "id">
+
+  export type BlogCommentOrderByWithAggregationInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BlogCommentCountOrderByAggregateInput
+    _max?: BlogCommentMaxOrderByAggregateInput
+    _min?: BlogCommentMinOrderByAggregateInput
+  }
+
+  export type BlogCommentScalarWhereWithAggregatesInput = {
+    AND?: BlogCommentScalarWhereWithAggregatesInput | BlogCommentScalarWhereWithAggregatesInput[]
+    OR?: BlogCommentScalarWhereWithAggregatesInput[]
+    NOT?: BlogCommentScalarWhereWithAggregatesInput | BlogCommentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BlogComment"> | string
+    postId?: StringWithAggregatesFilter<"BlogComment"> | string
+    userId?: StringWithAggregatesFilter<"BlogComment"> | string
+    parentId?: StringNullableWithAggregatesFilter<"BlogComment"> | string | null
+    content?: StringWithAggregatesFilter<"BlogComment"> | string
+    isDeleted?: BoolWithAggregatesFilter<"BlogComment"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"BlogComment"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BlogComment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BlogComment"> | Date | string
+  }
+
+  export type BlogCommentReportWhereInput = {
+    AND?: BlogCommentReportWhereInput | BlogCommentReportWhereInput[]
+    OR?: BlogCommentReportWhereInput[]
+    NOT?: BlogCommentReportWhereInput | BlogCommentReportWhereInput[]
+    id?: StringFilter<"BlogCommentReport"> | string
+    commentId?: StringFilter<"BlogCommentReport"> | string
+    reporterId?: StringFilter<"BlogCommentReport"> | string
+    reason?: EnumBlogCommentReportReasonFilter<"BlogCommentReport"> | $Enums.BlogCommentReportReason
+    description?: StringNullableFilter<"BlogCommentReport"> | string | null
+    status?: EnumBlogCommentReportStatusFilter<"BlogCommentReport"> | $Enums.BlogCommentReportStatus
+    reviewedBy?: StringNullableFilter<"BlogCommentReport"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"BlogCommentReport"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogCommentReport"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogCommentReport"> | Date | string
+    comment?: XOR<BlogCommentScalarRelationFilter, BlogCommentWhereInput>
+    reporter?: XOR<UserScalarRelationFilter, UserWhereInput>
+    reviewer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type BlogCommentReportOrderByWithRelationInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    reporterId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    comment?: BlogCommentOrderByWithRelationInput
+    reporter?: UserOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+  }
+
+  export type BlogCommentReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BlogCommentReportWhereInput | BlogCommentReportWhereInput[]
+    OR?: BlogCommentReportWhereInput[]
+    NOT?: BlogCommentReportWhereInput | BlogCommentReportWhereInput[]
+    commentId?: StringFilter<"BlogCommentReport"> | string
+    reporterId?: StringFilter<"BlogCommentReport"> | string
+    reason?: EnumBlogCommentReportReasonFilter<"BlogCommentReport"> | $Enums.BlogCommentReportReason
+    description?: StringNullableFilter<"BlogCommentReport"> | string | null
+    status?: EnumBlogCommentReportStatusFilter<"BlogCommentReport"> | $Enums.BlogCommentReportStatus
+    reviewedBy?: StringNullableFilter<"BlogCommentReport"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"BlogCommentReport"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogCommentReport"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogCommentReport"> | Date | string
+    comment?: XOR<BlogCommentScalarRelationFilter, BlogCommentWhereInput>
+    reporter?: XOR<UserScalarRelationFilter, UserWhereInput>
+    reviewer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type BlogCommentReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    reporterId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BlogCommentReportCountOrderByAggregateInput
+    _max?: BlogCommentReportMaxOrderByAggregateInput
+    _min?: BlogCommentReportMinOrderByAggregateInput
+  }
+
+  export type BlogCommentReportScalarWhereWithAggregatesInput = {
+    AND?: BlogCommentReportScalarWhereWithAggregatesInput | BlogCommentReportScalarWhereWithAggregatesInput[]
+    OR?: BlogCommentReportScalarWhereWithAggregatesInput[]
+    NOT?: BlogCommentReportScalarWhereWithAggregatesInput | BlogCommentReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BlogCommentReport"> | string
+    commentId?: StringWithAggregatesFilter<"BlogCommentReport"> | string
+    reporterId?: StringWithAggregatesFilter<"BlogCommentReport"> | string
+    reason?: EnumBlogCommentReportReasonWithAggregatesFilter<"BlogCommentReport"> | $Enums.BlogCommentReportReason
+    description?: StringNullableWithAggregatesFilter<"BlogCommentReport"> | string | null
+    status?: EnumBlogCommentReportStatusWithAggregatesFilter<"BlogCommentReport"> | $Enums.BlogCommentReportStatus
+    reviewedBy?: StringNullableWithAggregatesFilter<"BlogCommentReport"> | string | null
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"BlogCommentReport"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BlogCommentReport"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BlogCommentReport"> | Date | string
+  }
+
   export type BlogTopicWhereInput = {
     AND?: BlogTopicWhereInput | BlogTopicWhereInput[]
     OR?: BlogTopicWhereInput[]
@@ -64016,6 +67042,7 @@ export namespace Prisma {
     topic?: XOR<BlogTopicNullableScalarRelationFilter, BlogTopicWhereInput> | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     featuredImage?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    comments?: BlogCommentListRelationFilter
   }
 
   export type BlogPostOrderByWithRelationInput = {
@@ -64040,6 +67067,7 @@ export namespace Prisma {
     topic?: BlogTopicOrderByWithRelationInput
     author?: UserOrderByWithRelationInput
     featuredImage?: MediaOrderByWithRelationInput
+    comments?: BlogCommentOrderByRelationAggregateInput
   }
 
   export type BlogPostWhereUniqueInput = Prisma.AtLeast<{
@@ -64067,6 +67095,7 @@ export namespace Prisma {
     topic?: XOR<BlogTopicNullableScalarRelationFilter, BlogTopicWhereInput> | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     featuredImage?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    comments?: BlogCommentListRelationFilter
   }, "id" | "slug">
 
   export type BlogPostOrderByWithAggregationInput = {
@@ -66711,6 +69740,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistListRelationFilter
     media?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     blogPosts?: BlogPostListRelationFilter
+    blogComments?: BlogCommentListRelationFilter
+    blogCommentReports?: BlogCommentReportListRelationFilter
+    reviewedCommentReports?: BlogCommentReportListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -66751,6 +69783,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistOrderByRelationAggregateInput
     media?: MediaOrderByWithRelationInput
     blogPosts?: BlogPostOrderByRelationAggregateInput
+    blogComments?: BlogCommentOrderByRelationAggregateInput
+    blogCommentReports?: BlogCommentReportOrderByRelationAggregateInput
+    reviewedCommentReports?: BlogCommentReportOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -66794,6 +69829,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistListRelationFilter
     media?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     blogPosts?: BlogPostListRelationFilter
+    blogComments?: BlogCommentListRelationFilter
+    blogCommentReports?: BlogCommentReportListRelationFilter
+    reviewedCommentReports?: BlogCommentReportListRelationFilter
   }, "id" | "email" | "phone" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -68176,6 +71214,183 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BlogCommentCreateInput = {
+    id?: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    post: BlogPostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutBlogCommentsInput
+    parent?: BlogCommentCreateNestedOneWithoutRepliesInput
+    replies?: BlogCommentCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentUncheckedCreateInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: BlogCommentUncheckedCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutBlogCommentsNestedInput
+    parent?: BlogCommentUpdateOneWithoutRepliesNestedInput
+    replies?: BlogCommentUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: BlogCommentUncheckedUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentCreateManyInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportCreateInput = {
+    id?: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comment: BlogCommentCreateNestedOneWithoutReportsInput
+    reporter: UserCreateNestedOneWithoutBlogCommentReportsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedCommentReportsInput
+  }
+
+  export type BlogCommentReportUncheckedCreateInput = {
+    id?: string
+    commentId: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment?: BlogCommentUpdateOneRequiredWithoutReportsNestedInput
+    reporter?: UserUpdateOneRequiredWithoutBlogCommentReportsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedCommentReportsNestedInput
+  }
+
+  export type BlogCommentReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportCreateManyInput = {
+    id?: string
+    commentId: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type BlogTopicCreateInput = {
     id?: string
     name: string
@@ -68306,6 +71521,7 @@ export namespace Prisma {
     topic?: BlogTopicCreateNestedOneWithoutPostsInput
     author: UserCreateNestedOneWithoutBlogPostsInput
     featuredImage?: MediaCreateNestedOneWithoutBlogPostsInput
+    comments?: BlogCommentCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostUncheckedCreateInput = {
@@ -68327,6 +71543,7 @@ export namespace Prisma {
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    comments?: BlogCommentUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostUpdateInput = {
@@ -68348,6 +71565,7 @@ export namespace Prisma {
     topic?: BlogTopicUpdateOneWithoutPostsNestedInput
     author?: UserUpdateOneRequiredWithoutBlogPostsNestedInput
     featuredImage?: MediaUpdateOneWithoutBlogPostsNestedInput
+    comments?: BlogCommentUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateInput = {
@@ -68369,6 +71587,7 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: BlogCommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostCreateManyInput = {
@@ -71237,6 +74456,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -71276,6 +74498,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUpdateInput = {
@@ -71315,6 +74540,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -71354,6 +74582,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -72597,6 +75828,155 @@ export namespace Prisma {
     sortOrder?: SortOrder
   }
 
+  export type BlogPostScalarRelationFilter = {
+    is?: BlogPostWhereInput
+    isNot?: BlogPostWhereInput
+  }
+
+  export type BlogCommentNullableScalarRelationFilter = {
+    is?: BlogCommentWhereInput | null
+    isNot?: BlogCommentWhereInput | null
+  }
+
+  export type BlogCommentListRelationFilter = {
+    every?: BlogCommentWhereInput
+    some?: BlogCommentWhereInput
+    none?: BlogCommentWhereInput
+  }
+
+  export type BlogCommentReportListRelationFilter = {
+    every?: BlogCommentReportWhereInput
+    some?: BlogCommentReportWhereInput
+    none?: BlogCommentReportWhereInput
+  }
+
+  export type BlogCommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BlogCommentReportOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BlogCommentCountOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogCommentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogCommentMinOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumBlogCommentReportReasonFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportReason | EnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportReasonFilter<$PrismaModel> | $Enums.BlogCommentReportReason
+  }
+
+  export type EnumBlogCommentReportStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportStatus | EnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportStatusFilter<$PrismaModel> | $Enums.BlogCommentReportStatus
+  }
+
+  export type BlogCommentScalarRelationFilter = {
+    is?: BlogCommentWhereInput
+    isNot?: BlogCommentWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type BlogCommentReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    reporterId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    reviewedBy?: SortOrder
+    reviewedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogCommentReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    reporterId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    reviewedBy?: SortOrder
+    reviewedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogCommentReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    reporterId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    reviewedBy?: SortOrder
+    reviewedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumBlogCommentReportReasonWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportReason | EnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportReasonWithAggregatesFilter<$PrismaModel> | $Enums.BlogCommentReportReason
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBlogCommentReportReasonFilter<$PrismaModel>
+    _max?: NestedEnumBlogCommentReportReasonFilter<$PrismaModel>
+  }
+
+  export type EnumBlogCommentReportStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportStatus | EnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportStatusWithAggregatesFilter<$PrismaModel> | $Enums.BlogCommentReportStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBlogCommentReportStatusFilter<$PrismaModel>
+    _max?: NestedEnumBlogCommentReportStatusFilter<$PrismaModel>
+  }
+
   export type BlogTopicNullableScalarRelationFilter = {
     is?: BlogTopicWhereInput | null
     isNot?: BlogTopicWhereInput | null
@@ -73075,11 +76455,6 @@ export namespace Prisma {
     in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumMediaTypeFilter<$PrismaModel> | $Enums.MediaType
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
   }
 
   export type ProductImageListRelationFilter = {
@@ -75498,6 +78873,186 @@ export namespace Prisma {
     update?: XOR<XOR<BannerGroupUpdateToOneWithWhereWithoutBannersInput, BannerGroupUpdateWithoutBannersInput>, BannerGroupUncheckedUpdateWithoutBannersInput>
   }
 
+  export type BlogPostCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCommentsInput
+    connect?: BlogPostWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutBlogCommentsInput = {
+    create?: XOR<UserCreateWithoutBlogCommentsInput, UserUncheckedCreateWithoutBlogCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBlogCommentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BlogCommentCreateNestedOneWithoutRepliesInput = {
+    create?: XOR<BlogCommentCreateWithoutRepliesInput, BlogCommentUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutRepliesInput
+    connect?: BlogCommentWhereUniqueInput
+  }
+
+  export type BlogCommentCreateNestedManyWithoutParentInput = {
+    create?: XOR<BlogCommentCreateWithoutParentInput, BlogCommentUncheckedCreateWithoutParentInput> | BlogCommentCreateWithoutParentInput[] | BlogCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutParentInput | BlogCommentCreateOrConnectWithoutParentInput[]
+    createMany?: BlogCommentCreateManyParentInputEnvelope
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+  }
+
+  export type BlogCommentReportCreateNestedManyWithoutCommentInput = {
+    create?: XOR<BlogCommentReportCreateWithoutCommentInput, BlogCommentReportUncheckedCreateWithoutCommentInput> | BlogCommentReportCreateWithoutCommentInput[] | BlogCommentReportUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutCommentInput | BlogCommentReportCreateOrConnectWithoutCommentInput[]
+    createMany?: BlogCommentReportCreateManyCommentInputEnvelope
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+  }
+
+  export type BlogCommentUncheckedCreateNestedManyWithoutParentInput = {
+    create?: XOR<BlogCommentCreateWithoutParentInput, BlogCommentUncheckedCreateWithoutParentInput> | BlogCommentCreateWithoutParentInput[] | BlogCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutParentInput | BlogCommentCreateOrConnectWithoutParentInput[]
+    createMany?: BlogCommentCreateManyParentInputEnvelope
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+  }
+
+  export type BlogCommentReportUncheckedCreateNestedManyWithoutCommentInput = {
+    create?: XOR<BlogCommentReportCreateWithoutCommentInput, BlogCommentReportUncheckedCreateWithoutCommentInput> | BlogCommentReportCreateWithoutCommentInput[] | BlogCommentReportUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutCommentInput | BlogCommentReportCreateOrConnectWithoutCommentInput[]
+    createMany?: BlogCommentReportCreateManyCommentInputEnvelope
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+  }
+
+  export type BlogPostUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCommentsInput
+    upsert?: BlogPostUpsertWithoutCommentsInput
+    connect?: BlogPostWhereUniqueInput
+    update?: XOR<XOR<BlogPostUpdateToOneWithWhereWithoutCommentsInput, BlogPostUpdateWithoutCommentsInput>, BlogPostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutBlogCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutBlogCommentsInput, UserUncheckedCreateWithoutBlogCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBlogCommentsInput
+    upsert?: UserUpsertWithoutBlogCommentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBlogCommentsInput, UserUpdateWithoutBlogCommentsInput>, UserUncheckedUpdateWithoutBlogCommentsInput>
+  }
+
+  export type BlogCommentUpdateOneWithoutRepliesNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutRepliesInput, BlogCommentUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutRepliesInput
+    upsert?: BlogCommentUpsertWithoutRepliesInput
+    disconnect?: BlogCommentWhereInput | boolean
+    delete?: BlogCommentWhereInput | boolean
+    connect?: BlogCommentWhereUniqueInput
+    update?: XOR<XOR<BlogCommentUpdateToOneWithWhereWithoutRepliesInput, BlogCommentUpdateWithoutRepliesInput>, BlogCommentUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type BlogCommentUpdateManyWithoutParentNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutParentInput, BlogCommentUncheckedCreateWithoutParentInput> | BlogCommentCreateWithoutParentInput[] | BlogCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutParentInput | BlogCommentCreateOrConnectWithoutParentInput[]
+    upsert?: BlogCommentUpsertWithWhereUniqueWithoutParentInput | BlogCommentUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: BlogCommentCreateManyParentInputEnvelope
+    set?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    disconnect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    delete?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    update?: BlogCommentUpdateWithWhereUniqueWithoutParentInput | BlogCommentUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: BlogCommentUpdateManyWithWhereWithoutParentInput | BlogCommentUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+  }
+
+  export type BlogCommentReportUpdateManyWithoutCommentNestedInput = {
+    create?: XOR<BlogCommentReportCreateWithoutCommentInput, BlogCommentReportUncheckedCreateWithoutCommentInput> | BlogCommentReportCreateWithoutCommentInput[] | BlogCommentReportUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutCommentInput | BlogCommentReportCreateOrConnectWithoutCommentInput[]
+    upsert?: BlogCommentReportUpsertWithWhereUniqueWithoutCommentInput | BlogCommentReportUpsertWithWhereUniqueWithoutCommentInput[]
+    createMany?: BlogCommentReportCreateManyCommentInputEnvelope
+    set?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    disconnect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    delete?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    update?: BlogCommentReportUpdateWithWhereUniqueWithoutCommentInput | BlogCommentReportUpdateWithWhereUniqueWithoutCommentInput[]
+    updateMany?: BlogCommentReportUpdateManyWithWhereWithoutCommentInput | BlogCommentReportUpdateManyWithWhereWithoutCommentInput[]
+    deleteMany?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+  }
+
+  export type BlogCommentUncheckedUpdateManyWithoutParentNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutParentInput, BlogCommentUncheckedCreateWithoutParentInput> | BlogCommentCreateWithoutParentInput[] | BlogCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutParentInput | BlogCommentCreateOrConnectWithoutParentInput[]
+    upsert?: BlogCommentUpsertWithWhereUniqueWithoutParentInput | BlogCommentUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: BlogCommentCreateManyParentInputEnvelope
+    set?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    disconnect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    delete?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    update?: BlogCommentUpdateWithWhereUniqueWithoutParentInput | BlogCommentUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: BlogCommentUpdateManyWithWhereWithoutParentInput | BlogCommentUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyWithoutCommentNestedInput = {
+    create?: XOR<BlogCommentReportCreateWithoutCommentInput, BlogCommentReportUncheckedCreateWithoutCommentInput> | BlogCommentReportCreateWithoutCommentInput[] | BlogCommentReportUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutCommentInput | BlogCommentReportCreateOrConnectWithoutCommentInput[]
+    upsert?: BlogCommentReportUpsertWithWhereUniqueWithoutCommentInput | BlogCommentReportUpsertWithWhereUniqueWithoutCommentInput[]
+    createMany?: BlogCommentReportCreateManyCommentInputEnvelope
+    set?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    disconnect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    delete?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    update?: BlogCommentReportUpdateWithWhereUniqueWithoutCommentInput | BlogCommentReportUpdateWithWhereUniqueWithoutCommentInput[]
+    updateMany?: BlogCommentReportUpdateManyWithWhereWithoutCommentInput | BlogCommentReportUpdateManyWithWhereWithoutCommentInput[]
+    deleteMany?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+  }
+
+  export type BlogCommentCreateNestedOneWithoutReportsInput = {
+    create?: XOR<BlogCommentCreateWithoutReportsInput, BlogCommentUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutReportsInput
+    connect?: BlogCommentWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutBlogCommentReportsInput = {
+    create?: XOR<UserCreateWithoutBlogCommentReportsInput, UserUncheckedCreateWithoutBlogCommentReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBlogCommentReportsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewedCommentReportsInput = {
+    create?: XOR<UserCreateWithoutReviewedCommentReportsInput, UserUncheckedCreateWithoutReviewedCommentReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedCommentReportsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumBlogCommentReportReasonFieldUpdateOperationsInput = {
+    set?: $Enums.BlogCommentReportReason
+  }
+
+  export type EnumBlogCommentReportStatusFieldUpdateOperationsInput = {
+    set?: $Enums.BlogCommentReportStatus
+  }
+
+  export type BlogCommentUpdateOneRequiredWithoutReportsNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutReportsInput, BlogCommentUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutReportsInput
+    upsert?: BlogCommentUpsertWithoutReportsInput
+    connect?: BlogCommentWhereUniqueInput
+    update?: XOR<XOR<BlogCommentUpdateToOneWithWhereWithoutReportsInput, BlogCommentUpdateWithoutReportsInput>, BlogCommentUncheckedUpdateWithoutReportsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutBlogCommentReportsNestedInput = {
+    create?: XOR<UserCreateWithoutBlogCommentReportsInput, UserUncheckedCreateWithoutBlogCommentReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBlogCommentReportsInput
+    upsert?: UserUpsertWithoutBlogCommentReportsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBlogCommentReportsInput, UserUpdateWithoutBlogCommentReportsInput>, UserUncheckedUpdateWithoutBlogCommentReportsInput>
+  }
+
+  export type UserUpdateOneWithoutReviewedCommentReportsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewedCommentReportsInput, UserUncheckedCreateWithoutReviewedCommentReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedCommentReportsInput
+    upsert?: UserUpsertWithoutReviewedCommentReportsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewedCommentReportsInput, UserUpdateWithoutReviewedCommentReportsInput>, UserUncheckedUpdateWithoutReviewedCommentReportsInput>
+  }
+
   export type BlogTopicCreateNestedOneWithoutChildrenInput = {
     create?: XOR<BlogTopicCreateWithoutChildrenInput, BlogTopicUncheckedCreateWithoutChildrenInput>
     connectOrCreate?: BlogTopicCreateOrConnectWithoutChildrenInput
@@ -75636,6 +79191,20 @@ export namespace Prisma {
     connect?: MediaWhereUniqueInput
   }
 
+  export type BlogCommentCreateNestedManyWithoutPostInput = {
+    create?: XOR<BlogCommentCreateWithoutPostInput, BlogCommentUncheckedCreateWithoutPostInput> | BlogCommentCreateWithoutPostInput[] | BlogCommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutPostInput | BlogCommentCreateOrConnectWithoutPostInput[]
+    createMany?: BlogCommentCreateManyPostInputEnvelope
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+  }
+
+  export type BlogCommentUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<BlogCommentCreateWithoutPostInput, BlogCommentUncheckedCreateWithoutPostInput> | BlogCommentCreateWithoutPostInput[] | BlogCommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutPostInput | BlogCommentCreateOrConnectWithoutPostInput[]
+    createMany?: BlogCommentCreateManyPostInputEnvelope
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+  }
+
   export type EnumBlogPostStatusFieldUpdateOperationsInput = {
     set?: $Enums.BlogPostStatus
   }
@@ -75671,6 +79240,34 @@ export namespace Prisma {
     delete?: MediaWhereInput | boolean
     connect?: MediaWhereUniqueInput
     update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutBlogPostsInput, MediaUpdateWithoutBlogPostsInput>, MediaUncheckedUpdateWithoutBlogPostsInput>
+  }
+
+  export type BlogCommentUpdateManyWithoutPostNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutPostInput, BlogCommentUncheckedCreateWithoutPostInput> | BlogCommentCreateWithoutPostInput[] | BlogCommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutPostInput | BlogCommentCreateOrConnectWithoutPostInput[]
+    upsert?: BlogCommentUpsertWithWhereUniqueWithoutPostInput | BlogCommentUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: BlogCommentCreateManyPostInputEnvelope
+    set?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    disconnect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    delete?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    update?: BlogCommentUpdateWithWhereUniqueWithoutPostInput | BlogCommentUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: BlogCommentUpdateManyWithWhereWithoutPostInput | BlogCommentUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+  }
+
+  export type BlogCommentUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutPostInput, BlogCommentUncheckedCreateWithoutPostInput> | BlogCommentCreateWithoutPostInput[] | BlogCommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutPostInput | BlogCommentCreateOrConnectWithoutPostInput[]
+    upsert?: BlogCommentUpsertWithWhereUniqueWithoutPostInput | BlogCommentUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: BlogCommentCreateManyPostInputEnvelope
+    set?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    disconnect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    delete?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    update?: BlogCommentUpdateWithWhereUniqueWithoutPostInput | BlogCommentUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: BlogCommentUpdateManyWithWhereWithoutPostInput | BlogCommentUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutEmailVerificationLogsInput = {
@@ -78424,6 +82021,27 @@ export namespace Prisma {
     connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
   }
 
+  export type BlogCommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<BlogCommentCreateWithoutUserInput, BlogCommentUncheckedCreateWithoutUserInput> | BlogCommentCreateWithoutUserInput[] | BlogCommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutUserInput | BlogCommentCreateOrConnectWithoutUserInput[]
+    createMany?: BlogCommentCreateManyUserInputEnvelope
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+  }
+
+  export type BlogCommentReportCreateNestedManyWithoutReporterInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReporterInput, BlogCommentReportUncheckedCreateWithoutReporterInput> | BlogCommentReportCreateWithoutReporterInput[] | BlogCommentReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReporterInput | BlogCommentReportCreateOrConnectWithoutReporterInput[]
+    createMany?: BlogCommentReportCreateManyReporterInputEnvelope
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+  }
+
+  export type BlogCommentReportCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReviewerInput, BlogCommentReportUncheckedCreateWithoutReviewerInput> | BlogCommentReportCreateWithoutReviewerInput[] | BlogCommentReportUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReviewerInput | BlogCommentReportCreateOrConnectWithoutReviewerInput[]
+    createMany?: BlogCommentReportCreateManyReviewerInputEnvelope
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+  }
+
   export type CartUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -78531,6 +82149,27 @@ export namespace Prisma {
     connectOrCreate?: BlogPostCreateOrConnectWithoutAuthorInput | BlogPostCreateOrConnectWithoutAuthorInput[]
     createMany?: BlogPostCreateManyAuthorInputEnvelope
     connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type BlogCommentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BlogCommentCreateWithoutUserInput, BlogCommentUncheckedCreateWithoutUserInput> | BlogCommentCreateWithoutUserInput[] | BlogCommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutUserInput | BlogCommentCreateOrConnectWithoutUserInput[]
+    createMany?: BlogCommentCreateManyUserInputEnvelope
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+  }
+
+  export type BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReporterInput, BlogCommentReportUncheckedCreateWithoutReporterInput> | BlogCommentReportCreateWithoutReporterInput[] | BlogCommentReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReporterInput | BlogCommentReportCreateOrConnectWithoutReporterInput[]
+    createMany?: BlogCommentReportCreateManyReporterInputEnvelope
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+  }
+
+  export type BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReviewerInput, BlogCommentReportUncheckedCreateWithoutReviewerInput> | BlogCommentReportCreateWithoutReviewerInput[] | BlogCommentReportUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReviewerInput | BlogCommentReportCreateOrConnectWithoutReviewerInput[]
+    createMany?: BlogCommentReportCreateManyReviewerInputEnvelope
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
   }
 
   export type CartUpdateOneWithoutUserNestedInput = {
@@ -78755,6 +82394,48 @@ export namespace Prisma {
     deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
   }
 
+  export type BlogCommentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutUserInput, BlogCommentUncheckedCreateWithoutUserInput> | BlogCommentCreateWithoutUserInput[] | BlogCommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutUserInput | BlogCommentCreateOrConnectWithoutUserInput[]
+    upsert?: BlogCommentUpsertWithWhereUniqueWithoutUserInput | BlogCommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BlogCommentCreateManyUserInputEnvelope
+    set?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    disconnect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    delete?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    update?: BlogCommentUpdateWithWhereUniqueWithoutUserInput | BlogCommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BlogCommentUpdateManyWithWhereWithoutUserInput | BlogCommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+  }
+
+  export type BlogCommentReportUpdateManyWithoutReporterNestedInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReporterInput, BlogCommentReportUncheckedCreateWithoutReporterInput> | BlogCommentReportCreateWithoutReporterInput[] | BlogCommentReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReporterInput | BlogCommentReportCreateOrConnectWithoutReporterInput[]
+    upsert?: BlogCommentReportUpsertWithWhereUniqueWithoutReporterInput | BlogCommentReportUpsertWithWhereUniqueWithoutReporterInput[]
+    createMany?: BlogCommentReportCreateManyReporterInputEnvelope
+    set?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    disconnect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    delete?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    update?: BlogCommentReportUpdateWithWhereUniqueWithoutReporterInput | BlogCommentReportUpdateWithWhereUniqueWithoutReporterInput[]
+    updateMany?: BlogCommentReportUpdateManyWithWhereWithoutReporterInput | BlogCommentReportUpdateManyWithWhereWithoutReporterInput[]
+    deleteMany?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+  }
+
+  export type BlogCommentReportUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReviewerInput, BlogCommentReportUncheckedCreateWithoutReviewerInput> | BlogCommentReportCreateWithoutReviewerInput[] | BlogCommentReportUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReviewerInput | BlogCommentReportCreateOrConnectWithoutReviewerInput[]
+    upsert?: BlogCommentReportUpsertWithWhereUniqueWithoutReviewerInput | BlogCommentReportUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: BlogCommentReportCreateManyReviewerInputEnvelope
+    set?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    disconnect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    delete?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    update?: BlogCommentReportUpdateWithWhereUniqueWithoutReviewerInput | BlogCommentReportUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: BlogCommentReportUpdateManyWithWhereWithoutReviewerInput | BlogCommentReportUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+  }
+
   export type CartUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -78965,6 +82646,48 @@ export namespace Prisma {
     update?: BlogPostUpdateWithWhereUniqueWithoutAuthorInput | BlogPostUpdateWithWhereUniqueWithoutAuthorInput[]
     updateMany?: BlogPostUpdateManyWithWhereWithoutAuthorInput | BlogPostUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+  }
+
+  export type BlogCommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BlogCommentCreateWithoutUserInput, BlogCommentUncheckedCreateWithoutUserInput> | BlogCommentCreateWithoutUserInput[] | BlogCommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BlogCommentCreateOrConnectWithoutUserInput | BlogCommentCreateOrConnectWithoutUserInput[]
+    upsert?: BlogCommentUpsertWithWhereUniqueWithoutUserInput | BlogCommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BlogCommentCreateManyUserInputEnvelope
+    set?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    disconnect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    delete?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    connect?: BlogCommentWhereUniqueInput | BlogCommentWhereUniqueInput[]
+    update?: BlogCommentUpdateWithWhereUniqueWithoutUserInput | BlogCommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BlogCommentUpdateManyWithWhereWithoutUserInput | BlogCommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReporterInput, BlogCommentReportUncheckedCreateWithoutReporterInput> | BlogCommentReportCreateWithoutReporterInput[] | BlogCommentReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReporterInput | BlogCommentReportCreateOrConnectWithoutReporterInput[]
+    upsert?: BlogCommentReportUpsertWithWhereUniqueWithoutReporterInput | BlogCommentReportUpsertWithWhereUniqueWithoutReporterInput[]
+    createMany?: BlogCommentReportCreateManyReporterInputEnvelope
+    set?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    disconnect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    delete?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    update?: BlogCommentReportUpdateWithWhereUniqueWithoutReporterInput | BlogCommentReportUpdateWithWhereUniqueWithoutReporterInput[]
+    updateMany?: BlogCommentReportUpdateManyWithWhereWithoutReporterInput | BlogCommentReportUpdateManyWithWhereWithoutReporterInput[]
+    deleteMany?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<BlogCommentReportCreateWithoutReviewerInput, BlogCommentReportUncheckedCreateWithoutReviewerInput> | BlogCommentReportCreateWithoutReviewerInput[] | BlogCommentReportUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: BlogCommentReportCreateOrConnectWithoutReviewerInput | BlogCommentReportCreateOrConnectWithoutReviewerInput[]
+    upsert?: BlogCommentReportUpsertWithWhereUniqueWithoutReviewerInput | BlogCommentReportUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: BlogCommentReportCreateManyReviewerInputEnvelope
+    set?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    disconnect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    delete?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    connect?: BlogCommentReportWhereUniqueInput | BlogCommentReportWhereUniqueInput[]
+    update?: BlogCommentReportUpdateWithWhereUniqueWithoutReviewerInput | BlogCommentReportUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: BlogCommentReportUpdateManyWithWhereWithoutReviewerInput | BlogCommentReportUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAvatarInput = {
@@ -79379,6 +83102,40 @@ export namespace Prisma {
     _max?: NestedEnumBannerPositionFilter<$PrismaModel>
   }
 
+  export type NestedEnumBlogCommentReportReasonFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportReason | EnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportReasonFilter<$PrismaModel> | $Enums.BlogCommentReportReason
+  }
+
+  export type NestedEnumBlogCommentReportStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportStatus | EnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportStatusFilter<$PrismaModel> | $Enums.BlogCommentReportStatus
+  }
+
+  export type NestedEnumBlogCommentReportReasonWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportReason | EnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportReason[] | ListEnumBlogCommentReportReasonFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportReasonWithAggregatesFilter<$PrismaModel> | $Enums.BlogCommentReportReason
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBlogCommentReportReasonFilter<$PrismaModel>
+    _max?: NestedEnumBlogCommentReportReasonFilter<$PrismaModel>
+  }
+
+  export type NestedEnumBlogCommentReportStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogCommentReportStatus | EnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogCommentReportStatus[] | ListEnumBlogCommentReportStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogCommentReportStatusWithAggregatesFilter<$PrismaModel> | $Enums.BlogCommentReportStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBlogCommentReportStatusFilter<$PrismaModel>
+    _max?: NestedEnumBlogCommentReportStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumBlogPostStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.BlogPostStatus | EnumBlogPostStatusFieldRefInput<$PrismaModel>
     in?: $Enums.BlogPostStatus[] | ListEnumBlogPostStatusFieldRefInput<$PrismaModel>
@@ -79730,6 +83487,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAddressesInput = {
@@ -79768,6 +83528,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAddressesInput = {
@@ -79880,6 +83643,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAddressesInput = {
@@ -79918,6 +83684,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type OrderUpsertWithWhereUniqueWithoutShippingAddressInput = {
@@ -79995,6 +83764,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAffiliateInput = {
@@ -80033,6 +83805,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAffiliateInput = {
@@ -80157,6 +83932,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAffiliateInput = {
@@ -80195,6 +83973,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type AffiliateLinkUpsertWithWhereUniqueWithoutAffiliateInput = {
@@ -81073,6 +84854,915 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BlogPostCreateWithoutCommentsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    status?: $Enums.BlogPostStatus
+    tags?: BlogPostCreatetagsInput | string[]
+    viewCount?: number
+    metaTitle?: string | null
+    metaDescription?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    topic?: BlogTopicCreateNestedOneWithoutPostsInput
+    author: UserCreateNestedOneWithoutBlogPostsInput
+    featuredImage?: MediaCreateNestedOneWithoutBlogPostsInput
+  }
+
+  export type BlogPostUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    excerpt?: string | null
+    topicId?: string | null
+    authorId: string
+    featuredImageId?: string | null
+    status?: $Enums.BlogPostStatus
+    tags?: BlogPostCreatetagsInput | string[]
+    viewCount?: number
+    metaTitle?: string | null
+    metaDescription?: string | null
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogPostCreateOrConnectWithoutCommentsInput = {
+    where: BlogPostWhereUniqueInput
+    create: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type UserCreateWithoutBlogCommentsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
+    blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserUncheckedCreateWithoutBlogCommentsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
+    blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutBlogCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlogCommentsInput, UserUncheckedCreateWithoutBlogCommentsInput>
+  }
+
+  export type BlogCommentCreateWithoutRepliesInput = {
+    id?: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    post: BlogPostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutBlogCommentsInput
+    parent?: BlogCommentCreateNestedOneWithoutRepliesInput
+    reports?: BlogCommentReportCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentUncheckedCreateWithoutRepliesInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reports?: BlogCommentReportUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentCreateOrConnectWithoutRepliesInput = {
+    where: BlogCommentWhereUniqueInput
+    create: XOR<BlogCommentCreateWithoutRepliesInput, BlogCommentUncheckedCreateWithoutRepliesInput>
+  }
+
+  export type BlogCommentCreateWithoutParentInput = {
+    id?: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    post: BlogPostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutBlogCommentsInput
+    replies?: BlogCommentCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentUncheckedCreateWithoutParentInput = {
+    id?: string
+    postId: string
+    userId: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: BlogCommentUncheckedCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentCreateOrConnectWithoutParentInput = {
+    where: BlogCommentWhereUniqueInput
+    create: XOR<BlogCommentCreateWithoutParentInput, BlogCommentUncheckedCreateWithoutParentInput>
+  }
+
+  export type BlogCommentCreateManyParentInputEnvelope = {
+    data: BlogCommentCreateManyParentInput | BlogCommentCreateManyParentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogCommentReportCreateWithoutCommentInput = {
+    id?: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reporter: UserCreateNestedOneWithoutBlogCommentReportsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedCommentReportsInput
+  }
+
+  export type BlogCommentReportUncheckedCreateWithoutCommentInput = {
+    id?: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportCreateOrConnectWithoutCommentInput = {
+    where: BlogCommentReportWhereUniqueInput
+    create: XOR<BlogCommentReportCreateWithoutCommentInput, BlogCommentReportUncheckedCreateWithoutCommentInput>
+  }
+
+  export type BlogCommentReportCreateManyCommentInputEnvelope = {
+    data: BlogCommentReportCreateManyCommentInput | BlogCommentReportCreateManyCommentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogPostUpsertWithoutCommentsInput = {
+    update: XOR<BlogPostUpdateWithoutCommentsInput, BlogPostUncheckedUpdateWithoutCommentsInput>
+    create: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+    where?: BlogPostWhereInput
+  }
+
+  export type BlogPostUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: BlogPostWhereInput
+    data: XOR<BlogPostUpdateWithoutCommentsInput, BlogPostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type BlogPostUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogPostStatusFieldUpdateOperationsInput | $Enums.BlogPostStatus
+    tags?: BlogPostUpdatetagsInput | string[]
+    viewCount?: IntFieldUpdateOperationsInput | number
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    topic?: BlogTopicUpdateOneWithoutPostsNestedInput
+    author?: UserUpdateOneRequiredWithoutBlogPostsNestedInput
+    featuredImage?: MediaUpdateOneWithoutBlogPostsNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    topicId?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    featuredImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogPostStatusFieldUpdateOperationsInput | $Enums.BlogPostStatus
+    tags?: BlogPostUpdatetagsInput | string[]
+    viewCount?: IntFieldUpdateOperationsInput | number
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutBlogCommentsInput = {
+    update: XOR<UserUpdateWithoutBlogCommentsInput, UserUncheckedUpdateWithoutBlogCommentsInput>
+    create: XOR<UserCreateWithoutBlogCommentsInput, UserUncheckedCreateWithoutBlogCommentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBlogCommentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBlogCommentsInput, UserUncheckedUpdateWithoutBlogCommentsInput>
+  }
+
+  export type UserUpdateWithoutBlogCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
+    blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlogCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
+    blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type BlogCommentUpsertWithoutRepliesInput = {
+    update: XOR<BlogCommentUpdateWithoutRepliesInput, BlogCommentUncheckedUpdateWithoutRepliesInput>
+    create: XOR<BlogCommentCreateWithoutRepliesInput, BlogCommentUncheckedCreateWithoutRepliesInput>
+    where?: BlogCommentWhereInput
+  }
+
+  export type BlogCommentUpdateToOneWithWhereWithoutRepliesInput = {
+    where?: BlogCommentWhereInput
+    data: XOR<BlogCommentUpdateWithoutRepliesInput, BlogCommentUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type BlogCommentUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutBlogCommentsNestedInput
+    parent?: BlogCommentUpdateOneWithoutRepliesNestedInput
+    reports?: BlogCommentReportUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reports?: BlogCommentReportUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUpsertWithWhereUniqueWithoutParentInput = {
+    where: BlogCommentWhereUniqueInput
+    update: XOR<BlogCommentUpdateWithoutParentInput, BlogCommentUncheckedUpdateWithoutParentInput>
+    create: XOR<BlogCommentCreateWithoutParentInput, BlogCommentUncheckedCreateWithoutParentInput>
+  }
+
+  export type BlogCommentUpdateWithWhereUniqueWithoutParentInput = {
+    where: BlogCommentWhereUniqueInput
+    data: XOR<BlogCommentUpdateWithoutParentInput, BlogCommentUncheckedUpdateWithoutParentInput>
+  }
+
+  export type BlogCommentUpdateManyWithWhereWithoutParentInput = {
+    where: BlogCommentScalarWhereInput
+    data: XOR<BlogCommentUpdateManyMutationInput, BlogCommentUncheckedUpdateManyWithoutParentInput>
+  }
+
+  export type BlogCommentScalarWhereInput = {
+    AND?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+    OR?: BlogCommentScalarWhereInput[]
+    NOT?: BlogCommentScalarWhereInput | BlogCommentScalarWhereInput[]
+    id?: StringFilter<"BlogComment"> | string
+    postId?: StringFilter<"BlogComment"> | string
+    userId?: StringFilter<"BlogComment"> | string
+    parentId?: StringNullableFilter<"BlogComment"> | string | null
+    content?: StringFilter<"BlogComment"> | string
+    isDeleted?: BoolFilter<"BlogComment"> | boolean
+    deletedAt?: DateTimeNullableFilter<"BlogComment"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogComment"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogComment"> | Date | string
+  }
+
+  export type BlogCommentReportUpsertWithWhereUniqueWithoutCommentInput = {
+    where: BlogCommentReportWhereUniqueInput
+    update: XOR<BlogCommentReportUpdateWithoutCommentInput, BlogCommentReportUncheckedUpdateWithoutCommentInput>
+    create: XOR<BlogCommentReportCreateWithoutCommentInput, BlogCommentReportUncheckedCreateWithoutCommentInput>
+  }
+
+  export type BlogCommentReportUpdateWithWhereUniqueWithoutCommentInput = {
+    where: BlogCommentReportWhereUniqueInput
+    data: XOR<BlogCommentReportUpdateWithoutCommentInput, BlogCommentReportUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type BlogCommentReportUpdateManyWithWhereWithoutCommentInput = {
+    where: BlogCommentReportScalarWhereInput
+    data: XOR<BlogCommentReportUpdateManyMutationInput, BlogCommentReportUncheckedUpdateManyWithoutCommentInput>
+  }
+
+  export type BlogCommentReportScalarWhereInput = {
+    AND?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+    OR?: BlogCommentReportScalarWhereInput[]
+    NOT?: BlogCommentReportScalarWhereInput | BlogCommentReportScalarWhereInput[]
+    id?: StringFilter<"BlogCommentReport"> | string
+    commentId?: StringFilter<"BlogCommentReport"> | string
+    reporterId?: StringFilter<"BlogCommentReport"> | string
+    reason?: EnumBlogCommentReportReasonFilter<"BlogCommentReport"> | $Enums.BlogCommentReportReason
+    description?: StringNullableFilter<"BlogCommentReport"> | string | null
+    status?: EnumBlogCommentReportStatusFilter<"BlogCommentReport"> | $Enums.BlogCommentReportStatus
+    reviewedBy?: StringNullableFilter<"BlogCommentReport"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"BlogCommentReport"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogCommentReport"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogCommentReport"> | Date | string
+  }
+
+  export type BlogCommentCreateWithoutReportsInput = {
+    id?: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    post: BlogPostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutBlogCommentsInput
+    parent?: BlogCommentCreateNestedOneWithoutRepliesInput
+    replies?: BlogCommentCreateNestedManyWithoutParentInput
+  }
+
+  export type BlogCommentUncheckedCreateWithoutReportsInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: BlogCommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type BlogCommentCreateOrConnectWithoutReportsInput = {
+    where: BlogCommentWhereUniqueInput
+    create: XOR<BlogCommentCreateWithoutReportsInput, BlogCommentUncheckedCreateWithoutReportsInput>
+  }
+
+  export type UserCreateWithoutBlogCommentReportsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
+    blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserUncheckedCreateWithoutBlogCommentReportsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
+    blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutBlogCommentReportsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlogCommentReportsInput, UserUncheckedCreateWithoutBlogCommentReportsInput>
+  }
+
+  export type UserCreateWithoutReviewedCommentReportsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    cart?: CartCreateNestedOneWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulCreateNestedManyWithoutUserInput
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
+    media?: MediaCreateNestedOneWithoutUsersInput
+    blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewedCommentReportsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    phone: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    refreshToken?: string | null
+    isActive?: boolean
+    isVerified?: boolean
+    isBanned?: boolean
+    isDeleted?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
+    emailVerifiedAt?: Date | string | null
+    phoneVerifiedAt?: Date | string | null
+    mediaId?: string | null
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ProductReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewReplies?: ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedCreateNestedManyWithoutUserInput
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    affiliate?: AffiliateUncheckedCreateNestedOneWithoutUserInput
+    roleAssignments?: UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+    avatar?: UserAvatarUncheckedCreateNestedOneWithoutUserInput
+    uploadedMedia?: MediaUncheckedCreateNestedManyWithoutUploadedByInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedCreateNestedManyWithoutUserInput
+    questions?: ProductQuestionUncheckedCreateNestedManyWithoutUserInput
+    answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
+    wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
+    blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewedCommentReportsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewedCommentReportsInput, UserUncheckedCreateWithoutReviewedCommentReportsInput>
+  }
+
+  export type BlogCommentUpsertWithoutReportsInput = {
+    update: XOR<BlogCommentUpdateWithoutReportsInput, BlogCommentUncheckedUpdateWithoutReportsInput>
+    create: XOR<BlogCommentCreateWithoutReportsInput, BlogCommentUncheckedCreateWithoutReportsInput>
+    where?: BlogCommentWhereInput
+  }
+
+  export type BlogCommentUpdateToOneWithWhereWithoutReportsInput = {
+    where?: BlogCommentWhereInput
+    data: XOR<BlogCommentUpdateWithoutReportsInput, BlogCommentUncheckedUpdateWithoutReportsInput>
+  }
+
+  export type BlogCommentUpdateWithoutReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutBlogCommentsNestedInput
+    parent?: BlogCommentUpdateOneWithoutRepliesNestedInput
+    replies?: BlogCommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateWithoutReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: BlogCommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type UserUpsertWithoutBlogCommentReportsInput = {
+    update: XOR<UserUpdateWithoutBlogCommentReportsInput, UserUncheckedUpdateWithoutBlogCommentReportsInput>
+    create: XOR<UserCreateWithoutBlogCommentReportsInput, UserUncheckedCreateWithoutBlogCommentReportsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBlogCommentReportsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBlogCommentReportsInput, UserUncheckedUpdateWithoutBlogCommentReportsInput>
+  }
+
+  export type UserUpdateWithoutBlogCommentReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
+    blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlogCommentReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
+    blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUpsertWithoutReviewedCommentReportsInput = {
+    update: XOR<UserUpdateWithoutReviewedCommentReportsInput, UserUncheckedUpdateWithoutReviewedCommentReportsInput>
+    create: XOR<UserCreateWithoutReviewedCommentReportsInput, UserUncheckedCreateWithoutReviewedCommentReportsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewedCommentReportsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewedCommentReportsInput, UserUncheckedUpdateWithoutReviewedCommentReportsInput>
+  }
+
+  export type UserUpdateWithoutReviewedCommentReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cart?: CartUpdateOneWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUpdateManyWithoutUserNestedInput
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
+    media?: MediaUpdateOneWithoutUsersNestedInput
+    blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewedCommentReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    mediaId?: NullableStringFieldUpdateOperationsInput | string | null
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ProductReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewReplies?: ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+    reviewHelpfulMarks?: ReviewHelpfulUncheckedUpdateManyWithoutUserNestedInput
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    affiliate?: AffiliateUncheckedUpdateOneWithoutUserNestedInput
+    roleAssignments?: UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    avatar?: UserAvatarUncheckedUpdateOneWithoutUserNestedInput
+    uploadedMedia?: MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+    emailVerificationLogs?: EmailVerificationLogUncheckedUpdateManyWithoutUserNestedInput
+    questions?: ProductQuestionUncheckedUpdateManyWithoutUserNestedInput
+    answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
+    wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
+    blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+  }
+
   export type BlogTopicCreateWithoutChildrenInput = {
     id?: string
     name: string
@@ -81221,6 +85911,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutBlogPostsInput
     featuredImage?: MediaCreateNestedOneWithoutBlogPostsInput
+    comments?: BlogCommentCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostUncheckedCreateWithoutTopicInput = {
@@ -81241,6 +85932,7 @@ export namespace Prisma {
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    comments?: BlogCommentUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostCreateOrConnectWithoutTopicInput = {
@@ -81500,6 +86192,9 @@ export namespace Prisma {
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutBlogPostsInput = {
@@ -81538,6 +86233,9 @@ export namespace Prisma {
     answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutBlogPostsInput = {
@@ -81594,6 +86292,42 @@ export namespace Prisma {
   export type MediaCreateOrConnectWithoutBlogPostsInput = {
     where: MediaWhereUniqueInput
     create: XOR<MediaCreateWithoutBlogPostsInput, MediaUncheckedCreateWithoutBlogPostsInput>
+  }
+
+  export type BlogCommentCreateWithoutPostInput = {
+    id?: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBlogCommentsInput
+    parent?: BlogCommentCreateNestedOneWithoutRepliesInput
+    replies?: BlogCommentCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentUncheckedCreateWithoutPostInput = {
+    id?: string
+    userId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: BlogCommentUncheckedCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentCreateOrConnectWithoutPostInput = {
+    where: BlogCommentWhereUniqueInput
+    create: XOR<BlogCommentCreateWithoutPostInput, BlogCommentUncheckedCreateWithoutPostInput>
+  }
+
+  export type BlogCommentCreateManyPostInputEnvelope = {
+    data: BlogCommentCreateManyPostInput | BlogCommentCreateManyPostInput[]
+    skipDuplicates?: boolean
   }
 
   export type BlogTopicUpsertWithoutPostsInput = {
@@ -81686,6 +86420,9 @@ export namespace Prisma {
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlogPostsInput = {
@@ -81724,6 +86461,9 @@ export namespace Prisma {
     answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type MediaUpsertWithoutBlogPostsInput = {
@@ -81783,6 +86523,22 @@ export namespace Prisma {
     blogTopics?: BlogTopicUncheckedUpdateManyWithoutImageMediaNestedInput
   }
 
+  export type BlogCommentUpsertWithWhereUniqueWithoutPostInput = {
+    where: BlogCommentWhereUniqueInput
+    update: XOR<BlogCommentUpdateWithoutPostInput, BlogCommentUncheckedUpdateWithoutPostInput>
+    create: XOR<BlogCommentCreateWithoutPostInput, BlogCommentUncheckedCreateWithoutPostInput>
+  }
+
+  export type BlogCommentUpdateWithWhereUniqueWithoutPostInput = {
+    where: BlogCommentWhereUniqueInput
+    data: XOR<BlogCommentUpdateWithoutPostInput, BlogCommentUncheckedUpdateWithoutPostInput>
+  }
+
+  export type BlogCommentUpdateManyWithWhereWithoutPostInput = {
+    where: BlogCommentScalarWhereInput
+    data: XOR<BlogCommentUpdateManyMutationInput, BlogCommentUncheckedUpdateManyWithoutPostInput>
+  }
+
   export type UserCreateWithoutEmailVerificationLogsInput = {
     id?: string
     email: string
@@ -81819,6 +86575,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutEmailVerificationLogsInput = {
@@ -81857,6 +86616,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutEmailVerificationLogsInput = {
@@ -81911,6 +86673,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailVerificationLogsInput = {
@@ -81949,6 +86714,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type FlashSaleProductCreateWithoutFlashSaleInput = {
@@ -82654,6 +87422,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutUploadedMediaInput = {
@@ -82692,6 +87463,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutUploadedMediaInput = {
@@ -82951,6 +87725,9 @@ export namespace Prisma {
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutMediaInput = {
@@ -82989,6 +87766,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutMediaInput = {
@@ -83061,6 +87841,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     topic?: BlogTopicCreateNestedOneWithoutPostsInput
     author: UserCreateNestedOneWithoutBlogPostsInput
+    comments?: BlogCommentCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostUncheckedCreateWithoutFeaturedImageInput = {
@@ -83081,6 +87862,7 @@ export namespace Prisma {
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    comments?: BlogCommentUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostCreateOrConnectWithoutFeaturedImageInput = {
@@ -83140,6 +87922,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUploadedMediaInput = {
@@ -83178,6 +87963,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ProductImageUpsertWithWhereUniqueWithoutMediaInput = {
@@ -83483,6 +88271,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCartInput = {
@@ -83521,6 +88312,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCartInput = {
@@ -83603,6 +88397,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCartInput = {
@@ -83641,6 +88438,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type CartItemUpsertWithWhereUniqueWithoutCartInput = {
@@ -84016,6 +88816,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -84054,6 +88857,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -84299,6 +89105,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -84337,6 +89146,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type AddressUpsertWithoutOrdersInput = {
@@ -88324,6 +93136,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutQuestionsInput = {
@@ -88362,6 +93177,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutQuestionsInput = {
@@ -88405,6 +93223,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAnsweredQuestionsInput = {
@@ -88443,6 +93264,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAnsweredQuestionsInput = {
@@ -88576,6 +93400,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuestionsInput = {
@@ -88614,6 +93441,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUpsertWithoutAnsweredQuestionsInput = {
@@ -88663,6 +93493,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAnsweredQuestionsInput = {
@@ -88701,6 +93534,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PromotionProductCreateWithoutPromotionInput = {
@@ -89337,6 +94173,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -89375,6 +94214,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -89588,6 +94430,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -89626,6 +94471,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ReviewImageUpsertWithWhereUniqueWithoutReviewInput = {
@@ -89975,6 +94823,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutReviewRepliesInput = {
@@ -90013,6 +94864,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutReviewRepliesInput = {
@@ -90114,6 +94968,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewRepliesInput = {
@@ -90152,6 +95009,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ProductReviewCreateWithoutHelpfulMarksInput = {
@@ -90231,6 +95091,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutReviewHelpfulMarksInput = {
@@ -90269,6 +95132,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutReviewHelpfulMarksInput = {
@@ -90370,6 +95236,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewHelpfulMarksInput = {
@@ -90408,6 +95277,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type CartCreateWithoutUserInput = {
@@ -91026,6 +95898,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     topic?: BlogTopicCreateNestedOneWithoutPostsInput
     featuredImage?: MediaCreateNestedOneWithoutBlogPostsInput
+    comments?: BlogCommentCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostUncheckedCreateWithoutAuthorInput = {
@@ -91046,6 +95919,7 @@ export namespace Prisma {
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    comments?: BlogCommentUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type BlogPostCreateOrConnectWithoutAuthorInput = {
@@ -91055,6 +95929,110 @@ export namespace Prisma {
 
   export type BlogPostCreateManyAuthorInputEnvelope = {
     data: BlogPostCreateManyAuthorInput | BlogPostCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogCommentCreateWithoutUserInput = {
+    id?: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    post: BlogPostCreateNestedOneWithoutCommentsInput
+    parent?: BlogCommentCreateNestedOneWithoutRepliesInput
+    replies?: BlogCommentCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentUncheckedCreateWithoutUserInput = {
+    id?: string
+    postId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: BlogCommentUncheckedCreateNestedManyWithoutParentInput
+    reports?: BlogCommentReportUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type BlogCommentCreateOrConnectWithoutUserInput = {
+    where: BlogCommentWhereUniqueInput
+    create: XOR<BlogCommentCreateWithoutUserInput, BlogCommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type BlogCommentCreateManyUserInputEnvelope = {
+    data: BlogCommentCreateManyUserInput | BlogCommentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogCommentReportCreateWithoutReporterInput = {
+    id?: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comment: BlogCommentCreateNestedOneWithoutReportsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedCommentReportsInput
+  }
+
+  export type BlogCommentReportUncheckedCreateWithoutReporterInput = {
+    id?: string
+    commentId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportCreateOrConnectWithoutReporterInput = {
+    where: BlogCommentReportWhereUniqueInput
+    create: XOR<BlogCommentReportCreateWithoutReporterInput, BlogCommentReportUncheckedCreateWithoutReporterInput>
+  }
+
+  export type BlogCommentReportCreateManyReporterInputEnvelope = {
+    data: BlogCommentReportCreateManyReporterInput | BlogCommentReportCreateManyReporterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogCommentReportCreateWithoutReviewerInput = {
+    id?: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comment: BlogCommentCreateNestedOneWithoutReportsInput
+    reporter: UserCreateNestedOneWithoutBlogCommentReportsInput
+  }
+
+  export type BlogCommentReportUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    commentId: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportCreateOrConnectWithoutReviewerInput = {
+    where: BlogCommentReportWhereUniqueInput
+    create: XOR<BlogCommentReportCreateWithoutReviewerInput, BlogCommentReportUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type BlogCommentReportCreateManyReviewerInputEnvelope = {
+    data: BlogCommentReportCreateManyReviewerInput | BlogCommentReportCreateManyReviewerInput[]
     skipDuplicates?: boolean
   }
 
@@ -91507,6 +96485,54 @@ export namespace Prisma {
     data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyWithoutAuthorInput>
   }
 
+  export type BlogCommentUpsertWithWhereUniqueWithoutUserInput = {
+    where: BlogCommentWhereUniqueInput
+    update: XOR<BlogCommentUpdateWithoutUserInput, BlogCommentUncheckedUpdateWithoutUserInput>
+    create: XOR<BlogCommentCreateWithoutUserInput, BlogCommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type BlogCommentUpdateWithWhereUniqueWithoutUserInput = {
+    where: BlogCommentWhereUniqueInput
+    data: XOR<BlogCommentUpdateWithoutUserInput, BlogCommentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BlogCommentUpdateManyWithWhereWithoutUserInput = {
+    where: BlogCommentScalarWhereInput
+    data: XOR<BlogCommentUpdateManyMutationInput, BlogCommentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BlogCommentReportUpsertWithWhereUniqueWithoutReporterInput = {
+    where: BlogCommentReportWhereUniqueInput
+    update: XOR<BlogCommentReportUpdateWithoutReporterInput, BlogCommentReportUncheckedUpdateWithoutReporterInput>
+    create: XOR<BlogCommentReportCreateWithoutReporterInput, BlogCommentReportUncheckedCreateWithoutReporterInput>
+  }
+
+  export type BlogCommentReportUpdateWithWhereUniqueWithoutReporterInput = {
+    where: BlogCommentReportWhereUniqueInput
+    data: XOR<BlogCommentReportUpdateWithoutReporterInput, BlogCommentReportUncheckedUpdateWithoutReporterInput>
+  }
+
+  export type BlogCommentReportUpdateManyWithWhereWithoutReporterInput = {
+    where: BlogCommentReportScalarWhereInput
+    data: XOR<BlogCommentReportUpdateManyMutationInput, BlogCommentReportUncheckedUpdateManyWithoutReporterInput>
+  }
+
+  export type BlogCommentReportUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: BlogCommentReportWhereUniqueInput
+    update: XOR<BlogCommentReportUpdateWithoutReviewerInput, BlogCommentReportUncheckedUpdateWithoutReviewerInput>
+    create: XOR<BlogCommentReportCreateWithoutReviewerInput, BlogCommentReportUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type BlogCommentReportUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: BlogCommentReportWhereUniqueInput
+    data: XOR<BlogCommentReportUpdateWithoutReviewerInput, BlogCommentReportUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type BlogCommentReportUpdateManyWithWhereWithoutReviewerInput = {
+    where: BlogCommentReportScalarWhereInput
+    data: XOR<BlogCommentReportUpdateManyMutationInput, BlogCommentReportUncheckedUpdateManyWithoutReviewerInput>
+  }
+
   export type UserCreateWithoutAvatarInput = {
     id?: string
     email: string
@@ -91543,6 +96569,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAvatarInput = {
@@ -91581,6 +96610,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAvatarInput = {
@@ -91686,6 +96718,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAvatarInput = {
@@ -91724,6 +96759,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type MediaUpsertWithoutUserAvatarsInput = {
@@ -91859,6 +96897,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutRoleAssignmentsInput = {
@@ -91897,6 +96938,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutRoleAssignmentsInput = {
@@ -91974,6 +97018,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleAssignmentsInput = {
@@ -92012,6 +97059,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserRoleUpsertWithoutRoleAssignmentsInput = {
@@ -92079,6 +97129,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutWishlistsInput = {
@@ -92117,6 +97170,9 @@ export namespace Prisma {
     answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
     sharedWishlists?: SharedWishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutWishlistsInput = {
@@ -92293,6 +97349,9 @@ export namespace Prisma {
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWishlistsInput = {
@@ -92331,6 +97390,9 @@ export namespace Prisma {
     answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ProductUpsertWithoutWishlistsInput = {
@@ -92503,6 +97565,9 @@ export namespace Prisma {
     wishlists?: WishlistCreateNestedManyWithoutUserInput
     media?: MediaCreateNestedOneWithoutUsersInput
     blogPosts?: BlogPostCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutSharedWishlistsInput = {
@@ -92541,6 +97606,9 @@ export namespace Prisma {
     answeredQuestions?: ProductQuestionUncheckedCreateNestedManyWithoutAnsweredByUserInput
     wishlists?: WishlistUncheckedCreateNestedManyWithoutUserInput
     blogPosts?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    blogComments?: BlogCommentUncheckedCreateNestedManyWithoutUserInput
+    blogCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReporterInput
+    reviewedCommentReports?: BlogCommentReportUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutSharedWishlistsInput = {
@@ -92595,6 +97663,9 @@ export namespace Prisma {
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     media?: MediaUpdateOneWithoutUsersNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSharedWishlistsInput = {
@@ -92633,6 +97704,9 @@ export namespace Prisma {
     answeredQuestions?: ProductQuestionUncheckedUpdateManyWithoutAnsweredByUserNestedInput
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type OrderCreateManyShippingAddressInput = {
@@ -92877,6 +97951,102 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BlogCommentCreateManyParentInput = {
+    id?: string
+    postId: string
+    userId: string
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportCreateManyCommentInput = {
+    id?: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutBlogCommentsNestedInput
+    replies?: BlogCommentUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: BlogCommentUncheckedUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateManyWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reporter?: UserUpdateOneRequiredWithoutBlogCommentReportsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedCommentReportsNestedInput
+  }
+
+  export type BlogCommentReportUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type BlogTopicCreateManyParentInput = {
     id?: string
     name: string
@@ -92975,6 +98145,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutBlogPostsNestedInput
     featuredImage?: MediaUpdateOneWithoutBlogPostsNestedInput
+    comments?: BlogCommentUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateWithoutTopicInput = {
@@ -92995,6 +98166,7 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: BlogCommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateManyWithoutTopicInput = {
@@ -93013,6 +98185,54 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentCreateManyPostInput = {
+    id?: string
+    userId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBlogCommentsNestedInput
+    parent?: BlogCommentUpdateOneWithoutRepliesNestedInput
+    replies?: BlogCommentUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: BlogCommentUncheckedUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateManyWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -93495,6 +98715,9 @@ export namespace Prisma {
     wishlists?: WishlistUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMediaInput = {
@@ -93533,6 +98756,9 @@ export namespace Prisma {
     wishlists?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     sharedWishlists?: SharedWishlistUncheckedUpdateManyWithoutUserNestedInput
     blogPosts?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    blogComments?: BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+    blogCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReporterNestedInput
+    reviewedCommentReports?: BlogCommentReportUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutMediaInput = {
@@ -93621,6 +98847,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topic?: BlogTopicUpdateOneWithoutPostsNestedInput
     author?: UserUpdateOneRequiredWithoutBlogPostsNestedInput
+    comments?: BlogCommentUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateWithoutFeaturedImageInput = {
@@ -93641,6 +98868,7 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: BlogCommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateManyWithoutFeaturedImageInput = {
@@ -95307,6 +100535,41 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type BlogCommentCreateManyUserInput = {
+    id?: string
+    postId: string
+    parentId?: string | null
+    content: string
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportCreateManyReporterInput = {
+    id?: string
+    commentId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCommentReportCreateManyReviewerInput = {
+    id?: string
+    commentId: string
+    reporterId: string
+    reason: $Enums.BlogCommentReportReason
+    description?: string | null
+    status?: $Enums.BlogCommentReportStatus
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type OrderUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderNumber?: StringFieldUpdateOperationsInput | string
@@ -95823,6 +101086,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topic?: BlogTopicUpdateOneWithoutPostsNestedInput
     featuredImage?: MediaUpdateOneWithoutBlogPostsNestedInput
+    comments?: BlogCommentUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateWithoutAuthorInput = {
@@ -95843,6 +101107,7 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: BlogCommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type BlogPostUncheckedUpdateManyWithoutAuthorInput = {
@@ -95861,6 +101126,115 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+    parent?: BlogCommentUpdateOneWithoutRepliesNestedInput
+    replies?: BlogCommentUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: BlogCommentUncheckedUpdateManyWithoutParentNestedInput
+    reports?: BlogCommentReportUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type BlogCommentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUpdateWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment?: BlogCommentUpdateOneRequiredWithoutReportsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedCommentReportsNestedInput
+  }
+
+  export type BlogCommentReportUncheckedUpdateWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comment?: BlogCommentUpdateOneRequiredWithoutReportsNestedInput
+    reporter?: UserUpdateOneRequiredWithoutBlogCommentReportsNestedInput
+  }
+
+  export type BlogCommentReportUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCommentReportUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: EnumBlogCommentReportReasonFieldUpdateOperationsInput | $Enums.BlogCommentReportReason
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumBlogCommentReportStatusFieldUpdateOperationsInput | $Enums.BlogCommentReportStatus
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
