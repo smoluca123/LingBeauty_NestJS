@@ -16,13 +16,16 @@ import { RoleGuard } from 'src/guards/role.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { BlogCommentReportService } from './blog-comment-report.service';
 import { BlogCommentService } from './blog-comment.service';
-import { CreateCommentReportDto, BlogCommentReportResponseDto } from './dto';
+import {
+  CreateCommentReportDto,
+  BlogCommentReportResponseDto,
+  UpdateReportStatusDto,
+} from './dto';
 import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
 import { DecodedAccessToken } from 'src/decorators/decodedAccessToken.decorator';
-
 import {
   ApiCreateCommentReport,
   ApiGetReports,
@@ -89,12 +92,12 @@ export class BlogCommentReportController {
   updateReportStatus(
     @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
     @Param('id') id: string,
-    @Body('status') status: BlogCommentReportStatus,
+    @Body() dto: UpdateReportStatusDto,
   ): Promise<IBeforeTransformResponseType<BlogCommentReportResponseDto>> {
     return this.reportService.updateReportStatus(
       decodedToken.userId,
       id,
-      status,
+      dto.status,
     );
   }
 
