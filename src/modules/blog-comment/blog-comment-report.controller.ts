@@ -60,8 +60,6 @@ export class BlogCommentReportController {
 
   // Admin endpoints
   @Get()
-  @UseGuards(RoleGuard)
-  @Roles([RolesLevel.MANAGER])
   @ApiGetReports()
   getReports(
     @Query('page', new ParseIntPipe({ optional: true })) page?: number,

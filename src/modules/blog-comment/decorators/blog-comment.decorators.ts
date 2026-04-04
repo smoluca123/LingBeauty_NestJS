@@ -128,7 +128,8 @@ export const ApiCreateCommentReport = () =>
 
 export const ApiGetReports = () =>
   applyDecorators(
-    ApiProtectedAuthOperation({
+    ApiRoleProtectedOperation({
+      roles: [RolesLevel.MANAGER],
       summary: 'Get all comment reports (Admin)',
       description: 'Retrieve all comment reports with filters',
     }),
@@ -165,6 +166,7 @@ export const ApiGetReports = () =>
 
 export const ApiUpdateReportStatus = () =>
   applyDecorators(
+    ApiProtectedAuthOperation({}),
     ApiRoleProtectedOperation({
       roles: [RolesLevel.MANAGER],
       summary: 'Update report status (Admin)',
@@ -175,6 +177,7 @@ export const ApiUpdateReportStatus = () =>
       type: String,
       description: 'Report ID',
     }),
+
     ApiResponse({
       status: 200,
       type: BlogCommentReportResponseDto,
