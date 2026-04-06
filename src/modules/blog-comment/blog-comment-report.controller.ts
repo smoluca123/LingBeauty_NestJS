@@ -1,9 +1,7 @@
 import {
   Controller,
   Get,
-  Post,
   Patch,
-  Delete,
   Body,
   Param,
   Query,
@@ -15,22 +13,15 @@ import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from 'src/guards/role.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { BlogCommentReportService } from './blog-comment-report.service';
-import { BlogCommentService } from './blog-comment.service';
-import {
-  CreateCommentReportDto,
-  BlogCommentReportResponseDto,
-  UpdateReportStatusDto,
-} from './dto';
+import { BlogCommentReportResponseDto, UpdateReportStatusDto } from './dto';
 import {
   IBeforeTransformPaginationResponseType,
   IBeforeTransformResponseType,
 } from 'src/libs/types/interfaces/response.interface';
 import { DecodedAccessToken } from 'src/decorators/decodedAccessToken.decorator';
 import {
-  ApiCreateCommentReport,
   ApiGetReports,
   ApiUpdateReportStatus,
-  ApiAdminDeleteComment,
 } from './decorators/blog-comment.decorators';
 import { BlogCommentReportStatus } from 'prisma/generated/prisma/client';
 import {
@@ -38,25 +29,13 @@ import {
   type IDecodedAccecssTokenType,
 } from 'src/libs/types/interfaces/utils.interfaces';
 
-@ApiTags('Blog Comment Reports')
+@ApiTags('Blog Comment Reports - Admin')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('jwt'))
-@Controller('blog-comment-report')
+@UseGuards(AuthGuard('jwt'), RoleGuard)
+@Roles([RolesLevel.MANAGER])
+@Controller('admin/blog-comment-report')
 export class BlogCommentReportController {
-  constructor(
-    private readonly reportService: BlogCommentReportService,
-    private readonly commentService: BlogCommentService,
-  ) {}
-
-  // User endpoint: Create report
-  @Post()
-  @ApiCreateCommentReport()
-  createReport(
-    @DecodedAccessToken() decodedToken: IDecodedAccecssTokenType,
-    @Body() dto: CreateCommentReportDto,
-  ): Promise<IBeforeTransformResponseType<BlogCommentReportResponseDto>> {
-    return this.reportService.createReport(decodedToken.userId, dto);
-  }
+  constructor(private readonly reportService: BlogCommentReportService) {}
 
   // Admin endpoints
   @Get()
@@ -97,13 +76,5 @@ export class BlogCommentReportController {
       id,
       dto.status,
     );
-  }
-
-  @Delete('comment/:id')
-  @ApiAdminDeleteComment()
-  adminDeleteComment(
-    @Param('id') id: string,
-  ): Promise<IBeforeTransformResponseType<{ message: string }>> {
-    return this.commentService.adminDeleteComment(id);
   }
 }
