@@ -337,4 +337,48 @@ export class BlogCommentService {
       );
     }
   }
+
+  // Admin method to update any comment
+  async adminUpdateComment(
+    commentId: string,
+    dto: UpdateBlogCommentDto,
+  ): Promise<IBeforeTransformResponseType<BlogCommentResponseDto>> {
+    try {
+      const existingComment = await this.prismaService.blogComment.findFirst({
+        where: withoutDeleted({ id: commentId }),
+        select: { id: true },
+      });
+
+      if (!existingComment) {
+        throw new BusinessException(
+          ERROR_MESSAGES[ERROR_CODES.COMMENT_NOT_FOUND],
+          ERROR_CODES.COMMENT_NOT_FOUND,
+        );
+      }
+
+      const updated = await this.prismaService.blogComment.update({
+        where: { id: commentId },
+        data: {
+          content: dto.content,
+        },
+        select: blogCommentSelect,
+      });
+
+      const result = toResponseDto(BlogCommentResponseDto, updated);
+
+      return {
+        type: 'response',
+        message: 'Cập nhật bình luận thành công',
+        data: result,
+      };
+    } catch (error) {
+      if (error instanceof BusinessException) {
+        throw error;
+      }
+      throw new BusinessException(
+        ERROR_MESSAGES[ERROR_CODES.DATABASE_ERROR],
+        ERROR_CODES.DATABASE_ERROR,
+      );
+    }
+  }
 }

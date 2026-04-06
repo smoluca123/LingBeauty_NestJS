@@ -5,15 +5,15 @@ import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto
 export class BlogCommentResponseDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  postId: string;
+  postId!: string;
 
   @Expose()
   @ApiProperty()
-  userId: string;
+  userId!: string;
 
   @Expose()
   @ApiPropertyOptional()
@@ -21,20 +21,20 @@ export class BlogCommentResponseDto {
 
   @Expose()
   @ApiProperty()
-  content: string;
+  content!: string;
 
   @Expose()
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @Expose()
   @Type(() => UserResponseDto)
   @ApiProperty({ type: UserResponseDto })
-  user: UserResponseDto;
+  user!: UserResponseDto;
 
   @Expose()
   @Type(() => BlogCommentResponseDto)

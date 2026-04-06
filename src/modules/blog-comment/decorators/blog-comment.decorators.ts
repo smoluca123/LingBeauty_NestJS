@@ -200,3 +200,21 @@ export const ApiAdminDeleteComment = () =>
       status: 200,
     }),
   );
+
+export const ApiAdminUpdateComment = () =>
+  applyDecorators(
+    ApiRoleProtectedOperation({
+      roles: [RolesLevel.MANAGER],
+      summary: 'Update any comment (Admin)',
+      description: 'Admin can update any comment',
+    }),
+    ApiParam({
+      name: 'id',
+      type: String,
+      description: 'Comment ID',
+    }),
+    ApiResponse({
+      status: 200,
+      type: BlogCommentResponseDto,
+    }),
+  );

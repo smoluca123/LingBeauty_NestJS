@@ -9,33 +9,33 @@ import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto
 class ReportCommentDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  content: string;
+  content!: string;
 
   @Expose()
   @ApiProperty()
-  postId: string;
+  postId!: string;
 }
 
 export class BlogCommentReportResponseDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  commentId: string;
+  commentId!: string;
 
   @Expose()
   @ApiProperty()
-  reporterId: string;
+  reporterId!: string;
 
   @Expose()
   @ApiProperty({ enum: BlogCommentReportReason })
-  reason: BlogCommentReportReason;
+  reason!: BlogCommentReportReason;
 
   @Expose()
   @ApiPropertyOptional()
@@ -43,7 +43,7 @@ export class BlogCommentReportResponseDto {
 
   @Expose()
   @ApiProperty({ enum: BlogCommentReportStatus })
-  status: BlogCommentReportStatus;
+  status!: BlogCommentReportStatus;
 
   @Expose()
   @ApiPropertyOptional()
@@ -55,16 +55,16 @@ export class BlogCommentReportResponseDto {
 
   @Expose()
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @Expose()
   @Type(() => UserResponseDto)
   @ApiProperty({ type: UserResponseDto })
-  reporter: UserResponseDto;
+  reporter!: UserResponseDto;
 
   @Expose()
   @Type(() => UserResponseDto)
@@ -74,5 +74,5 @@ export class BlogCommentReportResponseDto {
   @Expose()
   @Type(() => ReportCommentDto)
   @ApiProperty({ type: ReportCommentDto })
-  comment: ReportCommentDto;
+  comment!: ReportCommentDto;
 }
