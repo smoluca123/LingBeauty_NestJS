@@ -1,6 +1,11 @@
 import { Prisma } from 'prisma/generated/prisma/client';
 import { userSelect } from './user-select';
-import { productSelect, productVariantSelect } from './product-select';
+import {
+  productSelect,
+  productVariantSelect,
+  productSummarySelect,
+  variantSummarySelect,
+} from './product-select';
 import { addressSelect } from './address-select';
 
 // Select for order item
@@ -94,20 +99,26 @@ export const orderListSelect = {
   total: true,
   createdAt: true,
   updatedAt: true,
-  user: {
-    select: {
-      id: true,
-      email: true,
-      firstName: true,
-      lastName: true,
-    },
-    // where: { isDeleted: false },
-  },
   items: {
     select: {
       id: true,
+      orderId: true,
+      productId: true,
+      variantId: true,
+      name: true,
+      sku: true,
+      price: true,
       quantity: true,
+      total: true,
+      createdAt: true,
+      product: {
+        select: productSummarySelect,
+      },
+      variant: {
+        select: variantSummarySelect,
+      },
     },
+    orderBy: { createdAt: 'asc' as const },
   },
 } satisfies Prisma.OrderSelect;
 
