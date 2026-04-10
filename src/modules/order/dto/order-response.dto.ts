@@ -9,6 +9,8 @@ import { UserResponseDto } from 'src/modules/auth/dto/response/user-response.dto
 import { AddressResponseDto } from 'src/modules/user/dto/address-response.dto';
 import { ProductResponseDto } from 'src/modules/product/dto/product-response.dto';
 import { ProductVariantResponseDto } from 'src/modules/product/dto/product-variant.dto';
+import { ProductSummaryResponseDto } from 'src/modules/product/dto/product-response.dto';
+import { VariantSummaryResponseDto } from 'src/modules/product/dto/product-variant.dto';
 
 /**
  * Response DTO for individual order item
@@ -17,54 +19,54 @@ import { ProductVariantResponseDto } from 'src/modules/product/dto/product-varia
 export class OrderItemDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  orderId: string;
+  orderId!: string;
 
   @Expose()
   @ApiProperty()
-  productId: string;
+  productId!: string;
 
   @Expose()
   @ApiProperty()
-  variantId: string;
+  variantId!: string;
 
   @Expose()
   @ApiProperty()
-  name: string;
+  name!: string;
 
   @Expose()
   @ApiProperty()
-  sku: string;
+  sku!: string;
 
   @Expose()
   @ApiProperty()
-  price: string;
+  price!: string;
 
   @Expose()
   @ApiProperty()
-  quantity: number;
+  quantity!: number;
 
   @Expose()
   @ApiProperty()
-  total: string;
+  total!: string;
 
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => ProductResponseDto)
   @ApiProperty({ type: ProductResponseDto })
-  product: ProductResponseDto;
+  product!: ProductResponseDto;
 
   @Expose()
   @Type(() => ProductVariantResponseDto)
   @ApiProperty({ type: ProductVariantResponseDto })
-  variant: ProductVariantResponseDto;
+  variant!: ProductVariantResponseDto;
 }
 
 /**
@@ -74,23 +76,23 @@ export class OrderItemDto {
 export class OrderPaymentDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  orderId: string;
+  orderId!: string;
 
   @Expose()
   @ApiProperty({ enum: PaymentMethod })
-  method: PaymentMethod;
+  method!: PaymentMethod;
 
   @Expose()
   @ApiProperty()
-  amount: string;
+  amount!: string;
 
   @Expose()
   @ApiProperty({ enum: PaymentStatus })
-  status: PaymentStatus;
+  status!: PaymentStatus;
 
   @Expose()
   @ApiPropertyOptional()
@@ -104,12 +106,12 @@ export class OrderPaymentDto {
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt!: Date;
 }
 
 /**
@@ -119,39 +121,39 @@ export class OrderPaymentDto {
 export class OrderResponseDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  userId: string;
+  userId!: string;
 
   @Expose()
   @ApiProperty()
-  orderNumber: string;
+  orderNumber!: string;
 
   @Expose()
   @ApiProperty({ enum: OrderStatus })
-  status: OrderStatus;
+  status!: OrderStatus;
 
   @Expose()
   @ApiProperty()
-  subtotal: string;
+  subtotal!: string;
 
   @Expose()
   @ApiProperty()
-  tax: string;
+  tax!: string;
 
   @Expose()
   @ApiProperty()
-  shipping: string;
+  shipping!: string;
 
   @Expose()
   @ApiProperty()
-  discount: string;
+  discount!: string;
 
   @Expose()
   @ApiProperty()
-  total: string;
+  total!: string;
 
   @Expose()
   @ApiPropertyOptional()
@@ -172,17 +174,17 @@ export class OrderResponseDto {
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @Expose()
   @Type(() => UserResponseDto)
   @ApiProperty({ type: UserResponseDto })
-  user: UserResponseDto;
+  user!: UserResponseDto;
 
   @Expose()
   @Type(() => AddressResponseDto)
@@ -192,55 +194,112 @@ export class OrderResponseDto {
   @Expose()
   @Type(() => OrderItemDto)
   @ApiProperty({ type: [OrderItemDto] })
-  items: OrderItemDto[];
+  items!: OrderItemDto[];
 
   @Expose()
   @Type(() => OrderPaymentDto)
   @ApiProperty({ type: [OrderPaymentDto] })
-  payments: OrderPaymentDto[];
+  payments!: OrderPaymentDto[];
+}
+
+/**
+ * Lightweight order item DTO for list views
+ * Contains summary product and variant information
+ */
+export class OrderListItemItemDto {
+  @Expose()
+  @ApiProperty()
+  id!: string;
+
+  @Expose()
+  @ApiProperty()
+  orderId!: string;
+
+  @Expose()
+  @ApiProperty()
+  productId!: string;
+
+  @Expose()
+  @ApiProperty()
+  variantId!: string;
+
+  @Expose()
+  @ApiProperty()
+  name!: string;
+
+  @Expose()
+  @ApiProperty()
+  sku!: string;
+
+  @Expose()
+  @ApiProperty()
+  price!: string;
+
+  @Expose()
+  @ApiProperty()
+  quantity!: number;
+
+  @Expose()
+  @ApiProperty()
+  total!: string;
+
+  @Expose()
+  @Type(() => Date)
+  @ApiProperty()
+  createdAt!: Date;
+
+  @Expose()
+  @Type(() => ProductSummaryResponseDto)
+  @ApiProperty({ type: ProductSummaryResponseDto })
+  product!: ProductSummaryResponseDto;
+
+  @Expose()
+  @Type(() => VariantSummaryResponseDto)
+  @ApiProperty({ type: VariantSummaryResponseDto })
+  variant!: VariantSummaryResponseDto;
 }
 
 /**
  * Lightweight response DTO for order list views
- * Contains summary information without nested details
+ * Contains summary information with product details
  */
 export class OrderListItemDto {
   @Expose()
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @Expose()
   @ApiProperty()
-  userId: string;
+  userId!: string;
 
   @Expose()
   @ApiProperty()
-  orderNumber: string;
+  orderNumber!: string;
 
   @Expose()
   @ApiProperty({ enum: OrderStatus })
-  status: OrderStatus;
+  status!: OrderStatus;
 
   @Expose()
   @ApiProperty()
-  total: string;
+  total!: string;
 
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @Expose()
   @Type(() => Date)
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @Expose()
-  @Type(() => UserResponseDto)
-  @ApiProperty({ type: UserResponseDto })
-  user: UserResponseDto;
+  @Type(() => OrderListItemItemDto)
+  @ApiProperty({ type: [OrderListItemItemDto] })
+  items!: OrderListItemItemDto[];
 
   @Expose()
   @ApiProperty()
-  itemCount: number;
+  itemCount!: number;
 }
