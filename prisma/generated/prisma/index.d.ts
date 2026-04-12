@@ -395,6 +395,14 @@ export const CateGoryType: {
 export type CateGoryType = (typeof CateGoryType)[keyof typeof CateGoryType]
 
 
+export const ProductType: {
+  INVENTORY: 'INVENTORY',
+  AFFILIATE: 'AFFILIATE'
+};
+
+export type ProductType = (typeof ProductType)[keyof typeof ProductType]
+
+
 export const ProductBadgeType: {
   NEW: 'NEW',
   SALE: 'SALE',
@@ -500,6 +508,10 @@ export const PaymentStatus: typeof $Enums.PaymentStatus
 export type CateGoryType = $Enums.CateGoryType
 
 export const CateGoryType: typeof $Enums.CateGoryType
+
+export type ProductType = $Enums.ProductType
+
+export const ProductType: typeof $Enums.ProductType
 
 export type ProductBadgeType = $Enums.ProductBadgeType
 
@@ -38282,6 +38294,9 @@ export namespace Prisma {
     weight: Decimal | null
     metaTitle: string | null
     metaDesc: string | null
+    productType: $Enums.ProductType | null
+    affiliateLink: string | null
+    affiliateSource: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -38303,6 +38318,9 @@ export namespace Prisma {
     weight: Decimal | null
     metaTitle: string | null
     metaDesc: string | null
+    productType: $Enums.ProductType | null
+    affiliateLink: string | null
+    affiliateSource: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -38324,6 +38342,9 @@ export namespace Prisma {
     weight: number
     metaTitle: number
     metaDesc: number
+    productType: number
+    affiliateLink: number
+    affiliateSource: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -38359,6 +38380,9 @@ export namespace Prisma {
     weight?: true
     metaTitle?: true
     metaDesc?: true
+    productType?: true
+    affiliateLink?: true
+    affiliateSource?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -38380,6 +38404,9 @@ export namespace Prisma {
     weight?: true
     metaTitle?: true
     metaDesc?: true
+    productType?: true
+    affiliateLink?: true
+    affiliateSource?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -38401,6 +38428,9 @@ export namespace Prisma {
     weight?: true
     metaTitle?: true
     metaDesc?: true
+    productType?: true
+    affiliateLink?: true
+    affiliateSource?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -38509,6 +38539,9 @@ export namespace Prisma {
     weight: Decimal | null
     metaTitle: string | null
     metaDesc: string | null
+    productType: $Enums.ProductType
+    affiliateLink: string | null
+    affiliateSource: string | null
     createdAt: Date
     updatedAt: Date
     _count: ProductCountAggregateOutputType | null
@@ -38549,6 +38582,9 @@ export namespace Prisma {
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
+    productType?: boolean
+    affiliateLink?: boolean
+    affiliateSource?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     brand?: boolean | Product$brandArgs<ExtArgs>
@@ -38586,6 +38622,9 @@ export namespace Prisma {
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
+    productType?: boolean
+    affiliateLink?: boolean
+    affiliateSource?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     brand?: boolean | Product$brandArgs<ExtArgs>
@@ -38608,6 +38647,9 @@ export namespace Prisma {
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
+    productType?: boolean
+    affiliateLink?: boolean
+    affiliateSource?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     brand?: boolean | Product$brandArgs<ExtArgs>
@@ -38630,11 +38672,14 @@ export namespace Prisma {
     weight?: boolean
     metaTitle?: boolean
     metaDesc?: boolean
+    productType?: boolean
+    affiliateLink?: boolean
+    affiliateSource?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "shortDesc" | "sku" | "brandId" | "basePrice" | "comparePrice" | "isActive" | "isFeatured" | "isDeleted" | "deletedAt" | "weight" | "metaTitle" | "metaDesc" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "shortDesc" | "sku" | "brandId" | "basePrice" | "comparePrice" | "isActive" | "isFeatured" | "isDeleted" | "deletedAt" | "weight" | "metaTitle" | "metaDesc" | "productType" | "affiliateLink" | "affiliateSource" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     brand?: boolean | Product$brandArgs<ExtArgs>
     badges?: boolean | Product$badgesArgs<ExtArgs>
@@ -38696,6 +38741,9 @@ export namespace Prisma {
       weight: Prisma.Decimal | null
       metaTitle: string | null
       metaDesc: string | null
+      productType: $Enums.ProductType
+      affiliateLink: string | null
+      affiliateSource: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["product"]>
@@ -39152,6 +39200,9 @@ export namespace Prisma {
     readonly weight: FieldRef<"Product", 'Decimal'>
     readonly metaTitle: FieldRef<"Product", 'String'>
     readonly metaDesc: FieldRef<"Product", 'String'>
+    readonly productType: FieldRef<"Product", 'ProductType'>
+    readonly affiliateLink: FieldRef<"Product", 'String'>
+    readonly affiliateSource: FieldRef<"Product", 'String'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
   }
@@ -65163,6 +65214,9 @@ export namespace Prisma {
     weight: 'weight',
     metaTitle: 'metaTitle',
     metaDesc: 'metaDesc',
+    productType: 'productType',
+    affiliateLink: 'affiliateLink',
+    affiliateSource: 'affiliateSource',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -65786,6 +65840,20 @@ export namespace Prisma {
    * Reference to a field of type 'CateGoryType[]'
    */
   export type ListEnumCateGoryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CateGoryType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductType'
+   */
+  export type EnumProductTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductType[]'
+   */
+  export type ListEnumProductTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductType[]'>
     
 
 
@@ -68368,6 +68436,9 @@ export namespace Prisma {
     weight?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDesc?: StringNullableFilter<"Product"> | string | null
+    productType?: EnumProductTypeFilter<"Product"> | $Enums.ProductType
+    affiliateLink?: StringNullableFilter<"Product"> | string | null
+    affiliateSource?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
@@ -68404,6 +68475,9 @@ export namespace Prisma {
     weight?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDesc?: SortOrderInput | SortOrder
+    productType?: SortOrder
+    affiliateLink?: SortOrderInput | SortOrder
+    affiliateSource?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     brand?: BrandOrderByWithRelationInput
@@ -68443,6 +68517,9 @@ export namespace Prisma {
     weight?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDesc?: StringNullableFilter<"Product"> | string | null
+    productType?: EnumProductTypeFilter<"Product"> | $Enums.ProductType
+    affiliateLink?: StringNullableFilter<"Product"> | string | null
+    affiliateSource?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
@@ -68479,6 +68556,9 @@ export namespace Prisma {
     weight?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDesc?: SortOrderInput | SortOrder
+    productType?: SortOrder
+    affiliateLink?: SortOrderInput | SortOrder
+    affiliateSource?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductCountOrderByAggregateInput
@@ -68508,6 +68588,9 @@ export namespace Prisma {
     weight?: DecimalNullableWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
     metaDesc?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    productType?: EnumProductTypeWithAggregatesFilter<"Product"> | $Enums.ProductType
+    affiliateLink?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    affiliateSource?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
   }
@@ -72981,6 +73064,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -73017,6 +73103,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -73051,6 +73140,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -73087,6 +73179,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -73122,6 +73217,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -73142,6 +73240,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -73163,6 +73264,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -77182,6 +77286,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumProductTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductType | EnumProductTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTypeFilter<$PrismaModel> | $Enums.ProductType
+  }
+
   export type ProductBadgeListRelationFilter = {
     every?: ProductBadgeWhereInput
     some?: ProductBadgeWhereInput
@@ -77284,6 +77395,9 @@ export namespace Prisma {
     weight?: SortOrder
     metaTitle?: SortOrder
     metaDesc?: SortOrder
+    productType?: SortOrder
+    affiliateLink?: SortOrder
+    affiliateSource?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -77311,6 +77425,9 @@ export namespace Prisma {
     weight?: SortOrder
     metaTitle?: SortOrder
     metaDesc?: SortOrder
+    productType?: SortOrder
+    affiliateLink?: SortOrder
+    affiliateSource?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -77332,6 +77449,9 @@ export namespace Prisma {
     weight?: SortOrder
     metaTitle?: SortOrder
     metaDesc?: SortOrder
+    productType?: SortOrder
+    affiliateLink?: SortOrder
+    affiliateSource?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -77340,6 +77460,16 @@ export namespace Prisma {
     basePrice?: SortOrder
     comparePrice?: SortOrder
     weight?: SortOrder
+  }
+
+  export type EnumProductTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductType | EnumProductTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTypeWithAggregatesFilter<$PrismaModel> | $Enums.ProductType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductTypeFilter<$PrismaModel>
+    _max?: NestedEnumProductTypeFilter<$PrismaModel>
   }
 
   export type EnumProductBadgeVariantFilter<$PrismaModel = never> = {
@@ -80690,6 +80820,10 @@ export namespace Prisma {
     connect?: WishlistWhereUniqueInput | WishlistWhereUniqueInput[]
   }
 
+  export type EnumProductTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ProductType
+  }
+
   export type BrandUpdateOneWithoutProductsNestedInput = {
     create?: XOR<BrandCreateWithoutProductsInput, BrandUncheckedCreateWithoutProductsInput>
     connectOrCreate?: BrandCreateOrConnectWithoutProductsInput
@@ -83322,6 +83456,23 @@ export namespace Prisma {
     _max?: NestedEnumCateGoryTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumProductTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductType | EnumProductTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTypeFilter<$PrismaModel> | $Enums.ProductType
+  }
+
+  export type NestedEnumProductTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductType | EnumProductTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductType[] | ListEnumProductTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTypeWithAggregatesFilter<$PrismaModel> | $Enums.ProductType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductTypeFilter<$PrismaModel>
+    _max?: NestedEnumProductTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumProductBadgeVariantFilter<$PrismaModel = never> = {
     equals?: $Enums.ProductBadgeVariant | EnumProductBadgeVariantFieldRefInput<$PrismaModel>
     in?: $Enums.ProductBadgeVariant[] | ListEnumProductBadgeVariantFieldRefInput<$PrismaModel>
@@ -84347,6 +84498,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -84382,6 +84536,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -84431,6 +84588,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -84466,6 +84626,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -86899,6 +87062,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -86934,6 +87100,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -87079,6 +87248,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -87114,6 +87286,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -88511,6 +88686,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -88546,6 +88724,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -88673,6 +88854,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -88708,6 +88892,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -89401,6 +89588,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -89436,6 +89626,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -89593,6 +89786,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -89628,6 +89824,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -89828,6 +90027,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -89863,6 +90065,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -89912,6 +90117,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -89947,6 +90155,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -90362,6 +90573,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeCreateNestedManyWithoutProductInput
@@ -90396,6 +90610,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -90557,6 +90774,9 @@ export namespace Prisma {
     weight?: DecimalNullableFilter<"Product"> | Decimal | DecimalJsLike | number | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDesc?: StringNullableFilter<"Product"> | string | null
+    productType?: EnumProductTypeFilter<"Product"> | $Enums.ProductType
+    affiliateLink?: StringNullableFilter<"Product"> | string | null
+    affiliateSource?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
   }
@@ -91571,6 +91791,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -91606,6 +91829,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
@@ -91655,6 +91881,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -91690,6 +91919,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
@@ -91723,6 +91955,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -91758,6 +91993,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -92002,6 +92240,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -92037,6 +92278,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -92183,6 +92427,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -92218,6 +92465,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -92367,6 +92617,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -92402,6 +92655,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -92547,6 +92803,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -92582,6 +92841,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -92680,6 +92942,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -92715,6 +92980,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -92803,6 +93071,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -92838,6 +93109,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -92928,6 +93202,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -92963,6 +93240,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -93043,6 +93323,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -93078,6 +93361,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -93301,6 +93587,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -93336,6 +93625,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -93632,6 +93924,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -93667,6 +93962,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -93761,6 +94059,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -93796,6 +94097,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -94080,6 +94384,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -94115,6 +94422,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -94331,6 +94641,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -94366,6 +94679,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -97196,6 +97512,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     brand?: BrandCreateNestedOneWithoutProductsInput
@@ -97231,6 +97550,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: ProductBadgeUncheckedCreateNestedManyWithoutProductInput
@@ -97422,6 +97744,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneWithoutProductsNestedInput
@@ -97457,6 +97782,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -99199,6 +99527,9 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     metaTitle?: string | null
     metaDesc?: string | null
+    productType?: $Enums.ProductType
+    affiliateLink?: string | null
+    affiliateSource?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -99235,6 +99566,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUpdateManyWithoutProductNestedInput
@@ -99269,6 +99603,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: ProductBadgeUncheckedUpdateManyWithoutProductNestedInput
@@ -99303,6 +99640,9 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    productType?: EnumProductTypeFieldUpdateOperationsInput | $Enums.ProductType
+    affiliateLink?: NullableStringFieldUpdateOperationsInput | string | null
+    affiliateSource?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -63,6 +63,12 @@ export const ERROR_MESSAGES = {
   [ERROR_CODES.PRODUCT_VARIANT_HAS_ORDERS]:
     'Không thể xóa biến thể sản phẩm đã có đơn hàng',
   [ERROR_CODES.PRODUCT_BADGE_NOT_FOUND]: 'Không tìm thấy nhãn sản phẩm',
+  [ERROR_CODES.PRODUCT_AFFILIATE_LINK_REQUIRED]:
+    'Link affiliate là bắt buộc đối với sản phẩm affiliate',
+  [ERROR_CODES.PRODUCT_AFFILIATE_CANNOT_HAVE_VARIANTS]:
+    'Sản phẩm affiliate không thể có biến thể',
+  [ERROR_CODES.PRODUCT_INVENTORY_CANNOT_HAVE_AFFILIATE_LINK]:
+    'Sản phẩm trong kho không thể có link affiliate',
 
   // Inventory
   [ERROR_CODES.INVENTORY_NOT_FOUND]: 'Không tìm thấy thông tin kho hàng',
