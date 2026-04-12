@@ -1,12 +1,16 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ProductType } from 'prisma/generated/prisma/client';
 import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
+  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
+  IsUrl,
   IsUUID,
+  MaxLength,
   Min,
   ValidateNested,
 } from 'class-validator';
@@ -212,6 +216,35 @@ export class UpdateProductDto {
   @IsString()
   @IsOptional()
   metaDesc?: string;
+
+  @ApiPropertyOptional({
+    enum: ProductType,
+    example: ProductType.INVENTORY,
+    description:
+      'Product type: INVENTORY (in stock) or AFFILIATE (third-party)',
+  })
+  @IsEnum(ProductType)
+  @IsOptional()
+  productType?: ProductType;
+
+  @ApiPropertyOptional({
+    example: 'https://shopee.vn/product/123456',
+    description: 'Affiliate link (required for AFFILIATE products)',
+  })
+  @IsString()
+  @IsOptional()
+  @IsUrl()
+  @MaxLength(1000)
+  affiliateLink?: string;
+
+  @ApiPropertyOptional({
+    example: 'Shopee',
+    description: 'Affiliate source name (e.g., Shopee, Lazada, Tiki)',
+  })
+  @IsString()
+  @IsOptional()
+  @MaxLength(255)
+  affiliateSource?: string;
 
   @ApiPropertyOptional({
     type: [UpdateProductVariantDto],

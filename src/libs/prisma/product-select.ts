@@ -116,6 +116,9 @@ export const productSummarySelect = {
   basePrice: true,
   comparePrice: true,
   isActive: true,
+  productType: true,
+  affiliateLink: true,
+  affiliateSource: true,
   brand: {
     select: brandSelect,
   },
@@ -145,6 +148,9 @@ export const productSelect = {
   weight: true,
   metaTitle: true,
   metaDesc: true,
+  productType: true,
+  affiliateLink: true,
+  affiliateSource: true,
   createdAt: true,
   updatedAt: true,
   productCategories: {

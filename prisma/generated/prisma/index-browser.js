@@ -515,6 +515,9 @@ exports.Prisma.ProductScalarFieldEnum = {
   weight: 'weight',
   metaTitle: 'metaTitle',
   metaDesc: 'metaDesc',
+  productType: 'productType',
+  affiliateLink: 'affiliateLink',
+  affiliateSource: 'affiliateSource',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -891,6 +894,11 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
 exports.CateGoryType = exports.$Enums.CateGoryType = {
   BRAND: 'BRAND',
   CATEGORY: 'CATEGORY'
+};
+
+exports.ProductType = exports.$Enums.ProductType = {
+  INVENTORY: 'INVENTORY',
+  AFFILIATE: 'AFFILIATE'
 };
 
 exports.ProductBadgeVariant = exports.$Enums.ProductBadgeVariant = {

@@ -4,6 +4,7 @@ import {
   MediaType,
   Prisma,
   ProductInventoryDisplayStatus,
+  ProductType,
 } from 'prisma/generated/prisma/client';
 import { StorageService } from 'src/modules/storage/storage.service';
 import { ERROR_CODES } from 'src/constants/error-codes';
@@ -902,6 +903,38 @@ export class ProductService {
     createProductDto: CreateProductDto,
   ): Promise<IBeforeTransformResponseType<ProductResponseDto>> {
     try {
+      // Validate affiliate products
+      if (createProductDto.productType === ProductType.AFFILIATE) {
+        if (!createProductDto.affiliateLink) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.PRODUCT_AFFILIATE_LINK_REQUIRED],
+            ERROR_CODES.PRODUCT_AFFILIATE_LINK_REQUIRED,
+          );
+        }
+        // Affiliate products don't need variants or inventory
+        if (createProductDto.variants && createProductDto.variants.length > 0) {
+          throw new BusinessException(
+            ERROR_MESSAGES[ERROR_CODES.PRODUCT_AFFILIATE_CANNOT_HAVE_VARIANTS],
+            ERROR_CODES.PRODUCT_AFFILIATE_CANNOT_HAVE_VARIANTS,
+          );
+        }
+      }
+
+      // Validate inventory products
+      if (
+        createProductDto.productType === ProductType.INVENTORY ||
+        !createProductDto.productType
+      ) {
+        if (createProductDto.affiliateLink) {
+          throw new BusinessException(
+            ERROR_MESSAGES[
+              ERROR_CODES.PRODUCT_INVENTORY_CANNOT_HAVE_AFFILIATE_LINK
+            ],
+            ERROR_CODES.PRODUCT_INVENTORY_CANNOT_HAVE_AFFILIATE_LINK,
+          );
+        }
+      }
+
       const productSku = createProductDto.sku || generateSkuCode();
       // Check if SKU already exists
       const existingSku = await this.prismaService.product.findUnique({
@@ -963,6 +996,45 @@ export class ProductService {
 
       const slug = await this.ensureUniqueSlug(createProductDto.name);
 
+      // For affiliate products, skip variant creation
+      if (createProductDto.productType === ProductType.AFFILIATE) {
+        const product = await this.prismaService.product.create({
+          data: {
+            name: createProductDto.name,
+            slug,
+            description: this.sanitizeHtmlContent(createProductDto.description),
+            shortDesc: createProductDto.shortDesc,
+            sku: productSku,
+            productCategories: {
+              create: createProductDto.categoryIds.map((categoryId) => ({
+                categoryId,
+              })),
+            },
+            brandId: createProductDto.brandId,
+            basePrice: createProductDto.basePrice,
+            comparePrice: createProductDto.comparePrice,
+            isActive: createProductDto.isActive ?? true,
+            isFeatured: createProductDto.isFeatured ?? false,
+            weight: createProductDto.weight,
+            metaTitle: createProductDto.metaTitle,
+            metaDesc: createProductDto.metaDesc,
+            productType: ProductType.AFFILIATE,
+            affiliateLink: createProductDto.affiliateLink,
+            affiliateSource: createProductDto.affiliateSource,
+          },
+          select: productSelect,
+        });
+
+        const productResponse = this.mapProductEntity(product);
+
+        return {
+          type: 'response',
+          message: 'Tạo sản phẩm affiliate thành công',
+          data: productResponse,
+          statusCode: 201,
+        };
+      }
+
       // If no variants provided, create a default variant
       const variantsToCreate =
         createProductDto.variants && createProductDto.variants.length > 0
@@ -998,6 +1070,7 @@ export class ProductService {
           weight: createProductDto.weight,
           metaTitle: createProductDto.metaTitle,
           metaDesc: createProductDto.metaDesc,
+          productType: createProductDto.productType ?? ProductType.INVENTORY,
           variants: {
             create: variantsToCreate.map((variant, index) => ({
               sku: variant.sku || generateSkuCode(),

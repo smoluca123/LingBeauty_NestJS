@@ -3,6 +3,11 @@ enum CateGoryType {
   CATEGORY
 }
 
+enum ProductType {
+  INVENTORY
+  AFFILIATE
+}
+
 model Category {
   id           String       @id @default(uuid())
   name         String       @db.VarChar(255)
@@ -56,24 +61,27 @@ model Brand {
 }
 
 model Product {
-  id           String    @id @default(uuid())
-  name         String    @db.VarChar(255)
-  slug         String    @unique @db.VarChar(255)
-  description  String?   @db.Text
-  shortDesc    String?   @map("short_desc") @db.VarChar(500)
-  sku          String    @unique @db.VarChar(100)
-  brandId      String?   @map("brand_id")
-  basePrice    Decimal   @map("base_price") @db.Decimal(10, 2)
-  comparePrice Decimal?  @map("compare_price") @db.Decimal(10, 2)
-  isActive     Boolean   @default(true) @map("is_active")
-  isFeatured   Boolean   @default(false) @map("is_featured")
-  isDeleted    Boolean   @default(false) @map("is_deleted")
-  deletedAt    DateTime? @map("deleted_at")
-  weight       Decimal?  @db.Decimal(8, 2)
-  metaTitle    String?   @map("meta_title") @db.VarChar(255)
-  metaDesc     String?   @map("meta_desc") @db.Text
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @updatedAt @map("updated_at")
+  id              String      @id @default(uuid())
+  name            String      @db.VarChar(255)
+  slug            String      @unique @db.VarChar(255)
+  description     String?     @db.Text
+  shortDesc       String?     @map("short_desc") @db.VarChar(500)
+  sku             String      @unique @db.VarChar(100)
+  brandId         String?     @map("brand_id")
+  basePrice       Decimal     @map("base_price") @db.Decimal(10, 2)
+  comparePrice    Decimal?    @map("compare_price") @db.Decimal(10, 2)
+  isActive        Boolean     @default(true) @map("is_active")
+  isFeatured      Boolean     @default(false) @map("is_featured")
+  isDeleted       Boolean     @default(false) @map("is_deleted")
+  deletedAt       DateTime?   @map("deleted_at")
+  weight          Decimal?    @db.Decimal(8, 2)
+  metaTitle       String?     @map("meta_title") @db.VarChar(255)
+  metaDesc        String?     @map("meta_desc") @db.Text
+  productType     ProductType @default(INVENTORY) @map("product_type")
+  affiliateLink   String?     @map("affiliate_link") @db.VarChar(1000)
+  affiliateSource String?     @map("affiliate_source") @db.VarChar(255)
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
 
   brand             Brand?             @relation(fields: [brandId], references: [id], onDelete: SetNull)
   badges            ProductBadge[]
@@ -95,6 +103,7 @@ model Product {
   @@index([brandId])
   @@index([sku])
   @@index([isDeleted])
+  @@index([productType])
   @@map("products")
 }
 
