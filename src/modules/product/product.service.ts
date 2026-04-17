@@ -1157,7 +1157,7 @@ export class ProductService {
     try {
       const existing = await this.prismaService.product.findUnique({
         where: { id: productId },
-        select: { id: true, name: true, sku: true },
+        select: { id: true, name: true, sku: true, basePrice: true },
       });
 
       if (!existing) {
@@ -1272,49 +1272,135 @@ export class ProductService {
           where: { productId, variantId: null },
         });
 
-        // Delete existing variants and recreate
-        await this.prismaService.productVariant.deleteMany({
-          where: { productId },
-        });
+        // Get existing variants for this product
+        const existingVariants =
+          await this.prismaService.productVariant.findMany({
+            where: { productId, isDeleted: false },
+            select: { id: true, sku: true },
+          });
+
+        const existingSkuMap = new Map(
+          existingVariants.map((v) => [v.sku, v.id]),
+        );
 
         if (updateProductDto.variants.length > 0) {
-          // Check variant SKUs
-          const variantSkus = updateProductDto.variants.map((v) => v.sku!);
-          const existingVariantSkus =
+          const newVariantSkus = updateProductDto.variants.map((v) => v.sku!);
+
+          // Check for SKU conflicts with OTHER products
+          const conflictingSkus =
             await this.prismaService.productVariant.findMany({
-              where: { sku: { in: variantSkus } },
+              where: {
+                sku: { in: newVariantSkus },
+                productId: { not: productId },
+                isDeleted: false,
+              },
               select: { sku: true },
             });
 
-          if (existingVariantSkus.length > 0) {
+          if (conflictingSkus.length > 0) {
             throw new BusinessException(
-              `${ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_SKU_EXISTS]}: ${existingVariantSkus.map((v) => v.sku).join(', ')}`,
+              `${ERROR_MESSAGES[ERROR_CODES.PRODUCT_VARIANT_SKU_EXISTS]}: ${conflictingSkus.map((v) => v.sku).join(', ')}`,
               ERROR_CODES.PRODUCT_VARIANT_SKU_EXISTS,
             );
           }
 
-          updateData.variants = {
-            create: updateProductDto.variants.map((variant, index) => ({
-              sku: variant.sku!,
-              name: variant.name!,
-              color: variant.color,
-              size: variant.size,
-              type: variant.type,
-              price: variant.price!,
-              sortOrder: variant.sortOrder ?? index,
-            })),
-          };
+          // Separate variants into: update, create, and soft-delete
+          const variantsToUpdate: Array<{
+            id: string;
+            data: Prisma.ProductVariantUpdateInput;
+          }> = [];
+          const variantsToCreate: Array<Prisma.ProductVariantCreateInput> = [];
+          const variantIdsToKeep = new Set<string>();
 
-          // Apply updateData first, then create inventories afterwards
-          const updatedProduct = await this.prismaService.product.update({
-            where: { id: productId },
-            data: updateData,
-            select: { id: true },
+          updateProductDto.variants.forEach((variant, index) => {
+            const existingId = existingSkuMap.get(variant.sku!);
+            // Use variant price if provided and > 0, otherwise use product basePrice
+            const variantPrice =
+              variant.price && variant.price > 0
+                ? variant.price
+                : (updateProductDto.basePrice ?? existing.basePrice);
+
+            if (existingId) {
+              // Update existing variant
+              variantIdsToKeep.add(existingId);
+              variantsToUpdate.push({
+                id: existingId,
+                data: {
+                  name: variant.name!,
+                  color: variant.color,
+                  size: variant.size,
+                  type: variant.type,
+                  price: variantPrice,
+                  sortOrder: variant.sortOrder ?? index,
+                },
+              });
+            } else {
+              // Create new variant
+              variantsToCreate.push({
+                product: { connect: { id: productId } },
+                sku: variant.sku!,
+                name: variant.name!,
+                color: variant.color,
+                size: variant.size,
+                type: variant.type,
+                price: variantPrice,
+                sortOrder: variant.sortOrder ?? index,
+              });
+            }
           });
 
-          const createdVariants =
+          // Soft delete variants not in the new list
+          const variantIdsToDelete = existingVariants
+            .filter((v) => !variantIdsToKeep.has(v.id))
+            .map((v) => v.id);
+
+          // Execute updates in transaction
+          await this.prismaService.$transaction(async (tx) => {
+            // Update existing variants
+            for (const { id, data } of variantsToUpdate) {
+              await tx.productVariant.update({
+                where: { id },
+                data,
+              });
+            }
+
+            // Create new variants
+            if (variantsToCreate.length > 0) {
+              await tx.productVariant.createMany({
+                data: variantsToCreate.map((v) => ({
+                  productId,
+                  sku: v.sku as string,
+                  name: v.name as string,
+                  color: v.color as string | undefined,
+                  size: v.size as string | undefined,
+                  type: v.type as string | undefined,
+                  price: v.price as number,
+                  sortOrder: v.sortOrder as number,
+                })),
+              });
+            }
+
+            // Soft delete removed variants
+            if (variantIdsToDelete.length > 0) {
+              await tx.productVariant.updateMany({
+                where: { id: { in: variantIdsToDelete } },
+                data: {
+                  isDeleted: true,
+                  deletedAt: new Date(),
+                },
+              });
+
+              // Also soft delete their inventory
+              await tx.productInventory.deleteMany({
+                where: { variantId: { in: variantIdsToDelete } },
+              });
+            }
+          });
+
+          // Get all current variants (updated + newly created)
+          const currentVariants =
             await this.prismaService.productVariant.findMany({
-              where: { productId: updatedProduct.id },
+              where: { productId, isDeleted: false },
               select: { id: true, sku: true },
             });
 
@@ -1328,22 +1414,46 @@ export class ProductService {
             ]),
           );
 
-          await this.prismaService.productInventory.createMany({
-            data: createdVariants.map((v) => {
-              const inv = variantSkuMap.get(v.sku) ?? {};
-              const qty = inv.quantity ?? 0;
-              return {
-                productId,
-                variantId: v.id,
-                quantity: qty,
-                lowStockThreshold: inv.lowStockThreshold ?? 10,
-                displayStatus:
-                  qty > 0
-                    ? ProductInventoryDisplayStatus.IN_STOCK
-                    : ProductInventoryDisplayStatus.OUT_OF_STOCK,
-              };
-            }),
-          });
+          // Update or create inventory for each variant
+          for (const variant of currentVariants) {
+            const inv = variantSkuMap.get(variant.sku) ?? {};
+            const qty = inv.quantity ?? 0;
+
+            const existingInventory =
+              await this.prismaService.productInventory.findFirst({
+                where: { variantId: variant.id },
+                select: { id: true },
+              });
+
+            if (existingInventory) {
+              // Update existing inventory
+              await this.prismaService.productInventory.update({
+                where: { id: existingInventory.id },
+                data: {
+                  quantity: qty,
+                  lowStockThreshold: inv.lowStockThreshold ?? 10,
+                  displayStatus:
+                    qty > 0
+                      ? ProductInventoryDisplayStatus.IN_STOCK
+                      : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+                },
+              });
+            } else {
+              // Create new inventory
+              await this.prismaService.productInventory.create({
+                data: {
+                  productId,
+                  variantId: variant.id,
+                  quantity: qty,
+                  lowStockThreshold: inv.lowStockThreshold ?? 10,
+                  displayStatus:
+                    qty > 0
+                      ? ProductInventoryDisplayStatus.IN_STOCK
+                      : ProductInventoryDisplayStatus.OUT_OF_STOCK,
+                },
+              });
+            }
+          }
 
           // Fetch & return updated product with new inventory
           const updated = await this.prismaService.product.findUnique({
@@ -1646,6 +1756,7 @@ export class ProductService {
         data: responseData,
       };
     } catch (error) {
+      console.log(error);
       if (error instanceof BusinessException) {
         throw error;
       }
