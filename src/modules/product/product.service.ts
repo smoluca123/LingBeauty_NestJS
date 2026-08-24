@@ -230,7 +230,9 @@ export class ProductService {
     params: GetFilterCategoriesParams,
   ): Promise<IBeforeTransformResponseType<FilterCategoryResponseDto[]>> {
     try {
-      const whereQuery = this.buildProductWhereQuery(params);
+      const whereQuery = withoutDeleted(
+        this.buildProductWhereQuery(params),
+      );
 
       // Query ProductCategory join table, grouping by categoryId,
       // but only for products that match the context filter
@@ -260,10 +262,10 @@ export class ProductService {
       // Fetch category details for the grouped IDs
       const categoryIds = categoryCounts.map((c) => c.categoryId);
       const categories = await this.prismaService.category.findMany({
-        where: {
+        where: withoutDeleted({
           id: { in: categoryIds },
           isActive: true,
-        },
+        }),
         select: {
           id: true,
           name: true,
@@ -312,7 +314,9 @@ export class ProductService {
     params: GetFilterCategoriesParams,
   ): Promise<IBeforeTransformResponseType<ProductStatsResponseDto>> {
     try {
-      const whereQuery = this.buildProductWhereQuery(params);
+      const whereQuery = withoutDeleted(
+        this.buildProductWhereQuery(params),
+      );
 
       // Count products and sum totalSold from ProductStats in parallel
       const [productCount, salesAgg] = await Promise.all([
